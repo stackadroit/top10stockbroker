@@ -2,7 +2,7 @@
   "name": "top10stockbroker",
   "version": "1.0.0",
   "author": "Praneeth <contact@polupraneeth.me>",
-  "homepage": "https://top10stockbroker.com/",
+  "homepage": "http://top10stockbroker.localhost/",
   "private": true,
   "repository": {
     "type": "git",

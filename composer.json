@@ -3,7 +3,7 @@
   "type": "wordpress-theme",
   "license": "MIT",
   "description": "WordPress theme for top10stockbroker.com",
-  "homepage": "https://top10stockbroker.com/",
+  "homepage": "http://top10stockbroker.localhost/",
   "authors": [
     {
       "name": "Praneeth Polu",
