@@ -64,7 +64,7 @@ ocular.phar
 phpunit.xml
 
 # Composer
-
+/vendor
 
 # webpack
 .cache-loader
