@@ -14,7 +14,7 @@ use Roots\Sage\Container;
  * @param string $title
  */
 $sage_error = function ($message, $subtitle = '', $title = '') {
-    $title = $title ?: __('Sage &rsaquo; Error', 'sage');
+    $title = $title ?: __('Top10stockbroker &rsaquo; Error', 'sage');
     $footer = '<a href="https://roots.io/sage/docs/">roots.io/sage/docs/</a>';
     $message = "<h1>{$title}<br><small>{$subtitle}</small></h1><p>{$message}</p><p>{$footer}</p>";
     wp_die($message, $title);
@@ -40,7 +40,7 @@ if (version_compare('4.7.0', get_bloginfo('version'), '>=')) {
 if (!class_exists('Roots\\Sage\\Container')) {
     if (!file_exists($composer = __DIR__.'/../vendor/autoload.php')) {
         $sage_error(
-            __('You must run <code>composer install</code> from the Sage directory.', 'sage'),
+            __('You must run <code>composer install</code> from the top10stockbroker directory.', 'sage'),
             __('Autoloader not found.', 'sage')
         );
     }
@@ -62,20 +62,20 @@ array_map(function ($file) use ($sage_error) {
 
 /**
  * Here's what's happening with these hooks:
- * 1. WordPress initially detects theme in themes/sage/resources
- * 2. Upon activation, we tell WordPress that the theme is actually in themes/sage/resources/views
- * 3. When we call get_template_directory() or get_template_directory_uri(), we point it back to themes/sage/resources
+ * 1. WordPress initially detects theme in themes/top10stockbroker/resources
+ * 2. Upon activation, we tell WordPress that the theme is actually in themes/top10stockbroker/resources/views
+ * 3. When we call get_template_directory() or get_template_directory_uri(), we point it back to themes/top10stockbroker/resources
  *
- * We do this so that the Template Hierarchy will look in themes/sage/resources/views for core WordPress themes
- * But functions.php, style.css, and index.php are all still located in themes/sage/resources
+ * We do this so that the Template Hierarchy will look in themes/top10stockbroker/resources/views for core WordPress themes
+ * But functions.php, style.css, and index.php are all still located in themes/top10stockbroker/resources
  *
  * This is not compatible with the WordPress Customizer theme preview prior to theme activation
  *
- * get_template_directory()   -> /srv/www/example.com/current/web/app/themes/sage/resources
- * get_stylesheet_directory() -> /srv/www/example.com/current/web/app/themes/sage/resources
+ * get_template_directory()   -> /srv/www/example.com/current/web/app/themes/top10stockbroker/resources
+ * get_stylesheet_directory() -> /srv/www/example.com/current/web/app/themes/top10stockbroker/resources
  * locate_template()
- * ├── STYLESHEETPATH         -> /srv/www/example.com/current/web/app/themes/sage/resources/views
- * └── TEMPLATEPATH           -> /srv/www/example.com/current/web/app/themes/sage/resources
+ * ├── STYLESHEETPATH         -> /srv/www/example.com/current/web/app/themes/top10stockbroker/resources/views
+ * └── TEMPLATEPATH           -> /srv/www/example.com/current/web/app/themes/top10stockbroker/resources
  */
 array_map(
     'add_filter',
