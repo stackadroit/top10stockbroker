@@ -64,11 +64,11 @@ ocular.phar
 phpunit.xml
 
 # Composer
-!/vendor/
+/vendor
 
 # webpack
 .cache-loader
-dist
+/dist
 npm-debug.log
 yarn-error.log
 resources/assets/config-local.json
