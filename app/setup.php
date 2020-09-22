@@ -24,14 +24,25 @@ add_action('wp_enqueue_scripts', function () {
  */
 add_action('after_setup_theme', function () {
     /**
-     * Enable features from Soil when plugin is activated
-     * @link https://roots.io/plugins/soil/
+     * Enable features from topstockbroker-extension when plugin is activated
      */
-    add_theme_support('soil-clean-up');
-    add_theme_support('soil-jquery-cdn');
-    add_theme_support('soil-nav-walker');
-    add_theme_support('soil-nice-search');
-    add_theme_support('soil-relative-urls');
+    //    add_theme_support('topstockbroker-clean-up');
+    //    add_theme_support('topstockbroker-jquery-cdn');
+    //    add_theme_support('topstockbroker-nav-walker');
+    //    add_theme_support('topstockbroker-nice-search');
+    //    add_theme_support('topstockbroker-relative-urls');
+
+    add_theme_support('topstockbroker', [
+        'clean-up',
+        'disable-rest-api',
+        'disable-asset-versioning',
+        'disable-trackbacks',
+        'js-to-footer',
+        'nav-walker',
+        'nav-walker-edit',
+        'nice-search',
+        'relative-urls'
+    ]);
 
     /**
      * Enable plugins to manage the document title
