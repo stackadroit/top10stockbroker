@@ -75,7 +75,7 @@
 								</div>
 							</div>
 						</div>
-					</div>					
+					</div>
 					<div class="header-nav-bar bg-color-light-scale-1 z-index-0" data-sticky-header-style="{'minResolution': 991}" data-sticky-header-style-active="{'background-color': 'transparent'}" data-sticky-header-style-deactive="{'background-color': '#f7f7f7'}">
 						<div class="container">
 							<div class="header-row">
@@ -139,7 +139,7 @@
 																		<li><a class="dropdown-item" href="index-portfolio-4.html" data-thumb-preview="img/previews/preview-portfolio-4.jpg">Portfolio - Version 4</a></li>
 																		<li><a class="dropdown-item" href="index-portfolio-5.html" data-thumb-preview="img/previews/preview-portfolio-5.jpg">Portfolio - Version 5</a></li>
 																	</ul>
-																</li>		
+																</li>
 																<li class="dropdown-submenu">
 																	<a class="dropdown-item" href="#">Blog</a>
 																	<ul class="dropdown-menu">
@@ -193,7 +193,7 @@
 																					<li><a class="dropdown-item" href="elements-image-frames.html">Image Frames</a></li>
 																					<li><a class="dropdown-item" href="elements-image-hotspots.html">Image Hotspots</a></li>
 																					<li><a class="dropdown-item" href="elements-testimonials.html">Testimonials</a></li>
-																					<li><a class="dropdown-item" href="elements-blockquotes.html">Blockquotes</a></li>							
+																					<li><a class="dropdown-item" href="elements-blockquotes.html">Blockquotes</a></li>
 																					<li><a class="dropdown-item" href="elements-sticky-elements.html">Sticky Elements</a></li>
 																				</ul>
 																			</div>
@@ -209,7 +209,7 @@
 																					<li><a class="dropdown-item" href="elements-counters.html">Counters</a></li>
 																					<li><a class="dropdown-item" href="elements-countdowns.html">Countdowns</a></li>
 																					<li><a class="dropdown-item" href="elements-sections-parallax.html">Sections &amp; Parallax</a></li>
-																					<li><a class="dropdown-item" href="elements-tooltips-popovers.html">Tooltips &amp; Popovers</a></li>							
+																					<li><a class="dropdown-item" href="elements-tooltips-popovers.html">Tooltips &amp; Popovers</a></li>
 																				</ul>
 																			</div>
 																			<div class="col-lg-3">
@@ -286,7 +286,7 @@
 																				<li><a class="dropdown-item" href="feature-headers-sticky-change-logo.html">Sticky Change Logo</a></li>
 																				<li><a class="dropdown-item" href="feature-headers-sticky-reveal.html">Sticky Reveal</a></li>
 																			</ul>
-																		</li>				
+																		</li>
 																		<li class="dropdown-submenu">
 																			<a class="dropdown-item" href="#">Transparent</a>
 																			<ul class="dropdown-menu">
@@ -487,27 +487,27 @@
 																		<li class="dropdown-submenu">
 																			<a class="dropdown-item" href="#">Classic</a>
 																			<ul class="dropdown-menu">
-																				<li><a class="dropdown-item" href="feature-page-headers-classic-small.html">Small</a></li>				
-																				<li><a class="dropdown-item" href="feature-page-headers-classic-medium.html">Medium</a></li>				
+																				<li><a class="dropdown-item" href="feature-page-headers-classic-small.html">Small</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-classic-medium.html">Medium</a></li>
 																				<li><a class="dropdown-item" href="feature-page-headers-classic-large.html">Large</a></li>
 																			</ul>
 																		</li>
 																		<li class="dropdown-submenu">
 																			<a class="dropdown-item" href="#">Modern</a>
 																			<ul class="dropdown-menu">
-																				<li><a class="dropdown-item" href="feature-page-headers-modern-small.html">Small</a></li>				
-																				<li><a class="dropdown-item" href="feature-page-headers-modern-medium.html">Medium</a></li>				
+																				<li><a class="dropdown-item" href="feature-page-headers-modern-small.html">Small</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-modern-medium.html">Medium</a></li>
 																				<li><a class="dropdown-item" href="feature-page-headers-modern-large.html">Large</a></li>
 																			</ul>
 																		</li>
 																		<li class="dropdown-submenu">
 																			<a class="dropdown-item" href="#">Colors</a>
 																			<ul class="dropdown-menu">
-																				<li><a class="dropdown-item" href="feature-page-headers-colors-primary.html">Primary</a></li>				
-																				<li><a class="dropdown-item" href="feature-page-headers-colors-secondary.html">Secondary</a></li>				
-																				<li><a class="dropdown-item" href="feature-page-headers-colors-tertiary.html">Tertiary</a></li>				
-																				<li><a class="dropdown-item" href="feature-page-headers-colors-quaternary.html">Quaternary</a></li>				
-																				<li><a class="dropdown-item" href="feature-page-headers-colors-light.html">Light</a></li>				
+																				<li><a class="dropdown-item" href="feature-page-headers-colors-primary.html">Primary</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-colors-secondary.html">Secondary</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-colors-tertiary.html">Tertiary</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-colors-quaternary.html">Quaternary</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-colors-light.html">Light</a></li>
 																				<li><a class="dropdown-item" href="feature-page-headers-colors-dark.html">Dark</a></li>
 																			</ul>
 																		</li>
@@ -517,24 +517,24 @@
 																				<li class="dropdown-submenu">
 																					<a class="dropdown-item" href="#">Left</a>
 																					<ul class="dropdown-menu">
-																						<li><a class="dropdown-item" href="feature-page-headers-title-position-left-small.html">Small</a></li>				
-																						<li><a class="dropdown-item" href="feature-page-headers-title-position-left-medium.html">Medium</a></li>				
+																						<li><a class="dropdown-item" href="feature-page-headers-title-position-left-small.html">Small</a></li>
+																						<li><a class="dropdown-item" href="feature-page-headers-title-position-left-medium.html">Medium</a></li>
 																						<li><a class="dropdown-item" href="feature-page-headers-title-position-left-large.html">Large</a></li>
 																					</ul>
 																				</li>
 																				<li class="dropdown-submenu">
 																					<a class="dropdown-item" href="#">Right</a>
 																					<ul class="dropdown-menu">
-																						<li><a class="dropdown-item" href="feature-page-headers-title-position-right-small.html">Small</a></li>				
-																						<li><a class="dropdown-item" href="feature-page-headers-title-position-right-medium.html">Medium</a></li>				
+																						<li><a class="dropdown-item" href="feature-page-headers-title-position-right-small.html">Small</a></li>
+																						<li><a class="dropdown-item" href="feature-page-headers-title-position-right-medium.html">Medium</a></li>
 																						<li><a class="dropdown-item" href="feature-page-headers-title-position-right-large.html">Large</a></li>
 																					</ul>
 																				</li>
 																				<li class="dropdown-submenu">
 																					<a class="dropdown-item" href="#">Center</a>
 																					<ul class="dropdown-menu">
-																						<li><a class="dropdown-item" href="feature-page-headers-title-position-center-small.html">Small</a></li>				
-																						<li><a class="dropdown-item" href="feature-page-headers-title-position-center-medium.html">Medium</a></li>				
+																						<li><a class="dropdown-item" href="feature-page-headers-title-position-center-small.html">Small</a></li>
+																						<li><a class="dropdown-item" href="feature-page-headers-title-position-center-medium.html">Medium</a></li>
 																						<li><a class="dropdown-item" href="feature-page-headers-title-position-center-large.html">Large</a></li>
 																					</ul>
 																				</li>
@@ -543,13 +543,13 @@
 																		<li class="dropdown-submenu">
 																			<a class="dropdown-item" href="#">Background</a>
 																			<ul class="dropdown-menu">
-																				<li><a class="dropdown-item" href="feature-page-headers-background-fixed.html">Fixed</a></li>		
+																				<li><a class="dropdown-item" href="feature-page-headers-background-fixed.html">Fixed</a></li>
 																				<li><a class="dropdown-item" href="feature-page-headers-background-parallax.html">Parallax</a></li>
-																				<li><a class="dropdown-item" href="feature-page-headers-background-video.html">Video</a></li>			
-																				<li><a class="dropdown-item" href="feature-page-headers-background-transparent-header.html">Transparent Header</a></li>			
-																				<li><a class="dropdown-item" href="feature-page-headers-background-pattern.html">Pattern</a></li>			
-																				<li><a class="dropdown-item" href="feature-page-headers-background-overlay.html">Overlay</a></li>			
-																				<li><a class="dropdown-item" href="feature-page-headers-background-clean.html">Clean (No Background)</a></li>	
+																				<li><a class="dropdown-item" href="feature-page-headers-background-video.html">Video</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-background-transparent-header.html">Transparent Header</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-background-pattern.html">Pattern</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-background-overlay.html">Overlay</a></li>
+																				<li><a class="dropdown-item" href="feature-page-headers-background-clean.html">Clean (No Background)</a></li>
 																			</ul>
 																		</li>
 																		<li class="dropdown-submenu">
@@ -558,11 +558,11 @@
 																				<li class="dropdown-submenu">
 																					<a class="dropdown-item" href="#">Breadcrumb</a>
 																					<ul class="dropdown-menu">
-																						<li><a class="dropdown-item" href="feature-page-headers-extra-breadcrumb-outside.html">Outside</a></li>				
-																						<li><a class="dropdown-item" href="feature-page-headers-extra-breadcrumb-dark.html">Dark</a></li>			
+																						<li><a class="dropdown-item" href="feature-page-headers-extra-breadcrumb-outside.html">Outside</a></li>
+																						<li><a class="dropdown-item" href="feature-page-headers-extra-breadcrumb-dark.html">Dark</a></li>
 																					</ul>
 																				</li>
-																				<li><a class="dropdown-item" href="feature-page-headers-extra-scroll-to-content.html">Scroll to Content</a></li>			
+																				<li><a class="dropdown-item" href="feature-page-headers-extra-scroll-to-content.html">Scroll to Content</a></li>
 																				<li><a class="dropdown-item" href="feature-page-headers-extra-full-width.html">Full Width</a></li>
 																			</ul>
 																		</li>
@@ -606,7 +606,7 @@
 																			<ul class="dropdown-menu">
 																				<li><a class="dropdown-item" href="feature-footers-modern.html#footer">Modern</a></li>
 																				<li><a class="dropdown-item" href="feature-footers-modern-font-style-alternative.html#footer">Font Style Alternative</a></li>
-																				<li><a class="dropdown-item" href="feature-footers-modern-clean.html#footer">Clean</a></li>	
+																				<li><a class="dropdown-item" href="feature-footers-modern-clean.html#footer">Clean</a></li>
 																				<li><a class="dropdown-item" href="feature-footers-modern-useful-links.html#footer">Useful Links</a></li>
 																				<li class="dropdown-submenu">
 																					<a class="dropdown-item" href="#">Background</a>
@@ -649,7 +649,7 @@
 																		<li class="dropdown-submenu">
 																			<a class="dropdown-item" href="#">Map</a>
 																			<ul class="dropdown-menu">
-																				<li><a class="dropdown-item" href="feature-footers-map-hidden.html#footer">Hidden Map</a></li> 
+																				<li><a class="dropdown-item" href="feature-footers-map-hidden.html#footer">Hidden Map</a></li>
 																				<li><a class="dropdown-item" href="feature-footers-map-full-width.html#footer">Full Width</a></li>
 																			</ul>
 																		</li>
