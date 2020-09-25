@@ -1,6 +1,13 @@
 // import external dependencies
 import 'jquery';
 
+import fontawesome from '@fortawesome/fontawesome-free';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faAngleRight, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookF, faTwitter} from '@fortawesome/free-brands-svg-icons';
+fontawesome.config = { searchPseudoElements: true };
+library.add(faAngleRight, faPhone, faFacebookF, faTwitter );
+
 // Import everything from autoload
 import './autoload/**/*'
 

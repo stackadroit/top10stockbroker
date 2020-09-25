@@ -1,0 +1,76 @@
+<nav class="collapse">
+  <ul id="menu-test-menu" class="nav nav-pills">
+    <li class="active dropdown menu-market-guide">
+      <a href="/category/market-guide/" class="dropdown-toggle dropdown-item">Market Guide</a>
+      <ul class="sub-menu clearfix dropdown-menu">
+        <li class="active dropdown-submenu menu-mutual-funds">
+          <a href="/category/mutual-funds/" class="dropdown-item">Mutual Funds</a>
+          <ul class="sub-menu clearfix dropdown-menu">
+            <li class="menu-stock-market"><a href="/category/stock-market/" class="dropdown-item">Stock Market</a></li>
+          </ul>
+        </li>
+        <li class="active dropdown-submenu menu-franchise-business">
+          <a href="/category/franchise-business/" class="dropdown-item">Franchise Business</a>
+          <ul class="sub-menu clearfix dropdown-menu">
+            <li class="menu-book-review"><a href="/category/book-review/" class="dropdown-item">Book Review</a></li>
+            <li class="menu-what-is-intraday-trading-or-day-trading-an-overview"><a
+              href="http://top10stockbroker.localhost/intraday-trading/" class="dropdown-item">What is Intraday Trading
+              or Day Trading? – An Overview</a></li>
+          </ul>
+        </li>
+        <li class="dropdown-submenu menu-how-to-make-profit-in-intraday-trading"><a
+          href="http://top10stockbroker.localhost/profit-intraday-trading/" class="dropdown-item">How to make Profit in
+          Intraday Trading?</a>
+          <ul class="sub-menu clearfix dropdown-menu">
+            <li class="menu-intraday-trading-strategies-techniques-or-tricks-an-overview"><a
+              href="http://top10stockbroker.localhost/intraday-trading-strategies/" class="dropdown-item">Intraday
+              Trading Strategies, Techniques or Tricks – An Overview</a></li>
+            <li class="menu-intraday-tips-or-intraday-trading-tips-a-detailed-discussion"><a
+              href="http://top10stockbroker.localhost/intraday-tips/" class="dropdown-item">Intraday Tips or Intraday
+              Trading Tips – A Detailed Discussion</a>
+              <ul class="sub-menu clearfix dropdown-menu">
+                <li class="menu-demat-account-opening-charges-benefits-features-an-overview"><a
+                  href="http://top10stockbroker.localhost/demat-account-opening-charges/" class="dropdown-item">Demat
+                  Account Opening Charges, Benefits &#038; Features – An Overview</a></li>
+                <li class="menu-how-to-open-demat-account-procedures-documentation"><a
+                  href="http://top10stockbroker.localhost/demat-account/" class="dropdown-item">How to Open Demat
+                  Account? Procedures &#038; Documentation</a></li>
+                <li class="menu-demat-account-basics-an-overview"><a
+                  href="http://top10stockbroker.localhost/basics-demat-account/" class="dropdown-item">Demat Account
+                  Basics- An Overview</a></li>
+                <li class="menu-the-unusual-billionaires-by-saurabh-mukherjea"><a
+                  href="http://top10stockbroker.localhost/unusual-billionaires/" class="dropdown-item">The Unusual
+                  Billionaires by Saurabh Mukherjea</a></li>
+                <li class="menu-top-10-sub-broker-partner-in-india"><a
+                  href="http://top10stockbroker.localhost/top-10-sub-broker-partner-india/" class="dropdown-item">Top 10
+                  Sub Broker Partner in India</a></li>
+                <li class="menu-top-10-share-market-websites-find-best-stock-market-websites-in-india"><a
+                  href="http://top10stockbroker.localhost/top-10-share-market-websites-india/" class="dropdown-item">Top
+                  10 Share Market Websites – Find Best Stock Market Websites in India</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li
+          class="dropdown-submenu menu-top-sectors-for-long-term-investment-find-best-long-term-investment-sectors-in-india">
+          <a href="http://top10stockbroker.localhost/top-sectors-for-long-term-investment/" class="dropdown-item">Top
+            Sectors for Long Term Investment – Find Best Long Term Investment Sectors in India</a>
+          <ul class="sub-menu clearfix dropdown-menu">
+            <li class="menu-top-10-successful-stock-market-investors-list-of-best-stock-market-investors-in-india"><a
+              href="http://top10stockbroker.localhost/top-10-stock-market-investors/" class="dropdown-item">Top 10
+              Successful Stock Market Investors – List of Best Stock Market Investors in India</a></li>
+            <li class="menu-top-10-share-market-app-in-india-list-of-best-share-market-apps-of-2020"><a
+              href="http://top10stockbroker.localhost/top-10-share-market-app-in-india/" class="dropdown-item">Top 10
+              Share Market App in India – List of Best Share Market Apps of 2020</a></li>
+            <li class="menu-top-10-sectoral-funds-in-india-list-of-best-sectoral-funds-of-2020"><a
+              href="http://top10stockbroker.localhost/top-10-sectoral-funds-in-india/" class="dropdown-item">Top 10
+              Sectoral Funds in India | List of Best Sectoral Funds of 2020</a></li>
+            <li class="menu-top-10-small-cap-equity-funds-in-india-review-best-small-cap-equity-funds-of-2020"><a
+              href="http://top10stockbroker.localhost/top-10-small-cap-equity-funds-in-india/" class="dropdown-item">Top
+              10 Small Cap Equity Funds in India – Review Best Small Cap Equity Funds of 2020</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
