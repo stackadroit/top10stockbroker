@@ -5,14 +5,11 @@
 </footer>
 <footer id="footer">
   <div class="container">
-    <div class="footer-ribbon">
-      <span>Get in Touch</span>
-    </div>
     <div class="row py-5 my-4">
       <div class="col-md-9 mb-4 mb-lg-0">
         <h5 class="text-3 mb-3">ABOUT US</h5>
         <p class="mt-2 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna. Phasellus semper scelerisque purus, et semper nisl lacinia sit amet. Praesent venenatis turpis vitae purus semper, eget sagittis velit venenatis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos...</p>
-        <p><a href="#" class="btn-flat btn-xs text-color-light"><strong class="text-2">VIEW MORE</strong><i class="fas fa-angle-right p-relative top-1 pl-2"></i></a></p>
+        <p><a href="#" class="btn-flat btn-xs text-color-light"><strong class="text-2">VIEW MORE</strong></a></p>
         <div class="row pt-3">
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">BLOG</h5>
@@ -72,11 +69,6 @@
   <div class="footer-copyright">
     <div class="container py-2">
       <div class="row py-4">
-        <div class="col-lg-1 d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
-          <a href="index.html" class="logo pr-0 pr-lg-3">
-            <img alt="Porto Website Template" src="img/logo-footer.png" class="opacity-5" height="33">
-          </a>
-        </div>
         <div class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
           <p>© Copyright 2019. All Rights Reserved.</p>
         </div>
