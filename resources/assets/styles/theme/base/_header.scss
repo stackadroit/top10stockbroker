@@ -1,0 +1,49 @@
+.mega-menu > li > a::after,
+.mega-menu > li > a::before,
+.header-profile ul a::before,
+.content-filter, .open-menu{
+	@include transitions(all 0.3s ease-in-out 0s);
+}
+.nav-open{
+	.header-ver {		
+		opacity: 1;
+		#{$right}: 0;
+		visibility: visible;
+	}
+}
+.header-info{
+	.open-menu {
+	  padding: side-values(0 0 0 17px);
+	}
+}
+
+.open-menu {
+  font-size: 20px;
+  cursor: pointer;
+  &:hover{
+  	color: $primary_color
+  }
+}
+.close-menu, .close-menu-mobile {
+  border: 1px solid $primary_color;
+  color: $primary_color;
+  cursor: pointer;
+  display: table;
+  font-size: 20px;
+  height: 40px;
+  padding: side-values(0);
+  position: absolute;
+  #{$left}: 40px;
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
+  @include transitions(all 0.3s ease-in-out 0s);
+  	span {
+	  display: inline;
+	  height: 100%;
+	  vertical-align: middle;
+	}
+  	&:hover{
+  		background: #fff;
+  	}
+}

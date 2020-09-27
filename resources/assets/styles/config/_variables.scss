@@ -108,3 +108,84 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px
 ) !default;
+
+
+// =============================================================================
+// Delete
+// =============================================================================
+//SKIN
+//General
+$general_bg_color: "#fff";
+$general_bg_image: "";
+$general_bg_repeat: "no-repeat";
+$general_bg_position: "center center";
+$general_bg_size: "inherit";
+$general_bg_attachment: "inherit";
+$general_font_family: "Poppins";
+$general_font_weight: "400";
+$general_font_size: "14px";
+$general_font_color: "#282828";
+$general_line_height: "24px";
+$primary_color: "#80bb01";
+$primary_color2: "#58d9cd";
+
+$highlight_color: "#222222";
+//Footer
+
+$footer_color: "#282828";
+
+// Newsletter
+$newsletter_bg_color:'';
+$newsletter_bg_image:'';
+$newsletter_bg_repeat: '';
+$newsletter_bg_position: '';
+$newsletter_bg_attachment: '';
+
+$newsletter_bg_color: "#282828";
+$newsletter_bg_image: "";
+$newsletter_bg_repeat: "";
+$newsletter_bg_position: "";	
+$newsletter_bg_size: "";
+$newsletter_bg_attachment: "";
+
+$breadcrumb_bg_image: "";
+$breadcrumb_bg_repeat: "";
+$breadcrumb_bg_position: "";
+
+$breadcrumb_bg_image:'';
+$breadcrumb_bg_repeat: '';
+$breadcrumb_bg_position: '';	
+
+$breadcrumb_bg_size: "";
+$breadcrumb_bg_attachment: "";
+$breadcrumb_font_family: "";
+$breadcrumb_font_size: "";
+$breadcrumb_font_color: "";
+
+//Typography
+$h1_font_family: "Poppins";
+$h1_font_size: "40px";
+$h1_font_color: "#000";
+$h2_font_family: "Poppins";
+$h2_font_size: "40px";
+$h2_font_color: "#000";
+$h3_font_family: "Poppins";
+$h3_font_size: "40px";
+$h3_font_color: "#000";
+$h4_font_family: "Poppins";
+$h4_font_size: "40px";
+$h4_font_color: "#000";
+$h5_font_family: "Poppins";
+$h5_font_size: "40px";
+$h5_font_color: "#000";
+$h6_font_family: "Poppins";
+$h6_font_size: "40px";
+$h6_font_color: "#000";
+
+$rtl: 0; 
+$dir: ltr !default;
+$text_color: #3d3935;
+
+$primary_color: #80bb01;
+$highlight_color: #000;
+$primary_color2: #58d9cd;

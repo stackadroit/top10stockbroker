@@ -1,8 +1,8 @@
-<footer class="content-info">
-  <div class="container">
-    @php dynamic_sidebar('sidebar-footer') @endphp
-  </div>
-</footer>
+{{--<footer class="content-info">--}}
+{{--  <div class="container">--}}
+{{--    @php dynamic_sidebar('sidebar-footer') @endphp--}}
+{{--  </div>--}}
+{{--</footer>--}}
 <footer id="footer">
   <div class="container">
     <div class="row py-5 my-4">
@@ -14,37 +14,37 @@
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">BLOG</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="blog-full-width.html">Blog Full Width</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="blog-large-image.html">Blog Large Image</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="blog-medium-image.html">Blog Medium Image</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="blog-post.html">Single Post</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-full-width.html">Blog Full Width</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-large-image.html">Blog Large Image</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-medium-image.html">Blog Medium Image</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-post.html">Single Post</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">PAGES</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-full-width.html">Full width</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-left-sidebar.html">Left sidebar</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-right-sidebar.html">Right sidebar</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-custom-header.html">Custom Header</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-full-width.html">Full width</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-left-sidebar.html">Left sidebar</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-right-sidebar.html">Right sidebar</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-custom-header.html">Custom Header</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">PORTFOLIO</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="portfolio-2-columns.html">2 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="portfolio-3-columns.html">3 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="portfolio-4-columns.html">4 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="portfolio-single-wide-slider.html">Single Project</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-2-columns.html">2 Columns</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-3-columns.html">3 Columns</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-4-columns.html">4 Columns</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-single-wide-slider.html">Single Project</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">EXTRA</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-team.html">Team</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-services.html">Services</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-careers.html">Careers</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover-style-1" href="page-faq.html">FAQ</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-team.html">Team</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-services.html">Services</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-careers.html">Careers</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-faq.html">FAQ</a></li>
             </ul>
           </div>
         </div>

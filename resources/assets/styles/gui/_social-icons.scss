@@ -98,85 +98,13 @@
 			}
 		}
 	}
-	&.social-icons-dark {
-		li {
-			a {
-				background: #181818;
-				i {
-					color: #FFF;
-				}
-			}
-		}
-	}
-	&.social-icons-dark-2 {
-		li {
-			a {
-				background: #272a2e;
-				i {
-					color: #FFF;
-				}
-			}
-		}
-	}
-	&.social-icons-transparent {
-		li {
-			box-shadow: none;
-			a {
-				background: transparent;
-			}
-		}
-	}
-	&.social-icons-icon-light {
-		li {
-			a {
-				i {
-					color: #FFF;
-				}
-			}
-		}
-	}
-	&.social-icons-icon-light.social-icons-clean {
-		li {
-			a {
-				i {
-					color: #FFF !important;
-				}
-			}
-		}
-	}
-	&.social-icons-big {
-		li {
-			a {
-				height: 48px;
-				line-height: 48px;
-				width: 48px;
-			}
-		}
-	}
-	&.social-icons-opacity-light {
-		li {
-			a {
-				background: rgba(255,255,255,0.04);
-			}
-		}
-	}
 }
 
-.social-icons:not(.social-icons-clean):not(.social-icons-dark):not(.social-icons-dark-2) {
+.social-icons:not(.social-icons-clean) {
 	li {
 		box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 		a {
 			background: #FFF;
-		}
-	}
-}
-
-.social-icons-dark.social-icons-clean,
-.social-icons-dark-2.social-icons-clean {
-	li {
-		a {
-			background: transparent;
-			color: #FFF !important;
 		}
 	}
 }

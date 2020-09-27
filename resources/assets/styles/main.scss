@@ -29,11 +29,10 @@
 @import "partials/posts";
 @import "partials/tinymce";
 
-
+//temp files
 // BASE
 @import "base/base";
 @import "base/header";
-@import "base/page-header";
 
 // HELPERS
 @import "base/helpers";
@@ -43,29 +42,12 @@
 
 // GUI
 @import "gui/animations";
-@import "gui/arrows";
-@import "gui/backgrounds";
-@import "gui/bars";
-@import "gui/borders";
-@import "gui/buttons";
-@import "gui/colors";
-@import "gui/counters";
-@import "gui/dividers";
-@import "gui/dropdowns";
-@import "gui/flags";
-@import "gui/forms";
-@import "gui/headings";
-@import "gui/icons";
-@import "gui/images";
-@import "gui/lightbox";
-@import "gui/lists";
-@import "gui/misc";
-@import "gui/navs";
-@import "gui/overlays";
-@import "gui/scroll-top-top";
-@import "gui/scrollable";
-@import "gui/sections";
-@import "gui/sidebar";
 @import "gui/social-icons";
-@import "gui/toggles";
-@import "gui/typography";
+@import "gui/lists";
+
+@import "skin/general"; 
+
+@import "theme/directional";
+@import "theme/typography";
+@import "theme/base/header_responsive";
+@import "theme/base/megamenu";
