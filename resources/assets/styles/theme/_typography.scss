@@ -1,6 +1,5 @@
 body{
 	font-size: 15px;
-	font-family: 'Open Sans', Arial;
 	color: #555555;
 	font-weight: normal;
   margin: side-values(0);
@@ -114,7 +113,7 @@ input[type="number"] {
 }
 
 .scroll-to-top {
-    background: $primary_color none repeat scroll 0 0;
+    background: $color-primary none repeat scroll 0 0;
     border: none;
     bottom: -100px;
     cursor: pointer;
@@ -212,7 +211,7 @@ input[type=text]::-ms-clear {
         a{
             color: #000;
             &:hover{
-              color: $primary_color;
+              color: $color-primary;
             }  
         }
     }
@@ -252,7 +251,7 @@ footer{
   }  
 }
 .sticky_post{
-    background: $primary_color;
+    background: $color-primary;
     font-weight: normal;
     font-size: 13px;
     text-transform: capitalize;
@@ -278,7 +277,7 @@ footer{
     label{    font-weight: normal;}
     input[type="submit"]{
       padding: side-values(9px 28px);
-      background: $primary_color;
+      background: $color-primary;
       color: #fff;
       text-transform: uppercase;
       vertical-align: bottom;
@@ -433,7 +432,7 @@ figure.wp-caption.alignleft, img.alignleft {
 }
 a:focus,
 a:hover{
-	color: $primary_color;
+	color: $color-primary;
 }
 a:hover, a:focus, a:active {
   text-decoration: none;
@@ -595,7 +594,7 @@ select {
   width: 100%;
   letter-spacing: 1px;
   vertical-align: top;
-  background: $primary_color;
+  background: $color-primary;
   font-weight: 600;
   &:hover{
     background: #000;
@@ -611,14 +610,14 @@ select {
     color: #888;
     text-transform: uppercase;
     &:hover{
-      color: $primary_color;
+      color: $color-primary;
     }
 
   }
   &.type2{
     font-size: 14px;
     font-weight: 500;
-    color: $primary_color;
+    color: $color-primary;
     position: relative;
     padding-#{$left}: 62px;
     &:before{
@@ -628,7 +627,7 @@ select {
       width: 45px;
       top: 50%;
       #{$left}:0;
-      background: $primary_color;
+      background: $color-primary;
       @include transition (all 0.3s ease-in-out 0s);
     }
     &:hover{
@@ -656,15 +655,15 @@ select {
     }
     &.btn-default{
       background: none;
-      border:1px solid $primary_color;
-      color: $primary_color;
+      border:1px solid $color-primary;
+      color: $color-primary;
       &:hover,&:focus, &:active{
-        background: $primary_color;
+        background: $color-primary;
         color: #fff;
       }
     }
     &.btn-primary{
-      background:$primary_color;
+      background:$color-primary;
       color: #fff;
       &:hover,&:focus, &:active{
         background: #222;
@@ -681,28 +680,28 @@ select {
         margin-#{$left}: 15px;
       }
      &:hover,&:focus, &:active{
-        background: $primary_color;
-        border-color:$primary_color;
+        background: $color-primary;
+        border-color:$color-primary;
         color: #000;
       }
     }
     &.btn-secondary{
       background:$highlight_color;
-      color: $primary_color;
+      color: $color-primary;
       border-color:$highlight_color;
       &:hover,&:focus, &:active{
-        background: $primary_color;
+        background: $color-primary;
         color: #000;
-        border-color: $primary_color;
+        border-color: $color-primary;
       } 
     }
     &.btn-white{
       background: #fff;
-      color: $primary_color;
+      color: $color-primary;
       padding:side-values(17px 38px 13px 36px);
       text-transform: capitalize;
         &:hover,&:focus, &:active{
-        background: $primary_color;
+        background: $color-primary;
         color: #fff;;
       } 
     }
@@ -782,7 +781,7 @@ select {
       position: absolute;
       height: 4px;
       width: 4px;
-      background: $primary_color;
+      background: $color-primary;
       #{$left}:-18px;
       top: 9px;
     }
@@ -840,7 +839,7 @@ select {
     }
 }
 .bg-primary{
-  background: $primary_color;
+  background: $color-primary;
 }
 .title-custom {
   clear: $left;
@@ -849,13 +848,13 @@ select {
 .main-bg_color.ult-content-box-container,
 .main-bg_color > .vc_column-inner,
 .main-bg_color > .upb_row_bg, .main-bg_color.vc_row{
-    background-color: $primary_color;
+    background-color: $color-primary;
 }
 .baber-heading {
   overflow: hidden;
   padding-bottom: 42px;
   .header_icon{
-    color: $primary_color;
+    color: $color-primary;
     margin-bottom: 12px;
   }
   h1,h2,h3,h4,h5,h6{
@@ -897,13 +896,13 @@ select {
         position: absolute;
         #{$left}:52px;
         top:15px;
-        background: -moz-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%);
-        background: -webkit-gradient(linear, $left top, $right top, color-stop(0%, $primary_color), color-stop(100%, rgba(255,255,255,0.1)));
-        background: -webkit-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        background: -o-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        background: -ms-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        background: linear-gradient(90deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$primary_color', endColorstr='rgba(255,255,255,0.1)',GradientType=1 ); 
+        background: -moz-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%);
+        background: -webkit-gradient(linear, $left top, $right top, color-stop(0%, $color-primary), color-stop(100%, rgba(255,255,255,0.1)));
+        background: -webkit-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        background: -o-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        background: -ms-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        background: linear-gradient(90deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color-primary', endColorstr='rgba(255,255,255,0.1)',GradientType=1 ); 
       }
        &:after{
         content: "";
@@ -912,13 +911,13 @@ select {
         position: absolute;
         #{$right}:52px;
         top:15px;
-         background: -moz-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%);
-        background: -webkit-gradient(linear, $left top, $right top, color-stop(0%, $primary_color), color-stop(100%, rgba(255,255,255,0.1)));
-        background: -webkit-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        background: -o-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        background: -ms-linear-gradient(0deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        background: linear-gradient(-90deg, $primary_color 0%, rgba(255,255,255,0.1) 100%); 
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$primary_color', endColorstr='rgba(255,255,255,0.1)',GradientType=1 ); 
+         background: -moz-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%);
+        background: -webkit-gradient(linear, $left top, $right top, color-stop(0%, $color-primary), color-stop(100%, rgba(255,255,255,0.1)));
+        background: -webkit-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        background: -o-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        background: -ms-linear-gradient(0deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        background: linear-gradient(-90deg, $color-primary 0%, rgba(255,255,255,0.1) 100%); 
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color-primary', endColorstr='rgba(255,255,255,0.1)',GradientType=1 ); 
       }
     }
   }
@@ -976,7 +975,7 @@ select {
     color: #282828;
     z-index: 9;
     &:hover{
-      color: $primary_color;
+      color: $color-primary;
     }
   }
   > .btn-next.slick-arrow {
@@ -993,7 +992,7 @@ select {
     color: #282828;
     z-index: 9;
     &:hover{
-      color: $primary_color;
+      color: $color-primary;
     }
   }
 }
@@ -1004,7 +1003,7 @@ select {
       height: 4px;
       width: 15px;
       &.slick-active{
-        background: $primary_color;
+        background: $color-primary;
       }
     }
     button{
@@ -1063,7 +1062,7 @@ select {
         height: 100%;
         opacity: 0;
         @include transform(scale(0));
-        background: $primary_color;
+        background: $color-primary;
       }
       &:after{
         position: absolute;

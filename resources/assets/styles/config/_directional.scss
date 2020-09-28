@@ -20,6 +20,8 @@ $dir: ltr !default;
 
 $left: if-ltr(left, right);
 $right: if-ltr(right, left);
+$translateX: if-ltr(-50%, 50%);
+$translateX2: if-ltr(-100%, 100%);
 
 @function side-values($values) {
   @if $dir == rtl and length($values) >= 4 {

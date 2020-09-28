@@ -1,0 +1,130 @@
+/* List */
+.list {
+	li {
+		margin-bottom: 13px;
+	}
+	&.pull-left li {
+		text-align: $left;
+	}
+
+	&.list-icons {
+		list-style: none;
+		padding-#{$left}: 0;
+		padding-#{$right}: 0;
+		li {
+			position: relative;
+			padding-#{$left}: 25px;
+			&, a:first-child {
+				> [class*="fa-"]:first-child,
+				> .icons:first-child {
+					position: absolute;
+					#{$left}: 0;
+					top: 5px;
+				}
+			}
+		}
+
+		&.list-icons-sm {
+			li {
+				padding-#{$left}: 13px;
+				margin-bottom: 5px;
+				&, a:first-child {
+					> [class*="fa-"]:first-child,
+					> .icons:first-child {
+						font-size: 0.8em;
+						top: 7px;
+					}
+				}
+			}
+		}
+
+		&.list-icons-lg {
+			li {
+				padding-top: 5px;
+				padding-#{$left}: 27px;
+				&, a:first-child {
+					> [class*="fa-"]:first-child,
+					> .icons:first-child {
+						font-size: 1.3em;
+						top: 10px;
+					}
+				}
+			}
+		}
+	}
+
+	&.list-borders {
+		li {
+			border-bottom: 1px solid #eaeaea;
+			margin-top: 9px;
+			margin-bottom: 0;
+			padding-bottom: 9px;
+			&:last-child {
+				border-bottom: 0;
+			}
+		}
+	}
+
+	&.list-side-borders {
+		border-#{$left}: 1px solid #eaeaea;
+		padding-#{$left}: 10px;
+	}
+
+	&.list-ordened {
+		counter-reset: custom-counter;
+		list-style: none;
+		li {
+			position: relative;
+			padding-#{$left}: 22px;
+			&:before {
+				position: absolute;
+				top: 0;
+				#{$left}: 0;
+				content: counter(custom-counter);
+				counter-increment: custom-counter;
+				font-weight: bold; 
+			}
+		}
+	}
+
+	&.list-unstyled {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.list-unstyled {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+// Description List
+dl {
+	dd {
+		margin-bottom: 15px;
+	}
+}
+
+@include if-rtl() {
+	dd {
+		margin-right: 0;
+	}	
+}
+
+/* Sitemap */
+ul {
+	&.sitemap {
+		> li > a {
+			font-weight: bold;
+		}
+		&.list {
+			li {
+				margin: 0 0 3px 0;
+			}
+			ul {
+				margin-bottom: 5px;
+				margin-top: 5px;
+			}
+		}
+	}
+}

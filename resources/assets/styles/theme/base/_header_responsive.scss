@@ -1,32 +1,17 @@
-@media (min-width: 1200px) and (max-width: 1365px){
-	header .mega-menu > li.menu-item > a {
-	  	padding-#{$left}: 17px;
-	  	padding-#{$right}: 17px;
-	}
-}
-
-@media (min-width: 992px) and (max-width: 1199px){
-	
-	header {
-		.container{
-			.mega-menu > li.menu-item > a {
-			  padding-#{$left}: 5px;
-			  padding-#{$right}: 6px;
-			  font-size: 14px;
-			}
-		}
-		.mega-menu > li.menu-item > a {
-		  padding-#{$left}: 10px;
-		  padding-#{$right}: 10px;
-		}
-	}
-}
+/*===================================
+	2.2 Header Responsive
+===================================*/
 
 @media (min-width: 992px){
 	.mega-menu > li.megamenu > .sub-menu {
 	    padding: side-values(15px 38px 28px);
 	}
+	.logo-mobile,
+	.close-menu-mobile{
+	  display: none;
+	}
 	.mega-menu{
+		height: inherit;
 		> li{
 			&.megamenu{
 				> .sub-menu > li > a{
@@ -59,14 +44,14 @@
 				    opacity: 1;
 	    		}
 			}
-			&.current-menu-item, 
+			&.active, 
 			&.current-menu-ancestor{
 	    		> a:before,
 	    		> a:after{
 				    opacity: 1;
 	    		}
 	    	}
-	    	&.current-menu-item, 
+	    	&.active, 
 	    	&.current-menu-ancestor{
 	    		> a:before{
 				    #{$left}: 0;
@@ -78,7 +63,7 @@
 
 			&:not(.megamenu) .sub-menu,
 			> .sub-menu{ 
-			  	border-top: 2px solid $primary_color;
+			  	border-top: 2px solid $color-primary;
 			}
 		}
 		> li{
@@ -211,16 +196,52 @@
 	}
 }
 @media (max-width: 991px){
-	.openmenu{
-		.header-center{
-			#{$left}: 0;
-			opacity: 1;
-			visibility: visible;
-		}
+	
+	.header-mobile-style{
+	  #{$left}: -100%;
+	  opacity: 0;
+	  height: 100%;
+	  position: fixed;
+	  top: 0;
+	  z-index: 9990;
+	  visibility: hidden;
+	  width: 400px;
+	  background: #ffffff none repeat scroll 0 0;
+	  @include transitions(all 0.3s ease-in-out 0s);
 	}
-	.open-submenu{
-		display: none;
+
+	.close-menu-mobile {
+	    border: 1px solid #80bb01;
+	    color: #80bb01;
+	    cursor: pointer;
+	    display: table;
+	    font-size: 20px;
+	    height: 40px;
+	    padding: 0;
+	    position: absolute;
+	    text-align: center;
+	    vertical-align: middle;
+	    width: 40px;
+	    #{$left}: auto;
+	  	#{$right}: -32px;
+	    @include transitions (all 0.3s ease-in-out 0s);
 	}
+
+	.logo-mobile {
+	    padding: 15px;
+	    text-align: left;
+	    border-bottom: 1px solid #f0efef;
+	    img {
+	    	width: 90px;
+	    }
+	    + .close-menu-mobile{
+	    	right: 15px;
+		    top: 10px;
+		    height: 40px;
+		    width: 40px;
+	    }
+	}
+
 	.open-menu-mobile{
 	  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	  border: medium none;
@@ -231,19 +252,17 @@
 	  z-index: 999;
 	  padding: side-values(28px 0 0);
 	}
-	.close-menu-mobile.hover-effect {
-	  height: 32px;
-	  #{$left}: auto;
-	  #{$right}: -32px;
-	  width: 32px;
-	}
-	.sub-menu{
-		display: none;
+	
+	.openmenu .header-mobile-style {
+	    left: 0;
+	    opacity: 1;
+	    visibility: visible;
 	}
 	.main-navigation{
 		.mega-menu {
 			display: block;
 			clear: $left;
+			width: 100%;
 			li{
 				position: relative;
 				clear: $left;
@@ -255,6 +274,7 @@
 			  	}
 			  	a{
 			  		padding: side-values(13px 25px);
+			  		font-weight: 600;
 			  	}
 			  	li{
 				  	a{
@@ -285,49 +305,89 @@
 				  @include transform(none);
 				}
 			}
+			.menu-block2-item, 
+			.menu-block1-item{
+				padding: side-values( 15px);
+			}
+			li .product_list_widget{
+				.product-img {
+				  	width: 60px;
+				  	border: 1px solid #ebebeb;
+				  	
+				  	a{
+						padding: side-values(0);
+						border: none !important;
+						&:hover{
+							background: none;
+						}
+						img{
+							width: 60px;
+						}
+					}
+				}
+				.product-content {
+				  	overflow: hidden;
+				  	.product-title{
+					  font-size: 12px;
+					  padding: side-values(0);
+					  text-transform: none;
+					  line-height: normal;
+					  border: none !important;
+					  	&:hover{
+							background: none;
+						}
+					}
+					.price{
+						del{
+							span{
+								font-size: 13px !important;
+							}
+						}
+						.amount {
+						  font-size: 16px;
+						}
+					} 
+					span.woocommerce-Price-amount{
+						span {
+						  font-size: 16px;
+						}
+					} 
+				}
+			} 
+		}
+		.menu-block1, .menu-block2{
+			border-bottom: 1px solid #f0efef;
+		}
+		.caret-submenu {
+		  border-#{$left}: 1px solid #f0efef;
 		}
 	}
-	.openmenu .right_openmenu ~ .overlay{
-	    #{$left}: auto;
-	    #{$right}: 400px;	
+	.col-xs-12.hidden-md {
+	  margin-top: -1px;
 	}
 	.menu-mobile{
-		.logo-mobile, 
-		.close-menu-mobile {
-		  display: none;
-		}
-	}
-	.menu-mobile, .header-bottom{
 		.open-menu-mobile{
 			padding: side-values(32px 0 0);
 		}
-	}
-	.openmenu .menu-mobile:not(.header-bottom) .header-center {
-	  	#{$left}: 0 !important;
-	}
-	.openmenu .menu-mobile .header-center,
-	.openmenu .menu-mobile.is-sticky .header-center {
-	  	top: 100%;
-	}
-	.openmenu .header-bottom.site-header .header-center,
-	.openmenu .header-bottom.site-header.is-sticky .header-center {
-	  	bottom: 100%;
-	  	top: auto !important;
-	}
-}
-@media (min-width: 768px){
-	.mega-menu li .sub-menu li a{
-		&:hover{
-			color: $primary_color;
-			background: #151515 none repeat scroll 0 0;
-			&::before {
-				height: 100%;
-			}
+		.header-mobile-style {
+		  height: 307px;
+		  width: 100%;
+		  overflow: auto;
+		  position: absolute;
+		  #{$left}: -100% !important;
+		  top: 100% !important;
+		}		
+		.header-container{
+			position: static;
 		}
 	}
+
 }
 
-@media (max-width: 767px){	
+@media (max-width: 767px){
+	.header-mobile-style{
+	  width: calc(100% - 40px);
+	}	
 	.openmenu{
 		.overlay {
 		  #{$left}: auto;
@@ -338,18 +398,13 @@
 		  z-index: 9999;
 		}
 	} 
-	.nav-open{
-		.overlay {
-		  width: 40px;
-		  #{$left}: 0;
-		}
-	} 
-	.openmenu .right_openmenu ~ .overlay {
-	    #{$left}: 0;
-	    #{$right}: auto;
+}
+@media (min-width: 480px) and (max-width: 737px){
+	.menu-mobile .header-mobile-style,
+	.header-bottom .header-mobile-style  {
+	    max-height: 200px;
 	}
 }
-
 @media (max-width: 375px){
 	.close-menu, .close-menu-mobile {
 	    height: 35px;

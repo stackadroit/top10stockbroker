@@ -15,39 +15,22 @@
 /** Common  */
 @import "common/global";
 
-/** Import theme styles */
-@import "components/buttons";
-@import "components/comments";
-@import "components/forms";
-@import "components/wp-classes";
-
 /** Partials */
 @import "partials/header";
-@import "partials/sidebar";
 @import "partials/footer";
+@import "partials/sidebar";
 @import "partials/pages";
 @import "partials/posts";
 @import "partials/tinymce";
 
-//temp files
-// BASE
-@import "base/base";
-@import "base/header";
+/** Import theme styles */
+@import "components/wp-classes";
+@import "components/animations";
+@import "components/social-icons";
+@import "components/lists";
+@import "components/forms";
 
-// HELPERS
-@import "base/helpers";
-
-// FOOTER
-@import "base/footer";
-
-// GUI
-@import "gui/animations";
-@import "gui/social-icons";
-@import "gui/lists";
-
-@import "skin/general"; 
-
-@import "theme/directional";
+// delete
 @import "theme/typography";
 @import "theme/base/header_responsive";
 @import "theme/base/megamenu";
