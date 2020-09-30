@@ -211,8 +211,8 @@
 	}
 
 	.close-menu-mobile {
-	    border: 1px solid #80bb01;
-	    color: #80bb01;
+	    border: 1px solid $color-primary;
+	    color: $color-primary;
 	    cursor: pointer;
 	    display: table;
 	    font-size: 20px;
@@ -236,7 +236,7 @@
 	    }
 	    + .close-menu-mobile{
 	    	right: 15px;
-		    top: 10px;
+		    top: 25px;
 		    height: 40px;
 		    width: 40px;
 	    }
@@ -253,11 +253,35 @@
 	  padding: side-values(28px 0 0);
 	}
 	
-	.openmenu .header-mobile-style {
-	    left: 0;
-	    opacity: 1;
-	    visibility: visible;
+	.openmenu {
+		& .header-mobile-style {
+			#{$left}: 0;
+			opacity: 1;
+			visibility: visible;
+		}
 	}
+	.open-submenu{
+		display: none;
+	}
+
+	.mega-menu .caret-submenu{
+		display: table;
+		i{
+			display: table-cell;
+		    height: 100%;
+		    vertical-align: middle;
+		    width: 100%;
+		    &:before {
+			    content: "\f107";
+			}
+		}
+		&.active {
+			i:before{
+				content: "\f106";
+			}
+		}
+	}
+	
 	.main-navigation{
 		.mega-menu {
 			display: block;
@@ -299,64 +323,13 @@
 					  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 					}
 					width: 100%;
+					max-width: 100%;
 					padding: side-values(0);
 				}
 				&:not(.megamenu) .sub-menu .sub-menu {
 				  @include transform(none);
 				}
 			}
-			.menu-block2-item, 
-			.menu-block1-item{
-				padding: side-values( 15px);
-			}
-			li .product_list_widget{
-				.product-img {
-				  	width: 60px;
-				  	border: 1px solid #ebebeb;
-				  	
-				  	a{
-						padding: side-values(0);
-						border: none !important;
-						&:hover{
-							background: none;
-						}
-						img{
-							width: 60px;
-						}
-					}
-				}
-				.product-content {
-				  	overflow: hidden;
-				  	.product-title{
-					  font-size: 12px;
-					  padding: side-values(0);
-					  text-transform: none;
-					  line-height: normal;
-					  border: none !important;
-					  	&:hover{
-							background: none;
-						}
-					}
-					.price{
-						del{
-							span{
-								font-size: 13px !important;
-							}
-						}
-						.amount {
-						  font-size: 16px;
-						}
-					} 
-					span.woocommerce-Price-amount{
-						span {
-						  font-size: 16px;
-						}
-					} 
-				}
-			} 
-		}
-		.menu-block1, .menu-block2{
-			border-bottom: 1px solid #f0efef;
 		}
 		.caret-submenu {
 		  border-#{$left}: 1px solid #f0efef;
@@ -382,6 +355,11 @@
 		}
 	}
 
+	#header{
+		.header-mobile-style{
+			display: block;
+		}
+	}
 }
 
 @media (max-width: 767px){

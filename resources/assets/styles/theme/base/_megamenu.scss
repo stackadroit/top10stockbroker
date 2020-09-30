@@ -111,6 +111,31 @@
 		
 	}
 }
+
+.caret-submenu {
+  color: #8b8b8b;
+  cursor: pointer;
+  display: none;
+  font-size: 18px;
+  height: 50px;
+  position: absolute;
+  #{$right}: 0;
+  text-align: center;
+  top: 0;
+  width: 50px;
+  	i{
+	  display: table-cell;
+	  height: 100%;
+	  vertical-align: middle;
+	  width: 100%;
+	}
+	&.active{
+		i:before{
+			content: "\f106";
+		}
+	}
+}
+
 .mega-menu > li.megamenu .sub-menu li:last-child a {
   border-bottom: medium none;
 }

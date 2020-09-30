@@ -3,10 +3,10 @@ import 'jquery';
 
 import fontawesome from '@fortawesome/fontawesome-free';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch} from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faTwitter} from '@fortawesome/free-brands-svg-icons';
 fontawesome.config = { searchPseudoElements: true, autoReplaceSvg: 'nest' };
-library.add(faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faSearch );
+library.add(faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faSearch);
 
 // Import everything from autoload
 import './autoload/**/*'

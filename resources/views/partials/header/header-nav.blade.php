@@ -9,8 +9,7 @@
                 <img class="" width="132" height="44" src="https://top10stockbroker.com/wp-content/uploads/2017/11/cropped-cropped-logo-web-1.png" alt="top10stockbroker">              </a>
             </h2>
             <div class="close-menu-mobile hidden-lg hidden-md">
-              <i class="lnr lnr-cross"></i>
-              <i class="lnr lnr-cross fa-hover"></i>
+              <i class="fas fa-times"></i>
             </div>
             <nav class="justify-content-start main-navigation">
               @if (has_nav_menu('primary_navigation'))
