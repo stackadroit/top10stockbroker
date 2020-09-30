@@ -11,8 +11,8 @@ use Roots\Sage\Template\BladeProvider;
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
-    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
+    wp_enqueue_style('top10stockbroker/main.css', asset_path('styles/main.css'), false, null);
+    wp_enqueue_script('top10stockbroker/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -55,7 +55,9 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage')
+        'primary_navigation' => __('Primary Navigation', 'top10stockbroker'),
+        'top_navigation' => __('Top Navigation', 'top10stockbroker'),
+        'footer_navigation' => __('Footer Navigation', 'top10stockbroker')
     ]);
 
     /**
@@ -94,11 +96,11 @@ add_action('widgets_init', function () {
         'after_title'   => '</h3>'
     ];
     register_sidebar([
-        'name'          => __('Primary', 'sage'),
+        'name'          => __('Primary', 'stockadroit'),
         'id'            => 'sidebar-primary'
     ] + $config);
     register_sidebar([
-        'name'          => __('Footer', 'sage'),
+        'name'          => __('Footer', 'stockadroit'),
         'id'            => 'sidebar-footer'
     ] + $config);
 });

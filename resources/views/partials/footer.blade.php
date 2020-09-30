@@ -1,9 +1,5 @@
-{{--<footer class="content-info">--}}
-{{--  <div class="container">--}}
 {{--    @php dynamic_sidebar('sidebar-footer') @endphp--}}
-{{--  </div>--}}
-{{--</footer>--}}
-<footer id="footer">
+<footer id="footer" class="content-info">
   <div class="container">
     <div class="row py-5 my-4">
       <div class="col-md-9 mb-4 mb-lg-0">
@@ -85,3 +81,4 @@
     </div>
   </div>
 </footer>
+<a class="scroll-to-top hidden-mobile visible" href="#"><i class="fas fa-chevron-up"></i></a>

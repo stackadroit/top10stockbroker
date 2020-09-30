@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Roots">
-  <description>Roots Coding Standards</description>
+<ruleset name="Stackadroit">
+  <description>Stackadroit Coding Standards</description>
 
   <!-- Scan these files -->
   <file>resources/functions.php</file>
