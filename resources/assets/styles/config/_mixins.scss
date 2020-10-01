@@ -31,3 +31,84 @@
   flex: $grow $shrink $basis;
   max-width: $basis;
 }
+
+// Tablet
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+//Desktop
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+//Border Radius
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+//Transition
+@mixin transition($value) {
+    -webkit-transition: all $value ease-in-out 0s !important;
+    -moz-transition: all $value ease-in-out 0s !important;
+    -ms-transition: all $value ease-in-out 0s !important;
+    -o-transition: all $value ease-in-out 0s !important;
+    transition: all $value ease-in-out 0s !important;
+}
+
+//Tranitions 
+@mixin transitions($transitions){
+    -webkit-transition: $transitions;
+    -moz-transition: $transitions;
+    -ms-transition: $transitions;
+    -o-transition: $transitions;
+    transition: $transitions;
+}
+
+//Transform
+@mixin transform($transforms) {
+     -moz-transform: $transforms;
+       -o-transform: $transforms;
+      -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+//Animation
+@mixin animation($animation) {
+     -moz-animation: $animation;
+       -o-animation: $animation;
+      -ms-animation: $animation;
+  -webkit-animation: $animation;
+          animation: $animation;
+}
+
+//Scrollbars
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  .algolia-autocomplete::-webkit-scrollbar {
+      width:  $size;
+      height: 5px;
+  }
+
+  .algolia-autocomplete::-webkit-scrollbar-thumb {
+      background: $foreground-color;
+  }
+
+  .algolia-autocomplete::-webkit-scrollbar-track {
+      background: $background-color;
+  }
+
+  // For Internet Explorer
+  .algolia-autocomplete {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}

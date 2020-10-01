@@ -17,6 +17,8 @@
 
 /** Partials */
 @import "partials/header";
+@import "partials/megamenu_responsive";
+@import "partials/megamenu";
 @import "partials/footer";
 @import "partials/sidebar";
 @import "partials/pages";
@@ -30,7 +32,3 @@
 @import "components/lists";
 @import "components/forms";
 
-// delete
-@import "theme/typography";
-@import "theme/base/header_responsive";
-@import "theme/base/megamenu";

@@ -1,0 +1,104 @@
+// Contact 7 Form
+div.wpcf7-response-output{
+  padding: side-values(8px 8px 8px 40px);
+  border-radius: corner-values(4px);
+  margin-#{$right}:0;
+  margin-#{$left}:0;
+  float: $left;
+  width: 100%;
+  text-align: $left;
+}
+
+.wpcf7-submit{
+  text-transform: uppercase;
+  color: #fff;
+  padding-#{$left}: 31px;
+  padding-#{$right}: 29px;
+  width: 100%;
+  letter-spacing: 1px;
+  vertical-align: top;
+  background: $color-primary;
+  font-weight: 600;
+  &:hover{
+    background: #000;
+  }
+
+}
+
+.wpcf7-response-output{
+  position: relative;
+  &:before{
+    position: absolute;
+    font-family: FontAwesome;
+    #{$left}: 15px;
+    top: 9px;
+  }
+  &.wpcf7-mail-sent-ok {
+    background: #e0f2d9 none repeat scroll 0 0;
+    border: 2px solid #e0f2d9;
+    color: #58a839;
+    &:before{
+      content: "\f00c";
+    }
+  }
+  &.wpcf7-mail-sent-ng{
+    background: #ecf1f9 none repeat scroll 0 0;
+    border: 2px solid #ecf1f9;
+    color: #3d6ebf;
+    &:before{
+      content: "\f00c";
+    }
+  }
+  &.wpcf7-validation-errors {
+    background: #ffecec none repeat scroll 0 0;
+    border: 2px solid #ffecec;
+    color: #df6060;
+    &:before{
+      content: "\f129";
+    }
+  }
+  &.wpcf7-spam-blocked {
+    background: #fdf9df none repeat scroll 0 0;
+    border-color: #fdf9df;
+    color: #eb9b0a;
+    &:before{
+      content: "\f071";
+    }
+  }
+}
+
+// Mail Chimp
+.mc4wp-response{
+  position: relative;
+  .mc4wp-alert{
+    padding: side-values(8px 8px 5px 40px);
+    font-size: 13px;
+    margin-top: 10px;
+    border-radius: corner-values(4px);
+    text-align: $left;
+    position: relative;
+    float: $left;
+    &:before{
+      position: absolute;
+      font-family: FontAwesome;
+      #{$left}: 20px;
+      top: 9px;
+    }
+  }
+  .mc4wp-success{
+    background: #e0f2d9 none repeat scroll 0 0;
+    border: 2px solid #e0f2d9;
+    color: #58a839;
+    &:before{
+      content: "\f00c";
+    }
+  }
+  .mc4wp-error { 
+    background: #ffecec none repeat scroll 0 0;
+    border: 2px solid #ffecec;
+    color: #df6060;
+    &:before{
+      content: "\f129";
+    }
+  }
+}

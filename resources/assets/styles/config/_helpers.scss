@@ -398,6 +398,8 @@ html.dark {
 }
 
 /* Width */
+.w-auto{width: auto !important;}
+
 @media(max-width: 991px) {
   .w-auto-mobile {
     width: auto !important;

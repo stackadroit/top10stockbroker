@@ -10,17 +10,17 @@
 
 	// Headings
 	h1, h2, h3, h4, h5, h6 {
-		color: #FFF;
+		color: $color-light;
 	}
 
 	// Link
 	a:not(.btn) {
 		color: $color-font-light;
-		transition: all 0.1s ease-in-out;
+		@include transitions(all 0.1s ease-in-out);
 
 		&:hover {
 			text-decoration: none;
-			color: #FFF;
+			color: $color-light;
 		}
 
 		&:focus, &:active {
@@ -29,14 +29,14 @@
 
 		// Light
 		&.text-color-light {
-			color: #FFF;
+			color: $color-light;
 
 			&:hover {
-				color: darken(#FFF, 10%) !important;
+				color: darken($color-light, 10%);
 			}
 
 			&:focus, &:active {
-				color: darken(#FFF, 20%) !important;
+				color: darken($color-light, 20%);
 			}
 		}
 
@@ -44,7 +44,7 @@
 		&.link-hover {
 			position: relative;
 			#{$left}: 0px;
-			transition: all 0.1s ease-in-out;
+			@include transitions(all 0.1s ease-in-out);
 			&:hover {
 				#{$left}: 3px;
 			}
@@ -59,7 +59,7 @@
 				display: inline-block;
 			    line-height: 12px;
 			    margin: 0;
-			    padding: 0 8px;	
+			    padding: side-values(0 8px);	
 			}
 		}
 	}
