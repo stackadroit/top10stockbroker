@@ -42,7 +42,7 @@ let webpackConfig = {
         enforce: 'pre',
         test: /\.js$/,
         include: config.paths.assets,
-        use: 'eslint',
+        // use: 'eslint',
       },
       {
         enforce: 'pre',

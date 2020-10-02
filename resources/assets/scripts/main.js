@@ -1,12 +1,24 @@
 // import external dependencies
 import 'jquery';
 
+// import then needed Font Awesome functionality
 import fontawesome from '@fortawesome/fontawesome-free';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { library, dom  } from '@fortawesome/fontawesome-svg-core';
+
+// import the base SVG icons
 import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch} from '@fortawesome/free-solid-svg-icons';
-import { faFacebookF, faTwitter} from '@fortawesome/free-brands-svg-icons';
+
+// import the Facebook and Twitter icons
+import { faFacebookF, faTwitter, faYoutube} from '@fortawesome/free-brands-svg-icons';
+
+// Config FontAwsome
 fontawesome.config = { searchPseudoElements: true, autoReplaceSvg: 'nest' };
+
+// add the imported icons to the library
 library.add(faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faSearch);
+
+// tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
+dom.watch();
 
 // Import everything from autoload
 import './autoload/**/*'

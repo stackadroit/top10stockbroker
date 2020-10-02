@@ -10,37 +10,37 @@
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">BLOG</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-full-width.html">Blog Full Width</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-large-image.html">Blog Large Image</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-medium-image.html">Blog Medium Image</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="blog-post.html">Single Post</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Blog Full Width</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Blog Large Image</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Blog Medium Image</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Single Post</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">PAGES</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-full-width.html">Full width</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-left-sidebar.html">Left sidebar</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-right-sidebar.html">Right sidebar</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-custom-header.html">Custom Header</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Full width</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Left sidebar</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Right sidebar</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Custom Header</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">PORTFOLIO</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-2-columns.html">2 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-3-columns.html">3 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-4-columns.html">4 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="portfolio-single-wide-slider.html">Single Project</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">2 Columns</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">3 Columns</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">4 Columns</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Single Project</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">EXTRA</h5>
             <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-team.html">Team</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-services.html">Services</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-careers.html">Careers</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="page-faq.html">FAQ</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Team</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Services</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Careers</a></li>
+              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">FAQ</a></li>
             </ul>
           </div>
         </div>
@@ -57,7 +57,7 @@
         <ul class="footer-social-icons social-icons mt-4">
           <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
           <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-          <li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+          <li class="social-icons-youtube"><a href="http://www.youtube.com/" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a></li>
         </ul>
       </div>
     </div>
@@ -66,14 +66,14 @@
     <div class="container py-2">
       <div class="row py-4">
         <div class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
-          <p>© Copyright 2019. All Rights Reserved.</p>
+          <p>{{ sprintf(__("© Copyright %d. All Rights Reserved.", "stockadroit" ),date("Y")) }}</p>
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-center justify-content-lg-end">
           <nav id="sub-menu">
             <ul>
-              <li><i class="fas fa-angle-right"></i><a href="page-faq.html" class="ml-1 text-decoration-none"> FAQ's</a></li>
-              <li><i class="fas fa-angle-right"></i><a href="sitemap.html" class="ml-1 text-decoration-none"> Sitemap</a></li>
-              <li><i class="fas fa-angle-right"></i><a href="contact-us.html" class="ml-1 text-decoration-none"> Contact Us</a></li>
+              <li><i class="fas fa-angle-right"></i><a href="#"class="ml-1 text-decoration-none"> FAQ's</a></li>
+              <li><i class="fas fa-angle-right"></i><a href="#" class="ml-1 text-decoration-none"> Sitemap</a></li>
+              <li><i class="fas fa-angle-right"></i><a href="#" class="ml-1 text-decoration-none"> Contact Us</a></li>
             </ul>
           </nav>
         </div>
@@ -81,4 +81,4 @@
     </div>
   </div>
 </footer>
-<a class="scroll-to-top hidden-mobile visible" href="#"><i class="fas fa-chevron-up"></i></a>
+<div class="overlay"></div>

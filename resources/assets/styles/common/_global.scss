@@ -54,6 +54,30 @@ ins, del {
   text-decoration: none;
 }
 
+/* Dividers */
+hr {
+  background: rgba(0, 0, 0, 0.06);
+  border: 0;
+  height: 1px;
+  margin: 22px 0;
+}
+
+hr.short {
+  margin: 11px 0;
+}
+
+hr.tall {
+  margin: 44px 0;
+}
+
+hr.solid {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+hr.light {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 del {
   padding-#{$right}: 5px;
   span{
@@ -150,34 +174,62 @@ a:hover, a:focus, a:active {
   outline: none !important;
 }
 
-h1,h2,h3,h4,h5,h6{
-	color:#000;
-	margin: side-values(0);
-	line-height: 100%;
-	font-weight: 400;
-  font-family: Poppins;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+  letter-spacing: -.05em;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
-h1{
-	font-size:36px;
+
+h1 {
+  font-size: 2.6em;
+  line-height: 44px;
+  margin: 0 0 32px 0;
 }
-h2{
-	font-size:32px;
+
+h2 {
+  font-size: 2.2em;
+  font-weight: 300;
+  line-height: 42px;
+  margin: 0 0 32px 0;
 }
-h3{
-	font-size:20px;
+
+h3 {
+  font-size: 1.8em;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 33px;
+  text-transform: uppercase;
 }
-h4{
-	font-size:18px;
+
+h4 {
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 27px;
+  margin: 0 0 14px 0;
 }
-h5{
-	font-size:16px;
+
+h5 {
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 18px;
+  margin: 0 0 14px 0;
+  text-transform: uppercase;
 }
-h6{
-  font-size:14px;
+
+h6 {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 0 0 14px 0;
 }
-p{
-	line-height: 24px;
+
+p {
+  color: #777;
+  line-height: 26px;
+  margin: 0 0 20px;
 }
+
 img{
 	max-width:100%;
 	height: auto;

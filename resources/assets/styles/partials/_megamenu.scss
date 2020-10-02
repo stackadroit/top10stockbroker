@@ -112,6 +112,20 @@
 	}
 }
 
+.overlay {
+  background: #000 none repeat scroll 0 0;
+  height: 100%;
+  opacity: 0;
+  position: fixed;
+  #{$right}: 0;
+  top: 0;
+  visibility: hidden;
+  z-index: 999;
+  width: 0;
+  cursor: pointer;
+  @include transitions(all 0.3s ease-in-out 0s);
+}
+
 .caret-submenu {
   color: #8b8b8b;
   cursor: pointer;

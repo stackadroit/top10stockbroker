@@ -41,7 +41,8 @@ add_action('after_setup_theme', function () {
         'nav-walker',
         'nav-walker-edit',
         'nice-search',
-        'relative-urls'
+        'relative-urls',
+        'custom-post-type'
     ]);
 
     /**
@@ -143,3 +144,71 @@ add_action('after_setup_theme', function () {
         return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
     });
 });
+
+/**
+ * Register CPT
+ */
+add_filter('top10stockbroker_cpt', function ($array) {
+    
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Share Market', 'top10stockbroker' ),
+                            __( 'Share Markets', 'top10stockbroker' ),
+                            'share-markets'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                            'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail' ), 
+                            'menu_icon'           => 'dashicons-tagcloud',
+                            // 'register_meta_box_cb' => '_pa1_add_share_market_indices_code',
+                        )
+            );
+
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Co. Share Price', 'top10stockbroker' ),
+                            __( 'Co. Share Prices', 'top10stockbroker' ),
+                            'share-price'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                            'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon'           => 'dashicons-tagcloud',
+                        )
+            );
+
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Option Chain', 'top10stockbroker' ),
+                            __( 'Option Chains', 'top10stockbroker' ),
+                            'option-chain'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                            'supports' => array('title','thumbnail', 'editor'),
+                            'menu_icon'           => 'dashicons-tagcloud',
+                        )
+            );
+
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Futures', 'top10stockbroker' ),
+                            __( 'Futuress', 'top10stockbroker' ),
+                            'futures'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                            'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon'           => 'dashicons-tagcloud',
+                        )
+            );
+
+
+    return $array;
+
+}, 10, 1);
+
