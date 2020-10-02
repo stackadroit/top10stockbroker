@@ -66,7 +66,7 @@
     <div class="container py-2">
       <div class="row py-4">
         <div class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
-          <p>{{ sprintf(__("© Copyright %d. All Rights Reserved.", "stockadroit" ),date("Y")) }}</p>
+          <p>{!! sprintf(__('&copy; Copyright %d. All Rights Reserved | Check out our <a href="%s" >Disclaimer & Terms & Condition </a>', "stockadroit"), date("Y"), "#") !!}</p>
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-center justify-content-lg-end">
           <nav id="sub-menu">
