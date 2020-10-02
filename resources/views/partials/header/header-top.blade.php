@@ -4,6 +4,9 @@
       <div class="header-column justify-content-start">
         <div class="header-row">
           <nav id="priority-menu" class="priority-navigation header-nav-top">
+            <!-- @if (has_nav_menu('top_navigation'))
+                {!! wp_nav_menu(['theme_location' => 'top_navigation', 'menu_id' => 'priority-menu-closed',  'menu_class' => 'nav nav-pills']) !!}
+            @endif -->
             <ul id="priority-menu-closed" class="nav nav-pills">
               <li class="nav-item nav-item-anim-icon ">
                 <a class="nav-link pl-0" href=""><i class="fas fa-angle-right"></i> About Us</a>

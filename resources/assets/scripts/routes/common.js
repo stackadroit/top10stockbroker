@@ -1,4 +1,4 @@
-import {PluginScrollToTop, Search, Nav}  from './global';
+import {PluginScrollToTop, Header, Nav}  from './global';
 
 export default {
   init() {
@@ -7,14 +7,14 @@ export default {
 
 		'use strict';
 
-		// Search
+		// Scroll to Top Button.
 		if (typeof PluginScrollToTop !== 'undefined') {
 			PluginScrollToTop.initialize();
 		}
 
-		// Scroll to Top Button.
-		if (typeof Search !== 'undefined') {
-			Search.initialize();
+		// Header
+		if (typeof Header !== 'undefined') {
+			Header.initialize();
 		}
 
 		// Navigation.

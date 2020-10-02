@@ -28,7 +28,7 @@
 		}
 		> a{
 			@media (min-width: 992px){
-				padding: side-values(10px 25px);
+				padding: side-values(10px 20px);
 				display: table-cell;
 				vertical-align: middle;
 			}
@@ -42,7 +42,7 @@
 
 		    align-items: center;
 		    white-space: normal;;
-		    font-size: 14px;
+		    font-size: 12px;
 		    font-style: normal;
 		    font-weight: 700;
 		    padding: side-values(0.5rem 1rem);
@@ -50,6 +50,7 @@
 		    text-transform: uppercase;
 		    display: block;
 		    position: relative;
+		    color: $color-dark;
 		    .open-submenu {
 			  	margin-#{$left}: 3px;
 			}

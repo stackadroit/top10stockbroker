@@ -145,12 +145,12 @@ window.theme.fn = {
 		
 }).apply(this, [window.theme, jQuery]);	
 
-// Search
+// header
 (function(theme, $) {
 
 	var initialized = false;
 
-	var Search = {
+	var Header = {
 
 			defaults: {
 			},
@@ -216,7 +216,7 @@ window.theme.fn = {
 			}
 	};
 
-	exports.Search = Search;
+	exports.Header = Header;
 
 }).apply(this, [window.theme, jQuery]);
 

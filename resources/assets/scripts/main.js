@@ -6,7 +6,7 @@ import fontawesome from '@fortawesome/fontawesome-free';
 import { library, dom  } from '@fortawesome/fontawesome-svg-core';
 
 // import the base SVG icons
-import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch} from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch, faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 // import the Facebook and Twitter icons
 import { faFacebookF, faTwitter, faYoutube} from '@fortawesome/free-brands-svg-icons';
@@ -15,7 +15,7 @@ import { faFacebookF, faTwitter, faYoutube} from '@fortawesome/free-brands-svg-i
 fontawesome.config = { searchPseudoElements: true, autoReplaceSvg: 'nest' };
 
 // add the imported icons to the library
-library.add(faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faSearch);
+library.add(faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faSearch, faBars, faTimes);
 
 // tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
 dom.watch();
