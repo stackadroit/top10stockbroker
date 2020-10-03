@@ -182,7 +182,7 @@
 						}
 						&:last-child {
 					  		a{
-					  			border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+					  			border-bottom: 1px solid #f0efef;
 					  		}
 					  	}
 					}
@@ -202,8 +202,18 @@
 	  z-index: 9990;
 	  visibility: hidden;
 	  width: 400px;
+	  overflow: auto;
 	  background: #ffffff none repeat scroll 0 0;
 	  @include transitions(all 0.3s ease-in-out 0s);
+
+	  .logo-mobile{
+	  	margin: 0;
+	  	a{
+	  		display: block;
+		    width: 100%;
+		    text-align: center;
+	  	}
+	  }
 	}
 
 	.close-menu-mobile {
@@ -221,6 +231,16 @@
 	    #{$left}: auto;
 	  	#{$right}: -32px;
 	    @include transitions (all 0.3s ease-in-out 0s);
+
+	    & i, & svg{
+    	    display: table-cell;
+		    height: 100%;
+		    position: relative;
+		    vertical-align: middle;
+		    width: 100%;
+		    top: 11%;
+		    z-index: 9;
+	    }
 	}
 
 	.logo-mobile {
@@ -264,11 +284,16 @@
 		display: none;
 	}
 
-	.caret-submenu i{
-		display: table-cell;
-		height: 100%;
-		vertical-align: middle;
-		width: 100%;
+	.caret-submenu{
+		& i, & svg{
+			display: table-cell;
+			height: 100%;
+			vertical-align: middle;
+			padding: 15px 0;
+		}
+		&.active i:before {
+		    content: "\f106";
+		}
 	}
 
 	.mega-menu .caret-submenu{
@@ -327,7 +352,7 @@
 			li {
 				.sub-menu li{
 					&:last-child > a {
-					  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+					  border-bottom: 1px solid #f0efef;
 					}
 					width: 100%;
 					max-width: 100%;
