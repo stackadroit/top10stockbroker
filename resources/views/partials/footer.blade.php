@@ -1,5 +1,5 @@
-{{--    @php dynamic_sidebar('sidebar-footer') @endphp--}}
 <footer id="footer" class="content-info">
+  @if (!$is_mobile)
   <div class="container">
     <div class="row py-5 my-4">
       <div class="col-md-9 mb-4 mb-lg-0">
@@ -8,6 +8,7 @@
         <p><a href="#" class="btn-flat btn-xs text-color-light"><strong class="text-2">VIEW MORE</strong></a></p>
         <div class="row pt-3">
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
+            {{--    @php dynamic_sidebar('sidebar-footer') @endphp--}}
             <h5 class="text-3 mb-3">BLOG</h5>
             <ul class="list list-icons list-icons-sm mb-0">
               <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Blog Full Width</a></li>
@@ -62,6 +63,7 @@
       </div>
     </div>
   </div>
+  @endif
   <div class="footer-copyright">
     <div class="container py-2">
       <div class="row py-4">

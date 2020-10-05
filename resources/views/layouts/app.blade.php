@@ -9,7 +9,7 @@
         <main class="main col-lg-9 order-lg-1">
           @yield('content')
         </main>
-        @if (App\display_sidebar())
+        @if (App\display_sidebar() && !$is_mobile)
           <aside class="sidebar col-lg-3 order-lg-2">
             @include('partials.sidebar')
           </aside>

@@ -3,9 +3,13 @@
 namespace App\Controllers;
 
 use Sober\Controller\Controller;
+use Detection\MobileDetect;
 
 class App extends Controller
 {
+
+    public $mobileDetect = null;
+
     public function siteName()
     {
         return get_bloginfo('name');
@@ -30,4 +34,15 @@ class App extends Controller
         }
         return get_the_title();
     }
+
+    public function is_mobile(){
+
+        if (! $this->mobileDetect) {
+            $this->mobileDetect = new MobileDetect();
+        }
+        
+        return $this->mobileDetect->isMobile();
+    }
+
+
 }
