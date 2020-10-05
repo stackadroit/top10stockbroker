@@ -89,3 +89,17 @@ add_filter('comments_template', function ($comments_template) {
 
     return $comments_template;
 }, 100);
+
+/**
+ * condition of sidebar to display
+ */
+add_filter('top10stockbroker/display_sidebar', function ($display) {
+    static $display;
+    isset($display) || $display = in_array(true, [
+    // The sidebar will be displayed if any of the following return true
+    is_home(),
+    is_front_page()
+    ]);
+    return $display;
+});
+

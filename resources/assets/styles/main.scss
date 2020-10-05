@@ -23,6 +23,8 @@
 @import "partials/sidebar";
 @import "partials/pages";
 @import "partials/posts";
+@import "partials/widget";
+@import "partials/plugin";
 @import "partials/tinymce";
 
 /** Import theme styles */
@@ -31,4 +33,4 @@
 @import "components/social-icons";
 @import "components/lists";
 @import "components/forms";
-
+@import "components/table";

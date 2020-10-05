@@ -1,0 +1,12 @@
+.main table:not(.no-defult){
+  @extend .table;
+  @extend .table-bordered;
+  width: 100% !important;
+  border-collapse: collapse;
+}
+
+.main table{
+	a{
+		color: $color-default;
+	}
+}

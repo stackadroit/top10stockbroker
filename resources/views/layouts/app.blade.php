@@ -5,12 +5,12 @@
     @php do_action('get_header') @endphp
     @include('partials.header')
     <div class="wrap container" role="document">
-      <div class="content">
-        <main class="main row">
+      <div class="content row">
+        <main class="main col-lg-9 order-lg-1">
           @yield('content')
         </main>
         @if (App\display_sidebar())
-          <aside class="sidebar">
+          <aside class="sidebar col-lg-3 order-lg-2">
             @include('partials.sidebar')
           </aside>
         @endif
