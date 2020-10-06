@@ -34,7 +34,7 @@ add_action('after_setup_theme', function () {
 
     add_theme_support('topstockbroker', [
         'clean-up',
-        'disable-rest-api',
+        //'disable-rest-api',
         'disable-asset-versioning',
         'disable-trackbacks',
         'js-to-footer',
