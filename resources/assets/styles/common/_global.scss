@@ -268,19 +268,19 @@ textarea{
 }
 select {
   	-webkit-appearance: none;
- 	-moz-appearance: none;
- 	-ms-appearance: none;
+ 	  -moz-appearance: none;
+ 	  -ms-appearance: none;
   	-o-appearance: none;
   	appearance: none;
   	border-radius: corner-values(0);
   	height: 40px;
- 	text-transform: capitalize;
-	overflow: hidden;
-	padding: side-values(0 0 0 10px);
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 100%;
-  outline: none;
+   	text-transform: capitalize;
+  	overflow: hidden;
+  	padding: side-values(0 0 0 10px);
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	width: 100%;
+    outline: none;
     background: url(../images/caret-down.png) no-repeat $right 20px;
     border: none;
     padding-#{$left}: 0;
