@@ -1,0 +1,1 @@
+<div class="goldsilverpricetoday" id="{{ $div_id }}"></div>

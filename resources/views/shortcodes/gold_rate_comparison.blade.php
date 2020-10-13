@@ -1,0 +1,1 @@
+<div data-id="{{ $div_id }}" id="{{ $div_id }}"></div>

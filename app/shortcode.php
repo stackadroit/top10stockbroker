@@ -123,3 +123,1104 @@ add_shortcode( 'BRANCHOFFICELINKS', function ( $atts ) {
 
     return '';
 });
+
+// Calculator shotcodes
+add_shortcode( 'real_rate_of_return_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.real_rate_of_return_calculator';
+
+    // Echo the shortcode blade template
+        return \App\template($template, $data);
+});
+
+add_shortcode( 'inflation_rate', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.inflation_rate';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'return_on_investment_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.return_on_investment_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'return_on_equity_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.return_on_equity_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'return_on_assets_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.assets_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'retention_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.retention_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'receivables_turnover_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.receivables_turnover_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'quick_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.quick_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'profitability_index_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.profitability_index_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'payback_period_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.payback_period_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'operating_margin_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.operating_margin_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'net_working_capital_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.net_working_capital_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'net_profit_margin_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.net_profit_margin_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'inventory_turnover_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.inventory_turnover_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'interest_coverage_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.interest_coverage_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'gross_profit_margin_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.gross_profit_margin_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'free_cashflow_to_firm_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.free_cashflow_to_firm_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'free_cashflow_to_equity_ratio', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.free_cashflow_to_equity_ratio';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'debt_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.debt_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'debt_equity_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.debt_equity_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'debt_coverage_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.debt_coverage_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'days_inventroy_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.days_inventroy_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'current_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.current_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'contribution_margin_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.contribution_margin_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'average_collection_period_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.average_collection_period_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'assets_turnover_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.assets_turnover_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'assets_sale_ratio_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.assets_sale_ratio_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'risk_premium', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.risk_premium';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'price_to_sale_ratio', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.price_to_sale_ratio';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'price_to_earning', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.price_to_earning';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'holding_period_return', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.holding_period_return';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'geometric_mean_return', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.geometric_mean_return';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'future_value_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.future_value_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'present_value_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.present_value_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'zero_coupon_bond_value', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.zero_coupon_bond_value';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'zero_coupon_be_yield_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.zero_coupon_be_yield_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'yield_maturity', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.yield_maturity';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'total_stock_return_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.total_stock_return_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'tax_equivlent_yield_calculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.tax_equivlent_yield_calculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'pv_with_constant_growth', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.pv_with_constant_growth';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'pv_stock_with_zero_growth', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.pv_stock_with_zero_growth';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'pricetobookvalue', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.pricetobookvalue';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'prefferedstock', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.prefferedstock';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'netassetvalue', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.netassetvalue';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'estimatedearnings', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.estimatedearnings';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'equitymultiplier', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.equitymultiplier';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'bidaskspreadcalculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.bidaskspreadcalculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'simpleinterest', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.simpleinterest';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'compoundinterest', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.compoundinterest';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'bondequivalentyieldcalculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.bondequivalentyieldcalculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'bookvaluepershare', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.bookvaluepershare';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'capitalassetpricingmodal', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.capitalassetpricingmodal';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'capitalgainyield', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.capitalgainyield';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'currentyield', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.currentyield';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'dilutedearningspershare', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.dilutedearningspershare';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'dividendpayoutratio', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.dividendpayoutratio';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'dividendyieldstock', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.dividendyieldstock';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'dividendpershare', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.dividendpershare';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'earningpershare', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.earningpershare';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'grahmcalculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.grahmcalculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'sipcalculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.sipcalculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'futurevaluecalculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.futurevaluecalculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'onetimeinvestmentcalculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.onetimeinvestmentcalculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+add_shortcode( 'targetcorpuscalculator', function ( $atts ) {
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'title' => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.calculator.targetcorpuscalculator';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+});
+
+// quicker slider 
+add_shortcode('quickerslider', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.quickerslider';
+
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('GoldInvestmentCalculator', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Gold Investment Calculator - ROI Calculator',
+        'city' => '',
+        'type'=> '',
+        'caret' => ''
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.gold_investment_calculator';
+
+    if (is_admin()) {
+        return "";
+    }
+
+    if($type ==1){
+        $data['div_id'] = $data['caret'] . "_gold_investment_calculator_" . $data['id'] ."_".  $data['type'];
+    }else{
+        $data['div_id'] = "silver_investment_calculator_" . $data['id'] . "_" . $data['type'];
+    }
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('GoldRateComparison', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Gold Rate Comparison',
+        'city' => '',
+        'caret' => ''
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.gold_rate_comparison';
+
+    if (is_admin()) {
+        return "";
+    }
+
+    $data['div_id'] = "_gold_rate_comparison_" . $data['id'] . "_" . $data['type'];
+
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('goldsilverlast15', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.gold_silver_last15';
+
+    global $wpdb;
+    $data['gs_val'] =  $wpdb->get_results( "SELECT * FROM gold_silver_rate  WHERE `page_id` = " . $data['id'] . " and `type` = '" . $data['type'] . "'  ORDER BY date DESC LIMIT 15" );
+
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('goldsilverpricetoday', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.goldsilverpricetoday';
+
+    $data['div_id'] = "goldsilverpricetoday_" . $data['id'] . "_" . $data['type'] . "_" . $data['carret'];
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('goldsilversummary', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.goldsilversummary';
+
+    $data['div_id'] = "gold_summery_data_" . $data['id'] . "_" . $data['type'];
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('goldsilverpricegraph', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => 'goldsilverpricegraph_',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.goldsilverpricegraph';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('brokerslider', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.brokerslider';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('tabfilter', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.tabfilter';
+
+    $data['get_meta'] = get_post_meta( $data['id'] , 'repeatable_fields' , true );
+    
+    global $wp;
+    $data['current_url'] = home_url( add_query_arg( array(), $wp->request ) );
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('LIVEPRICEWIDGETHTML', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.live_price_widget_html';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});

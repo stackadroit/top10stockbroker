@@ -1,0 +1,1 @@
+<div class="gold_summery_table" id="{{ $div_id }}"> </div>
