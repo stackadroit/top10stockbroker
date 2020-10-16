@@ -17,6 +17,12 @@ add_action('wp_enqueue_scripts', function () {
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
+
+    wp_localize_script( 'top10stockbroker/main.js', 'global_vars', array( 
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'ajax_nonce' => wp_create_nonce('gloabltop10stockbroker'),
+    ));
+
 }, 100);
 
 /**

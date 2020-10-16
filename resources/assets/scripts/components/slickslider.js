@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import axios from 'axios';
 import ContentLoader from "react-content-loader";
 
 class ListSlider extends React.Component {
@@ -8,18 +9,38 @@ class ListSlider extends React.Component {
         this.state = {
             error : null,
             isLoaded : false,
-            list : []          
+            lists : []          
         };
     }
 
     componentDidMount(){
-    	this.setState({
-            isLoaded : true
-        });
+
+    	const rootElement = document.getElementById('list-slider');
+		const data = new FormData();
+		data.append('ID', rootElement.getAttribute('data-id'));
+		data.append('action', 'icon_slider_data_ajax_request');
+		data.append('nonce', global_vars.ajax_nonce);
+
+		axios.post('/wp-admin/admin-ajax.php', data)
+	    .then(res => {
+	        const result = res.data;
+	        //console.log(result);
+	        this.setState({
+	            isLoaded : true,
+		        lists : result
+		    });
+	    })
+	    .catch(error =>  {
+			    //console.log(error);
+			    this.setState({
+                    isLoaded: true,
+                    error
+                });
+		});
     }
 
 	render() {
-		const {error, isLoaded, list} = this.state;
+		const {error, isLoaded, lists} = this.state;
 
 	    var settings = {
 	      dots: false,
@@ -61,15 +82,6 @@ class ListSlider extends React.Component {
 	      ]  
 	    };
 	    
-	    const lists = [
-					    {
-					    	"id" : 1,
-					        "link" : "https://top10stockbroker.com/share-market/nifty-50/",
-					        "title" : "NIFTY 50 Live",
-					        "img" : "/wp-content/uploads/2019/05/nifty-50.png"
-					    }
-					];
-
 	    if(error){
             return <div>Error in loading</div>
         }else if (!isLoaded) {
@@ -83,14 +95,14 @@ class ListSlider extends React.Component {
 			      <rect x="410" y="190" rx="3" ry="3" width="400" height="80" />
 			  </ContentLoader>
             );
-        }else{
+        }else {
 		    return (
 		      <Slider {...settings}>
 		      	{
 		      		lists.map(list => (
 		      			<div key={list.id}>
-					      <a href={ list.link } target="_blank">
-					     	<img src={ list.img } alt="globe" />
+					      <a href={ list.link_url } target="_blank">
+					     	<img src={ list.image_upload } alt="globe" />
 					      	<h4>{ list.title }</h4>
 					      </a>
 					    </div>

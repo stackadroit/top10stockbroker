@@ -25,3 +25,42 @@ add_action( 'wp_enqueue_scripts', function () {
     	//styles
         wp_dequeue_style( 'contact-form-7' );
  });
+
+/**
+ * Ajax
+ */
+add_action( 'wp_ajax_icon_slider_data_ajax_request',  __NAMESPACE__ . '\\icon_slider_data_ajax_request' );
+add_action( 'wp_ajax_nopriv_icon_slider_data_ajax_request',  __NAMESPACE__ . '\\icon_slider_data_ajax_request' );
+function icon_slider_data_ajax_request() {
+    $resonse = [];
+    if ( isset($_REQUEST) ):
+
+        $id =  @$_REQUEST['ID'];
+        $nonce =  @$_REQUEST['nonce'];
+
+        if ( ! wp_verify_nonce( $nonce, 'gloabltop10stockbroker' ) ) {
+            die( __( 'Security check', 'top10stockbroker' ) ); 
+        }
+
+        $loopid = 0;
+        if( have_rows('quiker_data', $id ) ):
+            while( have_rows('quiker_data',$id) ): the_row(); 
+
+                $title = get_sub_field('title');
+                $image_upload = get_sub_field('icon');
+                $link_url = get_sub_field('link');
+                $loopid++;
+
+                $resonse[] = array(
+                    'id' => $loopid,
+                    'title' => $title, 
+                    'image_upload' => $image_upload, 
+                    'link_url' => $link_url, 
+                );
+
+            endwhile;
+        endif;
+    endif;
+    echo json_encode($resonse);
+    die();
+}
