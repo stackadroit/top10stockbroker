@@ -64,3 +64,28 @@ function icon_slider_data_ajax_request() {
     echo json_encode($resonse);
     die();
 }
+
+add_action( 'wp_ajax_brokercomparison_link_ajax_request',  __NAMESPACE__ . '\\brokercomparison_link_ajax_request' );
+add_action( 'wp_ajax_nopriv_brokercomparison_link_ajax_request',  __NAMESPACE__ . '\\brokercomparison_link_ajax_request' );
+function brokercomparison_link_ajax_request() {
+    if ( isset($_REQUEST) ):
+        $data = $_REQUEST['data'];
+        $nonce =  @$data['security'];
+        $paged = @$data['page_paths'];
+        
+        // if ( ! wp_verify_nonce( $nonce, 'gloabltop10stockbroker' ) ) {
+        //     die( __( 'Security check', 'top10stockbroker' ) ); 
+        // }
+
+        foreach( $paged as $page_path ) {
+            if(!$page = get_page_by_path( $page_path ,OBJECT, 'broker-comparison')){
+            } else{
+                echo $get_page_url =  get_permalink( $page->ID ) ;
+                wp_die();
+                break;
+            }  
+        
+        }
+    endif;
+    wp_die();
+}

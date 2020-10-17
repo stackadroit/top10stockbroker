@@ -43,7 +43,10 @@ body, html {
 }
 
 a{
-  color: #000;
+  color: $color-primary;
+  &:hover{
+    color: darken($color-primary, 10%);
+  }
 }
 
 ins, del {
@@ -290,7 +293,11 @@ select {
       outline: none;
     }
 }
-
+input,
+textarea,
+select{
+  background-color: $color-light;
+}
 .input-text::-ms-input-placeholder {  
    opacity: 1;
 }

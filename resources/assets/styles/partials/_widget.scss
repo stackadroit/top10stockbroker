@@ -151,6 +151,7 @@ aside.widget:hover{
 		    font-weight: normal;
 		}
 		.search-submit {
+			font-weight: bold;
 		  &:hover{
 		  	background: $color-primary;
 		  	color: $color-light;
@@ -517,12 +518,19 @@ aside.widget:hover{
 .widget .wpcf7{
 	padding: 0;
 	border: 1px solid transparent;
-	
+	font-size: 14px;
+
 	& legend {
-    	font-size: 0.7em;
+    	font-size: 1em;
 	}
 	& .wpcf7-form input, 
 	& .wpcf7-form textarea {
-    	padding: 0;
+    	padding: 7px;
 	}
+}
+
+#site-sidebar:not(.no-sticky) .sticky-widget{
+    position: fixed;
+    top: 10px;
+    max-width: 255px;
 }

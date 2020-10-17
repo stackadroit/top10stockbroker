@@ -1,0 +1,12 @@
+button:not(.no-defult){
+  	@extend .btn;
+  	color: $color-light;
+	background-color: $color-primary;
+	border-color: transparent;
+}
+
+button:not(.no-defult):hover{
+  	@extend .btn:hover;
+  	color: $color-light;
+	background-color: $color-dark;
+}

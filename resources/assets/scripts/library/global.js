@@ -28,6 +28,8 @@ window.theme.fn = {
 
 };
 
+exports.theme = window.theme;
+
 // Scroll to Top
 (function(theme, $) {
 	
@@ -142,6 +144,84 @@ window.theme.fn = {
 	};
 
 	exports.PluginScrollToTop = PluginScrollToTop;
+		
+}).apply(this, [window.theme, jQuery]);	
+
+// Stickey Widget
+(function(theme, $) {
+	
+	var initialized = false;
+
+	var PluginStickyWidget = {
+
+		defaults: {
+			stickyWidget: $('#site-sidebar > .widget.text-6'),
+			offset: 50,
+			brakePoint: 975,
+		},
+
+		initialize: function(opts) {
+			initialized = true;
+
+			this
+				.setOptions(opts)
+				.events();
+
+			return this;
+		},
+
+		setOptions: function(opts) {
+			this.options = $.extend(true, {}, this.defaults, opts);
+
+			return this;
+		},
+
+		events: function() {
+			var self = this;
+
+			//only for desktop
+			$( window ).resize(function() {
+			  if ($( document ).width() < self.options.brakePoint ) {
+			  	$('#site-sidebar').addClass('no-sticky');
+			  }else{
+			  	$('#site-sidebar').removeClass('no-sticky');
+			  }
+			});
+
+			// Distance from top of page to sidebar ad in px
+			var widgetFromTop = self.options.stickyWidget.offset().top
+			
+			// Height of entire content area
+    		var contentHeight = $('#main-content').height();
+
+    		// Height of entire sidebar
+    		var sidebarHeight = $('#site-sidebar').height();
+
+
+    		if (sidebarHeight < contentHeight + self.options.offset) {
+    			$(window).scroll(function() {
+    				// If scroll distance from top exceeds by widget distance from top, add class
+        			if ($(window).scrollTop() >= widgetFromTop) {
+        				self.options.stickyWidget.addClass('sticky-widget');
+        			}else {
+			          	self.options.stickyWidget.removeClass('sticky-widget');
+			        }
+
+			        // If scroll distance from top is greater than content height remove class. 
+			        //Added  X-px to pull out a bit before reaching the bottom.
+			        if ($(window).scrollTop() > contentHeight - self.options.offset) {
+			          self.options.stickyWidget.removeClass('sticky-widget');
+			        }
+
+    			});
+    		}
+    		
+			return this;
+		}
+
+	};
+
+	exports.PluginStickyWidget = PluginStickyWidget;
 		
 }).apply(this, [window.theme, jQuery]);	
 

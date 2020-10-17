@@ -1,4 +1,4 @@
-import {PluginScrollToTop, Header, Nav}  from './global';
+import {PluginScrollToTop, Header, Nav, PluginStickyWidget}  from '../library/global';
 
 export default {
   init() {
@@ -22,6 +22,11 @@ export default {
 			Nav.initialize();
 		}
 
+		// Sticky Widget.
+		if (typeof PluginStickyWidget !== 'undefined') {
+			PluginStickyWidget.initialize();
+		}
+		
 
 	}).apply(this, [jQuery]);
 

@@ -40,6 +40,7 @@
         font-size: 14px;
         margin: 10px 0 0 0;
         padding: 0;
+        font-weight: unset;
     }
     .slick-prev, 
     .slick-next {
@@ -51,6 +52,16 @@
         cursor: pointer;
         outline: none;
         margin: 0;
+        background-color: transparent;
+        border-color: transparent;
+    }
+    .slick-prev:focus,
+    .slick-prev:hover,
+    .slick-next:focus,
+    .slick-next:hover {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: none;
     }
 
     .slick-next {
