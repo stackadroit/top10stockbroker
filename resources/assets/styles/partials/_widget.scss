@@ -529,8 +529,11 @@ aside.widget:hover{
 	}
 }
 
-#site-sidebar:not(.no-sticky) .sticky-widget{
-    position: fixed;
-    top: 10px;
-    max-width: 255px;
+@media (min-width: 975px){
+	#site-sidebar:not(.no-sticky) .sticky-widget{
+	    position: fixed;
+	    top: 10px;
+	    max-width: 255px;
+	}
 }
+

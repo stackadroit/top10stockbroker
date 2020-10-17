@@ -14,8 +14,11 @@ class ListSlider extends React.Component {
     }
 
     componentDidMount(){
+    	this.getData();
+    }
 
-    	const rootElement = document.getElementById('list-slider');
+    getData(){
+	    const rootElement = document.getElementById('list-slider');
 		const data = new FormData();
 		data.append('ID', rootElement.getAttribute('data-id'));
 		data.append('action', 'icon_slider_data_ajax_request');
@@ -37,7 +40,7 @@ class ListSlider extends React.Component {
                     error
                 });
 		});
-    }
+	}
 
 	render() {
 		const {error, isLoaded, lists} = this.state;

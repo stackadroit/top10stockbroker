@@ -48,7 +48,8 @@ add_action('after_setup_theme', function () {
         'nav-walker-edit',
         'nice-search',
         'relative-urls',
-        'custom-post-type'
+        'custom-post-type',
+        'widget-options',
     ]);
 
     /**

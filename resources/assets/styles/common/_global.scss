@@ -368,31 +368,41 @@ select{
 		padding-#{$right}: 0;
 	}
 }
-
 .scroll-to-top {
     background: $color-primary none repeat scroll 0 0;
-    border: none;
-    bottom: -100px;
-    cursor: pointer;
-    height: 35px;
-    line-height: 25px;
-    padding: side-values(3px);
+    transition: opacity 0.3s;
+    border-radius: 4px 4px 0 0;
+    bottom: 0;
+    color: $color-light;
+    display: block;
+    height: 9px;
+    opacity: 0;
+    padding: side-values(10px 10px 35px);
     position: fixed;
-    #{$right}: 25px;
+    #{$right}: 10px;
     text-align: center;
-    width: 35px;
-    z-index: 99999;
-    color: #fff;
-    border-radius: corner-values(5px);
+    text-decoration: none;
+    min-width: 50px;
+    z-index: 1040;
+    font-size: 0.8em;
+    &.visible{
+      opacity: 1;
+    }
     i{
       line-height: 25px;
     }
     &:hover{
-      color: #fff;
-      background: #000;
+      color: $color-light;
+      background: $color-dark;
     }
 }
-
+@media (max-width: 575px) {
+  .scroll-to-top {
+      &.hidden-mobile{
+        opacity: 0;
+      }
+  }
+}
 /* Responsive */
 @media (max-width: 575px) {
 

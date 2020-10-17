@@ -1,5 +1,5 @@
-<div class="menudropdown" id="{{ $el_id }}">
-    <span>{{ $title }}</span>
+<div class="menudropdown-shortcode" id="{{ $el_id }}">
+    <h4>{{ $title }}</h4>
 	<select class="dropdownmenusel" onchange="location = this.options[this.selectedIndex].value;" id="{{ $el_id }}">
 		<option value="#"> Please Select</optiom>
 	    @foreach ($array_menu as $md)

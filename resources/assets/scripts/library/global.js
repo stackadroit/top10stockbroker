@@ -39,11 +39,10 @@ exports.theme = window.theme;
 			wrapper: $('body'),
 			offset: 150,
 			buttonClass: 'scroll-to-top',
-			iconClass: 'fas fa-chevron-up',
+			iconClass: 'fas fa-angle-up',
 			delay: 1000,
 			visibleMobile: false,
-			label: false,
-			easing: 'easeOutBack'
+			label: false
 		},
 
 		initialize: function(opts) {
@@ -111,7 +110,7 @@ exports.theme = window.theme;
 				e.preventDefault();
 				$('body, html').animate({
 					scrollTop: 0
-				}, self.options.delay, self.options.easing);
+				}, self.options.delay);
 				return false;
 			});
 
@@ -155,7 +154,7 @@ exports.theme = window.theme;
 	var PluginStickyWidget = {
 
 		defaults: {
-			stickyWidget: $('#site-sidebar > .widget.text-6'),
+			stickyWidget: $('#site-sidebar > .fixed-widget'),
 			offset: 50,
 			brakePoint: 975,
 		},
@@ -180,13 +179,13 @@ exports.theme = window.theme;
 			var self = this;
 
 			//only for desktop
-			$( window ).resize(function() {
-			  if ($( document ).width() < self.options.brakePoint ) {
-			  	$('#site-sidebar').addClass('no-sticky');
-			  }else{
-			  	$('#site-sidebar').removeClass('no-sticky');
-			  }
-			});
+			// $( window ).resize(function() {
+			//   if ($( document ).width() < self.options.brakePoint ) {
+			//   	$('#site-sidebar').addClass('no-sticky');
+			//   }else{
+			//   	$('#site-sidebar').removeClass('no-sticky');
+			//   }
+			// });
 
 			// Distance from top of page to sidebar ad in px
 			var widgetFromTop = self.options.stickyWidget.offset().top
