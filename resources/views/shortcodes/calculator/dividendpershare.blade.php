@@ -1,29 +1,30 @@
 <h2>{{ $title }}</h2>
-<section class="couter">       
-    <div class="cinner bdrtp">
-        <div class="cleft pad-btm cntr">
+<section class="couter shotcodwraper">       
+    <div class="cinner form-row shortcode-bg">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span> Sum of Dividend Paid Over a Year (Rs.)*  </span>
         </div>
-        <div class="cright pad-btm"> 
-            <input class="cntr" type="number" value="" id="sum_dividend_id">
+        <div class="col-md-6 mt-1 mt-sm-2"> 
+            <input class="form-control" type="number" value="" id="sum_dividend_id">
         </div>
-        <div class="cleft pad-btm cntr">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span> Special, One time Dividends paid in the Period (Rs.)*</span>
         </div>
-        <div class="cright pad-btm"> 
-            <input class="cntr" type="number" value="" id="onetime_div_id">
+        <div class="col-md-6 mt-1 mt-sm-2"> 
+            <input class="form-control" type="number" value="" id="onetime_div_id">
         </div>
-        <div class="cleft pad-btm cntr">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span>Number of Outstanding Shares* </span>
         </div>
-        <div class="cright pad-btm">
-            <input class="cntr" type="number" value="" id="nos_id">
+        <div class="col-md-6 mt-1 mt-sm-2">
+            <input class="form-control" type="number" value="" id="nos_id">
         </div>
-        <div class="cleft pad-btm tright">
+        <hr class="hori col-md-12">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span class="pad-rt">Dividend per Share (Rs.)</span>
         </div>
-        <div class="cright pad-btm">  
-            <input class="cntr" type="text" value="" id="dps_id" readonly>
+        <div class="col-md-6 mt-1 mt-sm-2">  
+            <input class="form-control" type="text" value="" id="dps_id" readonly>
         </div> 
     </div> 
 </section>  

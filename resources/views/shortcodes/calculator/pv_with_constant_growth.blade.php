@@ -1,35 +1,36 @@
 <h2>{{ $title }}</h2>
-<section class="couter">       
-    <div class="cinner bdrtp">
-        <div class="cleft pad-btm cntr">
+<section class="couter shotcodwraper">       
+    <div class="cinner form-row shortcode-bg">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span>Estimated Dividend for the Next Period (Rs.)*</span>
         </div>
-        <div class="cright pad-btm">
-            <input type="number" class="cntr" value="8973828" id="edfnp_id">
+        <div class="col-md-6 mt-1 mt-sm-2">
+            <input type="number" class="form-control" value="8973828" id="edfnp_id">
         </div>
-        <div class="cleft pad-btm cntr">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span>Required Rate of Retun (%) </span>
         </div>
-        <div class="cright pad-btm">
-            <input type="number" class="cntr" value="7" id="rrfr_id" >
+        <div class="col-md-6 mt-1 mt-sm-2">
+            <input type="number" class="form-control" value="7" id="rrfr_id" >
         </div>
-        <div class="cleft pad-btm cntr">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span> Growth Rate (%)  </span>
         </div>
-        <div class="cright pad-btm">
-            <input type="number" class="cntr" value="3" id="gr1_id">
+        <div class="col-md-6 mt-1 mt-sm-2">
+            <input type="number" class="form-control" value="3" id="gr1_id">
         </div>
-        <div class="cleft pad-btm tright">
+        <hr class="hori col-md-12">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span class="pad-rt">PV of Stock with Contant Growth (Rs.) </span>
         </div>
-        <div class="cright pad-btm"> 
-            <input  class="cntr" type="text" value="224345700.00" id="pvosc_id" readonly>
+        <div class="col-md-6 mt-1 mt-sm-2"> 
+            <input  class="form-control" type="text" value="224345700.00" id="pvosc_id" readonly>
         </div>
-        <div class="cleft pad-btm tright">
+        <div class="col-md-6 mt-1 mt-sm-2">
             <span class="pad-rt"> PV of Stock per Share (Rs.)</span>
         </div>
-        <div class="cright pad-btm"> 
-            <input  class="cntr" type="text" value="25.00" id="pvspr_id" readonly>
+        <div class="col-md-6 mt-1 mt-sm-2"> 
+            <input  class="form-control" type="text" value="25.00" id="pvspr_id" readonly>
         </div>
     </div> 
 </section>

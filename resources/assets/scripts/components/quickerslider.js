@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import axios from 'axios';
 import ContentLoader from "react-content-loader";
 
-class ListSlider extends React.Component {
+class QuickerSlider extends React.Component {
 	constructor(props){
         super(props);
         this.state = {
@@ -117,4 +117,4 @@ class ListSlider extends React.Component {
 	}
 }
 
-export default ListSlider;
+export default QuickerSlider;

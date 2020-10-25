@@ -32,6 +32,9 @@
 				display: table-cell;
 				vertical-align: middle;
 			}
+			@media (min-width: 992px) and (max-width:1200px) {
+				padding: side-values(10px 12px);
+			}
 		}
 	}
 	li{	
@@ -146,8 +149,8 @@
 	  width: 100%;
 	}
 	&.active{
-		i:before{
-			content: "\f106";
+		svg{
+			@include transform(rotate(180deg));
 		}
 	}
 }

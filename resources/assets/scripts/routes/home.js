@@ -1,5 +1,5 @@
 import {BrokerComparison}  from '../library/shortcodes';
-import ListSlider from '../components/slickslider';
+import QuickerSlider from '../components/quickerslider';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 
@@ -7,7 +7,7 @@ export default {
   init() {
     // JavaScript to be fired on the home page
   	ReactDOM.render(
-  	  <ListSlider />,
+  	  <QuickerSlider />,
   	  document.getElementById('list-slider')
   	);
 

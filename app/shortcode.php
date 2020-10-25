@@ -189,7 +189,7 @@ add_shortcode( 'return_on_assets_calculator', function ( $atts ) {
     ), $atts);
 
     // Set the template we're going to use for the Shortcode
-    $template = 'shortcodes.calculator.assets_calculator';
+    $template = 'shortcodes.calculator.return_on_assets_calculator';
 
     // Echo the shortcode blade template
     return \App\template($template, $data);
@@ -1219,6 +1219,23 @@ add_shortcode('LIVEPRICEWIDGETHTML', function ($atts){
 
     // Set the template we're going to use for the Shortcode
     $template = 'shortcodes.live_price_widget_html';
+
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
+
+add_shortcode('socialPostShare', function ($atts){ 
+
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+    ), $atts);
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.social_post_share';
+
+    $data['ele_permalink'] = get_the_permalink();
+    $data['ele_title'] = get_the_title();
 
     // Echo the shortcode blade template
     return \App\template($template, $data);

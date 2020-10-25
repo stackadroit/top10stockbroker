@@ -1,5 +1,4 @@
 import {PluginScrollToTop, Header, Nav, PluginStickyWidget}  from '../library/global';
-
 export default {
   init() {
     // Commom Plugins
@@ -27,7 +26,6 @@ export default {
 			PluginStickyWidget.initialize();
 		}
 		
-
 	}).apply(this, [jQuery]);
 
   },

@@ -60,7 +60,7 @@
 		display: flex;
 		align-items: center;
 		border-bottom: 1px solid rgba(0,0,0,.06);
-		min-height: 47px;
+		min-height: 30px;
 	}
 
 	// Logo
@@ -68,10 +68,16 @@
 		margin: side-values(1rem 0);
 		position: relative;
 		z-index: 1;
+		@media(max-width: 575px) {
+			margin: side-values(0.3rem 0);
+		}
 		img {
 			@include transitions(all 0.3s ease);
 			position: relative;
 			top: 0;
+			@media(max-width: 575px) {
+				max-width: 200px;
+			}
 		}
 	}
 
@@ -93,12 +99,15 @@
 				> a, > span {
 					color: #999;
 					font-size: 0.8em;
-					padding: side-values(6px 10px);
+					padding: side-values(11px 10px);
 					display: inline-block;
 					[class*="fa-"], .icons {
 						margin-#{$right}: 3px;
 						font-size: 0.8em;
 						position: relative;
+					}
+					@media(max-width: 575px) {
+						padding: side-values(9px 6px);
 					}
 				}
 				> a {
@@ -136,18 +145,22 @@
 
 		&.priority-navigation{ 
 			width: 100%;
-			height: 44px; /* Menu height */
+			height: 32px; /* Menu height */
 			overflow: hidden; /* Don't show anything outside the nav */
-
+			
 			ul {
 				max-height: 88px; /* Menu height x 2 */
 				position: relative; /* Position the menu button relative to this item */
 				li{
 					display: inline-block;
+					line-height: 13px;
 					a {
 						display: inline-block;
 						white-space: nowrap;
-						height: 44px; /* Menu height */
+						height: 37px; /* Menu height */
+						@media(max-width: 575px) {
+							height: 32px;
+						}
 					}
 				}
 				li:nth-last-child(2){
@@ -157,10 +170,19 @@
 					position: absolute; /* Move the menu button out of flow */
 					right: 0;
 					bottom: 44px; /* Move upwards, the same distance as the menu height */
+					@media(max-width: 575px) {
+						bottom: 0;
+						top: 0;
+					}
 					background: $color-primary;
 					a{
 						color: $color-light;
 						font-size: 14px;
+						padding: side-values(14px 10px);
+						@media(max-width: 575px) {
+							font-size: 16px;
+							padding: side-values(6px 11px);
+						}
 					}
 				}
 			}
@@ -193,6 +215,10 @@
 						margin: 0;
 					}
 				}
+			}
+
+			& .priority-menu-close{
+				font-size: 25px;
 			}
 		}
 
@@ -313,6 +339,10 @@
 		margin: side-values(0.5rem 0 0.5rem 1rem);
 		padding: side-values(0.533rem 0.933rem);
 		border-radius: .25rem;
+		@media(max-width: 575px) {
+			margin: side-values(0.3rem 0 0.3rem 0.5rem);
+			padding: side-values(0.266rem 0.600rem);
+		}
 	}
 
 	@media (max-width: 991px){

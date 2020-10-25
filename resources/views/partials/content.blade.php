@@ -5,5 +5,6 @@
   </header>
   <div class="entry-summary">
     @php the_excerpt() @endphp
+    {!! do_shortcode(' [socialPostShare] ') !!}
   </div>
 </article>

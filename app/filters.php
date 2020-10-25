@@ -98,7 +98,8 @@ add_filter('top10stockbroker/display_sidebar', function ($display) {
     isset($display) || $display = in_array(true, [
     // The sidebar will be displayed if any of the following return true
     is_home(),
-    is_front_page()
+    is_front_page(),
+    true
     ]);
     return $display;
 });
