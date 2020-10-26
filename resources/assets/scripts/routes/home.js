@@ -11,7 +11,7 @@ export default {
   	  document.getElementById('list-slider')
   	);
 
-    // Scroll to Top Button.
+    //
     if (typeof BrokerComparison !== 'undefined') {
       BrokerComparison.initialize();
     }

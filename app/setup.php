@@ -18,10 +18,30 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('comment-reply');
     }
 
-    wp_localize_script( 'top10stockbroker/main.js', 'global_vars', array( 
+    $localize_script_vars = array( 
         'ajax_url' => admin_url( 'admin-ajax.php' ),
         'ajax_nonce' => wp_create_nonce('gloabltop10stockbroker'),
-    ));
+    );
+
+    if ( defined( 'WPCF7_LOAD_JS' ) ) {
+        $wpcf7 = array(
+            'apiSettings' => array(
+                'root' => esc_url_raw( rest_url( 'contact-form-7/v1' ) ),
+                'namespace' => 'contact-form-7/v1',
+            ),
+        );
+
+        if ( defined( 'WP_CACHE' ) and WP_CACHE ) {
+            $wpcf7['cached'] = 1;
+        }
+
+        if ( wpcf7_support_html5_fallback() ) {
+            $wpcf7['jqueryUi'] = 1;
+        }
+        $localize_script_vars['wpcf7'] = $wpcf7;
+    }
+
+    wp_localize_script( 'top10stockbroker/main.js', 'global_vars', $localize_script_vars);
 
 }, 100);
 

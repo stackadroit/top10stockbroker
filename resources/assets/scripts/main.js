@@ -95,7 +95,7 @@ import zeroCouponBondYieldCalculator from './routes/shortcode-calculator/calcula
 import zeroCouponBondValueCalculator from './routes/shortcode-calculator/calculator61';
 
 //Shortcodes
-//import quickerslider from './routes/shortcodes/quickerslider';
+import quickerslider from './routes/shortcodes/quickerslider';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -165,6 +165,7 @@ const routes = new Router({
   zeroCouponBondYieldCalculator,
   zeroCouponBondValueCalculator,
   //shortcodes
+  quickerslider,
 });
 
 // Load Events
