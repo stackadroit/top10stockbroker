@@ -1,4 +1,4 @@
-<div class="selectbrockerdiv form-row shortcode-bg" id="brokercomparison">  
+<div class="selectbrockerdiv form-row shortcode-bg " id="brokercomparison">  
     <div class="broker-title col-md-12">
         <h4>Compare Stock Brokers</h4>
     </div>

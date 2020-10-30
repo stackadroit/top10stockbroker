@@ -154,7 +154,7 @@ exports.theme = window.theme;
 	var PluginStickyWidget = {
 
 		defaults: {
-			stickyWidget: $('#site-sidebar > .fixed-widget'),
+			stickyWidget: $('#site-sidebar .fixed-widget'),
 			offset: 50,
 			brakePoint: 975,
 		},
@@ -187,7 +187,7 @@ exports.theme = window.theme;
 			//   }
 			// });
 
-			// Distance from top of page to sidebar ad in px
+			// Distance from top of page to sidebar add in px
 			var widgetFromTop = self.options.stickyWidget.offset().top
 			
 			// Height of entire content area
@@ -198,18 +198,23 @@ exports.theme = window.theme;
 
 
     		if (sidebarHeight < contentHeight + self.options.offset) {
+    			
     			$(window).scroll(function() {
+
     				// If scroll distance from top exceeds by widget distance from top, add class
         			if ($(window).scrollTop() >= widgetFromTop) {
         				self.options.stickyWidget.addClass('sticky-widget');
+        				//$('body').addClass('sticky-widget');
         			}else {
 			          	self.options.stickyWidget.removeClass('sticky-widget');
+			          	//$('body').removeClass('sticky-widget');
 			        }
 
 			        // If scroll distance from top is greater than content height remove class. 
 			        //Added  X-px to pull out a bit before reaching the bottom.
 			        if ($(window).scrollTop() > contentHeight - self.options.offset) {
 			          self.options.stickyWidget.removeClass('sticky-widget');
+			          //$('body').removeClass('sticky-widget'); 
 			        }
 
     			});
@@ -365,3 +370,91 @@ exports.theme = window.theme;
 	exports.Nav = Nav;
 
 }).apply(this, [window.theme, jQuery]);
+
+// Modal popup
+(function($) {
+
+  var initialized = false;
+
+  var ModalPopup = {
+
+      defaults: {
+      	wrapper: $('.popup-main')
+      },
+
+      initialize: function($wrapper, opts) {
+        if (initialized) {
+          return this;
+        }
+
+        initialized = true;
+        this.$wrapper = ($wrapper || this.defaults.wrapper); 
+
+        this
+          .setOptions(opts)
+          .events(); 
+
+        return this;
+      },
+
+      setOptions: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts, window.theme.fn.getOptions(this.$wrapper.data('plugin-options')));
+
+        return this;
+      },
+      
+      ajax: function(modal, button){
+        var self    = this; 
+        $.ajax({
+              cache: false,
+              type:"POST",
+              dataType: "html",
+              url: global_vars.ajax_url,
+              data : {
+                'action': 'modal_popup',
+                'security': global_vars.ajax_nonce,
+                'post_id': self.options.post_id,
+                'contactform': self.options.contactform,
+                'form_left_content': self.options.form_left_content,
+                'form_right_content': self.options.form_right_content,
+                'form_mobile_content': self.options.form_mobile_content,
+                'auto_popup_left_content': self.options.auto_popup_left_content,
+                'auto_popup_right_content': self.options.auto_popup_right_content,
+                'auto_popup_mobile_content': self.options.auto_popup_mobile_content,
+                'custom_hellobar': self.options.custom_hellobar
+              },
+            success: function(response){
+               modal.find('.load-model').html(response); 
+            },
+            error: function(response){
+              console.log('Module Data Error.'); 
+            }
+        });
+
+          return this;
+      },
+
+      events: function() {
+        var self    = this,
+          $rootnode  = $("#popup-main");
+
+          $rootnode
+          .on('show.bs.modal', function (event) {
+			  var button = $(event.relatedTarget) // Button that triggered the modal
+			  var modal = $(this)
+			  self.ajax(modal, button);
+		  });
+
+          $rootnode
+		  .on('hidden.bs.modal', function (event) {
+		  	  var modal = $(this);
+		  	  modal.find('.load-model').html(' <div class="fb-loader loader"></div>'); 
+		  });
+
+        return this;
+      },
+
+    };
+  exports.ModalPopup = ModalPopup;
+
+}).apply(this, [jQuery]);

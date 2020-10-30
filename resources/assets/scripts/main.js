@@ -6,7 +6,7 @@ import fontawesome from '@fortawesome/fontawesome-free';
 import { library, dom  } from '@fortawesome/fontawesome-svg-core';
 
 // import the base SVG icons
-import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch, faBars, faTimes, faBars} from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch, faBars, faTimes, faBell} from '@fortawesome/free-solid-svg-icons';
 
 // import the Facebook and Twitter icons
 import { faFacebookF, faTwitter, faYoutube, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud} from '@fortawesome/free-brands-svg-icons';
@@ -15,7 +15,7 @@ import { faFacebookF, faTwitter, faYoutube, faLinkedin, faPinterest, faReddit, f
 fontawesome.config = { searchPseudoElements: true, autoReplaceSvg: 'nest' };
 
 // add the imported icons to the library
-library.add(faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud ,faYoutube, faSearch, faBars, faTimes);
+library.add(faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud ,faYoutube, faSearch, faBars, faTimes, faBell);
 
 // tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
 dom.watch();
@@ -27,7 +27,8 @@ import './autoload/**/*'
 import Router from './util/Router';
 import common from './routes/common';
 import home from './routes/home';
-
+import page from './routes/page';
+  
 //Shortcodes calculator
 import assetsToSalesRatioCalculator from './routes/shortcode-calculator/calculator01';
 import assetsTurnoverRatioCalculator from './routes/shortcode-calculator/calculator02';
@@ -96,6 +97,7 @@ import zeroCouponBondValueCalculator from './routes/shortcode-calculator/calcula
 
 //Shortcodes
 import quickerslider from './routes/shortcodes/quickerslider';
+import GoldInvestmentCalculator from './routes/shortcodes/goldinvestmentcalculator';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -103,6 +105,8 @@ const routes = new Router({
   common,
   // Home page
   home,
+  // Pages 
+  page,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,
   assetsTurnoverRatioCalculator,
@@ -166,6 +170,7 @@ const routes = new Router({
   zeroCouponBondValueCalculator,
   //shortcodes
   quickerslider,
+  GoldInvestmentCalculator,
 });
 
 // Load Events

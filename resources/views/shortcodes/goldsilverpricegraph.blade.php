@@ -1,4 +1,4 @@
-<div class="full-page-loading" style="display: none;">Loading&#8230;</div>
+<div class="full-page-loading" style="display: none;"> Loading &#8230; </div>
 <div class="section-charts section-padding">
     <div class="inner-wrap"> 
         <div class="month_tabs">

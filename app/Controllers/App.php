@@ -44,5 +44,90 @@ class App extends Controller
         return $this->mobileDetect->isMobile();
     }
 
+    public function hello_bar(){
+        global $wp_query;
+        $post = $wp_query->post;
+        $hello_bar = get_post_meta( $post->ID, 'hello-checkbox', true );
+        $hellobar_type = get_post_meta( $post->ID, 'wpcf-hello-bar-type', true );
+
+        switch ($hellobar_type) {
+            case 'IPO':
+                $data = array(
+                    'contactform' => 'wpcf-ipo-form-shortcode', 
+                    'form_left_content' => 'wpcf-ipo-popup-left-side-content-on-form', 
+                    'form_right_content' => 'wpcf-ipo-popup-right-side-top-content', 
+                    'form_mobile_content' => 'wpcf-ipo-mobile-content', 
+                    'auto_popup_left_content' => 'wpcf-ipo-auto-popup-left-content', 
+                    'auto_popup_right_content' => 'wpcf-ipo-auto-popup-right-content', 
+                    'auto_popup_mobile_content' => 'wpcf-ipo-auto-popup-mobile-content', 
+                    'custom_hellobar' => 'wpcf-hello-bar-ipo-content',
+                );
+                break;
+            case 'DEMAT':
+                $data = array(
+                    'contactform' => 'wpcf-demat-form-shortcode', 
+                    'form_left_content' => 'wpcf-demat-popup-left-side-content-on-form', 
+                    'form_right_content' => 'wpcf-demat-popup-right-side-top-content', 
+                    'form_mobile_content' => 'wpcf-demat-mobile-content', 
+                    'auto_popup_left_content' => 'wpcf-demat-auto-popup-left-content', 
+                    'auto_popup_right_content' => 'wpcf-demat-auto-popup-right-content', 
+                    'auto_popup_mobile_content' => 'wpcf-demat-auto-popup-mobile-content', 
+                    'custom_hellobar' => 'wpcf-hello-bar-demat-content',
+                );
+                break;
+            case 'FRANCHISE':
+                $data = array(
+                    'contactform' => 'wpcf-franchise-form-shortcode', 
+                    'form_left_content' => 'wpcf-franchise-popup-left-side-content-on-form', 
+                    'form_right_content' => 'wpcf-franchise-popup-right-side-top-content', 
+                    'form_mobile_content' => 'wpcf-franchise-mobile-content', 
+                    'auto_popup_left_content' => 'wpcf-franchise-auto-popup-left-content', 
+                    'auto_popup_right_content' => 'wpcf-franchise-auto-popup-right-content', 
+                    'auto_popup_mobile_content' => 'wpcf-franchise-auto-popup-mobile-content', 
+                    'custom_hellobar' => 'wpcf-hello-bar-franchise-content',
+                );
+                break;
+            case 'Mutual Fund':
+                $data = array(
+                    'contactform' => 'wpcf-mutual-fund-form-shortcode', 
+                    'form_left_content' => 'wpcf-mutual-fund-popup-left-side-content-on-form', 
+                    'form_right_content' => 'wpcf-mutual-fund-popup-right-side-top-content', 
+                    'form_mobile_content' => 'wpcf-mutual-fund-mobile-content', 
+                    'auto_popup_left_content' => 'wpcf-mutual-fund-auto-popup-left-content', 
+                    'auto_popup_right_content' => 'wpcf-mutual-fund-auto-popup-right-content', 
+                    'auto_popup_mobile_content' => 'wpcf-mutual-fund-auto-popup-mobile-content', 
+                    'custom_hellobar' => 'wpcf-hello-bar-mutual-fund-content',
+                );
+                break; 
+            case 'FRANCHISE':
+                $data = array(
+                    'contactform' => 'wpcf-default-form-shortcode', 
+                    'form_left_content' => 'wpcf-popup-left-side-content-on-form', 
+                    'form_right_content' => 'wpcf-popup-right-side-top-content', 
+                    'form_mobile_content' => 'wpcf-mobile-content', 
+                    'auto_popup_left_content' => 'wpcf-auto-popup-left-content', 
+                    'auto_popup_right_content' => 'wpcf-auto-popup-right-content', 
+                    'auto_popup_mobile_content' => 'wpcf-auto-popup-mobile-content', 
+                    'custom_hellobar' => 'wpcf-hello-bar-default-content',
+                );
+                break;
+            default:
+                $data = array(
+                    'contactform' => '', 
+                    'form_left_content' => '', 
+                    'form_right_content' => '', 
+                    'form_mobile_content' => '', 
+                    'auto_popup_left_content' => '', 
+                    'auto_popup_right_content' => '', 
+                    'auto_popup_mobile_content' => '', 
+                    'custom_hellobar' => '',
+                );
+                break;
+        }
+
+        $data['post_id'] = $post->ID;
+        return $data;
+
+    }
 
 }

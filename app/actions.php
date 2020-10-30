@@ -89,3 +89,201 @@ function brokercomparison_link_ajax_request() {
     endif;
     wp_die();
 }
+
+add_action( 'wp_ajax_goldsilver_investment_calculator',  __NAMESPACE__ . '\\goldsilver_investment_calculator' );
+add_action( 'wp_ajax_nopriv_goldsilver_investment_calculator',  __NAMESPACE__ . '\\goldsilver_investment_calculator' );
+function goldsilver_investment_calculator() {
+    global $wpdb;
+    $type = @$_REQUEST['type'];
+    $p_id = @$_REQUEST['p_id'];
+    $carat = @$_REQUEST['carat'];
+    $g_invest = @$_REQUEST['g_invest'];
+    $g_timeline = @$_REQUEST['g_timeline'];
+    $prcdate ='';
+
+    switch ($g_timeline) {
+        case '1W':
+            $prcdate =date("Y-m-d", strtotime("-7 days"));
+            break;
+        case '2W':
+            $prcdate =date("Y-m-d", strtotime("-14 days"));
+            break;
+        case '3W':
+            $prcdate =date("Y-m-d", strtotime("-21 days"));
+            break;
+        case '1M':
+            $prcdate =date("Y-m-d", strtotime("-30 days"));
+            break;
+        case '3M':
+            $prcdate =date("Y-m-d", strtotime("-3 month"));
+            break;
+        case '6M':
+            $prcdate =date("Y-m-d", strtotime("-6 month"));
+            break;
+        case '9M':
+            $prcdate =date("Y-m-d", strtotime("-9 month"));
+            break;
+        case '1Y':
+            $prcdate =date("Y-m-d", strtotime("-365 month"));
+            break;
+        default:
+            $prcdate =date("Y-m-d", strtotime("-30 days"));
+            break;
+    }
+
+    $cData = date('Y-m-d');
+    
+    $c_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$p_id} and `type` = '{$type}' AND date='{$cData}' LIMIT 1");
+    $gs_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$p_id} and `type` = '{$type}' AND date='{$prcdate}' LIMIT 1");
+
+    $goldUnits =0;
+    $netWorth =0;
+    $totalProLoss =0;
+    $totalProLossPre =0;
+    $currentRate =0;
+
+    if($gs_val){
+        if($carat == 22){
+            $currentRate = @$c_val->t22_1_rate;
+            $timeLineRate = @$gs_val->t22_1_rate;
+        }else{
+            $currentRate = @$c_val->t24_1_rate;
+            $timeLineRate = @$gs_val->t24_1_rate;
+             
+        }
+        $goldUnits = @(number_format(($g_invest/$timeLineRate) ,2));
+        $netWorth = @(number_format(($goldUnits * $currentRate),2));
+        $totalProLoss = @(number_format($goldUnits * ($currentRate - $timeLineRate),2));
+        $totalProLossPre=@(number_format((($totalProLoss/$g_invest)*100),2));
+
+        $data['netWorth'] = @$netWorth;
+
+        if($totalProLoss >= 0){
+            $data['plClass'] = 'green';
+            $data['plText'] = 'Profit';
+        }else{
+            $data['plClass'] = 'red';
+            $data['plText'] = 'Loss';
+        }
+        if($totalProLossPre >= 0){
+            $data['plpClass'] = 'green';
+            $data['plpText'] = 'Profit(%) ';
+        }else{
+            $data['plpClass'] = 'red';
+            $data['plpText'] = 'Loss(%)';
+        }
+
+    }
+
+    $template = 'partials.ajax.gold-silver-investment-calculator-data';
+    echo \App\template($template, $data);
+    die();
+}
+
+add_action( 'wp_ajax_gold_rate_comparison_calculate',  __NAMESPACE__ . '\\gold_rate_comparison_calculate' );
+add_action( 'wp_ajax_nopriv_gold_rate_comparison_calculate',  __NAMESPACE__ . '\\gold_rate_comparison_calculate' );
+function gold_rate_comparison_calculate() {
+    global $wpdb;
+
+    $type = @$_REQUEST['type'];
+    $p_id1 = @$_REQUEST['p_id1'];
+    $p_id2 = @$_REQUEST['p_id2'];
+    $p_id3 = @$_REQUEST['p_id3'];
+    $carat = @$_REQUEST['carat'];
+    $g_invest = @$_REQUEST['g_invest'];
+    $g_timeline = @$_REQUEST['g_timeline'];
+
+    $cities = get_GoldCityStateLists();
+    $prcdate ='';
+    if($p_id1)
+        $p_id[] =$p_id1;
+    if($p_id2)
+        $p_id[] =$p_id2;
+    if($p_id3)
+        $p_id[] =$p_id3;
+    switch ($g_timeline) {
+        case '1W':
+            $prcdate =date("Y-m-d", strtotime("-7 days"));
+            break;
+        case '2W':
+            $prcdate =date("Y-m-d", strtotime("-14 days"));
+            break;
+        case '3W':
+            $prcdate =date("Y-m-d", strtotime("-21 days"));
+            break;
+        case '1M':
+            $prcdate =date("Y-m-d", strtotime("-30 days"));
+            break;
+        case '3M':
+            $prcdate =date("Y-m-d", strtotime("-3 month"));
+            break;
+        case '6M':
+            $prcdate =date("Y-m-d", strtotime("-6 month"));
+            break;
+        case '9M':
+            $prcdate =date("Y-m-d", strtotime("-9 month"));
+            break;
+        case '1Y':
+            $prcdate =date("Y-m-d", strtotime("-365 month"));
+            break;
+        default:
+            $prcdate =date("Y-m-d", strtotime("-30 days"));
+            break;
+    }
+    $cData=date('Y-m-d');
+    $priceRes =array();
+    $type = 1;
+    foreach ($p_id as $key => $value) {
+
+        $c_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$value} and `type` = '{$type}' AND date='{$cData}' LIMIT 1");
+        $gs_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$value} and `type` = '{$type}' AND date='{$prcdate}' LIMIT 1");
+        if($gs_val){
+            if($carat == 22){
+                $currentRate =@$c_val->t22_1_rate;
+                $timeLineRate =@$gs_val->t22_1_rate;
+            }else{
+                $currentRate =@$c_val->t24_1_rate;
+                $timeLineRate =@$gs_val->t24_1_rate;
+                 
+            }
+        }
+
+        $goldUnits = ($g_invest/ $timeLineRate);
+        $netWorth = @(number_format(($goldUnits * $currentRate),2));
+        $priceRes[$key] =array(
+            'currentRate'=>$c_val,
+            'timeLineRate'=>$gs_val,
+            'netWorth'=>$netWorth
+        );
+        $data['g_invest'] = $g_invest;
+        $data['priceRes'] = $priceRes;
+        $data['p_id'] = $p_id;
+        $data['cities'] = $cities;
+    }
+
+    $template = 'partials.ajax.gold-rate-comparison-calculate-data';
+    echo \App\template($template, $data);
+    die();
+}
+
+add_action( 'wp_ajax_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
+add_action( 'wp_ajax_nopriv_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
+function modal_popup() {
+
+
+    $nonce =  @$_REQUEST['security'];
+    $data['post_id'] =  @$_REQUEST['post_id'];
+    $data['contactform'] =  @$_REQUEST['contactform'];
+    $data['form_left_content'] =  @$_REQUEST['form_left_content'];
+    $data['form_right_content'] =  @$_REQUEST['form_right_content'];
+    $data['form_mobile_content'] =  @$_REQUEST['form_mobile_content'];
+    $data['auto_popup_left_content'] =  @$_REQUEST['auto_popup_left_content'];
+    $data['auto_popup_right_content'] =  @$_REQUEST['auto_popup_right_content'];
+    $data['auto_popup_mobile_content'] =  @$_REQUEST['auto_popup_mobile_content'];
+    $data['custom_hellobar'] =  @$_REQUEST['custom_hellobar'];
+
+    
+    $template = 'partials.ajax.modalpopup1';
+    echo \App\template($template, $data);
+    die();
+}

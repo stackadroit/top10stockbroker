@@ -1,7 +1,7 @@
 <div class="custom-menu-class">
     <ul>
 		@foreach( $get_meta as $gm ) 
-		<li class="{{ $current_url == @$gm['purl']  ? 'current': '' }}">
+		<li class="{{ @if($current_url == @$gm['purl']) current @endif }}">
 			<a href="{!! @$gm['purl'] !!}"> {{ @$gm['ptitle'] }} </a>
 		</li>
 		@endforeach

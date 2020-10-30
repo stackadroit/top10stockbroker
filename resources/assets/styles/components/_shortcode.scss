@@ -17,3 +17,80 @@
     height: 0;
     margin: 30px 0;
 }
+
+.data-value-big{
+   font-size: 24px;
+}
+.data-value-big-icon{
+    font-weight:700;
+    margin-left: 8px;
+    font-size: 20px;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+}
+.geen-value{
+    color: #00ae42;
+}
+.red-value{
+    color: red;
+}
+.black-value{
+    color: #000;
+}
+.black-Stable{
+    color: #444;
+}
+.gold_summery_table table tr {
+    background-color: #cccdcf;
+    border: 2px solid #cccdcf;
+    font-size: 16px;
+    color: #333;
+    background-image: -moz-linear-gradient(90deg,#e9e9e9 0%,#dbdbdb 100%);
+    background-image: -webkit-linear-gradient(90deg,#e9e9e9 0%,#dbdbdb 100%);
+    background-image: -ms-linear-gradient(90deg,#e9e9e9 0%,#dbdbdb 100%);
+    background-image: linear-gradient(90deg,#e9e9e9 0%,#dbdbdb 100%);
+}
+.gold_summery_table table td {
+    border:  none;
+    box-shadow: none;
+    border: none;
+    background:transparent;
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.arrow-style{
+    margin-left: 8px;
+    display: inline-block;
+    position: relative;
+    top: 0;
+}
+.input-hi4{
+    border: 1px solid #E5E7E9;
+    width: 100%;
+    height: 40px;
+}
+
+.get_gold_rate_comparison_result table{
+    & tr{font-size: 16px;}
+    & th{
+        color: #fff;
+        background: #5a9bd5;
+    }
+    & th, & th{ border: 2px solid #fff; } 
+    & tr:nth-child(2),
+    & tr:nth-child(4){
+        background: #d3e2f5;
+    }
+    & tr:nth-child(3) {
+        background: #edf1fa;
+    }
+}
+
+.invdata-heading {
+    background: #888;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+}

@@ -142,7 +142,7 @@ aside.widget:hover{
 			width: 100%;
 		}
 		input {
-			padding: side-values(14px 50px 16px 15px);
+			padding: side-values(14px 14px 14px 14px);
 		    height: 50px;
 		    width: 100%;
 		    color: #707070;
@@ -530,7 +530,8 @@ aside.widget:hover{
 }
 
 @media (min-width: 975px){
-	#site-sidebar:not(.no-sticky) .sticky-widget{
+	#site-sidebar:not(.no-sticky) .sticky-widget,
+	#body:not(.no-sticky).sticky-widget .fixed-widget{
 	    position: fixed;
 	    top: 10px;
 	    max-width: 255px;

@@ -194,8 +194,8 @@ add_filter('top10stockbroker_cpt', function ($array) {
 
     $array[] = array( 
                 'cpt' => array( 
-                            __( 'Co. Share Price', 'top10stockbroker' ),
-                            __( 'Co. Share Prices', 'top10stockbroker' ),
+                            __( 'Share Price', 'top10stockbroker' ),
+                            __( 'Share Prices', 'top10stockbroker' ),
                             'share-price'
                         ),
                 'arg_overrides' => array( 

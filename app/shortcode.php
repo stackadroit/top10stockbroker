@@ -1038,7 +1038,7 @@ add_shortcode('quickerslider', function ($atts){
 
 });
 
-add_shortcode('GoldInvestmentCalculator', function ($atts){ 
+add_shortcode('goldInvestmentCalculator', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1056,10 +1056,18 @@ add_shortcode('GoldInvestmentCalculator', function ($atts){
         return "";
     }
 
-    if($type ==1){
+    if($data['type'] ==1){
         $data['div_id'] = $data['caret'] . "_gold_investment_calculator_" . $data['id'] ."_".  $data['type'];
     }else{
         $data['div_id'] = "silver_investment_calculator_" . $data['id'] . "_" . $data['type'];
+    }
+
+    $data['josndata'] = $data;
+
+    if($data['type'] ==1){
+        $data['cities'] = get_GoldCityStateLists();
+    }else{
+        $data['cities'] = get_SilverCityStateLists();
     }
 
     // Echo the shortcode blade template
@@ -1073,8 +1081,9 @@ add_shortcode('GoldRateComparison', function ($atts){
     $data = shortcode_atts( array(
         'id'      => '',
         'title'   =>'Gold Rate Comparison',
+        'caret' => '',
         'city' => '',
-        'caret' => ''
+        'type' => ''
     ), $atts);
 
     // Set the template we're going to use for the Shortcode
@@ -1085,7 +1094,7 @@ add_shortcode('GoldRateComparison', function ($atts){
     }
 
     $data['div_id'] = "_gold_rate_comparison_" . $data['id'] . "_" . $data['type'];
-
+    $data['cities'] = get_GoldCityStateLists();
 
     // Echo the shortcode blade template
     return \App\template($template, $data);
@@ -1131,6 +1140,72 @@ add_shortcode('goldsilverpricetoday', function ($atts){
 
     $data['div_id'] = "goldsilverpricetoday_" . $data['id'] . "_" . $data['type'] . "_" . $data['carret'];
 
+    global $wpdb;
+    $gs_val =  $wpdb->get_results( "SELECT * FROM gold_silver_rate  WHERE `page_id` = ". $data['id'] . " and `type` = '".$data['type']."'  ORDER BY date DESC  LIMIT 2" );
+    
+    if($data['carret'] == '22'){
+        $data['today_rate1'] = $gs_val[0]->t22_1_rate; // 120
+        $data['yesterday_rate1'] =  $gs_val[1]->t22_1_rate; // 110
+        
+        $data['today_rate10'] = $gs_val[0]->t22_10_rate; // 120
+        $data['yesterday_rate10'] =  $gs_val[1]->t22_10_rate; // 110
+        
+        $data['today_rate100'] = $gs_val[0]->t22_100_rate; // 120
+        $data['yesterday_rate100'] =  $gs_val[1]->t22_100_rate; // 110
+    }
+    else{
+        $data['today_rate1'] = $gs_val[0]->t24_1_rate; // 120
+        $data['yesterday_rate1'] =  $gs_val[1]->t24_1_rate; // 110
+        
+        $data['today_rate10'] = $gs_val[0]->t_24_10_rate; // 120
+        $data['yesterday_rate10'] =  $gs_val[1]->t_24_10_rate; // 110
+        
+        $data['today_rate100'] = $gs_val[0]->t_24_100_rate; // 120
+        $data['yesterday_rate100'] =  $gs_val[1]->t_24_100_rate; // 110
+    }
+
+        $data['diff1'] = $data['today_rate1'] - $data['yesterday_rate1'];
+        $data['diff10'] = $data['today_rate10'] - $data['yesterday_rate10'];
+        $data['diff100'] = $data['today_rate100'] - $data['yesterday_rate100'];
+
+    if($data['today_rate1'] == $data['yesterday_rate1']){
+        $data['diff_class1'] = 'black-Stable';
+        $data['per1'] = 'Stable';
+    }elseif( $data['today_rate1'] > $data['yesterday_rate1']){
+        $data['diff_class1'] = 'geen-value';
+        $data['per1'] = 'Improve';
+    }else {
+        $data['$diff_class1'] = 'red-value';
+        $data['per1'] = 'Down';
+    }
+
+    if($data['today_rate10'] == $data['yesterday_rate10']){
+        $data['diff_class1'] = 'black-Stable';
+        $data['$per10'] = 'Stable';
+    }elseif( $data['today_rate10'] > $data['yesterday_rate10']) {
+        $data['diff_class10'] = 'geen-value';
+        $data['per10'] = 'Improve';
+    }
+    else {
+        $data['diff_class10'] = 'red-value';
+        $data['per10'] = 'Down';
+    }
+
+    if($data['today_rate100'] == $data['yesterday_rate100']){
+        $data['diff_class1'] = 'black-Stable';
+        $data['per100'] = 'Stable';
+    }elseif( $data['today_rate100'] > $data['yesterday_rate100']) {
+        $data['diff_class100'] = 'geen-value';
+        $data['per100'] = 'Improve';
+    }else{
+        $data['diff_class100'] = 'red-value';
+        $data['per100'] = 'Down';
+    }
+
+    $data['diff_per1'] = ( ($data['today_rate1'] - $data['yesterday_rate1']) / $data['yesterday_rate1'] ) * 100;
+    $data['diff_per10'] = ( ($data['today_rate10'] -$data['yesterday_rate10']) / $data['yesterday_rate10'] ) * 100;
+    $data['diff_per100'] = ( ($data['today_rate100'] - $data['yesterday_rate100']) / $data['yesterday_rate100']) * 100;
+
     // Echo the shortcode blade template
     return \App\template($template, $data);
 
@@ -1150,8 +1225,42 @@ add_shortcode('goldsilversummary', function ($atts){
     // Set the template we're going to use for the Shortcode
     $template = 'shortcodes.goldsilversummary';
 
-    $data['div_id'] = "gold_summery_data_" . $data['id'] . "_" . $data['type'];
+    global $wpdb;
+    $gs_val =  $wpdb->get_results( "SELECT * FROM gold_silver_rate  WHERE `page_id` = ".@$data['id']. " and `type` = '".$data['type']."'  ORDER BY date DESC  LIMIT 2" );
 
+    if($data['carret'] == '22'){
+        $data['today_rate'] = $gs_val[0]->t22_10_rate; // 120
+        $data['yesterday_rate'] =  $gs_val[1]->t22_10_rate; // 110
+    }
+    else{
+        $data['today_rate'] = $gs_val[0]->t_24_10_rate; // 120
+        $data['yesterday_rate'] =  $gs_val[1]->t_24_10_rate; // 110
+    }
+
+    $data['diff'] = $data['today_rate'] - $data['yesterday_rate'];
+
+    if($data['diff'] > 0){
+        $data['class_style'] = 'geen-value';
+        $data['arrowclass'] = "fa-angle-up";
+    }elseif($data['diff'] < 0){ 
+        $data['class_style'] = 'red-value';
+        $data['arrowclass'] = "fa-angle-down";
+    }else{
+        $data['class_style'] = 'black-value';
+        $data['arrowclass'] = "fa-angle-right";
+    }
+
+    $data['diff_per'] = ( ($data['today_rate'] - $data['yesterday_rate']) / $data['yesterday_rate'] ) * 100;
+    
+    if($data['type'] ==2){
+        $data['typeName'] = 'Silver';
+    }else{
+        $data['typeName'] = 'Gold';
+    }
+
+    $data['title'] = date('dS M Y',strtotime($gs_val[0]->date)).' - ' . $data['title'];
+
+    $data['div_id'] = "gold_summery_data_" . $data['id'] ."_". $data['type'];
     // Echo the shortcode blade template
     return \App\template($template, $data);
 

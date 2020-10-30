@@ -1,5 +1,9 @@
-import {PluginScrollToTop, Header, Nav, PluginStickyWidget}  from '../library/global';
+import {PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup}  from '../library/global';
 import {contactForm} from '../plugins/contactform';
+import React, { Component } from "react";
+import ReactDOM from 'react-dom';
+import MdfSearchWrap from '../components/mbfsearchwrap';
+
 export default {
   init() {
     // Commom Plugins
@@ -17,6 +21,11 @@ export default {
 			Nav.initialize();
 		}
 
+		// contact Form 7
+		if (typeof contactForm !== 'undefined') {
+			contactForm.initialize();
+		}
+
 		// Sticky Widget.
 		if (typeof PluginStickyWidget !== 'undefined') {
 			PluginStickyWidget.initialize();
@@ -27,10 +36,15 @@ export default {
 			PluginScrollToTop.initialize();
 		}
 		
-		// contact Form 7
-		if (typeof contactForm !== 'undefined') {
-			contactForm.initialize();
+		if (typeof ModalPopup !== 'undefined') {
+			ModalPopup.initialize();
 		}
+
+		//bell icon popup
+		ReactDOM.render(
+	  	  <MdfSearchWrap />,
+	  	  document.getElementById('mbf-search-wrap')
+	  	);
 
 	}).apply(this, [jQuery]);
 

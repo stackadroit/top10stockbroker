@@ -1,31 +1,31 @@
 <div id="invCalculator">
-<h3>Calculate your return on investment!</h3>
-<hr>
+<h3 class="font-weight-bold text-center">Calculate your return on investment!</h3>
 <form action="">
-    <p>
+  <div class="form-row">
+    <div class="form-group col-md-6 my-1">
         <label>Investment Amount</label>
-        <input type="text" name="price" id="price" value="500000">
-    </p>
-<p>
-    <label>Select Year</label>
-    <select id="invyear">
-      <option value="3M">3 Months</option>
-      <option value="6M">6 Months</option>
-      <option value="1Y">1 Year</option>
-      <option value="2Y">2 Year</option>
-      <option value="3Y">3 Year</option>    
-      <option value="4Y">4 Year</option>
-      <option value="5Y">5 Year</option>
-    </select>
-</p>
-  <p class="upd-box">
-      <label></label>
-      <button id="update">Calculate</button>
-  </p>
-
+        <input type="text" name="price" id="price" value="500000" class="form-control input-hi4">
+    </div>
+    <div class="form-group col-md-4 my-1">
+      <label>Select Year</label>
+      <select id="invyear">
+        <option value="3M">3 Months</option>
+        <option value="6M">6 Months</option>
+        <option value="1Y">1 Year</option>
+        <option value="2Y">2 Year</option>
+        <option value="3Y">3 Year</option>    
+        <option value="4Y">4 Year</option>
+        <option value="5Y">5 Year</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2 my-1">
+        <label>Calculate</label>
+        <button id="update">Calculate</button>
+    </div>
+  </div>
 </form>
 <br>
-<table class="invData">
+<table class="invData text-center">
 <tr class="invdata-heading">
   <td>Asset Class</td>
   <td>ROI (Rs.)</td>

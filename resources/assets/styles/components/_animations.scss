@@ -35,6 +35,23 @@
     transform: scale(0.9);
   }
 }
+/* ripple */
+@-webkit-keyframes at-ripple {
+  0% {
+    box-shadow: 0 4px 10px rgba(229, 80, 7, 0.1), 0 0 0 0 rgba(229, 80, 7, 0.1), 0 0 0 5px rgba(229, 80, 7, 0.1), 0 0 0 10px rgba(229, 80, 7, 0.1);
+  }
+  100% {
+    box-shadow: 0 4px 10px rgba(229, 80, 7, 0.1), 0 0 0 5px rgba(229, 80, 7, 0.1), 0 0 0 10px rgba(229, 80, 7, 0.1), 0 0 0 20px rgba(229, 80, 7, 0);
+  }
+}
+@keyframes at-ripple {
+  0% {
+    box-shadow: 0 4px 10px rgba(229, 80, 7, 0.1), 0 0 0 0 rgba(229, 80, 7, 0.1), 0 0 0 5px rgba(229, 80, 7, 0.1), 0 0 0 10px rgba(229, 80, 7, 0.1);
+  }
+  100% {
+    box-shadow: 0 4px 10px rgba(229, 80, 7, 0.1), 0 0 0 5px rgba(229, 80, 7, 0.1), 0 0 0 10px rgba(229, 80, 7, 0.1), 0 0 0 20px rgba(229, 80, 7, 0);
+  }
+}
 /*hvr-pulse*/
 .hvr-pulse {
   display: inline-block;
@@ -109,4 +126,84 @@
   transform: scaleY(1);
   -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
   transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+/*loadn animation*/
+.fb-loader {
+  background: currentcolor;
+  position: relative;
+  animation: fb-loader 1s ease-in-out infinite;
+  animation-delay: 0.4s;
+  width: .25em;
+  height: .5em;
+  margin: 0 .5em;
+  color: $color-primary;
+  &:after,
+  &:before {
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: inherit;
+    animation: inherit;
+  }
+  &:before {
+    right: .5em;
+    animation-delay: 0.2s;
+  }
+  &:after {
+    left: .5em;
+    animation-delay: 0.6s;
+  }
+}
+
+.loader-circle {
+  position: relative;
+  animation: loader-circle-1 2.0s infinite linear;
+  &:before,
+  &:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border: .5em solid currentcolor;
+    display: block;
+    position: absolute;
+    border-radius: 100%;
+    animation: loader-circle-2 2s infinite ease-in-out;
+  }
+  &:before {
+    top: 0;
+    left: 50%;
+  }
+  &:after {
+    bottom: 0;
+    right: 50%;
+    animation-delay: -1s;
+  }
+}
+
+@keyframes fb-loader {
+  0%,
+  100% {
+    box-shadow: 0 0 0 currentcolor, 0 0 0 currentcolor;
+  }
+  50% {
+    box-shadow: 0 -.25em 0 currentcolor, 0 .25em 0 currentcolor;
+  }
+}
+
+@keyframes loader-circle-1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-circle-2 {
+  0%,
+  100% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
 }
