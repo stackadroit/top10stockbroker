@@ -270,10 +270,12 @@ add_action( 'wp_ajax_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 add_action( 'wp_ajax_nopriv_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 function modal_popup() {
 
-
     $nonce =  @$_REQUEST['security'];
+    $data['hello_bar'] =  @$_REQUEST['hello_bar'];
+    $model_auto =  @$_REQUEST['model_auto'];
     $data['post_id'] =  @$_REQUEST['post_id'];
     $data['contactform'] =  @$_REQUEST['contactform'];
+    $data['model_action'] =  @$_REQUEST['model_action'];
     $data['form_left_content'] =  @$_REQUEST['form_left_content'];
     $data['form_right_content'] =  @$_REQUEST['form_right_content'];
     $data['form_mobile_content'] =  @$_REQUEST['form_mobile_content'];
@@ -283,7 +285,30 @@ function modal_popup() {
     $data['custom_hellobar'] =  @$_REQUEST['custom_hellobar'];
 
     
-    $template = 'partials.ajax.modalpopup1';
+    $shortcode_contactform = $data['contactform'];
+    
+    $data['auto_status'] = $model_auto;
+
+    switch ($data['model_action']) {
+        case 'custom-hellobar':
+            $template = 'partials.ajax.modalpopup';
+            break;
+        case 'mbf-search-wrap':
+            $template = 'partials.ajax.modalpopup-mdf-search';
+            break;
+        default:
+            if(@$data['hello_bar'] == 'yes'){ 
+                $template = 'partials.ajax.modalpopup-default';
+                $shortcode_contactform = '[contact-form-7 id="5057" title="Default PopUp Contact Form"]';
+            }else{
+                $template = 'partials.ajax.modalpopup-demat-default';
+                $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
+            }
+            break;
+    }
+
+    $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
+
     echo \App\template($template, $data);
     die();
 }

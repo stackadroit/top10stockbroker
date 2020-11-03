@@ -125,6 +125,7 @@ class App extends Controller
                 break;
         }
 
+        $data['hello_bar'] = $hello_bar;
         $data['post_id'] = $post->ID;
         return $data;
 
