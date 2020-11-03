@@ -89,7 +89,7 @@ class QuickerSlider extends React.Component {
             return <div>Error in loading</div>
         }else if (!isLoaded) {
             return (
-             <ContentLoader viewBox="0 0 800 350" height={350} width={800}>
+             <ContentLoader viewBox="0 0 700 350" height={350} width={700}>
 				  <rect x="0" y="0" rx="3" ry="3" width="400" height="80" />
 			      <rect x="410" y="0" rx="3" ry="3" width="400" height="80" />
 			      <rect x="0" y="90" rx="3" ry="3" width="400" height="80" />

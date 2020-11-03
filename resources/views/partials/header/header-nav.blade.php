@@ -36,6 +36,8 @@
                     </span>
                 </div>
               </form>
+              <div id="search-result-nav">
+              </div>
             </div>
           </div>
         </div>

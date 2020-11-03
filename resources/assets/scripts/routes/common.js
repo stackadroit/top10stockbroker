@@ -3,6 +3,7 @@ import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import MdfSearchWrap from '../components/mbfsearchwrap';
+import QuickerSlider from '../components/quickerslider';
 
 export default {
   init() {
@@ -45,6 +46,20 @@ export default {
 	  	  <MdfSearchWrap />,
 	  	  document.getElementById('mbf-search-wrap')
 	  	);
+
+		$(document)
+        .on('loadReactSlickIcons', function (event, eventInfo) {
+	        ReactDOM.render( 
+		  	  <QuickerSlider />,
+		  	  document.getElementById('list-slider-modal')
+		  	);
+  		});
+
+        $(document)
+        .on('reinitContactform', function (event, eventInfo) {
+        	var $form = $( '.load-model .wpcf7-form' );
+        	wpcf7.initForm( $form );
+  		});
 
 	}).apply(this, [jQuery]);
 

@@ -15,24 +15,21 @@ class MdfSearchWrap extends React.Component {
         };
 
         // This binding is necessary to make `this` work in the callback
-    	this.handleClick = this.handleClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick() {
-	    this.setState(state => ({
-	      isToggleOn: !state.isToggleOn
-	    }));
-	    console.log(this.state.isToggleOn);
+	    console.log('working');
 	}
 
 	render() {
 		const {error, isLoaded, lists} = this.state;
 
-	    if(error){
+	    if(error){ 
             return <div>Error in loading</div>
         }else if (!isLoaded) {
             return (
-            	<MdfSearch  />
+            	<MdfSearch />
             );
         }else {
 		    
