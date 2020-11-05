@@ -6,6 +6,7 @@ import SimpleBar from 'simplebar';
 import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
+import WidgetMarketTop from '../components/widgetmarketTop';
 
 export default {
   init() {
@@ -52,7 +53,12 @@ export default {
 		//widget market
 		ReactDOM.render(
 	  	  <WidgetMarket />,
-	  	  document.getElementById('marketRadar')
+	  	  document.getElementById('marketRadarGold')
+	  	);
+
+		ReactDOM.render(
+	  	  <WidgetMarketTop />,
+	  	  document.getElementById('widget-second')
 	  	);
 
 		$(document)
@@ -69,37 +75,34 @@ export default {
         	wpcf7.initForm( $form );
   		});
 
-        $(document)
-        .on('inittreadmill', function (event, eventInfo) {
-        	if (typeof SuperTreadmill !== 'undefined') {
-				SuperTreadmill.initialize();
-			}
 
-			$('#widget-first').startTreadmill({
-              runAfterPageLoad: true,
-              direction: "up",
-              speed: "slow",
-              viewable:1,
-              pause: false
-            });
- 
-            $('#widget-second').startTreadmill({
-            	runAfterPageLoad: true,
-                direction: "up",
-                speed: "slow",
-                viewable:1,
-                pause: false
-            });
+        // super tread mill
+        if (typeof SuperTreadmill !== 'undefined') {
+			SuperTreadmill.initialize();
+		}
 
-  		});
+		// $('#widget-first').startTreadmill({
+  //         runAfterPageLoad: true,
+  //         direction: "up",
+  //         speed: "slow",
+  //         viewable:1,
+  //         pause: false
+  //       });
 
-SuperTreadmill
+		// $('#widget-second').startTreadmill({
+  //       	runAfterPageLoad: true,
+  //           direction: "up",
+  //           speed: "slow",
+  //           viewable:1,
+  //           pause: false
+  //       });
 
+
+        //scroll bar on sections
         $('.scrollbar').each(function() {
         	new SimpleBar(this , { autoHide: true });
         });
-        //var myElement = document.getElementById('simple-bar');
-		//
+
 	}).apply(this, [jQuery]);
 
   },

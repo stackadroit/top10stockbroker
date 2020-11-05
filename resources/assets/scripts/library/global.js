@@ -171,7 +171,6 @@ exports.theme = window.theme;
 
 		setOptions: function(opts) {
 			this.options = $.extend(true, {}, this.defaults, opts);
-
 			return this;
 		},
 
@@ -706,7 +705,7 @@ exports.theme = window.theme;
 
 		        // Sets the height of Super Treadmill to viewable times height of the first unit else it is set to user-defined css value
 		        if(settings.viewable <= $(this).children().length && settings.viewable != 0)
-		            treadmillHeight = settings.viewable * $(this).find('.treadmill-unit').first().height();
+		            treadmillHeight = settings.viewable * $(this).find('.treadmill-wrap').first().height();
 		        else
 		            treadmillHeight = $(this).height();
 
@@ -743,11 +742,11 @@ exports.theme = window.theme;
 
 		            $(this).mouseleave( function() {
 		                running = !running;
-		                selectTreadmill(settings.direction, $(this), treadSpeed);
+		                selectTreadmill(settings.direction, $(this).find('.treadmill-wrap'), treadSpeed);
 		            });
 		        }
 
-		        selectTreadmill(settings.direction, $(this), treadSpeed);
+		        selectTreadmill(settings.direction, $(this).find('.treadmill-wrap'), treadSpeed);
 		        
 		    };
 		    
