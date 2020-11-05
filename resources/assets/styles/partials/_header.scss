@@ -362,6 +362,16 @@
 	}
 }
 
+// search
+#search-result-nav{
+	&.scrollbar{
+		max-height: 200px;
+	}
+	& .simplebar-track.simplebar-vertical {
+    	width: 8px;
+	}
+}
+
 /* Responsive */
 @media (min-width: 992px) {
 

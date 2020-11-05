@@ -1,0 +1,110 @@
+#marketRadar{
+    width: 100%;
+    position: relative;
+    @media (min-width:768px){
+    	display: -webkit-inline-box;
+    	display: inline-block;
+    }
+
+    & .grArrow,
+    & .rdArrow{
+    	vertical-align:middle;
+    }
+    & .grArrow{color:#009900;}
+    & .rdArrow{color:#d40000;}
+
+    & .bl_10{font:10px arial; color:#043c74;}
+	& .bl_11{font:11px arial; color:#043c74;}
+	& .bl_12{font:12px arial; color:#043c74;}
+	& .bl_13{font:13px arial; color:#043c74;}
+	& .bl_14{font:14px arial; color:#043c74;}
+	& .bl_15{font:15px arial; color:#043c74;}
+	& .b_14{font:14px arial; color:#000;}
+
+	& .gd_10{font:10px arial; color:#333;}
+	& .gd_11{font:11px arial; color:#333;}
+	& .gd_12{font:12px arial; color:#333;}
+	& .gd_13{font:13px arial; color:#333;}
+	& .gd_14{font:14px arial; color:#333;}
+	& .gd_15{font:15px arial; color:#333;}
+	& .gd_16{font:16px arial; color:#333;}
+	& .gd_18{font:18px arial; color:#333;}
+
+	& .gl_10{font:10px arial; color:#5b5b5b;}
+	& .gl_11{font:11px arial; color:#5b5b5b;}
+	& .gl_12{font:12px arial; color:#5b5b5b;}
+	& .gl_13{font:13px arial; color:#5b5b5b;}
+	& .gl_14{font:14px arial; color:#5b5b5b;}
+	& .gl_15{font:15px arial; color:#5b5b5b;}
+	& .gl_16{font:16px arial; color:#5b5b5b;}
+	& .gl_18{font:18px arial; color:#5b5b5b;}
+
+	& .gr_10{font:10px arial; color:#009900;}
+	& .gr_11{font:11px arial; color:#009900;}
+	& .gr_12{font:12px arial; color:#009900;}
+	& .gr_13{font:13px arial; color:#009900;}
+	& .gr_14{font:14px arial; color:#009900;}
+	& .gr_15{font:15px arial; color:#009900;}
+	& .gr_16{font:16px arial; color:#009900;}
+	& .gr_18{font:18px arial; color:#009900;}
+
+	& .r_10{font:10px arial; color:#d40000;}
+	& .r_11{font:11px arial; color:#d40000;}
+	& .r_12{font:12px arial; color:#d40000;}
+	& .r_13{font:13px arial; color:#d40000;}
+	& .r_14{font:14px arial; color:#d40000;}
+	& .r_15{font:15px arial; color:#d40000;}
+	& .r_16{font:16px arial; color:#d40000;}
+	& .r_18{font:18px arial; color:#d40000;}
+
+	.drop-btn{
+		display:none;
+		@media (max-width: 767px){
+			display: block;
+	        position: absolute;
+	        top: 17px;
+	        right: 10px;
+	        cursor: pointer;
+	        background: #232323;
+	        border: 1px solid #232323;
+	        z-index: 999999;
+	        padding: 3px 10px;
+	        margin: 0;
+	        z-index: 1;
+
+	        & i,
+	        & svg{
+	        	color: #fff;
+	        }
+	        &:hover{
+	        	background-color: #e55025;
+	        	border: 1px solid #e55025;
+	        }
+		}
+	}
+
+}
+
+.treadmill {
+	& .treadmill-unit {
+		position: relative;
+	}
+	& .widget-rp{
+		border-bottom: 1px solid #e3e3e3;
+		background-color:#f5f5f5;
+		@media (min-width:768px){
+    		width:38%;
+            float: left;
+            padding: 15px 0 10px;;
+    	}
+	}
+	.second-rp{
+    	display: none;
+    	@media (min-width:768px){
+    		display: block;
+    	}
+    }
+    .moveBx:not(:last-child){
+    	border-right: 2px solid #e3e3e3;
+    }
+}

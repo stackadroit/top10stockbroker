@@ -1,9 +1,11 @@
-import {PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup}  from '../library/global';
+import {PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill}  from '../library/global';
 import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
+import SimpleBar from 'simplebar';
 import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
+import WidgetMarket from '../components/widgetmarket';
 
 export default {
   init() {
@@ -47,6 +49,12 @@ export default {
 	  	  document.getElementById('mbf-search-wrap')
 	  	);
 
+		//widget market
+		ReactDOM.render(
+	  	  <WidgetMarket />,
+	  	  document.getElementById('marketRadar')
+	  	);
+
 		$(document)
         .on('loadReactSlickIcons', function (event, eventInfo) {
 	        ReactDOM.render( 
@@ -61,6 +69,37 @@ export default {
         	wpcf7.initForm( $form );
   		});
 
+        $(document)
+        .on('inittreadmill', function (event, eventInfo) {
+        	if (typeof SuperTreadmill !== 'undefined') {
+				SuperTreadmill.initialize();
+			}
+
+			$('#widget-first').startTreadmill({
+              runAfterPageLoad: true,
+              direction: "up",
+              speed: "slow",
+              viewable:1,
+              pause: false
+            });
+ 
+            $('#widget-second').startTreadmill({
+            	runAfterPageLoad: true,
+                direction: "up",
+                speed: "slow",
+                viewable:1,
+                pause: false
+            });
+
+  		});
+
+SuperTreadmill
+
+        $('.scrollbar').each(function() {
+        	new SimpleBar(this , { autoHide: true });
+        });
+        //var myElement = document.getElementById('simple-bar');
+		//
 	}).apply(this, [jQuery]);
 
   },

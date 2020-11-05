@@ -7,6 +7,7 @@
     <div class="wrap container" id="main-content" role="document">
       <div class="content row">
         <main class="main col-lg-9 order-lg-1">
+          @include('partials.ajax.widget-market')
           @yield('content')
         </main>
         @if (App\display_sidebar() && !$is_mobile)

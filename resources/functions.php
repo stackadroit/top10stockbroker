@@ -82,10 +82,10 @@ array_map(
     array_fill(0, 4, 'dirname')
 );
 Container::getInstance()
-    ->bindIf('config', function () {
-        return new Config([
-            'assets' => require dirname(__DIR__).'/config/assets.php',
-            'theme' => require dirname(__DIR__).'/config/theme.php',
-            'view' => require dirname(__DIR__).'/config/view.php',
-        ]);
-    }, true);
+->bindIf('config', function () {
+    return new Config([
+        'assets' => require dirname(__DIR__).'/config/assets.php',
+        'theme' => require dirname(__DIR__).'/config/theme.php',
+        'view' => require dirname(__DIR__).'/config/view.php',
+    ]);
+}, true);
