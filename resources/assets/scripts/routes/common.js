@@ -75,28 +75,10 @@ export default {
         	wpcf7.initForm( $form );
   		});
 
-
         // super tread mill
         if (typeof SuperTreadmill !== 'undefined') {
 			SuperTreadmill.initialize();
 		}
-
-		// $('#widget-first').startTreadmill({
-  //         runAfterPageLoad: true,
-  //         direction: "up",
-  //         speed: "slow",
-  //         viewable:1,
-  //         pause: false
-  //       });
-
-		// $('#widget-second').startTreadmill({
-  //       	runAfterPageLoad: true,
-  //           direction: "up",
-  //           speed: "slow",
-  //           viewable:1,
-  //           pause: false
-  //       });
-
 
         //scroll bar on sections
         $('.scrollbar').each(function() {

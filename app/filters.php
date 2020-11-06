@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Detection\MobileDetect;
 /**
  * Add <body> classes
  */
@@ -16,6 +17,12 @@ add_filter('body_class', function (array $classes) {
     /** Add class if sidebar is active */
     if (display_sidebar()) {
         $classes[] = 'sidebar-primary';
+    }
+
+    /** Check if it's mobile view */
+    $mobileDetect = new MobileDetect();
+    if ($mobileDetect->isMobile()) {
+        $classes[] = 'mobile';
     }
 
     /** Clean up class names for custom templates */

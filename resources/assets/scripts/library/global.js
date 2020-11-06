@@ -154,9 +154,9 @@ exports.theme = window.theme;
 	var PluginStickyWidget = {
 
 		defaults: {
-			stickyWidget: $('#site-sidebar .fixed-widget'),
+			stickyWidget: $('body:not(.mobile) #site-sidebar .fixed-widget'),
 			offset: 50,
-			brakePoint: 975,
+			brakePoint: 975, 
 		},
 
 		initialize: function(opts) {
@@ -185,6 +185,10 @@ exports.theme = window.theme;
 			//   	$('#site-sidebar').removeClass('no-sticky');
 			//   }
 			// });
+
+			if ( !self.options.stickyWidget.length ) {
+				return this;
+			}
 
 			// Distance from top of page to sidebar add in px
 			var widgetFromTop = self.options.stickyWidget.offset().top
@@ -637,118 +641,224 @@ exports.theme = window.theme;
       build: function() {
         var self    = this;
 
-         var running = false;
+         var name = "easyTicker",
+	        defaults = {
+	            direction: 'up',
+	            easing: 'swing',
+	            speed: 'slow',
+	            interval: 2000,
+	            height: 'auto',
+	            visible: 0,
+	            mousePause: true,
+	            controls: {
+	                up: '',
+	                down: '',
+	                toggle: '',
+	                playText: 'Play',
+	                stopText: 'Stop'
+	            },
+	            callbacks: {
+	                before: false,
+	                after: false
+	            }
+	        };
 
-		    // moves treadmill in the downward direction
-		    treadmillDown = function(obj, speed) {
-		                    setTimeout( function() {
-		                        if(running) {
-		                            var elm = obj.find('.treadmill-unit').last();
-		                            var elm2 = elm.clone();
-		                            var height = elm.height();
-		                            elm2.css('top', -height + 'px');
-		                            elm2.css('height', '0px');
-		                            elm2.prependTo(obj);
-		                            elm2.animate({
-		                                'top': '0px',
-		                                'height': height
-		                            }, 1000, function() { 
-		                                elm.remove();
-		                            });
+	    // Constructor
+	    function EasyTicker(el, options) {
+	        
+	        var s = this;
+	        
+	        s.opts = $.extend({}, defaults, options);
+	        s.elem = $(el);
+	        s.targ = $(el).children(':first-child');
+	        s.timer = 0;
+	        s.winFocus = 1;
+	        
+	        init();
+	        start();
+	        
+	        $([window, document]).off('focus').on('focus', function(){
+	            s.winFocus = 1;
+	        }).off('blur').on('blur', function(){
+	            s.winFocus = 0;
+	        });
+	        
+	        if(s.opts.mousePause){
+	            s.elem.mouseenter(function(){
+	                s.timerTemp = s.timer;
+	                stop();
+	            }).mouseleave(function(){
+	                if(s.timerTemp !== 0)
+	                    start();
+	            });
+	        }
+	        
+	        $(s.opts.controls.up).on('click', function(e){
+	            e.preventDefault();
+	            moveDir('up');
+	        });
+	        
+	        $(s.opts.controls.down).on('click', function(e){
+	            e.preventDefault();
+	            moveDir('down');
+	        });
+	        
+	        $(s.opts.controls.toggle).on('click', function(e){
+	            e.preventDefault();
+	            if(s.timer == 0) start();
+	            else stop();
+	        });
+	        
+	        function init(){
+	            
+	            s.elem.children().css('margin', 0).children().css('margin', 0);
+	            
+	            s.elem.css({
+	                position: 'relative',
+	                height: s.opts.height,
+	                overflow: 'hidden'
+	            });
+	            
+	            s.targ.css({
+	                'position': 'absolute',
+	                'margin': 0
+	            });
+	            
+	            s.heightTimer = setInterval(function(){
+	                adjustHeight(false);
+	            }, 100);
+	        
+	        }
+	        
+	        function start(){
+	            s.timer = setInterval(function(){
+	                if(s.winFocus == 1){
+	                    move(s.opts.direction);
+	                }
+	            }, s.opts.interval);
 
-		                            treadmillDown(obj, speed);
-		                        }
-		                    }, speed);
-		    },
+	            $(s.opts.controls.toggle).addClass('et-run').html(s.opts.controls.stopText);
+	            
+	        }
+	        
+	        function stop(){
+	            clearInterval(s.timer);
+	            s.timer = 0;
+	            $(s.opts.controls.toggle).removeClass('et-run').html(s.opts.controls.playText);
+	        }
+	        
+	        function move(dir){
+	            var sel, eq, appType;
 
-		    //moves treadmill in the upward direction
-		    treadmillUp = function(obj, speed) {
-		                    setTimeout( function() {
-		                        if(running) {
-		                            var elm = obj.find('.treadmill-unit').first();
-		                            var elm2 = elm.clone();
-		                            var height = elm.height();
-		                            elm.animate({
-		                                'height': '0px',
-		                                'top': -height
-		                            }, 1000, function() {
-		                                elm.remove();
-		                            });
-		                            elm2.appendTo(obj);
+	            if(!s.elem.is(':visible')) return;
 
-		                            treadmillUp(obj, speed);
-		                        }                   
-		                    }, speed);
-		    },
+	            if(dir == 'up'){
+	                sel = ':first-child';
+	                eq = '-=';
+	                appType = 'appendTo';
+	            }else{
+	                sel = ':last-child';
+	                eq = '+=';
+	                appType = 'prependTo';
+	            }
 
-		    // decides which type of treadmill to use
-		    selectTreadmill = function(direction, obj, speed) {
-		        if(direction == "down")
-		            treadmillDown(obj, speed);
-		        else
-		            treadmillUp(obj, speed);
-		    },
-		    
-		    // starts the treadmill
-		    $.fn.startTreadmill = function( options ) {
+	            var selChild = s.targ.children(sel);
+	            var height = selChild.outerHeight();
 
-		        var treadmillHeight = 0;
+	            if(typeof s.opts.callbacks.before === 'function'){
+	                s.opts.callbacks.before.call(s, s.targ, selChild);
+	            }
 
-		        var settings = $.extend({
-		            // These are the defaults.
-		            runAfterPageLoad: true,
-		            direction: "down",
-		            speed: "medium",
-		            viewable: 3,
-		            pause: false
-		        }, options );
+	            s.targ.stop(true, true).animate({
+	                'top': eq + height + 'px'
+	            }, s.opts.speed, s.opts.easing, function(){
+	                
+	                selChild.hide()[appType](s.targ).fadeIn();
+	                s.targ.css('top', 0);
+	                
+	                adjustHeight(true);
+	                
+	                if(typeof s.opts.callbacks.after === 'function'){
+	                    s.opts.callbacks.after.call(s, s.targ, selChild);
+	                }
 
-		        // Sets the height of Super Treadmill to viewable times height of the first unit else it is set to user-defined css value
-		        if(settings.viewable <= $(this).children().length && settings.viewable != 0)
-		            treadmillHeight = settings.viewable * $(this).find('.treadmill-wrap').first().height();
-		        else
-		            treadmillHeight = $(this).height();
+	            });
+	        }
+	        
+	        function moveDir(dir){
+	            stop();
+	            if(dir == 'up') move('up'); else move('down');
+	            // start();
+	        }
+	        
+	        function setFullHeight(){
+	            var height = 0;
+	            var tempDisplay = s.elem.css('display'); // Get the current el display value
+	            
+	            s.elem.css('display', 'block');
+	            
+	            s.targ.children().each(function(){
+	                height += $(this).outerHeight();
+	            });
+	            
+	            s.elem.css({
+	                'display': tempDisplay,
+	                'height': height
+	            });
+	        }
+	        
+	        function setVisibleHeight(animate){
+	            var wrapHeight = 0;
+	            var visibleItemClass = 'et-item-visible';
 
-		        $(this).css('height', treadmillHeight);
+	            s.targ.children().removeClass(visibleItemClass);
 
-		        
-		        // Super-Treadmill starts immediately after the page load
-		        if(settings.runAfterPageLoad)
-		            running = true;
+	            s.targ.children(':lt(' + s.opts.visible + ')').each(function(){
+	                wrapHeight += $(this).outerHeight();
+	                $(this).addClass(visibleItemClass);
+	            });
+	            
+	            if(animate){
+	                s.elem.stop(true, true).animate({height: wrapHeight}, s.opts.speed);
+	            }else{
+	                s.elem.css('height', wrapHeight);
+	            }
+	        }
+	        
+	        function adjustHeight(animate){
 
-		        
-		        // Setting the tread speed of the Super-Treadmill
-		        var treadSpeed = 3000;
+	            if(s.opts.height == 'auto'){
+	                if(s.opts.visible > 0){
+	                    setVisibleHeight(animate);
+	                }else{
+	                    setFullHeight();
+	                }
+	            }
 
-		        if(settings.speed == "slow" || settings.speed == "medium" || settings.speed == "fast" || $.isNumeric(settings.speed)) {
-		            if(settings.speed == "slow")
-		                treadSpeed = 5000; // 5 seconds
-		            else if(settings.speed == "fast")
-		                treadSpeed = 1200; // 1.2 seconds
-		            else if(settings.speed == "medium")
-		                treadSpeed = 3000; // 3 seconds
-		            else
-		                treadSpeed = settings.speed; // user-defined value
-		        }
-		        else
-		            $.error("Super-Treadmill can only use one of its predefined speeds: 'slow', 'medium', 'fast' or a number that you specify, which it later converts into milliseconds");
+	            if(!animate){
+	                clearInterval(s.heightTimer);
+	            }
 
-		        
-		        // Binding events to pause the Super-Treadmill during mouse enter and leave.
-		        if(settings.pause) {
-		            $(this).mouseenter( function() {
-		                running = !running;
-		            });
+	        }
+	        
+	        return {
+	            up: function(){ moveDir('up'); },
+	            down: function(){ moveDir('down'); },
+	            start: start,
+	            stop: stop,
+	            options: s.opts
+	        };
+	        
+	    }
 
-		            $(this).mouseleave( function() {
-		                running = !running;
-		                selectTreadmill(settings.direction, $(this).find('.treadmill-wrap'), treadSpeed);
-		            });
-		        }
-
-		        selectTreadmill(settings.direction, $(this).find('.treadmill-wrap'), treadSpeed);
-		        
-		    };
+	    // Attach the object to the DOM
+	    $.fn[name] = function(options) {
+	        return this.each(function () {
+	            if (!$.data(this, name)) {
+	                $.data(this, name, new EasyTicker(this, options));
+	            }
+	        });
+	    };
 		    
         return this;
       },
@@ -756,6 +866,12 @@ exports.theme = window.theme;
       events: function() {
         var self    = this,
           $document  = $(document);
+
+          $('#arrow-button-widget').on('click',function(e){
+	        e.preventDefault();
+	        $(this).toggleClass("open");
+	        $('.second-rp').toggle();
+	      });
 
         return this;
       },

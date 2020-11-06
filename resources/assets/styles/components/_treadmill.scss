@@ -91,6 +91,10 @@
 	        & svg{
 	        	color: #fff;
 	        }
+	        &.open i,
+	        &.open svg{
+	        	transform: rotate(180deg);
+	        }
 	        &:hover{
 	        	background-color: #e55025;
 	        	border: 1px solid #e55025;
