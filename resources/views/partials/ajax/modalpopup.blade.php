@@ -1,6 +1,6 @@
 <div class="container-fluid py-4 bull-bg">
     <div class="row">
-      <div class="col-md-6 p-4 left-section">
+      <div class="col-md-6 p-4 left-section show-desktop">
         @if(!$auto_status)
       	  {!! get_post_meta( $post_id, $form_left_content, true ) !!}
         @else

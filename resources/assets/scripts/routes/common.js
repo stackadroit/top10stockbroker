@@ -12,8 +12,8 @@ export default {
   init() {
     // Commom Plugins
 	(function($) {
-
-		'use strict';
+		//for mobile version for lazy loading
+		var process = true;
 
 		// Header
 		if (typeof Header !== 'undefined') {
@@ -44,30 +44,54 @@ export default {
 			ModalPopup.initialize();
 		}
 
-		//bell icon popup
-		ReactDOM.render(
-	  	  <MdfSearchWrap />,
-	  	  document.getElementById('mbf-search-wrap')
-	  	);
-
-		//widget market
-		ReactDOM.render(
-	  	  <WidgetMarket />,
-	  	  document.getElementById('marketRadarGold')
-	  	);
-
-		ReactDOM.render(
-	  	  <WidgetMarketTop />,
-	  	  document.getElementById('widget-second')
-	  	);
-
-		$(document)
-        .on('loadReactSlickIcons', function (event, eventInfo) {
-	        ReactDOM.render( 
-		  	  <QuickerSlider />,
-		  	  document.getElementById('list-slider-modal')
+		function loadReactComp(){
+			//bell icon popup
+			ReactDOM.render(
+		  	  <MdfSearchWrap />,
+		  	  document.getElementById('mbf-search-wrap')
 		  	);
-  		});
+
+			//widget market
+			ReactDOM.render(
+		  	  <WidgetMarket />,
+		  	  document.getElementById('widget-first')
+		  	);
+
+			ReactDOM.render(
+		  	  <WidgetMarketTop />,
+		  	  document.getElementById('widget-second')
+		  	);
+
+			//slick oncall load
+			$(document)
+	        .on('loadReactSlickIcons', function (event, eventInfo) {
+		        ReactDOM.render( 
+			  	  <QuickerSlider />,
+			  	  document.getElementById('list-slider-modal')
+			  	);
+	  		});
+	    }
+
+	    //only for mobile render
+	    function checkReactLoad(){
+	    	if ($( "body.mobile" ).length && process) {
+	    		loadReactComp();
+	    		process = false;
+	    	}
+	    }
+	    
+		if ($( "body.mobile" ).length) {
+	        $([window, document]).on('click', function(){
+	          if (process) {
+	            loadReactComp();
+	            process = false;
+	          }
+	        });
+	    }else{
+	      	loadReactComp();
+	    }
+
+	    setTimeout(checkReactLoad, 3000); 
 
         $(document)
         .on('reinitContactform', function (event, eventInfo) {

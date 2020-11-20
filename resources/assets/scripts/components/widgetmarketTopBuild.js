@@ -12,7 +12,7 @@ class WidgetMarketTopBuild extends React.Component {
             speed: 'slow',
             interval: 2000,
             height: '60',
-            visible: 0,
+            visible: 1,
             mousePause: true,
             controls: {
                 up: '',

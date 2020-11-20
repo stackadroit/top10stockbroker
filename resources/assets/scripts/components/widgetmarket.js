@@ -11,12 +11,20 @@ class WidgetMarket extends React.Component {
             isLoaded : false,
             lists : []          
         };
+        this.getData = this.getData.bind(this);
     }
 
     componentDidMount(){
     	this.getData();
+    	// set Interval
+    	this.interval = setInterval(this.getData, 100000);
     }
 
+    componentWillUnmount() {
+	    // Clear the interval right before component unmount
+	    clearInterval(this.interval);
+	}
+	
     getData(){
 
 		axios.get(global_vars.apiServerUrl + '/apiblock/widget-market')

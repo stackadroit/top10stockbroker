@@ -38,6 +38,21 @@ label {
 	height: 0;
 }
 
+.comment-form{
+	& > p{
+		@extend .form-group;
+		& select,
+		& textarea,
+		& input{
+			@extend .form-control;
+		}
+		& .submit{
+			@extend .btn;
+			@extend .btn-primary;
+		}
+	}
+}
+
 // Form Control
 .form-control {
 	border-color: rgba(0, 0, 0, 0.09);

@@ -516,7 +516,7 @@ exports.theme = window.theme;
         });
 
         var sumbmit_form_data= '';
-        $(document).on('click','.load-model .wpcf7-submit',function(e) {
+        $(document).on('click','.wpcf7-submit',function(e) {
         	e.preventDefault();
         	var Er = 0;
         	var form = $(this).closest('form.wpcf7-form');
@@ -576,7 +576,7 @@ exports.theme = window.theme;
           .on('show.bs.modal', function (event) {
         		var modelAction = $(event.relatedTarget); // Button that triggered the modal
         		var auto = false;
-        		if ($.isEmptyObject(modelAction)) {
+        		if (! modelAction.length) {
         			//console.log('auto');
           			modelAction = 'custom-hellobar';
           			auto = true;
@@ -597,9 +597,19 @@ exports.theme = window.theme;
           	modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
       		});
 
-	      var intervalID = setInterval( function(){ 
-	        //$rootnode.modal('show');
-	      },60000); 
+	      // var intervalID = setInterval( function(){ 
+	      //   $rootnode.modal('show');
+	      // },60000); 
+
+	      //auto open at 1 min
+	      setTimeout(function(){ 
+	        $rootnode.modal('show');
+	      }, 60000); 
+	      //auto open at 3 min
+	      setTimeout(function(){ 
+	        $rootnode.modal('show');
+	      }, 180000); 
+
           // clearInterval(intervalID); // Will clear the timer.
         return this;
       },
@@ -616,6 +626,24 @@ exports.theme = window.theme;
   var SuperTreadmill = {
 
       defaults: {
+      	direction: 'up',
+        easing: 'swing',
+        speed: 'slow',
+        interval: 2000,
+        height: 'auto',
+        visible: 0,
+        mousePause: true,
+        controls: {
+            up: '',
+            down: '',
+            toggle: '',
+            playText: 'Play',
+            stopText: 'Stop'
+        },
+        callbacks: {
+            before: false,
+            after: false
+        }
       },
 
       initialize: function(opts) {
@@ -639,36 +667,15 @@ exports.theme = window.theme;
       },
       
       build: function() {
-        var self    = this;
-
-         var name = "easyTicker",
-	        defaults = {
-	            direction: 'up',
-	            easing: 'swing',
-	            speed: 'slow',
-	            interval: 2000,
-	            height: 'auto',
-	            visible: 0,
-	            mousePause: true,
-	            controls: {
-	                up: '',
-	                down: '',
-	                toggle: '',
-	                playText: 'Play',
-	                stopText: 'Stop'
-	            },
-	            callbacks: {
-	                before: false,
-	                after: false
-	            }
-	        };
+        var self    = this,
+        name = "easyTicker";
 
 	    // Constructor
 	    function EasyTicker(el, options) {
 	        
 	        var s = this;
 	        
-	        s.opts = $.extend({}, defaults, options);
+	        s.opts = $.extend({}, this.options, options);
 	        s.elem = $(el);
 	        s.targ = $(el).children(':first-child');
 	        s.timer = 0;
@@ -680,7 +687,8 @@ exports.theme = window.theme;
 	        $([window, document]).off('focus').on('focus', function(){
 	            s.winFocus = 1;
 	        }).off('blur').on('blur', function(){
-	            s.winFocus = 0;
+	            // s.winFocus = 0; // stop when user is not active on page
+	            s.winFocus = 1;
 	        });
 	        
 	        if(s.opts.mousePause){

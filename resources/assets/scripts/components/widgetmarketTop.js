@@ -3,6 +3,7 @@ import axios from 'axios';
 import ContentLoader from "react-content-loader";
 import WidgetMarketTopBuild from './widgetmarketTopBuild';
 
+
 class WidgetMarketTop extends React.Component {
 	constructor(props){
         super(props);
@@ -11,11 +12,19 @@ class WidgetMarketTop extends React.Component {
             isLoaded : false,
             lists : []          
         };
+        this.getData = this.getData.bind(this);
     }
 
     componentDidMount(){
     	this.getData();
+    	// set Interval
+    	this.interval = setInterval(this.getData, 100000);
     }
+
+    componentWillUnmount() {
+	    // Clear the interval right before component unmount
+	    clearInterval(this.interval);
+	}
 
     getData(){
 
