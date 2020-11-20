@@ -28,6 +28,8 @@ import Router from './util/Router';
 import common from './routes/common';
 import home from './routes/home';
 import page from './routes/page';
+import demo from './routes/demo';
+// import shareMarketEducation from './routes/sharemarketeducation';
   
 //Shortcodes calculator
 import assetsToSalesRatioCalculator from './routes/shortcode-calculator/calculator01';
@@ -107,6 +109,8 @@ const routes = new Router({
   home,
   // Pages 
   page,
+  demo,
+  // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,
   assetsTurnoverRatioCalculator,

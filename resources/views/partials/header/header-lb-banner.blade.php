@@ -1,0 +1,1 @@
+{!! do_shortcode('[LB_BANNER_DISPLAY_SHORTCODE url="'.get_the_permalink().'"]') !!}

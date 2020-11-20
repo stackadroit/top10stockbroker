@@ -576,7 +576,7 @@ exports.theme = window.theme;
           .on('show.bs.modal', function (event) {
         		var modelAction = $(event.relatedTarget); // Button that triggered the modal
         		var auto = false;
-        		if ($.isEmptyObject(modelAction)) {
+        		if (! modelAction.length) {
         			//console.log('auto');
           			modelAction = 'custom-hellobar';
           			auto = true;
@@ -597,9 +597,19 @@ exports.theme = window.theme;
           	modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
       		});
 
-	      var intervalID = setInterval( function(){ 
-	        //$rootnode.modal('show');
-	      },60000); 
+	      // var intervalID = setInterval( function(){ 
+	      //   $rootnode.modal('show');
+	      // },60000); 
+
+	      //auto open at 1 min
+	      setTimeout(function(){ 
+	        $rootnode.modal('show');
+	      }, 60000); 
+	      //auto open at 3 min
+	      setTimeout(function(){ 
+	        $rootnode.modal('show');
+	      }, 180000); 
+
           // clearInterval(intervalID); // Will clear the timer.
         return this;
       },
@@ -616,6 +626,24 @@ exports.theme = window.theme;
   var SuperTreadmill = {
 
       defaults: {
+      	direction: 'up',
+        easing: 'swing',
+        speed: 'slow',
+        interval: 2000,
+        height: 'auto',
+        visible: 0,
+        mousePause: true,
+        controls: {
+            up: '',
+            down: '',
+            toggle: '',
+            playText: 'Play',
+            stopText: 'Stop'
+        },
+        callbacks: {
+            before: false,
+            after: false
+        }
       },
 
       initialize: function(opts) {
@@ -639,36 +667,15 @@ exports.theme = window.theme;
       },
       
       build: function() {
-        var self    = this;
-
-         var name = "easyTicker",
-	        defaults = {
-	            direction: 'up',
-	            easing: 'swing',
-	            speed: 'slow',
-	            interval: 2000,
-	            height: 'auto',
-	            visible: 0,
-	            mousePause: true,
-	            controls: {
-	                up: '',
-	                down: '',
-	                toggle: '',
-	                playText: 'Play',
-	                stopText: 'Stop'
-	            },
-	            callbacks: {
-	                before: false,
-	                after: false
-	            }
-	        };
+        var self    = this,
+        name = "easyTicker";
 
 	    // Constructor
 	    function EasyTicker(el, options) {
 	        
 	        var s = this;
 	        
-	        s.opts = $.extend({}, defaults, options);
+	        s.opts = $.extend({}, this.options, options);
 	        s.elem = $(el);
 	        s.targ = $(el).children(':first-child');
 	        s.timer = 0;
@@ -680,7 +687,8 @@ exports.theme = window.theme;
 	        $([window, document]).off('focus').on('focus', function(){
 	            s.winFocus = 1;
 	        }).off('blur').on('blur', function(){
-	            s.winFocus = 0;
+	            // s.winFocus = 0; // stop when user is not active on page
+	            s.winFocus = 1;
 	        });
 	        
 	        if(s.opts.mousePause){
@@ -878,5 +886,191 @@ exports.theme = window.theme;
 
     };
   exports.SuperTreadmill = SuperTreadmill;
+
+}).apply(this, [jQuery]);
+
+// Easy Tab
+(function($) {
+
+  var initialized = false;
+
+  var EasyTab = {
+ 		defaults: {
+		},
+
+		initialize: function(opts) {
+				if (initialized) {
+					return this;
+				}
+
+				initialized = true;
+
+				this
+					.setOptions(opts)
+					.events();
+
+				return this;
+		},
+
+		setOptions: function(opts) {
+				this.options = $.extend(true, {}, this.defaults, opts);
+
+				return this;
+		},
+		changeTab() {
+			alert('ddd');
+		    
+		},
+		events: function() {
+			var is_mobile=0;
+			if ($(window).width() < 700){
+		       is_mobile =1;
+		    }
+		    $(document).on('click','.see-all-btn',function(){
+				$(this).closest('.tab_content').find('.row').find('div').show();
+				$(this).hide();
+			});
+
+			$(document).on('click','.see-all-btn',function(){
+				$(this).closest('.tab_content').find('.row').find('div').show();
+				$(this).hide();
+			});
+			var els =".easy_tabs_container";
+			$(els+' .tab_content_wrapper div.tab_content:not(:first)').hide();
+				$(els+' .previous').hide();
+					$(els+' .tabs li > a').click(function (e) {
+	                    e.preventDefault();
+	                    // alert('dddddd');
+	                    if($(this).closest('li').is(':last-child')) {
+	                       $(this).closest('.easy_tabs_container').find('.next').hide();
+	                    } else {
+	                        $(this).closest('.easy_tabs_container').find('.next').show();
+	                    }
+
+	                    if ($(this).closest('li').is(':first-child')) {
+	                        $(this).closest('.easy_tabs_container').find('.previous').hide();
+	                    } else {
+	                        $(this).closest('.easy_tabs_container').find('.previous').show();
+	                    }
+
+	                    var position = $(this).closest('li').position();
+	                    //var corresponding = jQuery(this).data("id");
+	                    var corresponding = $(this).attr("href");
+	                    scroll = $(this).closest('.tabs').scrollLeft();
+	                    // alert(scroll+position.left);
+	                    $(this).closest('.tabs').animate({
+	                        'scrollLeft': scroll + position.left - 30
+	                    }, 200);
+
+	                    // hide all content divs
+	                    $(this).closest('.easy_tabs_container').find('.tab_content_wrapper').find('div.tab_content').hide();
+	                    // show content of corresponding tab
+	                    $(this).closest('.easy_tabs_container').find('div' + corresponding).toggle();
+	                    // remove active class from currently not active tabs
+	                    $(this).closest('.easy_tabs_container').find(' .tabs li').removeClass('active');
+	                    // add active class to clicked tab
+	                    $(this).closest('li').addClass('active');
+	                });
+ 
+	                $(els+' .next').click(function(e){
+	                    e.preventDefault();
+	                    $(this).closest('.easy_tabs_container').find('li.active').next('li').find('a').trigger('click');
+	                });
+	                $(els+' .previous').click(function(e){
+	                    e.preventDefault();
+	                    $(this).closest('.easy_tabs_container').find('li.active').prev('li').find('a').trigger('click');
+	                });
+	            // });
+			return this;
+		},
+	 
+    };
+  exports.EasyTab = EasyTab;
+
+}).apply(this, [jQuery]);
+
+// share-market-education
+(function($) {
+
+  var initialized = false;
+
+  var ShareMarketEducation = {
+ 		defaults: {
+		},
+
+		initialize: function(opts) {
+				if (initialized) {
+					return this;
+				}
+
+				initialized = true;
+
+				this
+					.setOptions(opts)
+					.events();
+
+				return this;
+		},
+
+		setOptions: function(opts) {
+				this.options = $.extend(true, {}, this.defaults, opts);
+
+				return this;
+		},
+		changeTab() {
+			
+		    
+		},
+		events: function() {
+			var is_mobile=0;
+			if (jQuery(window).width() < 700){
+		       is_mobile =1;
+		    }
+		    jQuery(document).on('click','.see-all-btn',function(){
+				jQuery(this).closest('.tab_content').find('.row').find('div').show();
+				jQuery(this).hide();
+			});
+
+			var els ="#easy_tabs_container_vertical_wrap_1";
+
+			$(els+" .tab_content").each(function(i) {
+			    $(this).find('.v_tab_content:not(:first)').hide();
+			    if ($(window).width() >= 781) {
+	                $(this).find(" .v_tab_content:nth-child(2)").show();
+	            }
+	            $(this).find("ul.v_tabs li").click(function () {
+                    	$(this).closest('.v_tabs_wrapper').find('.v_tab_content').hide();
+                        var activeTab = jQuery(this).attr("rel");
+                        $(this).closest('.v_tabs_wrapper').find("#" + activeTab).fadeIn();
+                        $(this).closest('.v_tabs_wrapper').find("ul.v_tabs li").removeClass("v_active");
+                        $(this).addClass("v_active");
+                        $(this).closest('.v_tabs_wrapper').find(".v_tab_drawer_heading").removeClass("d_active");
+                        $(this).closest('.v_tabs_wrapper').find(" .v_tab_drawer_heading[rel^='" + activeTab + "']").addClass("d_active");
+                });
+                /* if in tab mode */
+	          	$(this).find(".v_tab_container").css("min-height", function () {
+                  	return $(els+" .v_tabs").outerHeight() + 50;
+              	}); 
+
+              	 /* if in drawer mode */
+                $(this).find(".v_tab_drawer_heading").click(function () {
+                  	$(this).closest('.v_tab_container').find('.v_tab_content').hide();
+                 	if($(this).hasClass("d_active")){
+                      	$(this).removeClass("d_active");
+                   	}else{
+                    	var d_activeTab = $(this).attr("rel");
+                      	$(this).closest('.v_tab_container').find("#" + d_activeTab).fadeIn();
+                     	$(this).closest('.v_tab_container').find(".v_tab_drawer_heading").removeClass("d_active");
+                       	$(this).addClass("d_active");
+                      	$(this).closest('.v_tab_container').find("ul.v_tabs li").removeClass("v_active");
+                       	$(this).closest('.v_tab_container').find(" ul.v_tabs li[rel^='" + d_activeTab + "']").addClass("v_active");
+                  	}
+            	});
+			});
+			return this;
+		},
+	 
+    };
+  exports.ShareMarketEducation = ShareMarketEducation;
 
 }).apply(this, [jQuery]);

@@ -12,7 +12,7 @@ class WidgetMarketBuild extends React.Component {
             speed: 'slow',
             interval: 2000,
             height: '60',
-            visible: 0,
+            visible: 1,
             mousePause: true,
             controls: {
                 up: '',
@@ -32,7 +32,7 @@ class WidgetMarketBuild extends React.Component {
         return (
          <div id="tradmill-widget">
             <div style={{width: "100%"}}>
-                <div className="treadmill-unit">
+                <div className="treadmill-unit overflow-hidden">
                         <div className="moveBx w-50 float-left px-1">
                             <a target="_new" href={ this.props.widgetdata.siteUrl + "/share-market/nifty-50/"} className="bl_12 nm_a">
                                NIFTY 50
@@ -68,7 +68,7 @@ class WidgetMarketBuild extends React.Component {
                             </div>
                         </div>
                 </div>
-                <div className="treadmill-unit"> 
+                <div className="treadmill-unit overflow-hidden"> 
                     <div className="moveBx w-50 float-left px-1">
                         <a target="_new" href={ this.props.widgetdata.siteUrl + "/gold-rate/"} className="bl_12 nm_a">
                            Gold Rate (10 Gm)
@@ -109,5 +109,4 @@ class WidgetMarketBuild extends React.Component {
         );
 	}
 }
-
 export default WidgetMarketBuild;

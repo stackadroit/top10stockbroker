@@ -1,6 +1,6 @@
 <div class="container-fluid py-4 bull-bg">
     <div class="row">
-      <div class="col-md-6 p-4 left-section">
+      <div class="col-md-6 p-4 left-section show-desktop">
         @if(!$auto_status)
           <h3>
             <span class="red">Fill your details</span> & get all exclusive offers. <span class="red">Hurry!!!</span>

@@ -9,7 +9,7 @@
     ]
   },
   "publicPath": "/wp-content/themes/top10stockbroker",
-  "devUrl": "http://top10stockbroker.localhost",
+  "devUrl": "http://top10stockbroker.localhost/",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
   "watch": [

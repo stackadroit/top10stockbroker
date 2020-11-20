@@ -1,4 +1,4 @@
-import {PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill}  from '../library/global';
+import {PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation}  from '../library/global';
 import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
@@ -12,12 +12,20 @@ export default {
   init() {
     // Commom Plugins
 	(function($) {
-
-		'use strict';
+		//for mobile version for lazy loading
+		var process = true;
 
 		// Header
 		if (typeof Header !== 'undefined') {
 			Header.initialize();
+		}
+		// Easy tab
+		if (typeof EasyTab !== 'undefined') {
+			EasyTab.initialize();
+		}
+		// Easy tab
+		if (typeof ShareMarketEducation !== 'undefined') {
+			ShareMarketEducation.initialize();
 		}
 
 		// Navigation.
@@ -44,30 +52,54 @@ export default {
 			ModalPopup.initialize();
 		}
 
-		//bell icon popup
-		ReactDOM.render(
-	  	  <MdfSearchWrap />,
-	  	  document.getElementById('mbf-search-wrap')
-	  	);
-
-		//widget market
-		ReactDOM.render(
-	  	  <WidgetMarket />,
-	  	  document.getElementById('marketRadarGold')
-	  	);
-
-		ReactDOM.render(
-	  	  <WidgetMarketTop />,
-	  	  document.getElementById('widget-second')
-	  	);
-
-		$(document)
-        .on('loadReactSlickIcons', function (event, eventInfo) {
-	        ReactDOM.render( 
-		  	  <QuickerSlider />,
-		  	  document.getElementById('list-slider-modal')
+		function loadReactComp(){
+			//bell icon popup
+			ReactDOM.render(
+		  	  <MdfSearchWrap />,
+		  	  document.getElementById('mbf-search-wrap')
 		  	);
-  		});
+
+			//widget market
+			ReactDOM.render(
+		  	  <WidgetMarket />,
+		  	  document.getElementById('widget-first')
+		  	);
+
+			ReactDOM.render(
+		  	  <WidgetMarketTop />,
+		  	  document.getElementById('widget-second')
+		  	);
+
+			//slick oncall load
+			$(document)
+	        .on('loadReactSlickIcons', function (event, eventInfo) {
+		        ReactDOM.render( 
+			  	  <QuickerSlider />,
+			  	  document.getElementById('list-slider-modal')
+			  	);
+	  		});
+	    }
+
+	    //only for mobile render
+	    function checkReactLoad(){
+	    	if ($( "body.mobile" ).length && process) {
+	    		loadReactComp();
+	    		process = false;
+	    	}
+	    }
+	    
+		if ($( "body.mobile" ).length) {
+	        $([window, document]).on('click', function(){
+	          if (process) {
+	            loadReactComp();
+	            process = false;
+	          }
+	        });
+	    }else{
+	      	loadReactComp();
+	    }
+
+	    setTimeout(checkReactLoad, 3000); 
 
         $(document)
         .on('reinitContactform', function (event, eventInfo) {
