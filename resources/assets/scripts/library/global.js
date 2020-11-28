@@ -516,7 +516,7 @@ exports.theme = window.theme;
         });
 
         var sumbmit_form_data= '';
-        $(document).on('click','.load-model .wpcf7-submit',function(e) {
+        $(document).on('click','.wpcf7-submit',function(e) {
         	e.preventDefault();
         	var Er = 0;
         	var form = $(this).closest('form.wpcf7-form');
