@@ -19,6 +19,7 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     $localize_script_vars = array( 
+        'site_url' => site_url('/'),
         'ajax_url' => admin_url( 'admin-ajax.php' ),
         'ajax_nonce' => wp_create_nonce('gloabltop10stockbroker'),
     );

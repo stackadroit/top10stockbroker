@@ -1421,3 +1421,42 @@ add_shortcode('ShareMarketEducation', function ($atts){
     $template = 'shortcodes.share_market_education';
     return \App\template($template, $data);
 });
+
+add_shortcode('broker_city_search', function ($atts){ 
+
+    $post_id = @$atts['id'];
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+    ), $atts);
+    $brokers = get_terms( 'brokers', array(
+        'hide_empty' => true,
+        'parent' => 0   
+    ) );
+    $locations = get_terms( 'locations', array(
+        'hide_empty' => true,
+    ));
+    // Set the template we're going to use for the Shortcode
+
+    $data['ele_permalink'] = get_the_permalink();
+    $data['ele_title'] = get_the_title();
+    $data['brokers'] = $brokers;
+    $data['locations'] = $locations;
+    
+    // Echo the shortcode blade template
+    $template = 'shortcodes.broker_city_search';
+    return \App\template($template, $data);
+});
+add_shortcode('location_search_pincode', function ($atts){ 
+    $atts = array_change_key_case((array)$atts, CASE_LOWER);
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'city' => ''
+    ), $atts);
+     
+    $data['ele_permalink'] = get_the_permalink();
+    $data['ele_title'] = get_the_title();
+     
+    // Echo the shortcode blade template
+    $template = 'shortcodes.location_search_pincode';
+    return \App\template($template, $data);
+});

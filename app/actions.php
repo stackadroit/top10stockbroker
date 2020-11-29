@@ -312,3 +312,50 @@ function modal_popup() {
     echo \App\template($template, $data);
     die();
 }
+
+
+
+
+add_action("wp_ajax__load_city_list", function (){
+    $parent_term_id =($_REQUEST['parent_term_id'])?$_REQUEST['parent_term_id']:0;
+    $locationIds= get_term_meta($parent_term_id, 'broker_locations_ids',true);
+    $locationsHtml ='<option data-slug="" value="">Select City</option>';
+    if($locationIds){
+        $locations = get_terms( 'locations', array(
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'hide_empty' => true,
+            'include' =>(is_array($locationIds))?$locationIds:explode(',', $locationIds),
+        ));
+        if($locations){
+            foreach ($locations as $key => $value) {
+                $locationsHtml.='<option data-slug="'.$value->slug.'" value="'.$value->term_id.'">'.$value->name.'</option>';
+            }
+        }
+    }
+    echo $locationsHtml;
+    exit;
+});
+add_action("wp_ajax_nopriv__load_city_list", function (){
+    $parent_term_id =($_REQUEST['parent_term_id'])?$_REQUEST['parent_term_id']:0;
+    $locationIds= get_term_meta($parent_term_id, 'broker_locations_ids',true);
+    $locationsHtml ='<option data-slug="" value="">Select City</option>';
+    if($locationIds){
+        $locations = get_terms( 'locations', array(
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'hide_empty' => true,
+            'include' =>(is_array($locationIds))?$locationIds:explode(',', $locationIds),
+        ));
+        if($locations){
+            foreach ($locations as $key => $value) {
+                $locationsHtml.='<option data-slug="'.$value->slug.'" value="'.$value->term_id.'">'.$value->name.'</option>';
+            }
+        }
+    }
+    echo $locationsHtml;
+    exit;
+});
+
+
+

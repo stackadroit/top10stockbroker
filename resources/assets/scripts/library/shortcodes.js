@@ -307,3 +307,129 @@
   exports.GoldRateComparison = GoldRateComparison;
 
 }).apply(this, [jQuery]);
+
+// BrokerCitySearch
+(function($) {
+
+  var initialized = false;
+
+  var BrokerCitySearch = {
+      defaults: {
+      },
+      initialize: function($wrapper, opts) {
+        if (initialized) {
+          return this;
+        }
+
+        initialized = true;
+
+        this
+          .setOptions(opts)
+          .events(); 
+
+        return this;
+      },
+
+      setOptions: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts);
+
+        return this;
+      },
+      
+      ajax: function(parent_term_id){
+        var self    = this; 
+        $.ajax({
+              cache: false,
+              type:"POST",
+              dataType: "html",
+              // url: 'http://top10stockbroker.localhost/wp-admin/admin-ajax.php',
+              url: global_vars.ajax_url,
+              data : {
+                      action : '_load_city_list',
+                      parent_term_id : parent_term_id
+                  },
+            success: function(response){
+                jQuery('#searched_city').html(response);
+            },
+            error: function(response){
+              console.log('City list login issue.');
+            }
+        });
+
+          return this;
+      },
+
+      events: function() {
+        var self    = this,
+          $rootnode  = $(document);
+          $rootnode
+          .on( 'change', '#searched_broker', function(e) {
+              e.preventDefault();
+              var parent_term_id=$(this).val();
+              if(parent_term_id){
+                jQuery('#searched_city').html('');
+                 self.ajax(parent_term_id);
+                return false;
+              }else{
+                jQuery('#searched_city').html('');
+              }
+          });
+          $rootnode.on('click','#search_branch_by_broker_city',function(e){
+              // alert('d');
+               e.preventDefault();
+              var broker = jQuery(this).closest("#broker-search-wrap").find('#searched_broker').find(':selected').data('slug');
+              //alert(broker);
+              var city = jQuery(this).closest("#broker-search-wrap").find('#searched_city').find(':selected').data('slug');
+              //alert(city);
+               if(broker == '' || broker == '0'){
+                alert('Please select broker from list.');
+                return false;
+               }
+               if(city == '' || city == '0'){
+                alert('Please select city from list.');
+                return false;
+               }
+               if(broker && city){
+                window.location.href =global_vars.site_url+broker+'-branch-office/'+broker+'-'+city;
+               }
+            });
+
+          var cBroker=$('#cBroker').val();
+             
+          if(cBroker){
+            //$('#idUkuran').val(11).change();
+            //$('#searched_broker').val(cBroker).change();;
+            //self.ajax(cBroker);
+            $('#searched_broker  option[value="'+cBroker+'"]').prop("selected", true);
+             
+          }
+
+          // For Single page
+          $rootnode.on('click','#location-search_id',function(){
+                $('#loadMore').hide();
+                var locpin = $.trim(jQuery('input[name="spin"]').val());
+                if(locpin ==''){
+                  alert('Please enter pincode which you want to search.')
+                }else{
+                  $('table.branch-loc-table').hide();
+                  $('table[class*='+locpin+']').show();
+                }
+            });
+
+            $rootnode.on('click','#location-search_clear', function(e){
+              window.location.reload();
+            });
+
+            $rootnode.on('click','.custom-hellobar a',  function(e){
+              e.preventDefault();
+              $('.modal').show();
+            });
+
+
+        return this;
+      },
+
+    };
+  exports.BrokerCitySearch = BrokerCitySearch;
+
+}).apply(this, [jQuery]);

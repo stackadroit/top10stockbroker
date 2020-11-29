@@ -100,6 +100,7 @@ import zeroCouponBondValueCalculator from './routes/shortcode-calculator/calcula
 //Shortcodes
 import quickerslider from './routes/shortcodes/quickerslider';
 import GoldInvestmentCalculator from './routes/shortcodes/goldinvestmentcalculator';
+import singleBranches from './routes/shortcodes/broker_city_search';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -110,6 +111,9 @@ const routes = new Router({
   // Pages 
   page,
   demo,
+  
+   // Shotcodes branch
+  singleBranches,
   // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,
