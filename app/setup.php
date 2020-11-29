@@ -239,7 +239,20 @@ add_filter('top10stockbroker_cpt', function ($array) {
                             'menu_icon'           => 'dashicons-tagcloud',
                         )
             );
-
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'News', 'top10stockbroker' ),
+                            __( 'News', 'top10stockbroker' ),
+                            'news'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => true,
+                            'menu_position' => 5,
+                            'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                            'taxonomies'=> array( 'category' ),
+                        )
+            );
 
     return $array;
 

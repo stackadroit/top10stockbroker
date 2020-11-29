@@ -467,3 +467,19 @@ select{
     background-color: $color-value;
   }
 }
+
+/**
+For News ctp
+*/
+.more-link, .no-post-thumbnail {
+    background-color: #e55025;
+    display: inline-block;
+    border-radius: 3px;
+}
+.more-link span {
+    font-size: 12px;
+    padding: 2px 10px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+}

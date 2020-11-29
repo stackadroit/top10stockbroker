@@ -110,4 +110,8 @@ add_filter('top10stockbroker/display_sidebar', function ($display) {
     ]);
     return $display;
 });
-
+ 
+add_filter('excerpt_more', function ($more) {
+    global $post;
+    return '<br/> <a class="more-link" href="'. get_permalink($post->ID) . '"> <span>Read more</span></a>';
+});
