@@ -254,8 +254,63 @@ add_filter('top10stockbroker_cpt', function ($array) {
                             'taxonomies'=> array( 'category' ),
                         )
             );
-
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Stock Broker', 'top10stockbroker' ),
+                            __( 'Stock Brokers', 'top10stockbroker' ),
+                            'stock-brokers'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
     return $array;
 
 }, 10, 1);
+
+
+add_action( 'init', 
+
+    function () {
+
+        $labels = array(
+            'name'                       => _x( 'Zones', 'Taxonomy General Name', 'snt' ),
+            'singular_name'              => _x( 'Zone', 'Taxonomy Singular Name', 'snt' ),
+            'menu_name'                  => __( 'Zones', 'snt' ),
+            'all_items'                  => __( 'All Zones', 'snt' ),
+            'parent_item'                => __( 'Parent Zone', 'snt' ),
+            'parent_item_colon'          => __( 'Parent Zone:', 'snt' ),
+            'new_item_name'              => __( 'New Zone Name', 'snt' ),
+            'add_new_item'               => __( 'Add New Zone', 'snt' ),
+            'edit_item'                  => __( 'Edit Zone', 'snt' ),
+            'update_item'                => __( 'Update Zone', 'snt' ),
+            'view_item'                  => __( 'View Zone', 'snt' ),
+            'separate_items_with_commas' => __( 'Separate items with commas', 'snt' ),
+            'add_or_remove_items'        => __( 'Add or remove items', 'snt' ),
+            'choose_from_most_used'      => __( 'Choose from the most used', 'snt' ),
+            'popular_items'              => __( 'Popular Zones', 'snt' ),
+            'search_items'               => __( 'Search Zones', 'snt' ),
+            'not_found'                  => __( 'Not Found', 'snt' ),
+            'no_terms'                   => __( 'No Zones', 'snt' ),
+            'items_list'                 => __( 'Zones list', 'snt' ),
+            'items_list_navigation'      => __( 'Zones list navigation', 'snt' ),
+        );
+        $args = array(
+            'labels'                     => $labels,
+            'hierarchical'               => true,
+            'public'                     => true,
+            'show_ui'                    => true,
+            'show_admin_column'          => true,
+            'show_in_nav_menus'          => true,
+            'show_tagcloud'              => true,
+            // 'rewrite'                    => array('slug' => 'resources')
+        );
+        register_taxonomy( 'zones', array( 'stock-brokers' ), $args );
+
+    }
+    , 0 );
 

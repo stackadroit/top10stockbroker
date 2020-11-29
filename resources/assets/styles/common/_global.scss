@@ -494,3 +494,14 @@ For Branches
     padding: 20px 15px 32px 15px;
     margin-bottom: 15px;
 }
+
+.custom-hellobar a {
+    display: inline-block;
+    line-height: inherit;
+    margin-left: 10px;
+    background-color: green;
+    padding: 5px 10px;
+    color: #fff !important;
+    font-family: 'OpenSans-Semibold',serif;
+    cursor: pointer;
+}
