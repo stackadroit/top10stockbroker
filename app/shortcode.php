@@ -1422,6 +1422,10 @@ add_shortcode('ShareMarketEducation', function ($atts){
     return \App\template($template, $data);
 });
 
+
+/**
+*   Shortcode form Branches search based on City.
+*/
 add_shortcode('broker_city_search', function ($atts){ 
 
     $post_id = @$atts['id'];
@@ -1446,6 +1450,10 @@ add_shortcode('broker_city_search', function ($atts){
     $template = 'shortcodes.broker_city_search';
     return \App\template($template, $data);
 });
+
+/**
+*   Shortcode form Branches search based on Pincode.
+*/
 add_shortcode('location_search_pincode', function ($atts){ 
     $atts = array_change_key_case((array)$atts, CASE_LOWER);
     // Extract the shortcode attributes
@@ -1489,5 +1497,36 @@ add_shortcode('STOCKBROKERSLINKS', function ($atts){
      
     // Echo the shortcode blade template
     $template = 'shortcodes.stock-brokers-links';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form Sub Broker Internale linking.
+*/
+add_shortcode('SUBBROKERSLINKS', function ($atts){ 
+    $data = shortcode_atts( array(
+        'zone' => '',
+    ), $atts, 'bartag' );
+    $posts_array = get_posts(
+        array(
+            'posts_per_page' =>-1,
+            'post_type' => 'sub-broker',
+            'order' => 'ASC',
+            'orderby' => 'title',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'sub-broker-zones',
+                    'field' => 'slug',
+                    'terms' => $data['zone'],
+                )
+            )
+        )
+    ); 
+    $data['ele_permalink'] = get_the_permalink();
+    $data['ele_title'] = get_the_title();
+    $data['posts_array'] = $posts_array ;
+     
+    // Echo the shortcode blade template
+    $template = 'shortcodes.sub-brokers-links';
     return \App\template($template, $data);
 });
