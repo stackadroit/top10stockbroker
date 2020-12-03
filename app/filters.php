@@ -3,6 +3,7 @@
 namespace App;
 
 use Detection\MobileDetect;
+
 /**
  * Add <body> classes
  */
@@ -114,4 +115,19 @@ add_filter('top10stockbroker/display_sidebar', function ($display) {
 add_filter('excerpt_more', function ($more) {
     global $post;
     return '<br/> <a class="more-link" href="'. get_permalink($post->ID) . '"> <span>Read more</span></a>';
+});
+
+/**
+ * Modify Post Type Content
+ */
+add_filter('the_content', function ($content) {
+    global $post;
+    
+    if ((is_single() && is_singular('brokerage-calculator')) && in_the_loop() && is_main_query()) :
+
+        $getAfterContent    =   get_post_meta($post->ID, "after_content_brokerage_calculator", true) ;
+        $content            =   $content.'<div class="tsb-brokerage-calculator-after-content">'.$getAfterContent.'</div>';
+    
+    endif;
+    return $content;
 });

@@ -138,12 +138,12 @@ function display_sidebar()
 }
 
 /**
- * 
+ *
  * @return array
  */
 function get_GoldCityStateLists()
 {
-     $cities =array(
+    $cities =array(
         '52274' =>'india',
         '52365' =>'hyderabad',
         '52361' =>'patna',
@@ -212,16 +212,16 @@ function get_GoldCityStateLists()
         '52312' =>'haryana',
     );
      
-  return $cities;
+    return $cities;
 }
 
 /**
- * 
+ *
  * @return array
  */
 function get_SilverCityStateLists()
 {
-     $cities =array(
+    $cities =array(
         '52274' =>'india',
         '52365' =>'hyderabad',
         '52361' =>'patna',
@@ -290,5 +290,15 @@ function get_SilverCityStateLists()
         '52312' =>'haryana',
     );
      
-  return $cities;
+    return $cities;
+}
+
+/**
+ * Debug Function
+ */
+function _dd($data)
+{
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
 }

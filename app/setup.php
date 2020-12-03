@@ -18,38 +18,37 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('comment-reply');
     }
 
-    $localize_script_vars = array( 
+    $localize_script_vars = array(
         'site_url' => site_url('/'),
-        'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'ajax_url' => admin_url('admin-ajax.php'),
         'ajax_nonce' => wp_create_nonce('gloabltop10stockbroker'),
     );
     //set api server url
-    if ( WP_DEBUG ) {
+    if (WP_DEBUG) {
         $localize_script_vars['apiServerUrl'] = 'http://127.0.0.1:8000';
-    }else{
+    } else {
         $localize_script_vars['apiServerUrl'] = 'https://api.top10stockbroker.com';
     }
 
-    if ( defined( 'WPCF7_LOAD_JS' ) ) {
+    if (defined('WPCF7_LOAD_JS')) {
         $wpcf7 = array(
             'apiSettings' => array(
-                'root' => esc_url_raw( rest_url( 'contact-form-7/v1' ) ),
+                'root' => esc_url_raw(rest_url('contact-form-7/v1')),
                 'namespace' => 'contact-form-7/v1',
             ),
         );
 
-        if ( defined( 'WP_CACHE' ) and WP_CACHE ) {
+        if (defined('WP_CACHE') and WP_CACHE) {
             $wpcf7['cached'] = 1;
         }
 
-        if ( wpcf7_support_html5_fallback() ) {
+        if (wpcf7_support_html5_fallback()) {
             $wpcf7['jqueryUi'] = 1;
         }
         $localize_script_vars['wpcf7'] = $wpcf7;
     }
 
-    wp_localize_script( 'top10stockbroker/main.js', 'global_vars', $localize_script_vars);
-
+    wp_localize_script('top10stockbroker/main.js', 'global_vars', $localize_script_vars);
 }, 100);
 
 /**
@@ -183,29 +182,28 @@ add_action('after_setup_theme', function () {
  * Register CPT
  */
 add_filter('top10stockbroker_cpt', function ($array) {
-    
-    $array[] = array( 
-                'cpt' => array( 
-                            __( 'Share Market', 'top10stockbroker' ),
-                            __( 'Share Markets', 'top10stockbroker' ),
+    $array[] = array(
+                'cpt' => array(
+                            __('Share Market', 'top10stockbroker'),
+                            __('Share Markets', 'top10stockbroker'),
                             'share-markets'
                         ),
-                'arg_overrides' => array( 
+                'arg_overrides' => array(
                             'has_archive' => false,
                             'menu_position' => 5,
-                            'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail' ), 
+                            'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
                             'menu_icon'           => 'dashicons-tagcloud',
                             // 'register_meta_box_cb' => '_pa1_add_share_market_indices_code',
                         )
             );
 
-    $array[] = array( 
-                'cpt' => array( 
-                            __( 'Share Price', 'top10stockbroker' ),
-                            __( 'Share Prices', 'top10stockbroker' ),
+    $array[] = array(
+                'cpt' => array(
+                            __('Share Price', 'top10stockbroker'),
+                            __('Share Prices', 'top10stockbroker'),
                             'share-price'
                         ),
-                'arg_overrides' => array( 
+                'arg_overrides' => array(
                             'has_archive' => false,
                             'menu_position' => 5,
                             'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
@@ -213,13 +211,13 @@ add_filter('top10stockbroker_cpt', function ($array) {
                         )
             );
 
-    $array[] = array( 
-                'cpt' => array( 
-                            __( 'Option Chain', 'top10stockbroker' ),
-                            __( 'Option Chains', 'top10stockbroker' ),
+    $array[] = array(
+                'cpt' => array(
+                            __('Option Chain', 'top10stockbroker'),
+                            __('Option Chains', 'top10stockbroker'),
                             'option-chain'
                         ),
-                'arg_overrides' => array( 
+                'arg_overrides' => array(
                             'has_archive' => false,
                             'menu_position' => 5,
                             'supports' => array('title','thumbnail', 'editor'),
@@ -227,26 +225,26 @@ add_filter('top10stockbroker_cpt', function ($array) {
                         )
             );
 
-    $array[] = array( 
-                'cpt' => array( 
-                            __( 'Futures', 'top10stockbroker' ),
-                            __( 'Futuress', 'top10stockbroker' ),
+    $array[] = array(
+                'cpt' => array(
+                            __('Futures', 'top10stockbroker'),
+                            __('Futuress', 'top10stockbroker'),
                             'futures'
                         ),
-                'arg_overrides' => array( 
+                'arg_overrides' => array(
                             'has_archive' => false,
                             'menu_position' => 5,
                             'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
                             'menu_icon'           => 'dashicons-tagcloud',
                         )
             );
-    $array[] = array( 
-                'cpt' => array( 
-                            __( 'News', 'top10stockbroker' ),
-                            __( 'News', 'top10stockbroker' ),
+    $array[] = array(
+                'cpt' => array(
+                            __('News', 'top10stockbroker'),
+                            __('News', 'top10stockbroker'),
                             'news'
                         ),
-                'arg_overrides' => array( 
+                'arg_overrides' => array(
                             'has_archive' => true,
                             'menu_position' => 5,
                             'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
@@ -254,13 +252,13 @@ add_filter('top10stockbroker_cpt', function ($array) {
                             'taxonomies'=> array( 'category' ),
                         )
             );
-    $array[] = array( 
-                'cpt' => array( 
-                            __( 'Stock Broker', 'top10stockbroker' ),
-                            __( 'Stock Brokers', 'top10stockbroker' ),
+    $array[] = array(
+                'cpt' => array(
+                            __('Stock Broker', 'top10stockbroker'),
+                            __('Stock Brokers', 'top10stockbroker'),
                             'stock-brokers'
                         ),
-                'arg_overrides' => array( 
+                'arg_overrides' => array(
                             'has_archive' => false,
                             'menu_position' => 5,
                            'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
@@ -268,36 +266,91 @@ add_filter('top10stockbroker_cpt', function ($array) {
                            
                         )
             );
-    return $array;
+    $array[] = array(
+            'cpt' => array(
+                        __('BK State', 'top10stockbroker'),
+                        __('BK States', 'top10stockbroker'),
+                        'state'
+                    ),
+            'arg_overrides' => array(
+                        'has_archive' => false,
+                        'menu_position' => 5,
+                        'supports' => array('title', 'editor' ,'comments'),
+                        'menu_icon' => 'dashicons-tag',
+                        
+                    )
+        );
+    $array[] = array(
+            'cpt' => array(
+                        __('Brokerage Calculator', 'top10stockbroker'),
+                        __('Brokerage Calculator', 'top10stockbroker'),
+                        'brokerage-calculator'
+                    ),
+            'arg_overrides' => array(
+                        'has_archive' => true,
+                        'menu_position' => 5,
+                        'supports' => array('title', 'editor' ,'comments'),
+                        'menu_icon' => 'dashicons-tag',
+                        
+                    )
+        );
+    $array[] = array(
+            'cpt' => array(
+                        __('Brokerage Comparison', 'top10stockbroker'),
+                        __('Brokerage Comparisons', 'top10stockbroker'),
+                        'broker-comparison'
+                    ),
+            'arg_overrides' => array(
+                        'has_archive' => true,
+                        'menu_position' => 5,
+                        'supports' => array('title', 'editor', 'thumbnail','taxonomies','comments'),
+                        'menu_icon' => 'dashicons-tag',
+                        
+                    )
+        );
+    $array[] = array(
+            'cpt' => array(
+                        __('Margin Calculator', 'top10stockbroker'),
+                        __('Margin Calculator', 'top10stockbroker'),
+                        'margin-calculator'
+                    ),
+            'arg_overrides' => array(
+                        'has_archive' => true,
+                        'menu_position' => 5,
+                        'supports' => array('title', 'editor', 'thumbnail','taxonomies','comments'),
+                        'menu_icon' => 'dashicons-tag',
+                        
+                    )
+        );      
 
+    return $array;
 }, 10, 1);
 
 
-add_action( 'init', 
-
+add_action(
+    'init',
     function () {
-
         $labels = array(
-            'name'                       => _x( 'Zones', 'Taxonomy General Name', 'snt' ),
-            'singular_name'              => _x( 'Zone', 'Taxonomy Singular Name', 'snt' ),
-            'menu_name'                  => __( 'Zones', 'snt' ),
-            'all_items'                  => __( 'All Zones', 'snt' ),
-            'parent_item'                => __( 'Parent Zone', 'snt' ),
-            'parent_item_colon'          => __( 'Parent Zone:', 'snt' ),
-            'new_item_name'              => __( 'New Zone Name', 'snt' ),
-            'add_new_item'               => __( 'Add New Zone', 'snt' ),
-            'edit_item'                  => __( 'Edit Zone', 'snt' ),
-            'update_item'                => __( 'Update Zone', 'snt' ),
-            'view_item'                  => __( 'View Zone', 'snt' ),
-            'separate_items_with_commas' => __( 'Separate items with commas', 'snt' ),
-            'add_or_remove_items'        => __( 'Add or remove items', 'snt' ),
-            'choose_from_most_used'      => __( 'Choose from the most used', 'snt' ),
-            'popular_items'              => __( 'Popular Zones', 'snt' ),
-            'search_items'               => __( 'Search Zones', 'snt' ),
-            'not_found'                  => __( 'Not Found', 'snt' ),
-            'no_terms'                   => __( 'No Zones', 'snt' ),
-            'items_list'                 => __( 'Zones list', 'snt' ),
-            'items_list_navigation'      => __( 'Zones list navigation', 'snt' ),
+            'name'                       => _x('Zones', 'Taxonomy General Name', 'snt'),
+            'singular_name'              => _x('Zone', 'Taxonomy Singular Name', 'snt'),
+            'menu_name'                  => __('Zones', 'snt'),
+            'all_items'                  => __('All Zones', 'snt'),
+            'parent_item'                => __('Parent Zone', 'snt'),
+            'parent_item_colon'          => __('Parent Zone:', 'snt'),
+            'new_item_name'              => __('New Zone Name', 'snt'),
+            'add_new_item'               => __('Add New Zone', 'snt'),
+            'edit_item'                  => __('Edit Zone', 'snt'),
+            'update_item'                => __('Update Zone', 'snt'),
+            'view_item'                  => __('View Zone', 'snt'),
+            'separate_items_with_commas' => __('Separate items with commas', 'snt'),
+            'add_or_remove_items'        => __('Add or remove items', 'snt'),
+            'choose_from_most_used'      => __('Choose from the most used', 'snt'),
+            'popular_items'              => __('Popular Zones', 'snt'),
+            'search_items'               => __('Search Zones', 'snt'),
+            'not_found'                  => __('Not Found', 'snt'),
+            'no_terms'                   => __('No Zones', 'snt'),
+            'items_list'                 => __('Zones list', 'snt'),
+            'items_list_navigation'      => __('Zones list navigation', 'snt'),
         );
         $args = array(
             'labels'                     => $labels,
@@ -309,8 +362,7 @@ add_action( 'init',
             'show_tagcloud'              => true,
             // 'rewrite'                    => array('slug' => 'resources')
         );
-        register_taxonomy( 'zones', array( 'stock-brokers' ), $args );
-
-    }
-    , 0 );
-
+        register_taxonomy('zones', array( 'stock-brokers' ), $args);
+    },
+    0
+);
