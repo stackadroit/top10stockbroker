@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 // import HighchartsReact from 'highcharts-react-official';
-import ReactHighcharts from 'react-highcharts';
+// import ReactHighcharts from 'react-highcharts';
 
 // import Highcharts from 'https://code.highcharts.com/stock/highstock.js';
 export default {

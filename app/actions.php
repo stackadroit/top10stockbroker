@@ -357,5 +357,207 @@ add_action("wp_ajax_nopriv__load_city_list", function (){
     exit;
 });
 
+ 
+// add_action("wp_ajax_market_data_ajax_request", function (){
+//     $data = $_REQUEST['data'];
+//     echo $page = $data['page'];
+//     $page_id =($data['pageID'])? $data['pageID']: get_the_ID();
+//     if($page == 'chart'){
+//         $section_title= get_post_meta($page_id,'graph_section_title',true);
+//         $section_content= get_post_meta($page_id,'graph_section_content',true);
+//         $template = 'partials.ajax.share-market.chart';
+//     }
+//     if($page == 'sectors'){
+//          $section_title= get_post_meta($page_id,'sectors_section_title',true);
+//         $section_content= get_post_meta($page_id,'sectors_section_content',true);
+//         $template = 'partials.ajax.share-market.sectors';
+//     }
+//     if($page == 'return-calculator'){
+//          $section_title= get_post_meta($page_id,'return_calculator_section_title',true);
+//         $section_content= get_post_meta($page_id,'return_calculator_section_content',true);
+//         $template = 'partials.ajax.share-market.return-calculator';
+//     }
+//     $data['section_title']=$section_title;
+//     $data['section_content']=$section_content;
+//     echo \App\template($template, $data);
+//     die();
+// });
+add_action("wp_ajax_nopriv_market_data_ajax_request", function (){
+    $data = $_REQUEST['data'];
+    // print_r($data);
+    $page = $data['page'];
+    $indexCode = $data['indexCode'];
+    $page_id =($data['pageID'])? $data['pageID']: get_the_ID();
+    if($page == 'chart'){
+        $section_title= get_post_meta($page_id,'graph_section_title',true);
+        $section_content= get_post_meta($page_id,'graph_section_content',true);
+        $template = 'partials.ajax.share-market.chart';
+    }
+    if($page == 'sectors'){
+         $section_title= get_post_meta($page_id,'sectors_section_title',true);
+        $section_content= get_post_meta($page_id,'sectors_section_content',true);
+        $apiExchg =($indexCode <100)?'BSE':'NSE';
+        $GLResponse =array();
+        $type ='Gain';
+        // $apiExchg ='NSE';
+        $intra_day ='Daily';
+
+         $url ="http://stock.accordwebservices.com/Stock/GetGainersAndLosers?Exchange=".$apiExchg."&Group=A&Type=".$type."&Indices=".$indexCode."&Option=&Period=".$intra_day."&PageNo=1&Pagesize=10&SortExpression=OPEN_PRICE&SortDirect=Desc";
+          $resposeArray =get_api_response_curl($url);  
+        if(@$resposeArray->status_code == 200){
+           $GLResponse= (array) $resposeArray->Table;
+        } 
+        $data['apiExchg']=$apiExchg;
+        $data['GLResponse']=$GLResponse;
+        $data['intra_day']=$intra_day;
+        $data['type']=$type;
+        $indicesFilter= get_indicesListPost();
+        $data['indicesFilter']=$indicesFilter;
+        $template = 'partials.ajax.share-market.sectors';
+    }
+    if($page == 'return-calculator'){
+         $section_title= get_post_meta($page_id,'return_calculator_section_title',true);
+        $section_content= get_post_meta($page_id,'return_calculator_section_content',true);
+        $template = 'partials.ajax.share-market.return-calculator';
+    }
+    
+    $data['section_title']=$section_title;
+    $data['section_content']=$section_content;
+    echo \App\template($template, $data);
+    die();
+});
+
+function get_api_response_curl($url =''){
+        $token =ACCORD_API_TOKEN;
+        $url =$url."&token=".$token;
+        if($url){
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_NOBODY, false); // remove body
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if($httpCode == 200){
+               $resposeArray =json_decode($response);
+               $resposeArray->status_code=$httpCode;
+               return $resposeArray;
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+    }
+function get_indicesListPost(){
+    $args = array(
+          'post_type' => 'share-market',
+          'tax_query' => array(
+              array(
+                  'taxonomy' => 'sm-category',
+                  'field'    => 'slug',
+                  'terms'    => 'indices',
+              ),
+          ),
+          'order'=>'DESC',
+          'orderby',
+          'posts_per_page'=>-1,
+        );
+        $post_lists= get_posts($args);
+        return $post_lists;
+}
+/*--------------------------------------------------------
+/*                      Company Page Ajax Api Call      
+/*---------------------------------------------------------*/
+add_action( 'wp_ajax_get_company_list',  __NAMESPACE__ . '\\get_company_list' );
+add_action( 'wp_ajax_nopriv_get_company_list',  __NAMESPACE__ . '\\get_company_list' );
+function get_company_list() {
+
+    $SearchTxtArray =($_REQUEST['SearchTxt'])?$_REQUEST['SearchTxt']:'';
+    $SearchTxt = @$SearchTxtArray['term'];
+    $ajaxResponseTest='<option value="">Select company / stock name</option>';
+    if($SearchTxt){
+        $url ="https://company.accordwebservices.com/Company/GetCompanyList?SearchTxt=".$SearchTxt;
+        $resposeArray =get_api_response_curl($url);  
+        if(@$resposeArray->status_code == 200){
+            $searchResponse= (array) $resposeArray->Table;
+            foreach ($searchResponse as $key => $rowObj) {
+                $ajaxResponse[]=array(
+                    'id'=>$rowObj->FINCODE,
+                    'text'=>$rowObj->S_Name
+                );
+                $ajaxResponseTest .='<option value="'.$rowObj->FINCODE.'">'.$rowObj->S_Name.'</option>';
+            }
+        }else{
+          $ajaxResponse['status'] = 'error';
+        } 
+    }else{
+        $ajaxResponse['status'] = 'error';
+    }
+    echo  $ajaxResponseTest;
+    exit;
+
+    // echo json_encode($ajaxResponse);
+    // echo \App\template($template, $data);
+    // die();
+}
+/*--------------------------------------------------------
+/*                      Company Page Ajax Api Call      
+/*---------------------------------------------------------*/
+add_action( 'wp_ajax_get_return_price_calculator',  __NAMESPACE__ . '\\get_return_price_calculator' );
+add_action( 'wp_ajax_nopriv_get_return_price_calculator',  __NAMESPACE__ . '\\get_return_price_calculator' );
+function get_return_price_calculator() {
+
+    $amount =($_REQUEST['amount'])?$_REQUEST['amount']:'';
+    $period =($_REQUEST['period'])?$_REQUEST['period']:'';
+    $apiExchg =(@$_REQUEST['apiExchg'])?@$_REQUEST['apiExchg']:'NSE';
+    $finCode =(@$_REQUEST['finCode'])?@$_REQUEST['finCode']:'';
+    if($apiExchg){
+        $url ="https://company.accordwebservices.com/Company/GetStockReturnsWithPrice?Exchg=".$apiExchg."&Fincode=".$finCode."&Period=".$period; 
+        $resposeArray =get_api_response_curl($url);  
+        if(@$resposeArray->status_code == 200){
+            $searchResponse= (array) $resposeArray->Table;
+
+            $currentData= @$searchResponse[0];
+            $pastData= @$searchResponse[1];
+            $calResult =0;
+            $labC='text-red';
+            $resStatus='Loss';
+            $totalAmount =$amount;
+            if(@$currentData->CLOSE && @$pastData->CLOSE){
+                $calResult = (($currentData->CLOSE - $pastData->CLOSE)/$pastData->CLOSE) *100;
+                $calResult =number_format($calResult,2);
+                $cAmount = ($amount*$calResult)/100;
+                $totalAmount = ($amount+$cAmount);
+                if($calResult>0){
+                    $labC='text-success';
+                    $resStatus='Profit';
+                }else{
+                    $labC='text-red';
+                    $resStatus='Loss';
+                } 
+            }
+            
+            $ajaxResponse['apiresp'] =$searchResponse;
+            $ajaxResponse['result'] ='My investment would be worth <span class="text-blue"> Rs '.number_format($totalAmount,2).'</span> with a '.$resStatus.' of <span class="'.$labC.'"> '.number_format($calResult,2).'%</span>';
+          $ajaxResponse['status'] = 'success';
+        }else{
+        $ajaxResponse['status'] = 'error';
+        } 
+    }else{
+        $ajaxResponse['status'] = 'error';
+    }
+    echo json_encode($ajaxResponse);
+    exit;
+}
+/**--------------------------------------------------------------
+ * File include to create Taxonomy And Meta Box for cpts.
+ /---------------------------------------------------------------*/
+include 'taxonomy-and-meta-boxes.php';
+
+
+
+
 
 
