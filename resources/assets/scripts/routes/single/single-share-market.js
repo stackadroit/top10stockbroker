@@ -1,4 +1,4 @@
-import {TemplateShareMarket}  from '../../library/template-share-market';
+import {SingleShareMarket}  from '../../library/single-share-market';
 
 export default {
   init() {
@@ -15,7 +15,7 @@ export default {
             var info = {
                 page: pages[key],
                 pageID: $('#ajax-load-api-data').data('post-id'),
-                indexCode: $('#indicesIndexes').val(),
+                indexCode: $('#indicesIndexesCode').val(),
             };
 
             (function(info){
@@ -36,8 +36,8 @@ export default {
                 //$.ajaxSetup({async: true});
             })(info);
         }
-    if (typeof TemplateShareMarket !== 'undefined') {
-      TemplateShareMarket.initialize();
+    if (typeof SingleShareMarket !== 'undefined') {
+      SingleShareMarket.initialize();
     }
     
   }).apply(this, [jQuery]);

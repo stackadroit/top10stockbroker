@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Sober\Controller\Controller;
 
-class TemplateShareMarket extends Controller
+class SingleShareMarket extends Controller
 {
 	var $indicesDetails =array();
 	protected function get_api_response_curl($url =''){
@@ -87,4 +87,5 @@ class TemplateShareMarket extends Controller
 	    $apiExchg =($indexCode <100)?'BSE':'NSE';
 	    return $apiExchg;
 	}
+	 
 }

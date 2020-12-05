@@ -102,6 +102,7 @@ import quickerslider from './routes/shortcodes/quickerslider';
 import GoldInvestmentCalculator from './routes/shortcodes/goldinvestmentcalculator';
 import singleBranches from './routes/shortcodes/broker_city_search';
 import templateShareMarket from './routes/templates/template-share-market';
+import singleShareMarket from './routes/single/single-share-market';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -116,6 +117,7 @@ const routes = new Router({
    // Shotcodes branch
   singleBranches,
   templateShareMarket,
+  singleShareMarket,
   // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,

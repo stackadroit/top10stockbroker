@@ -10,15 +10,15 @@
                 
                 <div class="col-md-2 full-box order-md-2">
                     <div class="select-theme-stb">  
-                    <input type="hidden" id="indicesIndexesCode" value="{{$indexCode}}">   
                     <form method="post">     
                         <select name="indices_index" id="indicesIndexes" class="select-style1">
                             @php
                             foreach($indices_filter as $pt){
+                            $flt_ind_idx = get_post_meta($pt->ID, 'indices_code', true );
                                 @endphp
-                                <option value="{{get_the_permalink($pt->ID)}} " {{ ($post->ID ==$pt->ID)?'selected="selected"':''}}>
-                                 {{$pt->post_title}}
-                                </option> 
+                                <option value="{{@$flt_ind_idx}}" {{($flt_ind_idx == @$indexCode)?'selected="selected"':''}}>
+                                  {{$pt->post_title}}
+                                    </option>
                                 @php
                                 }
                             @endphp

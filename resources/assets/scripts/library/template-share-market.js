@@ -139,7 +139,7 @@
        
       get_ReturnPriceCalculator:function(apiExchg,finCode,amount,period){
        $('#get_return_result').html('');
-      jQuery.ajax(
+        jQuery.ajax(
           {
               type: "post",
               dataType: "json",
@@ -162,13 +162,14 @@
               }
           });
 
-  },
+      },
+      
 			events: function() {
 				var self    = this,
 					stockMarketLive  = '#stock-market-live';
           this.interval = setInterval(function(){
             var indexCode = $('#indicesIndexes').val();
-            // self.getStockMarket(indexCode,stockMarketLive);
+            self.getStockMarket(indexCode,stockMarketLive);
           }, 10000);
 
 					$(stockMarketLive)
@@ -212,6 +213,7 @@
             }
             
           });
+          // get Calulater result
           $(document).on('click','#getCalculatedResult',function(e){
             e.preventDefault();
             var period =$('#rc_period_box_filter').val();
@@ -237,7 +239,9 @@
                 return false;
             }
             self.get_ReturnPriceCalculator(apiExchg,finCode,amount,period);
+          
         });
+         
 				return this;
 			},
 
