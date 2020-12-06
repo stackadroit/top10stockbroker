@@ -100,9 +100,20 @@ import zeroCouponBondValueCalculator from './routes/shortcode-calculator/calcula
 //Shortcodes
 import quickerslider from './routes/shortcodes/quickerslider';
 import GoldInvestmentCalculator from './routes/shortcodes/goldinvestmentcalculator';
+/**
+ Js For Branches Single Page (CPT) Branche Template Page
+*/
 import singleBranches from './routes/shortcodes/broker_city_search';
+/**
+ Js For Single share Market (CPT) Share Market Template
+*/
 import templateShareMarket from './routes/templates/template-share-market';
 import singleShareMarket from './routes/single/single-share-market';
+/**
+ Js For Single share price (CPT) Share Price Template
+*/
+import singleSharePrice from './routes/single/single-share-price';
+import templateSharePrice from './routes/single/single-share-price';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -116,8 +127,16 @@ const routes = new Router({
   
    // Shotcodes branch
   singleBranches,
+  /**
+   Js For Single share Market (CPT) Share Market Template
+  */
   templateShareMarket,
   singleShareMarket,
+   /**
+   Js For Single share Price (CPT) Share Price Template
+  */
+  singleSharePrice,
+  templateSharePrice,
   // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,

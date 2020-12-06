@@ -371,6 +371,10 @@ include 'taxonomy-and-meta-boxes.php';
  /---------------------------------------------------------------*/
 include 'shareMarket/actions.php';
 
+/**--------------------------------------------------------------
+ * File include Share Price Actions.
+ /---------------------------------------------------------------*/
+include 'sharePrice/actions.php';
 
 
 
