@@ -115,6 +115,12 @@ import singleShareMarket from './routes/single/single-share-market';
 import singleSharePrice from './routes/single/single-share-price';
 import templateSharePrice from './routes/single/single-share-price';
 
+/**
+ Js For Single Futures (CPT) Futures Template
+*/
+import singleFutures from './routes/single/single-futures';
+import templateFutures from './routes/single/single-futures';
+
 /** Populate Router instance with DOM routes */
 const routes = new Router({
   // All pages
@@ -132,11 +138,16 @@ const routes = new Router({
   */
   templateShareMarket,
   singleShareMarket,
-   /**
+  /**
    Js For Single share Price (CPT) Share Price Template
   */
   singleSharePrice,
   templateSharePrice,
+  /**
+   Js For Single Futures (CPT) Futures Template
+  */
+  singleFutures,
+  templateFutures,
   // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,

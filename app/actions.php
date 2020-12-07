@@ -376,6 +376,11 @@ include 'shareMarket/actions.php';
  /---------------------------------------------------------------*/
 include 'sharePrice/actions.php';
 
+/**--------------------------------------------------------------
+ * File include Futures Actions.
+ /---------------------------------------------------------------*/
+include 'cpts-action/futures-actions.php';
+
 
 
 
