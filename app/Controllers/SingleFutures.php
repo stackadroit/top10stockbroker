@@ -194,6 +194,7 @@ class SingleFutures extends Controller
 		  		$valueTableTotalRow =0;
 		  		$gainerTableTotalRow =0;
 		  		$PageSize =20;
+		  		$loadDetailsPageData['PageSize']=$PageSize;
   				$url ="https://derivatives.accordwebservices.com/Derivative/GetMarketWatch?InstName=".$InstName."&Symbol=".$symbol."&ExpDate=".$ExpDate."&OptType=".$OptType."&Rtype=".$Rtype."&Top=&PageNo=1&PageSize=".$PageSize; 
 
   				$resposeArray =$this->get_deviatives_api_response_curl($url);
@@ -226,12 +227,67 @@ class SingleFutures extends Controller
 	            //include 'page-templates/futures/most-active-stock-detail.php';
 	            break;
 	          case 'open-interest-stock-futures':
-	            $InstName ='FUTSTK';
-	            $loadDetailsPageData['page']='interest-stock';
-	            $loadDetailsPageData['InstName']=$InstName;
-	            //include 'page-templates/futures/open-interest-stock-detail.php';
+	          	$loadDetailsPageData['page']='interest-stock';
+	            $main_h1_title= get_post_meta(get_the_ID(),'main_title_h1',true);
+			 	$main_para_content= get_post_meta(get_the_ID(),'main_paragraph_content',true);
+			 	$loadDetailsPageData['main_h1_title']=$main_h1_title;
+			 	$loadDetailsPageData['main_para_content']=$main_para_content;
+			 	$loadDetailsPageData['section_title']= get_post_meta(get_the_ID(),'main_title_h1',true);
+ 				$loadDetailsPageData['section_content']= get_post_meta(get_the_ID(),'main_paragraph_content',true);
+			  	$PageName ='OICNT';
+			  	$InstName='FUTSTK';
+			  	$Opt='HOI';
+			  	$Top ='';
+  				$PageNo ='1';
+  				$PageSize ='20';
+  				$SortExpression ='Strikepice';
+  				$SortDirection ='Desc';
+  				$OptType ='';
+  				$loadDetailsPageData['PageName']=$PageName;
+  				$loadDetailsPageData['InstName']=$InstName;
+  				$loadDetailsPageData['Opt']=$Opt;
+  				$loadDetailsPageData['Top']=$Top;
+  				$loadDetailsPageData['PageNo']=$PageNo;
+  				$loadDetailsPageData['PageSize']=$PageSize;
+  				$loadDetailsPageData['SortExpression']=$SortExpression;
+  				$loadDetailsPageData['SortDirection']=$SortDirection;
+  				$loadDetailsPageData['OptType']=$OptType;
+  				$hTableData =array();
+  				$lTableData =array();
+  				$symbol ='';
+  				$epUrl="https://derivatives.accordwebservices.com/Derivative/GetExpiryDate?InstName={$InstName}&Symbol={$symbol}";
+  				$resposeArray1 =get_deviatives_api_response_curl($epUrl); 
+  				$ExpiryDateFilter =array();
+  				if(@$resposeArray1->status_code == 200){
+    				$ExpiryDateFilter= (array) @$resposeArray1->Table;
+    				$ExpDate =@$ExpiryDateFilter[0]->expdate1;
+   					$ExpDateDsp =@$ExpiryDateFilter[0]->expdate;
+  				} 
+  				$loadDetailsPageData['ExpiryDateFilter']=$ExpiryDateFilter;
+  				$loadDetailsPageData['ExpDate']=$ExpDate;
+  				$loadDetailsPageData['ExpDateDsp']=$ExpDateDsp;
+  				$url ="https://derivatives.accordwebservices.com/Derivative/GetOIReports?PageName=".$PageName."&InstName=".$InstName."&Symbol=&ExpDate=".$ExpDate."&OptType=".$OptType."&Opt=".$Opt."&Top=".$Top."&PageNo=".$PageNo."&PageSize=".$PageSize."&SortExpression=".$SortExpression."&SortDirection=".$SortDirection.""; 
+  				$resposeArray =get_deviatives_api_response_curl($url);
+  				if(@$resposeArray->status_code == 200){
+      				$hTableData= (array) $resposeArray->Table;
+      				$hTableTotalRow=@$resposeArray->Table1[0]->TotalRows;
+  				}
+  				$loadDetailsPageData['hTableData']=$hTableData;
+  				$loadDetailsPageData['hTableTotalRow']=$hTableTotalRow;
+  				$Opt='LOI';
+  				$url ="https://derivatives.accordwebservices.com/Derivative/GetOIReports?PageName=".$PageName."&InstName=".$InstName."&Symbol=&ExpDate=".$ExpDate."&OptType=".$OptType."&Opt=".$Opt."&Top=".$Top."&PageNo=".$PageNo."&PageSize=".$PageSize."&SortExpression=".$SortExpression."&SortDirection=".$SortDirection.""; 
+  				$resposeArray =get_deviatives_api_response_curl($url);
+  				if(@$resposeArray->status_code == 200){
+      				$lTableData= (array) $resposeArray->Table;
+      				$lTableTotalRow=@$resposeArray->Table1[0]->TotalRows;
+  				}
+  				$loadDetailsPageData['lTableData']=$lTableData;
+  				$loadDetailsPageData['lTableTotalRow']=$lTableTotalRow;
+  				$futuresSymbol =get_symble_list_and_id('futures');  
+  				$loadDetailsPageData['futuresSymbol']=$futuresSymbol;
 	            break; 
 	          }
+	          // print_r($loadDetailsPageData);
 	        return $loadDetailsPageData;
 	    }else{
 	    	return false;

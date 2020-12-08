@@ -4,7 +4,10 @@
     @endphp
     @if($get_detail_page)
         @if($get_detail_page['page'] =='active-stock')
-         @include('partials.ajax.futures.most-active-stock-detail')
+            @include('partials.ajax.futures.most-active-stock-detail')
+        @endif
+        @if($get_detail_page['page'] =='interest-stock')
+            @include('partials.ajax.futures.open-interest-stock-detail')
         @endif
     @else
     @include('partials.futures.page-header')

@@ -12,14 +12,14 @@
         </div>
          <div class="row align-items-end n-tab-wrap">
           <ul class="tabs commn_tabs col-md-9">
-              <li><a href="#mostActiveStockVolume" class="changeMASEDFilter" data-expdate="{{@$ExpDate}}">Volume</a></li>
-              <li><a href="#mostActiveStockValue" class="changeMASEDFilter" data-expdate="{{@$ExpDate}}">Value</a></li>
-              <li><a href="#mostActiveStockGainers" class="changeMASEDFilter" data-expdate="{{@$ExpDate}}">Gainers</a></li>
+              <li><a href="#mostActiveStockVolume" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Volume</a></li>
+              <li><a href="#mostActiveStockValue" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Value</a></li>
+              <li><a href="#mostActiveStockGainers" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Gainers</a></li>
           </ul>
           <div class="commn_tabs col-md-3" >
           <label>Exp. Date</label> 
-                <select id="mostActiveStockExpiryDate" class="select-style1">
-                  @php foreach($ExpiryDateFilter as $lprow){ @endphp
+                <select id="mostActiveStockInDetailExpiryDate" class="select-style1">
+                  @php foreach($get_detail_page['ExpiryDateFilter'] as $lprow){ @endphp
                     <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
                     @php } @endphp
                  </select>
@@ -83,7 +83,7 @@
                  </tbody>
             </table>
             </div>
-            @php if($get_detail_page['volumeTableTotalRow'] > $PageSize){ @endphp
+            @php if($get_detail_page['volumeTableTotalRow'] > $get_detail_page['PageSize']){ @endphp
             <div class="alm-btn-wrap" id="loadMoreWrap_vol">
               <button class="alm-load-more-btn" id="loadMore_vol" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['volumeTableTotalRow']}}">Load More</button>
             </div>

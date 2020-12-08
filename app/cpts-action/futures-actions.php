@@ -322,4 +322,243 @@ function load_future_single_page_section(){
     die();
     }
 }
+
+/*--------------------------------------------------------
+/*      Load More data on future single page details
+/*---------------------------------------------------------*/
+add_action( 'wp_ajax_load_more_future_most_active_stack_and_index',  __NAMESPACE__ . '\\load_more_future_most_active_stack_and_index' );
+add_action( 'wp_ajax_nopriv_load_more_future_most_active_stack_and_index',  __NAMESPACE__ . '\\load_more_future_most_active_stack_and_index' );
+
+function load_more_future_most_active_stack_and_index() {
+    $resposeArray =array();
+    $tableData =array(); 
+    $tableTotalRow =0;
+    if (isset($_REQUEST)) {
+        $InstName = @$_REQUEST['InstName'];
+        $ExpDate = @$_REQUEST['ExpDate'];
+        $Rtype = @$_REQUEST['Rtype'];
+        $OptType = @$_REQUEST['OptType'];
+        $PageNo = (@$_REQUEST['PageNo'])?@$_REQUEST['PageNo']:0;
+        $PageSize = (@$_REQUEST['PageSize'])?@$_REQUEST['PageSize']:20;
+        $symbol ='';
+        $Top ='';
+       
+        $SortExpression ='Strikepice';
+        $SortDirection ='Desc';
+      
+        $tableData =array();
+        $tableTotalRow =0;
+        $url ="https://derivatives.accordwebservices.com/Derivative/GetMarketWatch?InstName=".$InstName."&Symbol=".$symbol."&ExpDate=".$ExpDate."&OptType=".$OptType."&Rtype=".$Rtype."&Top=&PageNo=".$PageNo."&PageSize=".$PageSize;
+        $resposeArray =get_deviatives_api_response_curl($url); 
+        if(@$resposeArray->status_code == 200){
+          $tableData= (array) $resposeArray->Table;
+          $tableTotalRow=@$resposeArray->Table1[0]->TotalRows;
+        }
+        $futuresSymbol =get_symble_list_and_id('futures');
+         if(@$tableTotalRow){ 
+            foreach ($tableData as $idxKey =>$rowObj){
+                $rowObj =(array) $rowObj;
+            ?>
+                <tr>
+                       <td>
+                        <?php
+                          $smId =@$futuresSymbol[@$rowObj['Symbol']];
+                          if(@$smId){
+                            $smbLink =get_the_permalink($smId);
+                            ?>
+                            <a href="<?php echo @$smbLink; ?>" title="<?php echo @$rowObj['Symbol'] ?>"><?php echo @$rowObj['Symbol'] ?></a>
+                            <?php
+                          }else{
+                            echo @$rowObj['Symbol'];
+                          }
+                         ?>
+                        </td>
+                       <td><?php echo date('d M Y', strtotime(@$rowObj['ExpDate'])); ?></td>
+                       <!-- <td><?php //echo @number_format(@$rowObj['StrikePrice'],2) ?></td> -->
+                       <td><?php echo @number_format(@$rowObj['LTP'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['PrevLtp'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OI'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIValue'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIdiff'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['Oichg'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['Qty'],2) ?></td>
+                </tr>
+           <?php
+           }
+        }else{
+            echo '<tr><td colspan="2">No Record Found!</div>';
+        }
+    }
+    // Always die in functions echoing ajax content
+    die();
+}
+/*--------------------------------------------------------
+/*      Load More data on future single page details for     open-interest-stock-futures
+/*---------------------------------------------------------*/
+add_action( 'wp_ajax_get_future_top_interest_stock_index_option_data',  __NAMESPACE__ . '\\get_future_top_interest_stock_index_option_data' );
+add_action( 'wp_ajax_nopriv_get_future_top_interest_stock_index_option_data',  __NAMESPACE__ . '\\get_future_top_interest_stock_index_option_data' );
+ 
+function get_future_top_interest_stock_index_option_data() {
+    $resposeArray =array();
+    $tableData =array(); 
+    $tableTotalRow =0;
+    if (isset($_REQUEST)) {
+        $InstName = @$_REQUEST['InstName'];
+        $ExpDate = @$_REQUEST['ExpDate'];
+        $Opt = @$_REQUEST['Opt'];
+        $OptType = @$_REQUEST['OptType'];
+        $section = @$_REQUEST['section'];
+        $PageSize = (@$_REQUEST['PageSize'])?@$_REQUEST['PageSize']:10;
+        $symbol ='';
+        $Top ='';
+        $PageName ='OICNT';
+          $PageNo ='1';
+          $SortExpression ='Strikepice';
+          $SortDirection ='Desc';
+          $tableData =array();
+          $tableTotalRow =0;
+      $url ="https://derivatives.accordwebservices.com/Derivative/GetOIReports?PageName=".$PageName."&InstName=".$InstName."&Symbol=&ExpDate=".$ExpDate."&OptType=".$OptType."&Opt=".$Opt."&Top=".$Top."&PageNo=".$PageNo."&PageSize=".$PageSize."&SortExpression=".$SortExpression."&SortDirection=".$SortDirection."";  
+        $resposeArray =get_deviatives_api_response_curl($url);
+        if(@$resposeArray->status_code == 200){
+          $tableData= (array) $resposeArray->Table;
+          $tableTotalRow=@$resposeArray->Table1[0]->TotalRows;
+        }
+        $futuresSymbol =get_symble_list_and_id('futures');
+        ?>
+        <div class="scrollbar-inner">
+         <table class="table-style1 <?php echo (@$section =='read_more')? 'mb-20':'mb-0' ?> ">
+                <thead>
+                     <tr>
+                     <th class="big-font">Symbol</th>
+                     <th class="big-font">Expiry</th>
+                     <!-- <th class="big-font">Strike Price</th> -->
+                     <th class="big-font">LTP</th>
+                     <th class="big-font">Prev. LTP</th>
+                     <th class="big-font">Open Interest</th>
+                     <th class="big-font">Prev. OI</th>
+                     <th class="big-font">OI Change</th>
+                     <th class="big-font">OI Change%</th>
+                     <th class="big-font">OI Value</th>
+                   </tr>
+                </thead>
+               <tbody>
+ 
+                  <?php
+                  if(@$tableTotalRow){ 
+                    foreach ($tableData as $idxKey =>$rowObj){
+                      $rowObj =(array) $rowObj;
+                      ?>
+                      <tr>
+                       <td>
+                        <?php
+                          $smId =@$futuresSymbol[@$rowObj['Symbol']];
+                          if(@$smId){
+                            $smbLink =get_the_permalink($smId);
+                            ?>
+                            <a href="<?php echo @$smbLink; ?>" title="<?php echo @$rowObj['Symbol'] ?>"><?php echo @$rowObj['Symbol'] ?></a>
+                            <?php
+                          }else{
+                            echo @$rowObj['Symbol'];
+                          }
+                         ?>
+                        </td>
+                       <td><?php echo date('d M Y', strtotime(@$rowObj['ExpDate'])); ?></td>
+                       <!-- <td><?php //echo @number_format(@$rowObj['Strikepice'],2) ?></td> -->
+                       <td><?php echo @number_format(@$rowObj['Ltp'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['PrevLtp'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OI'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['PrevOI'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIdiff'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIchg'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIVAlue'],2) ?></td>
+                    </tr>
+                      <?php
+                      }
+                    }else{
+                      echo '<tr><td colspan="2">No Record Found!</div>';
+                    }
+                  ?>
+                 </tbody>
+            </table>
+        </div>
+        <?php
+        if(@$section =='read_more' && ($tableTotalRow > $PageSize)){
+            ?>
+            <div class="alm-btn-wrap" id="loadMoreWrap_<?php echo @$Opt ?>">
+              <button class="alm-load-more-btn" id="loadMore_<?php echo @$Opt ?>" href="javascript:void(0);" data-page_no="1" data-total="<?php echo $tableTotalRow; ?>">Load More</button>
+            </div>
+            <?php
+        }
+    }
+    // Always die in functions echoing ajax content
+    die();
+}
+/*--------------------------------------------------------
+/*      Load More data on future single page details for     open-interest-stock-futures
+/*---------------------------------------------------------*/
+add_action( 'wp_ajax_load_more_future_open_interest_stack_and_index',  __NAMESPACE__ . '\\load_more_future_open_interest_stack_and_index' );
+add_action( 'wp_ajax_nopriv_load_more_future_open_interest_stack_and_index',  __NAMESPACE__ . '\\load_more_future_open_interest_stack_and_index' );
+ 
+function load_more_future_open_interest_stack_and_index() {
+    $resposeArray =array();
+    $tableData =array(); 
+    $tableTotalRow =0;
+    if (isset($_REQUEST)) {
+        $InstName = @$_REQUEST['InstName'];
+        $ExpDate = @$_REQUEST['ExpDate'];
+        $Opt = @$_REQUEST['Opt'];
+        $OptType = @$_REQUEST['OptType'];
+        $PageSize = (@$_REQUEST['PageSize'])?@$_REQUEST['PageSize']:10;
+        $PageNo = (@$_REQUEST['PageNo'])?@$_REQUEST['PageNo']:1;
+        $symbol ='';
+        $Top ='';
+        $PageName ='OICNT';
+          $SortExpression ='Strikepice';
+          $SortDirection ='Desc';
+          $tableData =array();
+          $tableTotalRow =0;
+        $url ="https://derivatives.accordwebservices.com/Derivative/GetOIReports?PageName=".$PageName."&InstName=".$InstName."&Symbol=&ExpDate=".$ExpDate."&OptType=".$OptType."&Opt=".$Opt."&Top=".$Top."&PageNo=".$PageNo."&PageSize=".$PageSize."&SortExpression=".$SortExpression."&SortDirection=".$SortDirection."";  
+        $resposeArray =get_deviatives_api_response_curl($url);
+        if(@$resposeArray->status_code == 200){
+          $tableData= (array) $resposeArray->Table;
+          $tableTotalRow=@$resposeArray->Table1[0]->TotalRows;
+        }
+        $futuresSymbol =get_symble_list_and_id('futures');
+         if(@$tableTotalRow){ 
+                    foreach ($tableData as $idxKey =>$rowObj){
+                      $rowObj =(array) $rowObj;
+                      ?>
+                      <tr>
+                       <td>
+                        <?php
+                          $smId =@$futuresSymbol[@$rowObj['Symbol']];
+                          if(@$smId){
+                            $smbLink =get_the_permalink($smId);
+                            ?>
+                            <a href="<?php echo @$smbLink; ?>" title="<?php echo @$rowObj['Symbol'] ?>"><?php echo @$rowObj['Symbol'] ?></a>
+                            <?php
+                          }else{
+                            echo @$rowObj['Symbol'];
+                          }
+                         ?>
+                        </td>
+                       <td><?php echo date('d M Y', strtotime(@$rowObj['ExpDate'])); ?></td>
+                       <!-- <td><?php //echo @number_format(@$rowObj['Strikepice'],2) ?></td> -->
+                       <td><?php echo @number_format(@$rowObj['Ltp'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['PrevLtp'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OI'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['PrevOI'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIdiff'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIchg'],2) ?></td>
+                       <td><?php echo @number_format(@$rowObj['OIVAlue'],2) ?></td>
+                    </tr>
+                      <?php
+                      }
+                    }else{
+                      echo '<tr><td colspan="2">No Record Found!</div>';
+                    }
+    }
+    // Always die in functions echoing ajax content
+    die();
+}
 ?>

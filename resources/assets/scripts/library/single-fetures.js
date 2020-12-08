@@ -102,18 +102,32 @@
               }
         });
       },
-      get_future_most_active_stock_index_data: function(InstName,ExpDate,Rtype,eleId){
+      get_future_most_active_stock_index_data: function(eleId,InstName,ExpDate,Rtype,PageSize='',section=''){
+        if(section){
+          // for details page load more option
+          var postData = {
+                'action':'get_future_most_active_stock_index_data',
+                'InstName':InstName,
+                'ExpDate':ExpDate,
+                'Rtype':Rtype,
+                'PageSize':PageSize,
+                'section':section,
+            }
+        }else{
+          var postData = {
+                'action':'get_future_most_active_stock_index_data',
+                'InstName':InstName,
+                'ExpDate':ExpDate,
+                'Rtype':Rtype,
+            }
+        }
+        
         jQuery.ajax(
         {
             type: "post",
             dataType: "html",
             url: global_vars.apiServerUrl + '/apiblock/futures/partial-most-active-stock-index',
-            data: {
-                'action':'get_future_most_active_stock_index_data',
-                'InstName':InstName,
-                'ExpDate':ExpDate,
-                'Rtype':Rtype,
-            },
+            data: postData,  
             cache:false,
             success: function(response){
                 if(response){
@@ -126,13 +140,13 @@
             }
         });
       },
-      get_future_top_interest_stock_index_option_data: function(InstName,ExpDate,OptType,Opt,eleId){
+      get_future_top_interest_stock_index_option_data: function(eleId,InstName,ExpDate,OptType,Opt){
         jQuery.ajax(
         {
             type: "post",
             dataType: "html",
             url: global_vars.apiServerUrl + '/apiblock/futures/partial-top-interest-stock-index',
-            data: {
+            data:{
                 'action':'get_future_top_interest_stock_index_option_data',
                 'InstName':InstName,
                 'ExpDate':ExpDate,
@@ -151,9 +165,88 @@
             }
         });
       },
+      get_future_top_interest_stock_index_option_data_detail: function(eleId,InstName,ExpDate,OptType,Opt,PageSize='',section=''){
+        $(eleId).html('');
+        jQuery.ajax(
+        {
+            type: "post",
+            dataType: "html",
+            url: global_vars.ajax_url,
+            data:{ 
+                'action':'get_future_top_interest_stock_index_option_data',
+                'PageSize':PageSize,
+                'InstName':InstName,
+                'ExpDate':ExpDate,
+                'OptType':OptType,
+                'Opt':Opt,
+                'section':'read_more',
+              },
+            cache:false,
+            success: function(response){
+
+                if(response){
+                   $(eleId).html(response);
+                }
+                // $('.full-page-loading').hide();
+            },
+            error:function(error){
+               // $('.full-page-loading').hide();
+            }
+        });
+      },
+      load_more_future_most_active_stack_and_index: function(ele,OptType,InstName,ExpDate,Rtype,PageNo,PageSize,total){
+        jQuery.ajax(
+                {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.ajax_url,
+                  data: {
+                    'action':'load_more_future_most_active_stack_and_index',
+                    'OptType':'',
+                    'InstName':InstName,
+                    'ExpDate':ExpDate,
+                    'Rtype':Rtype,
+                    'PageNo':PageNo,
+                    'PageSize':PageSize,
+                  },
+                success: function(response){
+                    if( total >  (PageNo*PageSize)){
+                      $(ele).attr('data-page_no',PageNo);
+                    }else{
+                      $(ele).remove();
+                    }
+                    if(response){
+                      $(ele).closest('.tab_content').find('table').find('tbody').append(response);
+                    }
+                    $(ele).removeClass('loading');
+                  },
+                error:function(error){
+                  $(ele).removeClass('loading');
+                }
+              });
+      },
 			events: function() {
 				var self    = this,
 					companyStockLive  = '#company-stock-live';
+          // For Detail page
+          $('ul.tabs').each(function () {
+            var $active, $content, $links = jQuery(this).find('a');
+             $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
+            $active.addClass('active');
+            $content = $($active[0].hash);
+           $links.not($active).each(function () {
+                jQuery(this.hash).hide();
+            });
+             jQuery(this).on('click', 'a', function (e) {
+                $active.removeClass('active');
+                $content.hide();
+            $active = jQuery(this);
+                $content = jQuery(this.hash);
+            $active.addClass('active');
+                $content.show();
+              e.preventDefault();
+            });
+          });
           this.interval = setInterval(function(){
             var instName = $('#companyInstName').val();
             var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
@@ -206,7 +299,7 @@
               Rtype ='G';
               eleId ='#mostActiveStockGainers';
             }
-            self.get_future_most_active_stock_index_data(InstName,ExpDate,Rtype,eleId);
+            self.get_future_most_active_stock_index_data(eleId,InstName,ExpDate,Rtype);
           });
           //   End
           // Most Active Index Futures
@@ -233,7 +326,7 @@
               Rtype ='G';
               eleId ='#mostActiveIndexGainers';
             }
-            self.get_future_most_active_stock_index_data(InstName,ExpDate,Rtype,eleId);
+            self.get_future_most_active_stock_index_data(eleId,InstName,ExpDate,Rtype);
           });
           // End
           // Top Open Interest Stock Futures
@@ -258,7 +351,7 @@
                 Opt ='LOI';
                 eleId ='#topInterestStockOptionLowest';
               } 
-              self.get_future_top_interest_stock_index_option_data(InstName,ExpDate,OptType,Opt,eleId);
+              self.get_future_top_interest_stock_index_option_data(eleId,InstName,ExpDate,OptType,Opt);
           });
           // End
           // Top Open Interest Index Futures
@@ -284,9 +377,137 @@
                 eleId ='#topInterestIndexOptionLowest';
               }
               $('.full-page-loading').show();
-              self.get_future_top_interest_stock_index_option_data(InstName,ExpDate,OptType,Opt,eleId);
+              self.get_future_top_interest_stock_index_option_data(eleId,InstName,ExpDate,OptType,Opt);
           });
           // End
+
+          // Most Active Stock Futures
+          $(document).on('click','.changeMASEDFilterInDetail',function(){
+              var expdate =$(this).attr('data-expdate');
+              $('option:selected', this).remove();
+              $('#mostActiveStockInDetailExpiryDate').val('');
+              $('#mostActiveStockInDetailExpiryDate').val(expdate);
+            });
+          $(document)
+          .on( 'change', '#mostActiveStockInDetailExpiryDate', function(event) {
+              var Rtype ='vol'
+              var InstName =$(this).closest('.inner-wrap').find('.tabs a.active').data('inst-name');
+              var PageSize =$(this).closest('.inner-wrap').find('.tabs a.active').data('page-size');
+              var ExpDate = $(this).val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
+              var eleId= '';
+
+              if(activeTb =='Volume'){
+                Rtype ='vol';
+                eleId ='#mostActiveStockVolume';
+              }else if(activeTb == 'Value'){
+                Rtype ='val';
+                eleId ='#mostActiveStockValue';
+              }else if(activeTb == 'Gainers'){
+                Rtype ='G';
+                eleId ='#mostActiveStockGainers';
+              }
+            self.get_future_most_active_stock_index_data(eleId,InstName,ExpDate,Rtype,PageSize,'read_more');
+          });
+          //   End
+          $(document).on('click','#loadMore_vol,#loadMore_val,#loadMore_G',function(e){
+              e.preventDefault(); 
+              var ele =this;
+              var PageSize =$('.changeMASEDFilterInDetail.active').data('page-size');
+              var InstName =$('.changeMASEDFilterInDetail.active').data('inst-name');
+              var ExpDate = $('.changeMASEDFilterInDetail.active').data('expdate');
+              var PageNo =parseInt($(this).attr('data-page_no'));
+              var total =parseInt($(this).attr('data-total'));
+              var activeTb= $('.tabs a.active').html();
+              var Rtype = 'vol';
+              if(activeTb =='Volume'){
+                Rtype ='vol';
+              }
+              if(activeTb =='Value'){
+                Rtype ='val';
+              }
+              if(activeTb =='Gainers'){
+                Rtype ='G';
+              }
+              PageNo =PageNo+1;
+              var OptType ='';
+              self.load_more_future_most_active_stack_and_index(ele,OptType,InstName,ExpDate,Rtype,PageNo,PageSize,total);
+               
+            });
+          // Most Active Stock Futures
+          $(document).on('click','.changeTOISFilterDetails',function(){
+              var expdate =$(this).attr('data-expdate');
+              $('option:selected', this).remove();
+              $('#topInterestStockOptionInDetailExpiryDate').val('');
+              $('#topInterestStockOptionInDetailExpiryDate').val(expdate);
+            });
+          
+          $(document).on('change','#topInterestStockOptionInDetailExpiryDate',function(){
+            var symbol ='';
+            var OptType ='';
+            var InstName =$(this).closest('.inner-wrap').find('.tabs a.active').data('inst-name');
+            var PageSize =$(this).closest('.inner-wrap').find('.tabs a.active').data('page-size');
+            var ExpDate = $(this).val();
+            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
+            var eleId= '';
+            if(activeTb =='Highest'){
+              Opt ='HOI';
+              eleId ='#topInterestStockOptionHighest';
+            }else{
+              Opt ='LOI';
+              eleId ='#topInterestStockOptionLowest';
+            }
+            self.get_future_top_interest_stock_index_option_data_detail(eleId,InstName,ExpDate,OptType,Opt,PageSize,'read_more');
+          });
+
+           $(document).on('click','#loadMore_HOI,#loadMore_LOI',function(e){
+              e.preventDefault(); 
+              $(this).addClass('loading');
+              var ele =this;
+              var InstName =$(this).closest('.inner-wrap').find('.tabs a.active').data('inst-name');
+              var PageSize =$(this).closest('.inner-wrap').find('.tabs a.active').data('page-size');
+              var ExpDate = $('#topInterestStockOptionExpiryDate').val();
+              var PageNo =parseInt($(this).attr('data-page_no'));
+              var total =parseInt($(this).attr('data-total'));
+              var activeTb= $('.tabs a.active').html();
+              var Opt = 'HOI';
+              if(activeTb =='Highest'){
+                Opt ='HOI';
+              }else{
+                Opt ='LOI';
+              }
+               
+              PageNo =PageNo+1;
+              jQuery.ajax(
+                {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.ajax_url,
+                  data: {
+                    'action':'load_more_future_open_interest_stack_and_index',
+                    'InstName':InstName,
+                    'ExpDate':ExpDate,
+                    'OptType':'',
+                    'Opt':Opt,
+                    'PageNo':PageNo,
+                    'PageSize':PageSize,
+                  },
+                success: function(response){
+                    if( total >  (PageNo*PageSize)){
+                      $(ele).attr('data-page_no',PageNo);
+                    }else{
+                      $(ele).remove();
+                    }
+                    if(response){
+                      $(ele).closest('.tab_content').find('table').find('tbody').append(response);
+                    }
+                    $(ele).removeClass('loading');
+                  },
+                error:function(error){
+                  $(ele).removeClass('loading');
+                }
+              });
+            });
 				return this;
 			},
 
