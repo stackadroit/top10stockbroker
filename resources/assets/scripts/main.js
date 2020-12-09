@@ -121,6 +121,12 @@ import templateSharePrice from './routes/single/single-share-price';
 import singleFutures from './routes/single/single-futures';
 import templateFutures from './routes/single/single-futures';
 
+/**
+ Js For Single Option Chain (CPT) Option Chain Template
+*/
+import singleOptionChain from './routes/single/single-option-chain';
+import templateOptionChain from './routes/single/single-option-chain';
+
 /** Populate Router instance with DOM routes */
 const routes = new Router({
   // All pages
@@ -148,6 +154,11 @@ const routes = new Router({
   */
   singleFutures,
   templateFutures,
+  /**
+   Js For Single Option Chain (CPT) Option Chain Template
+  */
+  singleOptionChain,
+  templateOptionChain,
   // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,

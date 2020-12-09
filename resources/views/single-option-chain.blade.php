@@ -10,16 +10,19 @@
             @include('partials.ajax.futures.open-interest-stock-detail')
         @endif
     @else
-    @include('partials.futures.page-header')
-    @include('partials.futures.company-details')
+    @include('partials.option-chain.page-header')
+    @include('partials.option-chain.company-details')
 
     <div id="ajax-load-api-data" data-post-id="{{get_the_ID()}}" data-inst-name="{{$inst_name}}" data-symbol="{{$symbol}}" data-exp-date="{{$exp_date}}" data-opt-type="{{$opt_type}}" data-stk-price="{{$stk_price}}">
-    
         <div id="chart-data-id"></div>
-        <div id="most-active-stock-data-id"></div>
-        <div id="most-active-index-data-id"></div>
-        <div id="top-open-interest-stock-data-id"></div>
-        <div id="top-open-interest-index-data-id"></div>
+        <div id="strike-price-analysis-data-id"></div>
+        <div id="most-active-options-data-id"></div>
+        <div id="open-interest-analysis-data-id"></div>
+        <div id="top-put-call-ratio-data-id"></div>
+        <div id="most-active-stock-options-data-id"></div>
+        <div id="most-active-index-options-data-id"></div>
+        <div id="top-open-interest-stock-options-data-id"></div>
+        <div id="top-open-interest-index-options-data-id"></div>
     </div>
     @endif
     @include('partials.content-page')
