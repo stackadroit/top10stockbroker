@@ -72,9 +72,9 @@ class TemplateFutures extends Controller
 		$symbol = get_post_meta(get_the_ID(),'symbol',true);
 		$symbol =($symbol)?$symbol:'TCS';
 		$cDetailsresponse =array();
-		$this->symbol =$symbol;
+
 		$epUrl="https://derivatives.accordwebservices.com/Derivative/GetExpiryDate?InstName={$instName}&Symbol={$symbol}";
-		$resposeArray1 =$this->get_deviatives_api_response_curl($epUrl); 
+		$resposeArray1 =get_deviatives_api_response_curl($epUrl); 
 
 		if(@$resposeArray1->status_code == 200){
 		    $ExpiryDate= (array) @$resposeArray1->Table;
@@ -84,17 +84,20 @@ class TemplateFutures extends Controller
 		    $ExpDateDsp =@$ExpiryDate[0]->expdate;
 		    $this->expDateDsp =$ExpDateDsp ;
 		} 
-   
-  		$OptType ='XX';
-  		$this->optType =$OptType;
-  		$StkPrice ='';
-  		$this->stkPrice =$StkPrice;
-  		$url ="https://derivatives.accordwebservices.com/Derivative/GetQuotes?InstName={$instName}&Symbol={$symbol}&ExpDate={$ExpDate}&OptType={$OptType}&StkPrice={$StkPrice}";
+		   
+		$OptType ='XX';
+		$StkPrice ='';
+		$this->optType =$OptType ;
+		$this->stkPrice =$StkPrice ;
+		$url ="https://derivatives.accordwebservices.com/Derivative/GetQuotes?InstName={$instName}&Symbol={$symbol}&ExpDate={$ExpDate}&OptType={$OptType}&StkPrice={$StkPrice}";
 
-  		$resposeArray =$this->get_deviatives_api_response_curl($url);  
+		$resposeArray =get_deviatives_api_response_curl($url);  
 		if(@$resposeArray->status_code == 200){
+		    // $cDetailsresponse= (array) @$resposeArray->Table[0];
 		    $this->cDetailsresponse= (array) @$resposeArray->Table[0];
 		} 
+		// print_r($this->cDetailsresponse);
+		// exit;
 		// $Symbol=get_symble_list('futures');
 
 		return $this->cDetailsresponse;

@@ -97,11 +97,44 @@
                 
             },
             error: function(errorThrown){
-                $(liveUpdateElement).find(".loading-data").remove();
+                $(companyStockLive).find(".loading-data").remove();
                 console.log(errorThrown);
               }
         });
       },
+      get_derivative_template_companyStock:function(symbol){
+        var companyStockLive="#company-stock-live";
+         jQuery.ajax(
+          {
+            type: "post",
+            dataType: "html",
+            url: global_vars.ajax_url,
+            data: {
+              'action':'get_future_full_page_ajax_search',
+              'symbol':symbol,
+            },
+            success: function(response){
+              if(response){
+                $(companyStockLive).html(response);
+                // $(companyStockLive).find();
+                $('#ajax-load-api-data').attr('data-exp-date',$('#ExpiryDate').val());
+                $('#ajax-load-api-data').attr('data-symbol',$('#ddlCompanySymbleTpl').val());
+                // $('#ajax-load-api-data').attr('data-opt-type',$('#companyInstName').val());
+                // $('#ajax-load-api-data').attr('data-stk-price',$(this).val());
+            
+              }
+              setTimeout(function(){
+                // $('.nested_tab a[href="#li_1y"]').trigger('click');
+              },200);
+                       
+              $('.full-page-loading').hide();
+            },
+            error:function(error){
+              $('.full-page-loading').hide();
+            }
+        }); 
+      }, 
+              
       get_future_most_active_stock_index_data: function(eleId,InstName,ExpDate,Rtype,PageSize='',section=''){
         if(section){
           // for details page load more option
@@ -249,7 +282,11 @@
           });
           this.interval = setInterval(function(){
             var instName = $('#companyInstName').val();
-            var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
+            if($('#ddlCompanySymble').length){
+              var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
+            }else{
+              var symbol = $('#ddlCompanySymbleTpl option:selected').attr('data-symble');
+            }
             var ExpDate = $('#ExpiryDate').val();
             var OptType = $('#ajax-load-api-data').data('opt-type');
             var StkPrice = $('#ajax-load-api-data').data('stk-price');
@@ -257,7 +294,13 @@
                 self.get_derivative_companyStock(instName,symbol,ExpDate,OptType,StkPrice);
             }
           }, 10000);
-          
+          $(companyStockLive).on('change','#ddlCompanySymbleTpl', function () {
+            var symbol = $(this).val();
+            if (symbol) {
+              self.get_derivative_template_companyStock(symbol);  
+              
+            }
+        });
           $(companyStockLive)
           .on( 'change', '#ExpiryDate', function(event) {
             var instName = $('#companyInstName').val();

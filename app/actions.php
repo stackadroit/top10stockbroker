@@ -369,18 +369,22 @@ include 'taxonomy-and-meta-boxes.php';
 /**--------------------------------------------------------------
  * File include Share Market Actions.
  /---------------------------------------------------------------*/
-include 'shareMarket/actions.php';
+include 'cpts-action/share-market-actions.php';
 
 /**--------------------------------------------------------------
  * File include Share Price Actions.
  /---------------------------------------------------------------*/
-include 'sharePrice/actions.php';
+include 'cpts-action/share-price-actions.php';
 
 /**--------------------------------------------------------------
  * File include Futures Actions.
  /---------------------------------------------------------------*/
 include 'cpts-action/futures-actions.php';
 
+/**--------------------------------------------------------------
+ * File include Option Chain Actions.
+ /---------------------------------------------------------------*/
+include 'cpts-action/option-chain-actions.php';
 
 
 
