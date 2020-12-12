@@ -1,5 +1,9 @@
 <?php
 
+/*--------------------------------------------------------
+/* Get derivative API Response Used in both Future and Option Chain
+/* @author Pavan JI <dropmail2pavan@gmail.com> 
+/*---------------------------------------------------------*/
 function get_deviatives_api_response_curl($url =''){
     $token =ACCORD_API_TOKEN;
     $url =$url."&token=".$token;
@@ -22,6 +26,10 @@ function get_deviatives_api_response_curl($url =''){
         return array();
     }
 }
+/*--------------------------------------------------------
+/* Get Future and Option Chain Symble list In our DB
+/* @author Pavan JI <dropmail2pavan@gmail.com> 
+/*---------------------------------------------------------*/
 function get_symble_list($instName ='option-chain'){
     $args = array(
       'post_type' => $instName,
@@ -32,6 +40,10 @@ function get_symble_list($instName ='option-chain'){
     $post_lists= get_posts($args);
     return $post_lists;
 }
+/*--------------------------------------------------------
+/* Get Future and Option Chain Symble Name and Symble ID our DB
+/* @author Pavan JI <dropmail2pavan@gmail.com> 
+/*---------------------------------------------------------*/
 function get_symble_list_and_id($instName ='option-chain'){
     $args = array(
       'post_type' => $instName,
@@ -48,7 +60,7 @@ function get_symble_list_and_id($instName ='option-chain'){
     return $responseData;
 }
 /*--------------------------------------------------------
-/*      Load Share Market Page Template and Single Page Content
+/*      Load Future Page Template and Future Single Page Content
 /*      Through Ajax
 /*---------------------------------------------------------*/
 add_action( 'wp_ajax_load_future_single_page_section',  __NAMESPACE__ . '\\load_future_single_page_section' );
@@ -66,11 +78,6 @@ function load_future_single_page_section(){
         // $companyName =  $data['companyName'];
         // $acc_companyLists = $GLOBALS['acc_companyLists'];
         // $cDetailsresponse =  (array)json_decode(stripslashes($data['cDetailsresponse']));
- // "p1": "chart-data",
- //              "p2": "most-active-stock-data",
- //              "p3": "most-active-index-data",
- //              "p4": "top-open-interest-stock-data",
- //              "p5": "top-open-interest-index-data",
         switch ($data['page']) {
             case 'chart-data':
                 $section_title=get_post_meta($page_id,'graph_section_title',true);
@@ -403,7 +410,7 @@ function load_more_future_most_active_stack_and_index() {
     die();
 }
 /*--------------------------------------------------------
-/*      Load More data on future single page details for     open-interest-stock-futures
+/*  Load More data on future single page details for          open-interest-stock-futures
 /*---------------------------------------------------------*/
 add_action( 'wp_ajax_get_future_top_interest_stock_index_option_data',  __NAMESPACE__ . '\\get_future_top_interest_stock_index_option_data' );
 add_action( 'wp_ajax_nopriv_get_future_top_interest_stock_index_option_data',  __NAMESPACE__ . '\\get_future_top_interest_stock_index_option_data' );
@@ -504,7 +511,7 @@ function get_future_top_interest_stock_index_option_data() {
     die();
 }
 /*--------------------------------------------------------
-/*      Load More data on future single page details for     open-interest-stock-futures
+/*      Load More data on future single page details for     open-interest-index-futures
 /*---------------------------------------------------------*/
 add_action( 'wp_ajax_load_more_future_open_interest_stack_and_index',  __NAMESPACE__ . '\\load_more_future_open_interest_stack_and_index' );
 add_action( 'wp_ajax_nopriv_load_more_future_open_interest_stack_and_index',  __NAMESPACE__ . '\\load_more_future_open_interest_stack_and_index' );

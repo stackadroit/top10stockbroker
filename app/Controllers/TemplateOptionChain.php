@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Sober\Controller\Controller;
 
-class SingleOptionChain extends Controller
+class TemplateOptionChain extends Controller
 {
 	var $cDetailsresponse =array();
 	var $expDate ='';
@@ -84,6 +84,9 @@ class SingleOptionChain extends Controller
 		$instName =($instName)?$instName:'OPTSTK';
 	    return $instName;
 	}
+	public function isTemplate(){
+	    return true;
+	}
 	public function symbol(){
 		$symbol = get_post_meta(get_the_ID(),'symbol',true);
 		$symbol =($symbol)?$symbol:'TCS';
@@ -127,7 +130,9 @@ class SingleOptionChain extends Controller
   		$this->strikePrice =$StrikePrice;
   		$this->stcMid =$stcMid;
   		$this->stkPrice =$StkPrice;
-		$url ="https://derivatives.accordwebservices.com/Derivative/GetQuotes?InstName={$InstName}&Symbol={$symbol}&ExpDate={$ExpDate}&OptType={$OptType}&StkPrice={$StkPrice}";
+  		$dates =explode('.', $ExpDate);
+		$expDateYDM =@$dates[0].'.'.@$dates[2].'.'.@$dates[1];
+		$url ="https://derivatives.accordwebservices.com/Derivative/GetQuotes?InstName={$InstName}&Symbol={$symbol}&ExpDate={$expDateYDM}&OptType={$OptType}&StkPrice={$StkPrice}";
 		$resposeArray =get_deviatives_api_response_curl($url);  
 		if(@$resposeArray->status_code == 200){
 		  	$this->cDetailsresponse= (array) @$resposeArray->Table[0];

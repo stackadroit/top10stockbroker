@@ -1,4 +1,8 @@
 <?php
+/*--------------------------------------------------------
+/* Get Accord API Response Used in both Share Market and Share Price
+/* @author Pavan JI <dropmail2pavan@gmail.com> 
+/*---------------------------------------------------------*/
 function get_api_response_curl($url =''){
         $token =ACCORD_API_TOKEN;
         $url =$url."&token=".$token;
@@ -22,7 +26,10 @@ function get_api_response_curl($url =''){
             return array();
         }
     }
-
+/*--------------------------------------------------------
+/* Get Indices list In our DB
+/* @author Pavan JI <dropmail2pavan@gmail.com> 
+/*---------------------------------------------------------*/
 function get_indicesListPost(){
     $args = array(
           'post_type' => 'share-market',
@@ -40,6 +47,10 @@ function get_indicesListPost(){
         $post_lists= get_posts($args);
         return $post_lists;
 }
+/*--------------------------------------------------------
+/* Get High Low Indices list In our DB
+/* @author Pavan JI <dropmail2pavan@gmail.com> 
+/*---------------------------------------------------------*/
 function get_highLowListPost(){
     $args = array(
       'post_type' => 'share-market',
@@ -57,6 +68,10 @@ function get_highLowListPost(){
     $post_lists= get_posts($args);
     return $post_lists;
 }
+/*--------------------------------------------------------
+/* Get Gainers Losors Indices list In our DB
+/* @author Pavan JI <dropmail2pavan@gmail.com> 
+/*---------------------------------------------------------*/
 function get_gainersLosorsListPost(){
     $args = array(
       'post_type' => 'share-market',
@@ -141,7 +156,7 @@ $indicesList =array(
     "36"=>'S&P BSE Consumer Disc',
 );
 /**
- * 
+ * Get Indice Company list In our DB
  * @return array
  */
 function get_acc_companyLists()
@@ -155,10 +170,12 @@ function get_acc_companyLists()
     }
     return $acc_companyLists;
 }
-/*--------------------------------------------------------
-/*      Load Share Market Page Template and Single Page Content
-/*      Through Ajax
-/*---------------------------------------------------------*/
+
+/**
+ * Load Share Market Page Template and Single Page Content
+ * Through Ajax
+ * @return array
+ */
 add_action( 'wp_ajax_share_market_data_ajax_request',  __NAMESPACE__ . '\\share_market_data_ajax_request' );
 add_action( 'wp_ajax_nopriv_share_market_data_ajax_request',  __NAMESPACE__ . '\\share_market_data_ajax_request' );
 function share_market_data_ajax_request(){

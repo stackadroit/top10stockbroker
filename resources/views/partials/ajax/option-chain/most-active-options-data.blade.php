@@ -6,11 +6,10 @@
           </div>
         <div class="row align-items-end n-tab-wrap">
         <ul class="tabs commn_tabs col-md-9">
-          <li><a href="#mostActiveOptionCall">CALL</a></li>
-          <li><a href="#mostActiveOptionPut">PUT</a></li>
+          <li><a href="#mostActiveOptionCall" class="mostActiveOptionFilterTab" data-opt-filter="vol">CALL</a></li>
+          <li><a href="#mostActiveOptionPut" class="mostActiveOptionFilterTab" data-opt-filter="vol">PUT</a></li>
         </ul>
           <div class="commn_tabs col-md-3" >
-          <label>Exp. Date</label>
             <select id="mostActiveOptionFilter" class="select-style1">
                <option value="vol">Volume</option>
                <option value="val">Value</option>

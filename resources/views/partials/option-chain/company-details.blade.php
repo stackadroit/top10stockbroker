@@ -1,5 +1,9 @@
 @if(@$company_details)
+  @if(@$ajaxLoad)
+  @else
     <div class="section-companyprice bg-light section-padding"  id="company-stock-live">
+  @endif
+    
         <div class="inner-wrap">
             <div class="row align-items-center mb30">
                 <div class="col-md-2 full-box order-md-last">
@@ -10,9 +14,15 @@
                                   $smName=get_post_meta($lprow->ID,'symbol',true);
                                   if($smName){
                                   @endphp
-                                    <option data-symble="{{$lprow->symbol}}" {{($smName==$symbol)?'selected="selected"':'' }} value="{{ get_the_permalink($lprow->ID) }}" >
-                                        {{$smName}}
-                                        </option>
+                                    @if(@$is_template)
+                                      <option data-symble="{{$lprow->symbol}}" {{($smName==$symbol)?'selected="selected"':'' }} value="{{$smName}}" >
+                                          {{$smName}}
+                                          </option>
+                                    @else
+                                      <option data-symble="{{$lprow->symbol}}" {{($smName==$symbol)?'selected="selected"':'' }} value="{{ get_the_permalink($lprow->ID) }}" >
+                                          {{$smName}}
+                                          </option>
+                                    @endif
                                   @php
                                   }
                                 }
@@ -103,7 +113,7 @@
                  </div>
                   <div class="col-12 col-md-2">
                      <label>&nbsp;</label>
-                    <button class="search-icons" style="padding: 8px 15px;" type="submit" id="filter_derivative_details();">Search Options</button>
+                    <button class="search-icons" style="padding: 8px 15px;" type="submit" id="filter_derivative_details">Search Options</button>
                   </div>
              </div>
             <div class="row marketDetails bt">  
@@ -241,5 +251,9 @@
                 </div>   
             </div>
         </div>
+    @if(@$ajaxLoad)
+  @else
     </div>
+  @endif
+    
 @endif

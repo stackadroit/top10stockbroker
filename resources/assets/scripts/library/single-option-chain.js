@@ -102,161 +102,304 @@
               }
         });
       },
-      get_derivative_template_companyStock:function(symbol){
-        var companyStockLive="#company-stock-live";
+      strikPriceAnalisisExpiryDateFilter:function(eleId,InstName,ExpDate,OptType,section,symbol){
+         $(eleId).find('table').find('tbody').html('');
+              jQuery.ajax(
+              {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-strike-price-analysis',
+                  data: {
+                      'action':'get_strick_price_analysis_data',
+                      'InstName':InstName,
+                      'ExpDate':ExpDate,
+                      'OptType':OptType,
+                      'section':section,
+                      'symbol':symbol,
+                  },
+                  cache:false,
+                  beforeSend: function() {
+                    $(eleId).find(".loading-data").show();
+                  },
+                  success: function(response){
+                      if(response){
+                         $(eleId).find('table').find('tbody').html(response);
+                      }
+                      $(eleId).find(".loading-data").hide();
+                  },
+                  error:function(error){
+                     $(eleId).find(".loading-data").hide();
+                  }
+              });
+      },
+      mostActiveOptionDataFilter:function(eleId,InstName,ExpDate,OptType,Rtype,symbol){
+         $(eleId).html('');
+              jQuery.ajax(
+              {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-most-active-stock-index-option',
+                  data: {
+                      'action':'get_most_active_stock_index_option_data',
+                      'InstName':InstName,
+                      'symbol':symbol,
+                      'ExpDate':ExpDate,
+                      'OptType':OptType,
+                      'Rtype':Rtype,
+                  },
+                  cache:false,
+                  beforeSend: function() {
+                    $(eleId).find(".loading-data").show();
+                  },
+                  success: function(response){
+                      if(response){
+                         $(eleId).html(response);
+                      }
+                      $(eleId).find(".loading-data").hide();
+                  },
+                  error:function(error){
+                     $(eleId).find(".loading-data").hide();
+                  }
+              });
+      },
+      putCallRatiosFilter: function(eleId,InstName,ExpDate,ReportType,PageSize,section){
+         $.ajax(
+              {
+            type: "POST",
+            dataType: "html",
+            url: global_vars.ajax_url,
+            data:{
+                'action':'get_top_call_put_data',
+                      'InstName':InstName,
+                      'ExpDate':ExpDate,
+                      'ReportType':ReportType,
+                      'section':section,
+                      'PageSize':PageSize,
+              },
+            cache:false,
+              beforeSend: function() {
+                $(eleId).find(".loading-data").show();
+              },
+                  success: function(response){
+                      if(response){
+                         $(eleId).html(response);
+                      }
+                      $(eleId).find(".loading-data").hide();
+                  },
+                  error:function(error){
+                     $(eleId).find(".loading-data").hide();
+                  }
+          });
+      },
+      loadMorePutCallRatiosData(eleId,InstName,ReportType,ExpDate,PageNo,total,PageSize){
+        jQuery.ajax({
+          type: "post",
+          dataType: "html",
+          url: global_vars.ajax_url,
+          data: {
+            'action':'load_more_top_put_call_ratio',
+            'ReportType':ReportType,
+            'InstName':InstName,
+            'ExpDate':ExpDate,
+            'PageNo':PageNo,
+            'PageSize':PageSize,
+          },
+          success: function(response){
+            $(eleId).removeClass('loading');
+            if(response){
+              $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
+            }
+            if( total >  (PageNo*PageSize)){
+              $(eleId).attr('data-page_no',PageNo);
+            }else{
+              $(eleId).remove();
+            }
+          },
+          error:function(error){
+            $(eleId).removeClass('loading');
+          }
+        });
+             
+      },
+      mostActiveStockIndexOptionCallPutFilter:function(eleId,InstName,ExpDate,OptType,Rtype,symbol,PageSize,section){
+        $(eleId).html();
+          jQuery.ajax(
+              {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-most-active-stock-index-option',
+                  data: {
+                      'action':'get_most_active_stock_index_option_data',
+                      'InstName':InstName,
+                      'symbol':symbol,
+                      'ExpDate':ExpDate,
+                      'OptType':OptType,
+                      'Rtype':Rtype,
+                      'PageSize':PageSize,
+                      'section':section,
+                  },
+                  cache:false,
+                  beforeSend: function() {
+                    $(eleId).find(".loading-data").show();
+                  },
+                  success: function(response){
+                      if(response){
+                         $(eleId).html(response);
+                      }
+                      $(eleId).find(".loading-data").hide();
+                  },
+                  error:function(error){
+                     $(eleId).find(".loading-data").hide();
+                  }
+              });
+      },
+      load_more_most_active_stack_and_index(eleId,InstName,ExpDate,Rtype,PageNo,PageSize,total){
+          jQuery.ajax(
+            {
+              type: "post",
+              dataType: "html",
+              url: global_vars.ajax_url,
+              data: {
+                  'action':'load_more_most_active_stack_and_index',
+                  'OptType':OptType,
+                  'InstName':InstName,
+                  'ExpDate':ExpDate,
+                  'Rtype':Rtype,
+                  'PageNo':PageNo,
+                  'PageSize':PageSize,
+                },
+              cache:false,
+              success: function(response){
+                if(response){
+                          $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
+                      }
+                      if( total >  (PageNo*PageSize)){
+                        $(eleId).attr('data-page_no',PageNo);
+                      }else{
+                        $(eleId).remove();
+                      }
+                      $(eleId).find(".loading-data").hide();
+              },
+              error:function(error){
+                   $(eleId).removeClass('loading');
+                }
+          });
+      },
+      topInterestStockIndexOptionCallPutFilter:function(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section){
+        $(eleId).html();
+          jQuery.ajax(
+              {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-top-interest-stock-option',
+                  data: {
+                      'action':'get_most_active_stock_index_option_data',
+                      'InstName':InstName,
+                      'ExpDate':ExpDate,
+                      'OptType':OptType,
+                      'Opt':Opt,
+                      'PageSize':PageSize,
+                      'section':section,
+                  },
+                  cache:false,
+                  beforeSend: function() {
+                    $(eleId).find(".loading-data").show();
+                  },
+                  success: function(response){
+                      if(response){
+                         $(eleId).html(response);
+                      }
+                      $(eleId).find(".loading-data").hide();
+                  },
+                  error:function(error){
+                     $(eleId).find(".loading-data").hide();
+                  }
+              });
+      },
+      loadMoreTopInterestStockIndexOptionCallPut:function(eleId,InstName,ExpDate,OptType,Opt,PageSize,PageNo,total){
+        $(eleId).html();
+          jQuery.ajax(
+              {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.ajax_url,
+                  data: {
+                    'action':'load_more_top_interest_stack_and_index',
+                    'OptType':OptType,
+                    'InstName':InstName,
+                    'ExpDate':ExpDate,
+                    'Opt':Opt,
+                    'PageNo':PageNo,
+                    'PageSize':PageSize,
+                  },
+                  cache:false,
+                  beforeSend: function() {
+                    $(eleId).find(".loading-data").show();
+                  },
+                  success: function(response){
+                      if(response){
+                          $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
+                      }
+                      if( total >  (PageNo*PageSize)){
+                        $(eleId).attr('data-page_no',PageNo);
+                      }else{
+                        $(eleId).remove();
+                      }
+                      $(eleId).find(".loading-data").hide();
+                  },
+                  error:function(error){
+                     $(eleId).find(".loading-data").hide();
+                  }
+              });
+      },
+      loadCompanyFilter:function(symbol){
          jQuery.ajax(
           {
             type: "post",
             dataType: "html",
             url: global_vars.ajax_url,
             data: {
-              'action':'get_future_full_page_ajax_search',
+              'action':'get_full_page_ajax_search',
               'symbol':symbol,
             },
             success: function(response){
               if(response){
-                $(companyStockLive).html(response);
-                // $(companyStockLive).find();
-                $('#ajax-load-api-data').attr('data-exp-date',$('#ExpiryDate').val());
-                $('#ajax-load-api-data').attr('data-symbol',$('#ddlCompanySymbleTpl').val());
-                // $('#ajax-load-api-data').attr('data-opt-type',$('#companyInstName').val());
-                // $('#ajax-load-api-data').attr('data-stk-price',$(this).val());
-            
+                $('#company-stock-live').html(response);
+                get_expiredata('#strikPriceAnalisisExpiryDate',symbol)
               }
-              setTimeout(function(){
-                // $('.nested_tab a[href="#li_1y"]').trigger('click');
-              },200);
-                       
               $('.full-page-loading').hide();
             },
             error:function(error){
               $('.full-page-loading').hide();
             }
-        }); 
-      }, 
-              
-      get_future_most_active_stock_index_data: function(eleId,InstName,ExpDate,Rtype,PageSize='',section=''){
-        if(section){
-          // for details page load more option
-          var postData = {
-                'action':'get_future_most_active_stock_index_data',
-                'InstName':InstName,
-                'ExpDate':ExpDate,
-                'Rtype':Rtype,
-                'PageSize':PageSize,
-                'section':section,
-            }
-        }else{
-          var postData = {
-                'action':'get_future_most_active_stock_index_data',
-                'InstName':InstName,
-                'ExpDate':ExpDate,
-                'Rtype':Rtype,
-            }
-        }
-        
-        jQuery.ajax(
-        {
-            type: "post",
-            dataType: "html",
-            url: global_vars.apiServerUrl + '/apiblock/futures/partial-most-active-stock-index',
-            data: postData,  
-            cache:false,
-            success: function(response){
-                if(response){
-                   $(eleId).html(response);
-                }
-                // $('.full-page-loading').hide();
-            },
-            error:function(error){
-               // $('.full-page-loading').hide();
-            }
-        });
+          }); 
       },
-      get_future_top_interest_stock_index_option_data: function(eleId,InstName,ExpDate,OptType,Opt){
-        jQuery.ajax(
-        {
-            type: "post",
-            dataType: "html",
-            url: global_vars.apiServerUrl + '/apiblock/futures/partial-top-interest-stock-index',
-            data:{
-                'action':'get_future_top_interest_stock_index_option_data',
-                'InstName':InstName,
-                'ExpDate':ExpDate,
-                'OptType':OptType,
-                'Opt':Opt,
-            },
-            cache:false,
-            success: function(response){
-                if(response){
-                   $(eleId).html(response);
-                }
-                // $('.full-page-loading').hide();
-            },
-            error:function(error){
-               // $('.full-page-loading').hide();
-            }
-        });
-      },
-      get_future_top_interest_stock_index_option_data_detail: function(eleId,InstName,ExpDate,OptType,Opt,PageSize='',section=''){
-        $(eleId).html('');
-        jQuery.ajax(
-        {
-            type: "post",
-            dataType: "html",
-            url: global_vars.ajax_url,
-            data:{ 
-                'action':'get_future_top_interest_stock_index_option_data',
-                'PageSize':PageSize,
-                'InstName':InstName,
-                'ExpDate':ExpDate,
-                'OptType':OptType,
-                'Opt':Opt,
-                'section':'read_more',
-              },
-            cache:false,
-            success: function(response){
-
-                if(response){
-                   $(eleId).html(response);
-                }
-                // $('.full-page-loading').hide();
-            },
-            error:function(error){
-               // $('.full-page-loading').hide();
-            }
-        });
-      },
-      load_more_future_most_active_stack_and_index: function(ele,OptType,InstName,ExpDate,Rtype,PageNo,PageSize,total){
-        jQuery.ajax(
+      get_expiredata:function(ele,symbol){
+        if(symbol){
+            jQuery.ajax(
                 {
-                  type: "post",
-                  dataType: "html",
-                  url: global_vars.ajax_url,
-                  data: {
-                    'action':'load_more_future_most_active_stack_and_index',
-                    'OptType':'',
-                    'InstName':InstName,
-                    'ExpDate':ExpDate,
-                    'Rtype':Rtype,
-                    'PageNo':PageNo,
-                    'PageSize':PageSize,
-                  },
-                success: function(response){
-                    if( total >  (PageNo*PageSize)){
-                      $(ele).attr('data-page_no',PageNo);
-                    }else{
-                      $(ele).remove();
+                    type: "post",
+                    dataType: "html",
+                    url: ajaxUrl,
+                    data: {
+                        'action':'get_expire_date_list',
+                        'symbol':symbol,
+                    },
+                    success: function(response){
+                        if(response){
+                           $(ele).html(response);
+                        }
+                        var expdate= $(ele).val();
+                        $(ele).closest('.inner-wrap').find('.tabs a').attr('data-expdate',expdate);
+                        $(ele).trigger('change');
+                        $('.full-page-loading').hide();
+                    },
+                    error:function(error){
+                       $('.full-page-loading').hide();
                     }
-                    if(response){
-                      $(ele).closest('.tab_content').find('table').find('tbody').append(response);
-                    }
-                    $(ele).removeClass('loading');
-                  },
-                error:function(error){
-                  $(ele).removeClass('loading');
-                }
-              });
+            });
+
+        }
       },
 			events: function() {
 				var self    = this,
@@ -280,277 +423,404 @@
               e.preventDefault();
             });
           });
+
+          //Top Filter
+          $(document).on('change','#ddlCompanySymble', function () {
+              var symbol = $(this).val();
+              if($('.template-option-chain').length){
+                if (symbol) {
+                  $('.full-page-loading').show();
+                  self.loadCompanyFilter(symbol);
+                  
+                }
+              }else{
+                if (symbol) {
+                    window.location.href =symbol;
+                }
+              }
+              
+          });
           this.interval = setInterval(function(){
-            var instName = $('#companyInstName').val();
-            if($('#ddlCompanySymble').length){
-              var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
-            }else{
-              var symbol = $('#ddlCompanySymbleTpl option:selected').attr('data-symble');
-            }
+            var InstName = $('#companyInstName').val();
+            var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
             var ExpDate = $('#ExpiryDate').val();
-            var OptType = $('#ajax-load-api-data').data('opt-type');
-            var StkPrice = $('#ajax-load-api-data').data('stk-price');
-            if (instName) {
-                self.get_derivative_companyStock(instName,symbol,ExpDate,OptType,StkPrice);
+            var OptType = $('#OptionType').val();
+            var StkPrice = $('#StrikePrice').val();
+            if (InstName) {
+              self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice);
             }
           }, 10000);
-          $(companyStockLive).on('change','#ddlCompanySymbleTpl', function () {
-            var symbol = $(this).val();
-            if (symbol) {
-              self.get_derivative_template_companyStock(symbol);  
-              
-            }
-        });
-          $(companyStockLive)
-          .on( 'change', '#ExpiryDate', function(event) {
-            var instName = $('#companyInstName').val();
+          $(document).on('click','#filter_derivative_details', function (e) {
+            e.preventDefault();
+            var InstName = $('#companyInstName').val();
             var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
-            var ExpDate = $(this).val();
-            $('#ajax-load-api-data').attr('data-exp-date',$(this).val());
-            var OptType = $('#ajax-load-api-data').data('opt-type');
-            var StkPrice = $('#ajax-load-api-data').data('stk-price');
-            self.get_derivative_companyStock(instName,symbol,ExpDate,OptType,StkPrice);
-          });
-					$(companyStockLive)
-          .on( 'change', '#ddlCompanySymble', function(event) {
-	            var filterUri = $(this).val();
-              if (filterUri) {
-                  window.location.href =filterUri;
-              }
-	        });
-          // Most Active Stock Futures
-          $(document).on('click','.changeMASEDFilter',function(){
-            var expdate =$(this).attr('data-expdate');
-            $('option:selected', this).remove();
-            $('#mostActiveStockExpiryDate').val('');
-            $('#mostActiveStockExpiryDate').val(expdate);
-          });
-          $(document)
-          .on( 'change', '#mostActiveStockExpiryDate', function(event) {
-            var Rtype ='vol'
-            var InstName ='FUTSTK';
-            var ExpDate = $(this).val();
-            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
-            var eleId= '';
-            if(activeTb =='Volume'){
-              Rtype ='vol';
-              eleId ='#mostActiveStockVolume';
-            }else if(activeTb == 'Value'){
-              Rtype ='val';
-              eleId ='#mostActiveStockValue';
-            }else if(activeTb == 'Gainers'){
-              Rtype ='G';
-              eleId ='#mostActiveStockGainers';
+            var ExpDate = $('#ExpiryDate').val();
+            var OptType = $('#OptionType').val();
+            var StkPrice = $('#StrikePrice').val();
+            if (InstName) {
+              self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice);
             }
-            self.get_future_most_active_stock_index_data(eleId,InstName,ExpDate,Rtype);
           });
-          //   End
-          // Most Active Index Futures
-          $(document).on('click','.changeMAIEDFilter',function(){
-            var expdate =$(this).attr('data-expdate');
-            $('option:selected', this).remove();
-            $('#mostActiveIndexExpiryDate').val('');
-            $('#mostActiveIndexExpiryDate').val(expdate);
+          // Top Filter End
+          //  Strike Price Analysis Filter
+          $(document).on('click','.changeSPAFilter', function () {
+             var expdate =$(this).attr('data-expdate');
+             $('option:selected', this).remove();
+             $('#strikPriceAnalisisExpiryDate').val('');
+             $('#strikPriceAnalisisExpiryDate').val(expdate);
           });
-          $(document)
-          .on( 'change', '#mostActiveIndexExpiryDate', function(event) {
-            var Rtype ='vol'
-            var InstName ='FUTIDX';
-            var ExpDate = $(this).val();
-            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
-            var eleId= '';
-            if(activeTb =='Volume'){
-              Rtype ='vol';
-              eleId ='#mostActiveIndexVolume';
-            }else if(activeTb == 'Value'){
-              Rtype ='val';
-              eleId ='#mostActiveIndexValue';
-            }else if(activeTb == 'Gainers'){
-              Rtype ='G';
-              eleId ='#mostActiveIndexGainers';
-            }
-            self.get_future_most_active_stock_index_data(eleId,InstName,ExpDate,Rtype);
-          });
-          // End
-          // Top Open Interest Stock Futures
-          $(document).on('click','.changeTOISFilter',function(){
-            var expdate =$(this).attr('data-expdate');
-            $('option:selected', this).remove();
-            $('#topInterestStockOptionExpiryDate').val('');
-            $('#topInterestStockOptionExpiryDate').val(expdate);
-          });
-          $(document)
-          .on( 'change', '#topInterestStockOptionExpiryDate', function(event) {
-              var symbol ='';
-              var OptType ='';
+          $(document).on('change','#strikPriceAnalisisExpiryDate',function(){
+              var ReportType ='vol'
+              var section ='';
               var InstName = $('#companyInstName').val();
-              var ExpDate = $('#topInterestStockOptionExpiryDate').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
-              var eleId= '';
-              if(activeTb =='Highest'){
-                Opt ='HOI';
-                eleId ='#topInterestStockOptionHighest';
-              }else{
-                Opt ='LOI';
-                eleId ='#topInterestStockOptionLowest';
-              } 
-              self.get_future_top_interest_stock_index_option_data(eleId,InstName,ExpDate,OptType,Opt);
-          });
-          // End
-          // Top Open Interest Index Futures
-          $(document).on('click','.changeTOIIFilter',function(){
-            var expdate =$(this).attr('data-expdate');
-            $('option:selected', this).remove();
-            $('#topInterestIndexOptionExpiryDate').val('');
-            $('#topInterestIndexOptionExpiryDate').val(expdate);
-          });
-          $(document)
-          .on( 'change', '#topInterestIndexOptionExpiryDate', function(event) {
-              var symbol ='';
-              var OptType ='';
-              var InstName ='FUTIDX';
-              var ExpDate = $('#topInterestIndexOptionExpiryDate').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
-              var eleId= '';
-              if(activeTb =='Highest'){
-                Opt ='HOI';
-                eleId ='#topInterestIndexOptionHighest';
-              }else{
-                Opt ='LOI';
-                eleId ='#topInterestIndexOptionLowest';
-              }
-              $('.full-page-loading').show();
-              self.get_future_top_interest_stock_index_option_data(eleId,InstName,ExpDate,OptType,Opt);
-          });
-          // End
-
-          // Most Active Stock Futures
-          $(document).on('click','.changeMASEDFilterInDetail',function(){
-              var expdate =$(this).attr('data-expdate');
-              $('option:selected', this).remove();
-              $('#mostActiveStockInDetailExpiryDate').val('');
-              $('#mostActiveStockInDetailExpiryDate').val(expdate);
-            });
-          $(document)
-          .on( 'change', '#mostActiveStockInDetailExpiryDate', function(event) {
-              var Rtype ='vol'
-              var InstName =$(this).closest('.inner-wrap').find('.tabs a.active').data('inst-name');
-              var PageSize =$(this).closest('.inner-wrap').find('.tabs a.active').data('page-size');
+              var symbol = $('#ddlCompanySymble').children("option:selected").attr('data-symble');
               var ExpDate = $(this).val();
               var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
               var eleId= '';
+              if(activeTb =='PUT'){
+                OptType ='PE';
+                eleId ='#Puts';
+              }else if(activeTb == 'CALL'){
+                OptType ='CE';
+                eleId ='#Calls';
+              }
+              
+              self.strikPriceAnalisisExpiryDateFilter(eleId,InstName,ExpDate,OptType,section,symbol);
 
-              if(activeTb =='Volume'){
-                Rtype ='vol';
-                eleId ='#mostActiveStockVolume';
-              }else if(activeTb == 'Value'){
-                Rtype ='val';
-                eleId ='#mostActiveStockValue';
-              }else if(activeTb == 'Gainers'){
-                Rtype ='G';
-                eleId ='#mostActiveStockGainers';
-              }
-            self.get_future_most_active_stock_index_data(eleId,InstName,ExpDate,Rtype,PageSize,'read_more');
           });
-          //   End
-          $(document).on('click','#loadMore_vol,#loadMore_val,#loadMore_G',function(e){
-              e.preventDefault(); 
-              var ele =this;
-              var PageSize =$('.changeMASEDFilterInDetail.active').data('page-size');
-              var InstName =$('.changeMASEDFilterInDetail.active').data('inst-name');
-              var ExpDate = $('.changeMASEDFilterInDetail.active').data('expdate');
-              var PageNo =parseInt($(this).attr('data-page_no'));
-              var total =parseInt($(this).attr('data-total'));
-              var activeTb= $('.tabs a.active').html();
-              var Rtype = 'vol';
-              if(activeTb =='Volume'){
-                Rtype ='vol';
-              }
-              if(activeTb =='Value'){
-                Rtype ='val';
-              }
-              if(activeTb =='Gainers'){
-                Rtype ='G';
-              }
-              PageNo =PageNo+1;
+          //  Strike Price Analysis Filter ENd 
+          //  Most Active Options Data  Filter
+          $(document).on('click','.mostActiveOptionFilterTab', function () {
+             var opt_filter =$(this).attr('data-opt-filter');
+             $('option:selected', this).remove();
+             $('#mostActiveOptionFilter').val('');
+             $('#mostActiveOptionFilter').val(opt_filter);
+          });
+          $(document).on('change','#mostActiveOptionFilter',function(){
               var OptType ='';
-              self.load_more_future_most_active_stack_and_index(ele,OptType,InstName,ExpDate,Rtype,PageNo,PageSize,total);
-               
-            });
-          // Most Active Stock Futures
-          $(document).on('click','.changeTOISFilterDetails',function(){
+              var InstName =$('#companyInstName').val();
+              var symbol =$('#ddlCompanySymble').children("option:selected").attr('data-symble');
+              var ExpDate =$('#ExpiryDate').val();
+              var Rtype = $(this).val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-opt-filter',Rtype).text();
+              var eleId= '';
+              if(activeTb =='CALL'){
+                OptType ='C';
+                eleId ='#mostActiveOptionCall';
+              }else{
+                OptType ='P';
+                eleId ='#mostActiveOptionPut';
+              }
+
+              self.mostActiveOptionDataFilter(eleId,InstName,ExpDate,OptType,Rtype,symbol);
+
+          });
+          // put-call-ratio
+          $(document).on('click','.changeSIFilter', function () {
+              var activeTb= $(this).text();
               var expdate =$(this).attr('data-expdate');
-              $('option:selected', this).remove();
-              $('#topInterestStockOptionInDetailExpiryDate').val('');
-              $('#topInterestStockOptionInDetailExpiryDate').val(expdate);
-            });
-          
-          $(document).on('change','#topInterestStockOptionInDetailExpiryDate',function(){
-            var symbol ='';
-            var OptType ='';
-            var InstName =$(this).closest('.inner-wrap').find('.tabs a.active').data('inst-name');
-            var PageSize =$(this).closest('.inner-wrap').find('.tabs a.active').data('page-size');
-            var ExpDate = $(this).val();
-            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
+              var reporttype =$(this).attr('data-reporttype');
+              if(activeTb =='Stocks'){
+                $(document).find('#stk-filter').show();
+                $(document).find('#idx-filter').hide();
+                $(document).find('#stockExpireDateFilter').val('');
+                $(document).find('#stockExpireDateFilter').val(expdate);
+                $(document).find('#stockReportTypeFilter').val('');
+                $(document).find('#stockReportTypeFilter').val(reporttype);
+              }
+              if(activeTb =='Indexes'){
+                $(document).find('#stk-filter').hide();
+                $(document).find('#idx-filter').show();
+                $(document).find('#indexExpireDateFilter').val('');
+                $(document).find('#indexExpireDateFilter').val(expdate);
+                $(document).find('#indexReportTypeFilter').val('');
+                $(document).find('#indexReportTypeFilter').val(reporttype);
+              }
+          });
+          $(document).on('change','#stockExpireDateFilter,#stockReportTypeFilter,#indexExpireDateFilter,#indexReportTypeFilter',function(){
+
+            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
+             var eleId= '';
+             if(activeTb =='Stocks'){
+                var InstName ='OPTSTK';
+                var ExpDate = $("#stockExpireDateFilter").val();
+                var ReportType = $("#stockReportTypeFilter").val();
+                eleId ='#stocksPutCallRatios';
+             }
+             if(activeTb =='Indexes'){
+                var InstName ='OPTIDX';
+                eleId ='#indexesPutCallRatios';
+                var ExpDate = $("#indexExpireDateFilter").val();
+                var ReportType = $("#indexReportTypeFilter").val();
+             }
+             $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-reporttype',ReportType);
+             var PageSize =10;
+              if($('#check-page-type').length){
+                var section ='read_more';
+                PageSize =20;
+              }else{
+                var section ='';
+              }
+              
+               
+              self.putCallRatiosFilter(eleId,InstName,ExpDate,ReportType,PageSize,section);
+          });
+          // For Details Page Call Put Stock Index
+          $(document).on('click','#loadMore_OPTSTK,#loadMore_OPTIDX',function(e){
+            e.preventDefault(); 
+            $(this).addClass('loading');
+            var ele =this;
+            var PageNo =parseInt($(this).attr('data-page_no'));
+            var total =parseInt($(this).attr('data-total'));
+            PageNo =PageNo+1;
+            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
+            var PageSize ='20';
             var eleId= '';
-            if(activeTb =='Highest'){
-              Opt ='HOI';
-              eleId ='#topInterestStockOptionHighest';
-            }else{
-              Opt ='LOI';
-              eleId ='#topInterestStockOptionLowest';
+            if(activeTb =='Stocks'){
+              var InstName ='OPTSTK';
+              var ExpDate = $("#stockExpireDateFilter").val();
+              var ReportType = $("#stockReportTypeFilter").val();
+              eleId ='#stocksPutCallRatios';
             }
-            self.get_future_top_interest_stock_index_option_data_detail(eleId,InstName,ExpDate,OptType,Opt,PageSize,'read_more');
+            if(activeTb =='Indexes'){
+              var InstName ='OPTIDX';
+              eleId ='#indexesPutCallRatios';
+              var ExpDate = $("#indexExpireDateFilter").val();
+              var ReportType = $("#indexReportTypeFilter").val();
+            }
+            self.loadMorePutCallRatiosData(eleId,InstName,ReportType,ExpDate,PageNo,total,PageSize);  
+            
           });
 
-           $(document).on('click','#loadMore_HOI,#loadMore_LOI',function(e){
+          //  Strike Price Analysis Filter ENd
+          //  Most Active Options Data  Filter
+          $(document).on('click','.changeMASOFilter', function () {
+             var expdate =$(this).attr('data-expdate');
+             var rtypefilter =$(this).attr('data-rtypefilter');
+             $('#mostActiveStockOptionExpiryDate').val('');
+             $('#mostActiveStockOptionExpiryDate').val(expdate);
+             $('#mostActiveStockOptionFilter').val('');
+             $('#mostActiveStockOptionFilter').val(rtypefilter);
+          });
+          $(document).on('change','#mostActiveStockOptionFilter,#mostActiveStockOptionExpiryDate',function(){
+              var symbol ='';
+              var OptType ='';
+              var InstName =$('#companyInstName').val();
+              var section =$('#most_a_s_o_section').val();
+              var ExpDate = $('#mostActiveStockOptionExpiryDate').val();
+              var Rtype = $('#mostActiveStockOptionFilter').val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var eleId= '';
+              var PageSize =20;
+              if(activeTb =='CALL'){
+                OptType ='C';
+                eleId ='#mostActiveStockOptionCall';
+              }else{
+                OptType ='P';
+                eleId ='#mostActiveStockOptionPut';
+              }
+              
+              self.mostActiveStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Rtype,symbol,PageSize,section);
+              
+          });
+          //  Most Active Options Data  Filter
+          $(document).on('click','.changeMAIOFilter', function () {
+             var expdate =$(this).attr('data-expdate');
+             var rtypefilter =$(this).attr('data-rtypefilter');
+             $('#mostActiveIndexOptionExpiryDate').val('');
+             $('#mostActiveIndexOptionExpiryDate').val(expdate);
+             $('#mostActiveIndexOptionFilter').val('');
+             $('#mostActiveIndexOptionFilter').val(rtypefilter);
+          });
+          $(document).on('change','#mostActiveIndexOptionExpiryDate,#mostActiveIndexOptionFilter',function(){
+              var symbol ='';
+              var OptType ='';
+              var InstName =$('#companyInstName').val();
+              var InstName ='OPTIDX';
+              var section =$('#most_a_i_o_section').val();
+              var ExpDate = $('#mostActiveIndexOptionExpiryDate').val();
+              var Rtype = $('#mostActiveIndexOptionFilter').val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var eleId= '';
+               var PageSize =20;
+              if(activeTb =='CALL'){
+                OptType ='C';
+                eleId ='#mostActiveIndexOptionCall';
+              }else{
+                OptType ='P';
+                eleId ='#mostActiveIndexOptionPut';
+              }
+              
+              self.mostActiveStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Rtype,symbol,PageSize,section);
+              
+          });
+          //  Most Active Stock Index Options Data  Filter for Details Page
+          $(document).on('click','.changeMASIOFilter', function () {
+             var expdate =$(this).attr('data-expdate');
+             var rtypefilter =$(this).attr('data-rtypefilter');
+             $('#mostActiveStockIndexOptionExpiryDate').val('');
+             $('#mostActiveStockIndexOptionExpiryDate').val(expdate);
+             $('#mostActiveStockIndexOptionFilter').val('');
+             $('#mostActiveStockIndexOptionFilter').val(rtypefilter);
+          });
+          $(document).on('change','#mostActiveStockIndexOptionExpiryDate,#mostActiveStockIndexOptionFilter',function(){
+              var symbol ='';
+              var OptType ='';
+              var PageSize =20;
+              var InstName =$('#ActiveInstName').val();
+              var section ='read_more';
+              var ExpDate = $('#mostActiveStockIndexOptionExpiryDate').val();
+              var Rtype = $('#mostActiveStockIndexOptionFilter').val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var eleId= '';
+              if(activeTb =='CALL'){
+                OptType ='C';
+                eleId ='#mostActiveStockIndexOptionCall';
+              }else{
+                OptType ='P';
+                eleId ='#mostActiveStockIndexOptionPut';
+              }
+              
+              self.mostActiveStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Rtype,symbol,PageSize,section);
+              
+          });
+          $(document).on('click','#loadMoreP,#loadMoreC',function(e){
               e.preventDefault(); 
               $(this).addClass('loading');
               var ele =this;
-              var InstName =$(this).closest('.inner-wrap').find('.tabs a.active').data('inst-name');
-              var PageSize =$(this).closest('.inner-wrap').find('.tabs a.active').data('page-size');
-              var ExpDate = $('#topInterestStockOptionExpiryDate').val();
+              var PageSize =20;
+              var InstName =$('#ActiveInstName').val();
+              var ExpDate = $('#mostActiveStockIndexOptionExpiryDate').val();
+              var Rtype = $('#mostActiveStockIndexOptionFilter').val();
               var PageNo =parseInt($(this).attr('data-page_no'));
               var total =parseInt($(this).attr('data-total'));
-              var activeTb= $('.tabs a.active').html();
-              var Opt = 'HOI';
-              if(activeTb =='Highest'){
-                Opt ='HOI';
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
+              var eleId=this;
+              if(activeTb =='CALL'){
+                OptType ='C';
+                // eleId ='#mostActiveStockIndexOptionCall';
               }else{
-                Opt ='LOI';
+                OptType ='P';
+                // eleId ='#mostActiveStockIndexOptionPut';
               }
-               
               PageNo =PageNo+1;
-              jQuery.ajax(
-                {
-                  type: "post",
-                  dataType: "html",
-                  url: global_vars.ajax_url,
-                  data: {
-                    'action':'load_more_future_open_interest_stack_and_index',
-                    'InstName':InstName,
-                    'ExpDate':ExpDate,
-                    'OptType':'',
-                    'Opt':Opt,
-                    'PageNo':PageNo,
-                    'PageSize':PageSize,
-                  },
-                success: function(response){
-                    if( total >  (PageNo*PageSize)){
-                      $(ele).attr('data-page_no',PageNo);
-                    }else{
-                      $(ele).remove();
-                    }
-                    if(response){
-                      $(ele).closest('.tab_content').find('table').find('tbody').append(response);
-                    }
-                    $(ele).removeClass('loading');
-                  },
-                error:function(error){
-                  $(ele).removeClass('loading');
-                }
-              });
-            });
+              self.load_more_most_active_stack_and_index(eleId,InstName,ExpDate,Rtype,PageNo,PageSize,total);
+                         
+                   
+          });
+          //  Top Active Filter
+          $(document).on('click','.changeTOISFilter', function () {
+             var expdate =$(this).attr('data-expdate');
+             var otpfilter =$(this).attr('data-otpfilter');
+             $('#topInterestStockOptionExpiryDate').val('');
+             $('#topInterestStockOptionExpiryDate').val(expdate);
+             $('#topInterestStockOptionFilter').val('');
+             $('#topInterestStockOptionFilter').val(otpfilter);
+          });
+          $(document).on('change','#topInterestStockOptionExpiryDate,#topInterestStockOptionFilter',function(){
+              var symbol ='';
+              var OptType ='';
+              var PageSize =10;
+              var InstName ='OPTSTK';
+              var section =$('#top_i_s_o_section').val();
+              var ExpDate = $('#topInterestStockOptionExpiryDate').val();
+              var Opt = $('#topInterestStockOptionFilter').val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var eleId= '';
+              if(activeTb =='CALL'){
+                OptType ='CE';
+                eleId ='#topInterestStockOptionCall';
+              }else{
+                OptType ='PE';
+                eleId ='#topInterestStockOptionPut';
+              }
+              
+              self.topInterestStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section);
+              
+          });
+          //  Top Active Stock Filter
+          $(document).on('click','.changeTOIIFilter', function () {
+             var expdate =$(this).attr('data-expdate');
+             var otpfilter =$(this).attr('data-otpfilter');
+             $('#topInterestIndexOptionExpiryDate').val('');
+             $('#topInterestIndexOptionExpiryDate').val(expdate);
+             $('#topInterestIndexOptionFilter').val('');
+             $('#topInterestIndexOptionFilter').val(otpfilter);
+          });
+          $(document).on('change','#topInterestIndexOptionExpiryDate,#topInterestIndexOptionFilter',function(){
+              var symbol ='';
+              var OptType ='';
+              var InstName ='OPTIDX';
+              var section =$('#top_i_i_o_section').val();
+              var ExpDate = $('#topInterestIndexOptionExpiryDate').val();
+              var Opt = $('#topInterestIndexOptionFilter').val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var eleId= '';
+              var PageSize=10;
+
+              if(activeTb =='CALL'){
+                OptType ='CE';
+                eleId ='#topInterestIndexOptionCall';
+              }else{
+                OptType ='PE';
+                eleId ='#topInterestIndexOptionPut';
+              }
+              self.topInterestStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section);
+              
+          });
+          //  Top Active Stock Index Filter For Details Page
+          $(document).on('click','.changeTOISIFilter', function () {
+             var expdate =$(this).attr('data-expdate');
+             var otpfilter =$(this).attr('data-otpfilter');
+             $('#topInterestStockIndexOptionExpiryDate').val('');
+             $('#topInterestStockIndexOptionExpiryDate').val(expdate);
+             $('#topInterestStockIndexOptionFilter').val('');
+             $('#topInterestStockIndexOptionFilter').val(otpfilter);
+          });
+          $(document).on('change','#topInterestStockIndexOptionExpiryDate,#topInterestStockIndexOptionFilter',function(){
+              var symbol ='';
+              var OptType ='';
+              var InstName =$('#ActiveInstName').val();
+              var section ='read_more';
+              var ExpDate = $('#topInterestStockIndexOptionExpiryDate').val();
+              var Opt = $('#topInterestStockIndexOptionFilter').val();
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var eleId= '';
+              var PageSize=20;
+              if(activeTb =='CALL'){
+                OptType ='CE';
+                eleId ='#topInterestStockIndexOptionCall';
+              }else{
+                OptType ='PE';
+                eleId ='#topInterestStockIndexOptionPut';
+              }
+              self.topInterestStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section);
+              
+          });
+          //Load More For Details Page
+          $(document).on('click','#loadMoreCE,#loadMorePE',function(e){
+              e.preventDefault(); 
+              $(this).addClass('loading');
+              var eleId =this;
+              var PageSize =20;
+              var InstName =$('#ActiveInstName').val();;
+              var ExpDate = $('#topInterestStockIndexOptionExpiryDate').val();
+              var Opt = $('#topInterestStockIndexOptionFilter').val();
+              var PageNo =parseInt($(this).attr('data-page_no'));
+              var total =parseInt($(this).attr('data-total'));
+              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
+              var OptType ='CE';
+              if(activeTb =='CALL'){
+                OptType ='CE';
+              }else{
+                OptType ='PE'; 
+              }
+              
+              PageNo =PageNo+1;
+              self.loadMoreTopInterestStockIndexOptionCallPut(eleId,InstName,ExpDate,OptType,Opt,PageSize,PageNo,total);
+               
+          });
+          
 				return this;
 			},
 

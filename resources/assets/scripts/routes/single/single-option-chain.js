@@ -10,17 +10,33 @@ export default {
       	var ExpDate = $('#ajax-load-api-data').data('exp-date');
       	var OptType = $('#ajax-load-api-data').data('opt-type');
       	var StkPrice = $('#ajax-load-api-data').data('stk-price');
-      	var pages = {
-            "p1": "chart-data",
-            // "p2": "strike-price-analysis-data",
-            "p3": "most-active-options-data",
+        // For Template page condition
+        if($('.template-option-chain').length){
+          var pages = {
+            // "p1": "chart-data",
+            "p2": "strike-price-analysis-data",
+            // "p3": "most-active-options-data",
             // "p4": "open-interest-analysis-data",
-            // "p5": "top-put-call-ratio-data",
-            // "p6": "most-active-stock-options-data",
-            // "p7": "most-active-index-options-data",
-            // "p8": "top-open-interest-stock-options-data",
-            // "p9": "top-open-interest-index-options-data",
-        };
+            "p5": "top-put-call-ratio-data",
+            "p6": "most-active-stock-options-data",
+            "p7": "most-active-index-options-data",
+            "p8": "top-open-interest-stock-options-data",
+            "p9": "top-open-interest-index-options-data",
+          };
+        }else{
+          var pages = {
+            "p1": "chart-data",
+            "p2": "strike-price-analysis-data",
+            "p3": "most-active-options-data",
+            "p4": "open-interest-analysis-data",
+            "p5": "top-put-call-ratio-data",
+            "p6": "most-active-stock-options-data",
+            "p7": "most-active-index-options-data",
+            "p8": "top-open-interest-stock-options-data",
+            "p9": "top-open-interest-index-options-data",
+          };
+        }
+      	
       	for (var key in pages) {
 	        var info = {
                 page: pages[key],

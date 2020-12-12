@@ -7,10 +7,10 @@
       <div class="row align-items-end n-tab-wrap">
         <ul class="tabs commn_tabs col-md-9">
             @if(is_array(@$callsAnalysis))
-              <li><a href="#Calls"  onclick="changeSPAFilter(this);" data-expdate="{{@$ExpDate}}">CALL</a></li>
+              <li><a href="#Calls"  class="changeSPAFilter" data-expdate="{{@$ExpDate}}">CALL</a></li>
             @endif
             @if(is_array(@$putsAnalysis))
-                <li><a href="#Puts"  onclick="changeSPAFilter(this);" data-expdate="{{@$ExpDate}}">PUT</a></li>
+                <li><a href="#Puts" class="changeSPAFilter" data-expdate="{{@$ExpDate}}">PUT</a></li>
             @endif
         </ul>
         <div class="commn_tabs col-md-3">
