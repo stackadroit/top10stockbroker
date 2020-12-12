@@ -61,7 +61,7 @@
                       <tr>
                        <td>
                         @php
-                          $smId =@$get_detail_page[$optionChainSymbol[@$rowObj['Symbol']]];
+                          $smId =@$get_detail_page['optionChainSymbol'][@$rowObj['Symbol']];
                           if(@$smId){
                             $smbLink =get_the_permalink($smId);
                            @endphp
@@ -113,7 +113,7 @@
                       <tr>
                          <td>
                           @php
-                          $smId =@$get_detail_page[$optionChainSymbol[@$rowObj['Symbol']]];
+                          $smId =@$get_detail_page['optionChainSymbol'][@$rowObj['Symbol']];
                           if(@$smId){
                             $smbLink =get_the_permalink($smId);
                            @endphp

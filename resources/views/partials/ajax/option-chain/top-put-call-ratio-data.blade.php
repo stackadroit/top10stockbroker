@@ -63,7 +63,7 @@
                           if(@$smId){
                             $smbLink =get_the_permalink($smId);
                             @endphp
-                            <a href="<?php @$smbLink ?>" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
+                            <a href="{{$smbLink}}" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
                           @php
                           }else{
                             echo @$rowObj['Symbol'];
@@ -116,7 +116,7 @@
                           if(@$smId){
                             $smbLink =get_the_permalink($smId);
                             @endphp
-                            <a href="<?php @$smbLink ?>" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
+                            <a href="{{$smbLink}}" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
                           @php
                           }else{
                             echo @$rowObj['Symbol'];
