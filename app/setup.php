@@ -279,6 +279,20 @@ add_filter('top10stockbroker_cpt', function ($array) {
             );
     $array[] = array( 
                 'cpt' => array( 
+                            __( 'Brokerage', 'top10stockbroker' ),
+                            __( 'Brokerages', 'top10stockbroker' ),
+                            'brokerage-calculator'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => true,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
+    $array[] = array( 
+                'cpt' => array( 
                             __( 'Brokerage comparison', 'top10stockbroker' ),
                             __( 'Brokerage comparisons', 'top10stockbroker' ),
                             'broker-comparison'
@@ -291,6 +305,7 @@ add_filter('top10stockbroker_cpt', function ($array) {
                            
                         )
             );
+    
     return $array;
 
 }, 10, 1);

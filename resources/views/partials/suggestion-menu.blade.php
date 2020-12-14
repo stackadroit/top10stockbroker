@@ -1,3 +1,4 @@
+@if($suggestion_menu['get_meta'])
 <div class="suggestion-menu">
     <ul>
         @foreach( $suggestion_menu['get_meta'] as $gm ) 
@@ -7,3 +8,4 @@
         @endforeach    
     </ul>
 </div><!-- custom menu class -->
+@endif

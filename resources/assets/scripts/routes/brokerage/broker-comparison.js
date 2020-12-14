@@ -1,4 +1,4 @@
-import {brokerCalculator}  from '../../library/broker-calculator';
+import {brokerComparison}  from '../../library/brokerage/broker-comparison';
 export default {
   init() {
     // Commom Plugins
@@ -6,8 +6,8 @@ export default {
 
 		'use strict';
 		// Calculator 
-		if (typeof brokerCalculator !== 'undefined') {
-			brokerCalculator.initialize();
+		if (typeof brokerComparison !== 'undefined') {
+			brokerComparison.initialize();
 		}
 		
 	}).apply(this, [jQuery]);

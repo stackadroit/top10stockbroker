@@ -131,3 +131,40 @@
 
         }
     , 0 );
+
+/**
+ * Register Taxonomy for Broker Comparison
+ */
+add_action( 'init', 'create_comparison_tax' );
+
+function create_comparison_tax() {
+    register_taxonomy( 
+            'broker-comparison_tag', 
+            'broker-comparison', 
+            array( 
+                'hierarchical'  => false, 
+                'label'         => __( 'Tags', 'CURRENT_THEME' ), 
+                'singular_name' => __( 'Tag', 'CURRENT_THEME' ), 
+                'rewrite'       => true, 
+                'query_var'     => true 
+            )  
+        );
+}
+
+
+// add tags in Brokerage Calculator
+add_action( 'init', 'create_calculator_tax' );
+
+function create_calculator_tax() {
+    register_taxonomy( 
+            'brokerage-calculator_tag', 
+            'brokerage-calculator', 
+            array( 
+                'hierarchical'  => false, 
+                'label'         => __( 'Tags', 'CURRENT_THEME' ), 
+                'singular_name' => __( 'Tag', 'CURRENT_THEME' ), 
+                'rewrite'       => true, 
+                'query_var'     => true 
+            )  
+        );
+}
