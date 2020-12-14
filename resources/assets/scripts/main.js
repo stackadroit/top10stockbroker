@@ -126,6 +126,7 @@ import templateFutures from './routes/single/single-futures';
 */
 import singleOptionChain from './routes/single/single-option-chain';
 import templateOptionChain from './routes/single/single-option-chain';
+import singleBrokerComparison from './routes/shortcode-calculator/calculator62';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -159,6 +160,10 @@ const routes = new Router({
   */
   singleOptionChain,
   templateOptionChain,
+  /**
+   Include Broker calculator js function
+  */
+  singleBrokerComparison,
   // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,
