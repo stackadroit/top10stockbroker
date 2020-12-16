@@ -8,8 +8,8 @@ textarea {
 }
 
 select {
-	border: 1px solid #E5E7E9;
-	border-radius: 6px;
+	border: 1px solid #e5e7e9;
+	border-radius: 3px;
 	outline: none;
 }
 
@@ -38,15 +38,15 @@ label {
 	height: 0;
 }
 
-.comment-form{
-	& > p{
+.comment-form {
+	& > p {
 		@extend .form-group;
 		& select,
 		& textarea,
-		& input{
+		& input {
 			@extend .form-control;
 		}
-		& .submit{
+		& .submit {
 			@extend .btn;
 			@extend .btn-primary;
 		}
@@ -68,20 +68,20 @@ label {
 
 	&.form-control-focused {
 		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-		border-color: #CCC;
+		border-color: #ccc;
 	}
 
 	&:focus {
 		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-		border-color: #CCC;
+		border-color: #ccc;
 	}
 
 	&.error {
 		border-color: #a94442;
-		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 		&:focus {
 			border-color: #843534;
-			box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
 		}
 	}
 }
@@ -106,7 +106,7 @@ label {
 	}
 	.input-group-append {
 		.btn {
-			border-color: rgba(0,0,0,0.09);
+			border-color: rgba(0, 0, 0, 0.09);
 			border-radius: if-ltr(0rem 2rem 2rem 0rem, 2rem 0rem 0rem 2rem);
 			font-size: 0.7rem;
 			padding: 0.87rem;
@@ -167,12 +167,10 @@ textarea {
 }
 
 .input-group-btn {
-
 	.btn {
 		padding-top: 0.5rem;
 		padding-bottom: 0.5rem;
 	}
-
 }
 
 select {
@@ -197,8 +195,8 @@ select {
 }
 
 .fileupload .btn {
-    line-height: 20px;
-    margin-left: -5px;
+	line-height: 20px;
+	margin-left: -5px;
 }
 
 /* Forms Validations */
@@ -222,12 +220,12 @@ label {
 .form-errors-light {
 	.form-control {
 		&.error {
-			border-color: #FFF;
+			border-color: #fff;
 		}
 	}
 	label {
 		&.error {
-			color: #FFF;
+			color: #fff;
 		}
 	}
 }
@@ -236,7 +234,7 @@ label {
 .simple-search {
 	.form-control {
 		border-radius: if-ltr(1.3rem 0 0 1.3rem, 0 1.3rem 1.3rem 0 !important);
-		border-color: #EEE;
+		border-color: #eee;
 		border-#{$right}: 0;
 
 		&:focus {
@@ -245,7 +243,7 @@ label {
 	}
 	.input-group-append {
 		border-radius: if-ltr(0 1.3rem 1.3rem 0, 1.3rem 0 0 1.3rem);
-		border: 1px solid #EEE;
+		border: 1px solid #eee;
 		border-#{$left}: 0;
 		.btn {
 			background: transparent !important;
@@ -259,7 +257,7 @@ label {
 .captcha {
 	clear: both;
 	overflow: hidden;
-	background: #F2F2F2;
+	background: #f2f2f2;
 	text-align: center;
 	margin-bottom: 20px;
 	max-width: 160px;
@@ -290,7 +288,10 @@ label {
 	right: 2px;
 	border-radius: 3px;
 	padding: 2px 5px;
-	a, a:hover, a:focus, a:active {
+	a,
+	a:hover,
+	a:focus,
+	a:active {
 		color: #333;
 	}
 }
@@ -301,27 +302,79 @@ label {
 		margin-bottom: 0.7rem;
 	}
 	.form-control {
-	    padding: 0.7rem 1rem;
-	    border: 0;
-	    &::-webkit-input-placeholder {
-		  color: #202528;
-		  opacity: 0.5;
+		padding: 0.7rem 1rem;
+		border: 0;
+		&::-webkit-input-placeholder {
+			color: #202528;
+			opacity: 0.5;
 		}
 		&::-moz-placeholder {
-		  color: #202528;
-		  opacity: 0.5;
+			color: #202528;
+			opacity: 0.5;
 		}
 		&:-ms-input-placeholder {
-		  color: #202528;
-		  opacity: 0.5;
+			color: #202528;
+			opacity: 0.5;
 		}
 		&:-moz-placeholder {
-		  color: #202528;
-		  opacity: 0.5;
+			color: #202528;
+			opacity: 0.5;
 		}
 
 		&.error {
 			border-width: 2px;
 		}
 	}
+}
+
+/* select custom style*/
+.select-holder {
+	display: flex;
+	align-items: center;
+	border-top: 1px solid $color-grey;
+	border-bottom: 1px solid $color-grey;
+	margin-top: 15px;
+	padding: 10px 15px;
+	@include media-breakpoint-up(sm){
+		justify-content: flex-end;
+		border: none;
+		margin-top: 0;
+		padding: 0;
+	}
+
+	label{
+		font-weight: $font-weight-semibold;
+		margin-right: 15px;
+		margin-bottom: 0;
+	}
+
+	select + select{
+		margin-left: 10px;
+	}
+}
+
+.select-theme-stb select {
+	border: #333;
+	padding: 5px;
+	width: 100%;
+}
+
+// select extend class
+%select{
+	//background: url(../img/angle-arrow-down.png) no-repeat 94% #f8f8f8;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	padding: 0 10px;
+	cursor: pointer;
+	border: 1px solid $color-dark;
+}
+select.select-style1 {
+	max-width: 130px;
+	@extend %select;
+}
+select.select-style2 {
+	width: 100%;
+	border: none;
+	@extend %select;
+	// border-bottom: 1px solid #999;
 }
