@@ -136,4 +136,27 @@ function get_broker_profit_loss_calculator() {
 	  	 
 	wp_die();
 }
- 
+/*--------------------------------------------------------
+/*     Action for Calculate Margin Calculator
+/*---------------------------------------------------------*/
+add_action( 'wp_ajax_get_calculate_margin_calculator',  __NAMESPACE__ . '\\get_calculate_margin_calculator' );
+add_action( 'wp_ajax_nopriv_get_calculate_margin_calculator',  __NAMESPACE__ . '\\get_calculate_margin_calculator' );
+
+function get_calculate_margin_calculator(){
+	$nonce =  @$_REQUEST['security'];
+	if ( ! wp_verify_nonce( $nonce, 'gloabltop10stockbroker' ) ) {
+      	die( __( 'Security check', 'top10stockbroker' ) ); 
+   	}		
+	$output=array();
+	$post_id =  @$_REQUEST['post_id'];
+	$prefix =  @$_REQUEST['prefix'];
+	$script_name =  @$_REQUEST['script_name'];
+	$margin =  @$_REQUEST['margin'];
+	$share_price =  @$_REQUEST['share_price'];
+	$meta_data = sanitize_title($prefix .'-'. $script_name) ; 
+	$meta_value = get_post_meta($post_id , $meta_data , true); 
+	$meta_value =($meta_value)?$meta_value:0;
+	$output = array( 'meta_value' => $meta_value, 'margin' => $margin , 'share_price' => $share_price );
+	echo json_encode( $output );
+	exit;
+}
