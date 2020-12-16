@@ -319,6 +319,20 @@ add_filter('top10stockbroker_cpt', function ($array) {
                            
                         )
             );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Margin Calculator', 'top10stockbroker' ),
+                            __( 'Margin Calculators', 'top10stockbroker' ),
+                            'margin-calculator'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
     
     return $array;
 

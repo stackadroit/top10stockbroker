@@ -128,6 +128,7 @@ import singleOptionChain from './routes/single/single-option-chain';
 import templateOptionChain from './routes/single/single-option-chain';
 import singleBrokerComparison from './routes/brokerage/broker-comparison';
 import singleBrokerageCalculator from './routes/brokerage/brokerage-calculator';
+import singleMarginCalculator from './routes/brokerage/margin-calculator';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -169,6 +170,10 @@ const routes = new Router({
    Include Broker calculator js function
   */
   singleBrokerageCalculator,
+  /**
+   Include Margin calculator js function
+  */
+  singleMarginCalculator,
   // shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,

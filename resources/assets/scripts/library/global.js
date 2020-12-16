@@ -918,7 +918,7 @@ exports.theme = window.theme;
 				return this;
 		},
 		changeTab() {
-			alert('ddd');
+			// alert('ddd');
 		    
 		},
 		events: function() {
@@ -1072,5 +1072,64 @@ exports.theme = window.theme;
 	 
     };
   exports.ShareMarketEducation = ShareMarketEducation;
+
+}).apply(this, [jQuery]);
+
+// Register Tabs
+(function($) {
+
+  var initialized = false;
+
+  var PaTabs = {
+ 		defaults: {
+		},
+
+		initialize: function(opts) {
+				if (initialized) {
+					return this;
+				}
+
+				initialized = true;
+
+				this
+					.setOptions(opts)
+					.events();
+
+				return this;
+		},
+
+		setOptions: function(opts) {
+				this.options = $.extend(true, {}, this.defaults, opts);
+
+				return this;
+		},
+		changeTab() {
+			
+		    
+		},
+		events: function() {
+			$('ul.tabs').each(function () {
+	            var $active, $content, $links = jQuery(this).find('a');
+	             $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
+	            $active.addClass('active');
+	            $content = $($active[0].hash);
+	           $links.not($active).each(function () {
+	                jQuery(this.hash).hide();
+	            });
+	             jQuery(this).on('click', 'a', function (e) {
+	                $active.removeClass('active');
+	                $content.hide();
+	            $active = jQuery(this);
+	                $content = jQuery(this.hash);
+	            $active.addClass('active');
+	                $content.show();
+	              e.preventDefault();
+	            });
+	          });
+			return this;
+		},
+	 
+    };
+  exports.PaTabs = PaTabs;
 
 }).apply(this, [jQuery]);
