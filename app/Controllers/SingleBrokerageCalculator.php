@@ -26,4 +26,25 @@ class SingleBrokerageCalculator extends Controller
        	// print_r($choose_broker);
        	// exit;
     }
+
+    public function state_name(){
+        global $wpdb;
+        $state_array=array();
+        $rp_query = get_posts( array('posts_per_page' => -1, 'post_type' => 'state', 'orderby'=>'title','order'=> 'ASC') );
+        // print_r($rp_query);
+        // exit;
+        if ($rp_query) {
+            foreach ($rp_query as $key => $pd) {
+                $stamp_fee_id= get_post_meta($pd->ID, 'stamp_fee_id', true );
+                $state_name     = get_the_title($pd);
+                $state_array[$state_name]=$stamp_fee_id;
+            }
+               
+        }else{
+            $state_array=array();    
+        }
+        // print_r($state_array);
+        // exit;     
+        return $state_array;   
+    }
 }

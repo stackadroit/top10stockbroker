@@ -279,6 +279,20 @@ add_filter('top10stockbroker_cpt', function ($array) {
             );
     $array[] = array( 
                 'cpt' => array( 
+                            __( 'BK State', 'top10stockbroker' ),
+                            __( 'BK States', 'top10stockbroker' ),
+                            'state'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
+    $array[] = array( 
+                'cpt' => array( 
                             __( 'Brokerage', 'top10stockbroker' ),
                             __( 'Brokerages', 'top10stockbroker' ),
                             'brokerage-calculator'
