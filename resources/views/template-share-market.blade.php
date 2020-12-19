@@ -9,8 +9,7 @@
   	<!-- {{ $posts = json_encode($getposts) }} -->
     @include('partials.share-market.page-header')
     @include('partials.share-market.template-company-details')
-      <div id="test-chart-id"></div>
-    <div id="ajax-load-api-data">
+    <div id="ajax-load-api-data" data-post-id="{{get_the_ID()}}">
         <div id="chart-id"></div>
         <div id="sectors-id"></div>
         <div id="return-calculator-id"></div>
