@@ -21,7 +21,13 @@ function share_price_data_ajax_request(){
         switch ($data['page']) {
             case 'chart':
                 $section_title=get_post_meta($page_id,'co_graph_section_title',true);
-                $section_content=get_post_meta($page_id,'co_graph_section_content',true);;
+                if(empty($section_title)){
+                    $section_title=get_post_meta($page_id,'graph_section_title',true); 
+                }
+                $section_content=get_post_meta($page_id,'co_graph_section_content',true);
+                if(empty($section_content)){
+                    $section_content=get_post_meta($page_id,'graph_section_content',true); 
+                }
                 $template = 'partials.ajax.share-price.chart';
                 break;
             case 'history-price':
@@ -89,7 +95,13 @@ function share_price_data_ajax_request(){
                 break;
             case 'return-calculator':
                 $section_title=get_post_meta($page_id,'co_return_calculator_section_title',true);
+                if(empty($section_title)){
+                    $section_title=get_post_meta($page_id,'return_calculator_section_title',true);
+                }
                 $section_content=get_post_meta($page_id,'co_return_calculator_section_content',true);
+                if(empty($section_content)){
+                   $section_content=get_post_meta($page_id,'return_calculator_section_content',true); 
+                }
                 $template = 'partials.ajax.share-price.return-calculator';
                 break;
             case 'profit-loss':

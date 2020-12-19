@@ -114,6 +114,7 @@ export default {
              ];
           return data;
         }
+        // load Graph Data
         function get_stock_graph(dur,selli,resp_div){
           // sc_did = $('#sc_did').val();
           // sc_did =132215;
@@ -220,7 +221,9 @@ export default {
             var dur=$(this).data("filter");
             var selli=$(this).data("element");
             var resp_div=$(this).data("chart-element");
-            get_stock_graph(dur,selli,resp_div);
+            if(!$('#'+resp_div).find('.tv-lightweight-charts').length){
+                get_stock_graph(dur,selli,resp_div);
+            }
         });
  
   }).apply(this, [jQuery]);
