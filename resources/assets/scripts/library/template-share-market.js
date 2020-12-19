@@ -167,6 +167,7 @@
 			events: function() {
 				var self    = this,
 					stockMarketLive  = '#stock-market-live';
+          
           this.interval = setInterval(function(){
             var indexCode = $('#indicesIndexes').val();
             self.getStockMarket(indexCode,stockMarketLive);
