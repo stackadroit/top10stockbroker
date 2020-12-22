@@ -163,13 +163,11 @@ export default {
                 if ( param === undefined || param.time === undefined || param.point.x < 0 || param.point.x > width || param.point.y < 0 || param.point.y > height ) {
                     setLastBarText();   
                   } else {
-                    // console.log(param);
-                    // var price = param.seriesPrices.get(series);
-                    // dateStr = param.time.year +' - '+ param.time.month + ' - ' + param.time.day;
+                    var month_arr = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sept','Oct','Nov','Dec'];
+                    var dateStr = param.time.day +' - '+ month_arr[param.time.month] + ' - ' + param.time.year;
                     var price = param.seriesPrices.get(lineSeries);
-                    var price = param.seriesPrices.get(lineSeries);
-                    // console.log(price);
                     $('#mouseoveropenVal').html(price);
+                    $('#mouseoverDate').html(dateStr);
                     // toolTip.innerHTML = '<div style="font-size: 24px; margin: 4px 0px; color: #20262E"> AEROSPACE</div>'+ '<div style="font-size: 22px; margin: 4px 0px; color: #20262E">' + (Math.round(price * 100) / 100).toFixed(2) + '</div>' + '<div>' + dateStr + '</div>';
                   }
               });

@@ -314,9 +314,14 @@ function modal_popup() {
 }
 
 
-
-
-add_action("wp_ajax__load_city_list", function (){
+/**
+ * Load Share Market Page Template and Single Page Content
+ * Through Ajax
+ * @return array
+ */
+add_action( 'wp_ajax__load_city_list',  __NAMESPACE__ . '\\load_city_list' );
+add_action( 'wp_ajax_nopriv__load_city_list',  __NAMESPACE__ . '\\load_city_list' );
+function load_city_list(){
     $parent_term_id =($_REQUEST['parent_term_id'])?$_REQUEST['parent_term_id']:0;
     $locationIds= get_term_meta($parent_term_id, 'broker_locations_ids',true);
     $locationsHtml ='<option data-slug="" value="">Select City</option>';
@@ -335,27 +340,101 @@ add_action("wp_ajax__load_city_list", function (){
     }
     echo $locationsHtml;
     exit;
-});
-add_action("wp_ajax_nopriv__load_city_list", function (){
-    $parent_term_id =($_REQUEST['parent_term_id'])?$_REQUEST['parent_term_id']:0;
-    $locationIds= get_term_meta($parent_term_id, 'broker_locations_ids',true);
-    $locationsHtml ='<option data-slug="" value="">Select City</option>';
-    if($locationIds){
-        $locations = get_terms( 'locations', array(
-            'orderby' => 'name',
-            'order' => 'ASC',
-            'hide_empty' => true,
-            'include' =>(is_array($locationIds))?$locationIds:explode(',', $locationIds),
-        ));
-        if($locations){
-            foreach ($locations as $key => $value) {
-                $locationsHtml.='<option data-slug="'.$value->slug.'" value="'.$value->term_id.'">'.$value->name.'</option>';
-            }
+}
+ 
+/**
+ * Load Share Market Page Template and Single Page Content
+ * Through Ajax
+ * @return array
+ */
+add_action( 'wp_ajax_get_gold_silver_price_graph_data_',  __NAMESPACE__ . '\\get_gold_silver_price_graph_data' );
+add_action( 'wp_ajax_nopriv_get_gold_silver_price_graph_data_',  __NAMESPACE__ . '\\get_gold_silver_price_graph_data' );
+
+function get_gold_silver_price_graph_data() {
+    global $wpdb;
+    // $nonce = $_POST['nonce'];
+    if ( isset($_REQUEST) ) {
+        $cDate=date('Y-m-d');
+        //$cDate=date("Y-m-d", strtotime("+1 days"));
+        $dur = $_REQUEST['dur'];
+        $postId = $_REQUEST['postId'];
+         //$postId =52358;
+        switch ($dur) {
+            case '1D':
+                $prcdate =date("Y-m-d", strtotime("-1 days"));
+            break;
+            case '1W':
+                $prcdate =date("Y-m-d", strtotime("-7 days"));
+            break;
+            case '1M':
+                $prcdate =date("Y-m-d", strtotime("-30 days"));
+            break;
+            case '3M':
+                $prcdate =date("Y-m-d", strtotime("-3 month"));
+            break;
+            case '6M':
+                $prcdate =date("Y-m-d", strtotime("-6 month"));
+            break;
+            case '1Y':
+                $prcdate =date("Y-m-d", strtotime("-365 days"));
+            break; 
+            case '2Y':
+                $prcdate =date("Y-m-d", strtotime("-730 days"));
+            break;
+            case '5Y':
+                $prcdate =date("Y-m-d", strtotime("-1825 days"));
+            break;  
+            case 'ALL':
+                 $sql ="SELECT * FROM gold_silver_rate WHERE page_id= ".$postId ." order by date DESC;";
+            break;  
+            
+            default:
+                $dur ='ALL';
+                $sql ="SELECT * FROM gold_silver_rate WHERE page_id= ".$postId ." order by date DESC;";
+            break;
         }
-    }
-    echo $locationsHtml;
-    exit;
-});
+        if($dur !='ALL'){
+            $sql ="SELECT * FROM gold_silver_rate WHERE page_id= ".$postId ." AND type = 1 AND ( date  >= '".$prcdate."' AND date <= '".$cDate."' ) order by date DESC;";
+        }
+        
+        //echo $sql;
+        $priceResults = $wpdb->get_results($sql);
+        // print_r($priceResults);
+        foreach ($priceResults as $key => $rowObj) {
+            if($dur == '1D'|| $dur =='1W'){
+                $data[] =array(
+                    'time'=>date('Y-m-d-H-i',strtotime($rowObj->date)),
+                    'price'=>$rowObj->t22_1_rate,
+                    'open'=>$rowObj->t22_1_rate,
+                    'high'=>$rowObj->t24_1_rate,
+                    'low'=>$rowObj->t22_1_rate,
+                    'volume'=>$rowObj->t22_1_rate,
+                    'value'=>$rowObj->t24_1_rate,
+                );
+            }else{
+
+             $data[] =array(
+                    'time'=>date('Y-m-d',strtotime($rowObj->date)),
+                    'price'=>$rowObj->t22_1_rate,
+                    'open'=>$rowObj->t22_1_rate,
+                    'high'=>$rowObj->t24_1_rate,
+                    'low'=>$rowObj->t22_1_rate,
+                    'volume'=>$rowObj->t22_1_rate,
+                    'value'=>$rowObj->t24_1_rate,
+                );
+            }
+
+        }
+        $chartResponse['g1']= $data;
+        $chartResponse['newsdata']=null;
+        $chartResponse['data']=null;
+        // echo json_encode($chartResponse);
+        echo json_encode($data);
+        exit;
+        
+     }
+    die();
+}
  
 
 

@@ -100,6 +100,9 @@ import zeroCouponBondValueCalculator from './routes/shortcode-calculator/calcula
 //Shortcodes
 import quickerslider from './routes/shortcodes/quickerslider';
 import GoldInvestmentCalculator from './routes/shortcodes/goldinvestmentcalculator';
+// Gold Silver Graph js
+import pageGoldRateData from './routes/shortcodes/gold-silver-price-graph';
+import pageChild from './routes/shortcodes/gold-silver-price-graph';
 /**
  Js For Branches Single Page (CPT) Branche Template Page
 */
@@ -239,6 +242,9 @@ const routes = new Router({
   //shortcodes
   quickerslider,
   GoldInvestmentCalculator,
+  // Gold Rate Graph js include
+  pageGoldRateData,
+  pageChild,
 });
 
 // Load Events
