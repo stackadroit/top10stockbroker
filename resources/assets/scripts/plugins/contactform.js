@@ -27,7 +27,7 @@
 
 				return this;
 			},
-
+			
 			init: function() {
 				if ( typeof global_vars.wpcf7 === 'undefined' || global_vars.wpcf7 === null ) {
 					return; 
@@ -57,8 +57,8 @@
 
 					$( 'div.wpcf7 > form' ).each( function() {
 						var $form = $( this );
+						wpcf7.formValidation(this)
 						wpcf7.initForm( $form );
-
 						if ( wpcf7.cached ) {
 							wpcf7.refill( $form );
 						}
@@ -181,7 +181,72 @@
 						$( this ).val( val );
 					} );
 				};
+				wpcf7.formConditionCheck= function($el, $regex){
+			      	if (!$($el).val().match($regex)) {
+			    		$($el).parent().find('.emsg').removeClass('d-none');
+			    	}else{
+			    		$($el).parent().find('.emsg').addClass('d-none');
+			    	}
+			    };
+				wpcf7.formValidation =function(formEle){
+			      	$(formEle).find('input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+					$(formEle).find('input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+					$(formEle).find('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
+					$(formEle).find('.wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
+			        
+			        $regexname = /^([a-zA-Z ]){1,100}$/;
+			        $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/;
 
+			        $(document).on('blur','input[name="cf7s-name"],input[name="cf7s-City"]',function(key){
+			        	wpcf7.formConditionCheck(this, $regexname);
+			        });
+
+			        $(document).on('blur','input[name="cf7s-phone"]',function(key){
+			        	wpcf7.formConditionCheck(this, $regexPhone);
+			        });
+
+			        var sumbmit_form_data= '';
+			        $(document).on('click','.wpcf7-submit',function(e) {
+			        	e.preventDefault();
+			        	var Er = 0;
+			        	var form = $(this).closest('form.wpcf7-form');
+			 			var name = $(form).find('input[name="cf7s-name"]');
+			 			var city = $(form).find('input[name="cf7s-City"]');
+			 			var number = $(form).find('input[name="cf7s-phone"]');
+
+			 			wpcf7.formConditionCheck(name, $regexname);
+			 			if (!$(name).val().match($regexname)) {
+			 				Er = 1;
+			 			}
+
+			 			wpcf7.formConditionCheck(city, $regexname);
+			 			if (!$(city).val().match($regexname)) {
+			 				Er = 2;
+			 			}
+
+			 			wpcf7.formConditionCheck(number, $regexPhone);
+			 			if (!$(number).val().match($regexPhone)) {
+			 				Er = 2;
+			 			}
+
+			 			if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
+			                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
+			            }else{
+			                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
+				            Er = 4;
+			            } 
+
+			            if(Er){
+			            	console.log(Er);
+			            	return false; 
+			            }else{
+			            	$form= $(form);
+			            	wpcf7.submit($form);
+			            	// return true;
+			            }
+			        });
+
+				};
 				wpcf7.submit = function( form ) {
 					if ( typeof window.FormData !== 'function' ) {
 						return;
