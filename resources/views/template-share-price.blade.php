@@ -4,6 +4,7 @@
 
 @extends('layouts.app-full')
 @section('content')
+  @include('partials.suggestion-menu')
   @while(have_posts()) @php the_post() @endphp
     @include('partials.share-price.template-page-header')
     @include('partials.share-price.template-company-details')

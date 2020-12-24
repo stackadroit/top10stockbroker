@@ -168,3 +168,74 @@ function create_calculator_tax() {
             )  
         );
 }
+
+/**
+*   tab filter in  Metabox in CPTS
+*/
+add_action('admin_init', 'tab_filter_add_meta_boxes', 1);
+function tab_filter_add_meta_boxes() {
+    add_meta_box( 'tab_filter', 'Tab Fields', 'tab_filter_meta_box_display', array( 'share-market','share-price','branches', 'brokerage-calculator','margin-calculator', 'broker-comparison', 'page' , 'post' , 'state','option-chain','futures' ,'news','sub-brokers','stock-broker'), 'normal', 'default');
+}
+/**
+*   Function to display in backend.
+*/
+function tab_filter_meta_box_display() {
+    global $post;
+    $tab_filter_id = get_post_meta( $post->ID, 'tab_filter_id', true);
+    wp_nonce_field( 'tab_filter_meta_box_nonce2', 'tab_filter_meta_box_nonce2' );
+
+    $args = array(
+      'numberposts' => -1,
+      'post_type'   => 'tabfilter'
+    );
+     
+    $tab_post = get_posts( $args );
+    ?>
+    <select name="tab_filter_id">
+        <option value="0" > Select Filter Tab </option>
+        <?php
+            if( $tab_post ){
+                foreach( $tab_post as $post ){
+                     setup_postdata( $post ); 
+                     $selct_id = ( $tab_filter_id == $post->ID ) ? 'selected' : '';
+                    echo '<option value="'.$post->ID.'" '.$selct_id.'>'.get_the_title().'</option>';
+                }
+                  wp_reset_postdata();
+            }
+        ?>
+    </select>
+    
+
+    
+    <?php
+}
+
+add_action('save_post', 'tab_filter_meta_box_save');
+function tab_filter_meta_box_save( $post_id) {
+    // check autosave
+    if ( wp_is_post_autosave( $post_id ) ) {
+        return __( 'autosave', 'mybusiness' );
+    }
+    //check post revision
+    if ( wp_is_post_revision( $post_id ) ) {
+        return __( 'revision', 'mybusiness' );
+    }
+    // check permissions
+    if ( isset( $_POST['post_type'] ) && 'page' == sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) ) {
+        if ( ! current_user_can( 'edit_page', $post_id ) ) {
+            return __( 'cannot edit page' , 'mybusiness' );
+        }
+    } elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return __( 'cannot edit post', 'mybusiness' );
+    }
+    $old = get_post_meta( $post_id, 'tab_filter_id', true);
+    $new = array();
+    $tab_filter_id = $_POST['tab_filter_id'];
+    $new = stripslashes( strip_tags( $tab_filter_id ) );
+    if ( !empty( $new ) && $new != $old ){
+        update_post_meta( $post_id, 'tab_filter_id', $new );
+    }
+    elseif ( empty($new) && $old ){
+        update_post_meta( $post_id, 'tab_filter_id', $old );
+    }
+}

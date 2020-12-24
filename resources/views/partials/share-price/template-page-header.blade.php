@@ -11,33 +11,6 @@
   @endphp
 <div class="section-companydetails section-padding">
         <div class="inner-wrap">
-
-       @php
-      $tab_id =  get_post_meta( get_the_id() , 'tab_filter_id' , true );
-        if( !empty( $tab_id ) ) :
-            $get_meta = get_post_meta( $tab_id , 'repeatable_fields' , true );
-                global $wp;
-                $current_url = home_url( add_query_arg( array(), $wp->request ) ) .'/';
-            @endphp
-            <div class="custom-menu-class">
-                <ul>
-                    @php 
-                    foreach( $get_meta as $gm ){ 
-                        $current_class =  ( $current_url == $gm['purl'] ) ? 'current': ''; 
-                        
-                
-                        echo'<li class="'.$current_class.'"><a href="'.$gm['purl'].'">'.$gm['ptitle'].'</a></li>';
-                    }
-                    
-                    @endphp
-                </ul>
-            </div><!-- custom menu class -->
-        @php
-        endif;
-        @endphp
-
-
-
           <h1 class="text-orange">{{ @$top_data['main_h1_title'] }}</h1>
           <p>{{ @$top_data['main_para_content'] }}</p>
       </div>

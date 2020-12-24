@@ -87,4 +87,5 @@ class TemplateShareMarket extends Controller
 	    $apiExchg =($indexCode <100)?'BSE':'NSE';
 	    return $apiExchg;
 	}
+	
 }

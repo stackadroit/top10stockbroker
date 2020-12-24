@@ -3,6 +3,7 @@
 --}}
 @extends('layouts.app-full')
 @section('content')
+  @include('partials.suggestion-menu')    
   @while(have_posts()) @php the_post()
     @endphp
     @if($get_detail_page)
