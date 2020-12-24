@@ -106,7 +106,11 @@ export default {
         	var $form = $( '.load-model .wpcf7-form' );
         	wpcf7.initForm( $form );
   		});
-
+  		// Show contact model on button click
+        $(document)
+        .on('click','.custom-hellobar', function (event, eventInfo) {
+        	$("#popup-main").modal('show');
+  		});
         // super tread mill
         if (typeof SuperTreadmill !== 'undefined') {
 			SuperTreadmill.initialize();

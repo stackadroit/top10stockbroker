@@ -291,7 +291,13 @@ function modal_popup() {
 
     switch ($data['model_action']) {
         case 'custom-hellobar':
-            $template = 'partials.ajax.modalpopup';
+            if($data['contactform']){
+                $template = 'partials.ajax.modalpopup';
+            }else{
+                $template = 'partials.ajax.modalpopup-demat-default';
+                $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
+            }
+            
             break;
         case 'mbf-search-wrap':
             $template = 'partials.ajax.modalpopup-mdf-search';
@@ -308,7 +314,6 @@ function modal_popup() {
     }
 
     $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
-
     echo \App\template($template, $data);
     die();
 }
