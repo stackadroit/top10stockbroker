@@ -106,11 +106,23 @@ export default {
         	var $form = $( '.load-model .wpcf7-form' );
         	wpcf7.initForm( $form );
   		});
+
   		// Show contact model on button click
         $(document)
         .on('click','.custom-hellobar', function (event, eventInfo) {
         	$("#popup-main").modal('show');
   		});
+
+  		// Banner Class Image image class click Event Capture
+        $(document)
+        .on('click','.open-b2cpopup', function (event) {
+        	event.preventDefault();
+        	var clickedClass =$(this).attr('class');
+        	$("#popup-main").attr('data-mini-popup',clickedClass);
+        	$("#popup-main").find('.modal-dialog').css('max-width','350px');
+        	$("#popup-main").modal('show');
+  		});
+  		
         // super tread mill
         if (typeof SuperTreadmill !== 'undefined') {
 			SuperTreadmill.initialize();

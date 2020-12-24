@@ -287,32 +287,64 @@ function modal_popup() {
     
     $shortcode_contactform = $data['contactform'];
     
-    $data['auto_status'] = $model_auto;
-
-    switch ($data['model_action']) {
-        case 'custom-hellobar':
-            if($data['contactform']){
-                $template = 'partials.ajax.modalpopup';
-                $shortcode_contactform = get_post_meta( $data['post_id'], $shortcode_contactform, true );
-            }else{
-                $template = 'partials.ajax.modalpopup-demat-default';
+    
+    // $data['auto_status'] = $model_auto;
+    if($data['model_action'] =='mini-popup'){
+        $template = 'partials.ajax.modal-mini-popup';
+        $modelClass =@$_REQUEST['model_auto'];
+        switch ($modelClass) {
+            case 'open-b2cpopup':
+                $data['head_title']='Share your details & Open Demat A/C Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17404" title="Image/Link Click - B2C Form"]';
+                break;
+            case 'open-b2bpopup':
+                $data['head_title']='Share your details & Become Sub Broker Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17405" title="Image/Link Click - B2B Form"]';
+                break;
+            case 'open-ipopopup':
+                $data['head_title']='Share your details & Get IPO Allotment Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17403" title="Image/Link Click - IPO Form"]';
+                break;
+            case 'open-pmspopup':
+                $data['head_title']='Share your details & Invest in PMS Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17402" title="Image/Link Click - PMS Form"]';
+                break;
+            default:
                 $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
-            }
-            
-            break;
-        case 'mbf-search-wrap':
-            $template = 'partials.ajax.modalpopup-mdf-search';
-            $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
-            break;
-        default:
-            if(@$data['hello_bar'] == 'yes'){ 
-                $template = 'partials.ajax.modalpopup-default';
-                $shortcode_contactform = '[contact-form-7 id="5057" title="Default PopUp Contact Form"]';
-            }else{
-                $template = 'partials.ajax.modalpopup-demat-default';
-                $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
-            }
-            break;
+                break;
+        }
+        
+    }else{
+        $data['auto_status'] = ($model_auto =='false')?false:true;
+        switch ($data['model_action']) {
+            case 'custom-hellobar':
+                if($data['contactform']){
+                    $template = 'partials.ajax.modalpopup';
+                    $shortcode_contactform = get_post_meta( $data['post_id'], $shortcode_contactform, true );
+                }else{
+                    $template = 'partials.ajax.modalpopup-demat-default';
+                    $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
+                }
+                
+                break;
+            case 'mbf-search-wrap':
+                $template = 'partials.ajax.modalpopup-mdf-search';
+                $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
+                break;
+            default:
+                if(@$data['hello_bar'] == 'yes'){ 
+                    $template = 'partials.ajax.modalpopup-default';
+                    $shortcode_contactform = '[contact-form-7 id="5057" title="Default PopUp Contact Form"]';
+                }else{
+                    $template = 'partials.ajax.modalpopup-demat-default';
+                    $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
+                }
+                break;
+        }
     }
     $data['do_contactform'] = $shortcode_contactform;
     // print_r($template);

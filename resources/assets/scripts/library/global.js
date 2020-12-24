@@ -463,7 +463,7 @@ exports.theme = window.theme;
               data : {
                 'action': 'modal_popup',
                 'security': global_vars.ajax_nonce,
-                'model_auto': auto,
+                'model_auto': auto, 
                 'model_action': modelAction,
                 'post_id': self.options.post_id,
                 'contactform': self.options.contactform,
@@ -483,7 +483,11 @@ exports.theme = window.theme;
             		$(document).trigger('loadReactSlickIcons', [modelAction]);
             	}
             	
-            	if (modelAction == "custom-hellobar") {
+            	if (modelAction == "custom-hellobar" || modelAction == "mini-popup") {
+            		// Condition For Mini Popup
+            		if(modelAction != "mini-popup"){
+            			modal.find('.modal-dialog').css('max-width','800px');
+            		}
             		self.formValidation();
             		$(document).trigger('reinitContactform', [modelAction]);
             	}
@@ -571,17 +575,24 @@ exports.theme = window.theme;
         var self    = this,
           $document  = $(document),
           $rootnode  = $("#popup-main");
-
           $rootnode
           .on('show.bs.modal', function (event) {
         		var modelAction = $(event.relatedTarget); // Button that triggered the modal
         		var auto = false;
         		if (! modelAction.length) {
-        			//console.log('auto');
-          			modelAction = 'custom-hellobar';
-          			auto = true;
+        			// Condition For Mini Popup
+        			if($rootnode.data('mini-popup')){
+        				// console.log('mini-popup');
+        				modelAction = 'mini-popup';
+          				auto = $rootnode.data('mini-popup');
+        			}else{
+          				$rootnode.find('.modal-dialog').css('max-width','800px');
+        				modelAction = 'custom-hellobar';
+          				auto = true;
+        			}
         		}else{
         			//console.log('onlick');
+          			$rootnode.find('.modal-dialog').css('max-width','800px');
           			modelAction = modelAction.get(0).id;
         		}
         		var modal = $(this);
