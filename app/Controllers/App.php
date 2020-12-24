@@ -49,7 +49,6 @@ class App extends Controller
         $post = $wp_query->post;
         $hello_bar = get_post_meta( $post->ID, 'hello-checkbox', true );
         $hellobar_type = get_post_meta( $post->ID, 'wpcf-hello-bar-type', true );
-
         switch ($hellobar_type) {
             case 'IPO':
                 $data = array(
@@ -99,7 +98,7 @@ class App extends Controller
                     'custom_hellobar' => 'wpcf-hello-bar-mutual-fund-content',
                 );
                 break; 
-            case 'FRANCHISE':
+            case 'default':
                 $data = array(
                     'contactform' => 'wpcf-default-form-shortcode', 
                     'form_left_content' => 'wpcf-popup-left-side-content-on-form', 

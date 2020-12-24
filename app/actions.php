@@ -293,6 +293,7 @@ function modal_popup() {
         case 'custom-hellobar':
             if($data['contactform']){
                 $template = 'partials.ajax.modalpopup';
+                $shortcode_contactform = get_post_meta( $data['post_id'], $shortcode_contactform, true );
             }else{
                 $template = 'partials.ajax.modalpopup-demat-default';
                 $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
@@ -301,6 +302,7 @@ function modal_popup() {
             break;
         case 'mbf-search-wrap':
             $template = 'partials.ajax.modalpopup-mdf-search';
+            $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
             break;
         default:
             if(@$data['hello_bar'] == 'yes'){ 
@@ -312,8 +314,9 @@ function modal_popup() {
             }
             break;
     }
-
-    $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
+    $data['do_contactform'] = $shortcode_contactform;
+    // print_r($template);
+    // print_r($data);
     echo \App\template($template, $data);
     die();
 }
