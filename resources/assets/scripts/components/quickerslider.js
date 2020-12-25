@@ -18,29 +18,33 @@ class QuickerSlider extends React.Component {
     }
 
     getData(){
-	    // const rootElement = document.getElementById('list-slider');
-	    const rootElement = document.getElementById('list-slider-modal');
+	    var rootElement = document.getElementById('list-slider');
+	   	// console.log(rootElement);
+	   	if(rootElement  == null){
+		   rootElement = document.getElementById('list-slider-modal');
+		   console.log(rootElement);
+		}
 		const data = new FormData();
-		data.append('ID', rootElement.getAttribute('data-id'));
-		data.append('action', 'icon_slider_data_ajax_request');
-		data.append('nonce', global_vars.ajax_nonce);
+			data.append('ID', rootElement.getAttribute('data-id'));
+			data.append('action', 'icon_slider_data_ajax_request');
+			data.append('nonce', global_vars.ajax_nonce);
 
-		axios.post('/wp-admin/admin-ajax.php', data)
-	    .then(res => {
-	        const result = res.data;
-	        //console.log(result);
-	        this.setState({
-	            isLoaded : true,
-		        lists : result
-		    });
-	    })
-	    .catch(error =>  {
-			    //console.log(error);
-			    this.setState({
-                    isLoaded: true,
-                    error
-                });
-		});
+			axios.post('/wp-admin/admin-ajax.php', data)
+		    .then(res => {
+		        const result = res.data;
+		        //console.log(result);
+		        this.setState({
+		            isLoaded : true,
+			        lists : result
+			    });
+		    })
+		    .catch(error =>  {
+				    //console.log(error);
+				    this.setState({
+	                    isLoaded: true,
+	                    error
+	                });
+			});
 	}
 
 	render() {

@@ -68,7 +68,7 @@
 				wpcf7.getId = function( form ) {
 					return parseInt( $( 'input[name="_wpcf7"]', form ).val(), 10 );
 				};
-
+				var sumbmit_form_data='';
 				wpcf7.initForm = function( form ) {
 					var $form = $( form );
 
@@ -83,6 +83,7 @@
 
 						if ( typeof window.FormData === 'function' ) {
 							wpcf7.submit( $form );
+
 							event.preventDefault();
 						}
 					} );
@@ -258,12 +259,13 @@
 					wpcf7.clearResponse( $form );
 
 					var formData = new FormData( $form.get( 0 ) );
-
+					var sumbmit_form_data =$form.serialize();
 					var detail = {
 						id: $form.closest( 'div.wpcf7' ).attr( 'id' ),
 						status: 'init',
 						inputs: [],
-						formData: formData
+						formData: formData,
+						sumbmit_form_data:sumbmit_form_data
 					};
 
 					$.each( $form.serializeArray(), function( i, field ) {
@@ -337,10 +339,11 @@
 
 						wpcf7.triggerEvent( data.into, 'submit', detail );
 
-						if ( 'mail_sent' == data.status ) {
+						if ('mail_sent'== data.status ) {
+
 							$form.each( function() {
 								this.reset();
-							} );
+							});
 
 							wpcf7.toggleSubmit( $form );
 							wpcf7.resetCounter( $form );
@@ -394,6 +397,7 @@
 						contentType: false
 					} ).done( function( data, status, xhr ) {
 						ajaxSuccess( data, status, xhr, $form );
+
 						$( '.ajax-loader', $form ).removeClass( 'is-active' );
 					} ).fail( function( xhr, status, error ) {
 						var $e = $( '<div class="ajax-error"></div>' ).text( error.message );
@@ -408,8 +412,28 @@
 					} );
 
 					$( target ).get( 0 ).dispatchEvent( event );
+					if(name =='mailsent'){
+						wpcf7.leadPostApi(target,detail);
+					}
+					if(name =='mailfailed'){
+						
+					}
 				};
-
+				//Call After Mail successfully Send.
+				wpcf7.leadPostApi =function( form, detail ){
+					$.ajax({
+		                url : global_vars.ajax_url,
+		                type : 'post',
+		                data : {
+		                    action : 'lead_data_post_to_api',
+		                    post_data :detail.sumbmit_form_data,
+		                },
+		                success : function( response ) {
+		                    console.log(response);
+		                }
+		            });
+					
+				};
 				wpcf7.setStatus = function( form, status ) {
 					var $form = $( form );
 					var prevStatus = $form.data( 'status' );

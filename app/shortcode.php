@@ -1362,40 +1362,49 @@ add_shortcode('EasyTabWidget', function ($atts){
     $data['ele_title'] = get_the_title();
     $data['post_id'] = $post_id;
     $data['tabs_count'] = get_post_meta($post_id,'pa1_wp_easy_tabs_count',true);
-    $data['tabs_data'] = unserialize(get_post_meta($post_id,'pa1_wp_easy_tabs_data',true));
-    $data['totalCount'] =count($data['tabs_data']);
-    $data['tabs_type'] = get_post_meta($post_id,'pa1_wp_easy_tabs_type',true);
+    $data['tabs_data'] =array();
+    $data['totalCount'] =0;
+    $data['tabs_type'] ='';
+    if($data['tabs_count']){
+        $data['tabs_data'] = unserialize(get_post_meta($post_id,'pa1_wp_easy_tabs_data',true));
+        $data['totalCount'] =@count($data['tabs_data']);
+        $data['tabs_type'] = get_post_meta($post_id,'pa1_wp_easy_tabs_type',true);
+    }
+    
+    // print_r(count(trim($data['tabs_data'])));
     // print_r($data);
     // exit;
-    foreach ($data['tabs_data'] as $idx => $tabs) {
-         print_r($value);
-         if($tabs['tab_option'] == 1){
-            $tabs_post_type =@$tabs['tabs_post_type'];
-            $tabs_category  =@$tabs['tabs_category'];
-            $args =array(
-                'post_type'=>$tabs_post_type,
-                'order'=>'DESC',
-                'orderby'=>'date',
-                'numberposts' =>10,
-            );
-            if($tabs_category){
-                $args['category']= $tabs_category;
-            }
-            $tabData =get_posts($args);
-            foreach ($tabData as $key => $pd) {
-                $tabs_link[] =$pd->post_title;
-                $tabs_link_to[] =get_the_permalink($pd->ID);
-                $post_modified[] =date('F j, Y',strtotime($pd->post_modified));
-                $categories[] =get_the_category_list(',','', $pd->ID);
-            }
-            $data['tabs_data'][$idx]['tabs_link']=$tabs_link;
-            $data['tabs_data'][$idx]['tabs_link_to']=$tabs_link_to;
-            $data['tabs_data'][$idx]['post_modified']=$post_modified;
-            $data['tabs_data'][$idx]['categories']=$categories;
-         }
-         // echo '<pre>';
-         // print_r($data);
-         // exit; 
+    if(@count($data['tabs_data'])){
+        foreach ($data['tabs_data'] as $idx => $tabs) {
+             print_r($value);
+             if($tabs['tab_option'] == 1){
+                $tabs_post_type =@$tabs['tabs_post_type'];
+                $tabs_category  =@$tabs['tabs_category'];
+                $args =array(
+                    'post_type'=>$tabs_post_type,
+                    'order'=>'DESC',
+                    'orderby'=>'date',
+                    'numberposts' =>10,
+                );
+                if($tabs_category){
+                    $args['category']= $tabs_category;
+                }
+                $tabData =get_posts($args);
+                foreach ($tabData as $key => $pd) {
+                    $tabs_link[] =$pd->post_title;
+                    $tabs_link_to[] =get_the_permalink($pd->ID);
+                    $post_modified[] =date('F j, Y',strtotime($pd->post_modified));
+                    $categories[] =get_the_category_list(',','', $pd->ID);
+                }
+                $data['tabs_data'][$idx]['tabs_link']=$tabs_link;
+                $data['tabs_data'][$idx]['tabs_link_to']=$tabs_link_to;
+                $data['tabs_data'][$idx]['post_modified']=$post_modified;
+                $data['tabs_data'][$idx]['categories']=$categories;
+             }
+             // echo '<pre>';
+             // print_r($data);
+             // exit; 
+        }
     }
     // Echo the shortcode blade template
     if($data['tabs_type'] =='VT'){
