@@ -115,9 +115,21 @@ export default {
 
   		// Banner Class Image image class click Event Capture
         $(document)
-        .on('click','.open-b2cpopup', function (event) {
+        .on('click','.open-b2cpopup,.open-b2bpopup,.open-ipopopup,.open-pmspopup', function (event) {
         	event.preventDefault();
-        	var clickedClass =$(this).attr('class');
+        	var clickedClass ='';
+        	if($(this).hasClass('open-b2cpopup')){
+        		clickedClass='open-b2cpopup';
+        	}
+        	if($(this).hasClass('open-b2bpopup')){
+        		clickedClass='open-b2bpopup';
+        	}
+        	if($(this).hasClass('open-ipopopup')){
+        		clickedClass='open-ipopopup';
+        	}
+        	if($(this).hasClass('open-pmspopup')){
+        		clickedClass='open-pmspopup';
+        	}
         	$("#popup-main").attr('data-mini-popup',clickedClass);
         	$("#popup-main").find('.modal-dialog').css('max-width','350px');
         	$("#popup-main").modal('show');

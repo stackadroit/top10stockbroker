@@ -18,7 +18,8 @@ class QuickerSlider extends React.Component {
     }
 
     getData(){
-	    const rootElement = document.getElementById('list-slider');
+	    // const rootElement = document.getElementById('list-slider');
+	    const rootElement = document.getElementById('list-slider-modal');
 		const data = new FormData();
 		data.append('ID', rootElement.getAttribute('data-id'));
 		data.append('action', 'icon_slider_data_ajax_request');
