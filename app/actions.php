@@ -69,7 +69,8 @@ add_action( 'wp_ajax_brokercomparison_link_ajax_request',  __NAMESPACE__ . '\\br
 add_action( 'wp_ajax_nopriv_brokercomparison_link_ajax_request',  __NAMESPACE__ . '\\brokercomparison_link_ajax_request' );
 function brokercomparison_link_ajax_request() {
     if ( isset($_REQUEST) ):
-        $data = $_REQUEST['data'];
+        // $data = $_REQUEST['data'];
+        $data = $_REQUEST;
         $nonce =  @$data['security'];
         $paged = @$data['page_paths'];
         
