@@ -1,5 +1,7 @@
 import {SingleShareMarket}  from '../../library/single-share-market';
-import { createChart } from 'lightweight-charts';
+import React, { Component } from "react";
+import ReactDOM from 'react-dom';
+import ShareMarketChart from '../../components/graph/share-market-chart';
 export default {
   init() {
     // Load page section through ajax
@@ -77,116 +79,19 @@ export default {
     if (typeof SingleShareMarket !== 'undefined') {
       SingleShareMarket.initialize();
     }
-    // load Graph Data
-        function get_stock_graph(dur,selli,resp_div){
-          // sc_did = $('#sc_did').val();
-          // sc_did =132215;
-          var chartElement =resp_div;
-
-          var width = 1100;
-          var height = 300;
-          var indexCode =$('#indicesIndexesCode').val();
-          indexCode =(indexCode)?indexCode:123;
-          $.ajax({
-            type: "post",
-            dataType: "json",
-            url: global_vars.apiServerUrl + '/api/get-indices-graph-data',
-            data: {
-                'action':'get_indices_graph_data',
-                'dur':dur,
-                'indexCode':indexCode,
-                // 'finCode':finCode,
-            },
-            cache:false,
-            success:function(res){
-              // var data =res.stocks;
-              $('#'+chartElement).html('');
-              var data =res;
-              // console.log(data);
-              var width = 1100;
-              var height = 300;
-              // var height = 300;
-              const chart = createChart(chartElement, {height: height,
-                  rightPriceScale: {
-                    scaleMargins: {
-                      top: 0.35,
-                      bottom: 0.2,
-                    },
-                    borderVisible: true,
-                  },
-                  timeScale: {
-                    borderVisible: true,
-                  },
-                  grid: {
-                    horzLines: {
-                      color: '#eee',
-                      visible: true,
-                    },
-                    vertLines: {
-                      color: '#ffffff',
-                    },
-                  },
-                  crosshair: {
-                      horzLine: {
-                        visible: false,
-                        labelVisible: false
-                      },
-                      vertLine: {
-                        visible: true,
-                        style: 0,
-                        width: 2,
-                        color: 'rgba(32, 38, 46, 0.1)',
-                        labelVisible: false,
-                      }
-                  },
-                }); 
-              const lineSeries = chart.addAreaSeries({  
-                  topColor: 'rgba(19, 68, 193, 0.4)', 
-                  bottomColor: 'rgba(0, 120, 255, 0.0)',
-                  lineColor: 'rgba(19, 40, 153, 1.0)',
-                  lineWidth:3
-              });
-               
-              // var data = getGraphData();
-              lineSeries.setData(data);
-              function setLastBarText() {
-                var dateStr = data[data.length - 1].value + data[data.length - 1].time.year + ' - ' + data[data.length - 1].time.month + ' - ' +  data[data.length - 1].time.day;
-                // console.log(dateStr);
-                //  toolTip.innerHTML =  '<div style="font-size: 24px; margin: 4px 0px; color: #20262E"> AEROSPACE</div>'+ '<div style="font-size: 22px; margin: 4px 0px; color: #20262E">' + data[data.length-1].value + '</div>' +
-                //   '<div>' + dateStr + '</div>';
-              }
-
-              setLastBarText(); 
-
-              chart.subscribeCrosshairMove(function(param) {
-                // 
-                if ( param === undefined || param.time === undefined || param.point.x < 0 || param.point.x > width || param.point.y < 0 || param.point.y > height ) {
-                    setLastBarText();   
-                  } else {
-                    var month_arr = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sept','Oct','Nov','Dec'];
-                    var dateStr = param.time.day +' - '+ month_arr[param.time.month] + ' - ' + param.time.year;
-                    var price = param.seriesPrices.get(lineSeries);
-                    $('#mouseoveropenVal').html(price);
-                    $('#mouseoverDate').html(dateStr);
-                    // toolTip.innerHTML = '<div style="font-size: 24px; margin: 4px 0px; color: #20262E"> AEROSPACE</div>'+ '<div style="font-size: 22px; margin: 4px 0px; color: #20262E">' + (Math.round(price * 100) / 100).toFixed(2) + '</div>' + '<div>' + dateStr + '</div>';
-                  }
-              });
-            },
-            error: function(errorThrown){
-                // $(liveUpdateElement).find(".loading-data").remove();
-                console.log(errorThrown);
-            }
-          });  
-        }
-        $(document).on('click','.shart_market_chart',function(e){
+    // Graph Tabs click event.
+    $(document).on('click','.shart_market_chart',function(e){
             var dur=$(this).data("filter");
             var selli=$(this).data("element");
             var resp_div=$(this).data("chart-element");
-            if(!$('#'+resp_div).find('.tv-lightweight-charts').length){
-                get_stock_graph(dur,selli,resp_div);
+            if(!$('#'+resp_div).find('.highcharts-container ').length){
+              ReactDOM.render( 
+                <ShareMarketChart />,
+                document.getElementById(resp_div)
+              );
             }
         });
-    
+
   }).apply(this, [jQuery]);
 
   },

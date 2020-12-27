@@ -1,4 +1,4 @@
-import { createChart } from 'lightweight-charts';
+// import { createChart } from 'lightweight-charts';
 export default {
   init() {
     // alert('d');
@@ -148,7 +148,7 @@ export default {
         var resp_div=$(this).data("chart-element");
         var post_id=$(this).data("post-id");
         if(!$('#'+resp_div).find('.tv-lightweight-charts').length){
-          get_gold_silver_graph(dur,selli,resp_div,post_id);
+          // get_gold_silver_graph(dur,selli,resp_div,post_id);
         }
       });
   }).apply(this, [jQuery]);

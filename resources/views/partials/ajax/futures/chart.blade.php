@@ -28,13 +28,13 @@
             </div>
             <div id="li_1d" class="tab_content">
                 <!-- <div class="stb_graph"> -->
-                    <div id="onedaychart" class="tab-pane in fade stock_graphs"></div>
+                    <div id="onedaychart"></div>
                 <!-- </div> -->
             </div>
 
             <div id="li_1w" class="tab_content">
                 <!-- <div class="stb_graph"> -->
-                 <div id="oneweekchart" class="tab-pane in fade stock_graphs"></div>
+                 <div id="oneweekchart"></div>
                 <!-- </div> -->
             </div>
              <div id="li_1m" class="tab_content">

@@ -4,8 +4,6 @@
            <h2>{{ @$section_title }}</h2>
             <p>{{ @$section_content }}</p>
         </div>
-        <!-- /.section-head -->
-                
         <div class="month_tabs">
             <ul class="tabs nested_tab">
                 <li><a href="#li_1d" title="1D" data-filter="1D" data-element="li_1d" data-chart-element="onedaychart" class="shart_market_chart">1D</a></li>
@@ -19,7 +17,7 @@
                 <li><a href="#li_all" title="ALL" data-filter="ALL" data-element="li_all" data-chart-element="allchart" class="shart_market_chart">ALL</a></li>
             </ul>  
             
-            <div class="details_container  bg-light">
+            <div class="details_container  bg-light" style="display:none;">
               <ul class="details">
                 <li><span id="mouseoverDate"></span></li>
                 <li id="openVal"><strong>Open :</strong> <span id="mouseoveropenVal"></span></li>
@@ -31,13 +29,13 @@
             </div>
             <div id="li_1d" class="tab_content">
                 <!-- <div class="stb_graph"> -->
-                    <div id="onedaychart" class="tab-pane in fade stock_graphs"></div>
+                    <div id="onedaychart"></div>
                 <!-- </div> -->
             </div>
 
             <div id="li_1w" class="tab_content">
                 <!-- <div class="stb_graph"> -->
-                 <div id="oneweekchart" class="tab-pane in fade stock_graphs"></div>
+                 <div id="oneweekchart"></div>
                 <!-- </div> -->
             </div>
              <div id="li_1m" class="tab_content">
@@ -62,9 +60,5 @@
                 <div id="allchart"></div>
             </div>
         </div>
-
-        <!-- /.month_tabs -->
-
     </div>
-    <!-- /.inner-wrap -->
 </div>

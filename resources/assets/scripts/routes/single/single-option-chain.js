@@ -1,5 +1,8 @@
 import {SingleOptionChain}  from '../../library/single-option-chain';
-import { createChart } from 'lightweight-charts';
+import React, { Component } from "react";
+import ReactDOM from 'react-dom';
+import OptionChainChart from '../../components/graph/option-chain-chart';
+
 export default {
   init() {
     // Load page section through ajax
@@ -263,11 +266,13 @@ export default {
         var dur=$(this).data("filter");
         var selli=$(this).data("element");
         var resp_div=$(this).data("chart-element");
-        // console.log($('#'+resp_div).find('.tv-lightweight-charts').length);
-        if(!$('#'+resp_div).find('.tv-lightweight-charts').length){
-            get_stock_graph(dur,selli,resp_div);
+        if(!$('#'+resp_div).find('.highcharts-container ').length){
+          ReactDOM.render( 
+            <OptionChainChart />,
+            document.getElementById(resp_div)
+          );
         }
-    });
+      });
   }).apply(this, [jQuery]);
 
   },
