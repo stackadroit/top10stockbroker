@@ -72,7 +72,7 @@ class TemplateSharePrice extends Controller
 	}
 	public function finCode(){
 		$finCode = get_post_meta(get_the_ID(),'co_fincode',true);
-		$finCode =($finCode)?$finCode:'132215';
+		$finCode =($finCode)?$finCode:'100180';
 	    return $finCode;
 	}
 	public function cpnlistedDb(){

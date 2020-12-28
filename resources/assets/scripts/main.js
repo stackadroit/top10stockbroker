@@ -66,7 +66,7 @@ import holdingPeriodReturnCalculator from './routes/shortcode-calculator/calcula
 import rateOfInflationCalculator from './routes/shortcode-calculator/calculator31';
 import interestCoverageRatioCalculator from './routes/shortcode-calculator/calculator32';
 import inventoryTurnoverRatioCalculator from './routes/shortcode-calculator/calculator33';
-import netProfitMargin1Calculator from './routes/shortcode-calculator/calculator34';
+import netProfitMarginCalculator from './routes/shortcode-calculator/calculator34';
 import netWorkingCapitalCalculator from './routes/shortcode-calculator/calculator35';
 import netAssetValueCalculator from './routes/shortcode-calculator/calculator36';
 import onetimeinvestmentcalculator from './routes/shortcode-calculator/calculator37';
@@ -102,7 +102,7 @@ import quickerslider from './routes/shortcodes/quickerslider';
 import GoldInvestmentCalculator from './routes/shortcodes/goldinvestmentcalculator';
 // Gold Silver Graph js
 import pageGoldRateData from './routes/shortcodes/gold-silver-price-graph';
-import pageChild from './routes/shortcodes/gold-silver-price-graph';
+// import pageChild from './routes/shortcodes/gold-silver-price-graph';
 /**
  Js For Branches Single Page (CPT) Branche Template Page
 */
@@ -213,7 +213,7 @@ const routes = new Router({
   rateOfInflationCalculator,
   interestCoverageRatioCalculator,
   inventoryTurnoverRatioCalculator,
-  netProfitMargin1Calculator,
+  netProfitMarginCalculator,
   netWorkingCapitalCalculator,
   netAssetValueCalculator,
   operatingMarginCalculator,
@@ -244,7 +244,7 @@ const routes = new Router({
   GoldInvestmentCalculator,
   // Gold Rate Graph js include
   pageGoldRateData,
-  pageChild,
+  // pageChild,
 });
 
 // Load Events

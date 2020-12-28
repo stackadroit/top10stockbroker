@@ -1465,25 +1465,22 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#m_amount_id1, #rate_id1, #time_id1');
+					$nodeEventRoot  = $('#ror1_id, #ror2_id, #ror3_id, #ror4_id, #ror5_id, #ror6_id, #ror7_id, #period_id');
 
 					$nodeEventRoot
 	                .on( 'keyup', function(event) {
-	                	var p = $('#m_amount_id1').val();
-					    var r = $('#rate_id1').val();
-					    var t = $('#time_id1').val();
-
-					    var final_r = 1+r/100;
-
-					    var total_r = final_r;
-
-					    for(var i=1; i<t; i++)
-					    {
-					        total_r *= final_r;
+	                	var amount = 1;
+					    var n = Number($('#period_id').val());
+					    var x = document.getElementsByName("ror[]");
+					    for(i = 0; i < x.length; i++){
+					        val = Number(x[i].value);
+					        if(val){
+					            amount = amount * (1+(val/100))
+					        }
 					    }
-					    var final_fv = (p * total_r).toFixed(4);
-
-					    $('#result_id1').val(final_fv);
+					    var power_val = 1/n;
+					    gmr = (((Math.pow(amount, power_val)) - 1)*100).toFixed(2);
+					    Number($('#gmr_id').val(gmr));
 			        });
 
 				return this;
@@ -1759,12 +1756,12 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#eb_id, #eb_id');
+					$nodeEventRoot  = $('#eb_id, #ie_id');
 
 					$nodeEventRoot
 	                .on( 'keyup', function(event) {
 	                	var eb = Number($('#eb_id').val());
-					    var ie = Number($('#eb_id').val());
+					    var ie = Number($('#ie_id').val());
 
 					     var icr2 = (eb/ie).toFixed(2);
 
@@ -1867,8 +1864,8 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#cgs_id, #ai_id');
-
+					$nodeEventRoot  = $('#ni1_id, #srrs_id');
+					// $nodeEventRoot  = $('#cgs_id, #ai_id');
 					$nodeEventRoot
 	                .on( 'keyup', function(event) {
 	                	var ni1 = Number($('#ni1_id').val());
@@ -2732,16 +2729,16 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#ni2_id, #ta_id');
-
+					$nodeEventRoot  = $('#ni3_id, #se_id');
+					// $nodeEventRoot  = $('#ni2_id, #ta_id');
 					$nodeEventRoot
 	                .on( 'keyup', function(event) {
-	                	var ni2 = Number($('#ni2_id').val());
-					    var ta = Number($('#ta_id').val());
+	                	var ni2 = Number($('#ni3_id').val());
+					    var ta = Number($('#se_id').val());
 
 					    var roa1 = (ni2 * 100 / ta).toFixed(2);
 
-					    Number($('#roa_id').val(roa1));
+					    Number($('#roe_id').val(roa1));
 			        });
 
 				return this;
@@ -2785,9 +2782,8 @@
 			events: function() {
 				var self    = this,
 					$nodeEventRoot  = $('#ni3_id, #se_id');
-
 					$nodeEventRoot
-	                .on( 'keyup', function(event) {
+	                .on('keyup', function(event) {
 	                	var ni3 = Number($('#ni3_id').val());
 					    var se = Number($('#se_id').val());
 

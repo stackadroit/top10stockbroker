@@ -12,7 +12,22 @@ class OptionChainChart extends React.Component {
       // To avoid unnecessary update keep all options in the state.
         chartOptions: {
           chart: {
-              type: 'area'
+            borderColor: '#EBBA95',
+              type: 'areaspline',
+              zoomType: false,
+              backgroundColor: 'white',
+              panning: false,
+              events:{
+                load: function () {
+                    this.renderer.image('https://top10stockbroker.com/wp-content/uploads/2017/11/cropped-cropped-logo-web-1.png',950,-9,160,50).attr({
+                        zIndex: 1,
+                        id:"credit_img"
+                    }).add();
+                    $("#credit_img").click(function() {
+                        window.open("https://top10stockbroker.com");
+                    });
+                }
+            },
           },
           title: {
               text: ''
@@ -51,10 +66,7 @@ class OptionChainChart extends React.Component {
               snap:true
             },
             gridLineColor: '#EBEBEB',
-                  startOnTick: false,
-          
-            //         min: Math.min(y_min),
-            //         max: Math.max(y_max),
+            startOnTick: false,
              gridLineWidth: 0.5,
   
           },{
@@ -137,56 +149,57 @@ class OptionChainChart extends React.Component {
       	data.append('action', 'get_derivative_company_graph_data');
       	data.append('nonce', global_vars.ajax_nonce);
 
-      	axios.post(global_vars.apiServerUrl + '/api/derivative-company-graph-data', data)
-        .then(res => {
-            const result = res.data;
-            const t = res.data;
+      	axios.post(global_vars.apiServerUrl + '/api/derivative-company-graph', data)
+        .then(response => {
+           var result = response.data.stocks;
             var graphDataArray=[];
+            var dt1=[];
+            var x_data=[];
+            // console.log(response.data);
             $.each(result.g1, function(k, v) {
-              if(v.time){
-                var rowValue = [
-                v.time, 
-                parseFloat(v.value),
-                parseFloat(v.price), 
-                parseFloat(v.open),
-                parseFloat(v.high),
-                parseFloat(v.low),
-                parseFloat(v.close),
-                parseFloat(v.volume)
-                ];
-                graphDataArray.push(rowValue);
+              // console.log(v);
+              var spl = v.date.split("-");
+              var y = spl[0];
+              var m = spl[1] - 1;
+              var d = spl[2];
+              var h = spl[3]? spl[3] : 0;
+              var i = spl[4]? spl[4] : 0;
+              if(dur == '1D' || dur == '1W'){
+                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+spl[3]+":"+spl[4];
               }else{
-                  var spl = v.date.split("-");
-                  var y = spl[0];
-                  var m = spl[1] - 1;
-                  var d = spl[2];
-                  var h = spl[3]? spl[3] : 0;
-                  var i = spl[4]? spl[4] : 0;
-                  if(dur == '1D' || dur == '1W'){
-                    var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+spl[3]+":"+spl[4];
-                  }else{
-                    var newDate=spl[1]+"/"+spl[2]+"/"+spl[0];  
-                  }
-                  dt1.push(new Date(newDate).getTime());
-                  var rowValue = [new Date(newDate).getTime(),
-                    parseFloat(v.value),
-                    parseFloat(v.price), 
+                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0];  
+              }
+              dt1.push(new Date(newDate).getTime());
+              x_data.push(parseFloat(v.value));
+              var rowValue = [new Date(newDate).getTime(),
+                  parseFloat(v.value),
+                  parseFloat(v.price), 
                     parseFloat(v.open),
                     parseFloat(v.high),
                     parseFloat(v.low),
                     parseFloat(v.close),
                     parseFloat(v.volume)];
-                 graphDataArray.push(rowValue);
-              }
+              graphDataArray.push(rowValue);
             });
             // console.log(graphDataArray);
+            var y_min = Math.min.apply(null, x_data);
+            var y_max = Math.max.apply(null, x_data);
             this.setState({ 
               chartOptions: {
+                yAxis: [
+                  {
+                    gridLineColor: '#EBEBEB',
+                    startOnTick: false,
+                    min: Math.min(y_min),
+                    max: Math.max(y_max),
+                    gridLineWidth: 0.5,
+                  },
+                ],
                 series: [
                   { data:graphDataArray}
                 ]
               }
-            });
+            });  
         })
         .catch(error =>  {
             //console.log(error);
