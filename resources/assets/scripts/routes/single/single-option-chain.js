@@ -1,4 +1,7 @@
 import {SingleOptionChain}  from '../../library/single-option-chain';
+import React, { Component } from "react";
+import ReactDOM from 'react-dom';
+import OptionChainChart from '../../components/graph/option-chain-chart';
 
 export default {
   init() {
@@ -99,6 +102,19 @@ export default {
                                 e.preventDefault();
                             });
                         });
+                      if( info.page == 'chart-data'){
+                          //select the tabs
+                          $("ul.nested_tab a").click(function (e) {
+                              e.preventDefault();
+                              $(this).closest('.nested_tab').find('a').removeClass('active');
+                              $(this).addClass("active");
+
+                              var activeTab = jQuery(this).attr("href");
+                              $(this).closest(".month_tabs").find('.tab_content').hide();
+                              $(this).closest(".month_tabs").find(activeTab).show();
+                            });
+                          $('.nested_tab a[href="#li_1m"').trigger('click');
+                      }
                   },
                     error: function (errorThrown) {
                         console.log(errorThrown);
@@ -112,6 +128,126 @@ export default {
 	      
 	    }
     
+    // load Graph Data
+    function get_stock_graph(dur,selli,resp_div){
+          // sc_did = $('#sc_did').val();
+          // sc_did =132215;
+          var chartElement =resp_div;
+
+          var width = 1100;
+          var height = 300;
+          var apiExchg =$('#ajax-load-api-data').data('apiexchg');
+          var symbol =$('#ddlCompanySymble').find(':selected').data('symble');
+          symbol =(symbol)?symbol:'TCS';
+          var instName =$('#companyInstName').val();
+          var expDate =$('#ExpiryDate').val();
+          var optType =$('#OptionType').val();
+          var stkPrice =$('#StrikePrice').val();
+          $.ajax({
+            type: "post",
+            dataType: "json",
+            url: global_vars.apiServerUrl + '/api/derivative-company-graph-data',
+            data: {
+                'action':'get_derivative_company_graph_data',
+                'dur':dur,
+                'instName':instName,
+                'symbol':symbol,
+                'expDate': expDate,
+                'optType': optType,
+                'stkPrice': stkPrice
+            },
+            cache:false,
+            success:function(res){
+              // var data =res.stocks;
+              $('#'+chartElement).html('');
+              var data =res;
+              // console.log(data);
+              var width = 1100;
+              var height = 300;
+              // var height = 300;
+              const chart = createChart(chartElement, {height: height,
+                  rightPriceScale: {
+                    scaleMargins: {
+                      top: 0.35,
+                      bottom: 0.2,
+                    },
+                    borderVisible: true,
+                  },
+                  timeScale: {
+                    borderVisible: true,
+                  },
+                  grid: {
+                    horzLines: {
+                      color: '#eee',
+                      visible: true,
+                    },
+                    vertLines: {
+                      color: '#ffffff',
+                    },
+                  },
+                  crosshair: {
+                      horzLine: {
+                        visible: false,
+                        labelVisible: false
+                      },
+                      vertLine: {
+                        visible: true,
+                        style: 0,
+                        width: 2,
+                        color: 'rgba(32, 38, 46, 0.1)',
+                        labelVisible: false,
+                      }
+                  },
+                }); 
+              const lineSeries = chart.addAreaSeries({  
+                  topColor: 'rgba(19, 68, 193, 0.4)', 
+                  bottomColor: 'rgba(0, 120, 255, 0.0)',
+                  lineColor: 'rgba(19, 40, 153, 1.0)',
+                  lineWidth:3
+              });
+               
+              // var data = getGraphData();
+              lineSeries.setData(data);
+              function setLastBarText() {
+                var dateStr = data[data.length - 1].value + data[data.length - 1].time.year + ' - ' + data[data.length - 1].time.month + ' - ' +  data[data.length - 1].time.day;
+                // console.log(dateStr);
+                //  toolTip.innerHTML =  '<div style="font-size: 24px; margin: 4px 0px; color: #20262E"> AEROSPACE</div>'+ '<div style="font-size: 22px; margin: 4px 0px; color: #20262E">' + data[data.length-1].value + '</div>' +
+                //   '<div>' + dateStr + '</div>';
+              }
+
+              setLastBarText(); 
+
+              chart.subscribeCrosshairMove(function(param) {
+                // 
+                if ( param === undefined || param.time === undefined || param.point.x < 0 || param.point.x > width || param.point.y < 0 || param.point.y > height ) {
+                    setLastBarText();   
+                  } else {
+                    var month_arr = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sept','Oct','Nov','Dec'];
+                    var dateStr = param.time.day +' - '+ month_arr[param.time.month] + ' - ' + param.time.year;
+                    var price = param.seriesPrices.get(lineSeries);
+                    $('#mouseoveropenVal').html(price);
+                    $('#mouseoverDate').html(dateStr);
+                    // toolTip.innerHTML = '<div style="font-size: 24px; margin: 4px 0px; color: #20262E"> AEROSPACE</div>'+ '<div style="font-size: 22px; margin: 4px 0px; color: #20262E">' + (Math.round(price * 100) / 100).toFixed(2) + '</div>' + '<div>' + dateStr + '</div>';
+                  }
+              });
+            },
+            error: function(errorThrown){
+                // $(liveUpdateElement).find(".loading-data").remove();
+                console.log(errorThrown);
+            }
+          });  
+        }
+    $(document).on('click','.shart_market_chart',function(e){
+        var dur=$(this).data("filter");
+        var selli=$(this).data("element");
+        var resp_div=$(this).data("chart-element");
+        if(!$('#'+resp_div).find('.highcharts-container ').length){
+          ReactDOM.render( 
+            <OptionChainChart />,
+            document.getElementById(resp_div)
+          );
+        }
+      });
   }).apply(this, [jQuery]);
 
   },

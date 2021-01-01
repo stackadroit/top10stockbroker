@@ -69,7 +69,8 @@ add_action( 'wp_ajax_brokercomparison_link_ajax_request',  __NAMESPACE__ . '\\br
 add_action( 'wp_ajax_nopriv_brokercomparison_link_ajax_request',  __NAMESPACE__ . '\\brokercomparison_link_ajax_request' );
 function brokercomparison_link_ajax_request() {
     if ( isset($_REQUEST) ):
-        $data = $_REQUEST['data'];
+        // $data = $_REQUEST['data'];
+        $data = $_REQUEST;
         $nonce =  @$data['security'];
         $paged = @$data['page_paths'];
         
@@ -287,36 +288,81 @@ function modal_popup() {
     
     $shortcode_contactform = $data['contactform'];
     
-    $data['auto_status'] = $model_auto;
-
-    switch ($data['model_action']) {
-        case 'custom-hellobar':
-            $template = 'partials.ajax.modalpopup';
-            break;
-        case 'mbf-search-wrap':
-            $template = 'partials.ajax.modalpopup-mdf-search';
-            break;
-        default:
-            if(@$data['hello_bar'] == 'yes'){ 
-                $template = 'partials.ajax.modalpopup-default';
-                $shortcode_contactform = '[contact-form-7 id="5057" title="Default PopUp Contact Form"]';
-            }else{
-                $template = 'partials.ajax.modalpopup-demat-default';
+    
+    // $data['auto_status'] = $model_auto;
+    if($data['model_action'] =='mini-popup'){
+        $template = 'partials.ajax.modal-mini-popup';
+        $modelClass =@$_REQUEST['model_auto'];
+        switch ($modelClass) {
+            case 'open-b2cpopup':
+                $data['head_title']='Share your details & Open Demat A/C Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17404" title="Image/Link Click - B2C Form"]';
+                break;
+            case 'open-b2bpopup':
+                $data['head_title']='Share your details & Become Sub Broker Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17405" title="Image/Link Click - B2B Form"]';
+                break;
+            case 'open-ipopopup':
+                $data['head_title']='Share your details & Get IPO Allotment Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17403" title="Image/Link Click - IPO Form"]';
+                break;
+            case 'open-pmspopup':
+                $data['head_title']='Share your details & Invest in PMS Now!';
+                $data['btm_content']='Offer valid for limited time.';
+                $shortcode_contactform = '[contact-form-7 id="17402" title="Image/Link Click - PMS Form"]';
+                break;
+            default:
                 $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
-            }
-            break;
+                break;
+        }
+        
+    }else{
+        $data['auto_status'] = ($model_auto =='false')?false:true;
+        switch ($data['model_action']) {
+            case 'custom-hellobar':
+                if($data['contactform']){
+                    $template = 'partials.ajax.modalpopup';
+                    $shortcode_contactform = get_post_meta( $data['post_id'], $shortcode_contactform, true );
+                }else{
+                    $template = 'partials.ajax.modalpopup-demat-default';
+                    $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
+                }
+                
+                break;
+            case 'mbf-search-wrap':
+                $template = 'partials.ajax.modalpopup-mdf-search';
+                $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
+                break;
+            default:
+                if(@$data['hello_bar'] == 'yes'){ 
+                    $template = 'partials.ajax.modalpopup-default';
+                    $shortcode_contactform = '[contact-form-7 id="5057" title="Default PopUp Contact Form"]';
+                }else{
+                    $template = 'partials.ajax.modalpopup-demat-default';
+                    $shortcode_contactform = '[contact-form-7 id="5056" title="DEMAT PopUp Contact Form"]';
+                }
+                break;
+        }
     }
-
-    $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
-
+    $data['do_contactform'] = $shortcode_contactform;
+    // print_r($template);
+    // print_r($data);
     echo \App\template($template, $data);
     die();
 }
 
 
-
-
-add_action("wp_ajax__load_city_list", function (){
+/**
+ * Load Share Market Page Template and Single Page Content
+ * Through Ajax
+ * @return array
+ */
+add_action( 'wp_ajax__load_city_list',  __NAMESPACE__ . '\\load_city_list' );
+add_action( 'wp_ajax_nopriv__load_city_list',  __NAMESPACE__ . '\\load_city_list' );
+function load_city_list(){
     $parent_term_id =($_REQUEST['parent_term_id'])?$_REQUEST['parent_term_id']:0;
     $locationIds= get_term_meta($parent_term_id, 'broker_locations_ids',true);
     $locationsHtml ='<option data-slug="" value="">Select City</option>';
@@ -335,27 +381,101 @@ add_action("wp_ajax__load_city_list", function (){
     }
     echo $locationsHtml;
     exit;
-});
-add_action("wp_ajax_nopriv__load_city_list", function (){
-    $parent_term_id =($_REQUEST['parent_term_id'])?$_REQUEST['parent_term_id']:0;
-    $locationIds= get_term_meta($parent_term_id, 'broker_locations_ids',true);
-    $locationsHtml ='<option data-slug="" value="">Select City</option>';
-    if($locationIds){
-        $locations = get_terms( 'locations', array(
-            'orderby' => 'name',
-            'order' => 'ASC',
-            'hide_empty' => true,
-            'include' =>(is_array($locationIds))?$locationIds:explode(',', $locationIds),
-        ));
-        if($locations){
-            foreach ($locations as $key => $value) {
-                $locationsHtml.='<option data-slug="'.$value->slug.'" value="'.$value->term_id.'">'.$value->name.'</option>';
-            }
+}
+ 
+/**
+ * Load Share Market Page Template and Single Page Content
+ * Through Ajax
+ * @return array
+ */
+add_action( 'wp_ajax_get_gold_silver_price_graph_data_',  __NAMESPACE__ . '\\get_gold_silver_price_graph_data' );
+add_action( 'wp_ajax_nopriv_get_gold_silver_price_graph_data_',  __NAMESPACE__ . '\\get_gold_silver_price_graph_data' );
+
+function get_gold_silver_price_graph_data() {
+    global $wpdb;
+    // $nonce = $_POST['nonce'];
+    if ( isset($_REQUEST) ) {
+        $cDate=date('Y-m-d');
+        //$cDate=date("Y-m-d", strtotime("+1 days"));
+        $dur = $_REQUEST['dur'];
+        $postId = $_REQUEST['postId'];
+         //$postId =52358;
+        switch ($dur) {
+            case '1D':
+                $prcdate =date("Y-m-d", strtotime("-1 days"));
+            break;
+            case '1W':
+                $prcdate =date("Y-m-d", strtotime("-7 days"));
+            break;
+            case '1M':
+                $prcdate =date("Y-m-d", strtotime("-30 days"));
+            break;
+            case '3M':
+                $prcdate =date("Y-m-d", strtotime("-3 month"));
+            break;
+            case '6M':
+                $prcdate =date("Y-m-d", strtotime("-6 month"));
+            break;
+            case '1Y':
+                $prcdate =date("Y-m-d", strtotime("-365 days"));
+            break; 
+            case '2Y':
+                $prcdate =date("Y-m-d", strtotime("-730 days"));
+            break;
+            case '5Y':
+                $prcdate =date("Y-m-d", strtotime("-1825 days"));
+            break;  
+            case 'ALL':
+                 $sql ="SELECT * FROM gold_silver_rate WHERE page_id= ".$postId ." order by date DESC;";
+            break;  
+            
+            default:
+                $dur ='ALL';
+                $sql ="SELECT * FROM gold_silver_rate WHERE page_id= ".$postId ." order by date DESC;";
+            break;
         }
-    }
-    echo $locationsHtml;
-    exit;
-});
+        if($dur !='ALL'){
+            $sql ="SELECT * FROM gold_silver_rate WHERE page_id= ".$postId ." AND type = 1 AND ( date  >= '".$prcdate."' AND date <= '".$cDate."' ) order by date DESC;";
+        }
+        
+        //echo $sql;
+        $priceResults = $wpdb->get_results($sql);
+        // print_r($priceResults);
+        foreach ($priceResults as $key => $rowObj) {
+            if($dur == '1D'|| $dur =='1W'){
+                $data[] =array(
+                    'time'=>date('Y-m-d-H-i',strtotime($rowObj->date)),
+                    'price'=>$rowObj->t22_1_rate,
+                    'open'=>$rowObj->t22_1_rate,
+                    'high'=>$rowObj->t24_1_rate,
+                    'low'=>$rowObj->t22_1_rate,
+                    'volume'=>$rowObj->t22_1_rate,
+                    'value'=>$rowObj->t24_1_rate,
+                );
+            }else{
+
+             $data[] =array(
+                    'time'=>date('Y-m-d',strtotime($rowObj->date)),
+                    'price'=>$rowObj->t22_1_rate,
+                    'open'=>$rowObj->t22_1_rate,
+                    'high'=>$rowObj->t24_1_rate,
+                    'low'=>$rowObj->t22_1_rate,
+                    'volume'=>$rowObj->t22_1_rate,
+                    'value'=>$rowObj->t24_1_rate,
+                );
+            }
+
+        }
+        $chartResponse['g1']= $data;
+        $chartResponse['newsdata']=null;
+        $chartResponse['data']=null;
+        // echo json_encode($chartResponse);
+        echo json_encode($data);
+        exit;
+        
+     }
+    die();
+}
  
 
 
@@ -385,11 +505,15 @@ include 'cpts-action/futures-actions.php';
  * File include Option Chain Actions.
  /---------------------------------------------------------------*/
 include 'cpts-action/option-chain-actions.php';
-/**--------------------------------------------------------------
+/**----------------------------------------------------------
  * File include broker-calculator Actions.
- /---------------------------------------------------------------*/
+ /----------------------------------------------------------*/
 include 'cpts-action/broker-calculator-actions.php';
 
+/**----------------------------------------------------------
+ * Exteral Api Call On Different contact form submit.
+ /---------------------------------------------------------*/
+include 'cpts-action/external-api-functions-actions.php';
 
 
 

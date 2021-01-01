@@ -14,7 +14,7 @@
             <input type="number" class="form-control" value="732" id="esp_id">
         </div>
         <div class="col-md-6 mt-1 mt-sm-2">
-            <span>Ending Stock Price (Rs.)* </span>
+            <span>Dividend Earned per Share (Rs.)* </span>
         </div>
         <div class="col-md-6 mt-1 mt-sm-2">
             <input type="number" class="form-control" value="17" id="deps1_id">

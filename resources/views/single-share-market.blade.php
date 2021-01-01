@@ -2,6 +2,7 @@
 @extends('layouts.app-full')
 
 @section('content')
+  @include('partials.suggestion-menu')
   @while(have_posts()) @php the_post() @endphp
   	@include('partials.share-market.page-header')
     <div id="ajax-load-api-data" data-post-id="{{$post->ID}}">

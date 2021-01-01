@@ -27,7 +27,7 @@
 
 				return this;
 			},
-
+			
 			init: function() {
 				if ( typeof global_vars.wpcf7 === 'undefined' || global_vars.wpcf7 === null ) {
 					return; 
@@ -57,8 +57,8 @@
 
 					$( 'div.wpcf7 > form' ).each( function() {
 						var $form = $( this );
+						wpcf7.formValidation(this)
 						wpcf7.initForm( $form );
-
 						if ( wpcf7.cached ) {
 							wpcf7.refill( $form );
 						}
@@ -68,7 +68,7 @@
 				wpcf7.getId = function( form ) {
 					return parseInt( $( 'input[name="_wpcf7"]', form ).val(), 10 );
 				};
-
+				var sumbmit_form_data='';
 				wpcf7.initForm = function( form ) {
 					var $form = $( form );
 
@@ -83,6 +83,7 @@
 
 						if ( typeof window.FormData === 'function' ) {
 							wpcf7.submit( $form );
+
 							event.preventDefault();
 						}
 					} );
@@ -181,7 +182,72 @@
 						$( this ).val( val );
 					} );
 				};
+				wpcf7.formConditionCheck= function($el, $regex){
+			      	if (!$($el).val().match($regex)) {
+			    		$($el).parent().find('.emsg').removeClass('d-none');
+			    	}else{
+			    		$($el).parent().find('.emsg').addClass('d-none');
+			    	}
+			    };
+				wpcf7.formValidation =function(formEle){
+			      	$(formEle).find('input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+					$(formEle).find('input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+					$(formEle).find('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
+					$(formEle).find('.wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
+			        
+			        $regexname = /^([a-zA-Z ]){1,100}$/;
+			        $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/;
 
+			        $(document).on('blur','input[name="cf7s-name"],input[name="cf7s-City"]',function(key){
+			        	wpcf7.formConditionCheck(this, $regexname);
+			        });
+
+			        $(document).on('blur','input[name="cf7s-phone"]',function(key){
+			        	wpcf7.formConditionCheck(this, $regexPhone);
+			        });
+
+			        var sumbmit_form_data= '';
+			        $(document).on('click','.wpcf7-submit',function(e) {
+			        	e.preventDefault();
+			        	var Er = 0;
+			        	var form = $(this).closest('form.wpcf7-form');
+			 			var name = $(form).find('input[name="cf7s-name"]');
+			 			var city = $(form).find('input[name="cf7s-City"]');
+			 			var number = $(form).find('input[name="cf7s-phone"]');
+
+			 			wpcf7.formConditionCheck(name, $regexname);
+			 			if (!$(name).val().match($regexname)) {
+			 				Er = 1;
+			 			}
+
+			 			wpcf7.formConditionCheck(city, $regexname);
+			 			if (!$(city).val().match($regexname)) {
+			 				Er = 2;
+			 			}
+
+			 			wpcf7.formConditionCheck(number, $regexPhone);
+			 			if (!$(number).val().match($regexPhone)) {
+			 				Er = 2;
+			 			}
+
+			 			if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
+			                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
+			            }else{
+			                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
+				            Er = 4;
+			            } 
+
+			            if(Er){
+			            	console.log(Er);
+			            	return false; 
+			            }else{
+			            	$form= $(form);
+			            	wpcf7.submit($form);
+			            	// return true;
+			            }
+			        });
+
+				};
 				wpcf7.submit = function( form ) {
 					if ( typeof window.FormData !== 'function' ) {
 						return;
@@ -193,12 +259,13 @@
 					wpcf7.clearResponse( $form );
 
 					var formData = new FormData( $form.get( 0 ) );
-
+					var sumbmit_form_data =$form.serialize();
 					var detail = {
 						id: $form.closest( 'div.wpcf7' ).attr( 'id' ),
 						status: 'init',
 						inputs: [],
-						formData: formData
+						formData: formData,
+						sumbmit_form_data:sumbmit_form_data
 					};
 
 					$.each( $form.serializeArray(), function( i, field ) {
@@ -272,10 +339,11 @@
 
 						wpcf7.triggerEvent( data.into, 'submit', detail );
 
-						if ( 'mail_sent' == data.status ) {
+						if ('mail_sent'== data.status ) {
+
 							$form.each( function() {
 								this.reset();
-							} );
+							});
 
 							wpcf7.toggleSubmit( $form );
 							wpcf7.resetCounter( $form );
@@ -329,6 +397,7 @@
 						contentType: false
 					} ).done( function( data, status, xhr ) {
 						ajaxSuccess( data, status, xhr, $form );
+
 						$( '.ajax-loader', $form ).removeClass( 'is-active' );
 					} ).fail( function( xhr, status, error ) {
 						var $e = $( '<div class="ajax-error"></div>' ).text( error.message );
@@ -343,8 +412,28 @@
 					} );
 
 					$( target ).get( 0 ).dispatchEvent( event );
+					if(name =='mailsent'){
+						wpcf7.leadPostApi(target,detail);
+					}
+					if(name =='mailfailed'){
+						
+					}
 				};
-
+				//Call After Mail successfully Send.
+				wpcf7.leadPostApi =function( form, detail ){
+					$.ajax({
+		                url : global_vars.ajax_url,
+		                type : 'post',
+		                data : {
+		                    action : 'lead_data_post_to_api',
+		                    post_data :detail.sumbmit_form_data,
+		                },
+		                success : function( response ) {
+		                    console.log(response);
+		                }
+		            });
+					
+				};
 				wpcf7.setStatus = function( form, status ) {
 					var $form = $( form );
 					var prevStatus = $form.data( 'status' );

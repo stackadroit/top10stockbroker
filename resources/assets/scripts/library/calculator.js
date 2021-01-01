@@ -32,7 +32,7 @@
 				var self    = this,
 					$nodeEventRoot  = $('#srr_id, #tars_id');
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 			            var tars = Number($('#tars_id').val());
 					    var srr= Number($('#srr_id').val());
 					    var atsr1 = (tars/srr).toFixed(2);
@@ -82,7 +82,7 @@
 					$nodeEventRoot  = $('#tab_id, #tae_id, #sr2_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 			            var tab_id = Number($('#tab_id').val());
 					    var tae_id = Number($('#tae_id').val());
 					    var sr2_id = Number($('#sr2_id').val());
@@ -135,7 +135,7 @@
 					$nodeEventRoot  = $('#sr3_id, #aar_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var sr3 = Number($('#sr3_id').val());
 					    var aar = Number($('#aar_id').val());
 
@@ -187,7 +187,7 @@
 					$nodeEventRoot  = $('#ask_prc_id, #bid_prc_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ask_prc = Number($('#ask_prc_id').val());
 					    var bid_prc = Number($('#bid_prc_id').val());
 
@@ -239,7 +239,7 @@
 					$nodeEventRoot  = $('#face_val_id, #bond_prc_id, #maturity_prd_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var face_val = Number($('#face_val_id').val());
 					    var bond_prc = Number($('#bond_prc_id').val());
 					    var to_maturity_prd = Number( $('#maturity_prd_id').val());
@@ -295,7 +295,7 @@
 					$nodeEventRoot  = $('#shareholder_equity_id, #prefer_equity_id, #to_share_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var shareholder_equity = Number($('#shareholder_equity_id').val());
 					    var prefer_equity = Number($('#prefer_equity_id').val());
 					    var to_share = Number($('#to_share_id').val());
@@ -348,7 +348,7 @@
 					$nodeEventRoot  = $('#risk_free_id, #beta_id, #return_mkt_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var risk_free = Number($('#risk_free_id').val());
 					    var beta = Number($('#beta_id').val());
 					    var return_mkt = Number($('#return_mkt_id').val());
@@ -401,7 +401,7 @@
 					$nodeEventRoot  = $('#initial_stock_id, #end_stock_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var initial_stock = Number($('#initial_stock_id').val());
 					    var end_stock = Number($('#end_stock_id').val());
 
@@ -451,13 +451,11 @@
 			events: function() {
 				var self    = this,
 					$nodeEventRoot  = $('#principal_id, #rate_id, #prd_id');
-
-					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                $nodeEventRoot
+	                .on( 'keyup', function(event) {	
 	                	var principal = Number($('#principal_id').val());
 					    var rate = Number($('#rate_id').val());
 					    var prd = Number($('#prd_id').val());
-
 					    final_rate = 1 + rate/100;
 
 					    var compound_interest = (principal * ((Math.pow(final_rate, prd)) - 1)).toFixed(2);
@@ -510,7 +508,7 @@
 					$nodeEventRoot  = $('#sr2_id, #vc_id, #nous_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var sr2 = Number($('#sr2_id').val());
 					    var vc = Number($('#vc_id').val());
 					    var nous = Number($('#nous_id').val())
@@ -567,7 +565,7 @@
 					$nodeEventRoot  = $('#ca1_id, #cl1_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ca1 = Number($('#ca1_id').val());
 					    var cl1 = Number($('#cl1_id').val());
 
@@ -619,7 +617,7 @@
 					$nodeEventRoot  = $('#ca1_id, #cl1_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ca1 = Number($('#ca1_id').val());
 					    var cl1 = Number($('#cl1_id').val());
 
@@ -671,7 +669,7 @@
 					$nodeEventRoot  = $('#coupon_id, #bond_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var coupon = Number($('#coupon_id').val());
 					    var bond = Number($('#bond_id').val());
 
@@ -723,7 +721,7 @@
 					$nodeEventRoot  = $('#al1_id, #cogs_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ca1 = Number($('#al1_id').val());
 					    var cl1 = Number($('#cogs_id').val());
 
@@ -775,7 +773,7 @@
 					$nodeEventRoot  = $('#noi_id, #td_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var noi = Number($('#noi_id').val());
 					    var td = Number($('#td_id').val());
 
@@ -827,7 +825,7 @@
 					$nodeEventRoot  = $('#tl1_id, #se1_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var tl1 = Number($('#tl1_id').val());
 					    var se1 = Number($('#se1_id').val());
 
@@ -879,7 +877,7 @@
 					$nodeEventRoot  = $('#tlu1_id, #ta1_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var tl1 = Number($('#tlu1_id').val());
 					    var se1 = Number($('#ta1_id').val());
 
@@ -931,7 +929,7 @@
 					$nodeEventRoot  = $('#div_stock_id, #net_income_id, #ot_share_id, #dilute_share_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var div_stock = Number($('#div_stock_id').val());
 					    var net_income = Number($('#net_income_id').val());
 					    var ot_share = Number($('#ot_share_id').val());
@@ -985,7 +983,7 @@
 					$nodeEventRoot  = $('#dividend_id, #net_income_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var dividend = Number($('#dividend_id').val());
 					    var net_income = Number($('#net_income_id').val());
 					    
@@ -1037,7 +1035,7 @@
 					$nodeEventRoot  = $('#sum_dividend_id, #onetime_div_id, #nos_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var sum_dividend = Number($('#sum_dividend_id').val());
 					    var onetime_div = Number($('#onetime_div_id').val());
 					    var nos = Number($('#nos_id').val());
@@ -1090,7 +1088,7 @@
 					$nodeEventRoot  = $('#dividend_id, #share_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var dividend = Number($('#dividend_id').val());
 					    var share = Number($('#share_id').val());
 					    
@@ -1142,7 +1140,7 @@
 					$nodeEventRoot  = $('#net_income_id, #preferred_div_id, #waos_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var net_income = Number($('#net_income_id').val());
 					    var preferred_div = Number($('#preferred_div_id').val());
 					    var waos = Number($('#waos_id').val());
@@ -1195,7 +1193,7 @@
 					$nodeEventRoot  = $('#ta_id, #she_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ta = Number($('#ta_id').val());
 					    var she = Number($('#she_id').val());
 
@@ -1247,7 +1245,7 @@
 					$nodeEventRoot  = $('#e_sales_id, #e_exp_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var e_sales = Number($('#e_sales_id').val());
 					    var e_exp = Number($('#e_exp_id').val());
 
@@ -1299,7 +1297,7 @@
 					$nodeEventRoot  = $('#ni_id, #da1_id, #wc_id, #ce1_id, #nb_id ');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ni = Number($('#ni_id').val());
 					    var da1 = Number($('#da1_id').val());
 					    var wc = Number($('#wc_id').val());
@@ -1354,7 +1352,7 @@
 					$nodeEventRoot  = $('#eb_id, #tr2_id, #da2_id, #cw_id, #cex_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var eb = Number($('#eb_id').val());
 					    var tr2 = Number($('#tr2_id').val());
 					    var da2= Number($('#da2_id').val());
@@ -1409,7 +1407,7 @@
 					$nodeEventRoot  = $('#m_amount_id1, #rate_id1, #time_id1');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var p = $('#m_amount_id1').val();
 					    var r = $('#rate_id1').val();
 					    var t = $('#time_id1').val();
@@ -1467,25 +1465,22 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#m_amount_id1, #rate_id1, #time_id1');
+					$nodeEventRoot  = $('#ror1_id, #ror2_id, #ror3_id, #ror4_id, #ror5_id, #ror6_id, #ror7_id, #period_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
-	                	var p = $('#m_amount_id1').val();
-					    var r = $('#rate_id1').val();
-					    var t = $('#time_id1').val();
-
-					    var final_r = 1+r/100;
-
-					    var total_r = final_r;
-
-					    for(var i=1; i<t; i++)
-					    {
-					        total_r *= final_r;
+	                .on( 'keyup', function(event) {
+	                	var amount = 1;
+					    var n = Number($('#period_id').val());
+					    var x = document.getElementsByName("ror[]");
+					    for(i = 0; i < x.length; i++){
+					        val = Number(x[i].value);
+					        if(val){
+					            amount = amount * (1+(val/100))
+					        }
 					    }
-					    var final_fv = (p * total_r).toFixed(4);
-
-					    $('#result_id1').val(final_fv);
+					    var power_val = 1/n;
+					    gmr = (((Math.pow(amount, power_val)) - 1)*100).toFixed(2);
+					    Number($('#gmr_id').val(gmr));
 			        });
 
 				return this;
@@ -1531,7 +1526,7 @@
 					$nodeEventRoot  = $('#crnt_share_price_id, #eps_id, #g_id, #bond1962_id, #y_id, #pe_id, #grm_id ');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var crnt_share_price = Number($('#crnt_share_price_id').val());
 					    var eps = Number($('#eps_id').val());
 					    
@@ -1597,7 +1592,7 @@
 					$nodeEventRoot  = $('#sr4_id, #cog_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var sr4 = Number($('#sr4_id').val());
 					    var cog = Number($('#cog_id').val());
 
@@ -1649,7 +1644,7 @@
 					$nodeEventRoot  = $('#ror1_id, #ror2_id, #ror3_id, #ror4_id, #ror5_id, #ror6_id, #ror7_id, #period_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var amount = 1;
 					    var n = Number($('#period_id').val());
 
@@ -1711,7 +1706,7 @@
 					$nodeEventRoot  = $('#icpi_id, #ecpi_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var icpi_id = Number($('#icpi_id').val());
 					    var ecpi_id = Number($('#ecpi_id').val());
 
@@ -1761,12 +1756,12 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#eb_id, #eb_id');
+					$nodeEventRoot  = $('#eb_id, #ie_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var eb = Number($('#eb_id').val());
-					    var ie = Number($('#eb_id').val());
+					    var ie = Number($('#ie_id').val());
 
 					     var icr2 = (eb/ie).toFixed(2);
 
@@ -1816,7 +1811,7 @@
 					$nodeEventRoot  = $('#cgs_id, #ai_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var cgs = Number($('#cgs_id').val());
 					    var ai = Number($('#ai_id').val());
 					    
@@ -1869,10 +1864,10 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#cgs_id, #ai_id');
-
+					$nodeEventRoot  = $('#ni1_id, #srrs_id');
+					// $nodeEventRoot  = $('#cgs_id, #ai_id');
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ni1 = Number($('#ni1_id').val());
 					    var srrs = Number($('#srrs_id').val());
 
@@ -1924,7 +1919,7 @@
 					$nodeEventRoot  = $('#ca2_id, #cl2_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ca2 = Number($('#ca2_id').val());
 					    var cl2 = Number($('#cl2_id').val());
 
@@ -1976,7 +1971,7 @@
 					$nodeEventRoot  = $('#fund_assets_id, #fund_liabl_id, #ot_share_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var fund_assets = Number($('#fund_assets_id').val());
 					    var fund_liabl = Number($('#fund_liabl_id').val());
 					    var ot_share = Number($('#ot_share_id').val());
@@ -2029,7 +2024,7 @@
 					$nodeEventRoot  = $('#m_amount_id2, #rate_id2, #time_id2');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var p = $('#m_amount_id2').val();
 					    var r = $('#rate_id2').val();
 					    var t = $('#time_id2').val();
@@ -2091,7 +2086,7 @@
 					$nodeEventRoot  = $('#oi_id, #sr5_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var oi = Number($('#oi_id').val());
 					    var sr5 = Number($('#sr5_id').val());
 
@@ -2143,7 +2138,7 @@
 					$nodeEventRoot  = $('#ii_id, #pof_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ii = Number($('#ii_id').val());
 					    var pof = Number($('#pof_id').val());
 
@@ -2195,7 +2190,7 @@
 					$nodeEventRoot  = $('#d_per_stk_id, #ror_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var d_per_stk = Number($('#d_per_stk_id').val());
 					    var ror = Number($('#ror_id').val());
 
@@ -2247,7 +2242,7 @@
 					$nodeEventRoot  = $('#pps_id, #eps_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var pps = Number($('#pps_id').val());
 					    var eps = Number($('#eps_id').val());
 
@@ -2299,7 +2294,7 @@
 					$nodeEventRoot  = $('#pps_id, #sps_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var pps = Number($('#pps_id').val());
 					    var sps = Number($('#sps_id').val());
 
@@ -2351,7 +2346,7 @@
 					$nodeEventRoot  = $('#fo1_id, #iit_id, #dr_id, #tp_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var p = Number($('#fo1_id').val());
 					    var iit = Number($('#iit_id').val());
 					    var r = Number($('#dr_id').val());
@@ -2418,7 +2413,7 @@
 					$nodeEventRoot  = $('#edf_id, #rate_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var edf = Number($('#edf_id').val());
 					    var rrf = Number($('#rate_id').val());
 					    
@@ -2472,7 +2467,7 @@
 					$nodeEventRoot  = $('#edfnp_id, #rrfr_id, #gr1_id ');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var edfnp = Number($('#edfnp_id').val());
 					    var rrfr = Number($('#rrfr_id').val());
 					    var gr1 = Number($('#gr1_id').val());
@@ -2527,7 +2522,7 @@
 					$nodeEventRoot  = $('#ca_id, #i_id, #cl_id ');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ca = Number($('#ca_id').val());
 					    var i = Number($('#i_id').val());
 					    var cl = Number($('#cl_id').val());
@@ -2581,7 +2576,7 @@
 					$nodeEventRoot  = $('#nr_id, #ir_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var icpi_id = Number($('#nr_id').val());
 					    var ecpi_id = Number($('#ir_id').val());
 
@@ -2633,7 +2628,7 @@
 					$nodeEventRoot  = $('#sr_id, #aar_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var sr = Number($('#sr_id').val());
 					    var aar = Number($('#aar_id').val());
 
@@ -2685,7 +2680,7 @@
 					$nodeEventRoot  = $('#ni_id, #d_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var ni = Number($('#ni_id').val());
 					    var d = Number($('#d_id').val());
 
@@ -2734,16 +2729,16 @@
 
 			events: function() {
 				var self    = this,
-					$nodeEventRoot  = $('#ni2_id, #ta_id');
-
+					$nodeEventRoot  = $('#ni3_id, #se_id');
+					// $nodeEventRoot  = $('#ni2_id, #ta_id');
 					$nodeEventRoot
-	                .on( 'change', function(event) {
-	                	var ni2 = Number($('#ni2_id').val());
-					    var ta = Number($('#ta_id').val());
+	                .on( 'keyup', function(event) {
+	                	var ni2 = Number($('#ni3_id').val());
+					    var ta = Number($('#se_id').val());
 
 					    var roa1 = (ni2 * 100 / ta).toFixed(2);
 
-					    Number($('#roa_id').val(roa1));
+					    Number($('#roe_id').val(roa1));
 			        });
 
 				return this;
@@ -2787,9 +2782,8 @@
 			events: function() {
 				var self    = this,
 					$nodeEventRoot  = $('#ni3_id, #se_id');
-
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on('keyup', function(event) {
 	                	var ni3 = Number($('#ni3_id').val());
 					    var se = Number($('#se_id').val());
 
@@ -2841,7 +2835,7 @@
 					$nodeEventRoot  = $('#te_id, #iin_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var te = Number($('#te_id').val());
 					    var iin = Number($('#iin_id').val());
 
@@ -2893,7 +2887,7 @@
 					$nodeEventRoot  = $('#mr_id, #rfr_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var mr = Number($('#mr_id').val());
 					    var rfr = Number($('#rfr_id').val());
 
@@ -2945,7 +2939,7 @@
 					$nodeEventRoot  = $('#principal_id, #rate_id, #prd_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var principal = Number($('#principal_id').val());
 					    var rate = Number($('#rate_id').val());
 					    var prd = Number($('#prd_id').val());
@@ -3000,7 +2994,7 @@
 					$nodeEventRoot  = $('#m_amount_id, #rate_id, #time_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var p = $('#m_amount_id').val();
 					    var r = $('#rate_id').val();
 					    var t = $('#time_id').val();
@@ -3064,7 +3058,7 @@
 					$nodeEventRoot  = $('#tfy_id, #tr1_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var tfy = Number($('#tfy_id').val());
 					    var tr1 = Number($('#tr1_id').val());
 
@@ -3116,7 +3110,7 @@
 					$nodeEventRoot  = $('#isp_id, #esp_id, #deps1_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var isp = Number($('#isp_id').val());
 					    var esp = Number($('#esp_id').val());
 					    var deps1= Number($('#deps1_id').val())
@@ -3172,7 +3166,7 @@
 					$nodeEventRoot  = $('#interest_id, #face_value_id, #price_of_bond_id, #maturity_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var interest = Number($('#interest_id').val());
 					    var face_value = Number($('#face_value_id').val());
 					    var bond_price= Number($('#price_of_bond_id').val());
@@ -3226,7 +3220,7 @@
 					$nodeEventRoot  = $('#face_value1_id, #pre_value_id, #time_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var fvb = Number($('#face_value1_id').val());
 					    var rfy = Number($('#pre_value_id').val());
 					    var tom= Number($('#time_id').val());
@@ -3280,7 +3274,7 @@
 					$nodeEventRoot  = $('#face_value1_id, #rate_of_yield_id, #time_of_maturity_id');
 
 					$nodeEventRoot
-	                .on( 'change', function(event) {
+	                .on( 'keyup', function(event) {
 	                	var fvb = Number($('#face_value1_id').val());
 					    var rfy = Number($('#rate_of_yield_id').val());
 					    var tom= Number($('#time_of_maturity_id').val());

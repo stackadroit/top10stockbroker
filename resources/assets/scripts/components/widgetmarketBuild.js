@@ -10,7 +10,7 @@ class WidgetMarketBuild extends React.Component {
             direction: 'up',
             easing: 'swing',
             speed: 'slow',
-            interval: 2000,
+            interval: 4000,
             height: '60',
             visible: 1,
             mousePause: true,
