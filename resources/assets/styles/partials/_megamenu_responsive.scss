@@ -238,8 +238,9 @@
 		    position: relative;
 		    vertical-align: middle;
 		    width: 100%;
-		    top: 11%;
-		    z-index: 9;
+		    top: 0;
+			z-index: 9;
+			margin: auto;
 	    }
 	}
 
@@ -251,10 +252,14 @@
 	    	width: 90px;
 	    }
 	    + .close-menu-mobile{
-	    	right: 15px;
-		    top: 25px;
-		    height: 40px;
-		    width: 40px;
+			height: 40px;
+			width: 40px;
+			right: 5px;
+			top: 11px;
+			@media (min-width: 768px) {
+				right: 15px;
+				top: 15px;
+			}
 	    }
 	}
 
@@ -290,6 +295,7 @@
 			height: 100%;
 			vertical-align: middle;
 			padding: 15px 0;
+			margin: 0 auto;
 		}
 		&.active i:before {
 		    content: "\f106";

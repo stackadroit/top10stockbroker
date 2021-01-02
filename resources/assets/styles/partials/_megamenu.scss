@@ -24,16 +24,16 @@
 		&.active {
 			> a{
 				color: $color-primary;
+				@media (min-width: 992px){
+					color: $color-light;
+				}
 			}
 		}
 		> a{
 			@media (min-width: 992px){
-				padding: side-values(10px 20px);
+				padding: side-values(5px 20px);
 				display: table-cell;
 				vertical-align: middle;
-			}
-			@media (min-width: 992px) and (max-width:1200px) {
-				padding: side-values(10px 12px);
 			}
 		}
 	}
@@ -47,7 +47,7 @@
 		    white-space: normal;;
 		    font-size: 12px;
 		    font-style: normal;
-		    font-weight: 700;
+		    font-weight: $font-weight-semibold;
 		    padding: side-values(0.5rem 1rem);
 		    letter-spacing: -0.5px;
 		    text-transform: uppercase;
@@ -55,7 +55,7 @@
 		    position: relative;
 		    color: $color-font-light;
 		    .open-submenu {
-			  	margin-#{$left}: 3px;
+			  	margin-#{$left}: 5px;
 			}
 		    &:hover, &:focus{
 		    	color: $color-primary !important;
