@@ -81,6 +81,12 @@
 		}
 	}
 
+	#header-right-sidebar .widget{
+		@media(max-width: 576px){
+			margin: 15px 0;
+		}
+	}
+
 	// Header Nav
 	.header-nav {
 		padding: side-values(0.5rem 0);
