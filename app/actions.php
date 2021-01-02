@@ -270,7 +270,7 @@ function gold_rate_comparison_calculate() {
 add_action( 'wp_ajax_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 add_action( 'wp_ajax_nopriv_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 function modal_popup() {
-
+    global $wpdb;
     $nonce =  @$_REQUEST['security'];
     $data['hello_bar'] =  @$_REQUEST['hello_bar'];
     $model_auto =  @$_REQUEST['model_auto'];
@@ -333,6 +333,15 @@ function modal_popup() {
                 
                 break;
             case 'mbf-search-wrap':
+                $lb_banners = $wpdb->prefix . 'lb_banners';
+                $nf_banner =  $wpdb->get_row("SELECT * FROM $lb_banners  WHERE `active_for` = 3 and `status` = 1 LIMIT 1");
+                $data['notificationBanner']='';
+                if(@$nf_banner->id){
+                    $data['notificationBanner'] ='<div class="text-center"><a href="'.$nf_banner->lb_redirect_url.'" class="single_ad_728x90" target="_blank" rel="nofollow noopener" alt="'.$nf_banner->lb_banner_name.'">
+                        <img src="'.$nf_banner->lb_banner.'" alt="'.$nf_banner->lb_banner_name.'">
+                    </a></div>';
+                }
+                
                 $template = 'partials.ajax.modalpopup-mdf-search';
                 $data['do_contactform'] = get_post_meta( $data['post_id'], $shortcode_contactform, true );
                 break;
