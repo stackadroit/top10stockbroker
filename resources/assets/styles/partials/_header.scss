@@ -81,10 +81,8 @@
 		}
 	}
 
-	#header-right-sidebar .widget{
-		@media(max-width: 576px){
-			margin: 15px 0;
-		}
+	#header-right-sidebar .widget	{
+		margin: 15px 0;
 	}
 
 	// Header Nav
@@ -160,6 +158,7 @@
 				li{
 					display: inline-block;
 					line-height: 13px;
+					
 					a {
 						display: inline-block;
 						white-space: nowrap;

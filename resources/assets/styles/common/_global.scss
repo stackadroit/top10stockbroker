@@ -13,7 +13,7 @@ body {
 	background-color: $light-bg;
 	color: $color-font-light;
 	font-family: $font-primary;
-	font-size: $body-font-size + 0px;
+	font-size: $body-font-size + 2px;
 	line-height: $body-line-height + 0px;
 	margin: 0;
 	@include if-rtl() {
