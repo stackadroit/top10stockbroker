@@ -24,16 +24,15 @@
 		&.active {
 			> a{
 				color: $color-primary;
-				@media (min-width: 992px){
-					color: $color-light;
-				}
 			}
 		}
 		> a{
+			// color: $color-primary;
 			@media (min-width: 992px){
 				padding: side-values(5px 20px);
 				display: table-cell;
 				vertical-align: middle;
+				color: $color-light;
 			}
 		}
 	}
@@ -52,8 +51,8 @@
 		    letter-spacing: -0.5px;
 		    text-transform: uppercase;
 		    display: block;
-		    position: relative;
-		    color: $color-light;
+			position: relative;
+
 		    .open-submenu {
 			  	margin-#{$left}: 5px;
 			}
