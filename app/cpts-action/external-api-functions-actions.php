@@ -185,7 +185,7 @@ function api_master_calls_for_city_data(){
 	    $state_name = @$srResults->state_name;
 	    $zone_name = @$srResults->zone_name;
 	}
-	$serviceQuery= "select ". $services_optionsTbl .".* ,ser.api_name,ser.google_sheet_id from ". $services_optionsTbl ." left JOIN wp_api_services as ser ON(ser.id=". $services_optionsTbl .".api_id) WHERE ". $services_optionsTbl .".status = 1 AND ". $services_optionsTbl .".active_for = 'city'";
+	$serviceQuery= "select ". $services_optionsTbl .".* ,ser.api_name,ser.google_sheet_id from ". $services_optionsTbl ." left JOIN wp_api_services as ser ON(ser.id=". $services_optionsTbl .".api_id) WHERE ". $services_optionsTbl .".city_status = 1 AND ". $services_optionsTbl .".active_for = 'city'";
 	    if($service){
 	        $serviceQuery .= " AND FIND_IN_SET('".$service."',services) ";
 	    }
