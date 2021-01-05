@@ -45,10 +45,23 @@ label {
 		& textarea,
 		& input {
 			@extend .form-control;
+			background-color: #f8f8f8;
 		}
 		& .submit {
 			@extend .btn;
 			@extend .btn-primary;
+			width: auto;
+			height: auto;
+			font-size: 18px;
+			background-color: #e55025;
+			border-color: #e55025;
+			color: #ffffff;
+			margin-bottom: 30px;
+    		padding: 10px 20px;
+
+			&:hover {
+				background-color: #33363b;
+			}
 		}
 	}
 }
