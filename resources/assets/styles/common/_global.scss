@@ -523,7 +523,7 @@ For Branches
     list-style: square;
 }
 .tableheading {
-  font-family: 'OpenSans-Semibold', serif;
+  font-family: $font-primary;
   font-weight: bold;
 }
 .table-militry{
@@ -539,6 +539,10 @@ For Branches
     color: green;
     font-size: 20px;
     font-weight: bold;
+}
+.table-star {
+  font-size: 24px;
+  color: rgb(255, 102, 0);
 }
 .table-wrongsign {
     color: red;
