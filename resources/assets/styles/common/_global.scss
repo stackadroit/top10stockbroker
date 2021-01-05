@@ -516,7 +516,30 @@ For Branches
     padding-bottom: 10px;
     margin:0px !important;
 }
-
 .text-orange {
     color: #e55025 !important;
+}
+.entry-content ul {
+    list-style: square;
+}
+.tableheading {
+  font-family: opensans-semibold, sans-serif;
+  font-weight: bold;
+  background: rgb(197, 190, 151);
+}
+.table-pistagreen {
+  background: rgb(194, 214, 154);
+}
+.table-lightblue {
+  background: rgb(229, 224, 236);
+}
+.table-correctsign {
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+}
+.table-wrongsign {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
 }
