@@ -519,7 +519,43 @@ For Branches
     padding-bottom: 10px;
     margin:0px !important;
 }
-
 .text-orange {
     color: #e55025 !important;
+}
+.entry-content ul {
+    list-style: square;
+}
+.tableheading {
+  font-family: 'OpenSans-Semibold', serif;
+  font-weight: bold;
+}
+.table-militry{
+  background: rgb(197, 190, 151);
+}
+.table-pistagreen {
+  background: rgb(194, 214, 154);
+}
+.table-lightblue {
+  background: rgb(229, 224, 236);
+}
+.table-correctsign {
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+}
+.table-wrongsign {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+.main {
+  .tdr {
+    .tdr-tr {
+      td {
+        h2 {
+          font-size: 2em;
+        }
+      }
+    }
+  }
 }
