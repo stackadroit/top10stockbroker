@@ -553,13 +553,71 @@ For Branches
     font-weight: bold;
 }
 .main {
-  .tdr {
-    .tdr-tr {
+  table {
+    tr {
       td {
         h2 {
           font-size: 2em;
+          margin: 0;
         }
       }
     }
+  }
+}
+.choose_broker, select#choose_broker {
+    width: 250px;
+    display: block;
+    margin: 10px 0;
+}
+.calculater  {
+  input[type=radio] {
+    display: none;
+  }
+  input[type=radio]+label {
+    padding-top: 7px;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #e55025;
+  }
+
+  label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+
+    &:before {
+      content: '\f17d';
+      font-family: fontawesome;
+    font-weight: 400;
+    margin-right: 10px;
+    }
+  }
+
+  table {
+    tr {
+      td {
+        text-align: left;
+      }
+    }
+  }
+}
+.__submit_btn {
+  @extend .btn;
+  @extend .btn-primary;
+  width: auto;
+  height: auto;
+  font-size: 18px!important;
+  background-color: #e55025;
+  border-color: #e55025;
+  color: #ffffff;
+  margin-bottom: 30px;
+    padding: 10px 20px;
+
+  &:hover {
+    background-color: #33363b;
   }
 }
