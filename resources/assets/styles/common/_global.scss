@@ -571,6 +571,9 @@ For Branches
     margin: 10px 0;
 }
 .calculater  {
+  #content7 {
+
+  }
   input[type=radio] {
     display: none;
   }
@@ -580,6 +583,7 @@ For Branches
     color: #000000;
     background-color: #e7e7e7;
     height: 42px;
+    cursor: pointer;
   }
 input[type=radio]:checked +label {
       color: #ffffff;
@@ -603,10 +607,14 @@ input[type=radio]:checked +label {
 
           input[type=number] {
               padding: 10px;
+              border: 1px solid #000000;
           }
 
           select {
-            min-width: 185px;
+            min-width: 188px;
+            border: 1px solid #000000;
+            border-radius: 0;
+            font-size: 1rem;
           }
 
           #calculate1, #calculate2, #calculate3, #calculate4, #calculate5, #calculate6, #calculate7 {
