@@ -75,7 +75,7 @@ span.wpcf7-list-item-label::after {
 div.wpcf7 {
   & .ajax-loader {
     visibility: hidden;
-    display: inline-block;
+    display: none;
     background-image: url('');
     width: 16px;
     height: 16px;
@@ -334,9 +334,9 @@ div.wpcf7-response-output {
   }
 
   & fieldset {
-    border: 1px solid silver;
-    margin: 0 2px;
-    padding: .35em .625em .75em
+    // border: 1px solid silver;
+    margin: 0;
+    // padding: .35em .625em .75em
   }
 
   & legend {
@@ -470,8 +470,8 @@ div.wpcf7-response-output {
   & fieldset {
     margin: 10px 0;
     padding: 10px 20px;
-    border: 1px solid darken(#f7f7f7, 10%);
-    background: #f7f7f7;
+    border: 1px solid #fff7c0;
+    background: #fff7c0;
   }
 
   & legend {
