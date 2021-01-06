@@ -1,6 +1,6 @@
-<div class="container-fluid py-4 bull-bg">
+<div class="container-fluid">
     <div class="row">
-      <div class="col-md-6 p-4 left-section show-desktop">
+      <div class="col-md-6 p-4 left-section d-none d-md-block">
         @if(!$auto_status)
           <h3>
             <span class="red">Fill your details</span> & get all exclusive offers. <span class="red">Hurry!!!</span>
@@ -33,11 +33,11 @@
         <div class="form-container">
           @if(!$auto_status)
             <h3 class="show-desktop"><strong>Become a Sub Broker</strong> in just 3 days</h3>
-            <h3 class="show-mobile">Fill your details & <strong>Become a Sub-Broker in just 3 Days</strong></h3>
+            <h3 class="show-mobile text-center">Fill your details & <strong> Become a Sub-Broker in just 3 Days</strong></h3>
             <hr>
           @else 
             <h3 class="show-desktop"><strong>Become a Sub Broker</strong> in just 3 days</h3>
-            <h3 class="show-mobile">Still Confused! <strong>Fill Details & Get Free Consultancy</strong></h3>
+            <h3 class="show-mobile text-center">Still Confused! <strong>Fill Details & Get Free Consultancy</strong></h3>
             <hr>
           @endif
             {!! do_shortcode($do_contactform) !!} 

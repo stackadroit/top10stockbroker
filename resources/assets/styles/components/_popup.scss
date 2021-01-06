@@ -1,6 +1,9 @@
-body { padding-right: 0 !important } 
+body { 
+    padding-right: 0 !important ; 
+} 
+
 .mbf-search{
-    background: #e55025;
+    background: $color-default;
     position: fixed;
     top: 350px;
     left: 12px;
@@ -51,6 +54,8 @@ body { padding-right: 0 !important }
         }
     }  
 }
+
+
 #custom-hellobar{
     top: auto;
     bottom: 0;
@@ -83,6 +88,9 @@ body { padding-right: 0 !important }
         }
     }
 }
+
+
+
 .popup-main{
     padding: 0 !important;
 }
@@ -91,7 +99,7 @@ body { padding-right: 0 !important }
     box-shadow: 0 5px 15px rgba(0,0,0,.5);
     & .close{
         position: absolute;
-        background: red;
+        background: $color-default;
         height: 30px;
         width: 30px;
         top: -15px;
@@ -116,23 +124,20 @@ body { padding-right: 0 !important }
         font-size: 33px;
     }
     & h3{
-      line-height: 28px; 
-      margin-bottom: 20px;
+        line-height: normal;
+        margin-bottom: 20px;
     }
     & .left-section {
         & h3{
-            text-align: center;
-        }
-        & ul{
-            padding-left: 50px;
+            // text-align: center;
         }
     }
     & ul,
     & ol{
         list-style: none;
-        padding-left: 20px;
+        // padding-left: 20px;
         & li{
-            line-height: 26px;
+            padding-bottom: 5px;
         }
     }
     & hr {
@@ -142,7 +147,7 @@ body { padding-right: 0 !important }
         color: red;
     }
     & .border-light{
-        border-left: 1px solid rgba(0, 0, 0, 0.06);
+        border-left: 1px solid $color-dark;
     }
     & .wpcf7 {
         padding: 3px;
