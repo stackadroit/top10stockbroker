@@ -575,15 +575,20 @@ For Branches
   }
   input[type=radio]+label {
     padding-top: 7px;
-    margin-top: 10px;
-    color: #fff;
-    background-color: #e55025;
+    margin-bottom: 10px;
+    color: #000000;
+    background-color: #e7e7e7;
+    height: 42px;
   }
+input[type=radio]:checked ~ label {
+      color: #ffffff;
+      background-color: #5a5a5a;
+}
 
   label {
     display: inline-block;
     margin: 0 0 -1px;
-    padding: 15px 25px;
+    padding: 15px 15px;
     font-weight: 600;
     text-align: center;
     color: #bbb;
@@ -600,7 +605,24 @@ For Branches
   table {
     tr {
       td {
-        text-align: left;
+        text-align: left!important;
+
+          input[type=number] {
+              padding: 10px;
+          }
+
+          select {
+            min-width: 185px;
+          }
+
+          #calculate1 {
+            display: flex;
+            background-color: #e55025;
+            &:hover {
+                background-color: #33363b;
+              }
+
+          }
       }
     }
   }
