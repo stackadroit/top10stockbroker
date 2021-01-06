@@ -19,14 +19,14 @@ body { padding-right: 0 !important }
     & ,
     & i,
     & svg{
-        color: #fff;
+        color: $color-light;
         font-size: 18px;
     }
     & .bars {
         position: relative;
         width: 25px;
         height: 2px;
-        background: #fff;
+        background: $color-light;
         display: block;
         margin: 0 auto;
         top: 19px;
@@ -38,7 +38,7 @@ body { padding-right: 0 !important }
             position: absolute;
             top: 9px;
             display: block;
-            background: #fff;
+            background: $color-light;
         }
         &:before {
             content: '';
@@ -47,7 +47,7 @@ body { padding-right: 0 !important }
             position: absolute;
             top: -9px;
             display: block;
-            background: #fff;
+            background: $color-light;
         }
     }  
 }
@@ -61,19 +61,26 @@ body { padding-right: 0 !important }
     display: table;
     font-size: 16px;
     font-weight: 400;
-    padding: .2em .3em;
-    background-color: #e55025;
+    padding: .3em;
     -webkit-font-smoothing: antialiased;
-    color: #fff;
-    z-index: 1039;
+    color: $color-light;
+    z-index: 9;
+    background-color: green;
+    @media(min-width: 768px){
+        padding: .2em .3em;
+        background-color: $color-primary;
+    }
     & a {
         display: inline-block;
         line-height: inherit;
         margin-left: 10px;
         background-color: green;
-        padding: 5px 10px;
-        color: #fff;
+        color: $color-light;
         cursor: pointer;
+        padding: 0 10px;
+        @media(min-width: 768px){
+            padding: 5px 10px;
+        }
     }
 }
 .popup-main{
@@ -96,9 +103,11 @@ body { padding-right: 0 !important }
         min-height: 300px;
     }
     & .bull-bg{
-        background-image: url("../images/bull.png");
-        background-repeat: no-repeat;
-        background-position: left bottom;
+        @media(min-width: 575px){
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            background-image: url("../images/bull.png");
+        }
     }
     & .loader{
         margin: auto;
@@ -154,5 +163,12 @@ body { padding-right: 0 !important }
             padding-top: 8px;
             padding-bottom: 8px;
         }
+    }
+}
+
+
+.modal-dialog{
+    @media(max-width: 991px) {
+        margin: 15px;
     }
 }
