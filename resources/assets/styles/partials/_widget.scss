@@ -104,6 +104,8 @@
 	position: relative;
 	margin-bottom: 35px;
 	h3{
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
 		background-color: $color-yellow;
 	    color: $color-dark;
 		padding: 5px 12px;
