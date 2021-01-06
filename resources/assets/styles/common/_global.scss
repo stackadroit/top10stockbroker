@@ -581,7 +581,7 @@ For Branches
     background-color: #e7e7e7;
     height: 42px;
   }
-input[type=radio]:checked ~ label {
+input[type=radio]:checked +label {
       color: #ffffff;
       background-color: #5a5a5a;
 }
@@ -594,13 +594,6 @@ input[type=radio]:checked ~ label {
     text-align: center;
     color: #bbb;
     border: 1px solid transparent;
-
-    &:before {
-      content: '\f17d';
-      font-family: fontawesome;
-    font-weight: 400;
-    margin-right: 10px;
-    }
   }
 
   table {
@@ -619,6 +612,8 @@ input[type=radio]:checked ~ label {
           #calculate1 {
             display: flex;
             background-color: #e55025;
+            margin: 0 auto;
+            color: #ffffff;
             &:hover {
                 background-color: #33363b;
               }

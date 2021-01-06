@@ -308,9 +308,9 @@ h2.names{font-size: 34px;}
     background-color: #eee;
     position: relative;
 }
-.tabs a.active, .tabs a:hover { 
+.tabs a.active, .tabs a:hover .tabs a:focus{ 
     background: #000;
-    color: #fff;
+    color: #fff!important;
     border-top: 2px solid orange;  
 }
 .tab-content {
