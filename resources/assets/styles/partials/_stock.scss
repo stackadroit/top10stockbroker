@@ -307,15 +307,6 @@ h2.names{font-size: 34px;}
     cursor: pointer;
     background-color: #eee;
     position: relative;
-
-    &:before {
-      content: "\f17d";
-      font-family: FontAwesome;
-      font-style: normal;
-      font-weight: normal;
-      text-decoration: inherit;
-      padding-right: 0.5em;
-    }
 }
 .tabs a.active, .tabs a:hover { 
     background: #000;
