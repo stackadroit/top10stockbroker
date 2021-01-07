@@ -33,6 +33,7 @@ body {
 }
 
 body #page{
+  padding-right: 0 !important; 
   position: relative;
   #{$left}: 0;
   @include transitions(all 0.3s ease-in-out 0s);
@@ -121,7 +122,7 @@ iframe{max-width: 100%; border: none;}
 ul, menu, dir {
     display: block;
     list-style-type: disc;
-    padding: side-values(0 0 0 40px);
+    padding: side-values(0 0 0 20px);
   }
   li > ul, li > ol {
     margin: side-values(0);
@@ -133,7 +134,7 @@ ul ul, ol ul, ul ol, ol ol {
 
 ul, ol {
   margin-top: 0;
-  padding-left: 0;
+  padding-left: 20px;
 }
 
 li {
@@ -144,7 +145,7 @@ li {
 ol {
   display: block;
   list-style-type: decimal;
-  padding: side-values(0 0 0 40px);
+  padding: side-values(0 0 0 20px);
 }
 
 ul ul, ol ul {
@@ -444,21 +445,6 @@ select{
     width: 100%;
     z-index: 9999;
 }
-@media (max-width: 575px) {
-  .scroll-to-top {
-      &.hidden-mobile{
-        opacity: 0;
-      }
-  }
-}
-/* Responsive */
-@media (max-width: 575px) {
-
-	body {
-		font-size: 13px;
-	}
-
-}
 
 /**
  * Block editor color palette utilities
@@ -479,7 +465,7 @@ select{
 For News ctp
 */
 .more-link, .no-post-thumbnail {
-    background-color: #e55025;
+    background-color: $color-default;
     display: inline-block;
     border-radius: 3px;
 }
@@ -521,7 +507,7 @@ For Branches
     margin:0px !important;
 }
 .text-orange {
-    color: #e55025 !important;
+    color: $color-default !important;
 }
 .entry-content ul {
     list-style: square;
@@ -619,7 +605,7 @@ input[type=radio]:checked +label {
 
           #calculate1, #calculate2, #calculate3, #calculate4, #calculate5, #calculate6, #calculate7 {
             display: flex;
-            background-color: #e55025;
+            background-color: $color-default;
             margin: 0 auto;
             color: #ffffff;
             &:hover {
@@ -637,13 +623,47 @@ input[type=radio]:checked +label {
   width: auto;
   height: auto;
   font-size: 18px!important;
-  background-color: #e55025;
-  border-color: #e55025;
+  background-color: $color-default;
+  border-color: $color-default;
   color: #ffffff;
   margin-bottom: 30px;
     padding: 10px 20px;
 
   &:hover {
     background-color: #33363b;
+  }
+}
+
+// custom hellbar style in footer
+#custom-hellobar{
+  top: auto;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  height: auto;
+  display: table;
+  font-size: 16px;
+  font-weight: 400;
+  padding: .3em;
+  -webkit-font-smoothing: antialiased;
+  color: $color-light;
+  z-index: 9;
+  background-color: $color-green;
+  @media(min-width: 768px){
+      padding: .2em .3em;
+      background-color: $color-primary;
+  }
+  & a {
+      display: inline-block;
+      line-height: inherit;
+      margin-left: 10px;
+      background-color: $color-green;
+      color: $color-light;
+      cursor: pointer;
+      padding: 0 10px;
+      @media(min-width: 768px){
+          padding: 5px 10px;
+      }
   }
 }

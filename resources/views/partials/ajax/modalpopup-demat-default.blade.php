@@ -32,16 +32,16 @@
       <div class="col-md-6 ml-auto p-4 border-light">
         <div class="form-container">
           @if(!$auto_status)
-            <h3 class="show-desktop"><strong>Open 100% Free Demat A/C</strong> in just 5 Minute</h3>
-            <h3 class="show-mobile text-center">Fill your Details <strong> & Open 100% Free Demat A/C</strong></h3>
+            <h3 class="d-none d-sm-block"><strong>Open 100% Free Demat A/C</strong> in just 5 Minute</h3>
+            <h3 class="d-block d-sm-none text-center">Fill your Details <strong> & Open 100% Free Demat A/C</strong></h3>
             <hr>
           @else 
-            <h3 class="show-desktop"><strong>Open 100% Free Demat A/C</strong> in just 5 Minute</h3>
-            <h3 class="show-mobile text-center">Fill your Details <strong>& Open 100% Free Demat A/C</strong></h3>
+            <h3 class="d-none d-sm-block"><strong>Open 100% Free Demat A/C</strong> in just 5 Minute</h3>
+            <h3 class="d-block d-sm-none text-center">Fill your Details <strong>& Open 100% Free Demat A/C</strong></h3>
             <hr>
           @endif
             {!! do_shortcode($do_contactform) !!} 
-          <p class="show-mobile bdr">
+          <p class="d-block d-sm-none bdr">
             @if(!$auto_status)
               <small> - Get 90% Discount on Brokerage</small>
               <small> - Get more than 20% Return on Investment</small>
