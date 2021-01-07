@@ -32,16 +32,16 @@
       <div class="col-md-6 ml-auto p-4 border-light">
         <div class="form-container">
           @if(!$auto_status)
-            <h3 class="show-desktop"><strong>Become a Sub Broker</strong> in just 3 days</h3>
-            <h3 class="show-mobile text-center">Fill your details & <strong> Become a Sub-Broker in just 3 Days</strong></h3>
+            <h3 class="d-none d-sm-block"><strong>Become a Sub Broker</strong> in just 3 days</h3>
+            <h3 class="d-block d-sm-none text-center">Fill your details & <strong> Become a Sub-Broker in just 3 Days</strong></h3>
             <hr>
           @else 
-            <h3 class="show-desktop"><strong>Become a Sub Broker</strong> in just 3 days</h3>
-            <h3 class="show-mobile text-center">Still Confused! <strong>Fill Details & Get Free Consultancy</strong></h3>
+            <h3 class="d-none d-sm-block"><strong>Become a Sub Broker</strong> in just 3 days</h3>
+            <h3 class="d-block d-sm-none text-center">Still Confused! <strong>Fill Details & Get Free Consultancy</strong></h3>
             <hr>
           @endif
             {!! do_shortcode($do_contactform) !!} 
-          <p class="show-mobile bdr">
+          <p class="d-block d-sm-none bdr">
             @if(!$auto_status)
               <small> - Get 80% Revenue Sharing</small>
               <small> - Start with Zero Security Deposit</small>

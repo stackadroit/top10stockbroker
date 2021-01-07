@@ -427,10 +427,10 @@ div.wpcf7-response-output {
 
   & fieldset {
     // margin: 10px 0;
-    border: 1px solid #fff7c0;
-    background: #fff7c0;
+    border: 1px solid #eee;
+    background: #eee;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 18px 20px 10px;
   }
 
   & legend {
@@ -506,7 +506,7 @@ div.wpcf7-response-output {
     padding: 7px 15px;
     color: $color-light;
     border: none;
-    background: $color-default;
+    background: $color-green;
   }
 
   & .wpcf7-form input[type=submit]:hover {
