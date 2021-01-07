@@ -288,16 +288,50 @@ h2.names{font-size: 34px;}
 .tab_content { 
   width:100%;
  }
+.tabs {
+    padding: 0;
+    margin: 0;
+}
 .tabs li { 
   display:inline;
   list-style:none;
 }
 .tabs a { 
-  display:inline-block; 
+    display: inline-block;
+    margin: 0 0 10px;
+    padding: 15px 32px;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color: #eee;
+    position: relative;
 }
-.tabs a.active, .tabs a:hover { 
-    color: #fff;
-    background-color: #e55025;  
+.tabs a.active, .tabs a:hover .tabs a:focus{ 
+    background: #000;
+    color: #fff!important;
+    border-top: 2px solid orange;  
+}
+.tab-content {
+  .tab-col {
+    input[type=text] {
+        padding: 1%;
+        border: 1px solid #000000;
+        line-height: 20px;
+        width: 95%;
+        margin: 0 0 30px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 3px;
+        height: 42px;
+        font-size: 16px;
+    }
+  }
+  .calculate_margin {
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
 }
 .commn_tabs{
   border-bottom: 1px solid #666;  

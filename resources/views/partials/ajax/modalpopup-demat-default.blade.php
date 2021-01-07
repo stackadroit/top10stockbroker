@@ -1,6 +1,6 @@
-<div class="container-fluid py-4 bull-bg">
+<div class="container-fluid">
     <div class="row">
-      <div class="col-md-6 p-4 left-section show-desktop">
+      <div class="col-md-6 p-4 left-section d-none d-md-block">
         @if(!$auto_status)
           <h3>
             <span class="red">Fill your details</span> & get all exclusive offers. <span class="red">Hurry!!!</span>
@@ -33,11 +33,11 @@
         <div class="form-container">
           @if(!$auto_status)
             <h3 class="show-desktop"><strong>Open 100% Free Demat A/C</strong> in just 5 Minute</h3>
-            <h3 class="show-mobile">Fill your Details <strong>& Open 100% Free Demat A/C</strong></h3>
+            <h3 class="show-mobile text-center">Fill your Details <strong> & Open 100% Free Demat A/C</strong></h3>
             <hr>
           @else 
             <h3 class="show-desktop"><strong>Open 100% Free Demat A/C</strong> in just 5 Minute</h3>
-            <h3 class="show-mobile">Fill your Details <strong>& Open 100% Free Demat A/C</strong></h3>
+            <h3 class="show-mobile text-center">Fill your Details <strong>& Open 100% Free Demat A/C</strong></h3>
             <hr>
           @endif
             {!! do_shortcode($do_contactform) !!} 
