@@ -3,13 +3,16 @@
   @extend .table-bordered;
   width: 100% !important;
   border-collapse: collapse;
+  overflow: auto;
 }
 
 .main table {
-  overflow: auto;
   a {
     color: $color-default;
   }
+   &,a {
+       font-size: 14px;
+    } 
 }
 
 .table th, .main table:not(.no-defult) th, .table td, .main table:not(.no-defult) td{

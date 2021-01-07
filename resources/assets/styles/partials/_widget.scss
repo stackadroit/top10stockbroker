@@ -143,10 +143,10 @@ aside.widget:hover{
 		label{
 			width: 100%;
 		}
-		input {
+		input[type="search"] {
 			padding: side-values(14px 14px 14px 14px);
 		    height: 50px;
-		    width: 100%;
+		    width: 77%;
 		    color: #707070;
 		    font-size: 15px;
 		    background: #f5f5f5;
@@ -154,6 +154,15 @@ aside.widget:hover{
 		}
 		.search-submit {
 			font-weight: bold;
+			&:before {
+				content: "\f002";
+				font-family: FontAwesome;
+				font-style: normal;
+				font-weight: 400;
+				text-decoration: inherit;
+				color: #fff;
+				font-size: 18px
+			}
 		  &:hover{
 		  	background: $color-primary;
 		  	color: $color-light;
@@ -539,4 +548,7 @@ aside.widget:hover{
 	    max-width: 255px;
 	}
 }
+
+
+
 

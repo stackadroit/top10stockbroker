@@ -406,7 +406,7 @@ select{
 	}
 }
 .scroll-to-top {
-    bottom: 40px;
+    bottom: 50px;
     position: fixed;
     border-radius: 4px;
     display: block;
@@ -415,7 +415,7 @@ select{
     text-decoration: none;
     min-width: 50px;
     z-index: 1040;
-    font-size: 4em;
+    font-size: 3.5em;
     opacity: 0;
     transition: opacity 0.3s;
     & i,
@@ -667,3 +667,5 @@ input[type=radio]:checked +label {
       }
   }
 }
+
+
