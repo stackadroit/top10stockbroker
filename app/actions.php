@@ -445,7 +445,7 @@ function get_gold_silver_price_graph_data() {
         foreach ($priceResults as $key => $rowObj) {
             if($dur == '1D'|| $dur =='1W'){
                 $data[] =array(
-                    'time'=>date('Y-m-d-H-i',strtotime($rowObj->date)),
+                    'date'=>date('Y-m-d-H-i',strtotime($rowObj->date)),
                     'price'=>$rowObj->t22_1_rate,
                     'open'=>$rowObj->t22_1_rate,
                     'high'=>$rowObj->t24_1_rate,
@@ -456,7 +456,7 @@ function get_gold_silver_price_graph_data() {
             }else{
 
              $data[] =array(
-                    'time'=>date('Y-m-d',strtotime($rowObj->date)),
+                    'date'=>date('Y-m-d',strtotime($rowObj->date)),
                     'price'=>$rowObj->t22_1_rate,
                     'open'=>$rowObj->t22_1_rate,
                     'high'=>$rowObj->t24_1_rate,
