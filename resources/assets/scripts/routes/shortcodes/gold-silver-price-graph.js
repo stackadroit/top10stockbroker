@@ -5,14 +5,16 @@ export default {
     
     'use strict';
       $(".month_tabs").find('.tab_content').hide();
-      $("ul.nested_tab li > a").click(function (e) {
+      var els =".gold-silver-price-graph";
+      
+      $(els+ " ul.nested_tab li > a").click(function (e) {
         e.preventDefault();
         $(this).closest('.nested_tab').find('a').removeClass('active');
         var activeTab = jQuery(this).addClass("active").attr("href");
         $(this).closest(".month_tabs").find('.tab_content').hide();
         $(this).closest(".month_tabs").find(activeTab).show();
       }); 
-      $('.nested_tab a[href="#li_1y"').trigger('click');
+      $(els+' .nested_tab a[href="#li_1y"').trigger('click');
       // setTimeout(function(){
       //   
       // },1000);
