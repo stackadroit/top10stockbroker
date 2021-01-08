@@ -19,6 +19,7 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     $localize_script_vars = array( 
+        'site_url' => site_url('/'),
         'ajax_url' => admin_url( 'admin-ajax.php' ),
         'ajax_nonce' => wp_create_nonce('gloabltop10stockbroker'),
     );
@@ -187,14 +188,23 @@ add_filter('top10stockbroker_cpt', function ($array) {
                 'cpt' => array( 
                             __( 'Share Market', 'top10stockbroker' ),
                             __( 'Share Markets', 'top10stockbroker' ),
-                            'share-markets'
+                            'share-market'
                         ),
                 'arg_overrides' => array( 
                             'has_archive' => false,
                             'menu_position' => 5,
                             'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail' ), 
                             'menu_icon'           => 'dashicons-tagcloud',
-                            // 'register_meta_box_cb' => '_pa1_add_share_market_indices_code',
+                            'register_meta_box_cb' => function () {
+                                add_meta_box(
+                                    'share_market_indices_code',
+                                    'Indices Code',
+                                    '_pa1_share_market_indices_code_fun',
+                                    'share-market',
+                                    'side',
+                                    'default'
+                                );
+                            },
                         )
             );
 
@@ -239,8 +249,91 @@ add_filter('top10stockbroker_cpt', function ($array) {
                             'menu_icon'           => 'dashicons-tagcloud',
                         )
             );
-
-
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'News', 'top10stockbroker' ),
+                            __( 'News', 'top10stockbroker' ),
+                            'news'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => true,
+                            'menu_position' => 5,
+                            'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                            'taxonomies'=> array( 'category' ),
+                        )
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Stock Broker', 'top10stockbroker' ),
+                            __( 'Stock Brokers', 'top10stockbroker' ),
+                            'stock-brokers'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'BK State', 'top10stockbroker' ),
+                            __( 'BK States', 'top10stockbroker' ),
+                            'state'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Brokerage', 'top10stockbroker' ),
+                            __( 'Brokerages', 'top10stockbroker' ),
+                            'brokerage-calculator'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => true,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Brokerage comparison', 'top10stockbroker' ),
+                            __( 'Brokerage comparisons', 'top10stockbroker' ),
+                            'broker-comparison'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => true,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Margin Calculator', 'top10stockbroker' ),
+                            __( 'Margin Calculators', 'top10stockbroker' ),
+                            'margin-calculator'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
+    
     return $array;
 
 }, 10, 1);
