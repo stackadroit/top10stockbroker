@@ -1,9 +1,11 @@
 <?php
- /**
-     * Register Taxonomy for Share Market
-     */
+ 
+/**
+ *  Register Share Market CPT
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
     
-    add_action( 'init',   function () {
+add_action( 'init',   function () {
         $labels = array(
             'name'                       => _x( 'SM Categories', 'Taxonomy General Name', 'snt' ),
             'singular_name'              => _x( 'SM Category', 'Taxonomy Singular Name', 'snt' ),
@@ -38,11 +40,13 @@
         );
         register_taxonomy( 'sm-category', array( 'share-market' ), $args );
 
-    }, 0 );
-    /**-----------------------------------------------------
-	 * Output the HTML for the metabox.
-	 /-----------------------------------------------------*/
-    function _pa1_share_market_indices_code_fun() {
+}, 0 );
+
+/**
+ *  Register Metabax For Share Maker CPT
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
+function _pa1_share_market_indices_code_fun() {
 	    global $post;
 	    // Nonce field to validate form request came from current site
 	    wp_nonce_field( basename( __FILE__ ), 'indices_fields' );
@@ -50,11 +54,13 @@
 	    $indices_code = get_post_meta( $post->ID, 'indices_code', true );
 	    // Output the field
 	    echo '<input type="text" name="indices_code" value="' . esc_textarea( $indices_code )  . '" class="widefat">';
-	}
-	/**
-	 * Save the metabox data
-	 */
-	add_action( 'save_post', function ( $post_id, $post ) {
+}
+ 
+/**
+ *  Save the metabox data for Share Maker CPT
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
+add_action( 'save_post', function ( $post_id, $post ) {
 
 	    // Return if the user doesn't have edit permissions.
 	    if ( ! current_user_can( 'edit_post', $post_id ) ) {
@@ -87,7 +93,7 @@
 	            delete_post_meta( $post_id, $key );
 	        }
 	    endforeach;
-	}, 1, 2 );
+}, 1, 2 );
 
 
     /**

@@ -516,5 +516,8 @@ include 'cpts-action/broker-calculator-actions.php';
  /---------------------------------------------------------*/
 include 'cpts-action/external-api-functions-actions.php';
 
-
+/**----------------------------------------------------------
+ * This file include custom meta code for tab filter CPT.
+ /---------------------------------------------------------*/
+include 'cpts-action/tab-filter-custom-meta.php';
 
