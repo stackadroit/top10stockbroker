@@ -7,7 +7,7 @@
         <!-- /.section-head -->
 
         <div class="history_table table-responsive">
-            <table class="table-style1 table-bordered">
+            <table class="table-bordered">
                 <thead>
                     <tr>
                         <th width="35%"></th>

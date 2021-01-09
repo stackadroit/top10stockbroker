@@ -336,20 +336,7 @@ select {
 .screen-reader-text {
   display: none;
 }
-.show-mobile {
-  display: none;
-}
-.show-desktop {
-  display: block;
-}
-@media all and (max-width: 768px) {
-  .show-mobile {
-    display: block;
-  }
-  .show-desktop {
-    display: none;
-  }
-}
+
 .container,
 .main-sidebar {
   .container {
@@ -559,6 +546,7 @@ select#choose_broker {
 }
 
 // custom hellbar style in footer
+// -------------------------------------------------
 #custom-hellobar {
   top: auto;
   bottom: 0;
