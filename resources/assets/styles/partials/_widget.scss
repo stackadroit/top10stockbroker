@@ -140,20 +140,28 @@ aside.widget:hover{
 .widget_search{
 	form {
 		position: relative;
+		display: flex;
+		align-items: stretch;
 		label{
 			width: 100%;
+			margin-bottom: 0;
 		}
 		input[type="search"] {
 			padding: side-values(14px 14px 14px 14px);
 		    height: 50px;
-		    width: 77%;
+		    width: 100%;
 		    color: #707070;
 		    font-size: 15px;
 		    background: #f5f5f5;
-		    font-weight: normal;
+			font-weight: normal;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
 		}
 		.search-submit {
 			font-weight: bold;
+			position: relative;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
 			&:before {
 				content: "\f002";
 				font-family: FontAwesome;
@@ -161,7 +169,7 @@ aside.widget:hover{
 				font-weight: 400;
 				text-decoration: inherit;
 				color: #fff;
-				font-size: 18px
+				font-size: 18px;
 			}
 		  &:hover{
 		  	background: $color-primary;

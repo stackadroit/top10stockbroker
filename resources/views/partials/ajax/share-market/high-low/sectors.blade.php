@@ -1,5 +1,5 @@
 
-<div class="section-companylist bg-light section-padding">
+<div class="section-companylist mb-5">
 	<div class="inner-wrap">
 		<form action="" method="post">
 			<div class="row mb30">

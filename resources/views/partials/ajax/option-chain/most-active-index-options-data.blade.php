@@ -42,55 +42,58 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="mostActiveIndexOptionCall" class="tab-pane fade show active">
-      <table class="table-responsive-md table-bordered mb-0">
-        <thead>
-          <tr>
-            <th class="big-font">Symbol</th>
-            <th class="big-font">Expiry</th>
-            <th class="big-font">Strike Price</th>
-            <th class="big-font">LTP</th>
-            <th class="big-font">Prev. LTP</th>
-            <th class="big-font">Open Interest</th>
-            <th class="big-font">OI Value</th>
-            <th class="big-font">OI Change</th>
-            <th class="big-font">OI Change%</th>
-            <th class="big-font">Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          @php
-          if(is_array(@$cVol)){
-          foreach ($cVol as $idxKey =>$rowObj){
-          $rowObj =(array) $rowObj;
-          @endphp
-          <tr>
-            <td>{{@$rowObj['Symbol']}}</td>
-            <td>{{date('d M Y', strtotime(@$rowObj['ExpDate']))}}</td>
-            <td>{{@number_format(@$rowObj['StrikePrice'],2)}}</td>
-            <td>{{@number_format(@$rowObj['LTP'],2)}}</td>
-            <td>{{@number_format(@$rowObj['PrevLtp'],2)}}</td>
-            <td>{{@number_format(@$rowObj['OI'],2)}}</td>
-            <td>{{@number_format(@$rowObj['OIValue'],2)}}</td>
-            <td>{{@number_format(@$rowObj['OIdiff'],2) }}</td>
-            <td>{{@number_format(@$rowObj['OIchg'],2)}}</td>
-            <td>{{@number_format(@$rowObj['Qty'],2)}}</td>
-          </tr>
-          @php
-          }
-          }else{
-          echo '<tr>
-            <td colspan="2">No Record Found!
-            </td>
-          </tr>';
-          }
-          @endphp
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table-bordered mb-0">
+          <thead>
+            <tr>
+              <th class="big-font">Symbol</th>
+              <th class="big-font">Expiry</th>
+              <th class="big-font">Strike Price</th>
+              <th class="big-font">LTP</th>
+              <th class="big-font">Prev. LTP</th>
+              <th class="big-font">Open Interest</th>
+              <th class="big-font">OI Value</th>
+              <th class="big-font">OI Change</th>
+              <th class="big-font">OI Change%</th>
+              <th class="big-font">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            @php
+            if(is_array(@$cVol)){
+            foreach ($cVol as $idxKey =>$rowObj){
+            $rowObj =(array) $rowObj;
+            @endphp
+            <tr>
+              <td>{{@$rowObj['Symbol']}}</td>
+              <td>{{date('d M Y', strtotime(@$rowObj['ExpDate']))}}</td>
+              <td>{{@number_format(@$rowObj['StrikePrice'],2)}}</td>
+              <td>{{@number_format(@$rowObj['LTP'],2)}}</td>
+              <td>{{@number_format(@$rowObj['PrevLtp'],2)}}</td>
+              <td>{{@number_format(@$rowObj['OI'],2)}}</td>
+              <td>{{@number_format(@$rowObj['OIValue'],2)}}</td>
+              <td>{{@number_format(@$rowObj['OIdiff'],2) }}</td>
+              <td>{{@number_format(@$rowObj['OIchg'],2)}}</td>
+              <td>{{@number_format(@$rowObj['Qty'],2)}}</td>
+            </tr>
+            @php
+            }
+            }else{
+            echo '<tr>
+              <td colspan="2">No Record Found!
+              </td>
+            </tr>';
+            }
+            @endphp
+          </tbody>
+        </table>
+      </div>
     </div>
     <!-- /.tab-pane -->
 
     <div id="mostActiveIndexOptionPut" class="tab-pane fade">
-        <table class="table-responsive-md table-bordered mb-0">
+      <div class="table-responsive">
+        <table class="table-bordered mb-0">
           <thead>
             <tr>
               <th class="big-font">Symbol</th>
@@ -135,14 +138,20 @@
           </tbody>
         </table>
       </div>
-      <!-- /.tab-pane -->
     </div>
-    <!-- /.tab-content -->
+    <!-- /.tab-pane -->
+
 
     <div class="view-detail bt">
-      <a href="{{site_url('option-chain/most-active-index-option')}}" target="_blank">Full Details
-        <span class="arr-lis"> > </span>
-      </a>
-    </div>
+    <a href="{{site_url('option-chain/most-active-index-option')}}" target="_blank">Full Details
+      <span class="arr-lis"> > </span>
+    </a>
+  </div>
+
 
   </div>
+  <!-- /.tab-content -->
+
+
+
+</div>

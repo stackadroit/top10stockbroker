@@ -1,17 +1,17 @@
  @php
     if($company_details){
     @endphp
-    <div class="section-companyprice bg-light section-padding"  id="company-stock-live">
-        <div class="inner-wrap">
+    <div class="section-companyprice bg-light section-padding mb-5"  id="company-stock-live">
+        <div class="inner-wrap px-3">
           <?php
             // echo '<pre>';
             // print_r($cDetailsresponse);
             // echo '</pre>';
            ?>
-            <div class="row align-items-center mb30"> 
+            <div class="row align-items-center mb-4"> 
                 <div class="col-md-2 full-box order-md-last">
                     <div class="select-theme-stb">          
-                        <select name="" id="ddlCompanyIndexes" class="select-style1">
+                        <select name="" id="ddlCompanyIndexes" class="">
                             @if($cpnlisted_db  ==3)
                                     <option value="NSE">NSE</option>
                                     <option value="BSE">BSE</option>

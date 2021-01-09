@@ -1,12 +1,12 @@
 @if(@$profitResposeArray)
-<div class="section_profitLoss section-padding">
+<div class="section_profitLoss section-padding pb-5">
     <div class="inner-wrap">
         <div class="section-head">  
             <h2 class="">{{@$section_title}}</h2>
             <p>{{@$section_content}}</p>
         </div>
-        <div class="porfitls_table scrollbar-inner">
-            <table class="table-style1 th-border">
+        <div class="porfitls_table table-responsive">
+            <table class="table-style1 table-bordered">
                <thead>
                   <tr>
                      @php 

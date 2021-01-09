@@ -1,4 +1,4 @@
-<div class="section_history bg-light section-padding">
+<div class="section_history pb-5">
     <div class="inner-wrap">
         <div class="section-head">
             <h2 class="">{{@$section_title}}</h2>
@@ -6,8 +6,8 @@
         </div>
         <!-- /.section-head -->
 
-        <div class="history_table  scrollbar-inner" style="overflow-x: auto; ">
-            <table class="table-style1 th-border">
+        <div class="history_table table-responsive">
+            <table class="table-style1 table-bordered">
                 <thead>
                     <tr>
                         <th width="35%"></th>

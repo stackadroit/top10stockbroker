@@ -1,4 +1,4 @@
-<div class="section-charts section-padding">
+<div class="section-charts pb-5">
     <div class="inner-wrap">
         <div class="section-head">
            <h2>{{ @$section_title }}</h2>

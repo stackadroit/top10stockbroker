@@ -1,27 +1,27 @@
-<div class="secion-marketgrid bg-light section-padding" id="sectors-section-wrap">
-	<div class="inner-wrap">
+<div class="secion-marketgrid bg-light section-padding mb-5" id="sectors-section-wrap">
+	<div class="inner-wrap px-3">
 		<div class="section-head">
 			<h2>{{ @$section_title }}</h2>
 			<p>{{ @$section_content }}</p>
 		</div>
 		<!-- section-head -->
 
-		<div class="row mb30">
+		<div class="row mb-4">
 		   <div class="col-md-2 col-sm-3">
-				<select id="type" class="select-style2">
+				<select id="type" class="">
 					<option value="Gain">Gainers</option>
 					<option value="Lose">Losers</option>
 				</select>
 		   </div>
 		   <div class="col-md-2 col-sm-3"  style="display: none;"> 
-				<select class="select-style2">
+				<select class="">
 					<option value="NSE">NSE</option>
 					<option value="BSE">BSE</option>
 				</select>
 		   </div>
 		   <input type="hidden"  id="exchanges" value="{{$apiExchg}}">
 		   <div class="col-md-2 col-sm-2">
-				<select name="" class="select-style2" id="gl_indices_change">
+				<select name="" class="" id="gl_indices_change">
 				   <option value="">ALL </option>
 				    @php
                   	foreach($indicesFilter as $ind_post){
@@ -41,7 +41,7 @@
 				</select>
 		   </div>
 		   <div class="col-md-2 col-sm-3">
-				<select id="intra_day" class="select-style2">
+				<select id="intra_day" class="">
 					<option value="Daily">Intra Day</option>
 					<option value="Weekly">1 Week</option>
 					<option value="Monthly">1 Month</option>

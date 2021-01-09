@@ -1,12 +1,12 @@
  @if(is_array(@$dividendResponse))
-<div class="section_corporateDiv bg-light section-padding">
+<div class="section_corporateDiv pb-5">
     <div class="inner-wrap clearfix">
         <div class="section-head">
             <h2 class="">{{@$section_title}}</h2>
             <p>{{@$section_content}}</p>
         </div>
-        <div class="corpdiv_table scrollbar-inner">
-            <table class="table-style1 th-border" width="100%">
+        <div class="corpdiv_table table-responsive">
+            <table class="table-style1 table-bordered" width="100%">
                 <thead>
                     <tr>
                         <th class="text-center">Dividend Date</th>

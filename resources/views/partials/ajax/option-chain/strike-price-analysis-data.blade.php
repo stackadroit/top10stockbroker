@@ -38,8 +38,9 @@
       <div class="tab-content" id="myTabContent">
         @if(is_array(@$callsAnalysis))
             <div id="Calls" class="tab-pane fade show active" role="tabpanel">
-              <table class="table-responsive-md table-bordered elm-dt-c-strike-price-analysis-data">
-                  <thead class="table-dark">
+            <div class="table-responsive">
+              <table class="table-bordered elm-dt-c-strike-price-analysis-data">
+                  <thead>
                       <tr>
                       <th class="big-font">Expiry</th>
                       <th class="big-font">Strike Price</th>
@@ -78,11 +79,13 @@
                   </tbody>
               </table>
           </div> 
+          </div> 
           <!-- /.tab-pane -->
         @endif
         @if(is_array(@$putsAnalysis))
             <div id="Puts" class="tab-pane fade" role="tabpanel">
-              <table class="table-responsive-md table-bordered elm-dt-p-strike-price-analysis-data">
+            <div class="table-responsive">
+              <table class="table-bordered elm-dt-p-strike-price-analysis-data">
                   <thead>
                       <tr>
                       <th class="big-font">Expiry</th>
@@ -122,6 +125,7 @@
                     @endphp
                   </tbody>
               </table>
+            </div> 
             </div> 
             <!-- /.tab-pane -->
         @endif   

@@ -1,17 +1,17 @@
-<div class="section-companyprice bg-light section-padding"  id="stock-market-live">
-        <div class="inner-wrap">
+<div class="section-companyprice bg-light section-padding mb-5"  id="stock-market-live">
+        <div class="inner-wrap px-3">
           @php
             $indecName =@$indices_details['INDEX_NAME'];
             $indexCode =@$indices_code;
             $apiExchg =@$api_exchg;
           @endphp
 
-            <div class="row align-items-center mb30"> 
+            <div class="row align-items-center mb-4"> 
                 
                 <div class="col-md-2 full-box order-md-2">
                     <div class="select-theme-stb">  
                     <form method="post">     
-                        <select name="indices_index" id="indicesIndexes" class="select-style1">
+                        <select name="indices_index" id="indicesIndexes" class="">
                             @php
                             foreach($indices_filter as $pt){
                             $flt_ind_idx = get_post_meta($pt->ID, 'indices_code', true );

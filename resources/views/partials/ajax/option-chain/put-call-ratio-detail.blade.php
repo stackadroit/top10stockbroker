@@ -58,7 +58,8 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="stocksPutCallRatios" class="tab-pane fade show active">
-      <table class="table-responsive-md table-bordered elm-vartival-table mb-30">
+    <div class="table-responsive">
+      <table class="table-bordered elm-vartival-table mb-0">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -107,10 +108,12 @@
         <button class="alm-load-more-btn" id="loadMore_OPTSTK" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['StableTotalRow']}}">Load More</button>
       </div>
     </div>
+    </div>
     <!-- /.tab-pane -->
 
     <div id="indexesPutCallRatios" class="tab-pane fade">
-      <table class="table-responsive-md table-bordered elm-vartival-table">
+    <div class="table-responsive">
+      <table class="table-bordered elm-vartival-table mb-0">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -159,6 +162,7 @@
       <div class="alm-btn-wrap" id="loadMoreWrap_OPTIDX">
         <button class="alm-load-more-btn" id="loadMore_OPTIDX" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['ItableTotalRow']}}">Load More</button>
       </div>
+    </div>
     </div>
     <!-- /.tab-pane -->
 

@@ -57,120 +57,126 @@
   <div class="tab-content" id="myTabContent">
     @if(is_array(@$stockCPAnalysis))
     <div id="stocksPutCallRatios" class="tab-pane fade show active">
-      <table class="table-responsive-md table-bordered elm-vartival-table mb-0">
-        <thead>
-          <tr>
-            <th class="big-font">Symbol</th>
-            <th class="big-font">Expiry</th>
-            <th class="big-font">Put OI</th>
-            <th class="big-font">Call OI</th>
-            <th class="big-font">Put Call Ratio</th>
-          </tr>
-        <tbody>
-          @php
-          if(is_array($stockCPAnalysis)){
-          foreach ($stockCPAnalysis as $idxKey =>$rowObj){
-          $rowObj =(array) $rowObj;
-          @endphp
-          <tr>
-            <td>
-              @php
-              $smId =@$optionChainSymbol[@$rowObj['Symbol']];
-              if(@$smId){
-              $smbLink =get_the_permalink($smId);
-              @endphp
-              <a href="{{$smbLink}}" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
-              @php
-              }else{
-              echo @$rowObj['Symbol'];
-              }
-              @endphp
-            </td>
+      <div class="table-responsive">
+        <table class="table-bordered elm-vartival-table mb-0">
+          <thead>
+            <tr>
+              <th class="big-font">Symbol</th>
+              <th class="big-font">Expiry</th>
+              <th class="big-font">Put OI</th>
+              <th class="big-font">Call OI</th>
+              <th class="big-font">Put Call Ratio</th>
+            </tr>
+          <tbody>
+            @php
+            if(is_array($stockCPAnalysis)){
+            foreach ($stockCPAnalysis as $idxKey =>$rowObj){
+            $rowObj =(array) $rowObj;
+            @endphp
+            <tr>
+              <td>
+                @php
+                $smId =@$optionChainSymbol[@$rowObj['Symbol']];
+                if(@$smId){
+                $smbLink =get_the_permalink($smId);
+                @endphp
+                <a href="{{$smbLink}}" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
+                @php
+                }else{
+                echo @$rowObj['Symbol'];
+                }
+                @endphp
+              </td>
 
-            <td>{{date('d M Y', strtotime(@$rowObj['ExpDate']))}}</td>
-            <td>{{@number_format(@$rowObj['Put'],2)}}</td>
-            <td>{{@number_format(@$rowObj['Call'],2)}}</td>
-            <td>{{@number_format(@$rowObj['Ratio'],2)}}</td>
-          </tr>
-          @php
-          }
-          }else{
-          echo '<tr>
-            <td colspan="10">No Record Found!
-            </td>
-          </tr>';
-          }
-          @endphp
-        </tbody>
-      </table>
+              <td>{{date('d M Y', strtotime(@$rowObj['ExpDate']))}}</td>
+              <td>{{@number_format(@$rowObj['Put'],2)}}</td>
+              <td>{{@number_format(@$rowObj['Call'],2)}}</td>
+              <td>{{@number_format(@$rowObj['Ratio'],2)}}</td>
+            </tr>
+            @php
+            }
+            }else{
+            echo '<tr>
+              <td colspan="10">No Record Found!
+              </td>
+            </tr>';
+            }
+            @endphp
+          </tbody>
+        </table>
+      </div>
     </div>
     <!-- /.tab-pane -->
     @endif
 
     @if(is_array(@$indexCPAnalysis))
     <div id="indexesPutCallRatios" class="tab-pane fade ">
-      <table class="table-responsive-md table-bordered elm-vartival-table mb-0">
-        <thead>
-          <tr>
-            <th class="big-font">Symbol</th>
-            <th class="big-font">Expiry</th>
-            <th class="big-font">Put OI</th>
-            <th class="big-font">Call OI</th>
-            <th class="big-font">Put Call Ratio</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="table-responsive">
+        <table class="table-bordered elm-vartival-table mb-0">
+          <thead>
+            <tr>
+              <th class="big-font">Symbol</th>
+              <th class="big-font">Expiry</th>
+              <th class="big-font">Put OI</th>
+              <th class="big-font">Call OI</th>
+              <th class="big-font">Put Call Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
 
-          @php
-          if(is_array($indexCPAnalysis)){
-          foreach ($indexCPAnalysis as $idxKey =>$rowObj){
-          $rowObj =(array) $rowObj;
-          @endphp
-          <tr>
-            <td>
-              @php
-              $smId =@$optionChainSymbol[@$rowObj['Symbol']];
-              if(@$smId){
-              $smbLink =get_the_permalink($smId);
-              @endphp
-              <a href="{{$smbLink}}" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
-              @php
-              }else{
-              echo @$rowObj['Symbol'];
-              }
-              @endphp
-            </td>
-            <td>{{date('d M Y', strtotime(@$rowObj['ExpDate']))}}</td>
-            <td>{{@number_format(@$rowObj['Put'],2) }}</td>
-            <td>{{@number_format(@$rowObj['Call'],2)}}</td>
-            <td>{{@number_format(@$rowObj['Ratio'],2)}}</td>
-          </tr>
-          @php
-          }
-          }else{
-          echo '<tr>
-            <td colspan="10">No Record Found!
-            </td>
-          </tr>';
-          }
-          @endphp
-        </tbody>
-      </table>
+            @php
+            if(is_array($indexCPAnalysis)){
+            foreach ($indexCPAnalysis as $idxKey =>$rowObj){
+            $rowObj =(array) $rowObj;
+            @endphp
+            <tr>
+              <td>
+                @php
+                $smId =@$optionChainSymbol[@$rowObj['Symbol']];
+                if(@$smId){
+                $smbLink =get_the_permalink($smId);
+                @endphp
+                <a href="{{$smbLink}}" title="{{@$rowObj['Symbol']}}">{{@$rowObj['Symbol'] }}</a>
+                @php
+                }else{
+                echo @$rowObj['Symbol'];
+                }
+                @endphp
+              </td>
+              <td>{{date('d M Y', strtotime(@$rowObj['ExpDate']))}}</td>
+              <td>{{@number_format(@$rowObj['Put'],2) }}</td>
+              <td>{{@number_format(@$rowObj['Call'],2)}}</td>
+              <td>{{@number_format(@$rowObj['Ratio'],2)}}</td>
+            </tr>
+            @php
+            }
+            }else{
+            echo '<tr>
+              <td colspan="10">No Record Found!
+              </td>
+            </tr>';
+            }
+            @endphp
+          </tbody>
+        </table>
+      </div>
     </div>
     <!-- /.tab-pane -->
     @endif
 
+
+    <div class="view-detail bt">
+      <a href="{{site_url('option-chain/put-call-ratio/')}}" target="_blank">Full Details
+        <span class="arr-lis"> > </span>
+      </a>
+    </div>
 
   </div>
   <!-- /.tab-content -->
 
 
 
-  <div class="view-detail bt">
-    <a href="{{site_url('option-chain/put-call-ratio/')}}" target="_blank">Full Details
-      <span class="arr-lis"> > </span>
-    </a>
-  </div>
+
 
 
 

@@ -1,10 +1,10 @@
 @if($company_details)
-    <div class="section-companyprice bg-light section-padding"  id="company-stock-live">
-        <div class="inner-wrap">
-            <div class="row align-items-center mb30">
+    <div class="section-companyprice bg-light section-padding mb-5"  id="company-stock-live">
+        <div class="inner-wrap px-3">
+            <div class="row align-items-center mb-4">
                 <div class="col-md-2 full-box order-md-last">
                     <div class="select-theme-stb">          
-                        <select name="" id="ddlCompanySymble" class="select-style1">
+                        <select name="" id="ddlCompanySymble" class="">
                             @php 
                                 foreach ($future_symbles as $lprow) {
                                   $smName=get_post_meta($lprow->ID,'symbol',true);
@@ -28,8 +28,8 @@
                         </div>
                         <div class="col-8" style="display: flex;align-items: center;    justify-content: flex-end;">
                             <label style="margin-right: 5px;">Expiry Date : </label>
-                                <div class="search-wrap" style="width: 130px;">
-                                  <select id="ExpiryDate" class="select-style1" style="height:40px;">
+                                <div class="search-wrap">
+                                  <select id="ExpiryDate" class="">
                                        @php foreach($expiry_date as $lprow){ @endphp
                                           <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
                                       @php } @endphp
