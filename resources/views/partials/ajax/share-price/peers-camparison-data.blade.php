@@ -1,7 +1,7 @@
 @php 
 if(is_array($peersComparison)) { 
 @endphp
-<div class="section_peersComp section-padding">
+<div class="section_peersComp section-padding pb-5">
     <div class="inner-wrap">
 
         <div class="section-head">
@@ -10,8 +10,8 @@ if(is_array($peersComparison)) {
         </div>
         <!-- /.section-head -->
 
-        <div class="peers_table scrollbar-inner">
-            <table class="table-style1 th-border" width="100%">
+        <div class="peers_table table-responsive">
+            <table class="table-style1 table-bordered" width="100%">
                 <thead>
                     <tr style="font-size: 12px;">
                         <th width="25%"></th>

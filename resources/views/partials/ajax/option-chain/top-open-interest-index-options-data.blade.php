@@ -42,7 +42,8 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="topInterestIndexOptionCall" class="tab-pane fade show active">
-      <table class="table-responsive-md table-bordered mb-0">
+    <div class="table-responsive">
+      <table class="table-bordered mb-0">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -86,10 +87,12 @@
         </tbody>
       </table>
     </div>
+    </div>
     <!-- /.tab-pane -->
 
     <div id="topInterestIndexOptionPut" class="tab-pane fade">
-      <table class="table-responsive-md table-bordered mb-0">
+    <div class="table-responsive">
+      <table class="table-bordered mb-0">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -140,6 +143,7 @@
     </div>
     <!-- /.tab-pane -->
 
+  </div>
   </div>
   <!-- /.tab-content -->
 

@@ -4,15 +4,15 @@ if(@$fundamentalAnalysisArray){
     $pageID = !empty($pageID) ? $pageID : get_the_ID();
 
 @endphp
-<div class="section_balanceSheet bg-light section-padding">
+<div class="section_balanceSheet pb-5">
     <div class="inner-wrap">
         <div class="section-head">  
             <h2 class="">{{@$section_title}}</h2>
             <p>{{@$section_content}}</p>
         </div>
         
-        <div class="balnce_table scrollbar-inner">
-            <table class="table-style1 th-border">
+        <div class="balnce_table table-responsive">
+            <table class="table-style1 table-bordered">
                <thead>
                   <tr>
                      <th></th>

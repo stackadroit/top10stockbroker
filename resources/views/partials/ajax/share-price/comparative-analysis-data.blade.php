@@ -1,14 +1,14 @@
 @php
 if(is_array(@$comparativeAnalysis)) { 
 @endphp
-<div class="section_comparativeRet bg-light section-padding">
+<div class="section_comparativeRet pb-5">
     <div class="inner-wrap">
         <div class="section-head">
             <h2 class="">{{@$section_title }}</h2>
             <p>{{@$section_content}}</p>
         </div>
-        <div class="compartive_table scrollbar-inner" id="5">
-            <table class="table-style1 th-border">
+        <div class="compartive_table table-responsive" id="5">
+            <table class="table-style1 table-bordered">
                 <thead>
                     <tr>
                         <th></th>

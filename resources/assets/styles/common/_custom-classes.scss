@@ -1,0 +1,97 @@
+.show-mobile {
+    display: block;
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+.show-desktop {
+    display: none;
+    @media (min-width: 768px) {
+        display: block;
+    }
+}
+
+/*border style*/
+
+.bt {
+    border-top: 1px solid #e2e2e2;
+}
+.bl {
+    border-left: 1px solid #e2e2e2;
+}
+.br {
+    border-right: 1px solid #e2e2e2;
+}
+.bb {
+    border-bottom: 1px solid #e2e2e2;
+}
+.border-right {
+    border-right: 2px solid;
+    padding-right: 5px;
+}
+
+// text color classes
+
+.text-blue {
+    color: #003b90;
+}
+.text-red,
+.color-red {
+    color: #eb3315;
+}
+
+.text-green,
+.color-green {
+    color: #00ae42;
+}
+.text-orange {
+    color: #e55025;
+}
+.text-white {
+    color: #fff;
+}
+.text-blck {
+    color: #000;
+}
+
+// background color classes
+
+.bg-light {
+    background-color: #eeeeee;
+}
+
+// section spacing classes
+
+.section-padding {
+    padding: 20px 0;
+}
+.section-padding h1,
+.section-padding h2 {
+    padding-bottom: 10px;
+}
+
+h2.names {
+    font-size: 34px;
+}
+
+/*section heading*/
+.section-head {
+    margin-bottom: 40px;
+}
+
+// table button 
+.bggreen_tbl,
+.bgred_tbl {
+  font: 400 14px;
+  width: 76px;
+  padding: 8px 0;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+}
+.bgred_tbl {
+  background-color: #e3515a;
+}
+.bggreen_tbl {
+  background-color: #50b973;
+}

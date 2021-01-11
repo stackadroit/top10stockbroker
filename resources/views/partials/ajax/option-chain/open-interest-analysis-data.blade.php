@@ -30,7 +30,8 @@
 
     @if(is_array(@$callsAnalysis))
     <div id="OptAnalyCalls" class="tab-pane fade show active">
-      <table class="table-responsive-md table-bordered elm-vartival-table">
+      <div class="table-responsive">
+      <table class="table-bordered elm-vartival-table">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -73,12 +74,14 @@
           @endphp
         </tbody>
       </table>
+      </div>
     </div>
     @endif
 
     @if(is_array(@$putsAnalysis))
     <div id="OptAnalyPuts" class="tab-pane fade">
-      <table class="table-responsive-md table-bordered elm-vartival-table">
+    <div class="table-responsive">
+      <table class="table-bordered elm-vartival-table">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -121,6 +124,7 @@
           @endphp
         </tbody>
       </table>
+    </div>
     </div>
     <!-- /.tab-pane -->
     @endif

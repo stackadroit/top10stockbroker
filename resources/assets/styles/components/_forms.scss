@@ -11,6 +11,7 @@ select {
 	border: 1px solid #e5e7e9;
 	border-radius: 3px;
 	outline: none;
+	padding: 5px 10px;
 }
 
 .label {
@@ -362,6 +363,7 @@ label {
 	}
 
 	label{
+		font-weight: 14px;
 		font-weight: $font-weight-semibold;
 		margin-right: 15px;
 		margin-bottom: 0;
@@ -373,8 +375,7 @@ label {
 }
 
 .select-theme-stb select {
-	border: #333;
-	padding: 5px;
+	padding: 5px 10px;
 	width: 100%;
 }
 

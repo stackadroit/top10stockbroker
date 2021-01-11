@@ -1,14 +1,14 @@
 @if(@$company_details)
   @if(@$ajaxLoad)
   @else
-    <div class="section-companyprice bg-light section-padding"  id="company-stock-live">
+    <div class="section-companyprice bg-light section-padding mb-5"  id="company-stock-live">
   @endif
     
-        <div class="inner-wrap">
-            <div class="row align-items-center mb30">
+        <div class="inner-wrap px-3">
+            <div class="row align-items-center mb-4">
                 <div class="col-md-2 full-box order-md-last">
                     <div class="select-theme-stb">          
-                        <select name="" id="ddlCompanySymble" class="select-style1">
+                        <select name="" id="ddlCompanySymble" class="">
                             @php 
                                 foreach ($get_symble_list as $lprow) {
                                   $smName=get_post_meta($lprow->ID,'symbol',true);
@@ -65,17 +65,17 @@
                     }
                     @endphp       
                     <div class="value">              
-                        <span class="fa sm-icon-box {{$arrowClass}}" id="currentStockRateArrow"></span>              
+                        <span class="sm-icon-box fa {{$arrowClass}}" id="currentStockRateArrow"></span>              
                         <span class="" id="currentStockRate">{{@number_format(@$company_details['LTP'],2)}}</span>              
                     </div>          
                     <div class="change">Change: <span class="{{$lavelClass}}" id="currentStockChange">{{@number_format(@$company_details['FaOdiff'],2) }} ({{ @number_format(@$company_details['FaOchange'],2) }}%)</span></div>      
                 </div>
             </div>
-              <div class="row option-search"> 
+              <div class="row option-search mb-4 align-items-end"> 
                  <div class="col-12 col-md-3 ">
                     <div class="search-wrap">
                       <label>Expiry Date</label>
-                      <select id="ExpiryDate" class="select-style1" style="height: 45px;">
+                      <select id="ExpiryDate" class="">
                             @php foreach($expiry_date as $lprow){ @endphp
                                 <option {{($exp_date ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
                             @php } @endphp
@@ -85,7 +85,7 @@
                  <div class="col-6 col-md-3">
                     <div class="search-wrap">
                          <label> Option Type</label>
-                       <select name="" class="select-style1" id="OptionType" style="height: 45px;">
+                       <select name="" class="" id="OptionType">
                           
                             @php foreach($option_type as $lprow){
                               $ot ='';
@@ -104,7 +104,7 @@
                  <div class="col-6 col-md-3">
                     <div class="search-wrap">
                       <label>Strike Price</label>
-                        <select id="StrikePrice" class="select-style1" style="height: 45px;">
+                        <select id="StrikePrice" class="">
                         @php foreach($strike_price as $lprow){ @endphp
                             <option {{($stk_price ==$lprow->StrikePrice)?'selected="selected"':''}} value="{{$lprow->StrikePrice}}">{{$lprow->StrikePrice}}</option>
                         @php } @endphp
@@ -112,8 +112,7 @@
                     </div>
                  </div>
                   <div class="col-12 col-md-2">
-                     <label>&nbsp;</label>
-                    <button class="search-icons" style="padding: 8px 15px;" type="submit" id="filter_derivative_details">Search Options</button>
+                    <button class="search-icons" style="padding: 7px 15px;" type="submit" id="filter_derivative_details">Search Options</button>
                   </div>
              </div>
             <div class="row marketDetails bt">  

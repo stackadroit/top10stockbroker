@@ -15,7 +15,7 @@
             {!! get_post_meta( $post_id, $auto_popup_right_content, true ) !!}
           @endif
     		  {!! do_shortcode($do_contactform) !!} 
-    			<p class="show-mobile bdr">
+    			<p class="d-block d-sm-none mb-0">
             @if(!$auto_status)
               {!! get_post_meta( $post_id, $form_mobile_content, true ) !!}
             @else

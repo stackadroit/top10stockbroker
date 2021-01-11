@@ -34,7 +34,8 @@
 
     @if(is_array(@$cVol))
     <div id="mostActiveOptionCall" class="tab-pane fade show active">
-      <table class="table-responsive-md table-bordered">
+    <div class="table-responsive">
+      <table class="table-bordered">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -79,12 +80,14 @@
         </tbody>
       </table>
     </div>
+    </div>
     <!-- /.tab-pane -->
     @endif
 
     @if(is_array(@$pVol))
     <div id="mostActiveOptionPut" class="tab-pane fade">
-      <table class="table-responsive-md table-bordered">
+    <div class="table-responsive">
+      <table class="table-bordered">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -128,6 +131,7 @@
           @endphp
         </tbody>
       </table>
+    </div>
     </div>
     <!-- /.tab-pane -->
     @endif

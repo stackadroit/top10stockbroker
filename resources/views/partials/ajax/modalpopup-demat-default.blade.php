@@ -41,7 +41,7 @@
             <hr>
           @endif
             {!! do_shortcode($do_contactform) !!} 
-          <p class="d-block d-sm-none bdr">
+          <p class="d-block d-sm-none mb-0">
             @if(!$auto_status)
               <small> - Get 90% Discount on Brokerage</small>
               <small> - Get more than 20% Return on Investment</small>

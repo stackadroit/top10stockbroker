@@ -1,4 +1,4 @@
-<div class="section-compnaysearch bg-light section-padding">
+<div class="section-compnaysearch section-padding">
     <div class="inner-wrap">
         <div class="section-head">
           @if ($top_data['main_h2_title'])
@@ -22,13 +22,13 @@
     if($company_details){
     @endphp
     <div class="section-companyprice bg-light section-padding"  id="company-stock-live">
-        <div class="inner-wrap">
+        <div class="inner-wrap px-3">
           <?php
             // echo '<pre>';
             // print_r($cDetailsresponse);
             // echo '</pre>';
            ?>
-            <div class="row align-items-center mb30"> 
+            <div class="row align-items-center mb-5"> 
                 <div class="col-md-2 full-box order-md-last">
                     <div class="select-theme-stb">          
                         <select name="" id="ddlCompanyIndexes" class="select-style1">

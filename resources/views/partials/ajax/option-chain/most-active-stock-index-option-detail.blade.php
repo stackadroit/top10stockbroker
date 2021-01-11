@@ -52,16 +52,17 @@
         <option value="L">Losers</option>
       </select>
     </div>
-    <!-- /.tabs -->
+    <!-- /.col-md-4 -->
   </div>
-  <!-- /.col-md-4 -->
+  <!-- /.tabs -->
 
 
 
   <div class="tab-content" id="myTabContent">
 
     <div id="mostActiveStockIndexOptionCall" class="tab-pane fade show active">
-      <table class="table-responsive-md table-bordered mb-20">
+    <div class="table-responsive">
+      <table class="table-bordered mb-0">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -109,10 +110,12 @@
         <button class="alm-load-more-btn" id="loadMoreC" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['ctableTotalRow']}}">Load More</button>
       </div>
     </div>
+    </div>
      <!-- /.tab-pane -->
 
     <div id="mostActiveStockIndexOptionPut" class="tab-pane fade">
-      <table class="table-responsive-md table-bordered mb-20">
+    <div class="table-responsive">
+      <table class="table-bordered mb-0">
         <thead>
           <tr>
             <th class="big-font">Symbol</th>
@@ -160,6 +163,7 @@
       <div class="alm-btn-wrap" id="loadMoreWrapP">
         <button class="alm-load-more-btn" id="loadMoreP" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['ptableTotalRow']}}">Load More</button>
       </div>
+    </div>
     </div>
      <!-- /.tab-pane -->
 

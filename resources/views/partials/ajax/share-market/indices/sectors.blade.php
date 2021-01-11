@@ -1,4 +1,4 @@
-<div class="section-companylist bg-light section-padding">
+<div class="section-companylist mb-5">
 	<div class="inner-wrap">
 		<div class="section-head">
 			<h2 class="">{{$section_title}}</h2>
