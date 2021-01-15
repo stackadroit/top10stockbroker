@@ -16,7 +16,7 @@
                 <li><a href="#li_5y" title="5Y" data-filter="5Y" data-element="li_5y" data-chart-element="fiveyearchart" class="shart_market_chart">5Y</a></li>
                 <li><a href="#li_all" title="ALL" data-filter="ALL" data-element="li_all" data-chart-element="allchart" class="shart_market_chart">ALL</a></li>
             </ul>  
-            <div class="details_container  bg-light">
+            <div class="details_container bg-light">
               <ul class="details">
                 <li><span id="mouseoverDate"></span></li>
                 <li id="openVal"><strong>Open :</strong> <span id="mouseoveropenVal"></span></li>

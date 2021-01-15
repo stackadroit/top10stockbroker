@@ -107,8 +107,8 @@
       font-size: 40px;
       line-height: 44px;
       @media(min-width: 992px){
-        font-size: 54px;
-        line-height: 54px;
+        font-size: 50px;
+        line-height: 50px;
       }
     }
     
@@ -828,13 +828,6 @@
 }
 
 /*-----------------------------Derivative Css-----------------------------*/
-.commn_tabs a {
-  color: #000;
-  padding: 5px 15px 5px;
-  outline: 0;
-  font-weight: 700;
-  border-bottom: 2px solid transparent;
-}
 table.dataTable thead th,
 table.dataTable thead td {
   padding: 10px 10px !important;
@@ -873,32 +866,12 @@ table.dataTable thead td {
   }
 }
 
-.n-tab-wrap select + select {
-  margin-left: 10px;
-}
-.n-tab-wrap .col-md-3,
-.n-tab-wrap .col-md-4 {
-  display: flex;
-  align-items: center;
-}
-.n-tab-wrap label {
-  margin-right: 5px;
-  display: inline-block;
-  max-width: 75px;
-  width: 100%;
-}
-
 @media (max-width: 768px) {
   .option-search {
     margin-bottom: 30px;
   }
 }
 @media screen and (max-width: 767px) {
-  .n-tab-wrap .col-md-3,
-  .n-tab-wrap .col-md-4 {
-    margin-bottom: 15px;
-    padding: 15px;
-  }
   .option-search [class*="col-"]:not(last-child) {
     margin-bottom: 15px;
   }
@@ -907,21 +880,6 @@ table.dataTable thead td {
   }
   .option-search .col-12 {
     text-align: center;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .n-tab-wrap .commn_tabs {
-    padding: 0;
-  }
-  .n-tab-wrap .col-md-3,
-  .n-tab-wrap .col-md-4 {
-    justify-content: flex-end;
-  }
-  .n-tab-wrap select {
-    height: 40px;
-    margin-bottom: 5px;
-    width: 130px;
   }
 }
 
