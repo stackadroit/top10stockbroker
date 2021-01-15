@@ -10,16 +10,16 @@
   <!-- /.row -->
 
   <div class="row tab-holder">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <input type="hidden" id="SIsection" value="{{$section}}">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li class="nav-item"><a href="#stocksPutCallRatios" class="changeSIFilter active" role="tab" data-toggle="tab" aria-controls="stocksPutCallRatios" data-expdate="{{@$SExpDate}}" data-reporttype="{{@$ReportType}}">Stocks</a></li>
         <li class="nav-item"><a href="#indexesPutCallRatios" class="changeSIFilter" role="tab" data-toggle="tab" aria-controls="indexesPutCallRatios" data-expdate="{{@$IExpDate}}" data-reporttype="{{@$ReportType}}">Indexes</a></li>
       </ul>
     </div>
-    <!-- /.col-md-8 -->
+    <!-- /.col-md-6 -->
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div id="stk-filter" class="select-holder">
         <label>Exp. Date</label>
         <select id="stockExpireDateFilter" class="select-style1">
@@ -48,7 +48,7 @@
         </select>
       </div>
     </div>
-    <!-- /.col-md-4 -->
+    <!-- /.col-md-6 -->
 
   </div>
   <!-- /.row -->
@@ -57,7 +57,7 @@
   <div class="tab-content" id="myTabContent">
     @if(is_array(@$stockCPAnalysis))
     <div id="stocksPutCallRatios" class="tab-pane fade show active">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered elm-vartival-table mb-0">
           <thead>
             <tr>
@@ -111,7 +111,7 @@
 
     @if(is_array(@$indexCPAnalysis))
     <div id="indexesPutCallRatios" class="tab-pane fade ">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered elm-vartival-table mb-0">
           <thead>
             <tr>

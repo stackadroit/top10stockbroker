@@ -13,16 +13,16 @@
 <div class="section_corporateact pb-5">
 
   <div class="row tab-holder">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <input type="hidden" id="check-page-type" value="details">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li class="nav-item"><a href="#stocksPutCallRatios" class="changeSIFilter active" role="tab" data-toggle="tab" aria-controls="stocksPutCallRatios" data-expdate="{{@$get_detail_page['SExpDate']}}" data-reporttype="{{@$get_detail_page['ReportType']}}">Stocks</a></li>
         <li class="nav-item"><a href="#indexesPutCallRatios" class="changeSIFilter" role="tab" data-toggle="tab" aria-controls="indexesPutCallRatios" data-expdate="{{@$get_detail_page['IExpDate']}}" data-reporttype="{{@$get_detail_page['ReportType']}}">Indexes</a></li>
       </ul>
     </div>
-    <!-- /.col-md-8 -->
+    <!-- /.col-md-6 -->
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div id="stk-filter" class="select-holder">
         <label>Exp. Date</label>
         <select id="stockExpireDateFilter" class="select-style1">
@@ -50,7 +50,7 @@
         </select>
       </div>
     </div>
-    <!-- /.col-md-4 -->
+    <!-- /.col-md-6 -->
   </div>
   <!-- /.row -->
 
@@ -58,7 +58,7 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="stocksPutCallRatios" class="tab-pane fade show active">
-    <div class="table-responsive">
+    <div class="table-responsive >
       <table class="table-bordered elm-vartival-table mb-0">
         <thead>
           <tr>
@@ -112,7 +112,7 @@
     <!-- /.tab-pane -->
 
     <div id="indexesPutCallRatios" class="tab-pane fade">
-    <div class="table-responsive">
+    <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
       <table class="table-bordered elm-vartival-table mb-0">
         <thead>
           <tr>

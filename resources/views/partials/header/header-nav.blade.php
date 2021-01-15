@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header-row">
       <div class="header-column">
-        <div class="header-row justify-content-end">
+        <div class="header-row justify-content-between justify-content-lg-end">
           <div class="header-mobile-style header-nav">
             <h2 class="logo-mobile hidden-lg hidden-md">
               <a href="#" rel="home">
@@ -21,7 +21,7 @@
             <i class="fas fa-bars"></i>
           </button>
           <div class="header-nav-features order-1 order-lg-2">
-            <a href="#" class="header-nav-features-toggle" data-focus="headerSearch" style="display: none;">
+            <a href="#" class="header-nav-features-toggle" data-focus="headerSearch">
               <i class="fas fa-search header-nav-top-icon"></i>
             </a>
             <div class="header-nav-features-dropdown" id="headerTopSearchDropdown">

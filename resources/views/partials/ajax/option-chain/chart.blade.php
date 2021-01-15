@@ -1,4 +1,4 @@
-<div class="section-charts mb-5">
+<div class="section-charts mb-4">
     <div class="inner-wrap">
         <div class="section-head">
            <h2>{{ @$section_title }}</h2>

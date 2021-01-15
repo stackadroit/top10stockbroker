@@ -1,11 +1,11 @@
 <div class="section-companylist mb-5">
 <div class="inner-wrap">
 		<form action="" method="post">
-			<div class="row mb30">
+			<div class="row mb-4">
 			   <div class="col-md-2 col-sm-3">
 			   	<input type="hidden" id="sectors_gl" value="{{$sectors_gl}}">
 			   	<input type="hidden" id="apiExchg" value="{{$apiExchg}}">
-					<select name="stock_order" id="gl_stock_order" class="select-style2">
+					<select name="stock_order" id="gl_stock_order" class="">
 					@php
 					foreach($gainerLoserFilter as $f_post){
 					@endphp
@@ -19,7 +19,7 @@
 			   </div>
 			   <div class="col-md-3 col-sm-3">
 			    
-					<select name="indices_index" id="gl_indices_index_filter" class="select-style2">
+					<select name="indices_index" id="gl_indices_index_filter" class="">
 					<option>All</option>
 					@php
 						foreach($indicesFilter as $ind_post){
@@ -38,7 +38,7 @@
 					</select>
 			   </div>
 			   <div class="col-md-2 col-sm-3">
-					<select name="" class="select-style2" id="gl_stock-period-search">
+					<select name="" class="" id="gl_stock-period-search">
 						<option value="1D" {{($intra_day =='1D')?'selected="selected"' :''}}>Intra Day</option>
 						<option value="1W" {{($intra_day =='1W')?'selected="selected"' :''}}>1 Week</option>
 						<option value="1M" {{($intra_day =='1M')?'selected="selected"' :''}}>1 Month</option>
@@ -61,7 +61,7 @@
             }
 		@endphp
 		 	<div class="companyList" id="stock-list-{{$idx}}">
-			   <div class="row mb20">
+			   <div class="row mb-3">
 			      <div class="col-12">
 			         <a href="{{site_url('/') . @$acc_companyLists[@$stock->FINCODE] }}" title="{{@$stock->COMPNAME}}">
 			         	<span class="cd-heading text-orange">
@@ -72,7 +72,7 @@
 			   </div>
 			   <!-- row -->
 			   
-               <div class="row companydata scrollbar-inner">
+               <div class="row companydata" data-simplebar data-simplebar-auto-hide="false">
 					<div class="compData-item">
 						<span class="cd-head">LTP</span>
 						<span class="cd-val">
@@ -137,7 +137,7 @@
 		}
 		if($totalPage >1){
 		@endphp
-			<div class="alm-btn-wrap" id="loadMoreWrap">
+			<div class="alm-btn-wrap text-center" id="loadMoreWrap">
 	          <button class="alm-load-more-btn" id="loadMoreGainarLosor" href="javascript:void(0);" data-page_no="1">Load More</button>
 	        </div>
 		@php

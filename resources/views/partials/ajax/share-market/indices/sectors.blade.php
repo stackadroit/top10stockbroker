@@ -7,9 +7,9 @@
 		<!-- section-head -->
 
 		<form action="" method="post">
-			<div class="row mb30">
+			<div class="row mb-4">
 			   <div class="col-md-2 col-sm-3">
-					<select name="stock_order" id="stock_order" class="select-style2">
+					<select name="stock_order" id="stock_order" class="">
 						<option value="">All</option>
 						<option value="G" <?php echo (@$stock_order =='G')?'selected="selected"':''; ?>>Gainers</option>
 						<option value="L" <?php echo (@$stock_order =='L')?'selected="selected"':''; ?>>Losers</option>
@@ -43,7 +43,7 @@
 			      </div>
 			   </div>
 			   <!-- row -->
-			   <div class="row companydata scrollbar-inner">
+			   <div class="row companydata" data-simplebar data-simplebar-auto-hide="false">
 					<div class="compData-item">
 						<span class="cd-head">LTP</span>
 						<span class="cd-val">
@@ -108,7 +108,7 @@
 		}
 		if($idx > $pagePerItem){
 			@endphp
-			<div class="alm-btn-wrap">
+			<div class="alm-btn-wrap text-center">
 	          <button class="alm-load-more-btn" id="loadMore" href="javascript:void(0);" data-page-per-item="{{$pagePerItem}}">Load More</button>
 	        </div>
 		@php

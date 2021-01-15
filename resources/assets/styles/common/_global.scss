@@ -222,6 +222,7 @@ textarea {
   border: medium none;
   color: #707070;
   box-shadow: none;
+  border: 1px solid #e5e7e9;
 }
 input:focus,
 textarea:focus {
@@ -242,7 +243,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input,
 textarea {
-  border-radius: corner-values(0);
+  border-radius: 3px;
 }
 select {
   -webkit-appearance: none;
@@ -250,18 +251,16 @@ select {
   -ms-appearance: none;
   -o-appearance: none;
   appearance: none;
-  border-radius: corner-values(0);
+  border-radius: 3px;
   height: 40px;
   text-transform: capitalize;
   overflow: hidden;
-  padding: side-values(0 0 0 10px);
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
   outline: none;
-  background: url(../images/caret-down.png) no-repeat $right 20px;
+  background: url(../images/caret-down.png) no-repeat $right 17px;
   border: none;
-  padding-#{$left}: 0;
   color: #777;
   padding: 5px;
   font-size: 14px;

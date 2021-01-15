@@ -23,20 +23,22 @@
 
 
   <div class="row tab-holder">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li class="nav-item"><a href="#topInterestStockOptionHighest" role="tab" data-toggle="tab" aria-controls="topInterestStockOptionHighest" class="active changeTOISFilterDetails" data-expdate="{{$get_detail_page['ExpDate']}}" data-inst-name="{{$get_detail_page['InstName']}}" data-page-name="{{$get_detail_page['PageName']}}" data-expdate="{{$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}">Highest</a></li>
         <li class="nav-item"><a href="#topInterestStockOptionLowest" role="tab" data-toggle="tab" aria-controls="topInterestStockOptionLowest" class="changeTOISFilterDetails" data-expdate="{{$get_detail_page['ExpDate']}}" data-inst-name="{{$get_detail_page['InstName']}}" data-page-name="{{$get_detail_page['PageName']}}" data-expdate="{{$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}">Lowest</a></li>
       </ul>
       <!-- /.tabs -->
-    </div>  
-    <div class="col-md-4 select-holder">
-      <label>Exp. Date</label>
-      <select id="topInterestStockOptionInDetailExpiryDate" class="select-style1">
-        @php foreach($get_detail_page['ExpiryDateFilter'] as $lprow){ @endphp
-        <option {{($get_detail_page['ExpDate'] ==$lprow->expdate1)?'selected="selected"':'' }} value="{{$lprow->expdate1 }}">{{$lprow->expdate}}</option>
-        @php } @endphp
-      </select>
+    </div>
+    <div class="col-md-6">
+      <div class="select-holder">
+        <label>Exp. Date</label>
+        <select id="topInterestStockOptionInDetailExpiryDate" class="select-style1">
+          @php foreach($get_detail_page['ExpiryDateFilter'] as $lprow){ @endphp
+          <option {{($get_detail_page['ExpDate'] ==$lprow->expdate1)?'selected="selected"':'' }} value="{{$lprow->expdate1 }}">{{$lprow->expdate}}</option>
+          @php } @endphp
+        </select>
+      </div>
     </div>
   </div>
 
@@ -45,7 +47,7 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="topInterestStockOptionHighest" class="tab-pane fade show active">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered">
           <thead>
             <tr>
@@ -111,7 +113,7 @@
     </div>
 
     <div id="topInterestStockOptionLowest" class="tab-pane fade">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered">
           <thead>
             <tr>

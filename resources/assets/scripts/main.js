@@ -6,7 +6,7 @@ import fontawesome from '@fortawesome/fontawesome-free';
 import { library, dom  } from '@fortawesome/fontawesome-svg-core';
 
 // import the base SVG icons
-import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch, faBars, faTimes, faBell, faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch, faBars, faTimes, faBell, faCaretDown, faCaretUp, faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 // import the Facebook and Twitter icons
 import { faFacebookF, faTwitter, faYoutube, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud} from '@fortawesome/free-brands-svg-icons';
@@ -15,7 +15,7 @@ import { faFacebookF, faTwitter, faYoutube, faLinkedin, faPinterest, faReddit, f
 fontawesome.config = { searchPseudoElements: true, autoReplaceSvg: 'nest' };
 
 // add the imported icons to the library
-library.add(faCaretDown, faCaretUp, faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud ,faYoutube, faSearch, faBars, faTimes, faBell);
+library.add(faCaretDown, faCaretUp, faArrowDown, faArrowUp, faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud ,faYoutube, faSearch, faBars, faTimes, faBell);
 
 // tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
 dom.watch();
@@ -249,3 +249,9 @@ const routes = new Router({
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());
+
+
+
+
+
+

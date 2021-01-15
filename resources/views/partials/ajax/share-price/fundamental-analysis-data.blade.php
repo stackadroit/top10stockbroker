@@ -11,8 +11,8 @@ if(@$fundamentalAnalysisArray){
             <p>{{@$section_content}}</p>
         </div>
         
-        <div class="balnce_table table-responsive">
-            <table class="table-style1 table-bordered">
+        <div class="balnce_table table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+            <table class="table-bordered">
                <thead>
                   <tr>
                      <th></th>

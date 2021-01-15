@@ -2,10 +2,10 @@
 <div class="section-companylist mb-5">
 	<div class="inner-wrap">
 		<form action="" method="post">
-			<div class="row mb30">
+			<div class="row mb-4">
 			   <div class="col-md-2 col-sm-3">
 			   		<input type="hidden" id="sectors_gl" value="{{$sectors_gl}}">
-					<select name="high_low" id="high_low_filter" class="select-style2">
+					<select name="high_low" id="high_low_filter" class="">
 					@php
 					foreach($gainerLoserFilter as $f_post){
 					@endphp
@@ -18,13 +18,13 @@
 					</select>
 			   </div>
 			   <div class="col-md-2 col-sm-3">
-					<select name="" id="api_exchg" class="select-style2">
+					<select name="" id="api_exchg" class="">
 						<option value="NSE" {{ ($apiExchg == 'NSE')?'selected="selected"':'' }}>NSE</option>
 						<option value="BSE" {{ ($apiExchg == 'BSE')?'selected="selected"':'' }}>BSE</option>
 					</select>
 			   </div>
 			   <div class="col-md-3 col-sm-3">
-					<select name="indices_index" id="indices_index_filter" class="select-style2">
+					<select name="indices_index" id="indices_index_filter" class="">
 					<option>All</option>
 					@php
 						foreach($indicesFilter as $ind_post){
@@ -46,7 +46,7 @@
 			   <div class="col-md-2 col-sm-3">
 			   	<input type="hidden" name=""  id="stock-period-search"  value="{{@$intra_day}}" />
 			   	
-					<select name="" class="select-style2"style="display: none;">
+					<select name="" class=""style="display: none;">
 						<option value="1W" {{($intra_day =='1W')?'selected="selected"' :''}}>1 Week</option>
 						<option value="1M" {{ ($intra_day =='1M')?'selected="selected"' :''}}>1 Month</option>
 						<option value="3M" {{ ($intra_day =='3M')?'selected="selected"' :''}}>3 Month</option>
@@ -65,7 +65,7 @@
 		foreach ($indicesStocks as $key => $stock) {
 		@endphp
 		 	<div class="companyList" id="stock-list-<?php echo $idx; ?>">
-			   <div class="row mb20">
+			   <div class="row mb-3">
 			      <div class="col-12">
 			         <a href="{{ site_url('/') . @$acc_companyLists[@$stock->FINCODE] }} " title="{{ @$stock->COMPNAME }}">
 			         	<span class="cd-heading text-orange">
@@ -75,7 +75,7 @@
 			      </div>
 			   </div>
 			   <!-- row -->
-				   <div class="row companydata scrollbar-inner">
+				   <div class="row companydata" data-simplebar data-simplebar-auto-hide="false">
 					<div class="compData-item">
 						<span class="cd-head">LTP</span>
 						<span class="cd-val">
@@ -140,7 +140,7 @@
 		}
 		if($totalPage >1){
 			@endphp
-			<div class="alm-btn-wrap" id="loadMoreWrap">
+			<div class="alm-btn-wrap text-center" id="loadMoreWrap">
 	          <button class="alm-load-more-btn" id="loadMoreHighLow" href="javascript:void(0);" data-page_no="1">Load More</button>
 	        </div>
 			@php

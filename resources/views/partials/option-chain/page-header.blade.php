@@ -12,7 +12,7 @@
                 </ul>
             </div><!-- custom menu class -->
         @endif
-      <h1 class="text-orange">{{ @$top_data['main_h1_title'] }}</h1>
+      <h1>{{ @$top_data['main_h1_title'] }}</h1>
       <p>{{ @$top_data['main_para_content'] }}</p>
     </div>
       @if ($top_data['main_h2_title'])

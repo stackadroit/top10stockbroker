@@ -133,8 +133,8 @@ export default {
         	$("#popup-main").attr('data-mini-popup',clickedClass);
         	$("#popup-main").find('.modal-dialog').css('max-width','350px');
         	$("#popup-main").modal('show');
-  		});
-  		
+		  });
+
         // super tread mill
         if (typeof SuperTreadmill !== 'undefined') {
 			SuperTreadmill.initialize();

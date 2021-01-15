@@ -6,7 +6,7 @@
         </div>
         <!-- /.section-head -->
 
-        <div class="history_table table-responsive">
+        <div class="history_table table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
             <table class="table-bordered">
                 <thead>
                     <tr>

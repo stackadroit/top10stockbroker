@@ -21,7 +21,7 @@ if(is_array($indicesStocks) && count($indicesStocks)){
                </div>
                <!-- row -->
                
-               <div class="row companydata scrollbar-inner">
+               <div class="row companydata" data-simplebar data-simplebar-auto-hide="false">
                     <div class="compData-item">
                         <span class="cd-head">LTP</span>
                         <span class="cd-val">
@@ -86,7 +86,7 @@ if(is_array($indicesStocks) && count($indicesStocks)){
         }
         if($totalPage > $page_no){
            @endphp
-            <div class="alm-btn-wrap" id="loadMoreWrap">
+            <div class="alm-btn-wrap text-center" id="loadMoreWrap">
               <button class="alm-load-more-btn" id="loadMoreGainarLosor" href="javascript:void(0);" data-page_no="{{$page_no}}">Load More</button>
             </div>
            @php
