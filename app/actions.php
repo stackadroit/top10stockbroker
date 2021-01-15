@@ -521,3 +521,70 @@ include 'cpts-action/external-api-functions-actions.php';
  /---------------------------------------------------------*/
 include 'cpts-action/tab-filter-custom-meta.php';
 
+// Start Session 
+function register_my_session()
+{
+  if( !session_id() ){
+    session_start();
+  }
+}
+
+add_action('init', __NAMESPACE__ . '\\register_my_session');
+
+// define the comment_form_after_fields callback 
+function action_comment_form_after_fields($fields) {
+    $_SESSION['comment_captcha']['fv'] = rand(1,10);
+    $_SESSION['comment_captcha']['lv'] = rand(1,10);
+    $checkSign =['Addition','Multiplication'];
+    // 'Subtraction',
+    $_SESSION['comment_captcha']['cs'] = $checkSign[array_rand($checkSign)];
+    $sign ='';
+    $act_ans=0;
+    switch ($_SESSION['comment_captcha']['cs']) {
+        case 'Addition':
+           $act_ans =($_SESSION['comment_captcha']['fv']+$_SESSION['comment_captcha']['lv']);
+           $sign ='+';
+            break;
+        case 'Subtraction':
+           $act_ans =($_SESSION['comment_captcha']['fv']-$_SESSION['comment_captcha']['lv']);
+           $sign ='-';
+            break;
+        case 'Multiplication':
+            $act_ans =($_SESSION['comment_captcha']['fv']*$_SESSION['comment_captcha']['lv']);
+            $sign ='X';
+            break;
+        
+    }
+    $_SESSION['comment_captcha']['act_ans']=$act_ans;
+    $captch_strimg =$_SESSION['comment_captcha']['fv'].' '. $sign .' '.$_SESSION['comment_captcha']['lv'] .' = ';
+    ?>
+    <label>Captcha</label>
+    <div class="form-group row">
+        <div class="col-sm-2 text-center" for="ccs_ps_ans"><b><?php echo $captch_strimg; ?></b></div>
+        <div class="col-sm-10">
+            <input name="captcha_ans" type="number" class="form-control" placeholder="Enter Answer" style="border: 1px solid #EEE;" required="">
+        </div>
+    </div>
+    <?php
+    // echo  do_shortcode('[ccs_easy_captcha]') ;
+    return $fields;
+}
+         
+
+ // add the action 
+ 
+add_action( 'comment_form_logged_in_after',  __NAMESPACE__ . '\\action_comment_form_after_fields' );
+add_action( 'comment_form_after_fields',  __NAMESPACE__ . '\\action_comment_form_after_fields' );
+
+
+function custom_validate_comment_url() {
+    // echo '<pre>';
+    // print_r($_SESSION['comment_captcha']);
+    // print_r($_POST);
+    $actualAns =$_SESSION['comment_captcha']['act_ans'];
+    if(trim($_POST['captcha_ans']) != $actualAns){
+        wp_die( __('Error: Please enter a valid captcha.'.'<br/><p><a href="javascript:history.back()">« Back</a></p>') );
+        // echo '<p><a href="javascript:history.back()">« Back</a></p>'
+    }
+}
+add_action( 'pre_comment_on_post',  __NAMESPACE__ . '\\custom_validate_comment_url' );
