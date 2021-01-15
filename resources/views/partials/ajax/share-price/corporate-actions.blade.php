@@ -32,8 +32,8 @@
 
 
     <div id="bm" class="tab-pane fade show active">
-      <div class="table-responsive">
-        <table class="table-style1 table-bordered">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+        <table class="table-bordered">
           <thead>
             <tr>
               <th class="big-font">Date</th>
@@ -65,8 +65,8 @@
 
 
     <div id="bonus" class="tab-pane fade">
-      <div class="table-responsive">
-        <table class="table-style1">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+        <table class="table-bordered">
           <thead>
             <tr>
               <th class="big-font">Date</th>
@@ -104,8 +104,8 @@
 
 
     <div id="split" class="tab-pane fade">
-      <div class="table-responsive">
-        <table class="table-style1">
+      <div class="table-responsive  tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+        <table class="table-bordered">
           <thead>
             <tr>
               <th class="big-font">NSE Date</th>
@@ -152,8 +152,8 @@
 
 
     <div id="rights" class="tab-pane fade">
-      <div class="table-responsive">
-        <table class="table-style1">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+        <table class="table-bordered">
           <thead>
             <tr>
               <th class="big-font" style="width:200px;">Date</th>
@@ -189,8 +189,8 @@
     </div>
 
     <div id="agm" class="tab-pane fade">
-      <div class="table-responsive">
-        <table class="table-style1">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+        <table class="table-bordered">
           <thead>
             <tr>
               <th class="big-font">Date</th>

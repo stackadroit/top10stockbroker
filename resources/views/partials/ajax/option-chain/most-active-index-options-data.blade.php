@@ -11,30 +11,32 @@
 
   <div class="row tab-holder">
 
-    <div class="col-md-8">
+    <div class="col-md-6">
       <input type="hidden" value="{{$section}}" id="most_a_i_o_section">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li class="nav-item"><a href="#mostActiveIndexOptionCall" class="changeMAIOFilter active" role="tab" data-toggle="tab" aria-controls="mostActiveIndexOptionCall" data-expdate="{{@$ExpDate}}" data-rtypefilter="{{@$Rtype}}">CALL</a></li>
         <li class="nav-item"><a href="#mostActiveIndexOptionPut" class="changeMAIOFilter" role="tab" data-toggle="tab" aria-controls="mostActiveIndexOptionPut" aria-controls="mostActiveIndexOptionPut" data-expdate="{{@$ExpDate}}" data-rtypefilter="{{@$Rtype}}">PUT</a></li>
       </ul>
     </div>
-    <!-- /.col-md-8 -->
+    <!-- /.col-md-6 -->
 
-    <div class="col-md-4 select-holder">
-      <label>Exp. Date</label>
-      <select id="mostActiveIndexOptionExpiryDate" class="select-style1">
-        @php foreach($ExpiryDateFilter as $lprow){ @endphp
-        <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
-        @php } @endphp
-      </select>
-      <select id="mostActiveIndexOptionFilter" class="select-style1">
-        <option value="vol">Volume</option>
-        <option value="val">Value</option>
-        <option value="G">Gainers</option>
-        <option value="L">Losers</option>
-      </select>
+    <div class="col-md-6">
+      <div class="select-holder">
+        <label>Exp. Date</label>
+        <select id="mostActiveIndexOptionExpiryDate" class="select-style1">
+          @php foreach($ExpiryDateFilter as $lprow){ @endphp
+          <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
+          @php } @endphp
+        </select>
+        <select id="mostActiveIndexOptionFilter" class="select-style1">
+          <option value="vol">Volume</option>
+          <option value="val">Value</option>
+          <option value="G">Gainers</option>
+          <option value="L">Losers</option>
+        </select>
+      </div>
     </div>
-    <!-- /.col-md-4 -->
+    <!-- /.col-md-6 -->
 
   </div>
   <!-- row -->
@@ -42,7 +44,7 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="mostActiveIndexOptionCall" class="tab-pane fade show active">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered mb-0">
           <thead>
             <tr>
@@ -92,7 +94,7 @@
     <!-- /.tab-pane -->
 
     <div id="mostActiveIndexOptionPut" class="tab-pane fade">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered mb-0">
           <thead>
             <tr>
@@ -143,10 +145,10 @@
 
 
     <div class="view-detail bt">
-    <a href="{{site_url('option-chain/most-active-index-option')}}" target="_blank">Full Details
-      <span class="arr-lis"> > </span>
-    </a>
-  </div>
+      <a href="{{site_url('option-chain/most-active-index-option')}}" target="_blank">Full Details
+        <span class="arr-lis"> > </span>
+      </a>
+    </div>
 
 
   </div>

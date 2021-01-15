@@ -24,20 +24,22 @@
   <!-- /.row -->
 
   <div class="row tab-holder">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li><a href="#mostActiveStockVolume" role="tab" data-toggle="tab" aria-controls="mostActiveStockVolume" class="active changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Volume</a></li>
         <li><a href="#mostActiveStockValue" role="tab" data-toggle="tab" aria-controls="mostActiveStockValue" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Value</a></li>
         <li><a href="#mostActiveStockGainers" role="tab" data-toggle="tab" aria-controls="mostActiveStockGainers" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Gainers</a></li>
       </ul>
     </div>
-    <div class="col-md-4 select-holder">
-      <label>Exp. Date</label>
-      <select id="mostActiveStockInDetailExpiryDate" class="select-style1">
-        @php foreach($get_detail_page['ExpiryDateFilter'] as $lprow){ @endphp
-        <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
-        @php } @endphp
-      </select>
+    <div class="col-md-6">
+      <div class="select-holder">
+        <label>Exp. Date</label>
+        <select id="mostActiveStockInDetailExpiryDate" class="select-style1">
+          @php foreach($get_detail_page['ExpiryDateFilter'] as $lprow){ @endphp
+          <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
+          @php } @endphp
+        </select>
+      </div>
     </div>
   </div>
 
@@ -47,7 +49,7 @@
 
 
     <div id="mostActiveStockVolume" class="tab-pane fade show active">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 table-bordered mb-20">
           <thead>
             <tr>
@@ -113,7 +115,7 @@
     </div>
 
     <div id="mostActiveStockValue" class="tab-pane fade">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 table-bordered mb-20">
           <thead>
             <tr>
@@ -179,7 +181,7 @@
     </div>
 
     <div id="mostActiveStockGainers" class="tab-pane fade">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 table-bordered mb-20">
           <thead>
             <tr>

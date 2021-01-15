@@ -417,6 +417,9 @@ ul.list-content li a {
     font-weight: $font-weight-semibold;
     padding: 6px 18px;
     position: relative;
+    @media(max-width:768px){
+      font-size: 13px;
+    }
     &.active {
       color: $color-light;
       background: $color-primary;

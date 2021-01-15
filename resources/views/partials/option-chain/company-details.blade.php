@@ -65,7 +65,7 @@
                     }
                     @endphp       
                     <div class="value">              
-                        <span class="sm-icon-box fa {{$arrowClass}}" id="currentStockRateArrow"></span>              
+                        <span class="fas sm-icon-box {{$arrowClass}}" id="currentStockRateArrow"></span>              
                         <span class="" id="currentStockRate">{{@number_format(@$company_details['LTP'],2)}}</span>              
                     </div>          
                     <div class="change">Change: <span class="{{$lavelClass}}" id="currentStockChange">{{@number_format(@$company_details['FaOdiff'],2) }} ({{ @number_format(@$company_details['FaOchange'],2) }}%)</span></div>      

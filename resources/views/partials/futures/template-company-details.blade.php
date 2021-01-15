@@ -22,14 +22,14 @@
                 </div>
                 <div class="col-md-4"> 
                     <div class="index row">
-                        <div class="col-4">
+                        <div class="col-12">
                             <input type="hidden" id="companyInstName" name="" value="{{$inst_name}}" />     
                             <h2 class="names" style="margin: 0px; padding:0;" title="{{@$comp_name}}">{{@$comp_name}}</h2>
                         </div>
-                        <div class="col-8" style="display: flex;align-items: center; justify-content: flex-end;">
-                            <label style="margin-right: 5px;">Expiry Date : </label>
+                        <div class="col-12 mt-3 d-flex align-items-center">
+                            <label style="margin:0 5px 0 0; font-size: 14px;">Expiry Date : </label>
                                 <div class="search-wrap">
-                                  <select id="ExpiryDate" class="">
+                                  <select id="ExpiryDate" class="" style="width: 150px;">
                                        @php foreach($expiry_date as $lprow){ @endphp
                                           <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
                                       @php } @endphp
@@ -49,7 +49,7 @@
                         }
                     @endphp        
                     <div class="value">              
-                        <span class="fa sm-icon-box {{$arrowClass}}" id="currentStockRateArrow"></span>              
+                        <span class="fas sm-icon-box {{$arrowClass}}" id="currentStockRateArrow"></span>              
                         <span class="" id="currentStockRate">{{ @number_format(@$company_details['LTP'],2)}}</span>              
                     </div>          
                     <div class="change">Change: <span class="{{$lavelClass}}" id="currentStockChange">{{@number_format(@$company_details['FaOdiff'],2)}} ({{@number_format(@$company_details['FaOchange'],2)}}%)</span>

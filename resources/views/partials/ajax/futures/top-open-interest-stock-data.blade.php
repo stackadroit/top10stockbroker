@@ -11,21 +11,23 @@
 
 
   <div class="row tab-holder">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li class="nav-item"><a href="#topInterestStockOptionHighest" role="tab" data-toggle="tab" aria-controls="topInterestStockOptionHighest" class="active changeTOISFilter" data-expdate="{{@$ExpDate}}">Highest</a></li>
         <li class="nav-item"><a href="#topInterestStockOptionLowest" role="tab" data-toggle="tab" aria-controls="topInterestStockOptionLowest" class="changeTOISFilter" data-expdate="{{@$ExpDate}}">Lowest</a></li>
       </ul>
       <!-- /.tabs -->
     </div>
-    <div class="col-md-4 select-holder">
-      <label>Exp. Date</label>
-      <select id="topInterestStockOptionExpiryDate" class="select-style1">
-        @php foreach($ExpiryDateFilter as $lprow){ @endphp
-        <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':'' }} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
-        @php } @endphp
-      </select>
+    <div class="col-md-6">
+      <div class="select-holder">
+        <label>Exp. Date</label>
+        <select id="topInterestStockOptionExpiryDate" class="select-style1">
+          @php foreach($ExpiryDateFilter as $lprow){ @endphp
+          <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':'' }} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
+          @php } @endphp
+        </select>
 
+      </div>
     </div>
   </div>
 
@@ -33,8 +35,8 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="topInterestStockOptionHighest" class="tab-pane fade show active">
-      <div class="table-responsive">
-        <table class="table-style1 table-bordered mb-0">
+      <div class="table-responsive  tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+        <table class="table-bordered mb-0">
           <thead>
             <tr>
               <th class="big-font">Symbol</th>
@@ -95,8 +97,8 @@
 
 
     <div id="topInterestStockOptionLowest" class="tab-pane fade">
-      <div class="table-responsive">
-        <table class="table-style1 table-bordered mb-0">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+        <table class="table-bordered mb-0">
           <thead>
             <tr>
               <th class="big-font">Symbol</th>

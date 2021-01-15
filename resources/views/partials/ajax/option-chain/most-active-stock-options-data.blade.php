@@ -11,7 +11,7 @@
   <!-- /.row -->
   <div class="row tab-holder">
 
-    <div class="col-md-8">
+    <div class="col-md-6">
       <input type="hidden" id="most_a_s_o_section" value="{{$section}}">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li class="nav-item"><a href="#mostActiveStockOptionCall" role="tab" data-toggle="tab" aria-controls="mostActiveStockOptionCall" data-expdate="{{@$ExpDate}}" class="changeMASOFilter active" data-rtypefilter="{{@$Rtype}}">CALL</a></li>
@@ -19,28 +19,30 @@
       </ul>
       <!-- /.nav-tabs -->
     </div>
-    <!-- /.col-md-8   -->
-    <div class="col-md-4 select-holder">
-      <label>Exp. Date</label>
-      <select id="mostActiveStockOptionExpiryDate" class="select-style1">
-        @php foreach($ExpiryDateFilter as $lprow){ @endphp
-        <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':'' }} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
-        @php } @endphp
-      </select>
-      <select id="mostActiveStockOptionFilter" class="select-style1">
-        <option value="vol">Volume</option>
-        <option value="val">Value</option>
-        <option value="G">Gainers</option>
-        <option value="L">Losers</option>
-      </select>
+    <!-- /.col-md-6   -->
+    <div class="col-md-6">
+      <div class="select-holder">
+        <label>Exp. Date</label>
+        <select id="mostActiveStockOptionExpiryDate" class="select-style1">
+          @php foreach($ExpiryDateFilter as $lprow){ @endphp
+          <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':'' }} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
+          @php } @endphp
+        </select>
+        <select id="mostActiveStockOptionFilter" class="select-style1">
+          <option value="vol">Volume</option>
+          <option value="val">Value</option>
+          <option value="G">Gainers</option>
+          <option value="L">Losers</option>
+        </select>
+      </div>
     </div>
   </div>
-  <!-- /.col-md-4  -->
+  <!-- /.col-md-6  -->
 
   <div class="tab-content" id="myTabContent">
 
     <div id="mostActiveStockOptionCall" class="tab-pane fade show active">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered mb-0">
           <thead>
             <tr>
@@ -88,7 +90,7 @@
     </div>
     <!-- /.tab-pane -->
     <div id="mostActiveStockOptionPut" class="tab-pane fade">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-bordered mb-0">
           <thead>
             <tr>
@@ -137,10 +139,10 @@
     <!-- /.tab-pane -->
 
     <div class="view-detail bt">
-    <a href="{{site_url('option-chain/most-active-stock-option')}}" target="_blank">Full Details
-      <span class="arr-lis"> > </span>
-    </a>
-  </div>
+      <a href="{{site_url('option-chain/most-active-stock-option')}}" target="_blank">Full Details
+        <span class="arr-lis"> > </span>
+      </a>
+    </div>
 
   </div>
   <!-- /.tab-content -->

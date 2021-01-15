@@ -10,37 +10,47 @@
   a {
     color: $color-default;
   }
-   &,a {
-       font-size: 14px;
-    } 
+  &,
+  a {
+    font-size: 14px;
+  }
 }
 
-.table th, .main table:not(.no-defult) th, .table td, .main table:not(.no-defult) td{
+.table th,
+.main table:not(.no-defult) th,
+.table td,
+.main table:not(.no-defult) td,
+.table thead th, .main table:not(.no-defult) thead th {
   padding: 0.4rem 0.75rem;
   text-align: center;
+  vertical-align: middle;
   // border: 1px solid #212425;
 }
 
-
-.table-responsive{
-    height: 450px;
+%table-sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  z-index: 1;
+  white-space: normal;
 }
 
-// @media only screen and (max-width: 579px) {
-//   table thead tr th:first-child,
-//   table tbody tr td:first-child {
-//     position: sticky;
-//     position: -webkit-sticky;
-//     position: -moz-sticky;
-//     position: -ms-sticky;
-//     position: -o-sticky;
-//     left: 0;
-//     z-index: 1;
-//     border-bottom: 1px solid #ebebeb;
-//     white-space: normal;
-//     z-index: 9;
-//     box-shadow: 2px 1px 5px 0px #dfdfdf;
-//     background: #eee;
-//   }
-// }
 
+.tb-fixed-head thead th{
+  @extend %table-sticky;
+  top: 0;
+  z-index: 2;
+  background: #eee;
+}
+.tb-fixed-head tbody td:first-child{
+  @extend %table-sticky;
+  @media(max-width: 768px){
+      left: 0;
+      background: #eee;
+  }
+}
+// .table-responsive{
+//   border: 1px solid #dee2e6;
+// }

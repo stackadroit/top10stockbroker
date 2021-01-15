@@ -355,7 +355,7 @@ label {
 	border-bottom: 1px solid $color-grey;
 	margin-top: 15px;
 	padding: 10px 15px;
-	@include media-breakpoint-up(sm){
+	@include media-breakpoint-up(md){
 		justify-content: flex-end;
 		border: none;
 		margin-top: 0;
@@ -363,7 +363,7 @@ label {
 	}
 
 	label{
-		font-weight: 14px;
+		font-size: 14px;
 		font-weight: $font-weight-semibold;
 		margin-right: 15px;
 		margin-bottom: 0;

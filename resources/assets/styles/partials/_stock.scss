@@ -57,46 +57,22 @@
 }
 
 /*text color*/
-.serch-form-comp .select2-container--default .select2-selection--single {
-  .select2-selection__rendered {
-    color: #444;
-    line-height: 42px !important;
-  }
-
-  .select2-selection__arrow {
-    height: 42px;
-  }
-}
-
-.serch-form-comp
-  .select2-container--default
-  .select2-selection--single
-  .serch-form-comp
-  .select2-container
-  .select2-selection--single {
-  height: 46px;
-  border: 1px solid #eaeaea;
-  border-radius: 0px;
-}
-.serch-form-comp .select2-container {
-  width: 77% !important;
-}
-
 .stock-btn-more-wrap {
   margin: 0px auto;
   text-align: center;
-  padding-top: 46px;
+  padding-top: 30px;
+  padding-bottom: 15px;
 
   .stock-btn-view-more {
-    background-color: #88cbe3;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09);
+    background-color: $color-default;
+    -webkit-box-shadow: 0 1px 3px rgba(10, 9, 9, 0.09);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09);
     color: #fff;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 3px;
     text-decoration: none;
     &:hover {
-      background-color: #e55025;
+      background-color: $color-dark;
       -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.09);
       color: #fff;
@@ -110,77 +86,58 @@
 }
 
 /*charts section*/
-@media only screen and (min-width: 581px) {
-  .section-companyprice .valuesDiv {
-    display: flex;
-    align-items: center;
+
+.section-companyprice{
+  .full-box {
+    @media(max-width: 767px){
+      margin-bottom: 20px;
+    }
   }
-  .section-companyprice .valuesDiv .change {
-    margin-left: 20px;
-  }
-  .section-companyprice .valuesDiv .change,
-  .section-companyprice .valuesDiv .value {
-    display: inline-block;
-  }
-}
-@media only screen and (min-width: 991px) {
-  .section-companyprice .valuesDiv .value {
-    font-size: 54px;
-    line-height: 54px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .section-companyprice {
-    padding: 10px 0 0 !important;
-  }
+  .valuesDiv {
+    @media(max-width: 767px){
+      margin-top: 20px;
+    }
+    @media(min-width: 581px){
+      display: flex;
+      align-items: center;
+    }
+
+    .value {
+      display: block;
+      font-size: 40px;
+      line-height: 44px;
+      @media(min-width: 992px){
+        font-size: 54px;
+        line-height: 54px;
+      }
+    }
+    
+    .change {
+      font-size: 20px;
+      font-weight: 300;
+      display: block;
+      @media(min-width: 581px){
+        margin-left: 20px;
+      }
+    }
+  } 
 }
 
-@media only screen and (max-width: 580px) {
-  .section-companyprice .valuesDiv .change,
-  .section-companyprice .valuesDiv .value {
-    display: block;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .section-companyprice .full-box {
-    margin-bottom: 20px;
-  }
-  .section-companyprice .valuesDiv {
-    margin-top: 20px;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  .section-companyprice .valuesDiv .value {
-    font-size: 40px;
-    line-height: 44px;
-  }
-}
-
-.section-companyprice .valuesDiv .change {
-  font-size: 20px;
-  font-weight: 300;
-  vertical-align: middle;
-}
-
-.sm-icon-box.color-red {
-  color: #eb3315;
-  border: 1px solid #eb3315;
-  /*transform: rotate(180deg);*/
-}
-.sm-icon-box.color-green {
-  color: #00ae42;
-  border: 1px solid #00ae42;
-  /*transform: rotate(180deg);*/
-}
-.sm-icon-box.fa {
-  font-size: 25px;
-  line-height: 50px;
-  width: 50px;
+// companyprice arrow icon css style
+.sm-icon-box{
+  padding: 5px;
+  width: 50px !important;
   height: 50px;
-  text-align: center;
-  vertical-align: middle;
+  &.color-red {
+    color: #eb3315;
+    border: 1px solid #eb3315;
+  }
+  &.color-green {
+    color: #00ae42;
+    border: 1px solid #00ae42;
+  }
 }
+
 
 .details_container {
   padding: 10px 10px;
@@ -305,7 +262,6 @@
   }
 }
 
-
 /*popoverBox*/
 .popoverBox {
   border: 1px solid #666;
@@ -317,108 +273,87 @@
   min-width: 210px;
   display: none;
   z-index: 2;
+  .para2 {
+    color: #71736f;
+  }
+  &:after,
+  &:before {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-top-color: #fff;
+    border-width: 21px;
+    margin-left: -32px;
+  }
+  &:before {
+    border-color: rgba(102, 102, 102, 0);
+    border-top-color: #666;
+    border-width: 22px;
+    margin-left: -33px;
+  }
+  &.mediumData {
+    padding: 5px;
+    left: -80px;
+    right: auto;
+    bottom: 35px;
+    top: auto;
+  }
+  &.small {
+    padding: 5px;
+    left: -30px;
+    right: auto;
+    min-width: 150px;
+  }
+  &.small .para2 {
+    margin-bottom: 5px;
+  }
+  &.small .data-amount {
+    font-size: 24px;
+    line-height: 24px;
+  }
 }
-.popoverBox .para2 {
-  color: #71736f;
-}
-.popoverBox:after,
-.popoverBox:before {
-  top: 100%;
-  left: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-.popoverBox:after {
-  border-color: rgba(255, 255, 255, 0);
-  border-top-color: #fff;
-  border-width: 21px;
-  margin-left: -32px;
-}
-.popoverBox:before {
-  border-color: rgba(102, 102, 102, 0);
-  border-top-color: #666;
-  border-width: 22px;
-  margin-left: -33px;
-}
-.popoverBox.mediumData {
-  padding: 5px;
-  left: -80px;
-  right: auto;
-  bottom: 35px;
-  top: auto;
-}
-.popoverBox.small {
-  padding: 5px;
-  left: -30px;
-  right: auto;
-  min-width: 150px;
-}
-.popoverBox.small .para2 {
-  margin-bottom: 5px;
-}
-.popoverBox.small .data-amount {
-  font-size: 24px;
-  line-height: 24px;
-}
-
 .popoverTigger:hover .popoverBox {
   display: block;
 }
 
 /*return calculator*/
 
-@media only screen and (min-width: 768px) {
-  .retcalc_form {
-    width: 75%;
-    padding: 50px 38px;
-  }
-}
 .retcalc_form {
   border: 1px solid #999;
+  border-radius: 5px;
   padding: 25px 28px;
-}
-.retcalc_form label {
-  margin-right: 15px;
-}
-.retcalc_form input,
-.retcalc_form select {
-  width: 250px;
-  max-width: 100%;
-  padding: 0 10px;
-  height: 35px;
-  margin-right: 15px;
-  background-color: #f8f8f8;
-  border-color: #eaeaea;
-  border-radius: 0;
-}
-.retcalc_form .select2-container--default .select2-selection--single {
-  background-color: #f8f8f8;
-  border-color: #eaeaea;
-  height: 35px;
-  border-radius: 0;
-}
-.retcalc_form .select2-container--default .select2-selection--single .select2-selection__rendered {
-  line-height: 34px;
-}
-.retcalc_form .select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 32px;
-}
-@media only screen and (max-width: 767px) {
-  .retcalc_form input,
-  .retcalc_form select,
-  .retcalc_form .select2-container {
-    //width: 89% !important;
+  @media(min-width: 768px) {
+      width: 75%;
+      padding: 50px 38px;
   }
-  .retcalc_form label {
-    margin-right: 0;
-    margin-bottom: 5px;
-    display: block;
+
+  label {
+    margin-right: 15px;
+    @media(max-width: 767px) {
+      margin-right: 0;
+      margin-bottom: 5px;
+      display: block;
+    }
+  }
+  input, select {
+    width: 250px;
+    max-width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    margin-right: 15px;
+    background: $color-grey;
   }
 }
+
+
 
 @media only screen and (max-width: 767px) {
   .total_worth {
@@ -452,9 +387,6 @@
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 30px;
   display: block;
-}
-
-.snapshot .container-slider {
 }
 
 .snapshot .container-slider .name {
@@ -652,32 +584,23 @@
 }
 
 /*market grids*/
-@media only screen and (max-width: 420px) {
-  .marketGrids .marketGridElement {
-    width: 100%;
-  }
-}
-@media only screen and (max-width: 1023px) {
-  .marketGridElement {
-    width: 50%;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .marketGridElement {
-    width: 20%;
-  }
-}
-.marketGridElement .marketGridElementTop {
-  height: 160px;
-}
-
 .marketGrids {
+
   .marketGridElement {
     float: left;
     border-right: 1px solid #cbcbcb;
     border-bottom: 1px solid #cbcbcb;
+    width: 100%;
+    @media(min-width: 421px) {
+      width: 50%;
+    }
+    @media(min-width: 1024px) {
+        width: 20%;
+    }
   }
+
   .marketGridElementTop {
+    height: 160px;
     &.marketGrid-0 {
       background-color: #ababab;
     }
@@ -846,7 +769,7 @@
   padding: 15px 20px 20px;
   border: 1px solid #999;
   margin-bottom: 15px;
-  background-color: #f5f5f5;
+  border-radius: 5px;
   .cd-heading {
     font-size: 22px;
     line-height: 40px;
@@ -1005,18 +928,8 @@ table.dataTable thead td {
 .serch-form-comp {
   display: flex;
   align-items: stretch;
-
   .search-icon {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    &:before {
-      content: "\f002";
-      font-family: FontAwesome;
-      font-style: normal;
-      font-weight: 400;
-      text-decoration: inherit;
-      color: #fff;
-      font-size: 18px;
-    }
   }
 }

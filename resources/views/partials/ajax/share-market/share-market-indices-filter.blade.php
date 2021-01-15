@@ -11,7 +11,7 @@ if(is_array($indicesStocks) && count($indicesStocks)){
             }
    @endphp
             <div class="companyList" id="stock-list-{{$idx}}" style="{{($idx >$pagePerItem)?'display:none;':''}}">
-               <div class="row mb20">
+               <div class="row mb-3">
                   <div class="col-12">
                      <a href="{{site_url('/') . @$acc_companyLists[@$stock->FINCODE]}}" title="{{@$stock->COMPNAME}}">
                         <span class="cd-heading text-orange">
@@ -21,7 +21,7 @@ if(is_array($indicesStocks) && count($indicesStocks)){
                   </div>
                </div>
                <!-- row -->
-               <div class="row companydata scrollbar-inner">
+            <div class="row companydata" data-simplebar data-simplebar-auto-hide="false">
                     <div class="compData-item">
                         <span class="cd-head">LTP</span>
                         <span class="cd-val">
@@ -86,7 +86,7 @@ if(is_array($indicesStocks) && count($indicesStocks)){
         }
         if($idx > $pagePerItem){
           @endphp
-            <div class="alm-btn-wrap">
+            <div class="alm-btn-wrap text-center">
               <button class="alm-load-more-btn" id="loadMore" href="javascript:void(0);">Load More</button>
             </div>
            @php

@@ -13,7 +13,7 @@
                 <select class="s field"  name="finCode" id="search-stock-info" placeholder="{{@$comp_name}}">
                     <option value="">{{@$comp_name}}</option>
                 </select>
-                <button class="search-icon" type="submit" id="find-co-share-price"></button>
+                <button class="search-icon" type="submit" id="find-co-share-price"><i class="fas fa-search"></i></button>
             </form>
         </div>
     </div>
@@ -71,7 +71,7 @@
                     }
                     @endphp         
                     <div class="value">              
-                        <span class="fa sm-icon-box {{$arrowClass }}" id="currentStockRateArrow"></span>              
+                        <span class="fas sm-icon-box {{$arrowClass }}" id="currentStockRateArrow"></span>              
                         <span class="" id="currentStockRate">{{@number_format(@$company_details['CLOSE'],2)}}</span>              
                     </div>          
                     <div class="change">Change: <span class="{{$lavelClass}}" id="currentStockChange">{{@number_format(@$company_details['CHANGE'],2)}} ({{@number_format(@$company_details['PER_CHANGE'],2) }}%)</span></div>      

@@ -1,6 +1,6 @@
 @if(is_array(@$tableData))
-<div class="table-responsive">
-  <table class="table-style1 table-bordered {{(@$section =='read_more') ?'mb-20':'mb-0' }}">
+<div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+  <table class="table table-bordered {{(@$section =='read_more') ?'mb-20':'mb-0' }}">
     <thead>
       <tr>
         <th class="big-font">Symbol</th>

@@ -1,13 +1,13 @@
 @if(@$balenceResposeArray)
-<div class="section_balanceSheet pb-5">
+<div class="section_balanceSheet pb-3">
     <div class="inner-wrap">
         <div class="section-head">  
             <h2 class="">{{@$section_title}}</h2>
             <p>{{@$section_content}}</p>
         </div>
         
-        <div class="balnce_table table-responsive">
-            <table class="table-style1 table-bordered">
+        <div class="balnce_table table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+            <table class="table-bordered">
                <thead>
                   <tr>
                      <th></th>

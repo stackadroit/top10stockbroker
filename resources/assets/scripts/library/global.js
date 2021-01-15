@@ -1144,3 +1144,7 @@ exports.theme = window.theme;
   exports.PaTabs = PaTabs;
 
 }).apply(this, [jQuery]);
+
+
+
+

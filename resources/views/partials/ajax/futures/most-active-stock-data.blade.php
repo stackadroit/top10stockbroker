@@ -11,28 +11,30 @@
 
 
   <div class="row tab-holder">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
         <li class="nav-item"><a href="#mostActiveStockVolume" role="tab" data-toggle="tab" aria-controls="mostActiveStockVolume" class="active changeMASEDFilter" data-expdate="{{@$ExpDate}}">Volume</a></li>
         <li class="nav-item"><a href="#mostActiveStockValue" role="tab" data-toggle="tab" aria-controls="mostActiveStockValue" class="changeMASEDFilter" data-expdate="{{@$ExpDate}}">Value</a></li>
         <li class="nav-item"><a href="#mostActiveStockGainers" role="tab" data-toggle="tab" aria-controls="mostActiveStockGainers" class="changeMASEDFilter" data-expdate="{{@$ExpDate}}">Gainers</a></li>
       </ul>
     </div>
-    <div class="col-md-4 select-holder">
-      <label>Exp. Date</label>
-      <select id="mostActiveStockExpiryDate" class="select-style1">
-        @php
-        foreach($ExpiryDateFilter as $lprow){ @endphp
-        <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
-        @php } @endphp
-      </select>
+    <div class="col-md-6">
+      <div class="select-holder">
+        <label>Exp. Date</label>
+        <select id="mostActiveStockExpiryDate" class="select-style1">
+          @php
+          foreach($ExpiryDateFilter as $lprow){ @endphp
+          <option {{($ExpDate ==$lprow->expdate1)?'selected="selected"':''}} value="{{$lprow->expdate1}}">{{$lprow->expdate}}</option>
+          @php } @endphp
+        </select>
+      </div>
     </div>
   </div>
 
   <div class="tab-content" id="myTabContent">
 
     <div id="mostActiveStockVolume" class="tab-pane fade show active">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 mb-0">
           <thead>
             <tr>
@@ -93,7 +95,7 @@
     </div>
 
     <div id="mostActiveStockValue" class="tab-pane fade">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 mb-0">
           <thead>
             <tr>
@@ -154,7 +156,7 @@
     </div>
 
     <div id="mostActiveStockGainers" class="tab-pane fade">
-      <div class="table-responsive">
+      <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 mb-0">
           <thead>
             <tr>
@@ -219,7 +221,7 @@
         <span class="arr-lis"> > </span>
       </a>
     </div>
-    
+
   </div>
 
 </div>

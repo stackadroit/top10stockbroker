@@ -238,7 +238,6 @@
 	// Nav Top Features
 	.header-nav-features {
 		position: relative;
-		margin-#{$left}: 10px;
 		display: inline-flex !important;
 		&:before,
 		&:after {
@@ -256,10 +255,10 @@
 
 		.header-nav-top-icon,
 		.header-nav-top-icon-img {
-			font-size: 0.8rem;
+			font-size: 20px;
 			position: relative;
 			top: -1px;
-			color: #444;
+			color: $color-light;
 		}
 
 		.header-nav-top-icon-img {
@@ -341,7 +340,7 @@
 		color: $color-light;
 		display: none;
 		float: $right;
-		margin: side-values(0.5rem 0 0.5rem 1rem);
+		margin: side-values(0.5rem 0 0.5rem 0);
 		padding: side-values(0.533rem 0.933rem);
 		border-radius: .25rem;
 		@media(max-width: 575px) {

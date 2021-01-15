@@ -9,22 +9,22 @@
             <form action="">
                 <label for="">If I had made an Investment of Rs</label>
                 <input type="text" name="" id="investmentOf" placeholder="10000">
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <label for="">Into a company / stock name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <input type="text" id="company-list-input">
-                <br/>
+                <br />
                 <div id="company-list-wrap" style="display: none;">
-                <br/>
+                    <br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="" id="company-list" placeholder="company / stock name">
                         <option value="">Select company / stock name</option>
                     </select>
                 </div>
-                
-                <br/>
-                <label for="">For a period of about 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <br />
+                <label for="">For a period of about
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </label>
                 <select id="rc_period_box_filter" class="select-style1d">
                     <option value="1W" class="">1 week</option>
@@ -35,13 +35,13 @@
                     <option value="3Y" class="">3 year</option>
                     <option value="5Y" class="">5 year</option>
                 </select>
-                <br/>
+                <br />
                 <div style="width: 100%;margin: 0px auto;
                     text-align: center;padding: 25px 10px;    margin: 0px;    height: 70px;">
                     <button style="padding: 5px 20px;" id="getCalculatedResult">Calculate</button>
                 </div>
                 <!-- <label for="">Period Ago</label> -->
-                <div class="total_worth" id="get_return_result"></div> 
+                <div class="total_worth" id="get_return_result"></div>
             </form>
         </div>
         <!-- /.retcalc_form -->
