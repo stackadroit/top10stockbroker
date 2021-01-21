@@ -141,4 +141,11 @@ class App extends Controller
         endif;  
     }
 
+    public function footer_about(){
+        global $wpdb;
+        $post   = get_post(3526);
+        // $output = apply_filters( 'the_content', $post->post_content );
+        $moreLink ='...';
+        return wp_trim_words($post->post_content , 20, $moreLink);
+    }
 }

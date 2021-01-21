@@ -1,48 +1,29 @@
-<footer id="footer" class="content-info">
+@include('partials.bottom-banner')
+<footer id="footer" class="content-info mb-0">
   @if (!$is_mobile)
   <div class="container">
     <div class="row py-5 my-4">
       <div class="col-md-9 mb-4 mb-lg-0">
         <h5 class="text-3 mb-3">ABOUT US</h5>
-        <p class="mt-2 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu pulvinar magna. Phasellus semper scelerisque purus, et semper nisl lacinia sit amet. Praesent venenatis turpis vitae purus semper, eget sagittis velit venenatis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos...</p>
-        <p><a href="#" class="btn-flat btn-xs text-color-light"><strong class="text-2">VIEW MORE</strong></a></p>
+        <p class="mt-2 mb-2">{{ $footer_about }}</p>
+        <p><a href="/about-us" class="btn-flat btn-xs text-color-light"><strong class="text-2">VIEW MORE</strong></a></p>
         <div class="row pt-3">
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
-            {{--    @php dynamic_sidebar('sidebar-footer') @endphp--}}
+            {{-- dynamic_sidebar('sidebar-footer') --}}
             <h5 class="text-3 mb-3">BLOG</h5>
-            <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Blog Full Width</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Blog Large Image</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Blog Medium Image</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Single Post</a></li>
-            </ul>
+            {!! wp_nav_menu(['menu' =>'Blog Menu','menu_id' => 'priority-menu-closed','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">PAGES</h5>
-            <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Full width</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Left sidebar</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Right sidebar</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Custom Header</a></li>
-            </ul>
+           {!! wp_nav_menu(['menu' =>'Pages Menu','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">PORTFOLIO</h5>
-            <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">2 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">3 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">4 Columns</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Single Project</a></li>
-            </ul>
+            {!! wp_nav_menu(['menu' =>'Portfolio Menu','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             <h5 class="text-3 mb-3">EXTRA</h5>
-            <ul class="list list-icons list-icons-sm mb-0">
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Team</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Services</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">Careers</a></li>
-              <li><i class="fas fa-angle-right top-8"></i> <a class="link-hover" href="#">FAQ</a></li>
-            </ul>
+            {!! wp_nav_menu(['menu' =>'Extra Menu','menu_id' => 'priority-menu-closed','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
         </div>
       </div>
