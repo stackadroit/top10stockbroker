@@ -42,7 +42,7 @@ export default {
                               $(this).closest(".month_tabs").find('.tab_content').hide();
                               $(this).closest(".month_tabs").find(activeTab).show();
                             }); 
-                          $('.nested_tab a[href="#li_1y"').trigger('click');
+                          $('.nested_tab a[href="#li_1y"]').trigger('click');
                     }
                     if( info.page == 'return-calculator'){
                           //select the tabs
@@ -86,6 +86,8 @@ export default {
             var selli=$(this).data("element");
             var resp_div=$(this).data("chart-element");
             if(!$('#'+resp_div).find('.highcharts-container ').length){
+              ReactDOM.unmountComponentAtNode(document.getElementById(resp_div));
+              $('#'+resp_div).before('<div class="fb-loader loader mx-auto"></div>');
               ReactDOM.render( 
                 <ShareMarketChart />,
                 document.getElementById(resp_div)

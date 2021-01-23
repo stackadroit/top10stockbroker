@@ -150,14 +150,14 @@
               },
               cache: false,
               success: function(response){
-                  $('#loadMoreWrap').remove();
                   if(response){
                      $('#indices-sector-g-l').html(response);
+                  }else{
+                    $('#indices-sector-g-l').html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>');
                   }
-                  $('.full-page-loading').hide();
               },
               error:function(error){
-                 $('.full-page-loading').hide();
+                $('#indices-sector-g-l').html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>');;
               }
           });
 
@@ -194,7 +194,6 @@
       },
       get_ShareMarketAllSectorHighLow:function(apiExchg,sectors_gl,intra_day,indices_index){
         $('#indices-sector-high-low-live').html('<div class="fb-loader loader mx-auto"></div>');
-        $('.full-page-loading').show();
         $('#loadMore').attr('data-page_no',1);
         jQuery.ajax(
             {
@@ -213,18 +212,19 @@
                 success: function(response){
                     if(response){
                        $('#indices-sector-high-low-live').html(response);
+                    }else{
+                      $('#indices-sector-high-low-live').html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>');
+  
                     }
-                    $('.full-page-loading').hide();
-                },
+                 },
                 error:function(error){
-                    $('.full-page-loading').hide();
+                  $('#indices-sector-high-low-live').html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>');
                 }
-            });
+              });
 
       },
       get_ShareMarketAllSectorGainerLooser:function(apiExchg,sectors_gl,intra_day,indices_index){
         $('#indices-stock-list-live').html('<div class="fb-loader loader mx-auto" style="margin-bottom:20px"></div>');
-        $('.full-page-loading').show();
         $('#loadMoreGainarLosor').attr('data-page_no',1);
         jQuery.ajax(
           {
@@ -242,11 +242,14 @@
             success: function(response){
               if(response){
                 $('#indices-stock-list-live').html(response);
+              }else{
+                $('#indices-stock-list-live').html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>');
+  
               }
-                $('.full-page-loading').hide();
-              },
+            },
             error:function(error){
-              $('.full-page-loading').hide();
+              $('#indices-stock-list-live').html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>');
+ 
             }
         });
       },
@@ -345,7 +348,7 @@
                   var companyList =$(document).find('.companyList').length;
                   totalShow =parseInt(totalShow)+parseInt(pagePerItem);
                   var cShow= 0;
-                  $(this).addClass('loading');
+                  $(this).after('<div class="fb-loader loader mx-auto" style="margin-top:20px"></div>');
                   setTimeout(function(){ 
                     $('.companyList').each(function(){
                         if($(this).is(":visible")){
@@ -358,7 +361,7 @@
                             return false
                         }
                     });
-                      $('#loadMore').removeClass('loading');
+                      $('#loadMore').next('.fb-loader').remove();
                   }, 500);
                   if(totalShow >= companyList){
                       $('#loadMore').hide();

@@ -199,10 +199,10 @@ class ShareMarketChart extends React.Component {
                 ]
               }
             });
+            $('#'+resp_div).prev('.fb-loader').remove();
         })
         .catch(error =>  {
-            //console.log(error);
-           
+           $('#'+resp_div).prev('.fb-loader').remove();
         });
      
   }

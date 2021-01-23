@@ -112,7 +112,7 @@
                 $(document).find(shareMarketGainer).html(response);
               },
             error: function(errorThrown){
-              $(sectorsSectionWrap).find(".loading-data").remove();
+              $(shareMarketGainer).html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>' );
                 console.log(errorThrown);
             }
         });
@@ -180,6 +180,10 @@
           .on( 'change', '#indicesIndexes', function(event) {
 	            var indexCode = $(this).val();
                self.getStockMarket(indexCode,stockMarketLive);
+              setTimeout(function(){
+                $('.tab_content').find('.highcharts-container').remove();
+                $('#ajax-load-api-data').find('.nested_tab a[href="#li_1y"]').trigger('click');
+             },200); 
 	        });
           // Stocks Event Filter
           sectorsSectionWrap ="#sectors-section-wrap";

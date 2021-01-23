@@ -37,7 +37,7 @@
                     <!-- index -->
                 </div>
                 <!-- col-4 -->
-                <div class="col-md-6 valuesDiv"> 
+                <div class="col-md-6 valuesDiv px-0"> 
                     @php
                     if(@$indices_details['CHANGE'] >0){
                         $arrowClass ="fa-arrow-up color-green";

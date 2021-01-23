@@ -80,7 +80,7 @@
 		</div>
 
 		<div class="stock-btn-more-wrap">
-			<a class="stock-btn-view-more" href="#" href="javascript:void(0);">View More
+			<a class="stock-btn-view-more" href="https://top10stockbroker.com/share-market/nse-top-gainers/" title="View More">View More
 			</a>
 		</div>
 		<!-- marketGrids -->
