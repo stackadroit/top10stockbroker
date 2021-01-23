@@ -182,61 +182,57 @@
 
             <div class="row comparison">
                 <div class="col item">
-                    <div class="fa fa-question-circle popoverTigger">
+                    <div class="fas fa-question-circle popoverTigger">
+                    </div>
                         <div class="popoverBox">
-                            <span class="text-blue">PE Ratio</span>
+                            <span class="popover-title">PE Ratio</span>
                             <br>
                             <p class="para2">Is the price-earnings ratio for valuing a company that measures its current share price relative to its earnings per share.</p>
                         </div>
-                    </div>
                     <div class="name">P/E RATIO</div>
                     <div class="value" id="peRatio">{{@number_format(@$company_details['PE'],2)}}</div>
                 </div>
                 <!-- item -->
                 <div class="col item">
-                    <div class="fa fa-question-circle popoverTigger">
+                    <div class="fas fa-question-circle popoverTigger"></div>
                         <div class="popoverBox">
-                            <span class="text-blue">EPS</span>
+                            <span class="popover-title">EPS</span>
                             <br>
                             <p class="para2">The earnings per share ratio is a portion of company's net profit allocated for each outstanding share. It is calculated by deducting preferred stock divided from the net income of the company divided by the number of outstanding shares.</p>
                         </div>
-                    </div>
                     <div class="name">EPS</div>
                     <div class="value" id="epsRATIO">{{@number_format(@$company_details['EPSc'],2)}}</div>
                 </div>
                 <!-- item -->
                 <div class="col item">
-                    <div class="fa fa-question-circle popoverTigger">
+                    <div class="fas fa-question-circle popoverTigger"></div>
                         <div class="popoverBox">
-                            <span class="text-blue">MCAP SALES</span>
+                            <span class="popover-title">MCAP SALES</span>
                             <br>
                             <p class="para2">MCAP SALES is used to compared the company's current market price with its mcap sales value. </p>
                         </div>
-                    </div>
                     <div class="name">MCAP SALES</div>
                     <div class="value" id="bvRatio">{{@number_format(@$company_details['MCAP_SALES'],2) }}</div>
                 </div>
                 <!-- item -->
                 <div class="col item">
-                    <div class="fa fa-question-circle popoverTigger">
+                    <div class="fas fa-question-circle popoverTigger"></div>
                         <div class="popoverBox">
-                            <span class="text-blue">Deliverable</span>
+                            <span class="popover-title">Deliverable</span>
                             <br>
                             <p class="para2">These are the acutal number of shares that are traded on delivery based, meaning transfered from one person to another during the day's trade.</p>
                         </div>
-                    </div>
                     <div class="name">DELIVERABLES</div>
                     <div class="value" id="deliverableRatio">{{@number_format(@$company_details['Deliverable'],2)}}</div>
                 </div>
                 <!-- item -->
                 <div class="col item">
-                    <div class="fa fa-question-circle popoverTigger">
+                    <div class="fas fa-question-circle popoverTigger"></div>
                         <div class="popoverBox">
-                            <span class="text-blue">DIV YIELD.(%)</span>
+                            <span class="popover-title">DIV YIELD.(%)</span>
                             <br>
                             <p class="para2">Dividend Yield measures the quantum of cash dividends paid to shareholders in a financial year relative to the market value of the per share.</p>
                         </div>
-                    </div>
                     <div class="name">DIV YIELD.(%)</div>
                     <div class="value" id="dividendRatio">{{@number_format(@$company_details['YIELD'],2) }}</div>
                 </div>

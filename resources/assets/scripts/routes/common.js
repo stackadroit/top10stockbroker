@@ -3,6 +3,7 @@ import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import SimpleBar from 'simplebar';
+import Select2 from 'select2';
 import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';

@@ -107,8 +107,8 @@
       font-size: 40px;
       line-height: 44px;
       @media(min-width: 992px){
-        font-size: 50px;
-        line-height: 50px;
+        font-size: 48px;
+        line-height: 48px;
       }
     }
     
@@ -203,19 +203,12 @@
 /*comparison*/
 .comparison {
   margin: 15px 0;
-
   .item {
     min-height: 90px;
     padding: 20px 10px;
     background-color: #f0f0f0;
     text-align: center;
-    .fa {
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      color: #71736f;
-      font-size: 16px;
-    }
+    position: relative;
     .name {
       line-height: 16px;
       text-transform: uppercase;
@@ -247,81 +240,62 @@
     &:nth-child(5) {
       background-color: #c9e2de;
     }
-    .popoverBox {
-      bottom: 35px;
-    }
   }
 
   @media (max-width: 767px) {
     .col {
       flex: 0 0 50% !important;
     }
-    .popoverTigger {
-      display: none;
-    }
   }
 }
 
 /*popoverBox*/
 .popoverBox {
-  border: 1px solid #666;
   padding: 10px;
-  background-color: #fff;
+  background-color: $color-yellow;
   position: absolute;
   bottom: 105%;
-  right: -108px;
-  min-width: 210px;
+  right: 0;
+  left: 0;
+  max-width: 220px;
   display: none;
-  z-index: 2;
-  .para2 {
-    color: #71736f;
-  }
-  &:after,
-  &:before {
-    top: 100%;
-    left: 50%;
-    border: solid transparent;
+  z-index: 1;
+  border-radius: 5px;
+  &::after {
     content: " ";
-    height: 0;
-    width: 0;
+    background-color: $color-yellow;
+    bottom: -4px;
+    right: 9px;
+    height: 10px;
+    width: 10px;
     position: absolute;
-    pointer-events: none;
+    display: block;
+    transform: rotate(45deg);
+    z-index: -1;
   }
-  &:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-top-color: #fff;
-    border-width: 21px;
-    margin-left: -32px;
-  }
-  &:before {
-    border-color: rgba(102, 102, 102, 0);
-    border-top-color: #666;
-    border-width: 22px;
-    margin-left: -33px;
-  }
-  &.mediumData {
-    padding: 5px;
-    left: -80px;
-    right: auto;
-    bottom: 35px;
-    top: auto;
-  }
-  &.small {
-    padding: 5px;
-    left: -30px;
-    right: auto;
-    min-width: 150px;
-  }
-  &.small .para2 {
+  p{
+    font-size: 13px;
     margin-bottom: 5px;
+    line-height: 18px;
+    color: lighten($color-dark, 20%);
   }
-  &.small .data-amount {
-    font-size: 24px;
-    line-height: 24px;
+  .popover-title{
+      font-weight: $font-weight-bold;
+      font-size: 14px;
+      color: $color-dark;
   }
 }
-.popoverTigger:hover .popoverBox {
-  display: block;
+.popoverTigger {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: #71736f;
+  font-size: 16px;
+  @media(min-width:768px){
+    &:hover + .popoverBox {
+      display: block;
+    }
+  }
 }
 
 /*return calculator*/
@@ -332,7 +306,7 @@
   padding: 25px 28px;
   @media(min-width: 768px) {
       width: 75%;
-      padding: 50px 38px;
+      padding: 50px 38px 40px;
   }
 
   label {
@@ -349,7 +323,9 @@
     height: 40px;
     padding: 0 10px;
     margin-right: 15px;
-    background: $color-grey;
+    // background: $color-grey;
+    border-color: #aaaaaa;
+
   }
 }
 
@@ -767,7 +743,8 @@
 /*company listing*/
 .companyList {
   padding: 15px 20px 20px;
-  border: 1px solid #999;
+  background: $color-grey;
+  border: 1px solid $color-dark;
   margin-bottom: 15px;
   border-radius: 5px;
   .cd-heading {
@@ -776,7 +753,7 @@
     padding: 0 5px 0 0;
   }
   .cd-head {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     color: #303440;
     display: block;
@@ -784,7 +761,7 @@
   .cd-val {
     margin-top: 10px;
     display: block;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 16px;
     color: #666;
     &.text-red {
@@ -805,15 +782,22 @@
   display: inline-block;
   padding: 0 15px;
   margin-bottom: 20px;
-  &:not(last-child) {
-    border-right: 1px solid #e2e2e2;
+  &:not(:last-child) {
+    border-right: 1px solid lighten($color-dark , 70%);
   }
 }
 
+
 /*search page*/
-.section-compnaysearch .search-wrap .search-icon {
-  right: auto;
-  background-color: #e55025;
+.section-compnaysearch .search-wrap{
+  .select2-container .select2-selection--single {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+  }
+  .search-icon {
+    right: auto;
+    background-color: $color-primary;
+  }
 }
 
 .no-sidebar-full-width #page {
