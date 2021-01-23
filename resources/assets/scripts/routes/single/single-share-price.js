@@ -118,9 +118,7 @@ export default {
     if (typeof SingleSharePrice !== 'undefined') {
       SingleSharePrice.initialize();
     }
-    function test(){
-
-    }
+     
       if($('#search-stock-info-main').length){
         $('#search-stock-info-main').select2({
           minimumInputLength: 2,
@@ -150,14 +148,13 @@ export default {
         var selli=$(this).data("element");
         var resp_div=$(this).data("chart-element");
         if(!$('#'+resp_div).find('.highcharts-container ').length){
+          ReactDOM.unmountComponentAtNode(document.getElementById(resp_div));
           $('#'+resp_div).before('<div class="fb-loader loader mx-auto"></div>');
           ReactDOM.render( 
             <SharePriceChart />,
             document.getElementById(resp_div)
           );
-          
-          // $('#'+resp_div).before('<div class="fb-loader loader mx-auto"></div>');
-
+           
         }
     });
   }).apply(this, [jQuery]);

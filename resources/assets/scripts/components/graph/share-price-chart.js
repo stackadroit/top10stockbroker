@@ -141,7 +141,7 @@ class SharePriceChart extends React.Component {
       	var finCode ='';
       	var apiExchg =$('#ajax-load-api-data').data('apiexchg');
      	// var finCode =$('#indicesIndexesCode').val();
-     	finCode = $('#ajax-load-api-data').data('fincode');
+     	  finCode = $('#ajax-load-api-data').attr('data-fincode');
  		// finCode =100180;
       	data.append('dur', dur);
       	data.append('apiExchg', apiExchg);

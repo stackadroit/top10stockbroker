@@ -198,7 +198,8 @@
                 self.get_companyStock(apiExchg,finCode);
               }
               setTimeout(function(){
-                $('.nested_tab a[href="#li_1y"').trigger('click');
+                $('.tab_content').find('.highcharts-container').remove();
+                $('#ajax-load-api-data').find('.nested_tab a[href="#li_1y"]').trigger('click');
              },200);
 
               
