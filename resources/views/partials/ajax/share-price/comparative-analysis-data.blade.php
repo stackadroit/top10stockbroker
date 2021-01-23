@@ -47,7 +47,7 @@ if(is_array(@$comparativeAnalysis)) {
                     // print_r($rowObj);
                       $cpnName= (@$rowObj['S_NAME'])?@$rowObj['S_NAME']:@$rowObj['INDEX_LNAME'];
                       $nameslug =strtolower(str_replace(' ', '-', $cpnName)).'-share-price';
-                    if(array_key_exists($cpnName, $caprowComp)){
+                    if($inpod ==0 || array_key_exists($cpnName, $caprowComp) ){
                     @endphp
                     <tr>
                         <td class="big-font">

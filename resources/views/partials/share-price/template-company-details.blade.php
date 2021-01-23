@@ -10,7 +10,7 @@
         </div>
         <div class="search-wrap">
             <form action="" method="post" class="serch-form-comp">
-                <select data-live-search="true" class="s field selectpicker" name="finCode" id="search-stock-info-main" placeholder="{{@$comp_name}}">
+                <select data-live-search="true" class="s field selectpicker" name="finCode" id="search-stock-info-main" style="width: 100%" placeholder="{{@$comp_name}}">
                     <option value="">{{@$comp_name}}</option>
 
                 </select>
