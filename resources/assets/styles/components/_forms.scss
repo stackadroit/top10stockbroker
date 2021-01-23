@@ -400,3 +400,12 @@ select.select-style2 {
 	@extend %select;
 	// border-bottom: 1px solid #999;
 }
+.select2-selection__rendered {
+    line-height: 39px !important;
+}
+.select2-container .select2-selection--single {
+	height: 40px !important;
+}
+.select2-selection__arrow {
+    height: 37px !important;
+}
