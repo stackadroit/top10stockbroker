@@ -48,7 +48,7 @@
                 <div id="sixmonthchart"></div>
             </div>
             <div id="li_1y" class="tab_content">
-                <div id="oneyearchart"></div>
+                <div id="oneyearchart"></div> 
             </div>
             <div id="li_2y" class="tab_content">
                 <div id="twoyearchart"></div>

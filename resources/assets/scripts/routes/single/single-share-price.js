@@ -150,10 +150,14 @@ export default {
         var selli=$(this).data("element");
         var resp_div=$(this).data("chart-element");
         if(!$('#'+resp_div).find('.highcharts-container ').length){
+          $('#'+resp_div).before('<div class="fb-loader loader mx-auto"></div>');
           ReactDOM.render( 
             <SharePriceChart />,
             document.getElementById(resp_div)
           );
+          
+          // $('#'+resp_div).before('<div class="fb-loader loader mx-auto"></div>');
+
         }
     });
   }).apply(this, [jQuery]);

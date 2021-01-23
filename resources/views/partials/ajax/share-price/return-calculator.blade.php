@@ -12,7 +12,7 @@
                 <br />
                 <br />
                 <label for="">Into a company / stock name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <select name="" id="company-list" placeholder="company / stock name" style="display: none;">
+                <select name="" id="company-list" placeholder="company / stock name">
                     <option value="">Select company / stock name</option>
                 </select>
                  

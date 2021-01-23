@@ -114,7 +114,7 @@
         });
       },
       get_ReturnPriceCalculator:function(apiExchg,finCode,amount,period){
-       $('#get_return_result').html('');
+       $('#get_return_result').html('<div class="fb-loader loader mx-auto"></div>');
         jQuery.ajax(
           {
               type: "post",
@@ -137,7 +137,10 @@
                       $(document).find('#get_return_result').html('You provided invalid options. Please try again.');
                   }
                   
-              }
+              },
+             error: function(errorThrown){
+              $(document).find('#get_return_result').html('You provided invalid options. Please try again.');
+            }
           });
 
       },

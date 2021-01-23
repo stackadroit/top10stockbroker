@@ -151,6 +151,7 @@ class SharePriceChart extends React.Component {
 
       	axios.post(global_vars.apiServerUrl + '/api/company-graph', data)
         .then(response => {
+
             var result = response.data.stocks;
             var graphDataArray=[];
             var dt1=[];
@@ -201,10 +202,10 @@ class SharePriceChart extends React.Component {
                 ]
               }
             });
+            $('#'+resp_div).prev('.fb-loader').remove();
         })
         .catch(error =>  {
-            //console.log(error);
-           
+           $('#'+resp_div).prev('.fb-loader').remove();
         });
      
   }
@@ -244,6 +245,7 @@ class SharePriceChart extends React.Component {
   }
   render() {
     const { chartOptions, hoverData } = this.state;
+
     return (
         <HighchartsReact
           highcharts={Highcharts}
