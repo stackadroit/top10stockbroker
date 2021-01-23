@@ -25,7 +25,7 @@
                 </div>
                 <!-- col-2 full-box -->
                 <div class="col-md-4">      
-                    <h2 class="names" style="margin: 0px; padding:0;" title="{{@$comp_name}}">{{@$comp_name}}</h2>
+                    <h2 class="names" id="company-name" style="margin: 0px; padding:0;" title="{{@$comp_name}}">{{@$comp_name}}</h2>
                     <div class="index"> 
                         <span class="group"> 
                             <span>BSE : </span><span id="bse-value" class="index-val border-right">{{@$company_details['scripcode']}}</span>

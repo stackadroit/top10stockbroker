@@ -107,7 +107,7 @@ export default {
                                       },
                               }
                             });
-                          }
+                        }
                       },
                     error: function (errorThrown) {
                         console.log(errorThrown);

@@ -52,9 +52,10 @@
                 else{
                   if(liveUpdateElement == '#stock-market-live'){
                     $(liveUpdateElement).find('#indecName').html(response.INDEX_NAME);
+                    $(".retcalc_form .select2-selection__placeholder").html(currentValue.INDEX_NAME);
                     $(liveUpdateElement).find('#indecName').attr('data-indices-code',indexCode);
-                    $(liveUpdateElement).find('#currentStockRate').html(response.PRICE);
-                    $(liveUpdateElement).find('#currentStockChange').html(response.CHANGE + '('+response.PER_CHANGE+'%)');
+                    $(liveUpdateElement).find('#currentStockRate').html(parseFloat(response.PRICE).toFixed(2));
+                    $(liveUpdateElement).find('#currentStockChange').html(parseFloat(response.CHANGE).toFixed(2) + '('+parseFloat(response.PER_CHANGE).toFixed(2)+'%)');
                     if(response.CHANGE >0){
                         $(liveUpdateElement).find('#currentStockChangee').removeClass('color-red').addClass('color-green');
                         $(liveUpdateElement).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
@@ -63,23 +64,23 @@
                         $(liveUpdateElement).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                     }
                    
-                    $(liveUpdateElement).find('#52weeklow').html(response["52WEEKLOW"]);
-                    $(liveUpdateElement).find('#52weekhigh').html(response["52WEEKHIGH"]);
+                    $(liveUpdateElement).find('#52weeklow').html(parseFloat(response["52WEEKLOW"]).toFixed(2));
+                    $(liveUpdateElement).find('#52weekhigh').html(parseFloat(response["52WEEKHIGH"]).toFixed(2));
                     
-                    $(liveUpdateElement).find('#daylow').html(response.LOW);
-                    $(liveUpdateElement).find('#dayhigh').html(response.HIGH);
-                    $(liveUpdateElement).find('#prevclose').html(response.PREV_CLOSE);
-                    $(liveUpdateElement).find('#open').html(response.OPEN);
-                    $(liveUpdateElement).find('#mcaprs').html(response.ADV);
-                    $(liveUpdateElement).find('#totalrs').html(response.DEC);
+                    $(liveUpdateElement).find('#daylow').html(parseFloat(response.LOW).toFixed(2));
+                    $(liveUpdateElement).find('#dayhigh').html(parseFloat(response.HIGH).toFixed(2));
+                    $(liveUpdateElement).find('#prevclose').html(parseFloat(response.PREV_CLOSE).toFixed(2));
+                    $(liveUpdateElement).find('#open').html(parseFloat(response.OPEN).toFixed(2));
+                    $(liveUpdateElement).find('#mcaprs').html(parseFloat(response.ADV).toFixed(2));
+                    $(liveUpdateElement).find('#totalrs').html(parseFloat(response.DEC).toFixed(2));
                     var owlblclass =(response['WEEKPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1wreturn').removeClass('text-green').removeClass('text-red').addClass(owlblclass).html(response.WEEKPERCHANGE);
+                    $(liveUpdateElement).find('#1wreturn').removeClass('text-green').removeClass('text-red').addClass(owlblclass).html(parseFloat(response.WEEKPERCHANGE).toFixed(2));
                     var omlblclass =(response['MONTHPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1mreturn').removeClass('text-green').removeClass('text-red').addClass(omlblclass).html(response.MONTHPERCHANGE);
+                    $(liveUpdateElement).find('#1mreturn').removeClass('text-green').removeClass('text-red').addClass(omlblclass).html(parseFloat(response.MONTHPERCHANGE).toFixed(2));
                     var smlblclass =(response['6MONTHPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#6mreturn').removeClass('text-green').removeClass('text-red').addClass(smlblclass).html(response['6MONTHPERCHANGE']);
+                    $(liveUpdateElement).find('#6mreturn').removeClass('text-green').removeClass('text-red').addClass(smlblclass).html(parseFloat(response['6MONTHPERCHANGE']).toFixed(2));
                     var orlblclass =(response['1YEARPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1yreturn').removeClass('text-green').removeClass('text-red').addClass(orlblclass).html(response['1YEARPERCHANGE']);
+                    $(liveUpdateElement).find('#1yreturn').removeClass('text-green').removeClass('text-red').addClass(orlblclass).html(parseFloat(response['1YEARPERCHANGE']).toFixed(2));
                   }
                 }
               },
@@ -103,6 +104,8 @@
             },
             beforeSend: function() {
               $(sectorsSectionWrap).find(".loading-data").show();
+              $(shareMarketGainer).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>' );
+
             },
             success:function(response){
               $(sectorsSectionWrap).find(".loading-data").remove();
@@ -138,7 +141,7 @@
       
        
       get_ReturnPriceCalculator:function(apiExchg,finCode,amount,period){
-       $('#get_return_result').html('');
+       $('#get_return_result').html('<div class="fb-loader loader mx-auto"></div>' );
         jQuery.ajax(
           {
               type: "post",
@@ -206,14 +209,14 @@
           }); 
 
           // Calulater
-          $(document).on("keyup","#company-list-input", function(e) {
-               var searchText = $(this).val();
-            if(searchText.length >= 3){
-                $("#result-search").html('<div class="fb-loader loader mx-auto"></div>');
-                  self.ajax(searchText); 
-            }
+          // $(document).on("keyup","#company-list-input", function(e) {
+          //      var searchText = $(this).val();
+          //   if(searchText.length >= 3){
+          //       $("#result-search").html('<div class="fb-loader loader mx-auto"></div>');
+          //         self.ajax(searchText); 
+          //   }
             
-          });
+          // });
           // get Calulater result
           $(document).on('click','#getCalculatedResult',function(e){
             e.preventDefault();

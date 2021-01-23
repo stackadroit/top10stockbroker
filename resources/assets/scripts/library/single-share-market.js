@@ -105,7 +105,7 @@
         });
       },
       get_ReturnPriceCalculator:function(apiExchg,finCode,amount,period){
-       $('#get_return_result').html('');
+       $('#get_return_result').html('<div class="fb-loader loader mx-auto"></div>' );
         jQuery.ajax(
           {
               type: "post",
@@ -120,6 +120,9 @@
                   'security': global_vars.ajax_nonce
               },
               cache: false,
+              beforeSend: function() {
+                // $("#brokercomparison .loading-data").show();
+              },
               success: function(response){
                   // console.log(response);
                   if(response.status == 'success'){
@@ -133,7 +136,7 @@
 
       },
       get_ShareMarketIndicesFilter:function(indexCode,stock_order){
-       $('#get_return_result').html('');
+       $('#indices-sector-g-l').html('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
         jQuery.ajax(
           {
               type: "post",
@@ -190,7 +193,7 @@
 
       },
       get_ShareMarketAllSectorHighLow:function(apiExchg,sectors_gl,intra_day,indices_index){
-        $('#indices-sector-high-low-live').html('');
+        $('#indices-sector-high-low-live').html('<div class="fb-loader loader mx-auto"></div>');
         $('.full-page-loading').show();
         $('#loadMore').attr('data-page_no',1);
         jQuery.ajax(
@@ -220,7 +223,7 @@
 
       },
       get_ShareMarketAllSectorGainerLooser:function(apiExchg,sectors_gl,intra_day,indices_index){
-        $('#indices-stock-list-live').html('');
+        $('#indices-stock-list-live').html('<div class="fb-loader loader mx-auto" style="margin-bottom:20px"></div>');
         $('.full-page-loading').show();
         $('#loadMoreGainarLosor').attr('data-page_no',1);
         jQuery.ajax(
@@ -364,6 +367,7 @@
           //Event forn High Low
           $(document).on('click','#loadMoreHighLow',function(e){
             e.preventDefault(); 
+            $(this).addClass('loading').after('<div class="fb-loader loader mx-auto" style="margin-top:20px;"></div>');
             var apiExchg =$('#api_exchg').val();
             var sectors_gl =$('#sectors_gl').val();
             var intra_day = $('#stock-period-search').val();
@@ -408,8 +412,8 @@
             self.get_ShareMarketAllSectorGainerLooser(apiExchg,sectors_gl,intra_day,indices_index);
           });
           $(document).on('click','#loadMoreGainarLosor',function(e){
-              e.preventDefault(); 
-              $(this).addClass('loading');
+              e.preventDefault();
+              $(this).addClass('loading').after('<div class="fb-loader loader mx-auto" style="margin-top:20px;"></div>');
                var apiExchg =$('#api_exchg').val();
               var sectors_gl =$('#sectors_gl').val();
               var intra_day = $('#gl_stock-period-search').val();
