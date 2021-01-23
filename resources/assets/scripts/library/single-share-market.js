@@ -44,8 +44,8 @@
                   if(liveUpdateElement == '#stock-market-live'){
                     $(liveUpdateElement).find('#indecName').html(response.INDEX_NAME);
                     $(liveUpdateElement).find('#indecName').attr('data-indices-code',indexCode);
-                    $(liveUpdateElement).find('#currentStockRate').html(response.PRICE);
-                    $(liveUpdateElement).find('#currentStockChange').html(response.CHANGE + '('+response.PER_CHANGE+'%)');
+                    $(liveUpdateElement).find('#currentStockRate').html(parseFloat(response.PRICE).toFixed(2));
+                    $(liveUpdateElement).find('#currentStockChange').html(parseFloat(response.CHANGE).toFixed(2) + '('+parseFloat(response.PER_CHANGE).toFixed(2)+'%)');
                     if(response.CHANGE >0){
                         $(liveUpdateElement).find('#currentStockChangee').removeClass('color-red').addClass('color-green');
                         $(liveUpdateElement).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
@@ -54,23 +54,23 @@
                         $(liveUpdateElement).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                     }
                    
-                    $(liveUpdateElement).find('#52weeklow').html(response["52WEEKLOW"]);
-                    $(liveUpdateElement).find('#52weekhigh').html(response["52WEEKHIGH"]);
+                    $(liveUpdateElement).find('#52weeklow').html(parseFloat(response["52WEEKLOW"]).toFixed(2));
+                    $(liveUpdateElement).find('#52weekhigh').html(parseFloat(response["52WEEKHIGH"]).toFixed(2));
                     
-                    $(liveUpdateElement).find('#daylow').html(response.LOW);
-                    $(liveUpdateElement).find('#dayhigh').html(response.HIGH);
-                    $(liveUpdateElement).find('#prevclose').html(response.PREV_CLOSE);
-                    $(liveUpdateElement).find('#open').html(response.OPEN);
-                    $(liveUpdateElement).find('#mcaprs').html(response.ADV);
-                    $(liveUpdateElement).find('#totalrs').html(response.DEC);
+                    $(liveUpdateElement).find('#daylow').html(parseFloat(response.LOW).toFixed(2));
+                    $(liveUpdateElement).find('#dayhigh').html(parseFloat(response.HIGH).toFixed(2));
+                    $(liveUpdateElement).find('#prevclose').html(parseFloat(response.PREV_CLOSE).toFixed(2));
+                    $(liveUpdateElement).find('#open').html(parseFloat(response.OPEN).toFixed(2));
+                    $(liveUpdateElement).find('#mcaprs').html(parseFloat(response.ADV).toFixed(2));
+                    $(liveUpdateElement).find('#totalrs').html(parseFloat(response.DEC).toFixed(2));
                     var owlblclass =(response['WEEKPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1wreturn').removeClass('text-green').removeClass('text-red').addClass(owlblclass).html(response.WEEKPERCHANGE);
+                    $(liveUpdateElement).find('#1wreturn').removeClass('text-green').removeClass('text-red').addClass(owlblclass).html(parseFloat(response.WEEKPERCHANGE).toFixed(2));
                     var omlblclass =(response['MONTHPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1mreturn').removeClass('text-green').removeClass('text-red').addClass(omlblclass).html(response.MONTHPERCHANGE);
+                    $(liveUpdateElement).find('#1mreturn').removeClass('text-green').removeClass('text-red').addClass(omlblclass).html(parseFloat(response.MONTHPERCHANGE).toFixed(2));
                     var smlblclass =(response['6MONTHPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#6mreturn').removeClass('text-green').removeClass('text-red').addClass(smlblclass).html(response['6MONTHPERCHANGE']);
+                    $(liveUpdateElement).find('#6mreturn').removeClass('text-green').removeClass('text-red').addClass(smlblclass).html(parseFloat(response['6MONTHPERCHANGE']).toFixed(2));
                     var orlblclass =(response['1YEARPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1yreturn').removeClass('text-green').removeClass('text-red').addClass(orlblclass).html(response['1YEARPERCHANGE']);
+                    $(liveUpdateElement).find('#1yreturn').removeClass('text-green').removeClass('text-red').addClass(orlblclass).html(parseFloat(response['1YEARPERCHANGE']).toFixed(2));
                   }
                 }
               },
@@ -105,7 +105,7 @@
         });
       },
       get_ReturnPriceCalculator:function(apiExchg,finCode,amount,period){
-       $('#get_return_result').html('');
+       $('#get_return_result').html('<div class="fb-loader loader mx-auto"></div>' );
         jQuery.ajax(
           {
               type: "post",
@@ -120,6 +120,9 @@
                   'security': global_vars.ajax_nonce
               },
               cache: false,
+              beforeSend: function() {
+                // $("#brokercomparison .loading-data").show();
+              },
               success: function(response){
                   // console.log(response);
                   if(response.status == 'success'){
@@ -133,7 +136,7 @@
 
       },
       get_ShareMarketIndicesFilter:function(indexCode,stock_order){
-       $('#get_return_result').html('');
+       $('#indices-sector-g-l').html('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
         jQuery.ajax(
           {
               type: "post",
@@ -190,7 +193,7 @@
 
       },
       get_ShareMarketAllSectorHighLow:function(apiExchg,sectors_gl,intra_day,indices_index){
-        $('#indices-sector-high-low-live').html('');
+        $('#indices-sector-high-low-live').html('<div class="fb-loader loader mx-auto"></div>');
         $('.full-page-loading').show();
         $('#loadMore').attr('data-page_no',1);
         jQuery.ajax(
@@ -220,7 +223,7 @@
 
       },
       get_ShareMarketAllSectorGainerLooser:function(apiExchg,sectors_gl,intra_day,indices_index){
-        $('#indices-stock-list-live').html('');
+        $('#indices-stock-list-live').html('<div class="fb-loader loader mx-auto" style="margin-bottom:20px"></div>');
         $('.full-page-loading').show();
         $('#loadMoreGainarLosor').attr('data-page_no',1);
         jQuery.ajax(
@@ -364,6 +367,7 @@
           //Event forn High Low
           $(document).on('click','#loadMoreHighLow',function(e){
             e.preventDefault(); 
+            $(this).addClass('loading').after('<div class="fb-loader loader mx-auto" style="margin-top:20px;"></div>');
             var apiExchg =$('#api_exchg').val();
             var sectors_gl =$('#sectors_gl').val();
             var intra_day = $('#stock-period-search').val();
@@ -408,8 +412,8 @@
             self.get_ShareMarketAllSectorGainerLooser(apiExchg,sectors_gl,intra_day,indices_index);
           });
           $(document).on('click','#loadMoreGainarLosor',function(e){
-              e.preventDefault(); 
-              $(this).addClass('loading');
+              e.preventDefault();
+              $(this).addClass('loading').after('<div class="fb-loader loader mx-auto" style="margin-top:20px;"></div>');
                var apiExchg =$('#api_exchg').val();
               var sectors_gl =$('#sectors_gl').val();
               var intra_day = $('#gl_stock-period-search').val();

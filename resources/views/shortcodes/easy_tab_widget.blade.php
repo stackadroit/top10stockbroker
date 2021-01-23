@@ -237,17 +237,9 @@ a:hover{ color: #666;}*/
                 $i = 1
               @endphp
                @foreach ($tabs_data as $tabs_single_data)
-                @php
-                    $tabs_name = @$tabs_single_data['tabs_name'];
-                    $tab_option = @$tabs_single_data['tab_option'];
-                    $tabs_post_type = @$tabs_single_data['tabs_post_type'];
-                    $tabs_category = @$tabs_single_data['tabs_category'];
-                    $tabs_link = @$tabs_single_data['tabs_link'];
-                    $tabs_link_to = @$tabs_single_data['tabs_link_to'];
-                @endphp
                   <li @php if($i==1){ @endphp class="active"  @php } @endphp >
                       <a href="#tabs_desc_{{$post_id}}_{{$i}}">
-                        <span><?php echo $tabs_name; ?></span>
+                        <span><?php echo @$tabs_single_data['tabs_name']; ?></span>
                       </a>
                   </li>
                   @php

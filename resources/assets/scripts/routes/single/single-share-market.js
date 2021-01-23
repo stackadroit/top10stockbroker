@@ -43,7 +43,32 @@ export default {
                               $(this).closest(".month_tabs").find(activeTab).show();
                             }); 
                           $('.nested_tab a[href="#li_1y"').trigger('click');
-                      }
+                    }
+                    if( info.page == 'return-calculator'){
+                          //select the tabs
+                          
+                            $('#company-list').select2({
+                              minimumInputLength: 2,
+                              placeholder: $('#indecName').html(),
+                              tags: [],
+                              ajax: {
+                                type: "post",
+                                url: global_vars.apiServerUrl+'/api/company-list',
+                                dataType: 'json',
+                                      type: "POST",
+                                      data: function (term) {
+                                          return {
+                                              'security': global_vars.ajax_nonce,
+                                              'action':'get_company_list',
+                                              'SearchTxt': term,
+                                          };
+                                      },
+                                      processResults: function (data) {
+                                          return { results: data.stocks};
+                                      },
+                              }
+                            });
+                    }
                   },
                     error: function (errorThrown) {
                         console.log(errorThrown);

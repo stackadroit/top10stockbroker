@@ -56,39 +56,39 @@
               if(parseFloat(currentValue.FaOdiff) > 0){
                 $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
                 $(companyStockLive).find('#currentStockChange').removeClass('color-red').addClass('color-green'); 
-                $(companyStockLive).find('#currentStockChange').html(currentValue.FaOdiff+ ' ('+currentValue.FaOchange+'%)');
+                $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
 
               }else{
                   $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                   $(companyStockLive).find('#currentStockChange').removeClass('color-green').addClass('color-red'); 
-                  $(companyStockLive).find('#currentStockChange').html(currentValue.FaOdiff+ ' ('+currentValue.FaOchange+'%)');
+                  $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
               }
-              $(companyStockLive).find('#strick_price').html(currentValue.STRIKEPRICE);
-              $(companyStockLive).find('#open_price').html(currentValue.OPENPRICE);
-              $(companyStockLive).find('#high_price').html(currentValue.HIGHPRICE);
-              $(companyStockLive).find('#low_price').html(currentValue.LOWPRICE);
-              $(companyStockLive).find('#prevclose').html(currentValue.PrevLtp);
-              $(companyStockLive).find('#spot_price').html(currentValue.Nseltp);
+              $(companyStockLive).find('#strick_price').html(parseFloat(currentValue.STRIKEPRICE).toFixed(2));
+              $(companyStockLive).find('#open_price').html(parseFloat(currentValue.OPENPRICE).toFixed(2));
+              $(companyStockLive).find('#high_price').html(parseFloat(currentValue.HIGHPRICE).toFixed(2));
+              $(companyStockLive).find('#low_price').html(parseFloat(currentValue.LOWPRICE).toFixed(2));
+              $(companyStockLive).find('#prevclose').html(parseFloat(currentValue.PrevLtp).toFixed(2));
+              $(companyStockLive).find('#spot_price').html(parseFloat(currentValue.Nseltp).toFixed(2));
 
-              $(companyStockLive).find('#bid_price').html(currentValue.BBUYPRICE);
+              $(companyStockLive).find('#bid_price').html(parseFloat(currentValue.BBUYPRICE).toFixed(2));
               $(companyStockLive).find('#bid_qty').html(currentValue.BBUYQTY);
-              $(companyStockLive).find('#offer_price').html(currentValue.BSELLPRICE);
+              $(companyStockLive).find('#offer_price').html(parseFloat(currentValue.BSELLPRICE).toFixed(2));
               $(companyStockLive).find('#offer_qty').html(currentValue.BSELLQTY);
-              $(companyStockLive).find('#avg_price').html(currentValue.AVGTP);
+              $(companyStockLive).find('#avg_price').html(parseFloat(currentValue.AVGTP).toFixed(2));
               $(companyStockLive).find('#contra_trad').html(currentValue.TradedQtyCnt);
 
-              $(companyStockLive).find('#turnover').html(currentValue.Turnover);
+              $(companyStockLive).find('#turnover').html(parseFloat(currentValue.Turnover).toFixed(2));
               $(companyStockLive).find('#trad_qty').html(currentValue.Volume); 
-              $(companyStockLive).find('#market_lot').html(currentValue.MktLot);
+              $(companyStockLive).find('#market_lot').html(parseFloat(currentValue.MktLot).toFixed(2));
               $(companyStockLive).find('#open_intrest').html(currentValue.OPENINTEREST);
                     
-              $(companyStockLive).find('#DiffOpenInt').html(currentValue.DiffOpenInt);
+              $(companyStockLive).find('#DiffOpenInt').html(parseFloat(currentValue.DiffOpenInt).toFixed(2));
               if(currentValue.DiffOpenInt >0){
                 $(companyStockLive).find('#DiffOpenInt').removeClass('text-red').addClass('text-green');
               }else{
                 $(companyStockLive).find('#DiffOpenInt').removeClass('text-green').addClass('text-red');
               }
-              $(companyStockLive).find('#chgOpenInt').html(currentValue['chgOpenInt']);
+              $(companyStockLive).find('#chgOpenInt').html(parseFloat(currentValue['chgOpenInt']).toFixed(2));
               if(currentValue['chgOpenInt'] >0){
                 $(companyStockLive).find('#chgOpenInt').removeClass('text-red').addClass('text-green');
               }else{

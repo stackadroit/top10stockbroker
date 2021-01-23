@@ -1,9 +1,10 @@
 <?php
 
-/*--------------------------------------------------------
-/* Get derivative API Response Used in both Future and Option Chain
-/* @author Pavan JI <dropmail2pavan@gmail.com> 
-/*---------------------------------------------------------*/
+/**
+ *  Get derivative API Response Used in both Future and  
+ *  Option  Chain
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
 function get_deviatives_api_response_curl($url =''){
     $token =ACCORD_API_TOKEN;
     $url =$url."&token=".$token;

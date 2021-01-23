@@ -2,6 +2,8 @@ import {SingleSharePrice}  from '../../library/single-share-price';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import SharePriceChart from '../../components/graph/share-price-chart';
+import select2 from 'select2';  
+
 export default {
   init() {
     // Load page section through ajax
@@ -20,6 +22,7 @@ export default {
             "p10": "corporate-actions",
 
         };
+
     for (var key in pages) {
             var info = {
                 page: pages[key],
@@ -81,7 +84,31 @@ export default {
                             }); 
                             $('.nested_tab a[href="#li_1y"').trigger('click');
                         }
-                    },
+                        if( info.page == 'return-calculator'){
+                          //select the tabs
+                            $('#company-list').select2({
+                              minimumInputLength: 2,
+                              placeholder: $('#company-name').html(),
+                              tags: [],
+                              ajax: {
+                                type: "post",
+                                url: global_vars.apiServerUrl+'/api/company-list',
+                                dataType: 'json',
+                                      type: "POST",
+                                      data: function (term) {
+                                          return {
+                                              'security': global_vars.ajax_nonce,
+                                              'action':'get_company_list',
+                                              'SearchTxt': term,
+                                          };
+                                      },
+                                      processResults: function (data) {
+                                          return { results: data.stocks};
+                                      },
+                              }
+                            });
+                        }
+                      },
                     error: function (errorThrown) {
                         console.log(errorThrown);
                     }
@@ -91,6 +118,33 @@ export default {
     if (typeof SingleSharePrice !== 'undefined') {
       SingleSharePrice.initialize();
     }
+    function test(){
+
+    }
+      if($('#search-stock-info-main').length){
+        $('#search-stock-info-main').select2({
+          minimumInputLength: 2,
+          tags: [],
+          ajax: {
+            type: "post",
+            url: global_vars.apiServerUrl+'/api/company-list',
+            dataType: 'json',
+                  type: "POST",
+                  data: function (term) {
+                      return {
+                          'security': global_vars.ajax_nonce,
+                          'action':'get_company_list',
+                          'SearchTxt': term,
+                      };
+                  },
+                  processResults: function (data) {
+                      return { results: data.stocks};
+                  },
+          }
+        });
+      }
+
+
     $(document).on('click','.shart_market_chart',function(e){
         var dur=$(this).data("filter");
         var selli=$(this).data("element");

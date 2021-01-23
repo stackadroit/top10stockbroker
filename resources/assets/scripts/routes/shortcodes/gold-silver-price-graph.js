@@ -1,21 +1,18 @@
+import React, { Component } from "react";
+import ReactDOM from 'react-dom';
+import GoldSilverChart from '../../components/graph/gold-silver-chart';
+
 export default {
   init() {
-    // Commom Plugins
+     
   (function($) {
     
     'use strict';
-      $(".month_tabs").find('.tab_content').hide();
-      $("ul.nested_tab li > a").click(function (e) {
-        e.preventDefault();
-        $(this).closest('.nested_tab').find('a').removeClass('active');
-        var activeTab = jQuery(this).addClass("active").attr("href");
-        $(this).closest(".month_tabs").find('.tab_content').hide();
-        $(this).closest(".month_tabs").find(activeTab).show();
-      }); 
-      $('.nested_tab a[href="#li_1y"').trigger('click');
-      // setTimeout(function(){
-      //   
-      // },1000);
+  
+      setTimeout(function(){
+        $('.gold-silver-graph a[href="#li_1y"').trigger('click');
+        
+      },1000);
   
 // load Graph Data
         // function get_gold_silver_graph(dur,selli,resp_div,postId){
@@ -119,7 +116,12 @@ export default {
           var selli=$(this).data("element");
           var resp_div=$(this).data("chart-element");
           var post_id=$(this).data("post-id");
-         
+         if(!$('#'+resp_div).find('.highcharts-container ').length){
+            ReactDOM.render( 
+              <GoldSilverChart />,
+              document.getElementById(resp_div)
+            );
+          }
       });
   }).apply(this, [jQuery]);
 

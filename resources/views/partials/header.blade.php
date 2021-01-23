@@ -15,7 +15,7 @@
         </div>
         <div class="header-column justify-content-end  col-sm-8">
           <div class="header-row">
-            {!! do_shortcode('[LB_BANNER_DISPLAY_SHORTCODE url="'.get_the_permalink().'"]') !!}
+            {!! do_shortcode('[LB_BANNER_DISPLAY_SHORTCODE url="'.get_the_permalink().'" type="1"]') !!}
           </div>
         </div>
       </div>

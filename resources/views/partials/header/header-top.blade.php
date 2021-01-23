@@ -4,9 +4,10 @@
       <div class="header-column justify-content-start">
         <div class="header-row">
           <nav id="priority-menu" class="priority-navigation header-nav-top">
-            <!-- @if (has_nav_menu('top_navigation'))
+            @if (has_nav_menu('top_navigation'))
                 {!! wp_nav_menu(['theme_location' => 'top_navigation', 'menu_id' => 'priority-menu-closed',  'menu_class' => 'nav nav-pills']) !!}
-            @endif -->
+            @endif
+            <!-- 
             <ul id="priority-menu-closed" class="nav nav-pills">
               <li class="nav-item nav-item-anim-icon ">
                 <a class="nav-link pl-0" href=""><i class="fas fa-angle-right"></i> About Us</a>
@@ -31,7 +32,7 @@
               </li>
               <li><a href="#priority-menu-closed" class="priority-menu-close"><i class="fas fa-times"></i></a></li>
               <li><a href="#priority-menu"><i class="fas fa-bars"></i></a></li>
-            </ul>
+            </ul> -->
           </nav>
         </div>
       </div>

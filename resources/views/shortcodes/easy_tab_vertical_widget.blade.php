@@ -2,15 +2,7 @@
       
       @if($totalCount)         
         <!-- <div id="easy_tabs_container_{{$post_id}}" class="easy_tabs_container"> -->
-           @php
-           $i =1;
-            $totalTopic =0;
-            foreach($tabs_data as $tabs_single_data)
-                {
-                    $totalTopic += (is_array($tabs_single_data['tabs_link'])) ? count($tabs_single_data['tabs_link']): 0;
-                   
-                }
-            @endphp
+         
           <div class="dots">
             <p class=""><strong></strong> {{count($tabs_data)}} Courses</p><p class=""><strong></strong> {{$totalTopic}} Topics</p>
             </div>
@@ -19,21 +11,12 @@
                 $i = 1
               @endphp
                @foreach ($tabs_data as $tabs_single_data)
-                @php
-                    $tabs_name = @$tabs_single_data['tabs_name'];
-                    $tabs_icon_image = @$tabs_single_data['tabs_icon_image'];
-                    $tab_option = @$tabs_single_data['tab_option'];
-                    $tabs_post_type = @$tabs_single_data['tabs_post_type'];
-                    $tabs_category = @$tabs_single_data['tabs_category'];
-                    $tabs_link = @$tabs_single_data['tabs_link'];
-                    $tabs_link_to = @$tabs_single_data['tabs_link_to'];
-                @endphp
-                  <li @php if($i==1){ @endphp class="v_active"  @php } @endphp rel="tab{{$i}}">
+                <li @php if($i==1){ @endphp class="v_active"  @php } @endphp rel="tab{{$i}}">
                      @php
-                        if($tabs_icon_image) { 
-                        echo '<img src="'.$tabs_icon_image.'" />'; 
+                        if(@$tabs_single_data['tabs_icon_image']) { 
+                        echo '<img src="'.@$tabs_single_data['tabs_icon_image'].'" />'; 
                         }
-                        echo $tabs_name;
+                        echo @$tabs_single_data['tabs_name'];
                      @endphp
                       <i class="fa fa-angle-right"></i>
                   </li>
