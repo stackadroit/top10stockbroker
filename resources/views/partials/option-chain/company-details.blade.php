@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-md-4"> 
                     <input type="hidden" id="companyInstName" name="" value="{{$inst_name}}" />     
-                    <h2 class="names" style="margin: 0px; padding:0;" title="{{$comp_name}}">{{@$comp_name}}</h2>
+                    <h2 class="names" id="company-name" style="margin: 0px; padding:0;" title="{{$comp_name}}">{{@$comp_name}}</h2>
                     <div class="index"> 
                         <span class="group"> 
                             <span>SP : </span><span id="set1-value" class="index-val border-right">{{@$company_details['STRIKEPRICE']}}</span>

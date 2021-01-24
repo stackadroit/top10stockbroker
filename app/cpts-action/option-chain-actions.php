@@ -248,6 +248,7 @@ function load_option_chain_page_section(){
                 $template = 'partials.ajax.option-chain.most-active-index-options-data';
                 break; 
             case 'top-open-interest-stock-options-data':
+                $symbol ='';
                 $section ='TOIS';
                 $PageName ='OICNT';
                 $Opt='HOI';
@@ -261,8 +262,9 @@ function load_option_chain_page_section(){
                 $data['section']=$section;
                 $data['OptType']=$OptType;
                 $data['Opt']=$Opt;
-                $epUrl="https://derivatives.accordwebservices.com/Derivative/GetExpiryDate?InstName={$InstName}&Symbol={$symbol}";
+               $epUrl="https://derivatives.accordwebservices.com/Derivative/GetExpiryDate?InstName={$InstName}&Symbol={$symbol}";
                 $resposeArray1 =get_deviatives_api_response_curl($epUrl); 
+                
                 $ExpiryDateFilter =array();
                 if(@$resposeArray1->status_code == 200){
                     $ExpiryDateFilter= (array) @$resposeArray1->Table;
@@ -464,6 +466,7 @@ function get_full_page_ajax_search() {
         $companyNameFull= @$cDetailsresponse['SYMBOL'];
         $data['companyNameFull']=$companyNameFull;
         $data['companyName']=$companyName;
+        $data['comp_name']=$companyName;
         $data['company_details']=$cDetailsresponse;
         $data['ajaxLoad']=1;
         $data['is_template']=true;

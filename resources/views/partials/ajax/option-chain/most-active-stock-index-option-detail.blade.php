@@ -13,10 +13,7 @@
 
 
 <div class="section_corporateact pb-5">
-
-
   <div class="row">
-
     <div class="col-md-12">
       <h2 class="">{{@$get_detail_page['section_title']}}</h2>
       <p>{{@$get_detail_page['section_content']}}</p>
@@ -108,7 +105,7 @@
           </tbody>
         </table>
 
-        <div class="alm-btn-wrap" id="loadMoreWrapC">
+        <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrapC">
           <button class="alm-load-more-btn" id="loadMoreC" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['ctableTotalRow']}}">Load More</button>
         </div>
       </div>
@@ -162,7 +159,7 @@
           </tbody>
         </table>
 
-        <div class="alm-btn-wrap" id="loadMoreWrapP">
+        <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrapP">
           <button class="alm-load-more-btn" id="loadMoreP" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['ptableTotalRow']}}">Load More</button>
         </div>
       </div>

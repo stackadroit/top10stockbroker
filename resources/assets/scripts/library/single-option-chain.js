@@ -36,11 +36,12 @@
             },
             cache: false,
             beforeSend: function() {
-              $(companyStockLive).find(".loading-data").show();
+              $(companyStockLive).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
             },
             success:function(response){
               response =response.stocks;
               currentValue =response.data;
+              $(companyStockLive).find('#companyInstName').html(currentValue.INSTNAME);
               $(companyStockLive).find('#company-name').html(currentValue.SYMBOL);
               $(companyStockLive).find('#set1-value').html(currentValue.STRIKEPRICE);
               var ot='';
@@ -52,19 +53,22 @@
               }
               $(companyStockLive).find('#set2-value').html(ot);
               $(companyStockLive).find('#set3-value').html(currentValue.EXPDATE);
-              $(companyStockLive).find('#currentStockRate').html(currentValue.LTP,2);
-              if(parseFloat(currentValue.FaOdiff) > 0){
+              $(companyStockLive).find('#currentStockRate').html(parseFloat(currentValue.LTP).toFixed(2));
+              if(currentValue.LTP >= 0){
                 $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
+              }else{
+                $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
+              }
+              if(currentValue.FaOdiff >= 0){
                 $(companyStockLive).find('#currentStockChange').removeClass('color-red').addClass('color-green'); 
                 $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
 
               }else{
-                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                   $(companyStockLive).find('#currentStockChange').removeClass('color-green').addClass('color-red'); 
                   $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
               }
               $(companyStockLive).find('#strick_price').html(currentValue.STRIKEPRICE);
-              $(companyStockLive).find('#open_price').html(currentValue.OPENPRICE);
+              $(companyStockLive).find('#open_price').html(parseFloat(currentValue.OPENPRICE).toFixed(2));
               $(companyStockLive).find('#high_price').html(parseFloat(currentValue.HIGHPRICE).toFixed(2));
               $(companyStockLive).find('#low_price').html(parseFloat(currentValue.LOWPRICE).toFixed(2));
               $(companyStockLive).find('#prevclose').html(parseFloat(currentValue.PrevLtp).toFixed(2));
@@ -94,10 +98,10 @@
               }else{
               $(companyStockLive).find('#chgOpenInt').removeClass('text-green').addClass('text-red');
               }
-                
+              $(companyStockLive).find('.fb-loader').remove();  
             },
             error: function(errorThrown){
-                $(companyStockLive).find(".loading-data").remove();
+              $(companyStockLive).find('.fb-loader').remove();
                 console.log(errorThrown);
               }
         });
@@ -119,16 +123,16 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                   $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).find('table').find('tbody').html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
@@ -149,16 +153,16 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
@@ -176,19 +180,19 @@
                       'section':section,
                       'PageSize':PageSize,
               },
-            cache:false,
+              cache:false,
               beforeSend: function() {
-                $(eleId).find(".loading-data").show();
+                $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
               },
-                  success: function(response){
-                      if(response){
-                         $(eleId).html(response);
-                      }
-                      $(eleId).find(".loading-data").hide();
-                  },
-                  error:function(error){
-                     $(eleId).find(".loading-data").hide();
+              success: function(response){
+                  if(response){
+                      $(eleId).html(response);
                   }
+                  $(eleId).closest(".tab-content").find('.fb-loader').remove();
+              },
+              error:function(error){
+                 $(eleId).closest(".tab-content").find('.fb-loader').remove();
+              }
           });
       },
       loadMorePutCallRatiosData(eleId,InstName,ReportType,ExpDate,PageNo,total,PageSize){
@@ -204,10 +208,15 @@
             'PageNo':PageNo,
             'PageSize':PageSize,
           },
+          cache:false,
+          beforeSend: function() {
+              $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+          },
           success: function(response){
-            $(eleId).removeClass('loading');
+            $(eleId).find('.fb-loader').remove();
+            $(eleId).closest(".tab-content").find('.fb-loader').remove();
             if(response){
-              $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
+              $(eleId).find('table').find('tbody').append(response);
             }
             if( total >  (PageNo*PageSize)){
               $(eleId).attr('data-page_no',PageNo);
@@ -216,7 +225,8 @@
             }
           },
           error:function(error){
-            $(eleId).removeClass('loading');
+            $(eleId).find('.fb-loader').remove();
+            $(eleId).closest(".tab-content").find('.fb-loader').remove();
           }
         });
              
@@ -240,16 +250,16 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
@@ -278,10 +288,10 @@
                       }else{
                         $(eleId).remove();
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
               },
               error:function(error){
-                   $(eleId).removeClass('loading');
+                   $(eleId).closest(".tab-content").find('.fb-loader').remove();
                 }
           });
       },
@@ -303,16 +313,16 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
@@ -334,7 +344,7 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
@@ -345,10 +355,10 @@
                       }else{
                         $(eleId).remove();
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
@@ -362,15 +372,19 @@
               'action':'get_full_page_ajax_search',
               'symbol':symbol,
             },
+            cache:false,
+             beforeSend: function() {
+              $('#company-stock-live').prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+            },
             success: function(response){
               if(response){
                 $('#company-stock-live').html(response);
-                get_expiredata('#strikPriceAnalisisExpiryDate',symbol)
+                self.get_expiredata('#strikPriceAnalisisExpiryDate',symbol)
               }
-              $('.full-page-loading').hide();
+              $('#company-stock-live').find('.fb-loader').remove();
             },
             error:function(error){
-              $('.full-page-loading').hide();
+              $('#company-stock-live').find('.fb-loader').remove();
             }
           }); 
       },
@@ -475,8 +489,9 @@
               var InstName = $('#companyInstName').val();
               var symbol = $('#ddlCompanySymble').children("option:selected").attr('data-symble');
               var ExpDate = $(this).val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).text();
               var eleId= '';
+              var OptType ='';
               if(activeTb =='PUT'){
                 OptType ='PE';
                 eleId ='#Puts';
@@ -538,9 +553,8 @@
               }
           });
           $(document).on('change','#stockExpireDateFilter,#stockReportTypeFilter,#indexExpireDateFilter,#indexReportTypeFilter',function(){
-
-            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
-             var eleId= '';
+            var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').text();
+            var eleId= '';
              if(activeTb =='Stocks'){
                 var InstName ='OPTSTK';
                 var ExpDate = $("#stockExpireDateFilter").val();
@@ -553,7 +567,7 @@
                 var ExpDate = $("#indexExpireDateFilter").val();
                 var ReportType = $("#indexReportTypeFilter").val();
              }
-             $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-reporttype',ReportType);
+             $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-reporttype',ReportType);
              var PageSize =10;
               if($('#check-page-type').length){
                 var section ='read_more';
@@ -568,12 +582,12 @@
           // For Details Page Call Put Stock Index
           $(document).on('click','#loadMore_OPTSTK,#loadMore_OPTIDX',function(e){
             e.preventDefault(); 
-            $(this).addClass('loading');
+            $(this).after('<div class="fb-loader loader mx-auto" style="margin-top:20px;"></div>');
             var ele =this;
             var PageNo =parseInt($(this).attr('data-page_no'));
             var total =parseInt($(this).attr('data-total'));
             PageNo =PageNo+1;
-            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
+            var activeTb = $(this).closest('#putCallRatioDetails').find('.nav-tabs a.active').text();
             var PageSize ='20';
             var eleId= '';
             if(activeTb =='Stocks'){
@@ -609,7 +623,7 @@
               var section =$('#most_a_s_o_section').val();
               var ExpDate = $('#mostActiveStockOptionExpiryDate').val();
               var Rtype = $('#mostActiveStockOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
               var PageSize =20;
               if(activeTb =='CALL'){
@@ -640,7 +654,7 @@
               var section =$('#most_a_i_o_section').val();
               var ExpDate = $('#mostActiveIndexOptionExpiryDate').val();
               var Rtype = $('#mostActiveIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
                var PageSize =20;
               if(activeTb =='CALL'){
@@ -671,7 +685,7 @@
               var section ='read_more';
               var ExpDate = $('#mostActiveStockIndexOptionExpiryDate').val();
               var Rtype = $('#mostActiveStockIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
               if(activeTb =='CALL'){
                 OptType ='C';
@@ -694,7 +708,7 @@
               var Rtype = $('#mostActiveStockIndexOptionFilter').val();
               var PageNo =parseInt($(this).attr('data-page_no'));
               var total =parseInt($(this).attr('data-total'));
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').text();
               var eleId=this;
               if(activeTb =='CALL'){
                 OptType ='C';
@@ -725,7 +739,7 @@
               var section =$('#top_i_s_o_section').val();
               var ExpDate = $('#topInterestStockOptionExpiryDate').val();
               var Opt = $('#topInterestStockOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
               var eleId= '';
               if(activeTb =='CALL'){
                 OptType ='CE';
@@ -754,7 +768,7 @@
               var section =$('#top_i_i_o_section').val();
               var ExpDate = $('#topInterestIndexOptionExpiryDate').val();
               var Opt = $('#topInterestIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
               var eleId= '';
               var PageSize=10;
 
@@ -784,7 +798,7 @@
               var section ='read_more';
               var ExpDate = $('#topInterestStockIndexOptionExpiryDate').val();
               var Opt = $('#topInterestStockIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
               var eleId= '';
               var PageSize=20;
               if(activeTb =='CALL'){
@@ -808,7 +822,7 @@
               var Opt = $('#topInterestStockIndexOptionFilter').val();
               var PageNo =parseInt($(this).attr('data-page_no'));
               var total =parseInt($(this).attr('data-total'));
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').text();
               var OptType ='CE';
               if(activeTb =='CALL'){
                 OptType ='CE';

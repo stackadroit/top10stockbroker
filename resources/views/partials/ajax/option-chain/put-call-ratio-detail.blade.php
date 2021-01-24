@@ -10,7 +10,7 @@
 </div>
 
 
-<div class="section_corporateact pb-5">
+<div class="section_corporateact pb-5" id="putCallRatioDetails">
 
   <div class="row tab-holder">
     <div class="col-md-6">
@@ -58,7 +58,7 @@
   <div class="tab-content" id="myTabContent">
 
     <div id="stocksPutCallRatios" class="tab-pane fade show active">
-    <div class="table-responsive >
+    <div class="table-responsive  tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
       <table class="table-bordered elm-vartival-table mb-0">
         <thead>
           <tr>
@@ -104,7 +104,7 @@
         </tbody>
       </table>
 
-      <div class="alm-btn-wrap" id="loadMoreWrap_OPTSTK">
+      <div class="alm-btn-wrap  text-center mt-3" id="loadMoreWrap_OPTSTK">
         <button class="alm-load-more-btn" id="loadMore_OPTSTK" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['StableTotalRow']}}">Load More</button>
       </div>
     </div>
@@ -159,7 +159,7 @@
         </tbody>
       </table>
 
-      <div class="alm-btn-wrap" id="loadMoreWrap_OPTIDX">
+      <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_OPTIDX">
         <button class="alm-load-more-btn" id="loadMore_OPTIDX" href="javascript:void(0);" data-page_no="1" data-total="{{@$get_detail_page['ItableTotalRow']}}">Load More</button>
       </div>
     </div>

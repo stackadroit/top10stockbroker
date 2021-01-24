@@ -49,7 +49,7 @@
           $rmID= $InstName;
           if(@$section =='read_more'){
           @endphp
-                <div class="alm-btn-wrap" id="loadMoreWrap_{{@$rmID}}">
+                <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_{{@$rmID}}">
                     <button class="alm-load-more-btn" id="loadMore_{{@$rmID}}" href="javascript:void(0);" data-page_no="1" data-total="{{$tableTotalRow}}">Load More</button>
                 </div>
          @php 
