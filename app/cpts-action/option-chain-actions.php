@@ -426,6 +426,7 @@ function get_full_page_ajax_search() {
         }
         $data['symbol']=$symbol;
         $data['InstName']=$InstName;
+        $data['inst_name']=$InstName;
         $cDetailsresponse =array();
         $epUrl="https://derivatives.accordwebservices.com/Derivative/GetExpiryDate?InstName={$InstName}&Symbol={$symbol}";
         $resposeArray1 =get_deviatives_api_response_curl($epUrl); 

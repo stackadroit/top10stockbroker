@@ -12,7 +12,7 @@
 </div>
 
 
-<div class="section_corporateact pb-5">
+<div class="section_corporateact pb-5" id="mostActiveStockIndexOptionDetail">
   <div class="row">
     <div class="col-md-12">
       <h2 class="">{{@$get_detail_page['section_title']}}</h2>
@@ -25,12 +25,12 @@
 
 
   <div class="row tab-holder">
-
+    
     <div class="col-md-6">
       <input type="hidden" id="ActiveInstName" value="{{@$get_detail_page['InstName']}}">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
-        <li><a href="#mostActiveStockIndexOptionCall" role="tab" data-toggle="tab" aria-controls="mostActiveStockIndexOptionCall" class="changeMASIOFilter active" data-expdate="{{@$get_detail_page['ExpDate']}}" data-rtypefilter="{{@$get_detail_page['Rtype']}}">CALL</a></li>
-        <li><a href="#mostActiveStockIndexOptionPut" role="tab" data-toggle="tab" aria-controls="mostActiveStockIndexOptionPut" class="changeMASIOFilter" data-expdate="{{@$get_detail_page['ExpDate']}}" data-rtypefilter="{{@$get_detail_page['Rtype']}}">PUT</a></li>
+        <li  class="nav-item"><a href="#mostActiveStockIndexOptionCall" role="tab" data-toggle="tab" aria-controls="mostActiveStockIndexOptionCall" class="changeMASIOFilter active" data-expdate="{{@$get_detail_page['ExpDate']}}" data-rtypefilter="{{@$get_detail_page['Rtype']}}">CALL</a></li>
+        <li  class="nav-item"><a href="#mostActiveStockIndexOptionPut" role="tab" data-toggle="tab" aria-controls="mostActiveStockIndexOptionPut" class="changeMASIOFilter" data-expdate="{{@$get_detail_page['ExpDate']}}" data-rtypefilter="{{@$get_detail_page['Rtype']}}">PUT</a></li>
       </ul>
     </div>
     <!-- /.col-md-6 -->

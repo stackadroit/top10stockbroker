@@ -11,7 +11,7 @@
 
 
 
-<div class="section_corporateact pb-5">
+<div class="section_corporateact pb-5" id="openInterestStockOptionDetail">
 
   <div class="row">
     <div class="col-md-12">
@@ -100,7 +100,7 @@
             @endphp
           </tbody>
         </table>
-        <div class="alm-btn-wrap" id="loadMoreWrapCE">
+        <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrapCE">
           <button class="alm-load-more-btn" id="loadMoreCE" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['ctableTotalRow']}}">Load More</button>
         </div>
       </div>
@@ -153,7 +153,7 @@
             @endphp
           </tbody>
         </table>
-        <div class="alm-btn-wrap" id="loadMoreWrapPE">
+        <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrapPE">
           <button class="alm-load-more-btn" id="loadMorePE" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['ptableTotalRow']}}">Load More</button>
         </div>
       </div>

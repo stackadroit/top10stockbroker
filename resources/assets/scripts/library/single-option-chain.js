@@ -36,67 +36,70 @@
             },
             cache: false,
             beforeSend: function() {
+              $(companyStockLive).find('.fb-loader').remove();
               $(companyStockLive).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
             },
             success:function(response){
               response =response.stocks;
               currentValue =response.data;
-              $(companyStockLive).find('#companyInstName').html(currentValue.INSTNAME);
-              $(companyStockLive).find('#company-name').html(currentValue.SYMBOL);
-              $(companyStockLive).find('#set1-value').html(currentValue.STRIKEPRICE);
-              var ot='';
-              if(currentValue.OPTTYPE =='PE'){
-                ot ='PUT';
-              }
-              if(currentValue.OPTTYPE =='CE'){
-                ot ='CALL';
-              }
-              $(companyStockLive).find('#set2-value').html(ot);
-              $(companyStockLive).find('#set3-value').html(currentValue.EXPDATE);
-              $(companyStockLive).find('#currentStockRate').html(parseFloat(currentValue.LTP).toFixed(2));
-              if(currentValue.LTP >= 0){
-                $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
-              }else{
-                $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
-              }
-              if(currentValue.FaOdiff >= 0){
-                $(companyStockLive).find('#currentStockChange').removeClass('color-red').addClass('color-green'); 
-                $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
-
-              }else{
-                  $(companyStockLive).find('#currentStockChange').removeClass('color-green').addClass('color-red'); 
+              if(currentValue.INSTNAME){
+                $(companyStockLive).find('#companyInstName').html(currentValue.INSTNAME);
+                $(companyStockLive).find('#company-name').html(currentValue.SYMBOL);
+                $(companyStockLive).find('#set1-value').html(currentValue.STRIKEPRICE);
+                var ot='';
+                if(currentValue.OPTTYPE =='PE'){
+                  ot ='PUT';
+                }
+                if(currentValue.OPTTYPE =='CE'){
+                  ot ='CALL';
+                }
+                $(companyStockLive).find('#set2-value').html(ot);
+                $(companyStockLive).find('#set3-value').html(currentValue.EXPDATE);
+                $(companyStockLive).find('#currentStockRate').html(parseFloat(currentValue.LTP).toFixed(2));
+                if(currentValue.LTP >= 0){
+                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
+                }else{
+                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
+                }
+                if(currentValue.FaOdiff >= 0){
+                  $(companyStockLive).find('#currentStockChange').removeClass('color-red').addClass('color-green'); 
                   $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
-              }
-              $(companyStockLive).find('#strick_price').html(currentValue.STRIKEPRICE);
-              $(companyStockLive).find('#open_price').html(parseFloat(currentValue.OPENPRICE).toFixed(2));
-              $(companyStockLive).find('#high_price').html(parseFloat(currentValue.HIGHPRICE).toFixed(2));
-              $(companyStockLive).find('#low_price').html(parseFloat(currentValue.LOWPRICE).toFixed(2));
-              $(companyStockLive).find('#prevclose').html(parseFloat(currentValue.PrevLtp).toFixed(2));
-              $(companyStockLive).find('#spot_price').html(parseFloat(currentValue.Nseltp).toFixed(2));
 
-              $(companyStockLive).find('#bid_price').html(parseFloat(currentValue.BBUYPRICE).toFixed(2));
-              $(companyStockLive).find('#bid_qty').html(currentValue.BBUYQTY);
-              $(companyStockLive).find('#offer_price').html(parseFloat(currentValue.BSELLPRICE).toFixed(2));
-              $(companyStockLive).find('#offer_qty').html(currentValue.BSELLQTY);
-              $(companyStockLive).find('#avg_price').html(parseFloat(currentValue.AVGTP).toFixed(2));
-              $(companyStockLive).find('#contra_trad').html(currentValue.TradedQtyCnt);
+                }else{
+                    $(companyStockLive).find('#currentStockChange').removeClass('color-green').addClass('color-red'); 
+                    $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
+                }
+                $(companyStockLive).find('#strick_price').html(currentValue.STRIKEPRICE);
+                $(companyStockLive).find('#open_price').html(parseFloat(currentValue.OPENPRICE).toFixed(2));
+                $(companyStockLive).find('#high_price').html(parseFloat(currentValue.HIGHPRICE).toFixed(2));
+                $(companyStockLive).find('#low_price').html(parseFloat(currentValue.LOWPRICE).toFixed(2));
+                $(companyStockLive).find('#prevclose').html(parseFloat(currentValue.PrevLtp).toFixed(2));
+                $(companyStockLive).find('#spot_price').html(parseFloat(currentValue.Nseltp).toFixed(2));
 
-              $(companyStockLive).find('#turnover').html(parseFloat(currentValue.Turnover).toFixed(2));
-              $(companyStockLive).find('#trad_qty').html(currentValue.Volume); 
-              $(companyStockLive).find('#market_lot').html(currentValue.MktLot);
-              $(companyStockLive).find('#open_intrest').html(currentValue.OPENINTEREST);
-                    
-              $(companyStockLive).find('#DiffOpenInt').html(currentValue.DiffOpenInt);
-              if(currentValue.DiffOpenInt >0){
-                $(companyStockLive).find('#DiffOpenInt').removeClass('text-red').addClass('text-green');
-              }else{
-                $(companyStockLive).find('#DiffOpenInt').removeClass('text-green').addClass('text-red');
-              }
-              $(companyStockLive).find('#chgOpenInt').html(currentValue['chgOpenInt']);
-              if(currentValue['chgOpenInt'] >0){
-                $(companyStockLive).find('#chgOpenInt').removeClass('text-red').addClass('text-green');
-              }else{
-              $(companyStockLive).find('#chgOpenInt').removeClass('text-green').addClass('text-red');
+                $(companyStockLive).find('#bid_price').html(parseFloat(currentValue.BBUYPRICE).toFixed(2));
+                $(companyStockLive).find('#bid_qty').html(currentValue.BBUYQTY);
+                $(companyStockLive).find('#offer_price').html(parseFloat(currentValue.BSELLPRICE).toFixed(2));
+                $(companyStockLive).find('#offer_qty').html(currentValue.BSELLQTY);
+                $(companyStockLive).find('#avg_price').html(parseFloat(currentValue.AVGTP).toFixed(2));
+                $(companyStockLive).find('#contra_trad').html(currentValue.TradedQtyCnt);
+
+                $(companyStockLive).find('#turnover').html(parseFloat(currentValue.Turnover).toFixed(2));
+                $(companyStockLive).find('#trad_qty').html(currentValue.Volume); 
+                $(companyStockLive).find('#market_lot').html(currentValue.MktLot);
+                $(companyStockLive).find('#open_intrest').html(currentValue.OPENINTEREST);
+                      
+                $(companyStockLive).find('#DiffOpenInt').html(currentValue.DiffOpenInt);
+                if(currentValue.DiffOpenInt >0){
+                  $(companyStockLive).find('#DiffOpenInt').removeClass('text-red').addClass('text-green');
+                }else{
+                  $(companyStockLive).find('#DiffOpenInt').removeClass('text-green').addClass('text-red');
+                }
+                $(companyStockLive).find('#chgOpenInt').html(currentValue['chgOpenInt']);
+                if(currentValue['chgOpenInt'] >0){
+                  $(companyStockLive).find('#chgOpenInt').removeClass('text-red').addClass('text-green');
+                }else{
+                $(companyStockLive).find('#chgOpenInt').removeClass('text-green').addClass('text-red');
+                }
               }
               $(companyStockLive).find('.fb-loader').remove();  
             },
@@ -280,19 +283,20 @@
                 },
               cache:false,
               success: function(response){
+                console.log(eleId);
                 if(response){
-                          $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
-                      }
-                      if( total >  (PageNo*PageSize)){
+                  $(eleId).closest('.tab-content').find('.active table').find('tbody').append(response);
+                }
+               if( total >  (PageNo*PageSize)){
                         $(eleId).attr('data-page_no',PageNo);
-                      }else{
-                        $(eleId).remove();
-                      }
-                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
+                }else{
+                    $(eleId).remove();
+                }       
+                $(eleId).closest(".tab-content").find('.fb-loader').remove();
               },
               error:function(error){
                    $(eleId).closest(".tab-content").find('.fb-loader').remove();
-                }
+              }
           });
       },
       topInterestStockIndexOptionCallPutFilter:function(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section){
@@ -343,12 +347,10 @@
                     'PageSize':PageSize,
                   },
                   cache:false,
-                  beforeSend: function() {
-                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
-                  },
                   success: function(response){
+                    console.log(eleId)
                       if(response){
-                          $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
+                          $(eleId).closest('.tab-content').find('.active table').find('tbody').append(response);
                       }
                       if( total >  (PageNo*PageSize)){
                         $(eleId).attr('data-page_no',PageNo);
@@ -373,13 +375,36 @@
               'symbol':symbol,
             },
             cache:false,
-             beforeSend: function() {
+            beforeSend: function() {
+              $('#company-stock-live').find('.fb-loader').remove();
               $('#company-stock-live').prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
             },
             success: function(response){
               if(response){
                 $('#company-stock-live').html(response);
-                self.get_expiredata('#strikPriceAnalisisExpiryDate',symbol)
+                var ele ='#strikPriceAnalisisExpiryDate';
+                jQuery.ajax(
+                  {
+                      type: "post",
+                      dataType: "html",
+                      url:global_vars.ajax_url,
+                      data: {
+                          'action':'get_expire_date_list',
+                          'symbol':symbol,
+                      },
+                      success: function(response){
+                          if(response){
+                             $(ele).html(response);
+                          }
+                          var expdate= $(ele).val();
+                          $(ele).closest('.tab-holder').find('.nav-tabs a').attr('data-expdate',expdate);
+                          $(ele).trigger('change');
+                          $('.full-page-loading').hide();
+                      },
+                      error:function(error){
+                         $('.full-page-loading').hide();
+                      }
+              });
               }
               $('#company-stock-live').find('.fb-loader').remove();
             },
@@ -443,6 +468,7 @@
               var symbol = $(this).val();
               if($('.template-option-chain').length){
                 if (symbol) {
+                  this.interval =0;
                   $('.full-page-loading').show();
                   self.loadCompanyFilter(symbol);
                   
@@ -466,6 +492,7 @@
           }, 10000);
           $(document).on('click','#filter_derivative_details', function (e) {
             e.preventDefault();
+            this.interval =0;
             var InstName = $('#companyInstName').val();
             var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
             var ExpDate = $('#ExpiryDate').val();
@@ -700,7 +727,7 @@
           });
           $(document).on('click','#loadMoreP,#loadMoreC',function(e){
               e.preventDefault(); 
-              $(this).addClass('loading');
+              $(this).after('<div class="fb-loader loader mx-auto" style="margin-top:20px;"></div>');
               var ele =this;
               var PageSize =20;
               var InstName =$('#ActiveInstName').val();
@@ -708,7 +735,7 @@
               var Rtype = $('#mostActiveStockIndexOptionFilter').val();
               var PageNo =parseInt($(this).attr('data-page_no'));
               var total =parseInt($(this).attr('data-total'));
-              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').text();
+              var activeTb = $(this).closest('#mostActiveStockIndexOptionDetail').find('.nav-tabs a.active').text();
               var eleId=this;
               if(activeTb =='CALL'){
                 OptType ='C';
@@ -814,7 +841,7 @@
           //Load More For Details Page
           $(document).on('click','#loadMoreCE,#loadMorePE',function(e){
               e.preventDefault(); 
-              $(this).addClass('loading');
+              $(this).after('<div class="fb-loader loader mx-auto" style="margin-top:20px;"></div>');
               var eleId =this;
               var PageSize =20;
               var InstName =$('#ActiveInstName').val();;
@@ -822,7 +849,7 @@
               var Opt = $('#topInterestStockIndexOptionFilter').val();
               var PageNo =parseInt($(this).attr('data-page_no'));
               var total =parseInt($(this).attr('data-total'));
-              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').text();
+              var activeTb = $(this).closest('#openInterestStockOptionDetail').find('.nav-tabs a.active').text();
               var OptType ='CE';
               if(activeTb =='CALL'){
                 OptType ='CE';

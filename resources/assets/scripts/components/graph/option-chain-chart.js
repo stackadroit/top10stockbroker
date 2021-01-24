@@ -132,7 +132,7 @@ class OptionChainChart extends React.Component {
       	var selli=$('.nested_tab').find('a.active').data("element");
      	  var resp_div=$('.nested_tab').find('a.active').data("chart-element");
       	const data = new FormData();
-        var apiExchg =$('#ajax-load-api-data').data('apiexchg');
+        // var apiExchg =$('#ajax-load-api-data').data('apiexchg');
         var symbol =$('#ddlCompanySymble').find(':selected').data('symble');
           symbol =(symbol)?symbol:'TCS';
         var instName =$('#companyInstName').val();
@@ -140,7 +140,7 @@ class OptionChainChart extends React.Component {
         var optType =$('#OptionType').val();
         var stkPrice =$('#StrikePrice').val();
       	data.append('dur', dur);
-      	data.append('apiExchg', apiExchg);
+      	// data.append('apiExchg', apiExchg);
       	data.append('symbol', symbol);
         data.append('instName', instName);
         data.append('expDate', expDate);
@@ -199,11 +199,11 @@ class OptionChainChart extends React.Component {
                   { data:graphDataArray}
                 ]
               }
-            });  
+            }); 
+            $('#'+resp_div).prev('.fb-loader').remove(); 
         })
         .catch(error =>  {
-            //console.log(error);
-           
+            $('#'+resp_div).prev('.fb-loader').remove();
         });
      
   }
