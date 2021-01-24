@@ -52,7 +52,7 @@
                 else{
                   if(liveUpdateElement == '#stock-market-live'){
                     $(liveUpdateElement).find('#indecName').html(response.INDEX_NAME);
-                    $(".retcalc_form .select2-selection__placeholder").html(currentValue.INDEX_NAME);
+                    $(".retcalc_form .select2-selection__placeholder").html(response.INDEX_NAME);
                     $(liveUpdateElement).find('#indecName').attr('data-indices-code',indexCode);
                     $(liveUpdateElement).find('#currentStockRate').html(parseFloat(response.PRICE).toFixed(2));
                     $(liveUpdateElement).find('#currentStockChange').html(parseFloat(response.CHANGE).toFixed(2) + '('+parseFloat(response.PER_CHANGE).toFixed(2)+'%)');
