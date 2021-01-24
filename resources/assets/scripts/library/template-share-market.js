@@ -40,12 +40,12 @@
               'security': global_vars.ajax_nonce
             },
             beforeSend: function() {
-              $(liveUpdateElement).find(".loading-data").show();
+              $(liveUpdateElement).find(".inner-wrap").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
             },
             success:function(response){
               console.log(response.stocks);
               response =response.stocks;
-              $(liveUpdateElement).find(".loading-data").remove();
+              $(liveUpdateElement).find(".fb-loader").remove();
                 if(response == ''){
                     
                 }
@@ -85,7 +85,7 @@
                 }
               },
               error: function(errorThrown){
-                $(liveUpdateElement).find(".loading-data").remove();
+                $(liveUpdateElement).find(".fb-loader").remove();
                 console.log(errorThrown);
               }
         });

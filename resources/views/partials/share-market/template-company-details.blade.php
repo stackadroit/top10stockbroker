@@ -5,7 +5,7 @@
             $indexCode =@$indices_code;
             $apiExchg =@$api_exchg;
           @endphp
-
+          
             <div class="row align-items-center mb-4"> 
                 
                 <div class="col-md-2 full-box order-md-2">
@@ -30,9 +30,9 @@
                 <div class="col-md-4">      
                     <h2 class="names" id="indecName" data-indices-code="{{$indexCode}}" style="margin: 0px; padding:0;" title="{{$indecName}}">{{$indecName}}</h2>
                     <div class="index"> 
-                        <span class="group"> 
+                        <!-- <span class="group"> 
                             <span>Exchange : </span><span id="bse-value" class="index-val">{{$apiExchg}}</span>
-                        </span> 
+                        </span>  -->
                     </div>    
                     <!-- index -->
                 </div>
