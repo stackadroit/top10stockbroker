@@ -235,7 +235,8 @@ export default {
         var resp_div=$(this).data("chart-element");
         // console.log($('#'+resp_div).find('.tv-lightweight-charts').length);
         if(!$('#'+resp_div).find('.highcharts-container ').length){
-          ReactDOM.render( 
+           $('#'+resp_div).before('<div class="fb-loader loader mx-auto"></div>');
+             ReactDOM.render( 
             <OptionFutureChart />,
             document.getElementById(resp_div)
           );
