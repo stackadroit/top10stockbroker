@@ -26,9 +26,9 @@
   <div class="row tab-holder">
     <div class="col-md-6">
       <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
-        <li><a href="#mostActiveStockVolume" role="tab" data-toggle="tab" aria-controls="mostActiveStockVolume" class="active changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Volume</a></li>
-        <li><a href="#mostActiveStockValue" role="tab" data-toggle="tab" aria-controls="mostActiveStockValue" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Value</a></li>
-        <li><a href="#mostActiveStockGainers" role="tab" data-toggle="tab" aria-controls="mostActiveStockGainers" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Gainers</a></li>
+        <li  class="nav-item"><a href="#mostActiveStockVolume" role="tab" data-toggle="tab" aria-controls="mostActiveStockVolume" class="active changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Volume</a></li>
+        <li  class="nav-item"><a href="#mostActiveStockValue" role="tab" data-toggle="tab" aria-controls="mostActiveStockValue" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Value</a></li>
+        <li  class="nav-item"><a href="#mostActiveStockGainers" role="tab" data-toggle="tab" aria-controls="mostActiveStockGainers" class="changeMASEDFilterInDetail" data-expdate="{{@$get_detail_page['ExpDate']}}" data-page-size="{{$get_detail_page['PageSize']}}" data-inst-name="{{$get_detail_page['InstName']}}">Gainers</a></li>
       </ul>
     </div>
     <div class="col-md-6">
@@ -108,13 +108,13 @@
         </table>
       </div>
       @php if($get_detail_page['volumeTableTotalRow'] > $get_detail_page['PageSize']){ @endphp
-      <div class="alm-btn-wrap" id="loadMoreWrap_vol">
+      <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_vol">
         <button class="alm-load-more-btn" id="loadMore_vol" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['volumeTableTotalRow']}}">Load More</button>
       </div>
       @php } @endphp
     </div>
 
-    <div id="mostActiveStockValue" class="tab-pane fade">
+    <div id="mostActiveStockValue" class="tab-pane">
       <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 table-bordered mb-20">
           <thead>
@@ -174,13 +174,13 @@
         </table>
       </div>
       @php if(@$get_detail_page['valueTableTotalRow'] > $PageSize){ @endphp
-      <div class="alm-btn-wrap" id="loadMoreWrap_val">
+      <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_val">
         <button class="alm-load-more-btn" id="loadMore_val" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['valueTableTotalRow']}}">Load More</button>
       </div>
       @php } @endphp
     </div>
 
-    <div id="mostActiveStockGainers" class="tab-pane fade">
+    <div id="mostActiveStockGainers" class="tab-pane">
       <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
         <table class="table-style1 table-bordered mb-20">
           <thead>
@@ -240,7 +240,7 @@
         </table>
       </div>
       @php if(@$get_detail_page['gainerTableTotalRow'] >$PageSize ) { @endphp
-      <div class="alm-btn-wrap" id="loadMoreWrap_G">
+      <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_G">
         <button class="alm-load-more-btn" id="loadMore_G" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['gainerTableTotalRow']}}">Load More</button>
       </div>
       @php } @endphp

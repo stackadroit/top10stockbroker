@@ -29,7 +29,7 @@
 
 			},
       
-      getStockMarket: function( indexCode,liveUpdateElement ){
+      getStockMarket: function( indexCode,liveUpdateElement ,filter=true){
 
         $.ajax({
             type:"POST",
@@ -40,7 +40,9 @@
               'security': global_vars.ajax_nonce
             },
             beforeSend: function() {
-              $(liveUpdateElement).find(".inner-wrap").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+              if(filter){
+                $(liveUpdateElement).find(".inner-wrap").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+              }
             },
             success:function(response){
               console.log(response.stocks);
@@ -173,7 +175,7 @@
           
           this.interval = setInterval(function(){
             var indexCode = $('#indicesIndexes').val();
-            self.getStockMarket(indexCode,stockMarketLive);
+            self.getStockMarket(indexCode,stockMarketLive,false);
           }, 10000);
 
 					$(stockMarketLive)

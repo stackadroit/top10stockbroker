@@ -20,7 +20,7 @@
 				this.options = $.extend(true, {}, this.defaults, opts);
 				return this;
 			},
-      get_derivative_companyStock: function(instName,symbol,expDate,optType,stkPrice){
+      get_derivative_companyStock: function(instName,symbol,expDate,optType,stkPrice,filter=true){
         var companyStockLive="#company-stock-live";
         $.ajax({
             type:"POST",
@@ -36,8 +36,10 @@
             },
             cache: false,
             beforeSend: function() {
-              $(companyStockLive).find('.fb-loader').remove();
-              $(companyStockLive).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+              if(filter){
+                $(companyStockLive).find('.fb-loader').remove();
+                $(companyStockLive).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+              }
             },
             success:function(response){
               response =response.stocks;
@@ -57,15 +59,15 @@
                 $(companyStockLive).find('#set3-value').html(currentValue.EXPDATE);
                 $(companyStockLive).find('#currentStockRate').html(parseFloat(currentValue.LTP).toFixed(2));
                 if(currentValue.LTP >= 0){
-                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
                 }else{
-                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                 }
                 if(currentValue.FaOdiff >= 0){
+                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
                   $(companyStockLive).find('#currentStockChange').removeClass('color-red').addClass('color-green'); 
                   $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
 
                 }else{
+                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                     $(companyStockLive).find('#currentStockChange').removeClass('color-green').addClass('color-red'); 
                     $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
                 }
@@ -487,7 +489,7 @@
             var OptType = $('#OptionType').val();
             var StkPrice = $('#StrikePrice').val();
             if (InstName) {
-              self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice);
+              self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice,false);
             }
           }, 10000);
           $(document).on('click','#filter_derivative_details', function (e) {

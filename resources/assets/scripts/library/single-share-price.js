@@ -21,7 +21,7 @@
         return this;
       },
        
-      get_companyStock:function (apiExchg,apiFinCode){
+      get_companyStock:function (apiExchg,apiFinCode,filter=true){
         var companyStockLive="#company-stock-live";
         jQuery.ajax(
           {
@@ -32,6 +32,12 @@
               'action':'get_stock_company_details',
               'apiExchg':apiExchg,
               'finCode':apiFinCode
+            },
+            cache:false,
+            beforeSend: function() {
+              if(filter){
+                $(companyStockLive).find(".inner-wrap").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+              }
             },
             success: function(response){
               // console.log(apiExchg);
@@ -85,7 +91,11 @@
                 $(companyStockLive).find('#deliverableRatio').html(parseFloat(currentValue.Deliverable).toFixed(2));
                 $(companyStockLive).find('#dividendRatio').html(parseFloat(currentValue.YIELD).toFixed(2));
               // }
-                      
+               $(companyStockLive).find(".fb-loader").remove();       
+            },
+            error: function(errorThrown){
+                $(companyStockLive).find(".fb-loader").remove();
+                console.log(errorThrown);
             }
         });
 
@@ -217,7 +227,7 @@
             var apiExchg = $('#ddlCompanyIndexes').val();
             var finCode = $('#ajax-load-api-data').attr('data-fincode');
             if (apiExchg) {
-              self.get_companyStock(apiExchg, finCode);
+              self.get_companyStock(apiExchg, finCode,false);
             }
           }, 10000);
           // history Section Filter

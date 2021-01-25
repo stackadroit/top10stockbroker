@@ -443,8 +443,8 @@ function get_future_top_interest_stock_index_option_data() {
         }
         $futuresSymbol =get_symble_list_and_id('futures');
         ?>
-        <div class="scrollbar-inner">
-         <table class="table-style1 <?php echo (@$section =='read_more')? 'mb-20':'mb-0' ?> ">
+        <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
+         <table class="table-style1 table-bordered <?php echo (@$section =='read_more')? 'mb-20':'mb-0' ?> ">
                 <thead>
                      <tr>
                      <th class="big-font">Symbol</th>
@@ -502,7 +502,7 @@ function get_future_top_interest_stock_index_option_data() {
         <?php
         if(@$section =='read_more' && ($tableTotalRow > $PageSize)){
             ?>
-            <div class="alm-btn-wrap" id="loadMoreWrap_<?php echo @$Opt ?>">
+            <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_<?php echo @$Opt ?>">
               <button class="alm-load-more-btn" id="loadMore_<?php echo @$Opt ?>" href="javascript:void(0);" data-page_no="1" data-total="<?php echo $tableTotalRow; ?>">Load More</button>
             </div>
             <?php
@@ -618,9 +618,9 @@ function get_future_full_page_ajax_search() {
         if($cDetailsresponse){
          
             ?>
-            <div class="inner-wrap">
+            <div class="inner-wrap  px-3">
 
-            <div class="row align-items-center mb30">
+            <div class="row align-items-center mb-4">
              
                 <div class="col-md-2 full-box order-md-last">
                     <div class="select-theme-stb">          
@@ -642,14 +642,13 @@ function get_future_full_page_ajax_search() {
                     </div>
                 </div>
                 
-                <!-- col-2 full-box -->
                 <div class="col-md-4"> 
-                   <div class="index row">
-                    <div class="col-4">
+                    <div class="index row">
+                    <div class="col-12">
                       <input type="hidden" id="companyInstName" name="" value="<?php echo $InstName?>" />     
                       <h2 class="names" style="margin: 0px; padding:0;" title="<?php echo @$companyNameFull ?>"><?php echo @$companyNameFull ?></h2>
                     </div>
-                      <div class="col-8" style="display: flex;align-items: center;justify-content: flex-end;">
+                      <div class="col-12 mt-3 d-flex align-items-center">
                         <label style="margin-right: 5px;">Expiry Date : </label>
                         <div class="search-wrap" style="width: 130px;">
                           <select id="ExpiryDate" class="select-style1" style="height:40px;" >

@@ -138,7 +138,7 @@ class OptionFutureChart extends React.Component {
         // var apiExchg =$('#ajax-load-api-data').data('apiexchg');
           // finCode: $('#ajax-load-api-data').data('fincode'),
         if($(document).find('#ddlCompanySymble').length){
-              var symbol =$('#ddlCompanySymbleTpl').val();
+              var symbol =$('#ddlCompanySymble').val();
         }
         if($(document).find('#ddlCompanySymbleTpl').length){
               var symbol =$('#ddlCompanySymbleTpl').val();

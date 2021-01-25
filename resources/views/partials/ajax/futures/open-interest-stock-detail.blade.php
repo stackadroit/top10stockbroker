@@ -1,4 +1,4 @@
-<div class="section-companydetails section-padding">
+<div class="section-companydetails pb-5">
 
   <div class="row">
     <div class="col-md-12">
@@ -8,9 +8,8 @@
     <!--./col-md-12-->
   </div>
   <!-- /.row -->
-</div>
-
-<div class="section_corporateact bg-light section-padding">
+ </div>
+<div class="section_corporateact pb-5" id="topInterestStockOptionDetail">
 
   <div class="row">
     <div class="col-md-12">
@@ -41,14 +40,12 @@
       </div>
     </div>
   </div>
-
-
-
+ 
   <div class="tab-content" id="myTabContent">
 
     <div id="topInterestStockOptionHighest" class="tab-pane fade show active">
       <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
-        <table class="table-bordered">
+        <table class="table-style1 table-bordered mb-20">
           <thead>
             <tr>
               <th class="big-font">Symbol</th>
@@ -106,15 +103,15 @@
         </table>
       </div>
       @php if($get_detail_page['hTableTotalRow'] > $get_detail_page['PageSize']){ @endphp
-      <div class="alm-btn-wrap" id="loadMoreWrap_HOI">
+      <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_HOI">
         <button class="alm-load-more-btn" id="loadMore_HOI" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['hTableTotalRow']}}">Load More</button>
       </div>
       @php } @endphp
     </div>
 
-    <div id="topInterestStockOptionLowest" class="tab-pane fade">
+    <div id="topInterestStockOptionLowest" class="tab-pane">
       <div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
-        <table class="table-bordered">
+        <table class="table-style1 table-bordered mb-20">
           <thead>
             <tr>
               <th class="big-font">Symbol</th>
@@ -172,10 +169,12 @@
         </table>
       </div>
       @php if($get_detail_page['lTableTotalRow'] > $get_detail_page['PageSize']){ @endphp
-      <div class="alm-btn-wrap" id="loadMoreWrap_LOI">
+      <div class="alm-btn-wrap text-center mt-3" id="loadMoreWrap_LOI">
         <button class="alm-load-more-btn" id="loadMore_LOI" href="javascript:void(0);" data-page_no="1" data-total="{{$get_detail_page['lTableTotalRow'] }}">Load More</button>
       </div>
       @php } @endphp
     </div>
 
   </div>
+
+</div>
