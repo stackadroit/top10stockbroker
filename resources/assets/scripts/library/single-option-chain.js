@@ -503,6 +503,10 @@
             if (InstName) {
               self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice);
             }
+            setTimeout(function(){
+                $('#ajax-load-api-data').find('#chart-data-id .highcharts-container').remove();
+                $('#ajax-load-api-data').find('.nested_tab a[href="#li_1m"]').trigger('click');
+            },200);
           });
           // Top Filter End
           //  Strike Price Analysis Filter
@@ -649,6 +653,7 @@
               var symbol ='';
               var OptType ='';
               var InstName =$('#companyInstName').val();
+              var InstName ='OPTSTK';
               var section =$('#most_a_s_o_section').val();
               var ExpDate = $('#mostActiveStockOptionExpiryDate').val();
               var Rtype = $('#mostActiveStockOptionFilter').val();

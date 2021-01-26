@@ -138,10 +138,10 @@ class OptionFutureChart extends React.Component {
         // var apiExchg =$('#ajax-load-api-data').data('apiexchg');
           // finCode: $('#ajax-load-api-data').data('fincode'),
         if($(document).find('#ddlCompanySymble').length){
-              var symbol =$('#ddlCompanySymble').val();
+          var symbol =$('#ddlCompanySymble').find(':selected').attr('data-symble');
         }
         if($(document).find('#ddlCompanySymbleTpl').length){
-              var symbol =$('#ddlCompanySymbleTpl').val();
+          var symbol =$('#ddlCompanySymbleTpl').val();
         }
         symbol =(symbol)?symbol:'TCS';
         var instName =$('#companyInstName').val();
@@ -164,16 +164,24 @@ class OptionFutureChart extends React.Component {
             $.each(result.g1, function(k, v) {
               // console.log(v);
               var spl = v.date.split("-");
+              // console.log(spl);
               var y = spl[0];
               var m = spl[1] - 1;
               var d = spl[2];
-              var h = spl[3]? spl[3] : 0;
-              var i = spl[4]? spl[4] : 0;
+              var h =0;
+              var i =0; 
+              if(spl[3] != undefined){
+                h = spl[3];
+              }
+              if(spl[4] != undefined){
+                i = spl[4];
+              }
               if(dur == '1D' || dur == '1W'){
-                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+spl[3]+":"+spl[4];
+                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+h+":"+i;
               }else{
                   var newDate=spl[1]+"/"+spl[2]+"/"+spl[0];  
               }
+              // console.log(newDate);
               dt1.push(new Date(newDate).getTime());
               x_data.push(parseFloat(v.value));
               var rowValue = [new Date(newDate).getTime(),
@@ -186,7 +194,7 @@ class OptionFutureChart extends React.Component {
                     parseFloat(v.volume)];
               graphDataArray.push(rowValue);
             });
-            // console.log(graphDataArray);
+            console.log(graphDataArray);
             var y_min = Math.min.apply(null, x_data);
             var y_max = Math.max.apply(null, x_data);
             this.setState({ 

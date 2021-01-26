@@ -162,10 +162,16 @@ class OptionChainChart extends React.Component {
               var y = spl[0];
               var m = spl[1] - 1;
               var d = spl[2];
-              var h = spl[3]? spl[3] : 0;
-              var i = spl[4]? spl[4] : 0;
+              var h =0;
+              var i =0; 
+              if(spl[3] != undefined){
+                h = spl[3];
+              }
+              if(spl[4] != undefined){
+                i = spl[4];
+              }
               if(dur == '1D' || dur == '1W'){
-                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+spl[3]+":"+spl[4];
+                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+h+":"+i;
               }else{
                   var newDate=spl[1]+"/"+spl[2]+"/"+spl[0];  
               }
