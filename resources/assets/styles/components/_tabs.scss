@@ -273,9 +273,9 @@ ul.list-content li {
   margin-right: 2%;
   font-size: 18px;
 }
-ul.list-content li:before {
-  content: "\f0da";
-  font-family: "FontAwesome";
+ul.list-content_dd li:before {
+  content: "\f061";
+  font-family: "Font Awesome 5 Free";
   display: block;
   position: absolute;
   left: 12px;

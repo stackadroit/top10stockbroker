@@ -55,6 +55,7 @@
                                 }
                               @endphp
                               <li>
+                                <i class="fa fa-angle-right text-oringe" aria-hidden="true" style="color:hsl(13deg 79% 52%);padding-top: 3px;"></i>
                                 <a href="{{$tabs_link_to[$s]}}" title="{{ ucfirst(@$tabs_link[$s]) }}">{{ ucfirst(@$tabs_link[$s]) }}</a>
                               </li>
                               @php  
