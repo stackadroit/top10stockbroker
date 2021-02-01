@@ -154,7 +154,7 @@
   text-align: center;
   margin: 0 auto;
   background: transparent;
-  padding: 0 15px 15px;
+  padding: 0 0 15px;
 }
 
 #content ul.v_tabs {
@@ -233,7 +233,7 @@ ul.v_tabs {
 }
 .v_tab_content {
   padding: 0 15px 20px 30px;
-  height: 100%;
+  // height: 100%;
   display: none;
 }
 .v_tab_drawer_heading {
