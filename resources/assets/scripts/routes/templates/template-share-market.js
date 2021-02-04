@@ -14,13 +14,11 @@ export default {
             "p3": "return-calculator",
         };
         for (var key in pages) {
-
                 var info = {
                     page: pages[key],
                     pageID: $('#ajax-load-api-data').data('post-id'),
                     indexCode: $('#indicesIndexes').val(),
                 };
-
                 (function(info){
                     $.ajax({
                       url: global_vars.ajax_url,
@@ -76,6 +74,38 @@ export default {
                     //$.ajaxSetup({async: true});
                 })(info);
             }
+        setTimeout(function(){ 
+          var shareMarketGainer="#share-market-gainer-looser";
+          var post_id= $('#filter-options').data('pid');
+          var indecCode = parseInt($('#filter-options').data('iicode'));
+          var type ='Gain';
+          var apiExchg =(indecCode <100)?'BSE':'NSE';;
+          var intra_day ='Daily';
+          $.ajax({
+              type:"POST",
+              url: global_vars.apiServerUrl + '/apiblock/share-market/gainer-looser',
+              data: {
+                  'action':'get_share_market_gainer_looser',
+                  'type':type,
+                  'apiExchg':apiExchg,
+                  'intra_day':intra_day,
+                  'indecCode':indecCode,
+              },
+              beforeSend: function() {
+                $(sectorsSectionWrap).find(".loading-data").show();
+                $(shareMarketGainer).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>' );
+
+              },
+              success:function(response){
+                $(sectorsSectionWrap).find(".loading-data").remove();
+                  $(document).find(shareMarketGainer).html(response);
+                },
+              error: function(errorThrown){
+                $(shareMarketGainer).html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>' );
+                  console.log(errorThrown);
+              }
+          });
+        }, 3000);
         if (typeof TemplateShareMarket !== 'undefined') {
           TemplateShareMarket.initialize();
         }

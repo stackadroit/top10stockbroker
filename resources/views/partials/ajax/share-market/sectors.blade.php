@@ -48,37 +48,7 @@
 			</div>
 		</div>
 		<div class="marketGrids tabBox-Container" id="share-market-gainer-looser">
-			@php
-			if($GLResponse && count($GLResponse)){
-			$idx =6;
-			foreach ($GLResponse as $key => $rowObj) {
-			@endphp
-			<div class="marketGridElement">
-				<a href="<?php echo site_url('/') . @$acc_companyLists[@$rowObj->FINCODE] ?>" title="<?php echo $rowObj->S_NAME ?>">
-					<div class="marketGridElementTop text-center vC marketGrid-{{ ($idx ==6) ? 1: $idx }}  color-green">
-						<div class="centerText">
-							<span class="companyName">
-								{{ $rowObj->S_NAME }}</span>
-							<br>
-							<span class="ltpVal">{{number_format($rowObj->OPEN_PRICE ,2)}}</span>
-							<br>
-							<span class="changeVal">{{ number_format($rowObj->NETCHG,2) }} </span>
-							<span class="changePercentVal">( {{ number_format($rowObj->PERCHG,2) }} %)</span>
-						</div>
-						<!-- centerText -->
-					</div>
-					<!-- marketGridElementTop -->
-				</a>
-			</div>
-			<!-- marketGridElement -->
-			@php
-			$idx = ($idx >= 10)?10:($idx+1);
-			}
-			}
-			@endphp
-			<div class="clearfix"></div>
 		</div>
-
 		<div class="stock-btn-more-wrap">
 			<a class="stock-btn-view-more" href="https://top10stockbroker.com/share-market/nse-top-gainers/" title="View More">View More
 			</a>

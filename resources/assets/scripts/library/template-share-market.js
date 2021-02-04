@@ -172,6 +172,11 @@
 			events: function() {
 				var self    = this,
 					stockMarketLive  = '#stock-market-live';
+
+          var indexCode = $('#filter-options').data('iicode');
+          if(indexCode){
+            self.getStockMarket(indexCode,stockMarketLive);
+          }
           
           this.interval = setInterval(function(){
             var indexCode = $('#indicesIndexes').val();
@@ -181,6 +186,7 @@
 					$(stockMarketLive)
           .on( 'change', '#indicesIndexes', function(event) {
 	            var indexCode = $(this).val();
+              $('#filter-options').data('iicode',indexCode);
                self.getStockMarket(indexCode,stockMarketLive);
               setTimeout(function(){
                 $('.tab_content').find('.highcharts-container').remove();

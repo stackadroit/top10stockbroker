@@ -132,7 +132,7 @@ function api_master_calls(){
                         echo $value->api_name;
                         PA1_GEOJITCRM_API_B2C($postData);
                         break;
-                    case '16':
+                    case '15':
                         echo $value->api_name;
                         PA1_5Paisa_API_B2C($postData);
                         break;
@@ -271,6 +271,10 @@ function api_master_calls_for_city_data(){
                     case '14':
                         echo $value->api_name;
                         PA1_GEOJITCRM_API_B2C($postData);
+                        break;
+                    case '15':
+                        echo $value->api_name;
+                        PA1_5Paisa_API_B2C($postData);
                         break;
                     default:
                         break;
@@ -894,7 +898,6 @@ function PA1_GEOJITCRM_API_B2C( $postedArray =array() ){
  *  Send Contact Data to PA1 5Paisa API B2C.
  *  @author Pavan JI <dropmail2pavan@gmail.com> 
  */
-PA1_5Paisa_API_B2C();
 function PA1_5Paisa_API_B2C( $postedArray =array() ){
     
     $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');

@@ -303,17 +303,18 @@ function share_market_data_ajax_request(){
             // $apiExchg ='NSE';
             $intra_day ='Daily';
 
-             $url ="http://stock.accordwebservices.com/Stock/GetGainersAndLosers?Exchange=".$apiExchg."&Group=A&Type=".$type."&Indices=".$indexCode."&Option=&Period=".$intra_day."&PageNo=1&Pagesize=10&SortExpression=OPEN_PRICE&SortDirect=Desc";
-              $resposeArray =get_api_response_curl($url);  
-            if(@$resposeArray->status_code == 200){
-               $GLResponse= (array) $resposeArray->Table;
-            } 
+            //  $url ="http://stock.accordwebservices.com/Stock/GetGainersAndLosers?Exchange=".$apiExchg."&Group=A&Type=".$type."&Indices=".$indexCode."&Option=&Period=".$intra_day."&PageNo=1&Pagesize=10&SortExpression=OPEN_PRICE&SortDirect=Desc";
+            //   $resposeArray =get_api_response_curl($url);  
+            // if(@$resposeArray->status_code == 200){
+            //    $GLResponse= (array) $resposeArray->Table;
+            // } 
+            // $data['GLResponse']=$GLResponse;
             $data['apiExchg']=$apiExchg;
-            $data['GLResponse']=$GLResponse;
             $data['intra_day']=$intra_day;
             $data['type']=$type;
             $indicesFilter= get_indicesListPost();
             $data['indicesFilter']=$indicesFilter;
+            // $data['indicesFilter']=[];
             $template = 'partials.ajax.share-market.sectors';
         }
 

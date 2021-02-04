@@ -1,7 +1,8 @@
+<div id="filter-options" data-pid="{{get_the_ID()}}" data-iicode="{{@$indices_code}}"></div>
 <div class="section-companyprice bg-light section-padding mb-5"  id="stock-market-live">
         <div class="inner-wrap px-3">
           @php
-            $indecName =@$indices_details['INDEX_NAME'];
+            //$indecName =@$indices_details['INDEX_NAME'];
             $indexCode =@$indices_code;
             $apiExchg =@$api_exchg;
           @endphp
@@ -28,7 +29,7 @@
                 </div>
                 <!-- col-2 full-box -->            
                 <div class="col-md-4">      
-                    <h2 class="names" id="indecName" data-indices-code="{{$indexCode}}" style="margin: 0px; padding:0;" title="{{$indecName}}">{{$indecName}}</h2>
+                    <h2 class="names" id="indecName" data-indices-code="{{$indexCode}}" style="margin: 0px; padding:0;" title="{{$indecName}}">{{@$indecName}}</h2>
                     <div class="index"> 
                         <!-- <span class="group"> 
                             <span>Exchange : </span><span id="bse-value" class="index-val">{{$apiExchg}}</span>
@@ -38,20 +39,11 @@
                 </div>
                 <!-- col-4 -->
                 <div class="col-md-6 valuesDiv px-0"> 
-                    @php
-                    if(@$indices_details['CHANGE'] >0){
-                        $arrowClass ="fa-arrow-up color-green";
-                        $lavelClass ="color-green";
-                    }else{
-                        $arrowClass ="fa-arrow-down color-red";
-                        $lavelClass ="color-red";
-                    }
-                    @endphp
                     <div class="value">              
-                        <span class="fas sm-icon-box {{ $arrowClass}}" id="currentStockRateArrow"></span>              
-                        <span class="" id="currentStockRate">{{ @number_format(@$indices_details['PRICE'],2) }}</span>              
+                        <span class="fas sm-icon-box" id="currentStockRateArrow"></span>
+                        <span class="" id="currentStockRate"></span>              
                     </div>          
-                    <div class="change">Change: <span class="{{ $lavelClass }}" id="currentStockChange">{{ @number_format(@$indices_details['CHANGE'],2)}} ({{ @number_format(@$indices_details['PER_CHANGE'],2) }}%)</span></div>      
+                    <div class="change">Change: <span class="" id="currentStockChange"></span></div>      
                 </div>
                 <!-- col-6 valuesDiv -->
 
@@ -63,11 +55,11 @@
                     <div class="row">              
                         <div class="col-md-6 col-6">                  
                             <span class="name">52 week Low</span><br>                  
-                            <span class="value" id="52weeklow">{{ @number_format(@$indices_details['52WEEKLOW'],2) }}</span>              
+                            <span class="value" id="52weeklow"></span>              
                         </div>              
                         <div class="col-md-6 col-6 text-right">                  
                             <span class="name">52 week High</span><br>                  
-                            <span class="value" id="52weekhigh">{{ @number_format(@$indices_details['52WEEKHIGH'],2) }}</span>              
+                            <span class="value" id="52weekhigh"></span>              
                         </div>          
                     </div>   
                     <!-- row -->
@@ -77,11 +69,11 @@
                     <div class="row">              
                         <div class="col-md-6 col-6">                  
                             <span class="name">Day low</span><br>                  
-                            <span class="value" id="daylow">{{ @number_format(@$indices_details['LOW'],2) }}</span>              
+                            <span class="value" id="daylow"></span>              
                         </div>              
                         <div class="col-md-6 col-6 text-right">                  
                             <span class="name">Day high</span><br>                  
-                            <span class="value" id="dayhigh">{{ @number_format(@$indices_details['HIGH'],2) }}</span>              
+                            <span class="value" id="dayhigh"></span>              
                         </div>          
                     </div>  
                     <!-- row -->
@@ -92,11 +84,11 @@
                     <div class="row">  
                        <div class="col-md-6 col-6">                  
                             <span class="name">Prev Close</span><br>                  
-                            <span class="value" id="prevclose">{{ @number_format(@$indices_details['PREV_CLOSE'],2) }}</span>              
+                            <span class="value" id="prevclose"></span>              
                         </div>       
                         <div class="col-md-6 col-6 text-right">                  
                             <span class="name">Open</span><br>                  
-                            <span class="value" id="open">{{ @number_format(@$indices_details['OPEN'],2) }}</span>              
+                            <span class="value" id="open"></span>              
                         </div> 
                     </div>
                 </div>
@@ -110,28 +102,13 @@
                 <div class="col-md-4">          
                     <div class="row">       
                         <div class="col-md-6 col-6">                  
-                            <span class="name">1W return%</span><br> @php 
-                            if(@$indices_details['WEEKPERCHANGE'] >0){
-                              $lbClass="text-green";
-                            }else{
-                              $lbClass="text-red";
-                            }
-                            @endphp               
-                            <span class="value {{ $lbClass }}" id="1wreturn">
-                              {{ @number_format(@$indices_details['WEEKPERCHANGE'],2) }}
+                            <span class="name">1W return%</span><br>
+                            <span class="value" id="1wreturn">
                             </span>              
                         </div>       
                         <div class="col-md-6 col-6 text-right">                  
                             <span class="name">1M return%</span><br>
-                            @php
-                            if(@$indices_details['MONTHPERCHANGE'] >0){
-                              $lbClass="text-green";
-                            }else{
-                              $lbClass="text-red";
-                            }
-                            @endphp                   
-                            <span class="value {{ $lbClass }}" id="1mreturn">
-                              {{ @number_format(@$indices_details['MONTHPERCHANGE'],2) }}
+                            <span class="value " id="1mreturn">
                             </span>              
                         </div>          
                     </div>  
@@ -141,29 +118,14 @@
                 <div class="col-md-4">          
                     <div class="row">    
                          <div class="col-md-6 col-6">                  
-                            <span class="name">6M return%</span><br> @php
-                            if(@$indices_details['6MONTHPERCHANGE'] >0){
-                              $lbClass="text-green";
-                            }else{
-                              $lbClass="text-red";
-                            }
-                            @endphp              
-                            <span class="value {{ $lbClass }}" id="6mreturn">
-                              {{ @number_format(@$indices_details['6MONTHPERCHANGE'],2) }}
+                            <span class="name">6M return%</span><br>              
+                            <span class="value" id="6mreturn">
                             </span>              
                         </div>    
                              
                         <div class="col-md-6 col-6 text-right">                  
                             <span class="name">1Y return%</span><br>
-                            @php
-                            if(@$indices_details['1YEARPERCHANGE'] >0){
-                              $lbClass="text-green";
-                            }else{
-                              $lbClass="text-red";
-                            }
-                            @endphp                  
-                            <span class="value {{ $lbClass}}" id="1yreturn">
-                               {{ @number_format(@$indices_details['1YEARPERCHANGE'],2) }} 
+                            <span class="value" id="1yreturn">
                             </span>              
                         </div>       
                     </div>
@@ -174,11 +136,11 @@
                     <div class="row"> 
                         <div class="col-md-6 col-6">                  
                             <span class="name">Advances</span><br>                  
-                            <span class="value" id="mcaprs">{{ @number_format(@$indices_details['ADV'],2) }}</span>              
+                            <span class="value" id="mcaprs"></span>              
                         </div>              
                         <div class="col-md-6 col-6 text-right">                  
                             <span class="name">Declines</span><br>                  
-                            <span class="value" id="totalrs">{{ @number_format(@$indices_details['DEC'],2) }}</span>              
+                            <span class="value" id="totalrs"></span>              
                         </div>  
                     </div>  
                     <!-- row -->
