@@ -4,25 +4,28 @@
 
 	var TemplateShareMarket = {
 
-			defaults: {
-				loadingElement : ''
-			},
-
+			 
+      defaults: {
+        wrapper: $('body'),
+        offset: 150,
+        loadingElement : '',
+        delay: 1000,
+        visibleMobile: false,
+        label: false
+      },
 			initialize: function(opts) {
 				if (initialized) {
 					return this;
 				}
 				initialized = true;
-
         
-
 				this
 					.setOptions(opts)
 					.events();
           
 				return this;
 			},
-
+      
 			setOptions: function(opts) {
 				this.options = $.extend(true, {}, this.defaults, opts);
 				return this;
@@ -30,7 +33,6 @@
 			},
       
       getStockMarket: function( indexCode,liveUpdateElement ,filter=true){
-
         $.ajax({
             type:"POST",
             url: global_vars.apiServerUrl + '/api/stock-market',
@@ -171,7 +173,94 @@
       
 			events: function() {
 				var self    = this,
-					stockMarketLive  = '#stock-market-live';
+					stockMarketLive  = '#stock-market-live',
+          _isScrolling = false;;
+        $(window).scroll(function() {
+          if (!_isScrolling) {
+            _isScrolling = true;
+            (function($) {
+              'use strict';
+              var pages = {
+                "p1": "chart",
+                "p2": "sectors",
+                "p3": "return-calculator",
+              };
+              for (var key in pages) {
+                var info = {
+                    page: pages[key],
+                    pageID: $('#ajax-load-api-data').data('post-id'),
+                    indexCode: $('#indicesIndexes').val(),
+                };
+                (function(info){
+                    $.ajax({
+                      url: global_vars.ajax_url,
+                      data: {
+                        'action': 'share_market_data_ajax_request',
+                        'data': info,
+                        // 'nonce': ajaxNoncePP
+                      },
+                      success: function (data) {
+                        $("#ajax-load-api-data " + "#" + info.page + "-id").append(data); 
+                        if( info.page == 'chart'){
+                          //select the tabs
+                          $("ul.nested_tab a").click(function (e) {
+                              e.preventDefault();
+                              $(this).closest('.nested_tab').find('a').removeClass('active');
+                              $(this).addClass("active");
+
+                              var activeTab = jQuery(this).attr("href");
+                              $(this).closest(".month_tabs").find('.tab_content').hide();
+                              $(this).closest(".month_tabs").find(activeTab).show();
+                            }); 
+                          $('.nested_tab a[href="#li_1y"').trigger('click');
+                        }
+                        if( info.page == 'return-calculator'){
+                          //select the tabs
+                            $('#company-list').select2({
+                              minimumInputLength: 2,
+                              placeholder: $('#indecName').html(),
+                              tags: [],
+                              ajax: {
+                                type: "post",
+                                url: global_vars.apiServerUrl+'/api/company-list',
+                                dataType: 'json',
+                                      type: "POST",
+                                      data: function (term) {
+                                          return {
+                                              'security': global_vars.ajax_nonce,
+                                              'action':'get_company_list',
+                                              'SearchTxt': term,
+                                          };
+                                      },
+                                      processResults: function (data) {
+                                          return { results: data.stocks};
+                                      },
+                              }
+                            });
+                        }
+                      },
+                        error: function (errorThrown) {
+                            console.log(errorThrown);
+                        }
+                    });
+                    //$.ajaxSetup({async: true});
+                })(info);
+              }
+            }).apply(this, [jQuery]);
+        
+          setTimeout(function(){ 
+             
+            var shareMarketGainer="#share-market-gainer-looser";
+            var post_id= $('#filter-options').data('pid');
+            var indecCode = parseInt($('#filter-options').data('iicode'));
+            var type ='Gain';
+            var apiExchg =(indecCode <100)?'BSE':'NSE';;
+            var intra_day ='Daily';
+            self.getShareMarketGainerLooser(type,apiExchg,intra_day,indecCode,shareMarketGainer);
+          },2000,self);
+        }
+
+      });
 
           var indexCode = $('#filter-options').data('iicode');
           if(indexCode){
