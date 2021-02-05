@@ -7,30 +7,6 @@ use Sober\Controller\Controller;
 class TemplateShareMarket extends Controller
 {
 	var $indicesDetails =array();
-	// protected function get_api_response_curl($url =''){
-	// 	$token =ACCORD_API_TOKEN;
-	//     $url =$url."&token=".$token;
-	//     if($url){
-	//         $ch = curl_init();
-	//         curl_setopt($ch, CURLOPT_URL, $url);
-	//         curl_setopt($ch, CURLOPT_HEADER, false);
-	//         curl_setopt($ch, CURLOPT_NOBODY, false); // remove body
-	//         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-	//         $response = curl_exec($ch);
-	//         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	//         curl_close($ch);
-	//         if($httpCode == 200){
-	//            $resposeArray =json_decode($response);
-	//            $resposeArray->status_code=$httpCode;
-	//            return $resposeArray;
-	//         }else{
-	//             return array();
-	//         }
-	//     }else{
-	//         return array();
-	//     }
-	// }
-
 	public function indicesFilter(){
 		$args = array(
           'post_type' => 'share-market',
@@ -64,13 +40,6 @@ class TemplateShareMarket extends Controller
 	public function indicesDetails(){
 		$indexCode =(@get_post_meta(get_the_ID(),'indices_code',true))? @get_post_meta(get_the_ID(),'indices_code',true):'123';
 	    $apiExchg =($indexCode <100)?'BSE':'NSE';
-	    // $url ="https://stock.accordwebservices.com/Stock/GetIndicesBasicData?Exchg=".$apiExchg."&Indexcode=".$indexCode;
-	    // $resposeArray =$this->get_api_response_curl($url);  
-	    
-	    // if(@$resposeArray->status_code == 200){
-	    //    $this->indicesDetails= (array) $resposeArray->Table['0'];
-	    // }
-		// return $this->indicesDetails;
 		return [];
 	}
 	public function indicesCode(){

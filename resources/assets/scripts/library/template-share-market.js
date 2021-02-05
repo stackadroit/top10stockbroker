@@ -150,14 +150,16 @@
           {
               type: "post",
               dataType: "json",
-              url: global_vars.ajax_url,
+              url: global_vars.apiServerUrl + '/api/price-calculator',
               data: {
                   'action':'get_return_price_calculator',
                   'apiExchg':apiExchg,
                   'finCode':finCode,
                   'amount':amount,
                   'period':period,
+                  'security': global_vars.ajax_nonce
               },
+              cache: false,
               success: function(response){
                   console.log(response);
                   if(response.status == 'success'){
@@ -174,7 +176,7 @@
 			events: function() {
 				var self    = this,
 					stockMarketLive  = '#stock-market-live',
-          _isScrolling = false;;
+          _isScrolling = false;
         $(window).scroll(function() {
           if (!_isScrolling) {
             _isScrolling = true;

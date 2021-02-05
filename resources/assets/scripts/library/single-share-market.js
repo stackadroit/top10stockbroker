@@ -2,8 +2,13 @@
 	var initialized = false;
 	var SingleShareMarket = {
 			defaults: {
-				loadingElement : ''
-			},
+        wrapper: $('body'),
+        offset:50,
+        loadingElement : '',
+        delay: 1000,
+        visibleMobile: false,
+        label: false
+      },
 			initialize: function(opts) {
 				if (initialized) {
 					return this;
@@ -112,7 +117,7 @@
           {
               type: "post",
               dataType: "json",
-              url: global_vars.ajax_url,
+              url: global_vars.apiServerUrl + '/api/price-calculator',
               data: {
                   'action':'get_return_price_calculator',
                   'apiExchg':apiExchg,
@@ -127,6 +132,7 @@
               },
               success: function(response){
                   // console.log(response);
+                  response = response.stocks;
                   if(response.status == 'success'){
                       $(document).find('#get_return_result').html(response.result);
                   }else{
@@ -143,7 +149,7 @@
           {
               type: "post",
               dataType: "html",
-              url: global_vars.ajax_url,
+              url: global_vars.apiServerUrl + '/apiblock/share-market/indices-filter',
               data: {
                   'action':'get_share_market_indices_filter',
                   'indexCode':indexCode,
@@ -170,7 +176,7 @@
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.ajax_url,
+                  url:global_vars.apiServerUrl + '/apiblock/share-market/all-sector-highLow',
                   data: {
                       'action':'get_share_market_all_sector_high_low',
                       'apiExchg':apiExchg,
@@ -187,6 +193,7 @@
                          $('#indices-sector-high-low-live').append(response);
                       }
                       $('#loadMoreHighLow').removeClass('loading');
+                      $('#loadMoreHighLow').attr('data-page_no',(page_no+1));
                   },
                   error:function(error){
                      $('#loadMoreHighLow').removeClass('loading');
@@ -201,7 +208,7 @@
             {
                 type: "post",
                 dataType: "html",
-                url: global_vars.ajax_url,
+                url: global_vars.apiServerUrl + '/apiblock/share-market/all-sector-highLow',
                 data: {
                     'action':'get_share_market_all_sector_high_low',
                     'apiExchg':apiExchg,
@@ -232,7 +239,7 @@
           {
             type: "post",
             dataType: "html",
-            url: global_vars.ajax_url,
+            url: global_vars.apiServerUrl+ '/apiblock/share-market/all-gainer-looser',
             data: {
               'action':'get_share_market_all_sector_gainer_looser',
               'apiExchg':apiExchg,
@@ -262,7 +269,7 @@
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.ajax_url,
+                  url: global_vars.apiServerUrl+ '/apiblock/share-market/all-gainer-looser',
                   data: {
                       'action':'get_share_market_all_sector_gainer_looser',
                       'apiExchg':apiExchg,
@@ -287,13 +294,135 @@
       },
 			events: function() {
 				var self    = this,
-					stockMarketLive  = '#stock-market-live';
-          this.interval = setInterval(function(){
-            var indexCode =  $('#indicesIndexesCode').val();
-            self.getStockMarket(indexCode,stockMarketLive,false);
-          }, 10000);
+          stockMarketLive  = '#stock-market-live',
+          _isScrolling = false;
+        $(window).scroll(function() {
+          if (!_isScrolling) {
 
-					$(stockMarketLive)
+            _isScrolling = true;
+
+            (function($) {
+              'use strict';
+             
+              if($(document).find('#stock-market-live').length){
+                 var pages = {
+                    "p1": "chart",
+                    "p2": "sectors",
+                    "p3": "return-calculator",
+                  };
+              }else{
+                  var pages = {
+                    "p2": "sectors",
+                    "p3": "return-calculator",
+                  };
+              }
+              console.log(pages);
+              for (var key in pages) {
+                var info = {
+                    page: pages[key],
+                    pageID: $('#ajax-load-api-data').data('post-id'),
+                    indexCode: $('#indicesIndexes').val(),
+                };
+                (function(info){
+                    $.ajax({
+                      url: global_vars.ajax_url,
+                      data: {
+                        'action': 'share_market_data_ajax_request',
+                        'data': info,
+                        // 'nonce': ajaxNoncePP
+                      },
+                      success: function (data) {
+                        $("#ajax-load-api-data " + "#" + info.page + "-id").html(data); 
+                        if( info.page == 'chart'){
+                          //select the tabs
+                          $("ul.nested_tab a").click(function (e) {
+                              e.preventDefault();
+                              $(this).closest('.nested_tab').find('a').removeClass('active');
+                              $(this).addClass("active");
+
+                              var activeTab = jQuery(this).attr("href");
+                              $(this).closest(".month_tabs").find('.tab_content').hide();
+                              $(this).closest(".month_tabs").find(activeTab).show();
+                            }); 
+                          $('.nested_tab a[href="#li_1y"').trigger('click');
+                        }
+                        if( info.page == 'return-calculator'){
+                          //select the tabs
+                            $('#company-list').select2({
+                              minimumInputLength: 2,
+                              placeholder: $('#indecName').html(),
+                              tags: [],
+                              ajax: {
+                                type: "post",
+                                url: global_vars.apiServerUrl+'/api/company-list',
+                                dataType: 'json',
+                                      type: "POST",
+                                      data: function (term) {
+                                          return {
+                                              'security': global_vars.ajax_nonce,
+                                              'action':'get_company_list',
+                                              'SearchTxt': term,
+                                          };
+                                      },
+                                      processResults: function (data) {
+                                          return { results: data.stocks};
+                                      },
+                              }
+                            });
+                        }
+                      },
+                        error: function (errorThrown) {
+                            console.log(errorThrown);
+                        }
+                    });
+                })(info);
+              }
+            }).apply(this, [jQuery]);
+        
+            setTimeout(function(){ 
+
+              if($(document).find('#indices-sector-g-l').length){
+                var post_id= $('#filter-options').data('pid');
+                var indexCode = parseInt($('#filter-options').data('iicode'));
+                var stock_order ='';
+                // var apiExchg =(indecCode <100)?'BSE':'NSE';;
+                self.get_ShareMarketIndicesFilter(indexCode,stock_order);
+              }
+
+              if($(document).find('#indices-sector-high-low-live').length){
+                var post_id= $('#filter-options').data('pid');
+                var apiExchg =$('#api_exchg').val();
+                var sectors_gl =$('#sectors_gl').val();
+                var indices_index = $('#indices_index_filter').val();
+                var intra_day = $('#stock-period-search').val();
+                self.get_ShareMarketAllSectorHighLow(apiExchg,sectors_gl,intra_day,indices_index);
+              }
+
+              if($(document).find('#indices-stock-list-live').length){
+                var post_id= $('#filter-options').data('pid');
+                 
+                var indices_index = $('#gl_indices_index_filter').val();
+                var apiExchg =$('#apiExchg').val();
+                var sectors_gl =$('#sectors_gl').val();
+                var intra_day = $('#gl_stock-period-search').val();
+                self.get_ShareMarketAllSectorGainerLooser(apiExchg,sectors_gl,intra_day,indices_index);
+              }
+            },2000,self);
+          }
+
+        });
+        if($(document).find('#stock-market-live').length){
+            var indexCode = $('#filter-options').data('iicode');
+            if(indexCode){
+              self.getStockMarket(indexCode,stockMarketLive);
+            }
+            this.interval = setInterval(function(){
+              var indexCode =  $('#indicesIndexesCode').val();
+              self.getStockMarket(indexCode,stockMarketLive,false);
+            }, 10000);
+        }
+          
+	     $(stockMarketLive)
           .on( 'change', '#indicesIndexes', function(event) {
 	            var indicesName =$.trim($(this).val());
                // self.getStockMarket(indexCode,stockMarketLive);
@@ -378,6 +507,7 @@
             var intra_day = $('#stock-period-search').val();
             var indices_index = $('#indices_index_filter').val();
             var page_no = parseInt($(this).attr('data-page_no'));
+            // console.log(page_no);
             self.get_ShareMarketAllSectorHighLowLoadMore(apiExchg,sectors_gl,intra_day,indices_index,page_no); 
           });
           $(document).on('change','#high_low_filter',function(){
