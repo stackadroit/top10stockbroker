@@ -4,8 +4,6 @@
             <h2 class="">{{@$section_title}}</h2>
             <p>{{@$section_content}}</p>
         </div>
-        <!-- /.section-head -->
-
         <div class="history_table table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
             <table class="table-bordered">
                 <thead>
@@ -27,35 +25,8 @@
                     </tr>
                 </thead>
                 <tbody id="history-price-wrap">  
-                  @php
-                    if($historyPrice){
-                      foreach ($historyPrice as $key => $rowArray) {
-                      @endphp
-                          <tr>
-                            <td><span class="fn_semibold">
-                              {{$rowArray['label']}} </span></td>
-                            <td>{{$rowArray['old_price']}}</td>
-                            <td>{{$rowArray['current_price']}}</td>
-                            <td>
-                              
-                               @php if($rowArray['avg_pre'] >0) {
-                                  echo '<div class="bggreen_tbl">'.$rowArray['avg_pre'] .'</div>';
-                                }else{
-                                  echo '<div class="bgred_tbl">'.$rowArray['avg_pre'] .'</div>';
-                                }  
-                                @endphp
-                            </td>
-                        </tr>
-                        @php
-                      }
-                    }
-                 @endphp                        
                 </tbody>
             </table>
-            <!-- table -->
         </div>
-        <!-- /.history_table -->
     </div>
-    <!-- /.inner-wrap -->
 </div>
-<!-- /.section_history -->

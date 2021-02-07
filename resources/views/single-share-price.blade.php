@@ -5,7 +5,7 @@
     @include('partials.share-price.page-header')
     @include('partials.share-price.company-details')
 
-    <div id="ajax-load-api-data" data-post-id="{{get_the_ID()}}" data-sector="{{$sector}}" data-company-name="{{$comp_name}}" data-fincode="{{$fin_code}}" data-apiexchg="{{$api_exchg}}">
+    <div id="ajax-load-api-data" data-post-id="{{get_the_ID()}}" data-sector="" data-company-name="{{$comp_name}}" data-fincode="{{$fin_code}}" data-apiexchg="{{$api_exchg}}">
         <div id="chart-id"></div>
         <div id="history-price-id"></div>
         <div id="fundamental-analysis-data-id"></div>

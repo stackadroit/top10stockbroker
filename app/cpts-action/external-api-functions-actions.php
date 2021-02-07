@@ -990,14 +990,8 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
                         "Mobile"=>$mobile,
                         "Email"=>"promod1@gmail.com",
                         "LeadSource"=>"Top10stockbroker",
-                        "OS_Type"=>"Android",
-                        "Advertising_ID"=>"ea7fb80a-7a13-4104-be1c-e3142848c272",
-                        "AppsFlyer_ID"=>"1576584759697-3996486684700612831",
-                        "OS_Version"=>"9",
-                        "Device_Make"=>"OnePlus",
-                        "Device_Model"=>"ONEPLUS",
-                        "Campaign"=>"LeadForm",
-                        "state"=>"Delhi",
+                        "subsource"=>"Top10stockbroker",
+                        "SubSource"=>"Top10stockbroker",
                         "city"=>$city
                     )
                 );

@@ -1,9 +1,3 @@
-@php
-if(@$fundamentalAnalysisArray){ 
-  $fundamentalAnalysisArray =(array) @$fundamentalAnalysisArray->Table1;
-    $pageID = !empty($pageID) ? $pageID : get_the_ID();
-
-@endphp
 <div class="section_balanceSheet pb-5">
     <div class="inner-wrap">
         <div class="section-head">  
@@ -109,10 +103,6 @@ if(@$fundamentalAnalysisArray){
               </tbody>
             </table>
         </div>
-        <!-- /.balnce_table -->
-         
     </div>
-    <!-- /.inner -->
 </div>
-<!-- /.section_balanceSheet -->
-@php } @endphp
+ 

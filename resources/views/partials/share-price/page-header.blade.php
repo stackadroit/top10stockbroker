@@ -1,14 +1,9 @@
-@php 
-    if(!$company_details){
-  @endphp
-       <div class="section-companyprice bg-light section-padding"  id="company-stock-live">
-        <div class="inner-wrap">
-            <h2>"Live Data is not available for <?php echo str_replace('Share Price', '', get_the_title()); ?> because they are yet to be Listed in NSE or BSE or both."</h2>
-        </div>
+ <div class="section-companyprice bg-light section-padding"  id="company-stock-live-hint" style="display: none;">
+    <div class="inner-wrap">
+        <h2>"Live Data is not available for <?php echo str_replace('Share Price', '', get_the_title()); ?> because they are yet to be Listed in NSE or BSE or both."</h2>
     </div>
-       @php
-    }
-  @endphp
+</div>
+  
 <div class="section-companydetails section-padding">
         <div class="inner-wrap">
           <h1>{{ @$top_data['main_h1_title'] }}</h1>

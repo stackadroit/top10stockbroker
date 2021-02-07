@@ -20,12 +20,8 @@
         <li class="nav-item"><a href="#rights" role="tab" data-toggle="tab" aria-controls="rights">Rights</a></li>
         <li class="nav-item"><a href="#agm" role="tab" data-toggle="tab" aria-controls="agm">AGM/EGM</a></li>
       </ul>
-      <!-- /.tabs -->
     </div>
-    <!-- /.col-md-12 -->
   </div>
-  <!-- /.row -->
-
 
 
   <div class="tab-content" id="myTabContent">
