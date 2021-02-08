@@ -271,7 +271,7 @@
                             apiExchg:$('#filter-options').data('apiexchg'),
                             finCode: $('#filter-options').data('fincode'),
                             sector: secters,
-                            cDetailsresponse:cDetailsresponse,
+                            cDetailsresponse:JSON.stringify(cDetailsresponse),
                         };
                         (function(info){
                           $.ajax({

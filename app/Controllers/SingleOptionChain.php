@@ -16,31 +16,31 @@ class SingleOptionChain extends Controller
 	var $strikePrice ='';
 	var $stcMid ='';
 
-	protected function get_deviatives_api_response_curl($url =''){
-		$token =ACCORD_API_TOKEN;
-	    $url =$url."&token=".$token;
-	    if($url){
-	        $ch = curl_init();
-	        curl_setopt($ch, CURLOPT_URL, $url);
-	        curl_setopt($ch, CURLOPT_HEADER, false);
-	        curl_setopt($ch, CURLOPT_NOBODY, false); // remove body
-	        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-	        $response = curl_exec($ch);
-	        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	        // print_r($response);
-	        // curl_close($ch);
-	        if($httpCode == 200){
-	           $resposeArray =json_decode($response);
-	           // print_r($resposeArray);
-	           $resposeArray->status_code=$httpCode;
-	           return $resposeArray;
-	        }else{
-	            return array();
-	        }
-	    }else{
-	        return array();
-	    }
-	}
+	// protected function get_deviatives_api_response_curl($url =''){
+	// 	$token =ACCORD_API_TOKEN;
+	//     $url =$url."&token=".$token;
+	//     if($url){
+	//         $ch = curl_init();
+	//         curl_setopt($ch, CURLOPT_URL, $url);
+	//         curl_setopt($ch, CURLOPT_HEADER, false);
+	//         curl_setopt($ch, CURLOPT_NOBODY, false); // remove body
+	//         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+	//         $response = curl_exec($ch);
+	//         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	//         // print_r($response);
+	//         // curl_close($ch);
+	//         if($httpCode == 200){
+	//            $resposeArray =json_decode($response);
+	//            // print_r($resposeArray);
+	//            $resposeArray->status_code=$httpCode;
+	//            return $resposeArray;
+	//         }else{
+	//             return array();
+	//         }
+	//     }else{
+	//         return array();
+	//     }
+	// }
 	public function get_symble_list_and_id($instName ='option-chain'){
 	    $args = array(
 	      'post_type' => $instName,
@@ -57,6 +57,8 @@ class SingleOptionChain extends Controller
 	    return $responseData;
 	}
 	public function get_symble_list($instName ='option-chain'){
+		global $wpdb;
+		// SELECT wpgl_posts.* FROM wpgl_posts WHERE 1=1 AND wpgl_posts.post_type = 'option-chain' AND ((wpgl_posts.post_status = 'publish')) ORDER BY wpgl_posts.post_title ASC
 	    $args = array(
 	      'post_type' => $instName,
 	      'order'=>'ASC',
@@ -64,6 +66,7 @@ class SingleOptionChain extends Controller
 	      'posts_per_page'=>-1,
 	    );
 	    $post_lists= get_posts($args);
+	    // print_r($wpdb->last_query);
 	    return $post_lists;
 	}
 	public function topData() {
@@ -98,69 +101,69 @@ class SingleOptionChain extends Controller
 		return @$get_symble_list;
 	}
 	
-	public function companyDetails(){
-		$InstName = $this->instName();
-		$symbol = $this->symbol();
-		$cDetailsresponse =array();
-		$epUrl="https://derivatives.accordwebservices.com/Derivative/GetExpiryDate?InstName={$InstName}&Symbol={$symbol}";
-		$resposeArray1 =$this->get_deviatives_api_response_curl($epUrl); 
-		if(@$resposeArray1->status_code == 200){
-		    $ExpiryDate= (array) @$resposeArray1->Table;
-		    $this->expiryDate= $ExpiryDate;
-		    $ExpDate =@$ExpiryDate[0]->expdate1;
-		    $this->expDate =$ExpDate ;
-		    $ExpDateDsp =@$ExpiryDate[0]->expdate;
-		    $this->expDateDsp =$ExpDateDsp ;
-		} 
-    	$OptType ='PE';
-  		$this->optType =$OptType;
-  		$spUrl="https://derivatives.accordwebservices.com/Derivative/GetSrikePrice?InstName={$InstName}&Symbol={$symbol}&ExpDate={$ExpDate}&OptType={$OptType}";
-		$resposeArrayOT =get_deviatives_api_response_curl($spUrl);
-		$StrikePrice =''; 
-		$stcMid =''; 
-		$StkPrice =''; 
-		if(@$resposeArrayOT->status_code == 200){
-		  $StrikePrice= (array) @$resposeArrayOT->Table;
-		  $stcMid=(int) (count($StrikePrice) /2);
-		  $StkPrice =$StrikePrice[$stcMid]->StrikePrice;
-		} 
-  		$this->strikePrice =$StrikePrice;
-  		$this->stcMid =$stcMid;
-  		$this->stkPrice =$StkPrice;
-		$url ="https://derivatives.accordwebservices.com/Derivative/GetQuotes?InstName={$InstName}&Symbol={$symbol}&ExpDate={$ExpDate}&OptType={$OptType}&StkPrice={$StkPrice}";
-		$resposeArray =get_deviatives_api_response_curl($url);  
-		if(@$resposeArray->status_code == 200){
-		  	$this->cDetailsresponse= (array) @$resposeArray->Table[0];
-		}
-		// print_r($this->cDetailsresponse);
-		return $this->cDetailsresponse;
-	}
-	public function expiryDate(){
-	    return $this->expiryDate;
-	}
-	public function optType(){
-	    return $this->optType;
-	}
-	public function strikePrice(){
-	    return $this->strikePrice;
-	}
-	public function stcMid(){
-	    return $this->stcMid;
-	}
-	public function stkPrice(){
-	    return $this->stkPrice;
-	}
-	public function compName(){
-		return $this->cDetailsresponse['SYMBOL'];
-	}
+	// public function companyDetails(){
+	// 	$InstName = $this->instName();
+	// 	$symbol = $this->symbol();
+	// 	$cDetailsresponse =array();
+	// 	$epUrl="https://derivatives.accordwebservices.com/Derivative/GetExpiryDate?InstName={$InstName}&Symbol={$symbol}";
+	// 	$resposeArray1 =$this->get_deviatives_api_response_curl($epUrl); 
+	// 	if(@$resposeArray1->status_code == 200){
+	// 	    $ExpiryDate= (array) @$resposeArray1->Table;
+	// 	    $this->expiryDate= $ExpiryDate;
+	// 	    $ExpDate =@$ExpiryDate[0]->expdate1;
+	// 	    $this->expDate =$ExpDate ;
+	// 	    $ExpDateDsp =@$ExpiryDate[0]->expdate;
+	// 	    $this->expDateDsp =$ExpDateDsp ;
+	// 	} 
+ //    	$OptType ='PE';
+ //  		$this->optType =$OptType;
+ //  		$spUrl="https://derivatives.accordwebservices.com/Derivative/GetSrikePrice?InstName={$InstName}&Symbol={$symbol}&ExpDate={$ExpDate}&OptType={$OptType}";
+	// 	$resposeArrayOT =get_deviatives_api_response_curl($spUrl);
+	// 	$StrikePrice =''; 
+	// 	$stcMid =''; 
+	// 	$StkPrice =''; 
+	// 	if(@$resposeArrayOT->status_code == 200){
+	// 	  $StrikePrice= (array) @$resposeArrayOT->Table;
+	// 	  $stcMid=(int) (count($StrikePrice) /2);
+	// 	  $StkPrice =$StrikePrice[$stcMid]->StrikePrice;
+	// 	} 
+ //  		$this->strikePrice =$StrikePrice;
+ //  		$this->stcMid =$stcMid;
+ //  		$this->stkPrice =$StkPrice;
+	// 	$url ="https://derivatives.accordwebservices.com/Derivative/GetQuotes?InstName={$InstName}&Symbol={$symbol}&ExpDate={$ExpDate}&OptType={$OptType}&StkPrice={$StkPrice}";
+	// 	$resposeArray =get_deviatives_api_response_curl($url);  
+	// 	if(@$resposeArray->status_code == 200){
+	// 	  	$this->cDetailsresponse= (array) @$resposeArray->Table[0];
+	// 	}
+	// 	// print_r($this->cDetailsresponse);
+	// 	return $this->cDetailsresponse;
+	// }
+	// public function expiryDate(){
+	//     return $this->expiryDate;
+	// }
+	// public function optType(){
+	//     return $this->optType;
+	// }
+	// public function strikePrice(){
+	//     return $this->strikePrice;
+	// }
+	// public function stcMid(){
+	//     return $this->stcMid;
+	// }
+	// public function stkPrice(){
+	//     return $this->stkPrice;
+	// }
+	// public function compName(){
+	// 	return $this->cDetailsresponse['SYMBOL'];
+	// }
 
-	public function expDate(){
-		return @$this->expDate;
-	}
+	// public function expDate(){
+	// 	return @$this->expDate;
+	// }
 
-	public function expDatedisplay(){
-		return @$this->expDateDsp;
-	}
+	// public function expDatedisplay(){
+	// 	return @$this->expDateDsp;
+	// }
 	public function currentUrl(){
 		global $wp;
 		$current_url = home_url( add_query_arg( array(), $wp->request ) ) .'/';

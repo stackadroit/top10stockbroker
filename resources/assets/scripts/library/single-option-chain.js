@@ -111,6 +111,33 @@
               }
         });
       },
+      get_derivative_company_detail:function(eleId,instName,symbol,filter=true){
+         
+              jQuery.ajax(
+              {
+                  type: "post",
+                  dataType: "html",
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/company-detail',
+                  data: {
+                      'action':'company_detail',
+                      'InstName':instName,
+                      'symbol':symbol,
+                  },
+                  cache:false,
+                  beforeSend: function() {
+                   $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+                  },
+                  success: function(response){
+                      if(response){
+                         $(eleId).html(response);
+                      }
+                      $(eleId).html();
+                  },
+                  error:function(error){
+                     $(eleId).html();
+                  }
+              });
+      },
       strikPriceAnalisisExpiryDateFilter:function(eleId,InstName,ExpDate,OptType,section,symbol){
          $(eleId).find('table').find('tbody').html('');
               jQuery.ajax(
@@ -446,6 +473,11 @@
 				var self    = this,
 					companyStockLive  = '#company-stock-live';
           // For Detail page
+          var symbol = $('#filter-options').data('symbol');
+          var InstName = $('#filter-options').data('inst-name');
+          if (symbol) {
+              self.get_derivative_company_detail(companyStockLive,InstName,symbol,false);
+          }  
           $('ul.tabs').each(function () {
             var $active, $content, $links = jQuery(this).find('a');
              $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
