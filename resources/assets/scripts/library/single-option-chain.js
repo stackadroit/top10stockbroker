@@ -2,8 +2,14 @@
 	var initialized = false;
 	var SingleOptionChain = {
 			defaults: {
-				loadingElement : ''
-			},
+        wrapper: $('body'),
+        offset:150,
+        loadingElement : '',
+        delay: 1000,
+        visibleMobile: false,
+        label: false,
+        topSectionLoaded: false
+      },
 			initialize: function(opts) {
 				if (initialized) {
 					return this;
@@ -79,24 +85,24 @@
                 $(companyStockLive).find('#spot_price').html(parseFloat(currentValue.Nseltp).toFixed(2));
 
                 $(companyStockLive).find('#bid_price').html(parseFloat(currentValue.BBUYPRICE).toFixed(2));
-                $(companyStockLive).find('#bid_qty').html(currentValue.BBUYQTY);
+                $(companyStockLive).find('#bid_qty').html(parseFloat(currentValue.BBUYQTY).toFixed(2));
                 $(companyStockLive).find('#offer_price').html(parseFloat(currentValue.BSELLPRICE).toFixed(2));
-                $(companyStockLive).find('#offer_qty').html(currentValue.BSELLQTY);
+                $(companyStockLive).find('#offer_qty').html(parseFloat(currentValue.BSELLQTY).toFixed(2));
                 $(companyStockLive).find('#avg_price').html(parseFloat(currentValue.AVGTP).toFixed(2));
-                $(companyStockLive).find('#contra_trad').html(currentValue.TradedQtyCnt);
+                $(companyStockLive).find('#contra_trad').html(parseFloat(currentValue.TradedQtyCnt).toFixed(2));
 
                 $(companyStockLive).find('#turnover').html(parseFloat(currentValue.Turnover).toFixed(2));
                 $(companyStockLive).find('#trad_qty').html(currentValue.Volume); 
                 $(companyStockLive).find('#market_lot').html(currentValue.MktLot);
                 $(companyStockLive).find('#open_intrest').html(currentValue.OPENINTEREST);
                       
-                $(companyStockLive).find('#DiffOpenInt').html(currentValue.DiffOpenInt);
+                $(companyStockLive).find('#DiffOpenInt').html(parseFloat(currentValue.DiffOpenInt).toFixed(2));
                 if(currentValue.DiffOpenInt >0){
                   $(companyStockLive).find('#DiffOpenInt').removeClass('text-red').addClass('text-green');
                 }else{
                   $(companyStockLive).find('#DiffOpenInt').removeClass('text-green').addClass('text-red');
                 }
-                $(companyStockLive).find('#chgOpenInt').html(currentValue['chgOpenInt']);
+                $(companyStockLive).find('#chgOpenInt').html(parseFloat(currentValue['chgOpenInt']).toFixed(2));
                 if(currentValue['chgOpenInt'] >0){
                   $(companyStockLive).find('#chgOpenInt').removeClass('text-red').addClass('text-green');
                 }else{
@@ -111,32 +117,76 @@
               }
         });
       },
-      get_derivative_company_detail:function(eleId,instName,symbol,filter=true){
-         
-              jQuery.ajax(
-              {
-                  type: "post",
-                  dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/company-detail',
-                  data: {
-                      'action':'company_detail',
-                      'InstName':instName,
-                      'symbol':symbol,
-                  },
-                  cache:false,
-                  beforeSend: function() {
-                   $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
-                  },
-                  success: function(response){
-                      if(response){
-                         $(eleId).html(response);
-                      }
-                      $(eleId).html();
-                  },
-                  error:function(error){
-                     $(eleId).html();
+      get_derivative_company_detail:function(self,eleId,symbol,filter=true,loadchield){
+        var ele ='#strikPriceAnalisisExpiryDate';
+        jQuery.ajax(
+         {
+            type: "post",
+            dataType: "html",
+            url: global_vars.apiServerUrl + '/apiblock/react-option-chain/company-detail',
+            data: {
+              'action':'company_detail',
+                      // 'InstName':instName,
+              'symbol':symbol,
+            },
+            cache:false,
+            beforeSend: function() {
+              $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+            },
+            success: function(response){
+              if(response){
+                  $(eleId).html(response);
+                  self.options.topSectionLoaded =true;
+                  if(loadchield){
+                    var ExpDate =$(eleId).find('#ExpiryDate').val();
+                    var OptType =$(eleId).find('#OptionType').val();
+                    var StrikePrice = $(eleId).find('#StrikePrice').val();
+                     self.loadStrikePriceAnalysis(symbol,ExpDate,OptType,StrikePrice);
                   }
-              });
+              }
+                $(eleId).html();
+            },
+            error:function(error){
+              $(eleId).html();
+            }
+        });
+      },
+      loadStrikePriceAnalysis:function(symbol,ExpDate,OptType,StrikePrice){
+        eleId ='#strike-price-analysis-data-id';
+        $(eleId).html('');
+        instName ='OPTSTK';
+        if(symbol =='BANKNIFTY' || symbol =='NIFTY'){
+           instName ='OPTIDX'; 
+        }
+        var pageID=$('#filter-options').data('post-id');
+        jQuery.ajax(
+         {
+            type: "post",
+            dataType: "html",
+            url: global_vars.apiServerUrl + '/apiblock/react-option-chain/strike-price-analysis',
+            data: {
+              'action':'strike-price-analysis',
+              'InstName':instName,
+              'ExpDate':ExpDate,
+              'OptType':OptType,
+              'pageID':pageID,
+              'symbol':symbol,
+            },
+            cache:false,
+            beforeSend: function() {
+              $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+            },
+            success: function(response){
+              if(response){
+                  $(eleId).html(response);
+              }else{
+                $(eleId).html();
+              }
+            },
+            error:function(error){
+              $(eleId).html();
+            }
+        });
       },
       strikPriceAnalisisExpiryDateFilter:function(eleId,InstName,ExpDate,OptType,section,symbol){
          $(eleId).find('table').find('tbody').html('');
@@ -144,7 +194,7 @@
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-strike-price-analysis',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-strike-price-analysis',
                   data: {
                       'action':'get_strick_price_analysis_data',
                       'InstName':InstName,
@@ -169,12 +219,12 @@
               });
       },
       mostActiveOptionDataFilter:function(eleId,InstName,ExpDate,OptType,Rtype,symbol){
-         $(eleId).html('');
+         $(eleId).find('table').find('tbody').html('');
               jQuery.ajax(
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-most-active-stock-index-option',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-most-active-stock-index-option',
                   data: {
                       'action':'get_most_active_stock_index_option_data',
                       'InstName':InstName,
@@ -199,11 +249,13 @@
               });
       },
       putCallRatiosFilter: function(eleId,InstName,ExpDate,ReportType,PageSize,section){
+         $(eleId).find('table').find('tbody').html('');
          $.ajax(
               {
             type: "POST",
             dataType: "html",
-            url: global_vars.ajax_url,
+            // url: global_vars.ajax_url,
+            url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-top-put-call-ratio',
             data:{
                 'action':'get_top_call_put_data',
                       'InstName':InstName,
@@ -211,6 +263,7 @@
                       'ReportType':ReportType,
                       'section':section,
                       'PageSize':PageSize,
+                      'PageNo':1,
               },
               cache:false,
               beforeSend: function() {
@@ -264,12 +317,12 @@
              
       },
       mostActiveStockIndexOptionCallPutFilter:function(eleId,InstName,ExpDate,OptType,Rtype,symbol,PageSize,section){
-        $(eleId).html();
+        $(eleId).find('table').find('tbody').html('');
           jQuery.ajax(
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-most-active-stock-index-option',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-most-active-stock-index-option',
                   data: {
                       'action':'get_most_active_stock_index_option_data',
                       'InstName':InstName,
@@ -329,12 +382,12 @@
           });
       },
       topInterestStockIndexOptionCallPutFilter:function(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section){
-        $(eleId).html();
+        $(eleId).find('table').find('tbody').html('');
           jQuery.ajax(
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-top-interest-stock-option',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-top-interest-stock-option',
                   data: {
                       'action':'get_most_active_stock_index_option_data',
                       'InstName':InstName,
@@ -393,55 +446,7 @@
                   }
               });
       },
-      loadCompanyFilter:function(symbol){
-         jQuery.ajax(
-          {
-            type: "post",
-            dataType: "html",
-            url: global_vars.ajax_url,
-            data: {
-              'action':'get_full_page_ajax_search',
-              'symbol':symbol,
-            },
-            cache:false,
-            beforeSend: function() {
-              $('#company-stock-live').find('.fb-loader').remove();
-              $('#company-stock-live').prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
-            },
-            success: function(response){
-              if(response){
-                $('#company-stock-live').html(response);
-                var ele ='#strikPriceAnalisisExpiryDate';
-                jQuery.ajax(
-                  {
-                      type: "post",
-                      dataType: "html",
-                      url:global_vars.ajax_url,
-                      data: {
-                          'action':'get_expire_date_list',
-                          'symbol':symbol,
-                      },
-                      success: function(response){
-                          if(response){
-                             $(ele).html(response);
-                          }
-                          var expdate= $(ele).val();
-                          $(ele).closest('.tab-holder').find('.nav-tabs a').attr('data-expdate',expdate);
-                          $(ele).trigger('change');
-                          $('.full-page-loading').hide();
-                      },
-                      error:function(error){
-                         $('.full-page-loading').hide();
-                      }
-              });
-              }
-              $('#company-stock-live').find('.fb-loader').remove();
-            },
-            error:function(error){
-              $('#company-stock-live').find('.fb-loader').remove();
-            }
-          }); 
-      },
+       
       get_expiredata:function(ele,symbol){
         if(symbol){
             jQuery.ajax(
@@ -469,15 +474,149 @@
 
         }
       },
+      partial_most_active_stock_index_option:function(eleId,pageID, InstName,PageSize){
+
+        jQuery.ajax(
+         {
+            type: "post",
+            dataType: "html",
+            url: global_vars.apiServerUrl + '/apiblock/react-option-chain/most-active-stock-index-options',
+            data: {
+              'action':'strike-price-analysis',
+              'InstName':InstName,
+              'PageSize':PageSize,
+              'pageID':pageID,
+              'section':'read_more',
+            },
+            cache:false,
+            beforeSend: function() {
+              $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+            },
+            success: function(response){
+              if(response){
+                  $(eleId).html(response);
+              }else{
+                $(eleId).html();
+              }
+            },
+            error:function(error){
+              $(eleId).html();
+            }
+        });
+      },
 			events: function() {
 				var self    = this,
-					companyStockLive  = '#company-stock-live';
+					companyStockLive  = '#company-stock-live',_isScrolling = false;
           // For Detail page
           var symbol = $('#filter-options').data('symbol');
-          var InstName = $('#filter-options').data('inst-name');
+          // var InstName = $('#filter-options').data('inst-name');
           if (symbol) {
-              self.get_derivative_company_detail(companyStockLive,InstName,symbol,false);
+              self.get_derivative_company_detail(self,companyStockLive,symbol,false);
           }  
+
+          $(window).scroll(function() {
+            if (!_isScrolling) {
+              
+              console.log(self.options.topSectionLoaded);
+              if (self.options.topSectionLoaded && $(window).scrollTop() > self.options.offset){
+                _isScrolling = true;
+                  (function($) {
+                    'use strict';
+                      var instName = $('#ajax-load-api-data').data('inst-name');
+                      var symbol = $('#company-stock-live #ddlCompanySymble').find(':selected').data('symble');
+                      var ExpDate = $('#company-stock-live #ExpiryDate').val();
+                      var OptType = $('#company-stock-live').find('#OptionType').val();
+                      var StkPrice = $('#company-stock-live #StrikePrice').val();
+                      $('#filter-options').attr('data-opt-type',OptType);
+                      $('#filter-options').attr('data-symbol',symbol);
+                      $('#filter-options').attr('data-exp-date',ExpDate);
+                      $('#filter-options').attr('data-stk-price',StkPrice);
+                       
+                          // For Template page condition
+                      if($('.template-option-chain').length){
+                        var pages = {
+                          "strike-price-analysis-data": "strike-price-analysis",
+                          "top-put-call-ratio-data": "top-put-call-ratio",
+                          "most-active-stock-options-data": "most-active-stock-options",
+                          "most-active-index-options-data": "most-active-index-options",
+                          "top-open-interest-stock-options-data": "top-open-interest-stock-options",
+                          "top-open-interest-index-options-data": "top-open-interest-index-options",
+                        };
+                      }else{
+                        var pages = {
+                          "chart-data":  "chart",
+                          "strike-price-analysis-data": "strike-price-analysis",
+                          "most-active-options-data": "most-active-options",
+                          "open-interest-analysis-data": "open-interest-analysis",
+                          "top-put-call-ratio-data": "top-put-call-ratio",
+                          "most-active-stock-options-data": "most-active-stock-options",
+                          "most-active-index-options-data": "most-active-index-options",
+                          "top-open-interest-stock-options-data": "top-open-interest-stock-options",
+                          "top-open-interest-index-options-data": "top-open-interest-index-options",
+                           
+                        };
+                      }
+        
+                      for (var key in pages) {
+                        var info = {
+                              page: key,
+                              pageURI: global_vars.apiServerUrl+'/apiblock/react-option-chain/'+pages[key],
+                              pageID: $('#ajax-load-api-data').data('post-id'),
+                              InstName: instName,
+                              symbol: symbol,
+                              ExpDate: ExpDate,
+                              OptType: OptType,
+                              StkPrice: StkPrice,
+                              // companyName: '<?php echo @$companyName; ?>',
+                              // cDetailsresponse: JSON.stringify(cDetailsresponseTemp),
+                          };
+                           
+                          (function(info){
+                              $.ajax({
+                                method: "POST",
+                                url: info.pageURI,
+                                crossDomain: true,
+                                config: {
+                                  headers: {
+                                      'Access-Control-Allow-Origin': '*',
+                                    }
+                                },
+                                data: {
+                                  'action': 'load_option_chain_page_section',
+                                  'data': info,
+                                  'security': global_vars.ajax_nonce,
+                                },
+                                success: function (data) {
+                                  $("#ajax-load-api-data " + "#" + info.page + "-id").append(data);   
+                                   
+                                    if( info.page == 'chart-data'){
+                                        //select the tabs
+                                        $("ul.nested_tab a").click(function (e) {
+                                            e.preventDefault();
+                                            $(this).closest('.nested_tab').find('a').removeClass('active');
+                                            $(this).addClass("active");
+
+                                            var activeTab = jQuery(this).attr("href");
+                                            $(this).closest(".month_tabs").find('.tab_content').hide();
+                                            $(this).closest(".month_tabs").find(activeTab).show();
+                                          });
+                                        $('.nested_tab a[href="#li_1m"').trigger('click');
+                                    }
+                                },
+                                  error: function (errorThrown) {
+                                      console.log(errorThrown);
+                                  }
+                              });
+                          
+                          })(info);
+                      }
+                    
+                  }).apply(this, [jQuery]);
+              }
+            }
+          });
+
+
           $('ul.tabs').each(function () {
             var $active, $content, $links = jQuery(this).find('a');
              $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
@@ -496,18 +635,24 @@
               e.preventDefault();
             });
           });
-
+          // For Details Paga
+          if($('#mostActiveStockIndexOptionDetail').length){
+            var eleId ='#mostActiveStockIndexOptionDetail';
+              InstName ='OPTIDX';
+              pageId ='54227';
+              PageSize =20;
+              self.partial_most_active_stock_index_option(eleId,pageId, InstName,PageSize);
+          }
           //Top Filter
           $(document).on('change','#ddlCompanySymble', function () {
-              var symbol = $(this).val();
               if($('.template-option-chain').length){
+                var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
                 if (symbol) {
                   this.interval =0;
-                  $('.full-page-loading').show();
-                  self.loadCompanyFilter(symbol);
-                  
+                  self.get_derivative_company_detail(self,companyStockLive,symbol,filter=true,loadchield=true)
                 }
               }else{
+              var symbol = $(this).val();
                 if (symbol) {
                     window.location.href =symbol;
                 }
@@ -582,7 +727,7 @@
               var symbol =$('#ddlCompanySymble').children("option:selected").attr('data-symble');
               var ExpDate =$('#ExpiryDate').val();
               var Rtype = $(this).val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-opt-filter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-opt-filter',Rtype).text();
               var eleId= '';
               if(activeTb =='CALL'){
                 OptType ='C';
@@ -691,7 +836,7 @@
               var Rtype = $('#mostActiveStockOptionFilter').val();
               var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
-              var PageSize =20;
+              var PageSize =10;
               if(activeTb =='CALL'){
                 OptType ='C';
                 eleId ='#mostActiveStockOptionCall';
@@ -722,7 +867,7 @@
               var Rtype = $('#mostActiveIndexOptionFilter').val();
               var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
-               var PageSize =20;
+               var PageSize =10;
               if(activeTb =='CALL'){
                 OptType ='C';
                 eleId ='#mostActiveIndexOptionCall';
@@ -746,7 +891,7 @@
           $(document).on('change','#mostActiveStockIndexOptionExpiryDate,#mostActiveStockIndexOptionFilter',function(){
               var symbol ='';
               var OptType ='';
-              var PageSize =20;
+              var PageSize =10;
               var InstName =$('#ActiveInstName').val();
               var section ='read_more';
               var ExpDate = $('#mostActiveStockIndexOptionExpiryDate').val();

@@ -505,7 +505,7 @@ include 'cpts-action/futures-actions.php';
 /**--------------------------------------------------------------
  * File include Option Chain Actions.
  /---------------------------------------------------------------*/
-include 'cpts-action/option-chain-actions.php';
+//include 'cpts-action/option-chain-actions.php';
 /**----------------------------------------------------------
  * File include broker-calculator Actions.
  /----------------------------------------------------------*/
