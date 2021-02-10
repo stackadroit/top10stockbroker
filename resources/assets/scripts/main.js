@@ -128,7 +128,13 @@ import templateFutures from './routes/single/single-futures';
  Js For Single Option Chain (CPT) Option Chain Template
 */
 import singleOptionChain from './routes/single/single-option-chain';
-import templateOptionChain from './routes/single/single-option-chain';
+import singleOptionChainPutCallRatioData from './routes/single/put-call-ratio-data';
+import singleOptionChainMostActiveStockOptionData from './routes/single/most-active-stock-index-detail';
+import singleOptionChainMostActiveIndexOptionData from './routes/single/most-active-stock-index-detail';
+import singleOptionChainOpenInterestStockOptionData from './routes/single/open-interest-stock-index-detail';
+import singleOptionChainOpenInterestIndexOptionData from './routes/single/open-interest-stock-index-detail';
+
+import templateOptionChain from './routes/templates/template-option-chain';
 import singleBrokerComparison from './routes/brokerage/broker-comparison';
 import singleBrokerageCalculator from './routes/brokerage/brokerage-calculator';
 import singleMarginCalculator from './routes/brokerage/margin-calculator';
@@ -164,6 +170,11 @@ const routes = new Router({
    Js For Single Option Chain (CPT) Option Chain Template
   */
   singleOptionChain,
+  singleOptionChainPutCallRatioData,
+  singleOptionChainMostActiveStockOptionData,
+  singleOptionChainMostActiveIndexOptionData,
+  singleOptionChainOpenInterestStockOptionData,
+  singleOptionChainOpenInterestIndexOptionData,
   templateOptionChain,
   /**
    Include Broker Comparison js function

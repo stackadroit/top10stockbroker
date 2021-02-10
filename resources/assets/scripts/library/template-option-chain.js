@@ -1,6 +1,6 @@
 (function($) {
 	var initialized = false;
-	var SingleOptionChain = {
+	var TemplateOptionChain = {
 			defaults: {
         wrapper: $('body'),
         offset:150,
@@ -344,17 +344,63 @@
                   }
               });
       },
-      
-        
-      
-			events: function() {
+      events: function() {
 				var self    = this,
 					companyStockLive  = '#company-stock-live',_isScrolling = false;
           
-          var symbol = $('#filter-options').data('symbol');
-          if (symbol) {
-              self.get_derivative_company_detail(self,companyStockLive,symbol,false);
-          }  
+          (function($) { 
+
+              var symbol = $('#filter-options').data('symbol');
+              if (symbol) {
+                  self.get_derivative_company_detail(self,companyStockLive,symbol,false);
+              } 
+              $('ul.tabs').each(function () {
+                  var $active, $content, $links = jQuery(this).find('a');
+                   $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
+                  $active.addClass('active');
+                  $content = $($active[0].hash);
+                 $links.not($active).each(function () {
+                      jQuery(this.hash).hide();
+                  });
+                   jQuery(this).on('click', 'a', function (e) {
+                      $active.removeClass('active');
+                      $content.hide();
+                  $active = jQuery(this);
+                      $content = jQuery(this.hash);
+                  $active.addClass('active');
+                      $content.show();
+                    e.preventDefault();
+                  });
+              });
+              
+              //Top Filter
+              $(document).on('change','#ddlCompanySymble', function () {
+                  if($('.template-option-chain').length){
+                    var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
+                    if (symbol) {
+                      this.interval =0;
+                      self.get_derivative_company_detail(self,companyStockLive,symbol,filter=true,loadchield=true)
+                    }
+                  }else{
+                  var symbol = $(this).val();
+                    if (symbol) {
+                        window.location.href =symbol;
+                    }
+                  }
+                  
+              });
+              this.interval = setInterval(function(){
+                var InstName = $('#companyInstName').val();
+                var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
+                var ExpDate = $('#ExpiryDate').val();
+                var OptType = $('#OptionType').val();
+                var StkPrice = $('#StrikePrice').val();
+                if (InstName) {
+                  self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice,false);
+                }
+              }, 10000);
+
+          }).apply(this, [jQuery]); 
 
           $(window).scroll(function() {
             if (!_isScrolling) {
@@ -372,21 +418,16 @@
                       $('#filter-options').attr('data-symbol',symbol);
                       $('#filter-options').attr('data-exp-date',ExpDate);
                       $('#filter-options').attr('data-stk-price',StkPrice);
-                       
-                       var pages = {
-                          "chart-data":  "chart",
+                        var pages = {
                           "strike-price-analysis-data": "strike-price-analysis",
-                          "most-active-options-data": "most-active-options",
-                          "open-interest-analysis-data": "open-interest-analysis",
                           "top-put-call-ratio-data": "top-put-call-ratio",
                           "most-active-stock-options-data": "most-active-stock-options",
                           "most-active-index-options-data": "most-active-index-options",
                           "top-open-interest-stock-options-data": "top-open-interest-stock-options",
                           "top-open-interest-index-options-data": "top-open-interest-index-options",
-                           
                         };
                       for (var key in pages) {
-                        var info = {
+                         var info = {
                               page: key,
                               pageURI: global_vars.apiServerUrl+'/apiblock/react-option-chain/'+pages[key],
                               pageID: $('#ajax-load-api-data').data('post-id'),
@@ -414,20 +455,6 @@
                                 },
                                 success: function (data) {
                                   $("#ajax-load-api-data " + "#" + info.page + "-id").append(data);   
-                                   
-                                    if( info.page == 'chart-data'){
-                                        //select the tabs
-                                        $("ul.nested_tab a").click(function (e) {
-                                            e.preventDefault();
-                                            $(this).closest('.nested_tab').find('a').removeClass('active');
-                                            $(this).addClass("active");
-
-                                            var activeTab = jQuery(this).attr("href");
-                                            $(this).closest(".month_tabs").find('.tab_content').hide();
-                                            $(this).closest(".month_tabs").find(activeTab).show();
-                                          });
-                                        $('.nested_tab a[href="#li_1m"').trigger('click');
-                                    }
                                 },
                                   error: function (errorThrown) {
                                       console.log(errorThrown);
@@ -442,51 +469,8 @@
             }
           });
 
-          $('ul.tabs').each(function () {
-            var $active, $content, $links = jQuery(this).find('a');
-             $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
-            $active.addClass('active');
-            $content = $($active[0].hash);
-           $links.not($active).each(function () {
-                jQuery(this.hash).hide();
-            });
-             jQuery(this).on('click', 'a', function (e) {
-                $active.removeClass('active');
-                $content.hide();
-            $active = jQuery(this);
-                $content = jQuery(this.hash);
-            $active.addClass('active');
-                $content.show();
-              e.preventDefault();
-            });
-          });
+
           
-          //Top Filter
-          $(document).on('change','#ddlCompanySymble', function () {
-              if($('.template-option-chain').length){
-                var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
-                if (symbol) {
-                  this.interval =0;
-                  self.get_derivative_company_detail(self,companyStockLive,symbol,filter=true,loadchield=true)
-                }
-              }else{
-              var symbol = $(this).val();
-                if (symbol) {
-                    window.location.href =symbol;
-                }
-              }
-              
-          });
-          this.interval = setInterval(function(){
-            var InstName = $('#companyInstName').val();
-            var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
-            var ExpDate = $('#ExpiryDate').val();
-            var OptType = $('#OptionType').val();
-            var StkPrice = $('#StrikePrice').val();
-            if (InstName) {
-              self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice,false);
-            }
-          }, 10000);
           $(document).on('click','#filter_derivative_details', function (e) {
             e.preventDefault();
             this.interval =0;
@@ -793,11 +777,10 @@
               
           });
           
-          
 				return this;
 			},
 
 		};
-	exports.SingleOptionChain = SingleOptionChain;
+	exports.TemplateOptionChain = TemplateOptionChain;
 
 }).apply(this, [jQuery]);
