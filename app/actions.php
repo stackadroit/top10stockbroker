@@ -500,7 +500,7 @@ include 'cpts-action/share-price-actions.php';
 /**--------------------------------------------------------------
  * File include Futures Actions.
  /---------------------------------------------------------------*/
-include 'cpts-action/futures-actions.php';
+// include 'cpts-action/futures-actions.php';
 
 /**--------------------------------------------------------------
  * File include Option Chain Actions.

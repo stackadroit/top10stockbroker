@@ -122,7 +122,9 @@ import templateSharePrice from './routes/single/single-share-price';
  Js For Single Futures (CPT) Futures Template
 */
 import singleFutures from './routes/single/single-futures';
-import templateFutures from './routes/single/single-futures';
+import templateFutures from './routes/templates/template-futures';
+import openInterestStockFutures from './routes/single/open-interest-stock-futures';
+import mostActiveStockFutures from './routes/single/most-active-stock-futures';
 
 /**
  Js For Single Option Chain (CPT) Option Chain Template
@@ -166,6 +168,8 @@ const routes = new Router({
   */
   singleFutures,
   templateFutures,
+  openInterestStockFutures,
+  mostActiveStockFutures,
   /**
    Js For Single Option Chain (CPT) Option Chain Template
   */

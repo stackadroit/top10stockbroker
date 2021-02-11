@@ -1,6 +1,7 @@
+// SingleFutures
 (function($) {
 	var initialized = false;
-	var SingleFutures = {
+	var TemplateFutures = {
 			defaults: {
         wrapper: $('body'),
         offset:50,
@@ -109,7 +110,6 @@
               }
         });
       },
-            
       get_future_most_active_stock_index_data: function(eleId,InstName,ExpDate,Rtype,PageSize='',section=''){
         $(eleId).find('table').find('tbody').html('');
         jQuery.ajax(
@@ -118,7 +118,7 @@
             dataType: "html",
             url: global_vars.apiServerUrl + '/apiblock/react-futures/partial-most-active-stock-index',
             data: {
-                'action':'get_future_most_active_stock_index_data',
+              'action':'get_future_most_active_stock_index_data',
                 'InstName':InstName,
                 'ExpDate':ExpDate,
                 'Rtype':Rtype,
@@ -144,7 +144,7 @@
         {
             type: "post",
             dataType: "html",
-            url: global_vars.apiServerUrl + '/apiblock/react-futures/partial-top-interest-stock-index',
+            url: global_vars.apiServerUrl + '/apiblock/futures/partial-top-interest-stock-index',
             data:{
                 'action':'get_future_top_interest_stock_index_option_data',
                 'InstName':InstName,
@@ -204,8 +204,9 @@
       },
 			events: function() {
 				var self    = this,
-					companyStockLive  = '#company-stock-live',
+          companyStockLive  = '#company-stock-live',
           _isScrolling = false;
+          
           // Toad Top Section Data
           (function($) {
               'use strict';
@@ -224,7 +225,15 @@
                     self.getDerivativeCompanyStock(instName,symbol,ExpDate,OptType,StkPrice,false);
                 }
               }, 10000);
- 
+
+              $(companyStockLive).on('change','#ddlCompanySymble', function () {
+                  var symbol =$('#ddlCompanySymble').find(':selected').attr('data-symble');
+                  var pageID =$('#filter-options').data('post-id');
+                  if (symbol) {
+                    self.ajax(self,companyStockLive,pageID,symbol);
+
+                  }
+              });
           }).apply(this, [jQuery]);  
 
           // Load Bellow page content after page scroll
@@ -310,53 +319,8 @@
               }
             }
           });
-
-          // For Detail page
-          $('ul.nav-tabs').each(function () {
-            var $active, $content, $links = jQuery(this).find('a');
-             $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
-            $active.addClass('active');
-            $content = $($active[0].hash);
-           $links.not($active).each(function () {
-                jQuery(this.hash).hide();
-            });
-             jQuery(this).on('click', 'a', function (e) {
-                $active.removeClass('active');
-                $content.hide();
-            $active = jQuery(this);
-                $content = jQuery(this.hash);
-            $active.addClass('active');
-                $content.show();
-              e.preventDefault();
-            });
-          });
-          this.interval = setInterval(function(){
-            var instName = $('#filter-options').data('inst-name');
-            var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
-            var ExpDate = $('#ExpiryDate').val();
-            var OptType = $('#ajax-load-api-data').data('opt-type');
-            var StkPrice = $('#ajax-load-api-data').data('stk-price');
-            if (instName) {
-                self.getDerivativeCompanyStock(instName,symbol,ExpDate,OptType,StkPrice,false);
-            }
-          }, 10000);
-
           
-          $(companyStockLive).on( 'change', '#ExpiryDate', function(event) {
-            var instName = $('#filter-options').data('inst-name');
-            var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
-            var ExpDate = $(this).val();
-            $('#ajax-load-api-data').attr('data-exp-date',$(this).val());
-            var OptType = $('#ajax-load-api-data').data('opt-type');
-            var StkPrice = $('#ajax-load-api-data').data('stk-price');
-            self.getDerivativeCompanyStock(instName,symbol,ExpDate,OptType,StkPrice);
-          });
-					$(companyStockLive).on( 'change', '#ddlCompanySymble', function(event) {
-	            var filterUri = $(this).val();
-              if (filterUri) {
-                  window.location.href =filterUri;
-              }
-	        });
+          // Page data Filter Js
           // Most Active Stock Futures
           $(document).on('click','.changeMASEDFilter',function(){
             var expdate =$(this).attr('data-expdate');
@@ -457,12 +421,8 @@
               self.get_future_top_interest_stock_index_option_data(eleId,InstName,ExpDate,OptType,Opt);
           });
           // End
-
-          
 				return this;
 			},
-
 		};
-	exports.SingleFutures = SingleFutures;
-
+	exports.TemplateFutures = TemplateFutures;
 }).apply(this, [jQuery]);

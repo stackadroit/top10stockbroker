@@ -137,14 +137,10 @@ class OptionFutureChart extends React.Component {
       	const data = new FormData();
         // var apiExchg =$('#ajax-load-api-data').data('apiexchg');
           // finCode: $('#ajax-load-api-data').data('fincode'),
-        if($(document).find('#ddlCompanySymble').length){
-          var symbol =$('#ddlCompanySymble').find(':selected').attr('data-symble');
-        }
-        if($(document).find('#ddlCompanySymbleTpl').length){
-          var symbol =$('#ddlCompanySymbleTpl').val();
-        }
+        var symbol =$('#ddlCompanySymble').find(':selected').attr('data-symble');
+         
         symbol =(symbol)?symbol:'TCS';
-        var instName =$('#companyInstName').val();
+        var instName =$('#filter-options').data('inst-name');
         var expDate =$('#ExpiryDate').val();
       	data.append('dur', dur);
       	// data.append('apiExchg', apiExchg);
@@ -194,7 +190,7 @@ class OptionFutureChart extends React.Component {
                     parseFloat(v.volume)];
               graphDataArray.push(rowValue);
             });
-            console.log(graphDataArray);
+            // console.log(graphDataArray);
             var y_min = Math.min.apply(null, x_data);
             var y_max = Math.max.apply(null, x_data);
             this.setState({ 
