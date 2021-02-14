@@ -76,6 +76,8 @@ exports.theme = window.theme;
 				.addClass(self.options.buttonClass)
 				.attr({
 					'href': '#',
+					'aria-label': 'Scroll To Top',
+					'title': 'Scroll To Top',
 				})
 				.append(
 					$('<i />')

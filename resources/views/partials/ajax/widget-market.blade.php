@@ -1,5 +1,5 @@
 <div id="marketRadar">
-	<button class="drop-btn" id="arrow-button-widget"><i class="fas fa-angle-down"></i></button>
+	<button class="drop-btn" id="arrow-button-widget" aria-label="Button Widget"><i class="fas fa-angle-down"></i></button>
 	<div class="widget-rp py-1 w-10">
 		<div id="widget-first" class="treadmill">
 		</div>
@@ -9,5 +9,3 @@
 		</div>
 	</div>
 </div>
-
-

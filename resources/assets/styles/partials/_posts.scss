@@ -1,0 +1,86 @@
+.search-pincode-input{
+	border-color: rgb(204, 204, 204); background-color: #FFF;width: 100%
+}
+.selectbrockerdiv .comlink {
+	padding:10px 20px;margin: 0px;
+}
+.single-margin-calculator-data .margin-output{background-color: #f9f9f9; width: 100%; margin: 10px auto;}
+	.single-margin-calculator-data .margin-output table{margin:0;}
+	.single-margin-calculator-data .margincalTable{table-layout: fixed;}
+	.single-margin-calculator-data .mar-ddata{border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 10px;}
+	.single-margin-calculator-data ul.tabs-margin{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+ 	.single-margin-calculator-data #myTable input[type=text],
+ 	.single-margin-calculator-data #myInput,.single-margin-calculator-data #marAutocomp,.single-margin-calculator-data #marAutocomp_co,.single-margin-calculator-data #marAutocomp_de,.single-margin-calculator-data #marAutocomp_cu,.single-margin-calculator-data .marAvail_de, .single-margin-calculator-data .marAvail_co, .single-margin-calculator-data .marAvail_cu, .single-margin-calculator-data .marAvail, .single-margin-calculator-data .marStockprice, .single-margin-calculator-data .marStockprice_de, .single-margin-calculator-data .marStockprice_co, .single-margin-calculator-data .marStockprice_cu{background-color: #fff !important; padding: 10px !important;}
+	 .single-margin-calculator-data #myInput{width: 100%;}
+		.single-margin-calculator-data  ul.tabs-margin li{
+			display: inline-block;
+			margin: 0 0 10px;
+    		padding: 15px 32px;
+    		font-weight: 600;
+    		text-align: center;
+    		color: #000;
+    		border: 1px solid transparent;
+			cursor: pointer;
+			background-color: #eee;
+			position: relative;
+		}
+		.single-margin-calculator-data ul.tabs-margin li:before {
+    content: "\f17d";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    padding-right: 0.5em;
+}
+
+		.single-margin-calculator-data ul.tabs-margin li.current{
+			background: #000;
+			color: #fff;
+			border-top: 2px solid orange;
+		}
+
+		.single-margin-calculator-data  .single-margin-calculator-data .tab-content{
+			display: none;
+			background: #f7f7f7;
+			padding: 15px;
+		}
+
+		.single-margin-calculator-data .tab-content.current{
+			display: inherit;
+		}
+		.single-margin-calculator-data .margin-output tr:nth-child(odd) td {text-align: center; color: #000;}
+		.single-margin-calculator-data .margin-output tr:nth-child(even) td {font-size: 18px; font-weight: bold; text-align: center;color: #000;}
+		.single-margin-calculator-data .margin-output th{background-color: #ddd; color: #000; text-align: center;}
+		.single-margin-calculator-data .margin-cal{margin-bottom: 0 !important;}
+		.single-margin-calculator-data .leverage{    
+			width: 100%;
+		    border: 1px solid #212425;
+		    padding: 6px 10px;
+		    text-align: center;
+		    font-size: 24px;
+		    border-top: none;
+		    font-weight: bold;
+		}
+		@media all and (max-width: 992px){
+			.single-margin-calculator-data ul.tabs-margin li{padding: 10px 15px;}
+		}
+ 
+.single-margin-calculator-data .immybox.immybox_witharrow{background-image:url(/img/immybox-arrow.png);background-repeat:no-repeat;background-position:right center}
+.single-margin-calculator-data .immybox_results{position:absolute;overflow:auto;max-height:20em;background-color:white;border:1px solid #ccc;z-index:9001}
+.single-margin-calculator-data .immybox_results p.immybox_moreinfo,.immybox_results p.immybox_noresults{color:#ccc;font-style:italic;padding:0 1em;margin:0}
+.single-margin-calculator-data .immybox_results ul{list-style-type:none;margin:0;padding:0}
+.single-margin-calculator-data .immybox_results ul li{padding:0.25em 1em;-o-user-select:none;-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;user-select:none}
+.single-margin-calculator-data .immybox_results ul li.immybox_choice{cursor:pointer}
+.single-margin-calculator-data .immybox_results ul li.immybox_choice.active{background-color:#f1f1f1}
+.single-margin-calculator-data .immybox_results ul li.immybox_choice .highlight{text-decoration:underline}
+.single-margin-calculator-data .tab-row{width: 100%;}
+.single-margin-calculator-data .tab-col{float:left; width: 33.3%}
+@media all and (max-width: 550px){
+.single-margin-calculator-data .tab-col{float:left; width: 100%}	
+}

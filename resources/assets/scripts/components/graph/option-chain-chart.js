@@ -132,7 +132,7 @@ class OptionChainChart extends React.Component {
       	var selli=$('.nested_tab').find('a.active').data("element");
      	  var resp_div=$('.nested_tab').find('a.active').data("chart-element");
       	const data = new FormData();
-        var apiExchg =$('#ajax-load-api-data').data('apiexchg');
+        // var apiExchg =$('#ajax-load-api-data').data('apiexchg');
         var symbol =$('#ddlCompanySymble').find(':selected').data('symble');
           symbol =(symbol)?symbol:'TCS';
         var instName =$('#companyInstName').val();
@@ -140,7 +140,7 @@ class OptionChainChart extends React.Component {
         var optType =$('#OptionType').val();
         var stkPrice =$('#StrikePrice').val();
       	data.append('dur', dur);
-      	data.append('apiExchg', apiExchg);
+      	// data.append('apiExchg', apiExchg);
       	data.append('symbol', symbol);
         data.append('instName', instName);
         data.append('expDate', expDate);
@@ -162,10 +162,16 @@ class OptionChainChart extends React.Component {
               var y = spl[0];
               var m = spl[1] - 1;
               var d = spl[2];
-              var h = spl[3]? spl[3] : 0;
-              var i = spl[4]? spl[4] : 0;
+              var h =0;
+              var i =0; 
+              if(spl[3] != undefined){
+                h = spl[3];
+              }
+              if(spl[4] != undefined){
+                i = spl[4];
+              }
               if(dur == '1D' || dur == '1W'){
-                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+spl[3]+":"+spl[4];
+                  var newDate=spl[1]+"/"+spl[2]+"/"+spl[0]+" "+h+":"+i;
               }else{
                   var newDate=spl[1]+"/"+spl[2]+"/"+spl[0];  
               }
@@ -199,11 +205,11 @@ class OptionChainChart extends React.Component {
                   { data:graphDataArray}
                 ]
               }
-            });  
+            }); 
+            $('#'+resp_div).prev('.fb-loader').remove(); 
         })
         .catch(error =>  {
-            //console.log(error);
-           
+            $('#'+resp_div).prev('.fb-loader').remove();
         });
      
   }

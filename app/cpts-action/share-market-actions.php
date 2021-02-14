@@ -1,10 +1,7 @@
 <?php
-/*--------------------------------------------------------
-/* Get Accord API Response Used in both Share Market and Share Price
-/* @author Pavan JI <dropmail2pavan@gmail.com> 
-/*---------------------------------------------------------*/
-function get_api_response_curl($url =''){
-        $token =ACCORD_API_TOKEN;
+ 
+ function get_api_response_curl($url =''){
+     $token =ACCORD_API_TOKEN;
         $url =$url."&token=".$token;
         if($url){
             $ch = curl_init();
@@ -26,6 +23,7 @@ function get_api_response_curl($url =''){
             return array();
         }
     }
+    
 /*--------------------------------------------------------
 /* Get Indices list In our DB
 /* @author Pavan JI <dropmail2pavan@gmail.com> 
@@ -195,12 +193,9 @@ function share_market_data_ajax_request(){
         $apiExchg =($indexCode <100)?'BSE':'NSE';
         if(get_post_type($page_id) =='share-market'){
             if(has_term('gainers-losers', 'sm-category', $page_id)){
-                $indicesStocks =array();
                 $intra_day ='1D';
                 $sectors_gl ='G';
                 $apiExchg ='NSE';
-                $sort ='Desc';
-                $sortby ='CHANGE';
                 $indexFilterOpt = get_post_meta($page_id, 'indices_code', true );
                 if($indexFilterOpt){
                     $indexCodeRep = explode('_', $indexFilterOpt);
@@ -214,34 +209,20 @@ function share_market_data_ajax_request(){
                         $intra_day = @$indexCodeRep[2];
                     }
                 }
-                if($sectors_gl =='L'){
-                    $sort ='Asc';
-                    $sortby ='CHANGE';
-                }
                 $indexCodes='1';
                 if($apiExchg =='NSE'){
                     $indexCodes='123';
                 }
-                $url ="https://stock.accordwebservices.com/Stock/GetGainerLoserIndex?Exchg=".$apiExchg."&IndexCode=".$indexCodes."&Opt=".$sectors_gl."&Period=".$intra_day."&PageNo=1&PageSize=20&SortExp=".$sortby."&SortDirection=".$sort;
-                $resposeArray =get_api_response_curl($url);  
-                $totalPage =1;
-                if(@$resposeArray->status_code == 200){
-                   $indicesStocks= (array) $resposeArray->Table;
-                   $totalPage=@$resposeArray->Table1[0]->TotalRows;
-                }
                 
                 $data['gainerLoserFilter']=get_gainersLosorsListPost();
                 $data['indicesFilter']=get_indicesListPost();
-                $data['indicesStocks']=$indicesStocks;
                 $data['apiExchg']=$apiExchg;
                 $data['sectors_gl']=$sectors_gl;
                 $data['intra_day']=$intra_day;
-                $data['page_id']=$page_id;
-                $data['totalPage']=$totalPage;
                 $data['indexCodes']=$indexCodes;
                 $template = 'partials.ajax.share-market.gainar-losors.sectors'; 
             }elseif(has_term('high-low', 'sm-category', $page_id)){
-                $indicesStocks =array();
+                // $indicesStocks =array();
                 $intra_day ='1W';
                 $sectors_gl ='L';
                 $apiExchg ='NSE';
@@ -266,34 +247,27 @@ function share_market_data_ajax_request(){
                     $sortby ='CHANGE';
                 }
 
-                $url="https://stock.accordwebservices.com/Stock/GethighLowIndex?Exchg=".$apiExchg."&IndexCode=&Opt=".$sectors_gl."&Period=".$intra_day."&PageNo=1&PageSize=20&SortExp=&SortDirection=";
-                $resposeArray =get_api_response_curl($url);  
-                $totalPage =1;
-                if(@$resposeArray->status_code == 200){
-                   $indicesStocks= (array) $resposeArray->Table;
-                   $totalPage=@$resposeArray->Table1[0]->TotalRows;
-                }
+                // $url="https://stock.accordwebservices.com/Stock/GethighLowIndex?Exchg=".$apiExchg."&IndexCode=&Opt=".$sectors_gl."&Period=".$intra_day."&PageNo=1&PageSize=20&SortExp=&SortDirection=";
+                // $resposeArray =get_api_response_curl($url);  
+                // $totalPage =1;
+                // if(@$resposeArray->status_code == 200){
+                //    $indicesStocks= (array) $resposeArray->Table;
+                //    $totalPage=@$resposeArray->Table1[0]->TotalRows;
+                // }
   
                 $gainerLoserFilter= get_highLowListPost();
                 $indicesFilter= get_indicesListPost();
                 $data['gainerLoserFilter']=$gainerLoserFilter;
                 $data['indicesFilter']=$indicesFilter;
-                $data['indicesStocks']=$indicesStocks;
+                // $data['indicesStocks']=$indicesStocks;
                 $data['apiExchg']=$apiExchg;
                 $data['sectors_gl']=$sectors_gl;
                 $data['intra_day']=$intra_day;
                 $data['page_id']=$page_id;
-                $data['totalPage']=$totalPage;
+                // $data['totalPage']=$totalPage;
                 $template = 'partials.ajax.share-market.high-low.sectors'; 
             }else{
-                $indicesStocks =array();
                 $stock_order =(@$_REQUEST['stock_order'])?@$_REQUEST['stock_order']:'';
-                $url ="https://stock.accordwebservices.com/Stock/GetIndicesCompanyData?Exchg=&Indexcode=".$indexCode."&SortExp=CHANGE&Sortdirection=Desc";
-                $resposeArray =get_api_response_curl($url);  
-                if(@$resposeArray->status_code == 200){
-                    $indicesStocks= (array) @$resposeArray->Table;
-                }
-                $data['indicesStocks']=$indicesStocks;
                 $data['stock_order']=$stock_order;
                 $template = 'partials.ajax.share-market.indices.sectors';
             }
@@ -302,14 +276,8 @@ function share_market_data_ajax_request(){
             $type ='Gain';
             // $apiExchg ='NSE';
             $intra_day ='Daily';
-
-             $url ="http://stock.accordwebservices.com/Stock/GetGainersAndLosers?Exchange=".$apiExchg."&Group=A&Type=".$type."&Indices=".$indexCode."&Option=&Period=".$intra_day."&PageNo=1&Pagesize=10&SortExpression=OPEN_PRICE&SortDirect=Desc";
-              $resposeArray =get_api_response_curl($url);  
-            if(@$resposeArray->status_code == 200){
-               $GLResponse= (array) $resposeArray->Table;
-            } 
+ 
             $data['apiExchg']=$apiExchg;
-            $data['GLResponse']=$GLResponse;
             $data['intra_day']=$intra_day;
             $data['type']=$type;
             $indicesFilter= get_indicesListPost();
@@ -331,116 +299,7 @@ function share_market_data_ajax_request(){
     echo \App\template($template, $data);
     die();
 }
-/*--------------------------------------------------------
-/*      Indices Filter on single indices category page
-/*---------------------------------------------------------*/
-add_action( 'wp_ajax_get_share_market_indices_filter',  __NAMESPACE__ . '\\get_share_market_indices_filter' );
-add_action( 'wp_ajax_nopriv_get_share_market_indices_filter',  __NAMESPACE__ . '\\get_share_market_indices_filter' );
- 
-function get_share_market_indices_filter() {
-    $acc_companyLists=get_acc_companyLists();
-    $indexCode =(@$_REQUEST['indexCode'])?@$_REQUEST['indexCode']:'';
-    $stock_order =(@$_REQUEST['stock_order'])?@$_REQUEST['stock_order']:'';
-    $url ="https://stock.accordwebservices.com/Stock/GetIndicesCompanyData?Exchg=&Indexcode=".$indexCode."&SortExp=CHANGE&Sortdirection=Desc";
-    $resposeArray =get_api_response_curl($url);  
-    if(@$resposeArray->status_code == 200){
-        $indicesStocks= (array) @$resposeArray->Table;
-    }
-    $template = 'partials.ajax.share-market.share-market-indices-filter';
-    // echo $template;
-    $data['section_title']=$section_title;
-    $data['indicesStocks']=$indicesStocks;
-    $data['stock_order']=$stock_order;
-    $data['acc_companyLists']=$acc_companyLists;
-    echo \App\template($template, $data);
-    die();
-    
-}
-
-/*--------------------------------------------------------
-/*      Indices Filter on single indices category page
-/*---------------------------------------------------------*/
-add_action( 'wp_ajax_get_share_market_all_sector_gainer_looser',  __NAMESPACE__ . '\\get_share_market_all_sector_gainer_looser' );
-add_action( 'wp_ajax_nopriv_get_share_market_all_sector_gainer_looser',  __NAMESPACE__ . '\\get_share_market_all_sector_gainer_looser' );
-
-function get_share_market_all_sector_gainer_looser() {
-    $acc_companyLists=get_acc_companyLists();
-    $apiExchg =(@$_REQUEST['apiExchg'])?@$_REQUEST['apiExchg']:'NSE';
-    $intra_day =(@$_REQUEST['intra_day'])?@$_REQUEST['intra_day']:'1D';
-    $sectors_gl =(@$_REQUEST['sectors_gl'])?@$_REQUEST['sectors_gl']:'G';
-    $page_no =(@$_REQUEST['page_no'])?@$_REQUEST['page_no']:'1';
-    $indices_index =(@$_REQUEST['indices_index'])?@$_REQUEST['indices_index']:'123';
-    $sort ='Desc';
-    $sortby ='CHANGE';
-    if($sectors_gl =='L'){
-        $sort ='Asc';
-        $sortby ='CHANGE';
-    }
-    $indices_index =(@$indices_index =='All')?'':@$indices_index;
-    $url ="https://stock.accordwebservices.com/Stock/GetGainerLoserIndex?Exchg=".$apiExchg."&IndexCode=".$indices_index."&Opt=".$sectors_gl."&Period=".$intra_day."&PageNo=".$page_no."&PageSize=20&SortExp=".$sortby."&SortDirection=".$sort;
-    $resposeArray =get_api_response_curl($url);  
-    $totalPage =1;
-    if(@$resposeArray->status_code == 200){
-       $indicesStocks= (array) $resposeArray->Table;
-       $totalPage=@$resposeArray->Table1[0]->TotalRows;
-    } 
-    $template = 'partials.ajax.share-market.gainar-losors.share-market-gainar-losors-filter';
-    // echo $template;
-    $data['indicesStocks']=$indicesStocks;
-    $data['totalPage']=$totalPage;
-    $data['page_no']=$page_no;
-    $data['acc_companyLists']=$acc_companyLists;
-    
-    $data['apiExchg']=$apiExchg;
-    $data['sectors_gl']=$sectors_gl;
-    $data['indices_index']=$indices_index;
-    $data['intra_day']=$intra_day;
-    //print_r($data);
-    echo \App\template($template, $data);
-    die();
-    
-}
-/*--------------------------------------------------------
-/*      Indices Filter on single High Low category page
-/*---------------------------------------------------------*/
-add_action( 'wp_ajax_get_share_market_all_sector_high_low',  __NAMESPACE__ . '\\get_share_market_all_sector_high_low' );
-add_action( 'wp_ajax_nopriv_get_share_market_all_sector_high_low',  __NAMESPACE__ . '\\get_share_market_all_sector_high_low' );
- 
-function get_share_market_all_sector_high_low() {
-    $acc_companyLists=get_acc_companyLists();
-    $apiExchg =(@$_REQUEST['apiExchg'])?@$_REQUEST['apiExchg']:'NSE';
-    $intra_day =(@$_REQUEST['intra_day'])?@$_REQUEST['intra_day']:'1W';
-    $sectors_gl =(@$_REQUEST['sectors_gl'])?@$_REQUEST['sectors_gl']:'H';
-    $page_no =(@$_REQUEST['page_no'])?@$_REQUEST['page_no']:'1';
-    $indices_index =(@$_REQUEST['indices_index'])?@$_REQUEST['indices_index']:'123';
-    $sort ='Desc';
-    $sortby ='CHANGE';
-    if($sectors_gl =='L'){
-        $sort ='Asc';
-        $sortby ='CHANGE';
-    }
-    $indices_index =(@$indices_index =='All')?'':@$indices_index;
-    $url="https://stock.accordwebservices.com/Stock/GethighLowIndex?Exchg=".$apiExchg."&IndexCode=".$indices_index."&Opt=".$sectors_gl."&Period=".$intra_day."&PageNo=".$page_no."&PageSize=20&SortExp=&SortDirection=";
-    $resposeArray =get_api_response_curl($url);  
-    $totalPage =1;
-    if(@$resposeArray->status_code == 200){
-       $indicesStocks= (array) $resposeArray->Table;
-       $totalPage=@$resposeArray->Table1[0]->TotalRows;
-    }
-    $template = 'partials.ajax.share-market.high-low.share-market-high-low-filter';
-    // echo $template;
-    $data['indicesStocks']=$indicesStocks;
-    $data['totalPage']=$totalPage;
-    $data['page_no']=$page_no;
-    $data['acc_companyLists']=$acc_companyLists;
-    $data['apiExchg']=$apiExchg;
-    $data['sectors_gl']=$sectors_gl;
-    $data['indices_index']=$indices_index;
-    //print_r($data);
-    echo \App\template($template, $data);
-    die();
-    
-}
+   
 /*--------------------------------------------------------
 /*                      Company Page Ajax Api Call      
 /*---------------------------------------------------------*/

@@ -2,8 +2,14 @@
 	var initialized = false;
 	var SingleOptionChain = {
 			defaults: {
-				loadingElement : ''
-			},
+        wrapper: $('body'),
+        offset:150,
+        loadingElement : '',
+        delay: 1000,
+        visibleMobile: false,
+        label: false,
+        topSectionLoaded: false
+      },
 			initialize: function(opts) {
 				if (initialized) {
 					return this;
@@ -20,7 +26,7 @@
 				this.options = $.extend(true, {}, this.defaults, opts);
 				return this;
 			},
-      get_derivative_companyStock: function(instName,symbol,expDate,optType,stkPrice){
+      get_derivative_companyStock: function(instName,symbol,expDate,optType,stkPrice,filter=true){
         var companyStockLive="#company-stock-live";
         $.ajax({
             type:"POST",
@@ -36,70 +42,150 @@
             },
             cache: false,
             beforeSend: function() {
-              $(companyStockLive).find(".loading-data").show();
+              if(filter){
+                $(companyStockLive).find('.fb-loader').remove();
+                $(companyStockLive).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+              }
             },
             success:function(response){
               response =response.stocks;
               currentValue =response.data;
-              $(companyStockLive).find('#company-name').html(currentValue.SYMBOL);
-              $(companyStockLive).find('#set1-value').html(currentValue.STRIKEPRICE);
-              var ot='';
-              if(currentValue.OPTTYPE =='PE'){
-                ot ='PUT';
-              }
-              if(currentValue.OPTTYPE =='CE'){
-                ot ='CALL';
-              }
-              $(companyStockLive).find('#set2-value').html(ot);
-              $(companyStockLive).find('#set3-value').html(currentValue.EXPDATE);
-              $(companyStockLive).find('#currentStockRate').html(currentValue.LTP,2);
-              if(parseFloat(currentValue.FaOdiff) > 0){
-                $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
-                $(companyStockLive).find('#currentStockChange').removeClass('color-red').addClass('color-green'); 
-                $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
-
-              }else{
-                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
-                  $(companyStockLive).find('#currentStockChange').removeClass('color-green').addClass('color-red'); 
+              if(currentValue.INSTNAME){
+                $(companyStockLive).find('#companyInstName').html(currentValue.INSTNAME);
+                $(companyStockLive).find('#company-name').html(currentValue.SYMBOL);
+                $(companyStockLive).find('#set1-value').html(currentValue.STRIKEPRICE);
+                var ot='';
+                if(currentValue.OPTTYPE =='PE'){
+                  ot ='PUT';
+                }
+                if(currentValue.OPTTYPE =='CE'){
+                  ot ='CALL';
+                }
+                $(companyStockLive).find('#set2-value').html(ot);
+                $(companyStockLive).find('#set3-value').html(currentValue.EXPDATE);
+                $(companyStockLive).find('#currentStockRate').html(parseFloat(currentValue.LTP).toFixed(2));
+                if(currentValue.LTP >= 0){
+                }else{
+                }
+                if(currentValue.FaOdiff >= 0){
+                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
+                  $(companyStockLive).find('#currentStockChange').removeClass('color-red').addClass('color-green'); 
                   $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
-              }
-              $(companyStockLive).find('#strick_price').html(currentValue.STRIKEPRICE);
-              $(companyStockLive).find('#open_price').html(currentValue.OPENPRICE);
-              $(companyStockLive).find('#high_price').html(parseFloat(currentValue.HIGHPRICE).toFixed(2));
-              $(companyStockLive).find('#low_price').html(parseFloat(currentValue.LOWPRICE).toFixed(2));
-              $(companyStockLive).find('#prevclose').html(parseFloat(currentValue.PrevLtp).toFixed(2));
-              $(companyStockLive).find('#spot_price').html(parseFloat(currentValue.Nseltp).toFixed(2));
 
-              $(companyStockLive).find('#bid_price').html(parseFloat(currentValue.BBUYPRICE).toFixed(2));
-              $(companyStockLive).find('#bid_qty').html(currentValue.BBUYQTY);
-              $(companyStockLive).find('#offer_price').html(parseFloat(currentValue.BSELLPRICE).toFixed(2));
-              $(companyStockLive).find('#offer_qty').html(currentValue.BSELLQTY);
-              $(companyStockLive).find('#avg_price').html(parseFloat(currentValue.AVGTP).toFixed(2));
-              $(companyStockLive).find('#contra_trad').html(currentValue.TradedQtyCnt);
+                }else{
+                  $(companyStockLive).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
+                    $(companyStockLive).find('#currentStockChange').removeClass('color-green').addClass('color-red'); 
+                    $(companyStockLive).find('#currentStockChange').html(parseFloat(currentValue.FaOdiff).toFixed(2)+ ' ('+parseFloat(currentValue.FaOchange).toFixed(2)+'%)');
+                }
+                $(companyStockLive).find('#strick_price').html(currentValue.STRIKEPRICE);
+                $(companyStockLive).find('#open_price').html(parseFloat(currentValue.OPENPRICE).toFixed(2));
+                $(companyStockLive).find('#high_price').html(parseFloat(currentValue.HIGHPRICE).toFixed(2));
+                $(companyStockLive).find('#low_price').html(parseFloat(currentValue.LOWPRICE).toFixed(2));
+                $(companyStockLive).find('#prevclose').html(parseFloat(currentValue.PrevLtp).toFixed(2));
+                $(companyStockLive).find('#spot_price').html(parseFloat(currentValue.Nseltp).toFixed(2));
 
-              $(companyStockLive).find('#turnover').html(parseFloat(currentValue.Turnover).toFixed(2));
-              $(companyStockLive).find('#trad_qty').html(currentValue.Volume); 
-              $(companyStockLive).find('#market_lot').html(currentValue.MktLot);
-              $(companyStockLive).find('#open_intrest').html(currentValue.OPENINTEREST);
-                    
-              $(companyStockLive).find('#DiffOpenInt').html(currentValue.DiffOpenInt);
-              if(currentValue.DiffOpenInt >0){
-                $(companyStockLive).find('#DiffOpenInt').removeClass('text-red').addClass('text-green');
-              }else{
-                $(companyStockLive).find('#DiffOpenInt').removeClass('text-green').addClass('text-red');
+                $(companyStockLive).find('#bid_price').html(parseFloat(currentValue.BBUYPRICE).toFixed(2));
+                $(companyStockLive).find('#bid_qty').html(parseFloat(currentValue.BBUYQTY).toFixed(2));
+                $(companyStockLive).find('#offer_price').html(parseFloat(currentValue.BSELLPRICE).toFixed(2));
+                $(companyStockLive).find('#offer_qty').html(parseFloat(currentValue.BSELLQTY).toFixed(2));
+                $(companyStockLive).find('#avg_price').html(parseFloat(currentValue.AVGTP).toFixed(2));
+                $(companyStockLive).find('#contra_trad').html(parseFloat(currentValue.TradedQtyCnt).toFixed(2));
+
+                $(companyStockLive).find('#turnover').html(parseFloat(currentValue.Turnover).toFixed(2));
+                $(companyStockLive).find('#trad_qty').html(currentValue.Volume); 
+                $(companyStockLive).find('#market_lot').html(currentValue.MktLot);
+                $(companyStockLive).find('#open_intrest').html(currentValue.OPENINTEREST);
+                      
+                $(companyStockLive).find('#DiffOpenInt').html(parseFloat(currentValue.DiffOpenInt).toFixed(2));
+                if(currentValue.DiffOpenInt >0){
+                  $(companyStockLive).find('#DiffOpenInt').removeClass('text-red').addClass('text-green');
+                }else{
+                  $(companyStockLive).find('#DiffOpenInt').removeClass('text-green').addClass('text-red');
+                }
+                $(companyStockLive).find('#chgOpenInt').html(parseFloat(currentValue['chgOpenInt']).toFixed(2));
+                if(currentValue['chgOpenInt'] >0){
+                  $(companyStockLive).find('#chgOpenInt').removeClass('text-red').addClass('text-green');
+                }else{
+                $(companyStockLive).find('#chgOpenInt').removeClass('text-green').addClass('text-red');
+                }
               }
-              $(companyStockLive).find('#chgOpenInt').html(currentValue['chgOpenInt']);
-              if(currentValue['chgOpenInt'] >0){
-                $(companyStockLive).find('#chgOpenInt').removeClass('text-red').addClass('text-green');
-              }else{
-              $(companyStockLive).find('#chgOpenInt').removeClass('text-green').addClass('text-red');
-              }
-                
+              $(companyStockLive).find('.fb-loader').remove();  
             },
             error: function(errorThrown){
-                $(companyStockLive).find(".loading-data").remove();
+              $(companyStockLive).find('.fb-loader').remove();
                 console.log(errorThrown);
               }
+        });
+      },
+      get_derivative_company_detail:function(self,eleId,symbol,filter=true,loadchield){
+        var ele ='#strikPriceAnalisisExpiryDate';
+        jQuery.ajax(
+         {
+            type: "post",
+            dataType: "html",
+            url: global_vars.apiServerUrl + '/apiblock/react-option-chain/company-detail',
+            data: {
+              'action':'company_detail',
+                      // 'InstName':instName,
+              'symbol':symbol,
+            },
+            cache:false,
+            beforeSend: function() {
+              $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+            },
+            success: function(response){
+              if(response){
+                  $(eleId).html(response);
+                  self.options.topSectionLoaded =true;
+                  if(loadchield){
+                    var ExpDate =$(eleId).find('#ExpiryDate').val();
+                    var OptType =$(eleId).find('#OptionType').val();
+                    var StrikePrice = $(eleId).find('#StrikePrice').val();
+                     self.loadStrikePriceAnalysis(symbol,ExpDate,OptType,StrikePrice);
+                  }
+              }
+                $(eleId).html();
+            },
+            error:function(error){
+              $(eleId).html();
+            }
+        });
+      },
+      loadStrikePriceAnalysis:function(symbol,ExpDate,OptType,StrikePrice){
+        eleId ='#strike-price-analysis-data-id';
+        $(eleId).html('');
+        instName ='OPTSTK';
+        if(symbol =='BANKNIFTY' || symbol =='NIFTY'){
+           instName ='OPTIDX'; 
+        }
+        var pageID=$('#filter-options').data('post-id');
+        jQuery.ajax(
+         {
+            type: "post",
+            dataType: "html",
+            url: global_vars.apiServerUrl + '/apiblock/react-option-chain/strike-price-analysis',
+            data: {
+              'action':'strike-price-analysis',
+              'InstName':instName,
+              'ExpDate':ExpDate,
+              'OptType':OptType,
+              'pageID':pageID,
+              'symbol':symbol,
+            },
+            cache:false,
+            beforeSend: function() {
+              $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+            },
+            success: function(response){
+              if(response){
+                  $(eleId).html(response);
+              }else{
+                $(eleId).html();
+              }
+            },
+            error:function(error){
+              $(eleId).html();
+            }
         });
       },
       strikPriceAnalisisExpiryDateFilter:function(eleId,InstName,ExpDate,OptType,section,symbol){
@@ -108,7 +194,7 @@
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-strike-price-analysis',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-strike-price-analysis',
                   data: {
                       'action':'get_strick_price_analysis_data',
                       'InstName':InstName,
@@ -119,26 +205,26 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                   $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).find('table').find('tbody').html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
       mostActiveOptionDataFilter:function(eleId,InstName,ExpDate,OptType,Rtype,symbol){
-         $(eleId).html('');
+         $(eleId).find('table').find('tbody').html('');
               jQuery.ajax(
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-most-active-stock-index-option',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-most-active-stock-index-option',
                   data: {
                       'action':'get_most_active_stock_index_option_data',
                       'InstName':InstName,
@@ -149,25 +235,26 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
       putCallRatiosFilter: function(eleId,InstName,ExpDate,ReportType,PageSize,section){
+         $(eleId).find('table').find('tbody').html('');
          $.ajax(
               {
             type: "POST",
             dataType: "html",
-            url: global_vars.ajax_url,
+            url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-top-put-call-ratio',
             data:{
                 'action':'get_top_call_put_data',
                       'InstName':InstName,
@@ -175,59 +262,31 @@
                       'ReportType':ReportType,
                       'section':section,
                       'PageSize':PageSize,
+                      'PageNo':1,
               },
-            cache:false,
+              cache:false,
               beforeSend: function() {
-                $(eleId).find(".loading-data").show();
+                $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
               },
-                  success: function(response){
-                      if(response){
-                         $(eleId).html(response);
-                      }
-                      $(eleId).find(".loading-data").hide();
-                  },
-                  error:function(error){
-                     $(eleId).find(".loading-data").hide();
+              success: function(response){
+                  if(response){
+                      $(eleId).html(response);
                   }
+                  $(eleId).closest(".tab-content").find('.fb-loader').remove();
+              },
+              error:function(error){
+                 $(eleId).closest(".tab-content").find('.fb-loader').remove();
+              }
           });
       },
-      loadMorePutCallRatiosData(eleId,InstName,ReportType,ExpDate,PageNo,total,PageSize){
-        jQuery.ajax({
-          type: "post",
-          dataType: "html",
-          url: global_vars.ajax_url,
-          data: {
-            'action':'load_more_top_put_call_ratio',
-            'ReportType':ReportType,
-            'InstName':InstName,
-            'ExpDate':ExpDate,
-            'PageNo':PageNo,
-            'PageSize':PageSize,
-          },
-          success: function(response){
-            $(eleId).removeClass('loading');
-            if(response){
-              $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
-            }
-            if( total >  (PageNo*PageSize)){
-              $(eleId).attr('data-page_no',PageNo);
-            }else{
-              $(eleId).remove();
-            }
-          },
-          error:function(error){
-            $(eleId).removeClass('loading');
-          }
-        });
-             
-      },
+     
       mostActiveStockIndexOptionCallPutFilter:function(eleId,InstName,ExpDate,OptType,Rtype,symbol,PageSize,section){
-        $(eleId).html();
+        $(eleId).find('table').find('tbody').html('');
           jQuery.ajax(
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-most-active-stock-index-option',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-most-active-stock-index-option',
                   data: {
                       'action':'get_most_active_stock_index_option_data',
                       'InstName':InstName,
@@ -240,58 +299,27 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
-      load_more_most_active_stack_and_index(eleId,InstName,ExpDate,Rtype,PageNo,PageSize,total){
-          jQuery.ajax(
-            {
-              type: "post",
-              dataType: "html",
-              url: global_vars.ajax_url,
-              data: {
-                  'action':'load_more_most_active_stack_and_index',
-                  'OptType':OptType,
-                  'InstName':InstName,
-                  'ExpDate':ExpDate,
-                  'Rtype':Rtype,
-                  'PageNo':PageNo,
-                  'PageSize':PageSize,
-                },
-              cache:false,
-              success: function(response){
-                if(response){
-                          $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
-                      }
-                      if( total >  (PageNo*PageSize)){
-                        $(eleId).attr('data-page_no',PageNo);
-                      }else{
-                        $(eleId).remove();
-                      }
-                      $(eleId).find(".loading-data").hide();
-              },
-              error:function(error){
-                   $(eleId).removeClass('loading');
-                }
-          });
-      },
+     
       topInterestStockIndexOptionCallPutFilter:function(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section){
-        $(eleId).html();
+        $(eleId).find('table').find('tbody').html('');
           jQuery.ajax(
               {
                   type: "post",
                   dataType: "html",
-                  url: global_vars.apiServerUrl + '/apiblock/option-chain/partial-top-interest-stock-option',
+                  url: global_vars.apiServerUrl + '/apiblock/react-option-chain/partial-top-interest-stock-option',
                   data: {
                       'action':'get_most_active_stock_index_option_data',
                       'InstName':InstName,
@@ -303,108 +331,117 @@
                   },
                   cache:false,
                   beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
+                    $(eleId).closest(".tab-content").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                   },
                   success: function(response){
                       if(response){
                          $(eleId).html(response);
                       }
-                      $(eleId).find(".loading-data").hide();
+                      $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   },
                   error:function(error){
-                     $(eleId).find(".loading-data").hide();
+                     $(eleId).closest(".tab-content").find('.fb-loader').remove();
                   }
               });
       },
-      loadMoreTopInterestStockIndexOptionCallPut:function(eleId,InstName,ExpDate,OptType,Opt,PageSize,PageNo,total){
-        $(eleId).html();
-          jQuery.ajax(
-              {
-                  type: "post",
-                  dataType: "html",
-                  url: global_vars.ajax_url,
-                  data: {
-                    'action':'load_more_top_interest_stack_and_index',
-                    'OptType':OptType,
-                    'InstName':InstName,
-                    'ExpDate':ExpDate,
-                    'Opt':Opt,
-                    'PageNo':PageNo,
-                    'PageSize':PageSize,
-                  },
-                  cache:false,
-                  beforeSend: function() {
-                    $(eleId).find(".loading-data").show();
-                  },
-                  success: function(response){
-                      if(response){
-                          $(eleId).closest('.tab_content').find('table').find('tbody').append(response);
-                      }
-                      if( total >  (PageNo*PageSize)){
-                        $(eleId).attr('data-page_no',PageNo);
-                      }else{
-                        $(eleId).remove();
-                      }
-                      $(eleId).find(".loading-data").hide();
-                  },
-                  error:function(error){
-                     $(eleId).find(".loading-data").hide();
-                  }
-              });
-      },
-      loadCompanyFilter:function(symbol){
-         jQuery.ajax(
-          {
-            type: "post",
-            dataType: "html",
-            url: global_vars.ajax_url,
-            data: {
-              'action':'get_full_page_ajax_search',
-              'symbol':symbol,
-            },
-            success: function(response){
-              if(response){
-                $('#company-stock-live').html(response);
-                get_expiredata('#strikPriceAnalisisExpiryDate',symbol)
-              }
-              $('.full-page-loading').hide();
-            },
-            error:function(error){
-              $('.full-page-loading').hide();
-            }
-          }); 
-      },
-      get_expiredata:function(ele,symbol){
-        if(symbol){
-            jQuery.ajax(
-                {
-                    type: "post",
-                    dataType: "html",
-                    url: ajaxUrl,
-                    data: {
-                        'action':'get_expire_date_list',
-                        'symbol':symbol,
-                    },
-                    success: function(response){
-                        if(response){
-                           $(ele).html(response);
-                        }
-                        var expdate= $(ele).val();
-                        $(ele).closest('.inner-wrap').find('.tabs a').attr('data-expdate',expdate);
-                        $(ele).trigger('change');
-                        $('.full-page-loading').hide();
-                    },
-                    error:function(error){
-                       $('.full-page-loading').hide();
-                    }
-            });
-
-        }
-      },
+      
+        
+      
 			events: function() {
 				var self    = this,
-					companyStockLive  = '#company-stock-live';
-          // For Detail page
+					companyStockLive  = '#company-stock-live',_isScrolling = false;
+          
+          var symbol = $('#filter-options').data('symbol');
+          if (symbol) {
+              self.get_derivative_company_detail(self,companyStockLive,symbol,false);
+          }  
+
+          $(window).scroll(function() {
+            if (!_isScrolling) {
+               
+              if (self.options.topSectionLoaded && $(window).scrollTop() > self.options.offset){
+                _isScrolling = true;
+                  (function($) {
+                    'use strict';
+                      var instName = $('#ajax-load-api-data').data('inst-name');
+                      var symbol = $('#company-stock-live #ddlCompanySymble').find(':selected').data('symble');
+                      var ExpDate = $('#company-stock-live #ExpiryDate').val();
+                      var OptType = $('#company-stock-live').find('#OptionType').val();
+                      var StkPrice = $('#company-stock-live #StrikePrice').val();
+                      $('#filter-options').attr('data-opt-type',OptType);
+                      $('#filter-options').attr('data-symbol',symbol);
+                      $('#filter-options').attr('data-exp-date',ExpDate);
+                      $('#filter-options').attr('data-stk-price',StkPrice);
+                       
+                       var pages = {
+                          "chart-data":  "chart",
+                          "strike-price-analysis-data": "strike-price-analysis",
+                          "most-active-options-data": "most-active-options",
+                          "open-interest-analysis-data": "open-interest-analysis",
+                          "top-put-call-ratio-data": "top-put-call-ratio",
+                          "most-active-stock-options-data": "most-active-stock-options",
+                          "most-active-index-options-data": "most-active-index-options",
+                          "top-open-interest-stock-options-data": "top-open-interest-stock-options",
+                          "top-open-interest-index-options-data": "top-open-interest-index-options",
+                           
+                        };
+                      for (var key in pages) {
+                        var info = {
+                              page: key,
+                              pageURI: global_vars.apiServerUrl+'/apiblock/react-option-chain/'+pages[key],
+                              pageID: $('#ajax-load-api-data').data('post-id'),
+                              InstName: instName,
+                              symbol: symbol,
+                              ExpDate: ExpDate,
+                              OptType: OptType,
+                              StkPrice: StkPrice,
+                          };
+                           
+                          (function(info){
+                              $.ajax({
+                                method: "POST",
+                                url: info.pageURI,
+                                crossDomain: true,
+                                config: {
+                                  headers: {
+                                      'Access-Control-Allow-Origin': '*',
+                                    }
+                                },
+                                data: {
+                                  'action': 'load_option_chain_page_section',
+                                  'data': info,
+                                  'security': global_vars.ajax_nonce,
+                                },
+                                success: function (data) {
+                                  $("#ajax-load-api-data " + "#" + info.page + "-id").append(data);   
+                                   
+                                    if( info.page == 'chart-data'){
+                                        //select the tabs
+                                        $("ul.nested_tab a").click(function (e) {
+                                            e.preventDefault();
+                                            $(this).closest('.nested_tab').find('a').removeClass('active');
+                                            $(this).addClass("active");
+
+                                            var activeTab = jQuery(this).attr("href");
+                                            $(this).closest(".month_tabs").find('.tab_content').hide();
+                                            $(this).closest(".month_tabs").find(activeTab).show();
+                                          });
+                                        $('.nested_tab a[href="#li_1m"').trigger('click');
+                                    }
+                                },
+                                  error: function (errorThrown) {
+                                      console.log(errorThrown);
+                                  }
+                              });
+                          
+                          })(info);
+                      }
+                    
+                  }).apply(this, [jQuery]);
+              }
+            }
+          });
+
           $('ul.tabs').each(function () {
             var $active, $content, $links = jQuery(this).find('a');
              $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
@@ -423,17 +460,17 @@
               e.preventDefault();
             });
           });
-
+          
           //Top Filter
           $(document).on('change','#ddlCompanySymble', function () {
-              var symbol = $(this).val();
               if($('.template-option-chain').length){
+                var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
                 if (symbol) {
-                  $('.full-page-loading').show();
-                  self.loadCompanyFilter(symbol);
-                  
+                  this.interval =0;
+                  self.get_derivative_company_detail(self,companyStockLive,symbol,filter=true,loadchield=true)
                 }
               }else{
+              var symbol = $(this).val();
                 if (symbol) {
                     window.location.href =symbol;
                 }
@@ -447,11 +484,12 @@
             var OptType = $('#OptionType').val();
             var StkPrice = $('#StrikePrice').val();
             if (InstName) {
-              self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice);
+              self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice,false);
             }
           }, 10000);
           $(document).on('click','#filter_derivative_details', function (e) {
             e.preventDefault();
+            this.interval =0;
             var InstName = $('#companyInstName').val();
             var symbol = $('#ddlCompanySymble option:selected').attr('data-symble');
             var ExpDate = $('#ExpiryDate').val();
@@ -460,6 +498,10 @@
             if (InstName) {
               self.get_derivative_companyStock(InstName,symbol,ExpDate,OptType,StkPrice);
             }
+            setTimeout(function(){
+                $('#ajax-load-api-data').find('#chart-data-id .highcharts-container').remove();
+                $('#ajax-load-api-data').find('.nested_tab a[href="#li_1m"]').trigger('click');
+            },200);
           });
           // Top Filter End
           //  Strike Price Analysis Filter
@@ -475,8 +517,9 @@
               var InstName = $('#companyInstName').val();
               var symbol = $('#ddlCompanySymble').children("option:selected").attr('data-symble');
               var ExpDate = $(this).val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).text();
               var eleId= '';
+              var OptType ='';
               if(activeTb =='PUT'){
                 OptType ='PE';
                 eleId ='#Puts';
@@ -502,7 +545,7 @@
               var symbol =$('#ddlCompanySymble').children("option:selected").attr('data-symble');
               var ExpDate =$('#ExpiryDate').val();
               var Rtype = $(this).val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-opt-filter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-opt-filter',Rtype).text();
               var eleId= '';
               if(activeTb =='CALL'){
                 OptType ='C';
@@ -538,9 +581,8 @@
               }
           });
           $(document).on('change','#stockExpireDateFilter,#stockReportTypeFilter,#indexExpireDateFilter,#indexReportTypeFilter',function(){
-
-            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
-             var eleId= '';
+            var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').text();
+            var eleId= '';
              if(activeTb =='Stocks'){
                 var InstName ='OPTSTK';
                 var ExpDate = $("#stockExpireDateFilter").val();
@@ -553,7 +595,7 @@
                 var ExpDate = $("#indexExpireDateFilter").val();
                 var ReportType = $("#indexReportTypeFilter").val();
              }
-             $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-reporttype',ReportType);
+             $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-reporttype',ReportType);
              var PageSize =10;
               if($('#check-page-type').length){
                 var section ='read_more';
@@ -565,32 +607,7 @@
                
               self.putCallRatiosFilter(eleId,InstName,ExpDate,ReportType,PageSize,section);
           });
-          // For Details Page Call Put Stock Index
-          $(document).on('click','#loadMore_OPTSTK,#loadMore_OPTIDX',function(e){
-            e.preventDefault(); 
-            $(this).addClass('loading');
-            var ele =this;
-            var PageNo =parseInt($(this).attr('data-page_no'));
-            var total =parseInt($(this).attr('data-total'));
-            PageNo =PageNo+1;
-            var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
-            var PageSize ='20';
-            var eleId= '';
-            if(activeTb =='Stocks'){
-              var InstName ='OPTSTK';
-              var ExpDate = $("#stockExpireDateFilter").val();
-              var ReportType = $("#stockReportTypeFilter").val();
-              eleId ='#stocksPutCallRatios';
-            }
-            if(activeTb =='Indexes'){
-              var InstName ='OPTIDX';
-              eleId ='#indexesPutCallRatios';
-              var ExpDate = $("#indexExpireDateFilter").val();
-              var ReportType = $("#indexReportTypeFilter").val();
-            }
-            self.loadMorePutCallRatiosData(eleId,InstName,ReportType,ExpDate,PageNo,total,PageSize);  
-            
-          });
+          
 
           //  Strike Price Analysis Filter ENd
           //  Most Active Options Data  Filter
@@ -606,12 +623,13 @@
               var symbol ='';
               var OptType ='';
               var InstName =$('#companyInstName').val();
+              var InstName ='OPTSTK';
               var section =$('#most_a_s_o_section').val();
               var ExpDate = $('#mostActiveStockOptionExpiryDate').val();
               var Rtype = $('#mostActiveStockOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
-              var PageSize =20;
+              var PageSize =10;
               if(activeTb =='CALL'){
                 OptType ='C';
                 eleId ='#mostActiveStockOptionCall';
@@ -640,9 +658,9 @@
               var section =$('#most_a_i_o_section').val();
               var ExpDate = $('#mostActiveIndexOptionExpiryDate').val();
               var Rtype = $('#mostActiveIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
-               var PageSize =20;
+               var PageSize =10;
               if(activeTb =='CALL'){
                 OptType ='C';
                 eleId ='#mostActiveIndexOptionCall';
@@ -671,7 +689,7 @@
               var section ='read_more';
               var ExpDate = $('#mostActiveStockIndexOptionExpiryDate').val();
               var Rtype = $('#mostActiveStockIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-rtypefilter',Rtype).text();
               var eleId= '';
               if(activeTb =='CALL'){
                 OptType ='C';
@@ -684,30 +702,7 @@
               self.mostActiveStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Rtype,symbol,PageSize,section);
               
           });
-          $(document).on('click','#loadMoreP,#loadMoreC',function(e){
-              e.preventDefault(); 
-              $(this).addClass('loading');
-              var ele =this;
-              var PageSize =20;
-              var InstName =$('#ActiveInstName').val();
-              var ExpDate = $('#mostActiveStockIndexOptionExpiryDate').val();
-              var Rtype = $('#mostActiveStockIndexOptionFilter').val();
-              var PageNo =parseInt($(this).attr('data-page_no'));
-              var total =parseInt($(this).attr('data-total'));
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
-              var eleId=this;
-              if(activeTb =='CALL'){
-                OptType ='C';
-                // eleId ='#mostActiveStockIndexOptionCall';
-              }else{
-                OptType ='P';
-                // eleId ='#mostActiveStockIndexOptionPut';
-              }
-              PageNo =PageNo+1;
-              self.load_more_most_active_stack_and_index(eleId,InstName,ExpDate,Rtype,PageNo,PageSize,total);
-                         
-                   
-          });
+           
           //  Top Active Filter
           $(document).on('click','.changeTOISFilter', function () {
              var expdate =$(this).attr('data-expdate');
@@ -725,7 +720,7 @@
               var section =$('#top_i_s_o_section').val();
               var ExpDate = $('#topInterestStockOptionExpiryDate').val();
               var Opt = $('#topInterestStockOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
               var eleId= '';
               if(activeTb =='CALL'){
                 OptType ='CE';
@@ -754,7 +749,7 @@
               var section =$('#top_i_i_o_section').val();
               var ExpDate = $('#topInterestIndexOptionExpiryDate').val();
               var Opt = $('#topInterestIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
               var eleId= '';
               var PageSize=10;
 
@@ -784,7 +779,7 @@
               var section ='read_more';
               var ExpDate = $('#topInterestStockIndexOptionExpiryDate').val();
               var Opt = $('#topInterestStockIndexOptionFilter').val();
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
+              var activeTb = $(this).closest('.tab-holder').find('.nav-tabs a.active').attr('data-expdate',ExpDate).attr('data-otpfilter',Opt).text();
               var eleId= '';
               var PageSize=20;
               if(activeTb =='CALL'){
@@ -797,29 +792,7 @@
               self.topInterestStockIndexOptionCallPutFilter(eleId,InstName,ExpDate,OptType,Opt,symbol,PageSize,section);
               
           });
-          //Load More For Details Page
-          $(document).on('click','#loadMoreCE,#loadMorePE',function(e){
-              e.preventDefault(); 
-              $(this).addClass('loading');
-              var eleId =this;
-              var PageSize =20;
-              var InstName =$('#ActiveInstName').val();;
-              var ExpDate = $('#topInterestStockIndexOptionExpiryDate').val();
-              var Opt = $('#topInterestStockIndexOptionFilter').val();
-              var PageNo =parseInt($(this).attr('data-page_no'));
-              var total =parseInt($(this).attr('data-total'));
-              var activeTb = $(this).closest('.inner-wrap').find('.tabs a.active').text();
-              var OptType ='CE';
-              if(activeTb =='CALL'){
-                OptType ='CE';
-              }else{
-                OptType ='PE'; 
-              }
-              
-              PageNo =PageNo+1;
-              self.loadMoreTopInterestStockIndexOptionCallPut(eleId,InstName,ExpDate,OptType,Opt,PageSize,PageNo,total);
-               
-          });
+          
           
 				return this;
 			},

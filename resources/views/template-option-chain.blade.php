@@ -1,4 +1,4 @@
-{{--
+{{-- 
   Template Name: Option Chain Template
 --}}
 @extends('layouts.app-full')

@@ -132,6 +132,10 @@ function api_master_calls(){
                         echo $value->api_name;
                         PA1_GEOJITCRM_API_B2C($postData);
                         break;
+                    case '15':
+                        echo $value->api_name;
+                        PA1_5Paisa_API_B2C($postData);
+                        break;
                   default:
                     
                         break;
@@ -267,6 +271,10 @@ function api_master_calls_for_city_data(){
                     case '14':
                         echo $value->api_name;
                         PA1_GEOJITCRM_API_B2C($postData);
+                        break;
+                    case '15':
+                        echo $value->api_name;
+                        PA1_5Paisa_API_B2C($postData);
                         break;
                     default:
                         break;
@@ -885,4 +893,140 @@ function PA1_GEOJITCRM_API_B2C( $postedArray =array() ){
     // print_r($apiRequest);
     // echo '-------------------------------------';
     insert_request_response_ac_db($form_id,'geogit_b2c_api_request_url',json_encode($apiRequest),'geogit_b2c_api_status',$apiResponse);
+}
+/**
+ *  Send Contact Data to PA1 5Paisa API B2C.
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
+function PA1_5Paisa_API_B2C( $postedArray =array() ){
+    
+    $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
+    
+    $form_id= $postedArray['_wpcf7'];
+    $name = $postedArray['cf7s-name'];
+    $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
+    //$email=$mobile."@gmail.com" ;  
+    $email="";  
+    $city=$postedArray['cf7s-City'];
+    //Get Token Request
+    $apiRequest =array();
+    $apiResponse =array();
+    $fields = array('client_id' => '4e60302c-f733-4616-87b5-2d644d1768e5',
+        'scope' => 'api://zohocrmapi/.default',
+        'client_secret' => '~e~F-Wr5Uy_tIt-WkuS3l.03.059WLi3O~',
+        'grant_type' => 'client_credentials'
+    );
+    $apiRequest['token_req']=json_encode($fields);
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://login.microsoftonline.com/51840122-2b13-4509-940a-04f06940dd5d/oauth2/v2.0/token',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS =>$fields ,
+       
+    ));
+    $token_response = curl_exec($curl);
+    if($token_response){
+        $apiRequest['token_res']=$token_response;
+        $token_response =json_decode($token_response);
+        $leadApiAccessToken =$token_response->token_type.' '.$token_response->access_token;
+        echo '5Paisa API Token: '.$leadApiAccessToken;
+
+    }
+    //Get Token Request End
+    curl_close($curl);
+    if(@$leadApiAccessToken) {
+        $tokenHeaderVars= array(
+            'Content-Type: application/json',
+            'Authorization:'.$leadApiAccessToken,
+            'Ocp-Apim-Subscription-Key:e2117d3d7aa041a4a7e6927631b2a752',
+            'Ocp-Apim-Trace:true'
+        );
+        $tokenPostData=array(
+            'UserID'=>'0F46C5923FEF4409'
+        );
+        $tokenPostDataJson =json_encode($tokenPostData);
+        $url2 ='https://zohocrmapi.azure-api.net/CRMAPI/Token';
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $url2,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>$tokenPostDataJson ,
+          CURLOPT_HTTPHEADER =>$tokenHeaderVars,
+           
+        ));
+
+        $token2_response = curl_exec($curl);
+        curl_close($curl);
+        if(@$token2_response){
+            $token2_response =json_decode($token2_response);
+            $token2=$token2_response->Body->Token;
+            if($token2){
+                $leadHeaderVars= array(
+                    'Content-Type: application/json',
+                    'Authorization:'.$leadApiAccessToken,
+                    'Ocp-Apim-Subscription-Key:e2117d3d7aa041a4a7e6927631b2a752',
+                    'Ocp-Apim-Trace:true'
+                );
+                $leadPostArray=array(
+                    'Token'=>$token2,
+                    'ObjectName'=>'Lead',
+                    'Parameters'=>array(
+                        "IsReg" => "Y",
+                        "FName" => $name,
+                        "LastName"=>"",
+                        "LeadProduct"=>"Equity",
+                        "Mobile"=>$mobile,
+                        "Email"=>"promod1@gmail.com",
+                        "LeadSource"=>"Top10stockbroker",
+                        "subsource"=>"Top10stockbroker",
+                        "SubSource"=>"Top10stockbroker",
+                        "city"=>$city
+                    )
+                );
+                   
+                $leadPostDataJson =json_encode($leadPostArray);
+                $url3 ='https://zohocrmapi.azure-api.net/CRMAPI/Save';
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                  CURLOPT_URL => $url3,
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_ENCODING => '',
+                  CURLOPT_MAXREDIRS => 10,
+                  CURLOPT_TIMEOUT => 0,
+                  CURLOPT_FOLLOWLOCATION => true,
+                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                  CURLOPT_CUSTOMREQUEST => 'POST',
+                  CURLOPT_POSTFIELDS =>$leadPostDataJson ,
+                  CURLOPT_HTTPHEADER =>$leadHeaderVars,
+                   
+                ));
+
+                $apiResponse = curl_exec($curl); 
+            }
+        }else{
+            $apiResponse ='Second Step Token Getting Failed';
+        }
+         
+    }else{
+        $apiResponse ='First Step Token Getting Failed';
+    }
+    // echo '-------------------------------------';
+    // echo '<pre><br/>';
+    // print_r($apiRequest);
+    // print_r($apiResponse);
+    // echo '-------------------------------------';
+    // exit;
+    insert_request_response_ac_db($form_id,'5paisa_b2c_req_url',json_encode($apiRequest),'5paisa_b2c_api_status',$apiResponse);
 }

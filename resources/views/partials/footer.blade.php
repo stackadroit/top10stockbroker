@@ -29,17 +29,19 @@
       </div>
       <div class="col-md-3 mb-4 mb-lg-0">
         <h5 class="text-3 mb-3 pb-1">CONTACT US</h5>
-        <p class="text-8 text-color-light font-weight-bold">(800) 123-4567</p>
-        <p class="mb-2">International: (333) 456-6670</p>
-        <p class="mb-2">Fax: (222) 531-8999</p>
-        <ul class="list list-icons list-icons-lg">
-          <li class="mb-1"><i class="far fa-dot-circle text-color-primary"></i><p class="m-0">234 Street Name, City Name</p></li>
-          <li class="mb-1"><i class="far fa-envelope text-color-primary"></i><p class="m-0"><a href="mailto:mail@example.com">mail@example.com</a></p></li>
-        </ul>
+        <p class="text-2 text-color-light font-weight-bold"><a href="mailto:info@top10stockbroker.com" title="info@top10stockbroker.com">info@top10stockbroker.com</a></p>
+        <!-- <p class="mb-2">International: (333) 456-6670</p> -->
+        <!-- <p class="mb-2">Fax: (222) 531-8999</p> -->
+        <!-- <ul class="list list-icons list-icons-lg"> -->
+          <!-- <li class="mb-1"><i class="far fa-dot-circle text-color-primary"></i><p class="m-0">234 Street Name, City Name</p></li> -->
+         <!--  <li class="mb-1"><p class="m-0">
+            <a href="mailto:info@top10stockbroker.com" title="info@top10stockbroker.com">info@top10stockbroker.com</a></p>
+          </li> -->
+        <!-- </ul> -->
         <ul class="footer-social-icons social-icons mt-4">
-          <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-          <li class="social-icons-youtube"><a href="http://www.youtube.com/" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+          <li class="social-icons-facebook"><a href="https://www.facebook.com/top10stockbroker/" target="_blank" title="Facebook" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li class="social-icons-twitter"><a href="https://twitter.com/topstockbrokerz" target="_blank" title="Twitter" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+          <li class="social-icons-youtube"><a href="https://www.youtube.com/channel/UCaIzPe052VbL27gbXurAmjg" target="_blank" title="Youtube" rel="noopener" aria-label="Youtube"><i class="fab fa-youtube"></i></a></li>
         </ul>
       </div>
     </div>
@@ -68,9 +70,9 @@
   @if( !empty($hello_bar['custom_hellobar']) )
     {!! get_post_meta( $post->ID, $hello_bar['custom_hellobar'], true ) !!}
   @elseif($hello_bar['hello_bar'] == 'yes')
-    <small>Get 80% Revenue Sharing Now! </small><a href="javascript:void(0)">Become Sub Broker</a>
+    <small>Get 80% Revenue Sharing Now! </small><<a href="#" onclick="return false;">Become Sub Broker</a>
   @else
-    <small>Get 90% Discount on Brokerage Now! </small><a href="javascript:void(0)">Open Demat Account</a>
+    <small>Get 90% Discount on Brokerage Now! </small><a href="#" onclick="return false;">Open Demat Account</a>
   @endif
 </div>
 @php $hello_bar_data =  str_replace('"', "'", json_encode($hello_bar)) @endphp

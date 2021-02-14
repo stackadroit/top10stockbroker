@@ -1,5 +1,4 @@
 <div id="v_tabs_wrapper_{{$post_id}}" class="v_tabs_wrapper_{{$post_id}} v_tabs_wrapper">
-      
       @if($totalCount)         
         <!-- <div id="easy_tabs_container_{{$post_id}}" class="easy_tabs_container"> -->
          
@@ -55,6 +54,7 @@
                                 }
                               @endphp
                               <li>
+                                <i class="fa fa-angle-right text-oringe" aria-hidden="true" style="color:hsl(13deg 79% 52%);padding-top: 3px;"></i>
                                 <a href="{{$tabs_link_to[$s]}}" title="{{ ucfirst(@$tabs_link[$s]) }}">{{ ucfirst(@$tabs_link[$s]) }}</a>
                               </li>
                               @php  

@@ -1,6 +1,6 @@
 <article @php post_class() @endphp>
   <div class="entry-content">
-    @php the_content() @endphp
+    {!! the_content() !!}
   </div>
   @include('partials.brokerage-calculator.choose-broker')
   @include('partials.brokerage-calculator.main-calculator')

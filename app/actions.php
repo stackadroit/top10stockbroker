@@ -439,7 +439,7 @@ function get_gold_silver_price_graph_data() {
             $sql ="SELECT * FROM gold_silver_rate WHERE page_id= ".$postId ." AND type = 1 AND ( date  >= '".$prcdate."' AND date <= '".$cDate."' ) order by date DESC;";
         }
         
-        //echo $sql;
+        // echo $sql;
         $priceResults = $wpdb->get_results($sql);
         // print_r($priceResults);
         foreach ($priceResults as $key => $rowObj) {
@@ -500,12 +500,12 @@ include 'cpts-action/share-price-actions.php';
 /**--------------------------------------------------------------
  * File include Futures Actions.
  /---------------------------------------------------------------*/
-include 'cpts-action/futures-actions.php';
+// include 'cpts-action/futures-actions.php';
 
 /**--------------------------------------------------------------
  * File include Option Chain Actions.
  /---------------------------------------------------------------*/
-include 'cpts-action/option-chain-actions.php';
+//include 'cpts-action/option-chain-actions.php';
 /**----------------------------------------------------------
  * File include broker-calculator Actions.
  /----------------------------------------------------------*/

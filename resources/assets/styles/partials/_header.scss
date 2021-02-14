@@ -101,7 +101,7 @@
 		.nav {
 			> li {
 				> a, > span {
-					color: #999;
+					color: #000;
 					font-size: 0.8em;
 					padding: side-values(11px 10px);
 					display: inline-block;
@@ -118,6 +118,7 @@
 					text-decoration: none;
 					&:hover, a:focus {
 						background: transparent;
+						color: #e35032;
 					}
 				}
 				@media(max-width: 575px) {
