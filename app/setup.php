@@ -77,6 +77,7 @@ add_action('after_setup_theme', function () {
         'relative-urls',
         'custom-post-type',
         'widget-options',
+        'google-analytics',
     ]);
 
     /**
