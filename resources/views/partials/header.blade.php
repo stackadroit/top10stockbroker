@@ -8,7 +8,7 @@
             <div class="header-logo">
               <a href="{{ home_url('/') }}">
                 <img alt="{{ get_bloginfo('name', 'display') }}" width="226" height="54"
-                     src="https://top10stockbroker.com/wp-content/uploads/2017/11/cropped-cropped-logo-web-1.png">
+                     src="https://top10.opendemataccounts.com/wp-content/uploads/logo.png">
               </a>
             </div>
           </div>

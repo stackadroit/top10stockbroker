@@ -16,12 +16,12 @@
 
 	// Link
 	a:not(.btn) {
-		color: $color-font-light;
+		color: #FFF;
 		@include transitions(all 0.1s ease-in-out);
 
 		&:hover {
 			text-decoration: none;
-			color: $color-light;
+			color: #e35032;
 		}
 
 		&:focus, &:active {
@@ -63,5 +63,9 @@
 			    padding: side-values(0 8px);	
 			}
 		}
+	}
+	p{
+		color: #FFF;
+		 
 	}
 }

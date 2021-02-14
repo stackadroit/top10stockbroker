@@ -1,5 +1,4 @@
 <div id="v_tabs_wrapper_{{$post_id}}" class="v_tabs_wrapper_{{$post_id}} v_tabs_wrapper">
-      
       @if($totalCount)         
         <!-- <div id="easy_tabs_container_{{$post_id}}" class="easy_tabs_container"> -->
          

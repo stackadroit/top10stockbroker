@@ -8,10 +8,4 @@
           <h1>{{ @$top_data['main_h1_title'] }}</h1>
           <p>{{ @$top_data['main_para_content'] }}</p>
       </div>
-      <!-- @if ($top_data['main_h2_title'])
-	    <div class="inner-wrap">
-          <h2>{{ @$top_data['main_h2_title'] }}</h2>
-          <p>{{ @$top_data['main_para2_content'] }}</p>
-        </div>
-       @endif -->
 </div>

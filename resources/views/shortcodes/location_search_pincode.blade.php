@@ -4,13 +4,12 @@
             </div>
         <div class="row">
             <div class="selectbrkerdata col-sm-6">
-            <input style="border-color: rgb(204, 204, 204); background-color: #FFF;width: 100%" type="text" name="spin" value="" placeholder="Search pincode"/>
+            <input class="search-pincode-input" type="text" name="spin" value="" placeholder="Search pincode"/>
             </div>
             <div class="selectbrkerdata col-sm-6">
-                <button type="button" class="comlink btn btn-primary" style="padding:10px 20px;margin: 0px;" id="location-search_id">Submit</button>
+                <button type="button" class="comlink btn btn-primary"  id="location-search_id">Submit</button>
                 &nbsp;&nbsp;
-                 <button type="button" class="comlink btn btn-primary" style="padding:10px 20px;margin: 0px;" id="location-search_clear">Clear</button> 
-                 
+                 <button type="button" class="comlink btn btn-primary"  id="location-search_clear">Clear</button> 
             </div>
     </div>
 </div>

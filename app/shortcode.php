@@ -1395,7 +1395,7 @@ add_shortcode('EasyTabWidget', function ($atts){
                     $tabs_link[] =$pd->post_title;
                     $tabs_link_to[] =get_the_permalink($pd->ID);
                     $post_modified[] =date('F j, Y',strtotime($pd->post_modified));
-                    $categories[] =get_the_category_list(',','', $pd->ID);
+                    $categories[] =strip_tags(get_the_category_list(',','', $pd->ID));
                 }
                 $data['tabs_data'][$idx]['tabs_link']=$tabs_link;
                 $data['tabs_data'][$idx]['tabs_link_to']=$tabs_link_to;
@@ -1403,11 +1403,11 @@ add_shortcode('EasyTabWidget', function ($atts){
                 $data['tabs_data'][$idx]['categories']=$categories;
 
              }
+        }
+    }
              // echo '<pre>';
              // print_r($data);
              // exit; 
-        }
-    }
     $totalTopic =0;
     if($totalCount){ 
         foreach($tabs_data as $tabs_single_data){

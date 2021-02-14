@@ -1,14 +1,10 @@
-@php
-	if($cDetailsresponse){
-    @endphp
+@if($cDetailsresponse)
     <div class="section-companyprice bg-light section-padding"  id="company-stock-live">
         <div class="inner-wrap">
             <h2>"Live Data is not available for  {!!  str_replace('Share Price', '', get_the_title()) !!} because they are yet to be Listed in NSE or BSE or both."</h2>
         </div>
     </div>
-       @php
-    }
-@endphp
+@endif
 <div class="section-companydetails section-padding">
   <div class="inner-wrap">
     <h1>{{ @$top_data['main_h1_title'] }}</h1>

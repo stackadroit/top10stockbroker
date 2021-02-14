@@ -142,10 +142,6 @@ class App extends Controller
     }
 
     public function footer_about(){
-        global $wpdb;
-        $post   = get_post(3526);
-        // $output = apply_filters( 'the_content', $post->post_content );
-        $moreLink ='...';
-        return wp_trim_words($post->post_content , 20, $moreLink);
+        return 'Top10stockbroker.com & Indianfranchisereview.com are websites under Medmonx Enterprises Private Limited. We are certified stock broker review & comparison website working with multiple partners. ...';
     }
 }
