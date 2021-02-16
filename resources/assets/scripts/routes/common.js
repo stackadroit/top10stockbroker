@@ -1,5 +1,5 @@
 import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation}  from '../library/global';
-// import {contactForm} from '../plugins/contactform';
+import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import SimpleBar from 'simplebar';
@@ -36,9 +36,9 @@ export default {
 		}
 
 		// contact Form 7
-		// if (typeof contactForm !== 'undefined') {
-		// 	contactForm.initialize();
-		// }
+		if (typeof contactForm !== 'undefined') {
+			contactForm.initialize();
+		}
 		if (typeof ContactFormValidation !== 'undefined') {
 			ContactFormValidation.initialize();
 		}

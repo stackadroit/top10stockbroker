@@ -458,6 +458,7 @@ exports.theme = window.theme;
       
     ajax: function(modal, modelAction, auto){
         var self    = this; 
+        // modal.close();
         $.ajax({
               cache: false,
               type:"POST",
@@ -481,7 +482,6 @@ exports.theme = window.theme;
               },
             success: function(response){
             	modal.find('.load-model').html(response); 
-
             	if (modelAction == "mbf-search-wrap") {
             		$(document).trigger('loadReactSlickIcons', [modelAction]);
             	}

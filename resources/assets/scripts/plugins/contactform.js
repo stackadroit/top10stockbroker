@@ -124,25 +124,25 @@
 					} );
 
 					// Placeholder Fallback
-					if ( ! wpcf7.supportHtml5.placeholder ) {
-						$( '[placeholder]', $form ).each( function() {
-							$( this ).val( $( this ).attr( 'placeholder' ) );
-							$( this ).addClass( 'placeheld' );
+					// if ( ! wpcf7.supportHtml5.placeholder ) {
+					// 	$( '[placeholder]', $form ).each( function() {
+					// 		$( this ).val( $( this ).attr( 'placeholder' ) );
+					// 		$( this ).addClass( 'placeheld' );
 
-							$( this ).focus( function() {
-								if ( $( this ).hasClass( 'placeheld' ) ) {
-									$( this ).val( '' ).removeClass( 'placeheld' );
-								}
-							} );
+					// 		$( this ).focus( function() {
+					// 			if ( $( this ).hasClass( 'placeheld' ) ) {
+					// 				$( this ).val( '' ).removeClass( 'placeheld' );
+					// 			}
+					// 		} );
 
-							$( this ).blur( function() {
-								if ( '' === $( this ).val() ) {
-									$( this ).val( $( this ).attr( 'placeholder' ) );
-									$( this ).addClass( 'placeheld' );
-								}
-							} );
-						} );
-					}
+					// 		$( this ).blur( function() {
+					// 			if ( '' === $( this ).val() ) {
+					// 				$( this ).val( $( this ).attr( 'placeholder' ) );
+					// 				$( this ).addClass( 'placeheld' );
+					// 			}
+					// 		} );
+					// 	} );
+					// }
 
 					if ( wpcf7.jqueryUi && ! wpcf7.supportHtml5.date ) {
 						$form.find( 'input.wpcf7-date[type="date"]' ).each( function() {
