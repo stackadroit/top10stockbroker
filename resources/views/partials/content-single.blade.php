@@ -4,7 +4,7 @@
     <!-- @include('partials/entry-meta') -->
   </header>
   <div class="entry-content">
-    @php the_content() @endphp
+    {!! the_content() !!}
   </div>
   <footer>
     {!! wp_link_pages(['echo' => 0, 'before' => '<nav class="page-nav"><p>' . __('Pages:', 'stockadroit'), 'after' => '</p></nav>']) !!}

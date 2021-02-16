@@ -1,8 +1,9 @@
-import {PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation}  from '../library/global';
-import {contactForm} from '../plugins/contactform';
+import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation}  from '../library/global';
+// import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import SimpleBar from 'simplebar';
+import Select2 from 'select2';
 import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
@@ -19,6 +20,7 @@ export default {
 		if (typeof Header !== 'undefined') {
 			Header.initialize();
 		}
+		
 		// Easy tab
 		if (typeof EasyTab !== 'undefined') {
 			EasyTab.initialize();
@@ -34,10 +36,12 @@ export default {
 		}
 
 		// contact Form 7
-		if (typeof contactForm !== 'undefined') {
-			contactForm.initialize();
+		// if (typeof contactForm !== 'undefined') {
+		// 	contactForm.initialize();
+		// }
+		if (typeof ContactFormValidation !== 'undefined') {
+			ContactFormValidation.initialize();
 		}
-
 		// Sticky Widget.
 		if (typeof PluginStickyWidget !== 'undefined') {
 			PluginStickyWidget.initialize();
@@ -133,8 +137,8 @@ export default {
         	$("#popup-main").attr('data-mini-popup',clickedClass);
         	$("#popup-main").find('.modal-dialog').css('max-width','350px');
         	$("#popup-main").modal('show');
-  		});
-  		
+		  });
+
         // super tread mill
         if (typeof SuperTreadmill !== 'undefined') {
 			SuperTreadmill.initialize();

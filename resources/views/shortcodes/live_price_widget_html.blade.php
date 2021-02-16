@@ -1,6 +1,6 @@
 <div class="">
 	<div id="marketRadar">
-    <button className="drop-btn" id="arrow-button-widget"><i className="fa fa-angle-down"></i></button>
+    <button className="drop-btn" id="arrow-button-widget" aria-label="Button Widget"><i className="fa fa-angle-up"></i></button>
 		<div class="widget-rp">
 			<div id="widget-first" class="treadmill">
 			</div>

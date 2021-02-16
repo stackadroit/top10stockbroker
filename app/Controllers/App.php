@@ -141,4 +141,7 @@ class App extends Controller
         endif;  
     }
 
+    public function footer_about(){
+        return 'Top10stockbroker.com & Indianfranchisereview.com are websites under Medmonx Enterprises Private Limited. We are certified stock broker review & comparison website working with multiple partners. ...';
+    }
 }

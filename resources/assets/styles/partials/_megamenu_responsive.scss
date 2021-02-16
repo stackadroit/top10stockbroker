@@ -256,6 +256,9 @@
 			width: 40px;
 			right: 5px;
 			top: 11px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			@media (min-width: 768px) {
 				right: 15px;
 				top: 15px;
@@ -303,7 +306,7 @@
 	}
 
 	.mega-menu .caret-submenu{
-		display: table;
+		display: inline-block;
 		i{
 			display: table-cell;
 		    height: 100%;

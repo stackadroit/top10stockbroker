@@ -3,19 +3,54 @@
   @extend .table-bordered;
   width: 100% !important;
   border-collapse: collapse;
+  overflow: auto;
 }
 
 .main table {
   a {
     color: $color-default;
   }
+  &,
+  a {
+    font-size: 14px;
+  }
 }
 
-.table th, .main table:not(.no-defult) th, .table td, .main table:not(.no-defult) td{
+.table th,
+.main table:not(.no-defult) th,
+.table td,
+.main table:not(.no-defult) td,
+.table thead th, .main table:not(.no-defult) thead th {
   padding: 0.4rem 0.75rem;
   text-align: center;
-  border: 1px solid #212425;
+  vertical-align: middle;
+  // border: 1px solid #212425;
+}
+
+%table-sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  z-index: 1;
+  white-space: normal;
 }
 
 
-
+.tb-fixed-head thead th{
+  @extend %table-sticky;
+  top: 0;
+  z-index: 2;
+  background: #eee;
+}
+.tb-fixed-head tbody td:first-child{
+  @extend %table-sticky;
+  @media(max-width: 768px){
+      left: 0;
+      background: #eee;
+  }
+}
+// .table-responsive{
+//   border: 1px solid #dee2e6;
+// }

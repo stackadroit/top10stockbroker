@@ -11,6 +11,9 @@ select {
 	border: 1px solid #e5e7e9;
 	border-radius: 3px;
 	outline: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	
 }
 
 .label {
@@ -354,7 +357,7 @@ label {
 	border-bottom: 1px solid $color-grey;
 	margin-top: 15px;
 	padding: 10px 15px;
-	@include media-breakpoint-up(sm){
+	@include media-breakpoint-up(md){
 		justify-content: flex-end;
 		border: none;
 		margin-top: 0;
@@ -362,6 +365,7 @@ label {
 	}
 
 	label{
+		font-size: 14px;
 		font-weight: $font-weight-semibold;
 		margin-right: 15px;
 		margin-bottom: 0;
@@ -373,8 +377,7 @@ label {
 }
 
 .select-theme-stb select {
-	border: #333;
-	padding: 5px;
+	padding: 5px 10px;
 	width: 100%;
 }
 
@@ -396,4 +399,13 @@ select.select-style2 {
 	border: none;
 	@extend %select;
 	// border-bottom: 1px solid #999;
+}
+.select2-selection__rendered {
+    line-height: 39px !important;
+}
+.select2-container .select2-selection--single {
+	height: 40px !important;
+}
+.select2-selection__arrow {
+    height: 37px !important;
 }

@@ -6,7 +6,7 @@ import fontawesome from '@fortawesome/fontawesome-free';
 import { library, dom  } from '@fortawesome/fontawesome-svg-core';
 
 // import the base SVG icons
-import { faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faSearch, faBars, faTimes, faBell, faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faAngleLeft, faAngleRight, faChevronDown, faPhone, faSearch, faBars, faTimes, faBell, faCaretDown, faCaretUp, faArrowDown, faArrowUp, faArrowRight, faQuestionCircle, faQuestion} from '@fortawesome/free-solid-svg-icons';
 
 // import the Facebook and Twitter icons
 import { faFacebookF, faTwitter, faYoutube, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud} from '@fortawesome/free-brands-svg-icons';
@@ -15,7 +15,7 @@ import { faFacebookF, faTwitter, faYoutube, faLinkedin, faPinterest, faReddit, f
 fontawesome.config = { searchPseudoElements: true, autoReplaceSvg: 'nest' };
 
 // add the imported icons to the library
-library.add(faCaretDown, faCaretUp, faAngleDown, faAngleUp, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faLinkedin, faPinterest, faReddit, faWhatsapp, faTelegram, faTumblr, faMixcloud ,faYoutube, faSearch, faBars, faTimes, faBell);
+library.add(faCaretDown, faCaretUp, faArrowDown, faArrowUp, faArrowRight, faAngleDown, faAngleUp, faAngleLeft, faAngleRight, faChevronDown, faPhone, faFacebookF, faTwitter, faLinkedin, faPinterest, faReddit, faQuestionCircle, faWhatsapp, faTelegram, faTumblr, faMixcloud ,faYoutube, faSearch, faBars, faTimes, faBell);
 
 // tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
 dom.watch();
@@ -101,8 +101,8 @@ import zeroCouponBondValueCalculator from './routes/shortcode-calculator/calcula
 import quickerslider from './routes/shortcodes/quickerslider';
 import GoldInvestmentCalculator from './routes/shortcodes/goldinvestmentcalculator';
 // Gold Silver Graph js
-// import pageGoldRateData from './routes/shortcodes/gold-silver-price-graph';
-// import pageChild from './routes/shortcodes/gold-silver-price-graph';
+import pageGoldRateData from './routes/shortcodes/gold-silver-price-graph';
+import pageChild from './routes/shortcodes/gold-silver-price-graph';
 /**
  Js For Branches Single Page (CPT) Branche Template Page
 */
@@ -122,13 +122,21 @@ import templateSharePrice from './routes/single/single-share-price';
  Js For Single Futures (CPT) Futures Template
 */
 import singleFutures from './routes/single/single-futures';
-import templateFutures from './routes/single/single-futures';
+import templateFutures from './routes/templates/template-futures';
+import openInterestStockFutures from './routes/single/open-interest-stock-futures';
+import mostActiveStockFutures from './routes/single/most-active-stock-futures';
 
 /**
  Js For Single Option Chain (CPT) Option Chain Template
 */
 import singleOptionChain from './routes/single/single-option-chain';
-import templateOptionChain from './routes/single/single-option-chain';
+import singleOptionChainPutCallRatioData from './routes/single/put-call-ratio-data';
+import singleOptionChainMostActiveStockOptionData from './routes/single/most-active-stock-index-detail';
+import singleOptionChainMostActiveIndexOptionData from './routes/single/most-active-stock-index-detail';
+import singleOptionChainOpenInterestStockOptionData from './routes/single/open-interest-stock-index-detail';
+import singleOptionChainOpenInterestIndexOptionData from './routes/single/open-interest-stock-index-detail';
+
+import templateOptionChain from './routes/templates/template-option-chain';
 import singleBrokerComparison from './routes/brokerage/broker-comparison';
 import singleBrokerageCalculator from './routes/brokerage/brokerage-calculator';
 import singleMarginCalculator from './routes/brokerage/margin-calculator';
@@ -160,10 +168,17 @@ const routes = new Router({
   */
   singleFutures,
   templateFutures,
+  openInterestStockFutures,
+  mostActiveStockFutures,
   /**
    Js For Single Option Chain (CPT) Option Chain Template
   */
   singleOptionChain,
+  singleOptionChainPutCallRatioData,
+  singleOptionChainMostActiveStockOptionData,
+  singleOptionChainMostActiveIndexOptionData,
+  singleOptionChainOpenInterestStockOptionData,
+  singleOptionChainOpenInterestIndexOptionData,
   templateOptionChain,
   /**
    Include Broker Comparison js function
@@ -243,9 +258,15 @@ const routes = new Router({
   quickerslider,
   GoldInvestmentCalculator,
   // Gold Rate Graph js include
-  // pageGoldRateData,
-  // pageChild,
+  pageGoldRateData,
+  pageChild,
 });
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());
+
+
+
+
+
+

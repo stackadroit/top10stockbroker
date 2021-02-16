@@ -24,7 +24,8 @@ window.theme.fn = {
 
 		}
 
-	}
+	},
+	
 
 };
 
@@ -76,6 +77,8 @@ exports.theme = window.theme;
 				.addClass(self.options.buttonClass)
 				.attr({
 					'href': '#',
+					'aria-label': 'Scroll To Top',
+					'title': 'Scroll To Top',
 				})
 				.append(
 					$('<i />')
@@ -83,9 +86,9 @@ exports.theme = window.theme;
 			);
 
 			// Visible Mobile
-			if (!self.options.visibleMobile) {
-				$el.addClass('hidden-mobile');
-			}
+			// if (!self.options.visibleMobile) {
+			// 	$el.addClass('hidden-mobile');
+			// }
 
 			// Label
 			if (self.options.label) {
@@ -447,13 +450,13 @@ exports.theme = window.theme;
         return this;
       },
 
-      setOptions: function(opts) {
+    setOptions: function(opts) {
         this.options = $.extend(true, {}, this.defaults, opts, window.theme.fn.getOptions(this.$wrapper.data('plugin-options')));
 
         return this;
-      },
+    },
       
-      ajax: function(modal, modelAction, auto){
+    ajax: function(modal, modelAction, auto){
         var self    = this; 
         $.ajax({
               cache: false,
@@ -488,7 +491,7 @@ exports.theme = window.theme;
             		if(modelAction != "mini-popup"){
             			modal.find('.modal-dialog').css('max-width','800px');
             		}
-            		self.formValidation();
+            		self.initializedValidation();
             		$(document).trigger('reinitContactform', [modelAction]);
             	}
             },
@@ -498,134 +501,143 @@ exports.theme = window.theme;
         });
 
           return this;
-      },
-
-      formValidation: function(){
-      	var self = this; 
-
-      	$('.load-model input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-		$('.load-model input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-		$('.load-model input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
-		$('.load-model .wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
+      	},
+      	initializedValidation:function(){
+      		var self = this; 
+	     	$('.model-popup input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+			$('.model-popup input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+			$('.model-popup input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
+			$('.model-popup .wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
         
-        $regexname = /^([a-zA-Z ]){1,100}$/;
-        $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/;
+      	},
+	    formValidation: function(){
+	      	var self = this; 
 
-        $(document).on('blur','.load-model input[name="cf7s-name"], .load-model input[name="cf7s-City"]',function(key){
-        	self.formConditionCheck(this, $regexname);
-        });
+	      	$('.wpcf7-form').find('.emsg').remove();
+	     	$('.wpcf7-form input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+			$('.wpcf7-form input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+			$('.wpcf7-form input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
+			$('.wpcf7-form .wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
+	        
+	        $regexname = /^([a-zA-Z ]){1,100}$/;
+	        $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[56789]\d{9}|(\d[ -]?){10}\d$/;
 
-        $(document).on('blur','.load-model input[name="cf7s-phone"]',function(key){
-        	self.formConditionCheck(this, $regexPhone);
-        });
+	        $(document).on('blur','input[name="cf7s-name"], .load-model input[name="cf7s-City"]',function(key){
+	        	self.formConditionCheck(this, $regexname);
+	        });
 
-        var sumbmit_form_data= '';
-        $(document).on('click','.wpcf7-submit',function(e) {
-        	e.preventDefault();
-        	var Er = 0;
-        	var form = $(this).closest('form.wpcf7-form');
- 			var name = $(form).find('input[name="cf7s-name"]');
- 			var city = $(form).find('input[name="cf7s-City"]');
- 			var number = $(form).find('input[name="cf7s-phone"]');
+	        $(document).on('blur',' input[name="cf7s-phone"]',function(key){
+	        	self.formConditionCheck(this, $regexPhone);
+	        });
 
- 			self.formConditionCheck(name, $regexname);
- 			if (!$(name).val().match($regexname)) {
- 				Er = 1;
- 			}
+	        var sumbmit_form_data= '';
+	        $(document).on('click','.wpcf7-submit',function(e) {
+	        	e.preventDefault();
+	        	var Er = 0;
+	        	var form = $(this).closest('form.wpcf7-form');
+	 			var name = $(form).find('input[name="cf7s-name"]');
+	 			var city = $(form).find('input[name="cf7s-City"]');
+	 			var number = $(form).find('input[name="cf7s-phone"]');
 
- 			self.formConditionCheck(city, $regexname);
- 			if (!$(city).val().match($regexname)) {
- 				Er = 2;
- 			}
+	 			self.formConditionCheck(name, $regexname);
+	 			if (!$(name).val().match($regexname)) {
+	 				Er = 1;
+	 			}
 
- 			self.formConditionCheck(number, $regexPhone);
- 			if (!$(number).val().match($regexPhone)) {
- 				Er = 2;
- 			}
+	 			self.formConditionCheck(city, $regexname);
+	 			if (!$(city).val().match($regexname)) {
+	 				Er = 2;
+	 			}
 
- 			if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
-                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
-            }else{
-                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
-	            Er = 4;
-            } 
+	 			self.formConditionCheck(number, $regexPhone);
+	 			if (!$(number).val().match($regexPhone)) {
+	 				Er = 2;
+	 			}
 
-            if(Er){
-            	console.log(Er);
-            	return false; 
-            }else{
-            	$(this).prop("disabled",true);
-            	sumbmit_form_data = $(form).serialize();
-            	var submit = $(form).submit();
-            	return true;
-            }
-        });
+	 			if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
+	                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
+	            }else{
+	                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
+		            Er = 4;
+	            } 
 
-      },
+	            if(Er){
+	            	console.log(Er);
+	            	return false; 
+	            }else{
+	            	$(this).prop("disabled",true);
+	            	sumbmit_form_data = $(form).serialize();
+	            	var submit = $(form).submit();
+	            	return true;
+	            }
+	        });
 
-      formConditionCheck: function($el, $regex){
-      	if (!$($el).val().match($regex)) {
-    		$($el).parent().find('.emsg').removeClass('d-none');
-    	}else{
-    		$($el).parent().find('.emsg').addClass('d-none');
-    	}
-      },
+	      },
 
-      events: function() {
-        var self    = this,
-          $document  = $(document),
-          $rootnode  = $("#popup-main");
-          $rootnode
-          .on('show.bs.modal', function (event) {
-        		var modelAction = $(event.relatedTarget); // Button that triggered the modal
-        		var auto = false;
-        		if (! modelAction.length) {
-        			// Condition For Mini Popup
-        			if($rootnode.data('mini-popup')){
-        				// console.log('mini-popup');
-        				modelAction = 'mini-popup';
-          				auto = $rootnode.data('mini-popup');
-        			}else{
-          				$rootnode.find('.modal-dialog').css('max-width','800px');
-        				modelAction = 'custom-hellobar';
-          				auto = true;
-        			}
-        		}else{
-        			//console.log('onlick');
-          			$rootnode.find('.modal-dialog').css('max-width','800px');
-          			modelAction = modelAction.get(0).id;
-        		}
-        		var modal = $(this);
-        		var statusModalOpen = (modal.data('bs.modal') || {isShown: false}).isShown;
-        		if (!statusModalOpen) {
-          			self.ajax(modal, modelAction, auto); 
-        		}
-      		});
+	    formConditionCheck: function($el, $regex){
+	      	if (!$($el).val().match($regex)) {
+	    		$($el).parent().find('.emsg').removeClass('d-none');
+	    	}else{
+	    		$($el).parent().find('.emsg').addClass('d-none');
+	    	}
+	    },
 
-          $rootnode
-      	  .on('hidden.bs.modal', function (event) {
-          	var modal = $(this);
-          	modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
-      		});
+	    events: function() {
+	        var self    = this,
+	          $document  = $(document),
+	          $rootnode  = $("#popup-main");
+	       	   
+	          $rootnode
+	          .on('show.bs.modal', function (event) {
+	        		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        		var auto = false;
+	        		if (! modelAction.length) {
+	        			// Condition For Mini Popup
+	        			if($rootnode.data('mini-popup')){
+	        				// console.log('mini-popup');
+	        				modelAction = 'mini-popup';
+	          				auto = $rootnode.data('mini-popup');
+	        			}else{
+	          				$rootnode.find('.modal-dialog').css('max-width','800px');
+	        				modelAction = 'custom-hellobar';
+	          				auto = true;
+	        			}
+	        		}else{
+	        			//console.log('onlick');
+	          			$rootnode.find('.modal-dialog').css('max-width','800px');
+	          			modelAction = modelAction.get(0).id;
+	        		}
+	        		var modal = $(this);
+	        		var statusModalOpen = (modal.data('bs.modal') || {isShown: false}).isShown;
+	        		if (!statusModalOpen) {
+	          			self.ajax(modal, modelAction, auto); 
+	        		}
+	      		});
+	          
+	          $rootnode
+	      	  .on('hidden.bs.modal', function (event) {
+	          	var modal = $(this);
+	          	modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
+	      		});
 
-	      // var intervalID = setInterval( function(){ 
-	      //   $rootnode.modal('show');
-	      // },60000); 
+		      // var intervalID = setInterval( function(){ 
+		      //   $rootnode.modal('show');
+		      // },60000); 
 
-	      //auto open at 1 min
-	      setTimeout(function(){ 
-	        $rootnode.modal('show');
-	      }, 60000); 
-	      //auto open at 3 min
-	      setTimeout(function(){ 
-	        $rootnode.modal('show');
-	      }, 180000); 
+		      //auto open at 1 min
+		      setTimeout(function(){ 
+		        $rootnode.modal('show');
+		      }, 60000); 
+		      //auto open at 3 min
+		      setTimeout(function(){ 
+		        $rootnode.modal('show');
+		      }, 180000); 
 
-          // clearInterval(intervalID); // Will clear the timer.
-        return this;
-      },
-    };
-  exports.ModalPopup = ModalPopup;
+	          // clearInterval(intervalID); // Will clear the timer.
+	        return this;
+	      },
+	    };
+	  exports.ModalPopup = ModalPopup;
 
 }).apply(this, [jQuery]);
 
@@ -1144,3 +1156,219 @@ exports.theme = window.theme;
   exports.PaTabs = PaTabs;
 
 }).apply(this, [jQuery]);
+
+(function(theme, $) {
+
+	var initialized = false;
+
+	var ContactFormValidation = {
+
+			defaults: {
+			},
+
+			initialize: function(opts) {
+				if (initialized) {
+					return this;
+				}
+
+				initialized = true;
+
+				this
+					.setOptions(opts)
+					.events();
+
+				return this;
+			},
+
+			setOptions: function(opts) {
+				this.options = $.extend(true, {}, this.defaults, opts);
+				return this;
+			},
+			formConditionCheck: function($el, $regex){
+		      	if (!$($el).val().match($regex)) {
+		    		$($el).closest('li').find('.emsg').show().removeClass('d-none');
+		    	}else{
+		    		$($el).closest('li').find('.emsg').hide().addClass('d-none');
+		    	}
+		    },
+		    leadPostApi:function(sumbmit_form_data){
+		    	console.log(sumbmit_form_data);
+				$.ajax({
+		           	url : global_vars.ajax_url,
+		          	type : 'post',
+		           	data : {
+		               	action : 'lead_data_post_to_api',
+		             	post_data :sumbmit_form_data,
+		          	},
+		          	success : function( response ) {
+		              	console.log(response);
+		          	}
+		      	});
+					
+			},
+			events: function() {
+				var self = this;
+				$('input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+				$('input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
+				$('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
+				$('.wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
+				$regexname = /^([a-zA-Z ]){1,100}$/;
+        		$regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/;
+
+
+		        $(document).on('blur','input[name="cf7s-name"],input[name="cf7s-City"]',function(key){
+		        	self.formConditionCheck(this, $regexname);
+		        });
+		        $(document).on('keypress','input[name="cf7s-name"],input[name="cf7s-City"]',function(key){
+		    		self.formConditionCheck(this, $regexname);
+		    	});
+		        
+		        $(document).on('blur','form.wpcf7-form input[name="cf7s-phone"]',function(key){
+		 		 	$(this).closest('li').find('.emsg').hide().addClass('d-none');
+		 		 	// self.formConditionCheck(this, $regexname);
+		 		 	// var $regexmobile=/^(?:(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
+		    		if (!$(this).val().match($regexPhone)) {
+			  			 $(this).closest('li').find('.emsg').show().removeClass('d-none');
+			        }else{
+			             $(this).closest('li').find('.emsg').hide().addClass('d-none');
+			        }
+		 		 });
+				$(document).on('keypress','form.wpcf7-form input[name="cf7s-phone"]',function(key){
+		    		$(this).closest('li').find('.emsg').hide().addClass('d-none');
+		    		var value =$(this).val();
+		    		$re = /^[0-9]$/;
+		    		if(key.charCode === 0 ){
+		    		    console.log(key.charCode);
+		    		    return true;
+		    		}
+		    		if($.trim(value) == ""){
+		    			if(key.charCode == 54 || key.charCode == 55 || key.charCode == 56 || key.charCode == 57){
+		    			
+			    		} else{
+			    			$(this).closest('li').find('.emsg').show().removeClass('d-none');
+			    			return false;
+			    		}
+		    		}else{
+		    			if(key.charCode >= 48 && key.charCode <= 57){
+		    			
+			    		} else{
+			    			$(this).closest('li').find('.emsg').show().removeClass('d-none');
+			    			return false;
+			    		}
+		    		}
+		    		if(value.length != 9 && value.length > 0) {
+		    			if(value.length > 9) return false;
+		    		}else{
+		    			$(this).closest('li').find('.emsg').hide().addClass('d-none');
+		    		}
+		    	});
+		    	$(document).on('keydown','form.wpcf7-form input[name="cf7s-phone"]',function(key){
+		    		$(this).closest('li').find('.emsg').hide().addClass('d-none');
+		    		var value =$(this).val();
+		    		$re = /^[0-9]$/;
+		    		if(key.charCode === 0 ){
+		    		    console.log(key.charCode);
+		    		    return true;
+		    		}
+		    		if($.trim(value) == ""){
+		    			if(key.charCode == 54 || key.charCode == 55 || key.charCode == 56 || key.charCode == 57){
+		    			
+			    		} else{
+			    			$(this).closest('li').find('.emsg').show().removeClass('d-none');
+			    			return false;
+			    		}
+		    		}else{
+		    			if(key.charCode >= 48 && key.charCode <= 57){
+		    			
+			    		} else{
+			    			$(this).closest('li').find('.emsg').show().removeClass('d-none');
+			    			return false;
+			    		}
+		    		}
+		    		if(value.length != 9 && value.length > 0) {
+		    			if(value.length > 9) return false;
+		    		}else{
+		    			$(this).closest('li').find('.emsg').hide().addClass('d-none');
+		    		}
+		    	});
+			 	 
+				var sumbmit_form_data='';
+		    	$(document).on('click','.wpcf7-submit',function(e) {
+		 			e.preventDefault();
+		 			var form =$(this).closest('form.wpcf7-form');
+		 			var name =$(form).find('input[name="cf7s-name"]');
+		 			var city =$(form).find('input[name="cf7s-City"]');
+		 			var number =$(form).find('input[name="cf7s-phone"]');
+		 			var $regexname=/^([a-zA-Z ]){1,100}$/;
+		 			 
+		 			Er =0;
+		 			self.formConditionCheck(name, $regexname);
+		 			if (!$(name).val().match($regexname)) {
+		 				Er = 1;
+		 			}
+		 			self.formConditionCheck(city, $regexname);
+		 			if (!$(city).val().match($regexname)) {
+		 				Er = 2;
+		 			}
+		 			self.formConditionCheck(number, $regexPhone);
+		 			if (!$(number).val().match($regexPhone)) {
+		 				Er = 3;
+		 			}
+			      	if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
+		                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
+		            }else{
+		                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
+			            Er = 4;
+		            } 
+			        if(Er){
+			            console.log(Er);
+			        	return false;  	
+			        }else{
+			            $(this).prop("disabled",true);
+			            // $('.ajax-loader', $(form)).addClass('is-active');
+			            $(this).after('<div class="fb-loader  mx-auto"></div>');
+			            sumbmit_form_data =$(form).serialize();
+			         	var submit = $(form).submit();
+			         	// console.log(sumbmit_form_data);
+			          	return true;
+			      	}
+		 	  	});
+
+		 	  	// Track Contact Form Submit Event
+		    	document.addEventListener('wpcf7mailsent', function( event ) {
+		    		// console.log(event);
+		    		// sumbmit_form_data =event;
+		    		$('.wpcf7-form').find('.fb-loader').remove();
+		    		self.leadPostApi(sumbmit_form_data) ;
+		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
+		        }, false );
+		        document.addEventListener('wpcf7mailfailed', function( event ) {
+		    		console.log(event);
+		    		$('.wpcf7-form').find('.fb-loader').remove();
+		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
+		        }, false );
+		        document.addEventListener('wpcf7invalid', function( event ) {
+		    		console.log(event);
+		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
+		    		$('.wpcf7-form').find('.fb-loader').remove();
+		        }, false );
+		        document.addEventListener('wpcf7spam', function( event ) {
+		    		console.log(event);
+		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
+		    		$('.wpcf7-form').find('.fb-loader').remove();
+		        }, false );
+		        document.addEventListener('wpcf7submit', function( event ) {
+		    		console.log(event);
+		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
+		    		$('.wpcf7-form').find('.fb-loader').remove();
+		        }, false );
+
+			  	return this;
+			}
+		};
+
+	exports.ContactFormValidation = ContactFormValidation;
+
+}).apply(this, [window.theme, jQuery]);
+
+

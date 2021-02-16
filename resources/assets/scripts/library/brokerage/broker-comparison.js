@@ -77,7 +77,31 @@
 			           		self.compareStockBrokers(page_paths);
 				       }
 			        });
+ 				$('tr td:first-child').not('.tmatte').css('background','#fff');
+		     	$('tr td:nth-child(2)').css('background','#c2d69a');
+		     	$('tr td:last-child').css('background','#e5e0ec');
+				$('table tr td').each(function(){
+					if($(this).text() == 'R'){
+						$(this).text('✔').css({"color": "green", "font-size": "20px","font-weight":"bold"});
+					};
+					if($(this).text() == 'S'){
+						$(this).text('✖').css({"color": "red", "font-size": "20px","font-weight":"bold"});
+					}
+				});
 
+				$('table').addClass('tdr');
+				$('table tr:first-child td').css('background','#fff');
+				$('table tr:nth-child(2) td').css('background','#c5be97').css('font-weight','bold');
+				$( "table td:has(h2),table td:has(h3),table td:has(h4)" ).css('background','#fff');
+				$( "table td:has(h2),table td:has(h3),table td:has(h4)" ).parent().addClass('tdr-tr');
+				$('table tr.tdr-tr').next('tr').addClass('tdr-tr2');
+				$('table tr.tdr-tr2 td').css('background','#c5be97').css('font-weight','bold');
+
+				$('table tr td:contains(★★★★★)').css({'font-size':'24px','color':'#ff6600'});
+				$('table tr td:contains(★★★★☆)').css({'font-size':'24px','color':'#ff6600'});
+				$('table tr td:contains(★★★☆☆)').css({'font-size':'24px','color':'#ff6600'});
+				$('table tr td:contains(★★☆☆☆)').css({'font-size':'24px','color':'#ff6600'});
+				$('table tr td:contains(★☆☆☆☆)').css({'font-size':'24px','color':'#ff6600'});
 				return this;
 			},
 

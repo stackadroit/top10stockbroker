@@ -4,33 +4,35 @@
 
 	var TemplateShareMarket = {
 
-			defaults: {
-				loadingElement : ''
-			},
-
+			 
+      defaults: {
+        wrapper: $('body'),
+        offset: 150,
+        loadingElement : '',
+        delay: 1000,
+        visibleMobile: false,
+        label: false
+      },
 			initialize: function(opts) {
 				if (initialized) {
 					return this;
 				}
 				initialized = true;
-
         
-
 				this
 					.setOptions(opts)
 					.events();
           
 				return this;
 			},
-
+      
 			setOptions: function(opts) {
 				this.options = $.extend(true, {}, this.defaults, opts);
 				return this;
 
 			},
       
-      getStockMarket: function( indexCode,liveUpdateElement ){
-
+      getStockMarket: function( indexCode,liveUpdateElement ,filter=true){
         $.ajax({
             type:"POST",
             url: global_vars.apiServerUrl + '/api/stock-market',
@@ -40,21 +42,24 @@
               'security': global_vars.ajax_nonce
             },
             beforeSend: function() {
-              $(liveUpdateElement).find(".loading-data").show();
+              if(filter){
+                $(liveUpdateElement).find(".inner-wrap").prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+              }
             },
             success:function(response){
               console.log(response.stocks);
               response =response.stocks;
-              $(liveUpdateElement).find(".loading-data").remove();
+              $(liveUpdateElement).find(".fb-loader").remove();
                 if(response == ''){
                     
                 }
                 else{
                   if(liveUpdateElement == '#stock-market-live'){
                     $(liveUpdateElement).find('#indecName').html(response.INDEX_NAME);
+                    $(".retcalc_form .select2-selection__placeholder").html(response.INDEX_NAME);
                     $(liveUpdateElement).find('#indecName').attr('data-indices-code',indexCode);
-                    $(liveUpdateElement).find('#currentStockRate').html(response.PRICE);
-                    $(liveUpdateElement).find('#currentStockChange').html(response.CHANGE + '('+response.PER_CHANGE+'%)');
+                    $(liveUpdateElement).find('#currentStockRate').html(parseFloat(response.PRICE).toFixed(2));
+                    $(liveUpdateElement).find('#currentStockChange').html(parseFloat(response.CHANGE).toFixed(2) + '('+parseFloat(response.PER_CHANGE).toFixed(2)+'%)');
                     if(response.CHANGE >0){
                         $(liveUpdateElement).find('#currentStockChangee').removeClass('color-red').addClass('color-green');
                         $(liveUpdateElement).find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
@@ -63,28 +68,28 @@
                         $(liveUpdateElement).find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                     }
                    
-                    $(liveUpdateElement).find('#52weeklow').html(response["52WEEKLOW"]);
-                    $(liveUpdateElement).find('#52weekhigh').html(response["52WEEKHIGH"]);
+                    $(liveUpdateElement).find('#52weeklow').html(parseFloat(response["52WEEKLOW"]).toFixed(2));
+                    $(liveUpdateElement).find('#52weekhigh').html(parseFloat(response["52WEEKHIGH"]).toFixed(2));
                     
-                    $(liveUpdateElement).find('#daylow').html(response.LOW);
-                    $(liveUpdateElement).find('#dayhigh').html(response.HIGH);
-                    $(liveUpdateElement).find('#prevclose').html(response.PREV_CLOSE);
-                    $(liveUpdateElement).find('#open').html(response.OPEN);
-                    $(liveUpdateElement).find('#mcaprs').html(response.ADV);
-                    $(liveUpdateElement).find('#totalrs').html(response.DEC);
+                    $(liveUpdateElement).find('#daylow').html(parseFloat(response.LOW).toFixed(2));
+                    $(liveUpdateElement).find('#dayhigh').html(parseFloat(response.HIGH).toFixed(2));
+                    $(liveUpdateElement).find('#prevclose').html(parseFloat(response.PREV_CLOSE).toFixed(2));
+                    $(liveUpdateElement).find('#open').html(parseFloat(response.OPEN).toFixed(2));
+                    $(liveUpdateElement).find('#mcaprs').html(parseFloat(response.ADV).toFixed(2));
+                    $(liveUpdateElement).find('#totalrs').html(parseFloat(response.DEC).toFixed(2));
                     var owlblclass =(response['WEEKPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1wreturn').removeClass('text-green').removeClass('text-red').addClass(owlblclass).html(response.WEEKPERCHANGE);
+                    $(liveUpdateElement).find('#1wreturn').removeClass('text-green').removeClass('text-red').addClass(owlblclass).html(parseFloat(response.WEEKPERCHANGE).toFixed(2));
                     var omlblclass =(response['MONTHPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1mreturn').removeClass('text-green').removeClass('text-red').addClass(omlblclass).html(response.MONTHPERCHANGE);
+                    $(liveUpdateElement).find('#1mreturn').removeClass('text-green').removeClass('text-red').addClass(omlblclass).html(parseFloat(response.MONTHPERCHANGE).toFixed(2));
                     var smlblclass =(response['6MONTHPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#6mreturn').removeClass('text-green').removeClass('text-red').addClass(smlblclass).html(response['6MONTHPERCHANGE']);
+                    $(liveUpdateElement).find('#6mreturn').removeClass('text-green').removeClass('text-red').addClass(smlblclass).html(parseFloat(response['6MONTHPERCHANGE']).toFixed(2));
                     var orlblclass =(response['1YEARPERCHANGE'] >0)?"text-green":"text-red";
-                    $(liveUpdateElement).find('#1yreturn').removeClass('text-green').removeClass('text-red').addClass(orlblclass).html(response['1YEARPERCHANGE']);
+                    $(liveUpdateElement).find('#1yreturn').removeClass('text-green').removeClass('text-red').addClass(orlblclass).html(parseFloat(response['1YEARPERCHANGE']).toFixed(2));
                   }
                 }
               },
               error: function(errorThrown){
-                $(liveUpdateElement).find(".loading-data").remove();
+                $(liveUpdateElement).find(".fb-loader").remove();
                 console.log(errorThrown);
               }
         });
@@ -103,13 +108,15 @@
             },
             beforeSend: function() {
               $(sectorsSectionWrap).find(".loading-data").show();
+              $(shareMarketGainer).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>' );
+
             },
             success:function(response){
               $(sectorsSectionWrap).find(".loading-data").remove();
                 $(document).find(shareMarketGainer).html(response);
               },
             error: function(errorThrown){
-              $(sectorsSectionWrap).find(".loading-data").remove();
+              $(shareMarketGainer).html('<div class="text-center text-orange" style="margin-bottom:20px;">No Stocks Available.</div>' );
                 console.log(errorThrown);
             }
         });
@@ -138,19 +145,21 @@
       
        
       get_ReturnPriceCalculator:function(apiExchg,finCode,amount,period){
-       $('#get_return_result').html('');
+       $('#get_return_result').html('<div class="fb-loader loader mx-auto"></div>' );
         jQuery.ajax(
           {
               type: "post",
               dataType: "json",
-              url: global_vars.ajax_url,
+              url: global_vars.apiServerUrl + '/api/price-calculator',
               data: {
                   'action':'get_return_price_calculator',
                   'apiExchg':apiExchg,
                   'finCode':finCode,
                   'amount':amount,
                   'period':period,
+                  'security': global_vars.ajax_nonce
               },
+              cache: false,
               success: function(response){
                   console.log(response);
                   if(response.status == 'success'){
@@ -166,17 +175,114 @@
       
 			events: function() {
 				var self    = this,
-					stockMarketLive  = '#stock-market-live';
+					stockMarketLive  = '#stock-market-live',
+          _isScrolling = false;
+        $(window).scroll(function() {
+          if (!_isScrolling) {
+            _isScrolling = true;
+            (function($) {
+              'use strict';
+              var pages = {
+                "p1": "chart",
+                "p2": "sectors",
+                "p3": "return-calculator",
+              };
+              for (var key in pages) {
+                var info = {
+                    page: pages[key],
+                    pageID: $('#ajax-load-api-data').data('post-id'),
+                    indexCode: $('#indicesIndexes').val(),
+                };
+                (function(info){
+                    $.ajax({
+                      url: global_vars.ajax_url,
+                      data: {
+                        'action': 'share_market_data_ajax_request',
+                        'data': info,
+                        // 'nonce': ajaxNoncePP
+                      },
+                      success: function (data) {
+                        $("#ajax-load-api-data " + "#" + info.page + "-id").append(data); 
+                        if( info.page == 'chart'){
+                          //select the tabs
+                          $("ul.nested_tab a").click(function (e) {
+                              e.preventDefault();
+                              $(this).closest('.nested_tab').find('a').removeClass('active');
+                              $(this).addClass("active");
+
+                              var activeTab = jQuery(this).attr("href");
+                              $(this).closest(".month_tabs").find('.tab_content').hide();
+                              $(this).closest(".month_tabs").find(activeTab).show();
+                            }); 
+                          $('.nested_tab a[href="#li_1y"').trigger('click');
+                        }
+                        if( info.page == 'return-calculator'){
+                          //select the tabs
+                            $('#company-list').select2({
+                              minimumInputLength: 2,
+                              placeholder: $('#indecName').html(),
+                              tags: [],
+                              ajax: {
+                                type: "post",
+                                url: global_vars.apiServerUrl+'/api/company-list',
+                                dataType: 'json',
+                                      type: "POST",
+                                      data: function (term) {
+                                          return {
+                                              'security': global_vars.ajax_nonce,
+                                              'action':'get_company_list',
+                                              'SearchTxt': term,
+                                          };
+                                      },
+                                      processResults: function (data) {
+                                          return { results: data.stocks};
+                                      },
+                              }
+                            });
+                        }
+                      },
+                        error: function (errorThrown) {
+                            console.log(errorThrown);
+                        }
+                    });
+                    //$.ajaxSetup({async: true});
+                })(info);
+              }
+            }).apply(this, [jQuery]);
+        
+          setTimeout(function(){ 
+             
+            var shareMarketGainer="#share-market-gainer-looser";
+            var post_id= $('#filter-options').data('pid');
+            var indecCode = parseInt($('#filter-options').data('iicode'));
+            var type ='Gain';
+            var apiExchg =(indecCode <100)?'BSE':'NSE';;
+            var intra_day ='Daily';
+            self.getShareMarketGainerLooser(type,apiExchg,intra_day,indecCode,shareMarketGainer);
+          },2000,self);
+        }
+
+      });
+
+          var indexCode = $('#filter-options').data('iicode');
+          if(indexCode){
+            self.getStockMarket(indexCode,stockMarketLive);
+          }
           
           this.interval = setInterval(function(){
             var indexCode = $('#indicesIndexes').val();
-            self.getStockMarket(indexCode,stockMarketLive);
+            self.getStockMarket(indexCode,stockMarketLive,false);
           }, 10000);
 
 					$(stockMarketLive)
           .on( 'change', '#indicesIndexes', function(event) {
 	            var indexCode = $(this).val();
+              $('#filter-options').data('iicode',indexCode);
                self.getStockMarket(indexCode,stockMarketLive);
+              setTimeout(function(){
+                $('.tab_content').find('.highcharts-container').remove();
+                $('#ajax-load-api-data').find('.nested_tab a[href="#li_1y"]').trigger('click');
+             },200); 
 	        });
           // Stocks Event Filter
           sectorsSectionWrap ="#sectors-section-wrap";
@@ -206,14 +312,14 @@
           }); 
 
           // Calulater
-          $(document).on("keyup","#company-list-input", function(e) {
-               var searchText = $(this).val();
-            if(searchText.length >= 3){
-                $("#result-search").html('<div class="fb-loader loader mx-auto"></div>');
-                  self.ajax(searchText); 
-            }
+          // $(document).on("keyup","#company-list-input", function(e) {
+          //      var searchText = $(this).val();
+          //   if(searchText.length >= 3){
+          //       $("#result-search").html('<div class="fb-loader loader mx-auto"></div>');
+          //         self.ajax(searchText); 
+          //   }
             
-          });
+          // });
           // get Calulater result
           $(document).on('click','#getCalculatedResult',function(e){
             e.preventDefault();

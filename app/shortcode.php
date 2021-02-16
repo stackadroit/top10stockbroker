@@ -1374,9 +1374,10 @@ add_shortcode('EasyTabWidget', function ($atts){
     // print_r(count(trim($data['tabs_data'])));
     // print_r($data);
     // exit;
+    $totalTopic =0;
     if(@count($data['tabs_data'])){
         foreach ($data['tabs_data'] as $idx => $tabs) {
-             print_r($value);
+             //print_r($value);
              if($tabs['tab_option'] == 1){
                 $tabs_post_type =@$tabs['tabs_post_type'];
                 $tabs_category  =@$tabs['tabs_category'];
@@ -1394,18 +1395,27 @@ add_shortcode('EasyTabWidget', function ($atts){
                     $tabs_link[] =$pd->post_title;
                     $tabs_link_to[] =get_the_permalink($pd->ID);
                     $post_modified[] =date('F j, Y',strtotime($pd->post_modified));
-                    $categories[] =get_the_category_list(',','', $pd->ID);
+                    $categories[] =strip_tags(get_the_category_list(',','', $pd->ID));
                 }
                 $data['tabs_data'][$idx]['tabs_link']=$tabs_link;
                 $data['tabs_data'][$idx]['tabs_link_to']=$tabs_link_to;
                 $data['tabs_data'][$idx]['post_modified']=$post_modified;
                 $data['tabs_data'][$idx]['categories']=$categories;
+
              }
+        }
+    }
              // echo '<pre>';
              // print_r($data);
              // exit; 
+    $totalTopic =0;
+    if($totalCount){ 
+        foreach($tabs_data as $tabs_single_data){
+            $totalTopic += (is_array($tabs_single_data['tabs_link'])) ? count($tabs_single_data['tabs_link']): 0;
+                       
         }
     }
+    $data['totalTopic'] =$totalTopic;
     // Echo the shortcode blade template
     if($data['tabs_type'] =='VT'){
         $template = 'shortcodes.easy_tab_vertical_widget';

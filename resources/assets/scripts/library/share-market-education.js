@@ -44,7 +44,7 @@
 			var els =".v_tabs_wrapper";
 			 
 			$(els+" .v_tab_content:not(:first)").hide();
-            if ($(window).width() >= 781) {
+            if ($(window).width() >= 768) {
                 $(els+" .v_tab_content:nth-child(2)").show();
             }
 				/* if in tab mode */
