@@ -397,6 +397,10 @@ For Branches
   margin-bottom: 15px;
 }
 
+.selectbrockerdiv#broker-search-wrap .selectbrkerdata {
+  margin-bottom: 20px;
+}
+
 .section-padding {
   padding: 20px 0;
   border-radius: 5px;
@@ -484,7 +488,7 @@ select#choose_broker {
   label {
     display: inline-block;
     margin: 0 0 -1px;
-    padding: 15px 15px;
+    padding: 20px;
     font-weight: 600;
     text-align: center;
     color: #bbb;
@@ -573,7 +577,7 @@ select#choose_broker {
   display: table;
   font-size: 16px;
   font-weight: 400;
-  padding: 0.3em;
+  padding: 0.3em 0.3em 1em 0.3em;
   -webkit-font-smoothing: antialiased;
   color: $color-light;
   z-index: 9;
@@ -691,4 +695,7 @@ select#choose_broker {
 }
 .wpcf7 .emsg {
     color: red;
+}
+#comments .comment-form-comment textarea#comment {
+  max-height: 100px;
 }
