@@ -102,7 +102,7 @@
 			> li {
 				> a, > span {
 					color: #000;
-					font-size: 0.8em;
+					font-size: 14px;
 					padding: side-values(11px 10px);
 					display: inline-block;
 					[class*="fa-"], .icons {
@@ -112,6 +112,10 @@
 					}
 					@media(max-width: 575px) {
 						padding: side-values(9px 6px);
+					}
+
+					@media (min-width: 768px) {
+						font-size: 0.8em;
 					}
 				}
 				> a {
@@ -195,7 +199,10 @@
 
 			&#priority-menu:target {
 				height: auto;
-				padding: 0;
+				padding: 15px 0;
+				 @media (min-width: 768px) {
+				 	padding: 0;
+				 }
 				ul {
 					max-height: none;
 					display: block;

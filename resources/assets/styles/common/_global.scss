@@ -577,7 +577,7 @@ select#choose_broker {
   display: table;
   font-size: 16px;
   font-weight: 400;
-  padding: 0.3em 0.3em 1em 0.3em;
+  padding: 0.3em 0.3em;
   -webkit-font-smoothing: antialiased;
   color: $color-light;
   z-index: 9;
@@ -594,8 +594,11 @@ select#choose_broker {
     color: $color-light;
     cursor: pointer;
     padding: 0 10px;
+    font-weight: bold;
+    font-size: 18px;
     @media (min-width: 768px) {
       padding: 5px 10px;
+      font-size: 16px;
     }
   }
 }

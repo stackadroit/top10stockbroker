@@ -506,10 +506,13 @@ div.wpcf7-response-output {
   }
 
   & .wpcf7-form input[type=submit] {
-    padding: 7px 15px;
+    padding: 12px 34px;
     color: $color-light;
     border: none;
     background: $color-green;
+    @media (min-width: 768px) {
+      padding: 7px 15px;
+    }
   }
 
   & .wpcf7-form input[type=submit]:hover {
