@@ -134,9 +134,9 @@ export default {
         	if($(this).hasClass('open-pmspopup')){
         		clickedClass='open-pmspopup';
         	}
-        	$("#popup-main").attr('data-mini-popup',clickedClass);
-        	$("#popup-main").find('.modal-dialog').css('max-width','350px');
-        	$("#popup-main").modal('show');
+        	$("#popup-mini").attr('data-mini-popup',clickedClass);
+        	$("#popup-mini").find('.modal-dialog').css('max-width','350px');
+        	$("#popup-mini").modal('show');
 		  });
 
         // super tread mill

@@ -432,7 +432,10 @@ exports.theme = window.theme;
   var ModalPopup = {
 
       defaults: {
-        wrapper: $('.popup-main')
+        wrapper: $('.popup-main'),
+        is_main_popup_loaded:false,
+        is_mini_popup_loaded:false,
+        is_mbf_search_loaded:false
       },
 
       initialize: function($wrapper, opts) {
@@ -483,118 +486,65 @@ exports.theme = window.theme;
             success: function(response){
             	modal.find('.load-model').html(response); 
             	if (modelAction == "mbf-search-wrap") {
+            		self.options.is_mbf_search_loaded =true;
             		$(document).trigger('loadReactSlickIcons', [modelAction]);
             	}
             	
             	if (modelAction == "custom-hellobar" || modelAction == "mini-popup") {
             		// Condition For Mini Popup
             		if(modelAction != "mini-popup"){
+            			self.options.is_mini_popup_loaded =true;
             			modal.find('.modal-dialog').css('max-width','800px');
+            		}else{
+            			self.options.is_main_popup_loaded =true;
             		}
-            		self.initializedValidation();
+            		self.initializedValidation(modal);
             		$(document).trigger('reinitContactform', [modelAction]);
             	}
             },
             error: function(response){
               console.log('Module Data Error.');
             }
-        });
+    	});
 
-          return this;
+       	return this;
+ 	},
+      	initializedValidation:function(modal){
+      		var self = this;
+      		$(modal).find('input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(modal).find('input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(modal).find('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>'); 
+      		$(modal).find('.wpcf7-checkbox').after('<p><span class="emsg d-none">Please select the service.</span></p>'); 
       	},
-      	initializedValidation:function(){
-      		var self = this; 
-	     	$('.model-popup input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.model-popup input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.model-popup input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
-			$('.model-popup .wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
-        
-      	},
-	    formValidation: function(){
-	      	var self = this; 
-
-	      	$('.wpcf7-form').find('.emsg').remove();
-	     	$('.wpcf7-form input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.wpcf7-form input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.wpcf7-form input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
-			$('.wpcf7-form .wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
-	        
-	        $regexname = /^([a-zA-Z ]){1,100}$/;
-	        $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[56789]\d{9}|(\d[ -]?){10}\d$/;
-
-	        $(document).on('blur','input[name="cf7s-name"], .load-model input[name="cf7s-City"]',function(key){
-	        	self.formConditionCheck(this, $regexname);
-	        });
-
-	        $(document).on('blur',' input[name="cf7s-phone"]',function(key){
-	        	self.formConditionCheck(this, $regexPhone);
-	        });
-
-	        var sumbmit_form_data= '';
-	        $(document).on('click','.wpcf7-submit',function(e) {
-	        	e.preventDefault();
-	        	var Er = 0;
-	        	var form = $(this).closest('form.wpcf7-form');
-	 			var name = $(form).find('input[name="cf7s-name"]');
-	 			var city = $(form).find('input[name="cf7s-City"]');
-	 			var number = $(form).find('input[name="cf7s-phone"]');
-
-	 			self.formConditionCheck(name, $regexname);
-	 			if (!$(name).val().match($regexname)) {
-	 				Er = 1;
-	 			}
-
-	 			self.formConditionCheck(city, $regexname);
-	 			if (!$(city).val().match($regexname)) {
-	 				Er = 2;
-	 			}
-
-	 			self.formConditionCheck(number, $regexPhone);
-	 			if (!$(number).val().match($regexPhone)) {
-	 				Er = 2;
-	 			}
-
-	 			if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
-	                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
-	            }else{
-	                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
-		            Er = 4;
-	            } 
-
-	            if(Er){
-	            	console.log(Er);
-	            	return false; 
-	            }else{
-	            	$(this).prop("disabled",true);
-	            	sumbmit_form_data = $(form).serialize();
-	            	var submit = $(form).submit();
-	            	return true;
-	            }
-	        });
-
-	      },
-
-	    formConditionCheck: function($el, $regex){
-	      	if (!$($el).val().match($regex)) {
-	    		$($el).parent().find('.emsg').removeClass('d-none');
-	    	}else{
-	    		$($el).parent().find('.emsg').addClass('d-none');
-	    	}
-	    },
-
+	     
 	    events: function() {
 	        var self    = this,
-	          $document  = $(document),
-	          $rootnode  = $("#popup-main");
-	       	   
-	          $rootnode
-	          .on('show.bs.modal', function (event) {
+	        $document  = $(document);
+	        var popupLoading = {
+               	"popup-main": ['custom-hellobar','is_main_popup_loaded'],
+              	"popup-mini": ['mini-popup','is_mini_popup_loaded'],
+              	"mbf-search-popup": ["mbf-search-wrap",'is_mbf_search_loaded']
+         	};
+         
+         	setTimeout(function() {
+         		for (var key in popupLoading) {
+         			modal =$('#'+key);
+         			modelAction = popupLoading[key][0];
+         			lodedVal = popupLoading[key][1];
+         			auto = true; 
+         			if(!self.options[lodedVal]){
+		       	  		self.ajax(modal, modelAction, auto); 
+		       	  	}
+         		}
+         	}, 5000);	
+	    	$rootnode  = $("#popup-main");
+	      	$rootnode.on('show.bs.modal', function (event) {
 	        		var modelAction = $(event.relatedTarget); // Button that triggered the modal
 	        		var auto = false;
 	        		if (! modelAction.length) {
 	        			// Condition For Mini Popup
 	        			if($rootnode.data('mini-popup')){
-	        				// console.log('mini-popup');
+	        				console.log('mini-popup');
 	        				modelAction = 'mini-popup';
 	          				auto = $rootnode.data('mini-popup');
 	        			}else{
@@ -610,20 +560,48 @@ exports.theme = window.theme;
 	        		var modal = $(this);
 	        		var statusModalOpen = (modal.data('bs.modal') || {isShown: false}).isShown;
 	        		if (!statusModalOpen) {
-	          			self.ajax(modal, modelAction, auto); 
+	        			if(modelAction == 'custom-hellobar'){
+	        				if(!self.options.is_main_popup_loaded){
+	        					self.ajax(modal, modelAction, auto);
+	        				}
+	        			}else if(modelAction =='mini-popup'){
+	        				if(!self.options.is_mini_popup_loaded){
+	        					self.ajax(modal, modelAction, auto);
+	        				}
+	        			}else{
+	        				self.ajax(modal, modelAction, auto);
+	        			}
 	        		}
-	      		});
+	      	});
 	          
-	          $rootnode
+	      	$rootnode
 	      	  .on('hidden.bs.modal', function (event) {
 	          	var modal = $(this);
-	          	modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
-	      		});
+	          	// modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
+	      	});
 
-		      // var intervalID = setInterval( function(){ 
-		      //   $rootnode.modal('show');
-		      // },60000); 
-
+	      	$('#popup-mini').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = false;
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_popup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	}); 
+ 			$('#mbf-search-popup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = false;
+	        	$('#mbf-search-popup').find('.modal-dialog').css('max-width','800px');
+	       		modelAction = modelAction.get(0).id;
+	        	var modal = $(this);
+	        	var statusModalOpen = (modal.data('bs.modal') || {isShown: false}).isShown;
+	        	if (!statusModalOpen) {
+	        		if(!self.options.is_mbf_search_loaded){
+			       	  	self.ajax(modal, modelAction, auto); 
+			     	}
+	        	}
+	     	});
 		      //auto open at 1 min
 		      setTimeout(function(){ 
 		        $rootnode.modal('show');
@@ -1315,9 +1293,9 @@ exports.theme = window.theme;
 		 				Er = 3;
 		 			}
 			      	if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
-		                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
-		            }else{
 		                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
+		            }else{
+		                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
 			            Er = 4;
 		            } 
 			        if(Er){
@@ -1325,11 +1303,9 @@ exports.theme = window.theme;
 			        	return false;  	
 			        }else{
 			            $(this).prop("disabled",true);
-			            // $('.ajax-loader', $(form)).addClass('is-active');
 			            $(this).after('<div class="fb-loader  mx-auto"></div>');
 			            sumbmit_form_data =$(form).serialize();
 			         	var submit = $(form).submit();
-			         	// console.log(sumbmit_form_data);
 			          	return true;
 			      	}
 		 	  	});

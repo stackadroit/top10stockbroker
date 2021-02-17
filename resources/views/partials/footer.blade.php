@@ -88,6 +88,29 @@
     </div>
   </div>
 </div>
-
-<div id="mbf-search-wrap" data-toggle="modal" data-target=".popup-main" data-keyboard="false" data-backdrop="static"></div>
+<div class="modal fade popup-mini" id="popup-mini" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade mbf-search-popup" id="mbf-search-popup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="mbf-search-wrap" data-toggle="modal" data-target="#mbf-search-popup" data-keyboard="false" data-backdrop="static"></div>
 <div class="overlay"></div>
