@@ -434,8 +434,11 @@ exports.theme = window.theme;
       defaults: {
         wrapper: $('.popup-main'),
         is_main_popup_loaded:false,
-        is_mini_popup_loaded:false,
-        is_mbf_search_loaded:false
+        is_mbf_search_loaded:false,
+        is_mini_b2cpopup_loaded:false,
+        is_mini_b2bpopup_loaded:false,
+        is_mini_ipopopup_loaded:false,
+        is_mini_pmspopup_loaded:false,
       },
 
       initialize: function($wrapper, opts) {
@@ -492,14 +495,32 @@ exports.theme = window.theme;
             	
             	if (modelAction == "custom-hellobar" || modelAction == "mini-popup") {
             		// Condition For Mini Popup
+            		var form='';
             		if(modelAction != "mini-popup"){
-            			self.options.is_mini_popup_loaded =true;
-            			modal.find('.modal-dialog').css('max-width','800px');
-            		}else{
+            			modal.find('.modal-dialog').addClass('modal-lg');
             			self.options.is_main_popup_loaded =true;
+            			form =$('#popup-main').find('form');
+            		}else{
+            			if(auto =='open-b2cpopup'){
+            				self.options.is_mini_b2cpopup_loaded =true;
+            				form =$('#mini-b2cpopup').find('form');
+            			}
+            			if(auto =='open-b2bpopup'){
+            				self.options.is_mini_b2bpopup_loaded =true;
+            				form =$('#mini-b2bpopup').find('form');
+            			}
+            			if(auto =='open-ipopopup'){
+            				self.options.is_mini_ipopopup_loaded =true;
+            				form =$('#mini-ipopopup').find('form');
+            			}
+            			if(auto =='open-pmspopup'){
+            				self.options.is_mini_pmspopup_loaded =true;
+            				form =$('#mini-pmspopup').find('form');
+            			}
             		}
+            		$(document).trigger('reinitContactform', $(form));
             		self.initializedValidation(modal);
-            		$(document).trigger('reinitContactform', [modelAction]);
+            		
             	}
             },
             error: function(response){
@@ -521,9 +542,12 @@ exports.theme = window.theme;
 	        var self    = this,
 	        $document  = $(document);
 	        var popupLoading = {
-               	"popup-main": ['custom-hellobar','is_main_popup_loaded'],
-              	"popup-mini": ['mini-popup','is_mini_popup_loaded'],
-              	"mbf-search-popup": ["mbf-search-wrap",'is_mbf_search_loaded']
+               	"popup-main": ['custom-hellobar','is_main_popup_loaded',true],
+              	"mbf-search-popup": ["mbf-search-wrap",'is_mbf_search_loaded',false],
+              	"mini-b2cpopup": ['mini-popup','is_mini_b2cpopup_loaded','open-b2cpopup'],
+              	"mini-b2bpopup": ['mini-popup','is_mini_b2bpopup_loaded','open-b2bpopup'],
+              	"mini-ipopopup": ['mini-popup','is_mini_ipopopup_loaded','open-ipopopup'],
+              	"mini-pmspopup": ['mini-popup','is_mini_pmspopup_loaded','open-pmspopup'],
          	};
          
          	setTimeout(function() {
@@ -531,11 +555,12 @@ exports.theme = window.theme;
          			modal =$('#'+key);
          			modelAction = popupLoading[key][0];
          			lodedVal = popupLoading[key][1];
-         			auto = true; 
+         			auto = popupLoading[key][2];
          			if(!self.options[lodedVal]){
 		       	  		self.ajax(modal, modelAction, auto); 
 		       	  	}
          		}
+
          	}, 5000);	
 	    	$rootnode  = $("#popup-main");
 	      	$rootnode.on('show.bs.modal', function (event) {
@@ -544,17 +569,15 @@ exports.theme = window.theme;
 	        		if (! modelAction.length) {
 	        			// Condition For Mini Popup
 	        			if($rootnode.data('mini-popup')){
-	        				console.log('mini-popup');
 	        				modelAction = 'mini-popup';
 	          				auto = $rootnode.data('mini-popup');
 	        			}else{
-	          				$rootnode.find('.modal-dialog').css('max-width','800px');
+	          				$rootnode.find('.modal-dialog').addClass('modal-lg');
 	        				modelAction = 'custom-hellobar';
 	          				auto = true;
 	        			}
 	        		}else{
-	        			//console.log('onlick');
-	          			$rootnode.find('.modal-dialog').css('max-width','800px');
+	          			$rootnode.find('.modal-dialog').addClass('modal-lg');
 	          			modelAction = modelAction.get(0).id;
 	        		}
 	        		var modal = $(this);
@@ -580,19 +603,46 @@ exports.theme = window.theme;
 	          	// modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
 	      	});
 
-	      	$('#popup-mini').on('show.bs.modal', function (event) {
+	      	$('#mini-b2cpopup').on('show.bs.modal', function (event) {
 	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
-	        	var auto = false;
+	        	var auto = 'open-b2cpopup';
 	        	modelAction = 'mini-popup';
 	        	var modal = $(this); 
-	    		if(!self.options.is_mini_popup_loaded){
+	    		if(!self.options.is_mini_b2cpopup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	}); 
+	     	$('#mini-b2bpopup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = 'open-b2bpopup';
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_b2bpopup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	});
+	     	$('#mini-ipopopup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = 'open-ipopopup';
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_ipopopup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	}); 
+	     	$('#mini-pmspopup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = 'open-pmspopup';
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_pmspopup_loaded){
 	        		self.ajax(modal, modelAction, auto);
 	        	} 
 	     	}); 
  			$('#mbf-search-popup').on('show.bs.modal', function (event) {
 	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
 	        	var auto = false;
-	        	$('#mbf-search-popup').find('.modal-dialog').css('max-width','800px');
+	        	$('#mbf-search-popup').find('.modal-dialog').addClass('modal-lg');
 	       		modelAction = modelAction.get(0).id;
 	        	var modal = $(this);
 	        	var statusModalOpen = (modal.data('bs.modal') || {isShown: false}).isShown;
@@ -1203,8 +1253,6 @@ exports.theme = window.theme;
 		        
 		        $(document).on('blur','form.wpcf7-form input[name="cf7s-phone"]',function(key){
 		 		 	$(this).closest('li').find('.emsg').hide().addClass('d-none');
-		 		 	// self.formConditionCheck(this, $regexname);
-		 		 	// var $regexmobile=/^(?:(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
 		    		if (!$(this).val().match($regexPhone)) {
 			  			 $(this).closest('li').find('.emsg').show().removeClass('d-none');
 			        }else{
@@ -1274,6 +1322,8 @@ exports.theme = window.theme;
 		    	$(document).on('click','.wpcf7-submit',function(e) {
 		 			e.preventDefault();
 		 			var form =$(this).closest('form.wpcf7-form');
+		 			var _wpcf7 =$(form).find('input[name="_wpcf7"]');
+		 			console.log($(_wpcf7).val());
 		 			var name =$(form).find('input[name="cf7s-name"]');
 		 			var city =$(form).find('input[name="cf7s-City"]');
 		 			var number =$(form).find('input[name="cf7s-phone"]');
@@ -1293,9 +1343,9 @@ exports.theme = window.theme;
 		 				Er = 3;
 		 			}
 			      	if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
-		                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
+		                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').addClass('d-none');
 		            }else{
-		                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
+		                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').removeClass('d-none');
 			            Er = 4;
 		            } 
 			        if(Er){
@@ -1305,14 +1355,16 @@ exports.theme = window.theme;
 			            $(this).prop("disabled",true);
 			            $(this).after('<div class="fb-loader  mx-auto"></div>');
 			            sumbmit_form_data =$(form).serialize();
+			            // console.log(sumbmit_form_data);
+			            $(this).siblings('.ajax-loader').addClass('is-active')
 			         	var submit = $(form).submit();
-			          	return true;
+			         	e.preventDefault();
+						return false;
 			      	}
 		 	  	});
 
 		 	  	// Track Contact Form Submit Event
 		    	document.addEventListener('wpcf7mailsent', function( event ) {
-		    		// console.log(event);
 		    		// sumbmit_form_data =event;
 		    		$('.wpcf7-form').find('.fb-loader').remove();
 		    		self.leadPostApi(sumbmit_form_data) ;

@@ -19,9 +19,9 @@ add_action('wp_head', function () {
  */
 add_action( 'wp_enqueue_scripts', function () {
         //styles
-        wp_dequeue_style( 'contact-form-7' );
+        // wp_dequeue_style( 'contact-form-7' );
     	//scripts
-    	wp_dequeue_script( 'contact-form-7');
+    	// wp_dequeue_script( 'contact-form-7');
  });
 
 /**

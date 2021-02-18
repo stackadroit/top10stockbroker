@@ -1,9 +1,9 @@
 import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation}  from '../library/global';
-import {contactForm} from '../plugins/contactform';
+// import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import SimpleBar from 'simplebar';
-import Select2 from 'select2';
+// import Select2 from 'select2';
 import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
@@ -36,9 +36,9 @@ export default {
 		}
 
 		// contact Form 7
-		if (typeof contactForm !== 'undefined') {
-			contactForm.initialize();
-		}
+		// if (typeof contactForm !== 'undefined') {
+		// 	contactForm.initialize();
+		// }
 		if (typeof ContactFormValidation !== 'undefined') {
 			ContactFormValidation.initialize();
 		}
@@ -107,7 +107,8 @@ export default {
 
         $(document)
         .on('reinitContactform', function (event, eventInfo) {
-        	var $form = $( '.load-model .wpcf7-form' );
+        	// var $form = $( '.load-model .wpcf7-form' );
+        	var $form =eventInfo;
         	wpcf7.initForm( $form );
   		});
 
@@ -124,19 +125,21 @@ export default {
         	var clickedClass ='';
         	if($(this).hasClass('open-b2cpopup')){
         		clickedClass='open-b2cpopup';
-        	}
+        		$("#mini-b2cpopup").attr('data-mini-popup',clickedClass).modal('show');
+      	 	}
         	if($(this).hasClass('open-b2bpopup')){
         		clickedClass='open-b2bpopup';
+        		$("#mini-b2bpopup").attr('data-mini-popup',clickedClass).modal('show');
         	}
         	if($(this).hasClass('open-ipopopup')){
         		clickedClass='open-ipopopup';
+        		$("#mini-ipopopup").attr('data-mini-popup',clickedClass).modal('show');
         	}
         	if($(this).hasClass('open-pmspopup')){
         		clickedClass='open-pmspopup';
+        		$("#mini-pmspopup").attr('data-mini-popup',clickedClass).modal('show');
         	}
-        	$("#popup-mini").attr('data-mini-popup',clickedClass);
-        	$("#popup-mini").find('.modal-dialog').css('max-width','350px');
-        	$("#popup-mini").modal('show');
+        	
 		  });
 
         // super tread mill

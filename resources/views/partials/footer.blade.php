@@ -88,8 +88,8 @@
     </div>
   </div>
 </div>
-<div class="modal fade popup-mini" id="popup-mini" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal fade mini-b2cpopup" id="mini-b2cpopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content model-popup">
       <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -100,6 +100,44 @@
     </div>
   </div>
 </div>
+<div class="modal fade mini-b2bpopup" id="mini-b2bpopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade mini-ipopopup" id="mini-ipopopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade mini-pmspopup" id="mini-pmspopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>          
+          
+          
 <div class="modal fade mbf-search-popup" id="mbf-search-popup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content model-popup">
