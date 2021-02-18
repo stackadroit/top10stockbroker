@@ -4,15 +4,21 @@
     & .close{
         position: absolute;
         background: $color-default;
-        height: 30px;
-        width: 30px;
+        height: 35px;
+        width: 35px;
         top: -15px;
         right: -15px;
         border-radius: 15px;
         opacity: 0.9;
+        font-size: 25px;
     }
     & .load-model{
         min-height: 300px;
+
+        .tb-pd {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     }
     & .loader{
         margin: auto;
@@ -66,10 +72,13 @@
         font-size: 92%;
     }
 }
-
-
 .modal-dialog{
     @media(max-width: 575px) {
-        margin: 15px;
+        margin: 22px;
+    }
+    &.modal-dialog-centered {
+         @media(max-width: 575px) {
+            align-items: flex-start;
+        }
     }
 }

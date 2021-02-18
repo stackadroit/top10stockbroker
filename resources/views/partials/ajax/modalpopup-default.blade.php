@@ -29,7 +29,7 @@
           </ul>
         @endif
       </div>
-      <div class="col-md-6 ml-auto p-4 border-light">
+      <div class="col-md-6 ml-auto tb-pd border-light">
         <div class="form-container">
           @if(!$auto_status)
             <h3 class="d-none d-sm-block"><strong>Become a Sub Broker</strong> in just 3 days</h3>
