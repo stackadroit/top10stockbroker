@@ -7,7 +7,7 @@
           {!! get_post_meta( $post_id, $auto_popup_left_content, true ) !!}
         @endif
       </div>
-      <div class="col-md-6 ml-auto p-4 border-light">
+      <div class="col-md-6 ml-auto tb-pd border-light">
       	<div class="form-container">
           @if(!$auto_status)
             {!! get_post_meta( $post_id, $form_right_content, true ) !!} 
