@@ -1038,7 +1038,7 @@ add_shortcode('quickerslider', function ($atts){
 
 });
 
-add_shortcode('goldInvestmentCalculator', function ($atts){ 
+add_shortcode('GoldInvestmentCalculator', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(

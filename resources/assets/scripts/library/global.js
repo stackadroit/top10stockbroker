@@ -1241,7 +1241,8 @@ exports.theme = window.theme;
 				$('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
 				$('.wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
 				$regexname = /^([a-zA-Z ]){1,100}$/;
-        		$regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/;
+        		// $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/;
+        		$regexPhone = /^[6789]\d{9}$/;
 
 
 		        $(document).on('blur','input[name="cf7s-name"],input[name="cf7s-City"]',function(key){

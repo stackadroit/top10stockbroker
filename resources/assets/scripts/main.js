@@ -140,6 +140,8 @@ import templateOptionChain from './routes/templates/template-option-chain';
 import singleBrokerComparison from './routes/brokerage/broker-comparison';
 import singleBrokerageCalculator from './routes/brokerage/brokerage-calculator';
 import singleMarginCalculator from './routes/brokerage/margin-calculator';
+// Gold Page Calculator
+import goldInvestmentCalculator from './routes/gold-silver/gold-investment-calculator';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -260,6 +262,7 @@ const routes = new Router({
   // Gold Rate Graph js include
   pageGoldRateData,
   pageChild,
+  goldInvestmentCalculator
 });
 
 // Load Events

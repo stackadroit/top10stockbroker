@@ -131,7 +131,6 @@ function goldsilver_investment_calculator() {
     }
 
     $cData = date('Y-m-d');
-    
     $c_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$p_id} and `type` = '{$type}' AND date='{$cData}' LIMIT 1");
     $gs_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$p_id} and `type` = '{$type}' AND date='{$prcdate}' LIMIT 1");
 
@@ -156,7 +155,7 @@ function goldsilver_investment_calculator() {
         $totalProLossPre=@(number_format((($totalProLoss/$g_invest)*100),2));
 
         $data['netWorth'] = @$netWorth;
-
+        
         if($totalProLoss >= 0){
             $data['plClass'] = 'green';
             $data['plText'] = 'Profit';
