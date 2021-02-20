@@ -476,14 +476,7 @@ function get_gold_silver_price_graph_data() {
     die();
 }
  
-
-
-
-/**--------------------------------------------------------------
- * File include to create Taxonomy And Meta Box for cpts.
- /---------------------------------------------------------------*/
-include 'taxonomy-and-meta-boxes.php';
-
+ 
 
 /**--------------------------------------------------------------
  * File include Share Market Actions.
@@ -494,16 +487,7 @@ include 'cpts-action/share-market-actions.php';
  * File include Share Price Actions.
  /---------------------------------------------------------------*/
 include 'cpts-action/share-price-actions.php';
-
-/**--------------------------------------------------------------
- * File include Futures Actions.
- /---------------------------------------------------------------*/
-// include 'cpts-action/futures-actions.php';
-
-/**--------------------------------------------------------------
- * File include Option Chain Actions.
- /---------------------------------------------------------------*/
-//include 'cpts-action/option-chain-actions.php';
+  
 /**----------------------------------------------------------
  * File include broker-calculator Actions.
  /----------------------------------------------------------*/
@@ -513,11 +497,7 @@ include 'cpts-action/broker-calculator-actions.php';
  * Exteral Api Call On Different contact form submit.
  /---------------------------------------------------------*/
 include 'cpts-action/external-api-functions-actions.php';
-
-/**----------------------------------------------------------
- * This file include custom meta code for tab filter CPT.
- /---------------------------------------------------------*/
-include 'cpts-action/tab-filter-custom-meta.php';
+ 
 
 // Start Session 
 function register_my_session()
