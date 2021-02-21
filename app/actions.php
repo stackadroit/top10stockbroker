@@ -248,6 +248,7 @@ function gold_rate_comparison_calculate() {
 
         $goldUnits = ($g_invest/ $timeLineRate);
         $netWorth = @(number_format(($goldUnits * $currentRate),2));
+        
         $priceRes[$key] =array(
             'currentRate'=>$c_val,
             'timeLineRate'=>$gs_val,
@@ -263,7 +264,142 @@ function gold_rate_comparison_calculate() {
     echo \App\template($template, $data);
     die();
 }
+/*****************************************************************
+                    Gold Rate Comparison
+******************************************************************/
 
+
+add_action("wp_ajax_gold_silver_unit_compare_calculate_jfunc",   __NAMESPACE__ . '\\gold_silver_unit_compare_calculate_jfunc');
+add_action("wp_ajax_nopriv_gold_silver_unit_compare_calculate_jfunc",   __NAMESPACE__ . '\\gold_silver_unit_compare_calculate_jfunc');
+
+function gold_silver_unit_compare_calculate_jfunc(){
+    global $wpdb;
+    $p_id1 = @$_REQUEST['p_id1'];
+    $p_id2 = @$_REQUEST['p_id2'];
+    $p_id3 = @$_REQUEST['p_id3'];
+    $type = @$_REQUEST['type'];
+    $carat = @$_REQUEST['carat'];
+    $unit = @$_REQUEST['unit'];
+    $unit_type = @$_REQUEST['unit_type'];
+    $g_timeline = @$_REQUEST['g_timeline'];
+    $p_ids =array();
+    if($p_id1)
+        $p_ids[] =$p_id1;
+    if($p_id2)
+        $p_ids[] =$p_id2;
+    if($p_id2)
+        $p_ids[] =$p_id3;
+    if($type ==1){
+        $cities =get_GoldCityStateLists();
+    }else{
+        $cities =get_SilverCityStateLists();
+    }
+    foreach ($p_ids as $key => $p_id) {
+        if($g_timeline =='1D'){
+            $crdateQue= "SELECT * FROM gold_silver_rate  WHERE `page_id` = ".$p_id. " and `type` = '".$type."'  ORDER BY date DESC  LIMIT 1";
+        }else{
+            switch ($g_timeline) {
+                case '1W':
+                    $prcdate =date("Y-m-d", strtotime("-7 days"));
+                    break;
+                case '2W':
+                    $prcdate =date("Y-m-d", strtotime("-14 days"));
+                    break;
+                case '3W':
+                    $prcdate =date("Y-m-d", strtotime("-21 days"));
+                    break;
+                case '1M':
+                    $prcdate =date("Y-m-d", strtotime("-30 days"));
+                    break;
+                case '3M':
+                    $prcdate =date("Y-m-d", strtotime("-3 month"));
+                    break;
+                case '6M':
+                    $prcdate =date("Y-m-d", strtotime("-6 month"));
+                    break;
+                case '9M':
+                    $prcdate =date("Y-m-d", strtotime("-9 month"));
+                    break;
+                case '1Y':
+                    $prcdate =date("Y-m-d", strtotime("-365 month"));
+                    break;
+                default:
+                    $prcdate =date("Y-m-d");
+                    break;
+            }
+            $crdateQue="SELECT * FROM gold_silver_rate  WHERE `page_id` = ".$p_id. " and `type` = '".$type."' AND date='".$prcdate."' LIMIT 1";
+        }
+        $timeLinePriceobj =  $wpdb->get_row($crdateQue);
+        $onegrmPrice=0;
+        if($timeLinePriceobj){
+            if($type ==1){
+                if($carat == 22){
+                    $onegrmPrice=@$timeLinePriceobj->t22_1_rate;
+                }else{
+                    $onegrmPrice =@$timeLinePriceobj->t24_1_rate;
+                }
+            }else{
+                $onegrmPrice=@$timeLinePriceobj->t22_1_rate/10;
+            }
+            $totalAmount= getUnitConvertedAmount($unit,$unit_type,$onegrmPrice);
+        }else{
+            $totalAmount ="0.00";   
+        } 
+        $priceRes[$key] =array(
+            'timeLineobj'=>$timeLinePriceobj,
+            'timeLineRate'=>$totalAmount,
+        );
+    }
+     
+    $netw =0;
+    $maxidx =0;
+    foreach ($priceRes as $key => $value) {
+        if($netw < @$value['timeLineRate']){
+            $netw =@$value['timeLineRate'];
+            $maxidx =$key;
+        }
+    }
+    ?>
+
+    <p style="text-align: center;">Here is the Gold Rate Comparison of 3 cities</p>
+    <table>
+        <tr>
+            <th>&nbsp;</th>
+            <?php if($p_id1){ ?>
+                <th><?php echo  ucfirst(@$cities[$p_id1]); ?></th>
+            <?php }
+            if($p_id2){ ?>
+                <th><?php echo  ucfirst(@$cities[$p_id2]); ?></th>
+            <?php }
+            if($p_id3){ ?>
+            <th><?php echo  ucfirst(@$cities[$p_id3]); ?></th>
+        <?php } ?>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size:25px;"> 
+                    <?php 
+                    $untString= $unit.' '.ucfirst($unit_type).' '.(($type==1)?'Gold':'Silver').' Price (Rs.)';
+                echo $untString; ?>
+                </span>
+            </td>
+            <?php
+            foreach ($priceRes as $key => $value) {
+                if($maxidx ==$key){
+                    $plClass='style="color:green;"';
+                }else{
+                    $plClass='';
+                }
+                ?>
+                <td <?php echo @$plClass; ?>>
+                    <?php echo @$value['timeLineRate'];  ?>
+                </td>
+            <?php } ?>
+        </tr>
+    </table>
+    <?php
+    exit;
+}
 add_action( 'wp_ajax_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 add_action( 'wp_ajax_nopriv_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 function modal_popup() {

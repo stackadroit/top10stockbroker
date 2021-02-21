@@ -29,7 +29,6 @@ import common from './routes/common';
 import home from './routes/home';
 import page from './routes/page';
 import demo from './routes/demo';
-// import shareMarketEducation from './routes/sharemarketeducation';
   
 //Shortcodes calculator
 import assetsToSalesRatioCalculator from './routes/shortcode-calculator/calculator01';
@@ -142,6 +141,9 @@ import singleBrokerageCalculator from './routes/brokerage/brokerage-calculator';
 import singleMarginCalculator from './routes/brokerage/margin-calculator';
 // Gold Page Calculator
 import goldInvestmentCalculator from './routes/gold-silver/gold-investment-calculator';
+import goldRateCalculator from './routes/gold-silver/gold-rate-calculator';
+import goldRateComparison from './routes/gold-silver/gold-rate-comparison';
+import goldRate from './routes/gold-silver/gold-silver-summary';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -262,7 +264,10 @@ const routes = new Router({
   // Gold Rate Graph js include
   pageGoldRateData,
   pageChild,
-  goldInvestmentCalculator
+  goldInvestmentCalculator,
+  goldRateCalculator,
+  goldRateComparison,
+  goldRate
 });
 
 // Load Events

@@ -153,9 +153,11 @@
               },
             success: function(response){
                $(ele).find('.get_gold_silver_return_result').html(response);
+               $(ele).find('.fb-loader').remove();
             },
             error: function(response){
-              console.log('Gold Silver Calculator Error.'); 
+              console.log('Gold Silver Calculator Error.');
+              $(ele).find('.fb-loader').remove(); 
             }
         });
 
@@ -166,8 +168,7 @@
         var self    = this,
           $rootnode  = $(document);
 
-          $rootnode
-          .on( 'click', '.getGoldSilverCalculatedResult', function(e) {
+          $rootnode.on( 'click', '.getGoldSilverCalculatedResult', function(e) {
               e.preventDefault();
 
               var ele = $(this).closest('form');
@@ -193,6 +194,7 @@
                 alert('Select Timeline.');
                 return false;
               }
+              $(this).after('<div class="fb-loader loader mx-auto" style="margin-top:20px"></div>');
               self.ajax(ele, type, p_id, carat, g_invest, g_timeline);
               return false;
           });
@@ -253,9 +255,11 @@
               },
             success: function(response){
                $(ele).find('.get_gold_rate_comparison_result').html(response);
+               $(ele).find('.fb-loader').remove(); 
             },
             error: function(response){
               console.log('gold rate comparison Calculator Error.');
+              $(ele).find('.fb-loader').remove(); 
             }
         });
 
@@ -296,7 +300,7 @@
                 alert('Select Timeline.');
                 return false;
               }
-
+              $(this).after('<div class="fb-loader loader mx-auto" style="margin-top:20px"></div>');
               self.ajax(ele, p_id1, p_id2, p_id3, carat, g_invest, g_timeline );
               return false;
           });
