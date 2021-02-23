@@ -35,7 +35,8 @@
 .tabs a {
   display: inline-block;
   margin: 0 0 10px;
-  padding: 15px 32px;
+  padding: 10px 17px;
+  min-width: 120px;
   font-weight: 600;
   text-align: center;
   color: #000;
@@ -43,6 +44,11 @@
   border: 1px solid transparent;
   cursor: pointer;
   position: relative;
+
+  @media (min-width: 768px) {
+    padding: 15px 32px;
+    min-width: auto;
+  }
 }
 .tabs a.active,
 .tabs a:hover .tabs a:focus {
