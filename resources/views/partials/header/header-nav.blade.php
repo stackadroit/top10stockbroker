@@ -28,7 +28,7 @@
             <div class="header-nav-features-dropdown" id="headerTopSearchDropdown">
               <form role="search" action="" method="get">
                 <div class="simple-search input-group">
-                  <input class="form-control text-1" id="headerSearchd" name="s type="search" value=""
+                  <input class="form-control text-1" id="headerSearchd" name="s" type="search" value=""
                          placeholder="Search...">
                   <label for="headerSearchd"></label>
                   <span class="input-group-append">
