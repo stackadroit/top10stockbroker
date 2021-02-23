@@ -139,6 +139,9 @@ ul {
 		margin-bottom: 0;
 		padding: 0;
 		text-align: justify;
+		display: flex;
+    	flex-flow: row wrap;
+    	justify-content: space-between;
 	}
     & li {
 	    display: inline-block;
