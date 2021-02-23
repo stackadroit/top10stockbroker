@@ -38,17 +38,16 @@
   padding: 15px 32px;
   font-weight: 600;
   text-align: center;
-  color: $color-default;
+  color: #000;
+  background-color: #e7e7e7;
   border: 1px solid transparent;
   cursor: pointer;
-  background-color: #eee;
   position: relative;
 }
 .tabs a.active,
 .tabs a:hover .tabs a:focus {
-  background: $color-default;
-  color: #fff !important;
-  border-bottom: 2px solid $color-dark;
+    color: #fff;
+    background-color: #5a5a5a;
 }
 .tab-content {
   .tab-col {

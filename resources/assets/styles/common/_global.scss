@@ -36,6 +36,7 @@ body {
     padding-right: 0 !important;
     .modal {
       padding-right: 0 !important;
+      z-index: 99999;
     }
   }
 }
@@ -400,7 +401,7 @@ For Branches
   margin-bottom: 15px;
 }
 
-.selectbrockerdiv#broker-search-wrap .selectbrkerdata {
+.selectbrockerdiv .selectbrkerdata {
   margin-bottom: 20px;
 }
 
@@ -704,4 +705,16 @@ select#choose_broker {
 }
 #comments .comment-form-comment textarea#comment {
   max-height: 100px;
+}
+
+.single-margin-calculator {
+  #main-content {
+    .content {
+      &.content {
+        &>div.center {
+          margin: 0;
+        }
+      }
+    }
+  }
 }
