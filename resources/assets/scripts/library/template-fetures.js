@@ -1,6 +1,7 @@
 // SingleFutures
 (function($) {
 	var initialized = false;
+  var initializedBottom = false;
 	var TemplateFutures = {
 			defaults: {
         wrapper: $('body'),
@@ -22,11 +23,11 @@
           
 				return this;
 			},
-
-			setOptions: function(opts) {
-				this.options = $.extend(true, {}, this.defaults, opts);
-				return this;
-			},
+      setOptions: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts);
+        return this;
+      },
+      
       getDerivativeCompanyStock: function(instName,symbol,expDate,optType,stkPrice,filter=true){
         var companyStockLive="#company-stock-live";
         $.ajax({
@@ -235,12 +236,30 @@
                   }
               });
           }).apply(this, [jQuery]);  
+ 
+          // End
+				return this;
+			},
+      initializeBottom: function(opts) {
+        if (initializedBottom) {
+          return this;
+        }
+        initializedBottom = true;
+        this
+          .setOptionsBottom(opts)
+          .eventsBottom();
+          
+        return this;
+      },
 
-          // Load Bellow page content after page scroll
-          $(window).scroll(function() {
-            if (!_isScrolling) {
-              if (self.options.topSectionLoaded && $(window).scrollTop() > self.options.offset){
-                _isScrolling = true;
+      setOptionsBottom: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts);
+        return this;
+      },
+      eventsBottom: function() {
+        var self    = this,
+          companyStockLive  = '#company-stock-live';
+           
                 (function($) {
                   'use strict';
                     var instName = $('#filter-options').data('inst-name');
@@ -316,11 +335,7 @@
                       })(info);
                     }
                 }).apply(this, [jQuery]);
-              }
-            }
-          });
-          
-          // Page data Filter Js
+         
           // Most Active Stock Futures
           $(document).on('click','.changeMASEDFilter',function(){
             var expdate =$(this).attr('data-expdate');
@@ -421,8 +436,8 @@
               self.get_future_top_interest_stock_index_option_data(eleId,InstName,ExpDate,OptType,Opt);
           });
           // End
-				return this;
-			},
+        return this;
+      },
 		};
 	exports.TemplateFutures = TemplateFutures;
 }).apply(this, [jQuery]);

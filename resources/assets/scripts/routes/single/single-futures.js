@@ -5,12 +5,33 @@ import OptionFutureChart from '../../components/graph/option-future-chart';
 
 export default {
   init() { 
-
+    var process = true;
     if (typeof SingleFutures !== 'undefined') {
         SingleFutures.initialize();
     }
-     
-    $(document).on('click','.shart_market_chart',function(e){
+    if($("body.mobile").length) {
+          $([window, document]).on('click', function(){
+            if (process) {
+              loadBottomPage();
+              process = false;
+            }
+          });
+    }else{
+          $(window).scroll(function() {
+            if (process) {
+              process = false;
+              loadBottomPage();
+            }
+          });
+    }
+
+    function loadBottomPage(){
+
+      if (typeof SingleFutures !== 'undefined') {
+        SingleFutures.initializeBottom();
+      }
+
+      $(document).on('click','.shart_market_chart',function(e){
           var dur=$(this).data("filter");
           var selli=$(this).data("element");
           var resp_div=$(this).data("chart-element");
@@ -22,7 +43,15 @@ export default {
               document.getElementById(resp_div)
             );
           }
-    });
+      });
+    } 
+
+    setTimeout(function(){
+      if (process) {
+         process = false;
+         loadBottomPage();
+      }
+    }, 5000,process); 
       
   },
   finalize() {
