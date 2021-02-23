@@ -1,9 +1,8 @@
 // SingleFutures
 (function($) {
-	var initialized = false;
-  var initializedBottom = false;
-	var TemplateFutures = {
-			defaults: {
+  var initialized = false;
+  var TemplateFutures = {
+      defaults: {
         wrapper: $('body'),
         offset:50,
         loadingElement : '',
@@ -12,22 +11,22 @@
         label: false,
         topSectionLoaded: false
       },
-			initialize: function(opts) {
-				if (initialized) {
-					return this;
-				}
-				initialized = true;
-				this
-					.setOptions(opts)
-					.events();
+      initialize: function(opts) {
+        if (initialized) {
+          return this;
+        }
+        initialized = true;
+        this
+          .setOptions(opts)
+          .events();
           
-				return this;
-			},
+        return this;
+      },
+
       setOptions: function(opts) {
         this.options = $.extend(true, {}, this.defaults, opts);
         return this;
       },
-      
       getDerivativeCompanyStock: function(instName,symbol,expDate,optType,stkPrice,filter=true){
         var companyStockLive="#company-stock-live";
         $.ajax({
@@ -203,8 +202,8 @@
             }
         });
       },
-			events: function() {
-				var self    = this,
+      events: function() {
+        var self    = this,
           companyStockLive  = '#company-stock-live',
           _isScrolling = false;
           
@@ -236,30 +235,12 @@
                   }
               });
           }).apply(this, [jQuery]);  
- 
-          // End
-				return this;
-			},
-      initializeBottom: function(opts) {
-        if (initializedBottom) {
-          return this;
-        }
-        initializedBottom = true;
-        this
-          .setOptionsBottom(opts)
-          .eventsBottom();
-          
-        return this;
-      },
 
-      setOptionsBottom: function(opts) {
-        this.options = $.extend(true, {}, this.defaults, opts);
-        return this;
-      },
-      eventsBottom: function() {
-        var self    = this,
-          companyStockLive  = '#company-stock-live';
-           
+          // Load Bellow page content after page scroll
+          $(window).scroll(function() {
+            if (!_isScrolling) {
+              if (self.options.topSectionLoaded && $(window).scrollTop() > self.options.offset){
+                _isScrolling = true;
                 (function($) {
                   'use strict';
                     var instName = $('#filter-options').data('inst-name');
@@ -335,7 +316,11 @@
                       })(info);
                     }
                 }).apply(this, [jQuery]);
-         
+              }
+            }
+          });
+          
+          // Page data Filter Js
           // Most Active Stock Futures
           $(document).on('click','.changeMASEDFilter',function(){
             var expdate =$(this).attr('data-expdate');
@@ -438,6 +423,6 @@
           // End
         return this;
       },
-		};
-	exports.TemplateFutures = TemplateFutures;
+    };
+  exports.TemplateFutures = TemplateFutures;
 }).apply(this, [jQuery]);
