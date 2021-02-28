@@ -41,7 +41,8 @@ class App extends Controller
             $this->mobileDetect = new MobileDetect();
         }
         
-        return $this->mobileDetect->isMobile();
+        // return $this->mobileDetect->isMobile();
+        return false;
     }
 
     public function hello_bar(){

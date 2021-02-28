@@ -14,7 +14,7 @@
           @yield('content')
         </main>
         @if (App\display_sidebar() && !$is_mobile)
-          <aside class="sidebar col-lg-3 order-lg-2" id="site-sidebar" >
+          <aside class="sidebar col-lg-3 order-lg-2" id="site-sidebar"   style="display:none">
             @include('partials.sidebar')
           </aside>
         @endif

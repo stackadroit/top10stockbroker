@@ -15,7 +15,13 @@ export default {
 	(function($) {
 		//for mobile version for lazy loading
 		var process = true;
-
+		if ($(window).width() < 700){
+	        setTimeout(function(){
+	        	$('#site-sidebar').show();
+	        }, 12000);
+	    }else {
+	        $('#site-sidebar').show();
+	    }
 		// Header
 		if (typeof Header !== 'undefined') {
 			Header.initialize();
@@ -105,16 +111,17 @@ export default {
 
 	    setTimeout(checkReactLoad, 3000); 
 
-        $(document)
-        .on('reinitContactform', function (event, eventInfo) {
-        	// var $form = $( '.load-model .wpcf7-form' );
-        	var $form =eventInfo;
-        	wpcf7.initForm( $form );
-  		});
+	    setTimeout(function(){
+	    	$(document).on('reinitContactform', function (event, eventInfo) {
+	        	// var $form = $( '.load-model .wpcf7-form' );
+	        	var $form =eventInfo;
+	        	wpcf7.initForm( $form );
+	  		});
+	    },500,wpcf7);
+        
 
   		// Show contact model on button click
-        $(document)
-        .on('click','.custom-hellobar', function (event, eventInfo) {
+        $(document).on('click','.custom-hellobar', function (event, eventInfo) {
         	$("#popup-main").modal('show');
   		});
 
