@@ -6,5 +6,6 @@
   <div class="entry-summary">
     @php the_excerpt() @endphp
     {!! do_shortcode(' [socialPostShare] ') !!}
+    @php comments_template('/partials/comments.blade.php') @endphp
   </div>
 </article>

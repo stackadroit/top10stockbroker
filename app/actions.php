@@ -670,6 +670,8 @@ function action_comment_form_after_fields($fields) {
     }
     $_SESSION['comment_captcha']['act_ans']=$act_ans;
     $captch_strimg =$_SESSION['comment_captcha']['fv'].' '. $sign .' '.$_SESSION['comment_captcha']['lv'] .' = ';
+    $captch_strimg =' 24 + 9 = ';
+    $_SESSION['comment_captcha']['act_ans'] =33;
     ?>
     <label>Captcha</label>
     <div class="form-group row">
