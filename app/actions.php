@@ -8,9 +8,9 @@ namespace App;
  */
 add_action('wp_head', function () {
     ?>
-    	<link rel="apple-touch-icon" sizes="180x180" href=" <?php asset_path('images/apple-touch-icon.png') ?> " >
-    	<link rel="icon" type="image/png" sizes="32x32" href=" <?php asset_path('images/favicon-32x32.png') ?> " >
-    	<link rel="icon" type="image/png" sizes="16x16" href=" <?php asset_path('images/favicon-16x16.png') ?> " >
+        <link rel="apple-touch-icon" sizes="180x180" href=" <?php asset_path('images/apple-touch-icon.png') ?> " >
+        <link rel="icon" type="image/png" sizes="32x32" href=" <?php asset_path('images/favicon-32x32.png') ?> " >
+        <link rel="icon" type="image/png" sizes="16x16" href=" <?php asset_path('images/favicon-16x16.png') ?> " >
     <?php
 });
 
@@ -20,8 +20,8 @@ add_action('wp_head', function () {
 add_action( 'wp_enqueue_scripts', function () {
         //styles
         // wp_dequeue_style( 'contact-form-7' );
-    	//scripts
-    	// wp_dequeue_script( 'contact-form-7');
+        //scripts
+        // wp_dequeue_script( 'contact-form-7');
  });
 
 /**
@@ -123,7 +123,7 @@ function goldsilver_investment_calculator() {
             $prcdate =date("Y-m-d", strtotime("-9 month"));
             break;
         case '1Y':
-            $prcdate =date("Y-m-d", strtotime("-365 month"));
+            $prcdate =date("Y-m-d", strtotime("-12 month"));
             break;
         default:
             $prcdate =date("Y-m-d", strtotime("-30 days"));
@@ -154,20 +154,22 @@ function goldsilver_investment_calculator() {
         $totalProLoss = @(number_format($goldUnits * ($currentRate - $timeLineRate),2));
         $totalProLossPre=@(number_format((($totalProLoss/$g_invest)*100),2));
 
-        $data['netWorth'] = @$netWorth;
+        $data['netWorth'] = (@$netWorth)?@$netWorth:'0.0';
+        $data['totalProLoss'] = (@$totalProLoss)?@$totalProLoss:'0.0';
+        $data['totalProLossPre'] = (@$totalProLossPre)?@$totalProLossPre:'0.0';
         
         if($totalProLoss >= 0){
-            $data['plClass'] = 'green';
+            $data['plClass'] = 'text-success';
             $data['plText'] = 'Profit';
         }else{
-            $data['plClass'] = 'red';
+            $data['plClass'] = 'text-danger';
             $data['plText'] = 'Loss';
         }
         if($totalProLossPre >= 0){
-            $data['plpClass'] = 'green';
+            $data['plpClass'] = 'text-success';
             $data['plpText'] = 'Profit(%) ';
         }else{
-            $data['plpClass'] = 'red';
+            $data['plpClass'] = 'text-danger';
             $data['plpText'] = 'Loss(%)';
         }
 
@@ -222,7 +224,7 @@ function gold_rate_comparison_calculate() {
             $prcdate =date("Y-m-d", strtotime("-9 month"));
             break;
         case '1Y':
-            $prcdate =date("Y-m-d", strtotime("-365 month"));
+            $prcdate =date("Y-m-d", strtotime("-12 month"));
             break;
         default:
             $prcdate =date("Y-m-d", strtotime("-30 days"));
@@ -265,7 +267,7 @@ function gold_rate_comparison_calculate() {
     die();
 }
 /*****************************************************************
-                    Gold Rate Comparison
+                    Gold Rate  Investment Comparison
 ******************************************************************/
 
 
@@ -321,7 +323,7 @@ function gold_silver_unit_compare_calculate_jfunc(){
                     $prcdate =date("Y-m-d", strtotime("-9 month"));
                     break;
                 case '1Y':
-                    $prcdate =date("Y-m-d", strtotime("-365 month"));
+                    $prcdate =date("Y-m-d", strtotime("-12 month"));
                     break;
                 default:
                     $prcdate =date("Y-m-d");
@@ -703,3 +705,55 @@ function custom_validate_comment_url() {
     }
 }
 add_action( 'pre_comment_on_post',  __NAMESPACE__ . '\\custom_validate_comment_url' );
+
+add_action("wp_ajax_get_gold_summery_data_", __NAMESPACE__ . '\\get_gold_summery_data_');
+add_action("wp_ajax_nopriv_get_gold_summery_data_", __NAMESPACE__ . '\\get_gold_summery_data_');
+
+function get_gold_summery_data_(){
+    global $wpdb;
+
+    $id= @$_REQUEST['id'];
+    $title= @$_REQUEST['title'];
+    $city= @$_REQUEST['city'];
+    $type= @$_REQUEST['type'];
+    $carret= @$_REQUEST['carret'];
+    $data =@$_REQUEST;
+    global $wpdb;
+    $gs_val =  $wpdb->get_results( "SELECT * FROM gold_silver_rate  WHERE `page_id` = ".@$data['id']. " and `type` = '".$data['type']."'  ORDER BY date DESC  LIMIT 2" );
+
+    if($data['carret'] == '22'){
+        $data['today_rate'] = $gs_val[0]->t22_10_rate; // 120
+        $data['yesterday_rate'] =  $gs_val[1]->t22_10_rate; // 110
+    }
+    else{
+        $data['today_rate'] = $gs_val[0]->t_24_10_rate; // 120
+        $data['yesterday_rate'] =  $gs_val[1]->t_24_10_rate; // 110
+    }
+
+    $data['diff'] = $data['today_rate'] - $data['yesterday_rate'];
+
+    if($data['diff'] > 0){
+        $data['class_style'] = 'geen-value';
+        $data['arrowclass'] = "fa-angle-up";
+    }elseif($data['diff'] < 0){ 
+        $data['class_style'] = 'red-value';
+        $data['arrowclass'] = "fa-angle-down";
+    }else{
+        $data['class_style'] = 'black-value';
+        $data['arrowclass'] = "fa-angle-right";
+    }
+
+    $data['diff_per'] = ( ($data['today_rate'] - $data['yesterday_rate']) / $data['yesterday_rate'] ) * 100;
+    
+    if($data['type'] ==2){
+        $data['typeName'] = 'Silver';
+    }else{
+        $data['typeName'] = 'Gold';
+    }
+
+    $data['title'] = date('dS M Y',strtotime($gs_val[0]->date)).' - ' . $data['title'];
+    $template = 'shortcodes.gold-silver.gold-silver-summary';
+    
+    echo \App\template($template, $data);
+    exit;
+}

@@ -1399,7 +1399,7 @@ add_shortcode('goldsilverpricetoday', function ($atts){
 
 });
 
-add_shortcode('goldsilversummary', function ($atts){ 
+add_shortcode('goldsilversummary_old', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1453,93 +1453,32 @@ add_shortcode('goldsilversummary', function ($atts){
     return \App\template($template, $data);
 
 });
-add_shortcode('goldsilversummary_for_cache_free', function ($atts){ 
+add_shortcode('goldsilversummary', function ($atts){ 
     global $wpdb;
     ob_start();
-    $data = extract( shortcode_atts( array(
-            'id'      => '',
-            'title'   =>'Summary (22 Ct Gold/10 gram)',
-            'city' => '',
-            'type'=> '',
-            'carret' => ''
-            ),
-            $atts )
-        );
+
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
 
     $id= @$data['id'];
     $title= @$data['title'];
     $city= @$data['city'];
     $type= @$data['type'];
     $carret= @$data['carret'];
-    $gs_val =  $wpdb->get_results( "SELECT * FROM gold_silver_rate  WHERE `page_id` = ".$id. " and `type` = '".$data['type']."'  ORDER BY date DESC  LIMIT 2" ); 
-    if($data['carret'] == '22'){
-        $today_rate = $gs_val[0]->t22_10_rate;  
-        $yesterday_rate =  $gs_val[1]->t22_10_rate; 
-    }else{
-        $today_rate = $gs_val[0]->t_24_10_rate; 
-        $yesterday_rate =  $gs_val[1]->t_24_10_rate; 
-    } 
-    $diff = $today_rate - $yesterday_rate;
+    $div_id="gold_summery_data_".$id."_".$type;
+    ?>
 
-    if($diff > 0){
-        $diff_color = '#00ae42';
-        $arrowclass="fa-arrow-up";
-    }elseif($diff < 0){ 
-        $diff_color = 'red';
-        $arrowclass="fa-arrow-down";
-    }else{
-        $diff_color = '#000';
-        $arrowclass="arrow-alt-right";
-    }
-   
-    if($yesterday_rate && $today_rate){
-        $diff_per = @( ($today_rate - $yesterday_rate) / $yesterday_rate ) * 100;
-    }else{
-        $diff_per =0;
-    }
-    
-    $typeName ='Gold';
-    if($type ==2){
-        $typeName ='Silver';
-    }
-    if($gs_val ){
-        $title='( '. date('dS M Y',strtotime($gs_val[0]->date)).' ) - ' . $attr['title'];
-
-        $div_id="gold_summery_data_".$id."_".$type;
-        ?>
-        <div class="gold_summery_table" id="<?php echo $div_id; ?>">
-            <table style="width: 61.5884%; height: 25px;" width="362">
-                <tbody>
-                  <tr>
-                    <td style="text-align: center;" colspan="2" width="362"><b><?php echo $title; ?></b>
-                            </td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: center;">Today <?php echo @$typeName; ?> Rate in <?php echo $attr['city']; ?> (Rs.)
-                    </td>
-                    <td style="text-align: center;">
-                    <span style="color:<?php echo $diff_color; ?>; font-size: 24px;"><?php echo $today_rate; ?><i class="fa <?php echo $arrowclass; ?>" style="color:<?php echo $diff_color; ?>;font-weight:700;margin-left: 8px;font-size: 20px;display: inline-block;position: relative;top: -2px;"></i></span></td>
-                   </tr>
-                    <tr>
-                        <td style="text-align: center;">Yesterday <?php echo @$typeName; ?> Rate in <?php echo $attr['city']; ?> (Rs.)</td>
-                        <td style="text-align: center;"><?php echo $yesterday_rate; ?></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: center;">Change (Rs.)</td>
-                        <td style="text-align: center;"><span style="color: <?php echo $diff_color; ?>"><?php echo $diff; ?></span></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: center;">Change (%)</td>
-                        <td style="text-align: center;"><span style="color: <?php echo $diff_color; ?>"><?php echo round( $diff_per, 2 ); ?>%</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="gold_summery_table" id="<?php echo $div_id; ?>"  data-id="<?php echo $id; ?>" data-title="<?php echo $title; ?>" data-city="<?php echo $city; ?>" data-type="<?php echo $type; ?>" data-carret="<?php echo $carret; ?>">
+    </div>
     <?php
-    }
-
     return ob_get_clean();
 });
+
 add_shortcode('goldsilverpricegraph', function ($atts){ 
 
     // Extract the shortcode attributes

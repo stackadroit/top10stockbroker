@@ -143,6 +143,8 @@ import singleMarginCalculator from './routes/brokerage/margin-calculator';
 import goldInvestmentCalculator from './routes/gold-silver/gold-investment-calculator';
 import goldRateCalculator from './routes/gold-silver/gold-rate-calculator';
 import goldRateComparison from './routes/gold-silver/gold-rate-comparison';
+import goldInvestmentComparison from './routes/gold-silver/gold-investment-comparison';
+import parentPageid52274 from './routes/gold-silver/gold-silver-summary';
 // import goldRate from './routes/gold-silver/gold-silver-summary';
 
 /** Populate Router instance with DOM routes */
@@ -267,7 +269,8 @@ const routes = new Router({
   goldInvestmentCalculator,
   goldRateCalculator,
   goldRateComparison,
-  // goldRate
+  goldInvestmentComparison,
+  parentPageid52274,
 });
 
 // Load Events
