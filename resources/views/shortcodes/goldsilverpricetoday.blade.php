@@ -1,4 +1,4 @@
-<div class="goldsilverpricetoday" id="{{ $div_id }}">
+<!-- <div class="goldsilverpricetoday" id="{{ $div_id }}"> -->
 	<table>
 		<tbody>
 		@if($type == 1)
@@ -50,4 +50,4 @@
 			</tr>
 		</tbody>
 	</table>
-</div>
+<!-- </div> -->

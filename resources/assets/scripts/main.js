@@ -144,8 +144,11 @@ import goldInvestmentCalculator from './routes/gold-silver/gold-investment-calcu
 import goldRateCalculator from './routes/gold-silver/gold-rate-calculator';
 import goldRateComparison from './routes/gold-silver/gold-rate-comparison';
 import goldInvestmentComparison from './routes/gold-silver/gold-investment-comparison';
-import parentPageid52274 from './routes/gold-silver/gold-silver-summary';
-// import goldRate from './routes/gold-silver/gold-silver-summary';
+ 
+import goldRate from './routes/gold-silver/gold-short-codes';
+import parentPageid52274 from './routes/gold-silver/gold-short-codes';
+import silverRate from './routes/gold-silver/gold-short-codes';
+import parentPageid52779 from './routes/gold-silver/gold-short-codes';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -271,6 +274,9 @@ const routes = new Router({
   goldRateComparison,
   goldInvestmentComparison,
   parentPageid52274,
+  goldRate,
+  silverRate,
+  parentPageid52779,
 });
 
 // Load Events

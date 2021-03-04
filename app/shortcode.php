@@ -1289,7 +1289,7 @@ add_shortcode('GoldRateComparison', function ($atts){
     return \App\template($template, $data);
 });
 
-add_shortcode('goldsilverlast15', function ($atts){ 
+add_shortcode('goldsilverlast15_inside', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1305,14 +1305,28 @@ add_shortcode('goldsilverlast15', function ($atts){
 
     global $wpdb;
     $data['gs_val'] =  $wpdb->get_results( "SELECT * FROM gold_silver_rate  WHERE `page_id` = " . $data['id'] . " and `type` = '" . $data['type'] . "'  ORDER BY date DESC LIMIT 15" );
-
-
     // Echo the shortcode blade template
     return \App\template($template, $data);
 
 });
+add_shortcode('goldsilverlast15', function ($atts){ 
+    ob_start();
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Last 15 Days Gold Price',
+        'city' => '',
+        'type'=> '',
+    ), $atts);
+    $div_id = "goldsilverpricelast15day_" . $data['id'] . "_" . $data['type'];
+    ?>
+    <div class="goldsilverpricelast15day" id="<?php echo $div_id; ?>" data-id="<?php echo $data['id']; ?>" data-title="<?php echo $data['title']; ?>" data-city="<?php echo $data['city']; ?>" data-type="<?php echo $data['type']; ?>">
+    </div>
+    <?php
+    return ob_get_clean();
 
-add_shortcode('goldsilverpricetoday', function ($atts){ 
+});
+add_shortcode('goldsilverpricetoday_inside', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1398,8 +1412,29 @@ add_shortcode('goldsilverpricetoday', function ($atts){
     return \App\template($template, $data);
 
 });
-
-add_shortcode('goldsilversummary_old', function ($atts){ 
+add_shortcode('goldsilverpricetoday', function ($atts){ 
+    ob_start();
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
+    $id=$data['id'];
+    $title=$data['title'];
+    $city=$data['city'];
+    $type=$data['type'];
+    $carret=$data['carret'];
+    $div_id = "goldsilverpricetoday_" . $data['id'] . "_" . $data['type'] . "_" . $data['carret'];
+    ?>
+    <div class="goldsilverpricetoday" id="<?php echo $div_id; ?>" data-id="<?php echo $id; ?>" data-title="<?php echo $title; ?>" data-city="<?php echo $city; ?>" data-type="<?php echo $type; ?>" data-carret="<?php echo $carret; ?>">
+    </div>
+    <?php
+    return ob_get_clean();
+});
+add_shortcode('goldsilversummary_inside', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
