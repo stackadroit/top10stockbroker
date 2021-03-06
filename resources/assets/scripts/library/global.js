@@ -188,7 +188,6 @@ exports.theme = window.theme;
 			//   	$('#site-sidebar').removeClass('no-sticky');
 			//   }
 			// });
-
 			if ( !self.options.stickyWidget.length ) {
 				return this;
 			}
@@ -1356,9 +1355,8 @@ exports.theme = window.theme;
 			            $(this).prop("disabled",true);
 			            $(this).after('<div class="fb-loader  mx-auto"></div>');
 			            sumbmit_form_data =$(form).serialize();
-			            // console.log(sumbmit_form_data);
-			            $(this).siblings('.ajax-loader').addClass('is-active')
 			         	var submit = $(form).submit();
+			            $(this).siblings('.ajax-loader').removeClass('is-active')
 			         	e.preventDefault();
 						return false;
 			      	}
@@ -1397,6 +1395,132 @@ exports.theme = window.theme;
 		};
 
 	exports.ContactFormValidation = ContactFormValidation;
+
+}).apply(this, [window.theme, jQuery]);
+
+// Side Bar
+(function(theme, $) {
+
+  var initialized = false;
+
+  var LoadSideBar = {
+      defaults: {
+      	wrapper: $('#site-sidebar'),
+      	// stickyWidget: $('#site-sidebar .fixed-widget'),
+      	stickyWidget: $('body:not(.mobile) #site-sidebar .fixed-widget'),
+		offset: 50,
+		brakePoint: 975,
+      },
+
+      initialize: function($wrapper, opts) {
+        if (initialized) {
+          return this;
+        }
+
+        initialized = true;
+        this.$wrapper = ($wrapper || this.defaults.wrapper); 
+
+        this
+          .setOptions(opts)
+          .events(); 
+
+        return this;
+      },
+
+      setOptions: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts, window.theme.fn.getOptions(this.$wrapper.data('plugin-options')));
+
+        return this;
+      },
+      stickyWidgetCreate:function(){
+      	var self    = this;
+      	var stickyWidget=$('#site-sidebar .fixed-widget');
+       	if ( !stickyWidget.length ) {
+			return this;
+		}
+
+		// Distance from top of page to sidebar add in px
+		var widgetFromTop = stickyWidget.offset().top
+			// console.log('widgetFromTop'+widgetFromTop);	
+		// Height of entire content area
+		var contentHeight = $('#main-content').height();
+		// console.log('contentHeight'+contentHeight);	
+		// Height of entire sidebar
+		var sidebarHeight = $('#site-sidebar').height();
+		// console.log('sidebarHeight'+sidebarHeight);	
+ 		if (sidebarHeight < contentHeight + self.options.offset) {
+		// console.log('self.options.offset'+self.options.offset);	
+	    	$(window).scroll(function() {
+ 				// If scroll distance from top exceeds by widget distance from top, add class
+	        	if ($(window).scrollTop() >= widgetFromTop) {
+	        		stickyWidget.addClass('sticky-widget');
+	        		//$('body').addClass('sticky-widget');
+	        	}else {
+				  	stickyWidget.removeClass('sticky-widget');
+				   	//$('body').removeClass('sticky-widget');
+				}
+ 				// If scroll distance from top is greater than content height remove class. 
+				//Added  X-px to pull out a bit before reaching the bottom.
+				if ($(window).scrollTop() > contentHeight - self.options.offset) {
+				 	stickyWidget.removeClass('sticky-widget');
+				 	//$('body').removeClass('sticky-widget'); 
+				}
+
+	   		});
+	 	}
+      },
+      ajax: function(){
+        var self    = this;
+        $rootnode  = $(document);
+        $.ajax({
+          	cache: false,
+         	type:"POST",
+            dataType: "html",
+        	url: global_vars.ajax_url,
+                // async:false,
+           	data: {
+              	'action':'load_side_bar',
+           	},
+           	success: function(response){
+               	$('#site-sidebar').html(response);
+               	var form ='#site-sidebar form';
+
+               	// Initalize contact form
+               	$('#site-sidebar div.wpcf7 > form' ).each( function() {
+					var $form = $( this );
+                	self.initializedValidation($form);
+					wpcf7.initForm( $form );
+					if ( wpcf7.cached ) {
+						wpcf7.refill( $form );
+					}
+				}); 
+				// sticky Widget
+				setTimeout(function(){
+					self.stickyWidgetCreate();
+				},500); 
+               	
+          	},
+          	error: function(response){
+                console.log('Side Bar error.'); 
+          	}
+          });
+        return this;
+      },
+      initializedValidation:function(form){
+      		var self = this;
+      		$(form).find('input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(form).find('input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(form).find('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>'); 
+      		$(form).find('.wpcf7-checkbox').after('<p><span class="emsg d-none">Please select the service.</span></p>'); 
+     	},
+      events: function() {
+        var self    = this;
+        self.ajax();   
+        return this;
+      },
+
+    };
+  exports.LoadSideBar = LoadSideBar;
 
 }).apply(this, [window.theme, jQuery]);
 

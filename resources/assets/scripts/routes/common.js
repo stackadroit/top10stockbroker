@@ -1,4 +1,4 @@
-import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation}  from '../library/global';
+import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation,LoadSideBar}  from '../library/global';
 // import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
@@ -15,18 +15,22 @@ export default {
 	(function($) {
 		//for mobile version for lazy loading
 		var process = true;
-		if ($(window).width() < 700){
-	        setTimeout(function(){
-	        	$('#site-sidebar').show();
-	        }, 12000);
-	    }else {
-	        $('#site-sidebar').show();
-	    }
+		
 		// Header
 		if (typeof Header !== 'undefined') {
 			Header.initialize();
 		}
-		
+		// SideBar
+		if ($(window).width() < 700){
+	        // For mobile
+	    }else {
+	    	if (typeof LoadSideBar !== 'undefined') {
+				LoadSideBar.initialize();
+			}
+			setTimeout(function(){
+			
+			},5500); 
+	    }
 		// Easy tab
 		if (typeof EasyTab !== 'undefined') {
 			EasyTab.initialize();
@@ -118,6 +122,7 @@ export default {
 	        	wpcf7.initForm( $form );
 	  		});
 	    },500,wpcf7);
+
         
 
   		// Show contact model on button click

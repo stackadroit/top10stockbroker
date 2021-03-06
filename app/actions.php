@@ -25,6 +25,18 @@ add_action( 'wp_enqueue_scripts', function () {
  });
 
 /**
+ * Load Side Bar.
+ */
+add_action( 'wp_ajax_load_side_bar',  __NAMESPACE__ . '\\load_side_bar' );
+add_action( 'wp_ajax_nopriv_load_side_bar',  __NAMESPACE__ . '\\load_side_bar' );
+function load_side_bar() {
+    // @if (App\display_sidebar() && !$is_mobile)
+    // @endif
+    dynamic_sidebar('sidebar-primary');
+    exit; 
+}
+
+/**
  * Ajax
  */
 add_action( 'wp_ajax_icon_slider_data_ajax_request',  __NAMESPACE__ . '\\icon_slider_data_ajax_request' );

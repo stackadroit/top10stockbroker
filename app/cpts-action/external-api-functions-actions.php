@@ -889,7 +889,6 @@ function PA1_GEOJITCRM_API_B2C( $postedArray =array() ){
  *  Send Contact Data to PA1 5Paisa API B2C.
  *  @author Pavan JI <dropmail2pavan@gmail.com> 
  */
-
 function PA1_5Paisa_API_B2C( $postedArray =array() ){
     
     $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
@@ -897,8 +896,8 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
     $form_id= $postedArray['_wpcf7'];
     $name = $postedArray['cf7s-name'];
     $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
-    // $email="";  
-    $email=$mobile."@gmail.com" ;  
+    $email="";  
+    // $email=$mobile."@gmail.com" ;  
     $city=$postedArray['cf7s-City'];
     //Get Token Request
     $apiRequest =array();
@@ -992,6 +991,7 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
                 );
                    
                 $leadPostDataJson =json_encode($leadPostArray);
+                $apiRequest['token_res']=$leadPostDataJson;
                 $url3 ='https://zohocrmapi.azure-api.net/CRMAPI/Save';
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
@@ -1018,6 +1018,6 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
     }else{
         $apiResponse ='First Step Token Getting Failed';
     }
-
+    print_r($apiRequest);
     insert_request_response_ac_db($form_id,'5paisa_b2c_req_url',json_encode($apiRequest),'5paisa_b2c_api_status',$apiResponse);
 }

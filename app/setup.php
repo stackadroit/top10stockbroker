@@ -11,8 +11,8 @@ use Roots\Sage\Template\BladeProvider;
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('top10stockbroker/main.css', asset_path('styles/main.css'), '2.5.0', true);
-    wp_enqueue_script('top10stockbroker/main.js', asset_path('scripts/main.js'), ['jquery'], '2.5.0', true);
+    wp_enqueue_style('top10stockbroker/main.css', asset_path('styles/main.css'), '2.5.5', true);
+    wp_enqueue_script('top10stockbroker/main.js', asset_path('scripts/main.js'), ['jquery'], '2.5.5', true);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
