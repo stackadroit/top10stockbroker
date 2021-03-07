@@ -483,6 +483,10 @@ select#choose_broker {
     background-color: #e7e7e7;
     height: 42px;
     cursor: pointer;
+
+    @media only screen and (max-width: 767px) {
+     min-width: calc(50% - 3px);
+    }
   }
   input[type="radio"]:checked + label {
     color: #ffffff;
@@ -507,13 +511,21 @@ select#choose_broker {
         input[type="number"] {
           padding: 10px;
           border: 1px solid #000000;
+           @media only screen and (max-width: 767px) {
+            width: 100%;
+          }
         }
 
         select {
-          min-width: 188px;
+          min-width: 168px;
           border: 1px solid #000000;
           border-radius: 0;
           font-size: 1rem;
+          @media only screen and (max-width: 767px) {
+            min-width: 100%;
+          }
+
+
         }
 
         #calculate1,
@@ -716,5 +728,17 @@ select#choose_broker {
         }
       }
     }
+  }
+}
+.comments {
+  .comment-respond {
+      padding: 0 15px;
+      border: 1px solid #eee;
+      background: #eee;
+      border-radius: 10px;
+
+      .comment-reply-title {
+            margin-top: 30px;
+      }
   }
 }
