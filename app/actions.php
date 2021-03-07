@@ -711,10 +711,15 @@ function custom_validate_comment_url() {
     // print_r($_SESSION['comment_captcha']);
     // print_r($_POST);
     $actualAns =$_SESSION['comment_captcha']['act_ans'];
+    if(empty($_POST['captcha_ans'])){
+         wp_die( __('Error: Please enter a valid captcha.'.'<br/><p><a href="javascript:history.back()">« Back</a></p>') );
+    }
     if(trim($_POST['captcha_ans']) != $actualAns){
         wp_die( __('Error: Please enter a valid captcha.'.'<br/><p><a href="javascript:history.back()">« Back</a></p>') );
         // echo '<p><a href="javascript:history.back()">« Back</a></p>'
     }
 }
 add_action( 'pre_comment_on_post',  __NAMESPACE__ . '\\custom_validate_comment_url' );
-add_action( 'pre_comment_on_post',  __NAMESPACE__ . '\\custom_validate_comment_url' );
+ 
+
+ 
