@@ -1342,12 +1342,14 @@ exports.theme = window.theme;
 		 			if (!$(number).val().match($regexPhone)) {
 		 				Er = 3;
 		 			}
-			      	if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
-		                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').addClass('d-none');
-		            }else{
-		                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').removeClass('d-none');
-			            Er = 4;
-		            } 
+		 			if($(form).find('.wpcf7-checkbox').length){
+				      	if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
+			                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').addClass('d-none');
+			            }else{
+			                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').removeClass('d-none');
+				            Er = 4;
+			            } 
+		 			}
 			        if(Er){
 			            console.log(Er);
 			        	return false;  	
