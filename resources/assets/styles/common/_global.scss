@@ -479,8 +479,8 @@ select#choose_broker {
   input[type="radio"] + label {
     padding-top: 7px;
     margin-bottom: 10px;
-    color: #000000;
-    background-color: #e7e7e7;
+    color: #e35132;
+    background-color: #eee;
     height: 42px;
     cursor: pointer;
 
@@ -489,8 +489,9 @@ select#choose_broker {
     }
   }
   input[type="radio"]:checked + label {
-    color: #ffffff;
-    background-color: #5a5a5a;
+      background: #e35132;
+      color: #fff!important;
+      border-bottom: 2px solid #212529;
   }
 
   label {
@@ -539,6 +540,8 @@ select#choose_broker {
           background-color: $color-default;
           margin: 0 auto;
           color: #ffffff;
+          font-size: 18px;
+          font-weight: bold;
           &:hover {
             background-color: #33363b;
           }
@@ -731,6 +734,7 @@ select#choose_broker {
   }
 }
 .comments {
+  margin-bottom: 20px;
   .comment-respond {
       padding: 0 15px;
       border: 1px solid #eee;
