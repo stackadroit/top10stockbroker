@@ -29,7 +29,6 @@ import common from './routes/common';
 import home from './routes/home';
 import page from './routes/page';
 import demo from './routes/demo';
-// import shareMarketEducation from './routes/sharemarketeducation';
   
 //Shortcodes calculator
 import assetsToSalesRatioCalculator from './routes/shortcode-calculator/calculator01';
@@ -140,6 +139,16 @@ import templateOptionChain from './routes/templates/template-option-chain';
 import singleBrokerComparison from './routes/brokerage/broker-comparison';
 import singleBrokerageCalculator from './routes/brokerage/brokerage-calculator';
 import singleMarginCalculator from './routes/brokerage/margin-calculator';
+// Gold Page Calculator
+import goldInvestmentCalculator from './routes/gold-silver/gold-investment-calculator';
+import goldRateCalculator from './routes/gold-silver/gold-rate-calculator';
+import goldRateComparison from './routes/gold-silver/gold-rate-comparison';
+import goldInvestmentComparison from './routes/gold-silver/gold-investment-comparison';
+ 
+import goldRate from './routes/gold-silver/gold-short-codes';
+import parentPageid52274 from './routes/gold-silver/gold-short-codes';
+import silverRate from './routes/gold-silver/gold-short-codes';
+import parentPageid52779 from './routes/gold-silver/gold-short-codes';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -260,6 +269,14 @@ const routes = new Router({
   // Gold Rate Graph js include
   pageGoldRateData,
   pageChild,
+  goldInvestmentCalculator,
+  goldRateCalculator,
+  goldRateComparison,
+  goldInvestmentComparison,
+  parentPageid52274,
+  goldRate,
+  silverRate,
+  parentPageid52779,
 });
 
 // Load Events

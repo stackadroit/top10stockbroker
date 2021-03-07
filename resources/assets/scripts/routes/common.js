@@ -1,9 +1,9 @@
-import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation}  from '../library/global';
+import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation,LoadSideBar}  from '../library/global';
 // import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import SimpleBar from 'simplebar';
-import Select2 from 'select2';
+// import Select2 from 'select2';
 import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
@@ -15,12 +15,22 @@ export default {
 	(function($) {
 		//for mobile version for lazy loading
 		var process = true;
-
+		
 		// Header
 		if (typeof Header !== 'undefined') {
 			Header.initialize();
 		}
-		
+		// SideBar
+		if ($(window).width() < 700){
+	        // For mobile
+	    }else {
+	    	if (typeof LoadSideBar !== 'undefined') {
+				LoadSideBar.initialize();
+			}
+			setTimeout(function(){
+			
+			},5500); 
+	    }
 		// Easy tab
 		if (typeof EasyTab !== 'undefined') {
 			EasyTab.initialize();
@@ -105,15 +115,18 @@ export default {
 
 	    setTimeout(checkReactLoad, 3000); 
 
-        $(document)
-        .on('reinitContactform', function (event, eventInfo) {
-        	var $form = $( '.load-model .wpcf7-form' );
-        	wpcf7.initForm( $form );
-  		});
+	    setTimeout(function(){
+	    	$(document).on('reinitContactform', function (event, eventInfo) {
+	        	// var $form = $( '.load-model .wpcf7-form' );
+	        	var $form =eventInfo;
+	        	wpcf7.initForm( $form );
+	  		});
+	    },500,wpcf7);
+
+        
 
   		// Show contact model on button click
-        $(document)
-        .on('click','.custom-hellobar', function (event, eventInfo) {
+        $(document).on('click','.custom-hellobar', function (event, eventInfo) {
         	$("#popup-main").modal('show');
   		});
 
@@ -124,19 +137,21 @@ export default {
         	var clickedClass ='';
         	if($(this).hasClass('open-b2cpopup')){
         		clickedClass='open-b2cpopup';
-        	}
+        		$("#mini-b2cpopup").attr('data-mini-popup',clickedClass).modal('show');
+      	 	}
         	if($(this).hasClass('open-b2bpopup')){
         		clickedClass='open-b2bpopup';
+        		$("#mini-b2bpopup").attr('data-mini-popup',clickedClass).modal('show');
         	}
         	if($(this).hasClass('open-ipopopup')){
         		clickedClass='open-ipopopup';
+        		$("#mini-ipopopup").attr('data-mini-popup',clickedClass).modal('show');
         	}
         	if($(this).hasClass('open-pmspopup')){
         		clickedClass='open-pmspopup';
+        		$("#mini-pmspopup").attr('data-mini-popup',clickedClass).modal('show');
         	}
-        	$("#popup-main").attr('data-mini-popup',clickedClass);
-        	$("#popup-main").find('.modal-dialog').css('max-width','350px');
-        	$("#popup-main").modal('show');
+        	
 		  });
 
         // super tread mill

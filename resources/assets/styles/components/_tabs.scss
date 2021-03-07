@@ -35,25 +35,20 @@
 .tabs a {
   display: inline-block;
   margin: 0 0 10px;
-  padding: 10px 17px;
-  min-width: 120px;
+  padding: 15px 32px;
   font-weight: 600;
   text-align: center;
-  color: #000;
-  background-color: #e7e7e7;
+  color: $color-default;
   border: 1px solid transparent;
   cursor: pointer;
+  background-color: #eee;
   position: relative;
-
-  @media (min-width: 768px) {
-    padding: 8px 32px;
-    min-width: 120px;
-  }
 }
 .tabs a.active,
 .tabs a:hover .tabs a:focus {
-    color: #fff;
-    background-color: #5a5a5a;
+  background: $color-default;
+  color: #fff !important;
+  border-bottom: 2px solid $color-dark;
 }
 .tab-content {
   .tab-col {

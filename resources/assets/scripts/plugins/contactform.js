@@ -39,21 +39,21 @@
 				}, global_vars.wpcf7 );
 
 				$( function() {
-					wpcf7.supportHtml5 = ( function() {
-						var features = {};
-						var input = document.createElement( 'input' );
+					// wpcf7.supportHtml5 = ( function() {
+					// 	var features = {};
+					// 	var input = document.createElement( 'input' );
 
-						features.placeholder = 'placeholder' in input;
+					// 	features.placeholder = 'placeholder' in input;
 
-						var inputTypes = [ 'email', 'url', 'tel', 'number', 'range', 'date' ];
+					// 	var inputTypes = [ 'email', 'url', 'tel', 'number', 'range', 'date' ];
 
-						$.each( inputTypes, function( index, value ) {
-							input.setAttribute( 'type', value );
-							features[ value ] = input.type !== 'text';
-						} );
+					// 	$.each( inputTypes, function( index, value ) {
+					// 		input.setAttribute( 'type', value );
+					// 		features[ value ] = input.type !== 'text';
+					// 	} );
 
-						return features;
-					} )();
+					// 	return features;
+					// } )();
 
 					$( 'div.wpcf7 > form' ).each( function() {
 						var $form = $( this );
@@ -75,11 +75,11 @@
 					wpcf7.setStatus( $form, 'init' );
 
 					$form.submit( function( event ) {
-						if ( ! wpcf7.supportHtml5.placeholder ) {
-							$( '[placeholder].placeheld', $form ).each( function( i, n ) {
-								$( n ).val( '' ).removeClass( 'placeheld' );
-							} );
-						}
+						// if ( ! wpcf7.supportHtml5.placeholder ) {
+						// 	$( '[placeholder].placeheld', $form ).each( function( i, n ) {
+						// 		$( n ).val( '' ).removeClass( 'placeheld' );
+						// 	} );
+						// }
 
 						if ( typeof window.FormData === 'function' ) {
 							wpcf7.submit( $form );
@@ -124,25 +124,25 @@
 					} );
 
 					// Placeholder Fallback
-					if ( ! wpcf7.supportHtml5.placeholder ) {
-						$( '[placeholder]', $form ).each( function() {
-							$( this ).val( $( this ).attr( 'placeholder' ) );
-							$( this ).addClass( 'placeheld' );
+					// if ( ! wpcf7.supportHtml5.placeholder ) {
+					// 	$( '[placeholder]', $form ).each( function() {
+					// 		$( this ).val( $( this ).attr( 'placeholder' ) );
+					// 		$( this ).addClass( 'placeheld' );
 
-							$( this ).focus( function() {
-								if ( $( this ).hasClass( 'placeheld' ) ) {
-									$( this ).val( '' ).removeClass( 'placeheld' );
-								}
-							} );
+					// 		$( this ).focus( function() {
+					// 			if ( $( this ).hasClass( 'placeheld' ) ) {
+					// 				$( this ).val( '' ).removeClass( 'placeheld' );
+					// 			}
+					// 		} );
 
-							$( this ).blur( function() {
-								if ( '' === $( this ).val() ) {
-									$( this ).val( $( this ).attr( 'placeholder' ) );
-									$( this ).addClass( 'placeheld' );
-								}
-							} );
-						} );
-					}
+					// 		$( this ).blur( function() {
+					// 			if ( '' === $( this ).val() ) {
+					// 				$( this ).val( $( this ).attr( 'placeholder' ) );
+					// 				$( this ).addClass( 'placeheld' );
+					// 			}
+					// 		} );
+					// 	} );
+					// }
 
 					if ( wpcf7.jqueryUi && ! wpcf7.supportHtml5.date ) {
 						$form.find( 'input.wpcf7-date[type="date"]' ).each( function() {
@@ -281,11 +281,11 @@
 							wpcf7.resetCounter( $form );
 						}
 
-						if ( ! wpcf7.supportHtml5.placeholder ) {
-							$form.find( '[placeholder].placeheld' ).each( function( i, n ) {
-								$( n ).val( $( n ).attr( 'placeholder' ) );
-							} );
-						}
+						// if ( ! wpcf7.supportHtml5.placeholder ) {
+						// 	$form.find( '[placeholder].placeheld' ).each( function( i, n ) {
+						// 		$( n ).val( $( n ).attr( 'placeholder' ) );
+						// 	} );
+						// }
 
 						$( '.wpcf7-response-output', $form )
 							.html( '' ).append( data.message ).slideDown( 'fast' );

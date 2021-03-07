@@ -13,9 +13,7 @@ add_action( 'wp_ajax_nopriv_lead_data_post_to_api',  __NAMESPACE__ . '\\api_mast
  *  @author Pavan JI <dropmail2pavan@gmail.com> 
  */
 function api_master_calls(){
-    //error_reporting(E_ALL);
-    //error_reporting(1);
-    //ini_set('error_reporting', E_ALL);
+   
     global $wp;
     global $wpdb;
     $url = upicrm_get_referer1(); 
@@ -23,8 +21,7 @@ function api_master_calls(){
     $postData= array();
     // Set Post Data in to variable
     parse_str($_POST['post_data'], $postData);
-    // print_r($postData);
-    // exit;
+    
     $SelectServices =(isset($postData['cf7s-SelectServices'])) ? $postData['cf7s-SelectServices'] : (isset($postData['cf7s-SelectService'])?$postData['cf7s-SelectService']:'');
      
     $form_id = $postData['_wpcf7'];
@@ -68,11 +65,9 @@ function api_master_calls(){
         }elseif($brand){
             $serviceQuery .= " AND FIND_IN_SET('".$brand."',brands) ";
         }
-        echo $serviceQuery;
-        // exit;
+        echo $serviceQuery .'<br/>';
         $serviceResults = $wpdb->get_results($serviceQuery);
-        // echo '<pre>';
-        //print_r($serviceResults );
+        
         if($serviceResults){
             foreach ($serviceResults as $key => $value) {
                 switch ($value->api_id) {
@@ -350,8 +345,7 @@ function angelBroking_BtoB_Api_Call($postedArray =array()){
     $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
     $email="NA" ;    
     $city=urlencode($postedArray['cf7s-City']);
-    $apiUrl =  'https://www.angelbroking.com/api/b2b-3rd-party.php?api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname='.$name.'&lname=&LeadSource=WEB&Mobile='.$mobile.'&Email=NA&ResidenceCity='.$city.'&ResidenceAddress=&ResidenceArea=&ResidencePin=&ProductsInterested=&LeadChannel=Direct&Correspondence=&Category=&Refferal=&Remarks=';
-
+    
     // Curl 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,"https://www.angelbroking.com/api/b2b-3rd-party.php");
@@ -382,9 +376,9 @@ function angelBroking_BtoC_Api_Call($postedArray =array()){
     $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
     $email="NA" ;    
     $city=urlencode($postedArray['cf7s-City']);
-    $apiUrl = "https://www.angelbroking.com/api/b2c-3rd-party.php?api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname=".$name."&strLName=".$name."&mobile=".$mobile."&strLandLine=&city=".$city."&email=". $email."&strRefURL=&strLMSSource=chittorgarh&strDevice=Desktop&strAdType=Direct&strAd_Id=9665&iWebPlacementId=&strIPAddress=172.29.17.111&strOS=Windows&strBrowser=Chrome&UTM=http%3A%2F%2Fopenanaccount.angelbroking.com%2Forb.aspx%3Futm_source%3Dchittorgarh%26utm_medium%3Dweb%26utm_campaign%3Dorb%26utm_content%3Dtopsharebrokers&Keyword1=&Keyword2=&Keyword3=&Keyword_Final=&strReferrerKeyword=&strAdGroup=ad&PageUrl=http%3A%2F%2Fopenanaccount.angelbroking.com%2Forb.aspx";
-
+     
     $ch = curl_init();
+
     curl_setopt($ch, CURLOPT_URL,"https://www.angelbroking.com/api/b2c-3rd-party.php");
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS,
@@ -459,9 +453,7 @@ function motilal_BtoC_Api_Call($postedArray=array()){
         ),
         'TokenModel' => array('Token' => '1015LKJH')
     ));
-    // echo "<pre>";
-    // print_r($postData);
-    // echo "</pre>";
+     
     print_r($postData);
    // $postData =json_encode($postData);
     $encryptedPostData = base64_encode(openssl_encrypt($postData, $method, $password, OPENSSL_RAW_DATA, $iv));
@@ -686,7 +678,7 @@ function IIFL_B2C_GrowthAPI( $postedArray =array() ){
     // Set HTTP Header for POST request 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
-        'Authorization: {99F3935A-7B2B-0612-164D-46EFA6EFED95}',
+        'Authorization: {6CB7E6B2-BC4A-EE92-EFFB-2C381E22D2C8}',
         'Content-Length: ' . strlen($payload))
     );
     // Submit the POST request
@@ -695,7 +687,7 @@ function IIFL_B2C_GrowthAPI( $postedArray =array() ){
     print_r($result);
      //$form_id= $postedArray['_wpcf7'];
     insert_request_response_ac_db($form_id,'iifl_b2c_api_request_url',$payload,'iifl_b2c_api_status',$result);
-    //exit;
+    //exit;return
 }
 /**
  *  Send Contact Data to Bajaj Finserv Securities.
@@ -704,17 +696,18 @@ function IIFL_B2C_GrowthAPI( $postedArray =array() ){
 function bajajfinservsecurities($postedArray =array()){
    
     $form_id= $postedArray['_wpcf7'];
+    $email =$postedArray['cf7s-phone'].'@gmail.com';
     $data= array(
         'name' => $postedArray['cf7s-name'],
         'mobile' => $postedArray['cf7s-phone'],
-        'email' => '123',
-        'partner' => 'ddddd',
+        'email' => $email,
+        'partner' => 'top10stockbroker',
         'date' => date("Y-m-d"),
-        'product' => 'kkkkk',
+        'product' => 'Lead',
         'City' => $postedArray['cf7s-City'],
-        'additionalone'=>'nnnnn',
-        'additionaltwo' => 'new');
-        $postdata = json_encode($data);
+        'additionalone'=>'one',
+        'additionaltwo' => 'two');
+    $postdata = json_encode($data);
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_PORT => "8282",
@@ -737,10 +730,8 @@ function bajajfinservsecurities($postedArray =array()){
     
     $response = curl_exec($curl);
     $err = curl_error($curl);
-    
     curl_close($curl);
-    
-   if ($err) {
+    if ($err) {
       echo $response= "cURL Error #:" . $err;
     } else {
       echo $response;
@@ -835,7 +826,7 @@ function PA1_GEOJITCRM_API_B2C( $postedArray =array() ){
     $token_response = curl_exec($curl);
 
     if($token_response){
-        $apiRequest['token_res']=$token_response;
+        // $apiRequest['token_res']=$token_response;
         $token_response =json_decode($token_response);
         $leadApiAccessToken =$token_response->token_type.' '.$token_response->access_token;
         echo 'Geojit API Token: '.$leadApiAccessToken;
@@ -905,8 +896,8 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
     $form_id= $postedArray['_wpcf7'];
     $name = $postedArray['cf7s-name'];
     $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
-    //$email=$mobile."@gmail.com" ;  
     $email="";  
+    // $email=$mobile."@gmail.com" ;  
     $city=$postedArray['cf7s-City'];
     //Get Token Request
     $apiRequest =array();
@@ -932,7 +923,7 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
     ));
     $token_response = curl_exec($curl);
     if($token_response){
-        $apiRequest['token_res']=$token_response;
+        // $apiRequest['token_res']=$token_response;
         $token_response =json_decode($token_response);
         $leadApiAccessToken =$token_response->token_type.' '.$token_response->access_token;
         echo '5Paisa API Token: '.$leadApiAccessToken;
@@ -988,8 +979,11 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
                         "LastName"=>"",
                         "LeadProduct"=>"Equity",
                         "Mobile"=>$mobile,
-                        "Email"=>"promod1@gmail.com",
-                        "LeadSource"=>"Top10stockbroker",
+                        "Email"=>$email,
+                        "LeadSource"=>"Partner Program",
+                        "lead_source"=>"Partner Program",
+                        'partner_client_code' => '58398898',
+                        'Campaign'=> 'Top10StockBroker',
                         "subsource"=>"Top10stockbroker",
                         "SubSource"=>"Top10stockbroker",
                         "city"=>$city
@@ -997,6 +991,7 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
                 );
                    
                 $leadPostDataJson =json_encode($leadPostArray);
+                $apiRequest['token_res']=$leadPostDataJson;
                 $url3 ='https://zohocrmapi.azure-api.net/CRMAPI/Save';
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
@@ -1014,6 +1009,7 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
                 ));
 
                 $apiResponse = curl_exec($curl); 
+                print_r($apiResponse);
             }
         }else{
             $apiResponse ='Second Step Token Getting Failed';
@@ -1022,11 +1018,6 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
     }else{
         $apiResponse ='First Step Token Getting Failed';
     }
-    // echo '-------------------------------------';
-    // echo '<pre><br/>';
-    // print_r($apiRequest);
-    // print_r($apiResponse);
-    // echo '-------------------------------------';
-    // exit;
+    print_r($apiRequest);
     insert_request_response_ac_db($form_id,'5paisa_b2c_req_url',json_encode($apiRequest),'5paisa_b2c_api_status',$apiResponse);
 }

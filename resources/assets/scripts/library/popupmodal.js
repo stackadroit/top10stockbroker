@@ -72,7 +72,6 @@ import ReactDOM from 'react-dom';
         var self    = this,
           $document  = $(document),
           $rootnode  = $("#popup-main");
-
           $rootnode
           .on('show.bs.modal', function (event) {
         var modelAction = $(event.relatedTarget); // Button that triggered the modal

@@ -1038,7 +1038,7 @@ add_shortcode('quickerslider', function ($atts){
 
 });
 
-add_shortcode('goldInvestmentCalculator', function ($atts){ 
+add_shortcode('GoldInvestmentCalculator', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1074,34 +1074,222 @@ add_shortcode('goldInvestmentCalculator', function ($atts){
     return \App\template($template, $data);
 
 });
+add_shortcode('GoldSilverRateCalculator', function ($atts){ 
 
+    // Extract the shortcode attributes
+    if(!is_admin()){
+        $data =shortcode_atts( 
+            array(
+                'id'      => '',
+                'title'   =>'Gold Rate Comparison',
+                'city' => '',
+                'caret' => '',
+                'type' => ''
+                ),
+                $atts 
+            );
+         
+        $div_id=$caret."_gold_silver_rate_calculator_".@$data['id']."_".@$data['type'];
+        if(@$data['type']){
+            $cities = get_GoldCityStateLists();
+        }else{
+            $cities = get_SilverCityStateLists();
+        }
+        // Set the template we're going to use for the Shortcode
+        $template = 'shortcodes.gold-silver.gold_silver_rate_calculator';
+        $data['div_id'] = $div_id;
+        $data['cities'] = $cities;
+        // Echo the shortcode blade template
+        return \App\template($template, $data);
+    }
+});
+
+/*****************************************************************
+                    Gold Rate Calculator
+******************************************************************/
+function getUnitConvertedAmount($unit,$unit_type,$onegrmPrice){
+    $utypePrice=0;
+    switch ($unit_type) {
+        case 'ounce':
+            $utypePrice =28.3495;
+            break;
+        case 'gram':
+            $utypePrice =1;
+            break;
+        case 'kilo':
+            $utypePrice =1000;
+            break;
+        case 'tola':
+            $utypePrice =11.3398;
+            break;
+        case 'baht':
+            $utypePrice =15.224;
+            break;
+        case 'tael':
+            $utypePrice =37.7994;
+            break;
+        case 'troypound':
+            $utypePrice =373.242;
+            break;
+        case 'pound':
+            $utypePrice =453.592;
+            break;
+        case 'pennyweight':
+            $utypePrice =1.55517;
+            break;
+        case 'vori':
+            $utypePrice =11.66;
+            break;
+        case 'grain':
+            $utypePrice =0.0647989;
+            break;
+        case 'ratti':
+            $utypePrice =0.182; 
+            break;
+        case 'masha':
+            $utypePrice =0.972;
+            break;
+        default:
+            $utypePrice =1;
+            break;
+    }
+    $totalAmount= @(number_format(($unit*$onegrmPrice*$utypePrice),2));
+    return @$totalAmount;
+}
+
+add_action("wp_ajax_gold_silver_unit_calculate_jfunc", __NAMESPACE__ . '\\gold_silver_unit_calculate_jfunc');
+add_action("wp_ajax_nopriv_gold_silver_unit_calculate_jfunc", __NAMESPACE__ . '\\gold_silver_unit_calculate_jfunc');
+
+function gold_silver_unit_calculate_jfunc(){
+    global $wpdb;
+    $p_id = @$_REQUEST['p_id'];
+    $type = @$_REQUEST['type'];
+    $carat = @$_REQUEST['carat'];
+    $unit = @$_REQUEST['unit'];
+    $unit_type = @$_REQUEST['unit_type'];
+    $g_timeline = @$_REQUEST['g_timeline'];
+    if($g_timeline =='1D'){
+        $crdateQue= "SELECT * FROM gold_silver_rate  WHERE `page_id` = ".$p_id. " and `type` = '".$type."'  ORDER BY date DESC  LIMIT 1";
+    }else{
+        switch ($g_timeline) {
+            case '1W':
+                $prcdate =date("Y-m-d", strtotime("-7 days"));
+                break;
+            case '2W':
+                $prcdate =date("Y-m-d", strtotime("-14 days"));
+                break;
+            case '3W':
+                $prcdate =date("Y-m-d", strtotime("-21 days"));
+                break;
+            case '1M':
+                $prcdate =date("Y-m-d", strtotime("-30 days"));
+                break;
+            case '3M':
+                $prcdate =date("Y-m-d", strtotime("-3 month"));
+                break;
+            case '6M':
+                $prcdate =date("Y-m-d", strtotime("-6 month"));
+                break;
+            case '9M':
+                $prcdate =date("Y-m-d", strtotime("-9 month"));
+                break;
+            case '1Y':
+                $prcdate =date("Y-m-d", strtotime("-365 month"));
+                break;
+            default:
+                $prcdate =date("Y-m-d");
+                break;
+        }
+        $crdateQue="SELECT * FROM gold_silver_rate  WHERE `page_id` = ".$p_id. " and `type` = '".$type."' AND date='".$prcdate."' LIMIT 1";
+    }
+    // echo $crdateQue;
+    $gs_val =  $wpdb->get_row($crdateQue);
+   // print_r($gs_val);
+    if($type ==1){
+        $cities =get_GoldCityStateLists();
+        $typeName ='Gold';
+        $onegrmPrice=0;
+        if($carat ==22){
+            $onegrmPrice=@$gs_val->t22_1_rate;
+        }else{
+            $onegrmPrice=@$gs_val->t24_1_rate;
+        }
+    }else{
+        $cities =get_SilverCityStateLists();
+        $typeName ='Silver';
+        $onegrmPrice=0;
+        $onegrmPrice=@$gs_val->t22_1_rate/10;
+    }
+    $totalAmount= getUnitConvertedAmount($unit,$unit_type,$onegrmPrice);
+     
+    $resultStr= 'Rate of <b>'.$unit.' '. @ucfirst($unit_type).' '.$typeName.' in '.@ucfirst($cities[$p_id]).'</b> is <b><span style="font-size:22px">Rs.'.@$totalAmount .'</span></b>';
+    ?>
+    <div class="pre-result">
+        <?php echo @$resultStr; ?>
+    </div>
+    <?php
+    exit;
+}
+add_shortcode('GoldSilverRateComparisonCalculator', function ($atts){ 
+    // Extract the shortcode attributes
+    if (is_admin()) {
+        return "";
+    }
+    $data = shortcode_atts( 
+            array(
+                'id'      => '',
+                'title'   =>'Gold Rate Comparison',
+                'city' => '',
+                'caret' => '',
+                'type' => ''
+            ),
+            $atts 
+        );
+
+    // Set the template we're going to use for the Shortcode
+    $template = 'shortcodes.gold-silver.gold_silver_rate_comparison';
+
+    $div_id=@$data['caret']."_gold_silver_rate_comparison_calculator_".$data['id']."_".$data['type'];
+    $data['div_id'] =$div_id;
+
+    if(@$data['type'] ==1){
+        $data['cities'] = get_GoldCityStateLists();
+    }else{
+        $data['cities'] = get_SilverCityStateLists();
+    }
+    // Echo the shortcode blade template
+    return \App\template($template, $data);
+
+});
 add_shortcode('GoldRateComparison', function ($atts){ 
 
     // Extract the shortcode attributes
+    // print_r($atts);
     $data = shortcode_atts( array(
-        'id'      => '',
-        'title'   =>'Gold Rate Comparison',
-        'caret' => '',
-        'city' => '',
-        'type' => ''
-    ), $atts);
+                'id'      => '',
+                'title'   =>'Gold Rate Comparison',
+                'city' => '',
+                'caret' => ''
+                ), $atts);
 
     // Set the template we're going to use for the Shortcode
-    $template = 'shortcodes.gold_rate_comparison';
+    $template = 'shortcodes.gold-silver.gold_rate_comparison';
 
     if (is_admin()) {
         return "";
     }
 
     $data['div_id'] = "_gold_rate_comparison_" . $data['id'] . "_" . $data['type'];
-    $data['cities'] = get_GoldCityStateLists();
-
+    if($data['type'] ==1){
+        $data['cities'] = get_GoldCityStateLists();
+        }else{
+        $data['cities'] = get_SilverCityStateLists();
+    }
     // Echo the shortcode blade template
     return \App\template($template, $data);
-
 });
 
-add_shortcode('goldsilverlast15', function ($atts){ 
+add_shortcode('goldsilverlast15_inside', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1117,14 +1305,28 @@ add_shortcode('goldsilverlast15', function ($atts){
 
     global $wpdb;
     $data['gs_val'] =  $wpdb->get_results( "SELECT * FROM gold_silver_rate  WHERE `page_id` = " . $data['id'] . " and `type` = '" . $data['type'] . "'  ORDER BY date DESC LIMIT 15" );
-
-
     // Echo the shortcode blade template
     return \App\template($template, $data);
 
 });
+add_shortcode('goldsilverlast15', function ($atts){ 
+    ob_start();
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Last 15 Days Gold Price',
+        'city' => '',
+        'type'=> '',
+    ), $atts);
+    $div_id = "goldsilverpricelast15day_" . $data['id'] . "_" . $data['type'];
+    ?>
+    <div class="goldsilverpricelast15day" id="<?php echo $div_id; ?>" data-id="<?php echo $data['id']; ?>" data-title="<?php echo $data['title']; ?>" data-city="<?php echo $data['city']; ?>" data-type="<?php echo $data['type']; ?>">
+    </div>
+    <?php
+    return ob_get_clean();
 
-add_shortcode('goldsilverpricetoday', function ($atts){ 
+});
+add_shortcode('goldsilverpricetoday_inside', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1210,8 +1412,29 @@ add_shortcode('goldsilverpricetoday', function ($atts){
     return \App\template($template, $data);
 
 });
-
-add_shortcode('goldsilversummary', function ($atts){ 
+add_shortcode('goldsilverpricetoday', function ($atts){ 
+    ob_start();
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
+    $id=$data['id'];
+    $title=$data['title'];
+    $city=$data['city'];
+    $type=$data['type'];
+    $carret=$data['carret'];
+    $div_id = "goldsilverpricetoday_" . $data['id'] . "_" . $data['type'] . "_" . $data['carret'];
+    ?>
+    <div class="goldsilverpricetoday" id="<?php echo $div_id; ?>" data-id="<?php echo $id; ?>" data-title="<?php echo $title; ?>" data-city="<?php echo $city; ?>" data-type="<?php echo $type; ?>" data-carret="<?php echo $carret; ?>">
+    </div>
+    <?php
+    return ob_get_clean();
+});
+add_shortcode('goldsilversummary_inside', function ($atts){ 
 
     // Extract the shortcode attributes
     $data = shortcode_atts( array(
@@ -1264,6 +1487,31 @@ add_shortcode('goldsilversummary', function ($atts){
     // Echo the shortcode blade template
     return \App\template($template, $data);
 
+});
+add_shortcode('goldsilversummary', function ($atts){ 
+    global $wpdb;
+    ob_start();
+
+    $data = shortcode_atts( array(
+        'id'      => '',
+        'title'   =>'Summary (22 Ct Gold/10 gram)',
+        'city' => '',
+        'type'=> '',
+        'carret' => ''
+    ), $atts);
+
+    $id= @$data['id'];
+    $title= @$data['title'];
+    $city= @$data['city'];
+    $type= @$data['type'];
+    $carret= @$data['carret'];
+    $div_id="gold_summery_data_".$id."_".$type;
+    ?>
+
+    <div class="gold_summery_table" id="<?php echo $div_id; ?>"  data-id="<?php echo $id; ?>" data-title="<?php echo $title; ?>" data-city="<?php echo $city; ?>" data-type="<?php echo $type; ?>" data-carret="<?php echo $carret; ?>">
+    </div>
+    <?php
+    return ob_get_clean();
 });
 
 add_shortcode('goldsilverpricegraph', function ($atts){ 
@@ -1351,6 +1599,24 @@ add_shortcode('socialPostShare', function ($atts){
 
 });
 
+add_shortcode('EasyTabWidget_api', function ($atts){ 
+    global $wpdb;
+    $post_id =$atts['id'];
+    // Extract the shortcode attributes
+    $data = shortcode_atts( array(
+        'id'=>''
+    ), $atts);
+   
+    $tabs_type = get_post_meta($post_id,'pa1_wp_easy_tabs_type',true);
+     
+    if($tabs_type == 'VT'){
+        $shortcodeWrap= '<div id="v_tabs_wrapper_'.$post_id.'" class="v_tabs_wrapper_'.$post_id.' v_tabs_wrapper" data-id="'.$post_id.'" ></div>';
+     // print_r($data);
+    }else{
+        $shortcodeWrap ='<div id="easy_tabs_container_wrap_'.$post_id.'" class="easy_tabs_container_wrap" data-id="'.$post_id.'"></div>';
+    }
+    return $shortcodeWrap;
+});
 add_shortcode('EasyTabWidget', function ($atts){ 
     global $wpdb;
     $post_id =$atts['id'];
@@ -1424,7 +1690,6 @@ add_shortcode('EasyTabWidget', function ($atts){
     }
         return \App\template($template, $data);
 });
-
 add_shortcode('ShareMarketEducation', function ($atts){ 
 
     $post_id = @$atts['id'];

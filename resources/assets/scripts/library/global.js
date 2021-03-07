@@ -188,7 +188,6 @@ exports.theme = window.theme;
 			//   	$('#site-sidebar').removeClass('no-sticky');
 			//   }
 			// });
-
 			if ( !self.options.stickyWidget.length ) {
 				return this;
 			}
@@ -432,7 +431,13 @@ exports.theme = window.theme;
   var ModalPopup = {
 
       defaults: {
-        wrapper: $('.popup-main')
+        wrapper: $('.popup-main'),
+        is_main_popup_loaded:false,
+        is_mbf_search_loaded:false,
+        is_mini_b2cpopup_loaded:false,
+        is_mini_b2bpopup_loaded:false,
+        is_mini_ipopopup_loaded:false,
+        is_mini_pmspopup_loaded:false,
       },
 
       initialize: function($wrapper, opts) {
@@ -458,6 +463,7 @@ exports.theme = window.theme;
       
     ajax: function(modal, modelAction, auto){
         var self    = this; 
+        // modal.close();
         $.ajax({
               cache: false,
               type:"POST",
@@ -481,149 +487,170 @@ exports.theme = window.theme;
               },
             success: function(response){
             	modal.find('.load-model').html(response); 
-
             	if (modelAction == "mbf-search-wrap") {
+            		self.options.is_mbf_search_loaded =true;
             		$(document).trigger('loadReactSlickIcons', [modelAction]);
             	}
             	
             	if (modelAction == "custom-hellobar" || modelAction == "mini-popup") {
             		// Condition For Mini Popup
+            		var form='';
             		if(modelAction != "mini-popup"){
-            			modal.find('.modal-dialog').css('max-width','800px');
+            			modal.find('.modal-dialog').addClass('modal-lg');
+            			self.options.is_main_popup_loaded =true;
+            			form =$('#popup-main').find('form');
+            		}else{
+            			if(auto =='open-b2cpopup'){
+            				self.options.is_mini_b2cpopup_loaded =true;
+            				form =$('#mini-b2cpopup').find('form');
+            			}
+            			if(auto =='open-b2bpopup'){
+            				self.options.is_mini_b2bpopup_loaded =true;
+            				form =$('#mini-b2bpopup').find('form');
+            			}
+            			if(auto =='open-ipopopup'){
+            				self.options.is_mini_ipopopup_loaded =true;
+            				form =$('#mini-ipopopup').find('form');
+            			}
+            			if(auto =='open-pmspopup'){
+            				self.options.is_mini_pmspopup_loaded =true;
+            				form =$('#mini-pmspopup').find('form');
+            			}
             		}
-            		self.initializedValidation();
-            		$(document).trigger('reinitContactform', [modelAction]);
+            		$(document).trigger('reinitContactform', $(form));
+            		self.initializedValidation(modal);
+            		
             	}
             },
             error: function(response){
               console.log('Module Data Error.');
             }
-        });
+    	});
 
-          return this;
+       	return this;
+ 	},
+      	initializedValidation:function(modal){
+      		var self = this;
+      		$(modal).find('input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(modal).find('input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(modal).find('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>'); 
+      		$(modal).find('.wpcf7-checkbox').after('<p><span class="emsg d-none">Please select the service.</span></p>'); 
       	},
-      	initializedValidation:function(){
-      		var self = this; 
-	     	$('.model-popup input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.model-popup input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.model-popup input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
-			$('.model-popup .wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
-        
-      	},
-	    formValidation: function(){
-	      	var self = this; 
-
-	      	$('.wpcf7-form').find('.emsg').remove();
-	     	$('.wpcf7-form input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.wpcf7-form input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>');
-			$('.wpcf7-form input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
-			$('.wpcf7-form .wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
-	        
-	        $regexname = /^([a-zA-Z ]){1,100}$/;
-	        $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[56789]\d{9}|(\d[ -]?){10}\d$/;
-
-	        $(document).on('blur','input[name="cf7s-name"], .load-model input[name="cf7s-City"]',function(key){
-	        	self.formConditionCheck(this, $regexname);
-	        });
-
-	        $(document).on('blur',' input[name="cf7s-phone"]',function(key){
-	        	self.formConditionCheck(this, $regexPhone);
-	        });
-
-	        var sumbmit_form_data= '';
-	        $(document).on('click','.wpcf7-submit',function(e) {
-	        	e.preventDefault();
-	        	var Er = 0;
-	        	var form = $(this).closest('form.wpcf7-form');
-	 			var name = $(form).find('input[name="cf7s-name"]');
-	 			var city = $(form).find('input[name="cf7s-City"]');
-	 			var number = $(form).find('input[name="cf7s-phone"]');
-
-	 			self.formConditionCheck(name, $regexname);
-	 			if (!$(name).val().match($regexname)) {
-	 				Er = 1;
-	 			}
-
-	 			self.formConditionCheck(city, $regexname);
-	 			if (!$(city).val().match($regexname)) {
-	 				Er = 2;
-	 			}
-
-	 			self.formConditionCheck(number, $regexPhone);
-	 			if (!$(number).val().match($regexPhone)) {
-	 				Er = 2;
-	 			}
-
-	 			if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
-	                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
-	            }else{
-	                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
-		            Er = 4;
-	            } 
-
-	            if(Er){
-	            	console.log(Er);
-	            	return false; 
-	            }else{
-	            	$(this).prop("disabled",true);
-	            	sumbmit_form_data = $(form).serialize();
-	            	var submit = $(form).submit();
-	            	return true;
-	            }
-	        });
-
-	      },
-
-	    formConditionCheck: function($el, $regex){
-	      	if (!$($el).val().match($regex)) {
-	    		$($el).parent().find('.emsg').removeClass('d-none');
-	    	}else{
-	    		$($el).parent().find('.emsg').addClass('d-none');
-	    	}
-	    },
-
+	     
 	    events: function() {
 	        var self    = this,
-	          $document  = $(document),
-	          $rootnode  = $("#popup-main");
-	       	   
-	          $rootnode
-	          .on('show.bs.modal', function (event) {
+	        $document  = $(document);
+	        var popupLoading = {
+               	"popup-main": ['custom-hellobar','is_main_popup_loaded',true],
+              	"mbf-search-popup": ["mbf-search-wrap",'is_mbf_search_loaded',false],
+              	"mini-b2cpopup": ['mini-popup','is_mini_b2cpopup_loaded','open-b2cpopup'],
+              	"mini-b2bpopup": ['mini-popup','is_mini_b2bpopup_loaded','open-b2bpopup'],
+              	"mini-ipopopup": ['mini-popup','is_mini_ipopopup_loaded','open-ipopopup'],
+              	"mini-pmspopup": ['mini-popup','is_mini_pmspopup_loaded','open-pmspopup'],
+         	};
+         
+         	setTimeout(function() {
+         		for (var key in popupLoading) {
+         			modal =$('#'+key);
+         			modelAction = popupLoading[key][0];
+         			lodedVal = popupLoading[key][1];
+         			auto = popupLoading[key][2];
+         			if(!self.options[lodedVal]){
+		       	  		self.ajax(modal, modelAction, auto); 
+		       	  	}
+         		}
+
+         	}, 5000);	
+	    	$rootnode  = $("#popup-main");
+	      	$rootnode.on('show.bs.modal', function (event) {
 	        		var modelAction = $(event.relatedTarget); // Button that triggered the modal
 	        		var auto = false;
 	        		if (! modelAction.length) {
 	        			// Condition For Mini Popup
 	        			if($rootnode.data('mini-popup')){
-	        				// console.log('mini-popup');
 	        				modelAction = 'mini-popup';
 	          				auto = $rootnode.data('mini-popup');
 	        			}else{
-	          				$rootnode.find('.modal-dialog').css('max-width','800px');
+	          				$rootnode.find('.modal-dialog').addClass('modal-lg');
 	        				modelAction = 'custom-hellobar';
 	          				auto = true;
 	        			}
 	        		}else{
-	        			//console.log('onlick');
-	          			$rootnode.find('.modal-dialog').css('max-width','800px');
+	          			$rootnode.find('.modal-dialog').addClass('modal-lg');
 	          			modelAction = modelAction.get(0).id;
 	        		}
 	        		var modal = $(this);
 	        		var statusModalOpen = (modal.data('bs.modal') || {isShown: false}).isShown;
 	        		if (!statusModalOpen) {
-	          			self.ajax(modal, modelAction, auto); 
+	        			if(modelAction == 'custom-hellobar'){
+	        				if(!self.options.is_main_popup_loaded){
+	        					self.ajax(modal, modelAction, auto);
+	        				}
+	        			}else if(modelAction =='mini-popup'){
+	        				if(!self.options.is_mini_popup_loaded){
+	        					self.ajax(modal, modelAction, auto);
+	        				}
+	        			}else{
+	        				self.ajax(modal, modelAction, auto);
+	        			}
 	        		}
-	      		});
+	      	});
 	          
-	          $rootnode
+	      	$rootnode
 	      	  .on('hidden.bs.modal', function (event) {
 	          	var modal = $(this);
-	          	modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
-	      		});
+	          	// modal.find('.load-model').html('<div class="fb-loader loader"></div>'); 
+	      	});
 
-		      // var intervalID = setInterval( function(){ 
-		      //   $rootnode.modal('show');
-		      // },60000); 
-
+	      	$('#mini-b2cpopup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = 'open-b2cpopup';
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_b2cpopup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	}); 
+	     	$('#mini-b2bpopup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = 'open-b2bpopup';
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_b2bpopup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	});
+	     	$('#mini-ipopopup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = 'open-ipopopup';
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_ipopopup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	}); 
+	     	$('#mini-pmspopup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = 'open-pmspopup';
+	        	modelAction = 'mini-popup';
+	        	var modal = $(this); 
+	    		if(!self.options.is_mini_pmspopup_loaded){
+	        		self.ajax(modal, modelAction, auto);
+	        	} 
+	     	}); 
+ 			$('#mbf-search-popup').on('show.bs.modal', function (event) {
+	       		var modelAction = $(event.relatedTarget); // Button that triggered the modal
+	        	var auto = false;
+	        	$('#mbf-search-popup').find('.modal-dialog').addClass('modal-lg');
+	       		modelAction = modelAction.get(0).id;
+	        	var modal = $(this);
+	        	var statusModalOpen = (modal.data('bs.modal') || {isShown: false}).isShown;
+	        	if (!statusModalOpen) {
+	        		if(!self.options.is_mbf_search_loaded){
+			       	  	self.ajax(modal, modelAction, auto); 
+			     	}
+	        	}
+	     	});
 		      //auto open at 1 min
 		      setTimeout(function(){ 
 		        $rootnode.modal('show');
@@ -1213,7 +1240,8 @@ exports.theme = window.theme;
 				$('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>');
 				$('.wpcf7-checkbox').append('<p><span class="emsg d-none">Please select the service.</span></p>');
 				$regexname = /^([a-zA-Z ]){1,100}$/;
-        		$regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/;
+        		// $regexPhone = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/;
+        		$regexPhone = /^[6789]\d{9}$/;
 
 
 		        $(document).on('blur','input[name="cf7s-name"],input[name="cf7s-City"]',function(key){
@@ -1225,8 +1253,6 @@ exports.theme = window.theme;
 		        
 		        $(document).on('blur','form.wpcf7-form input[name="cf7s-phone"]',function(key){
 		 		 	$(this).closest('li').find('.emsg').hide().addClass('d-none');
-		 		 	// self.formConditionCheck(this, $regexname);
-		 		 	// var $regexmobile=/^(?:(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
 		    		if (!$(this).val().match($regexPhone)) {
 			  			 $(this).closest('li').find('.emsg').show().removeClass('d-none');
 			        }else{
@@ -1296,6 +1322,8 @@ exports.theme = window.theme;
 		    	$(document).on('click','.wpcf7-submit',function(e) {
 		 			e.preventDefault();
 		 			var form =$(this).closest('form.wpcf7-form');
+		 			var _wpcf7 =$(form).find('input[name="_wpcf7"]');
+		 			console.log($(_wpcf7).val());
 		 			var name =$(form).find('input[name="cf7s-name"]');
 		 			var city =$(form).find('input[name="cf7s-City"]');
 		 			var number =$(form).find('input[name="cf7s-phone"]');
@@ -1315,9 +1343,9 @@ exports.theme = window.theme;
 		 				Er = 3;
 		 			}
 			      	if($(form).find('.wpcf7-checkbox [type="checkbox"]').is(":checked")){
-		                $(form).find('.wpcf7-checkbox').find('.emsg').addClass('d-none');
+		                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').addClass('d-none');
 		            }else{
-		                $(form).find('.wpcf7-checkbox').find('.emsg').removeClass('d-none');
+		                $(form).find('.wpcf7-checkbox').closest('li').find('.emsg').removeClass('d-none');
 			            Er = 4;
 		            } 
 			        if(Er){
@@ -1325,18 +1353,17 @@ exports.theme = window.theme;
 			        	return false;  	
 			        }else{
 			            $(this).prop("disabled",true);
-			            // $('.ajax-loader', $(form)).addClass('is-active');
 			            $(this).after('<div class="fb-loader  mx-auto"></div>');
 			            sumbmit_form_data =$(form).serialize();
 			         	var submit = $(form).submit();
-			         	// console.log(sumbmit_form_data);
-			          	return true;
+			            $(this).siblings('.ajax-loader').removeClass('is-active')
+			         	e.preventDefault();
+						return false;
 			      	}
 		 	  	});
 
 		 	  	// Track Contact Form Submit Event
 		    	document.addEventListener('wpcf7mailsent', function( event ) {
-		    		// console.log(event);
 		    		// sumbmit_form_data =event;
 		    		$('.wpcf7-form').find('.fb-loader').remove();
 		    		self.leadPostApi(sumbmit_form_data) ;
@@ -1368,6 +1395,132 @@ exports.theme = window.theme;
 		};
 
 	exports.ContactFormValidation = ContactFormValidation;
+
+}).apply(this, [window.theme, jQuery]);
+
+// Side Bar
+(function(theme, $) {
+
+  var initialized = false;
+
+  var LoadSideBar = {
+      defaults: {
+      	wrapper: $('#site-sidebar'),
+      	// stickyWidget: $('#site-sidebar .fixed-widget'),
+      	stickyWidget: $('body:not(.mobile) #site-sidebar .fixed-widget'),
+		offset: 50,
+		brakePoint: 975,
+      },
+
+      initialize: function($wrapper, opts) {
+        if (initialized) {
+          return this;
+        }
+
+        initialized = true;
+        this.$wrapper = ($wrapper || this.defaults.wrapper); 
+
+        this
+          .setOptions(opts)
+          .events(); 
+
+        return this;
+      },
+
+      setOptions: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts, window.theme.fn.getOptions(this.$wrapper.data('plugin-options')));
+
+        return this;
+      },
+      stickyWidgetCreate:function(){
+      	var self    = this;
+      	var stickyWidget=$('#site-sidebar .fixed-widget');
+       	if ( !stickyWidget.length ) {
+			return this;
+		}
+
+		// Distance from top of page to sidebar add in px
+		var widgetFromTop = stickyWidget.offset().top
+			// console.log('widgetFromTop'+widgetFromTop);	
+		// Height of entire content area
+		var contentHeight = $('#main-content').height();
+		// console.log('contentHeight'+contentHeight);	
+		// Height of entire sidebar
+		var sidebarHeight = $('#site-sidebar').height();
+		// console.log('sidebarHeight'+sidebarHeight);	
+ 		if (sidebarHeight < contentHeight + self.options.offset) {
+		// console.log('self.options.offset'+self.options.offset);	
+	    	$(window).scroll(function() {
+ 				// If scroll distance from top exceeds by widget distance from top, add class
+	        	if ($(window).scrollTop() >= widgetFromTop) {
+	        		stickyWidget.addClass('sticky-widget');
+	        		//$('body').addClass('sticky-widget');
+	        	}else {
+				  	stickyWidget.removeClass('sticky-widget');
+				   	//$('body').removeClass('sticky-widget');
+				}
+ 				// If scroll distance from top is greater than content height remove class. 
+				//Added  X-px to pull out a bit before reaching the bottom.
+				if ($(window).scrollTop() > contentHeight - self.options.offset) {
+				 	stickyWidget.removeClass('sticky-widget');
+				 	//$('body').removeClass('sticky-widget'); 
+				}
+
+	   		});
+	 	}
+      },
+      ajax: function(){
+        var self    = this;
+        $rootnode  = $(document);
+        $.ajax({
+          	cache: false,
+         	type:"POST",
+            dataType: "html",
+        	url: global_vars.ajax_url,
+                // async:false,
+           	data: {
+              	'action':'load_side_bar',
+           	},
+           	success: function(response){
+               	$('#site-sidebar').html(response);
+               	var form ='#site-sidebar form';
+
+               	// Initalize contact form
+               	$('#site-sidebar div.wpcf7 > form' ).each( function() {
+					var $form = $( this );
+                	self.initializedValidation($form);
+					wpcf7.initForm( $form );
+					if ( wpcf7.cached ) {
+						wpcf7.refill( $form );
+					}
+				}); 
+				// sticky Widget
+				setTimeout(function(){
+					self.stickyWidgetCreate();
+				},500); 
+               	
+          	},
+          	error: function(response){
+                console.log('Side Bar error.'); 
+          	}
+          });
+        return this;
+      },
+      initializedValidation:function(form){
+      		var self = this;
+      		$(form).find('input[name="cf7s-name"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(form).find('input[name="cf7s-City"]').after('<p><span class="emsg d-none">Use Alphabet Only!</span></p>'); 
+      		$(form).find('input[name="cf7s-phone"]').after('<p><span class="emsg d-none">Invalid number! Use 10 digit numbers starting with 6, 7, 8 or 9.</span></p>'); 
+      		$(form).find('.wpcf7-checkbox').after('<p><span class="emsg d-none">Please select the service.</span></p>'); 
+     	},
+      events: function() {
+        var self    = this;
+        self.ajax();   
+        return this;
+      },
+
+    };
+  exports.LoadSideBar = LoadSideBar;
 
 }).apply(this, [window.theme, jQuery]);
 

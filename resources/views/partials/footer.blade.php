@@ -66,7 +66,7 @@
     </div>
   </div>
 </footer>
-<div id="custom-hellobar" class="text-center" data-toggle="modal" data-target=".popup-main">
+<div id="custom-hellobar" class="text-center" data-toggle="modal" data-target=".popup-main" data-keyboard="false" data-backdrop="static">
   @if( !empty($hello_bar['custom_hellobar']) )
     {!! get_post_meta( $post->ID, $hello_bar['custom_hellobar'], true ) !!}
   @elseif($hello_bar['hello_bar'] == 'yes')
@@ -76,7 +76,7 @@
   @endif
 </div>
 @php $hello_bar_data =  str_replace('"', "'", json_encode($hello_bar)) @endphp
-<div class="modal fade popup-main" id="popup-main" tabindex="-1" role="dialog" aria-hidden="true" data-plugin-options="{{ $hello_bar_data }}">
+<div class="modal fade popup-main" id="popup-main" tabindex="-1" role="dialog" aria-hidden="true" data-plugin-options="{{ $hello_bar_data }}" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content model-popup">
       <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
@@ -88,6 +88,67 @@
     </div>
   </div>
 </div>
-
-<div id="mbf-search-wrap" data-toggle="modal" data-target=".popup-main"></div>
+<div class="modal fade mini-b2cpopup" id="mini-b2cpopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade mini-b2bpopup" id="mini-b2bpopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade mini-ipopopup" id="mini-ipopopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade mini-pmspopup" id="mini-pmspopup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>          
+          
+          
+<div class="modal fade mbf-search-popup" id="mbf-search-popup" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content model-popup">
+      <button type="button" class="close" id="model-main-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="load-model">
+          <div class="fb-loader loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="mbf-search-wrap" data-toggle="modal" data-target="#mbf-search-popup" data-keyboard="false" data-backdrop="static"></div>
 <div class="overlay"></div>

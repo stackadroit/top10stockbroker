@@ -1,8 +1,8 @@
 // SingleFutures
 (function($) {
-	var initialized = false;
-	var TemplateFutures = {
-			defaults: {
+  var initialized = false;
+  var TemplateFutures = {
+      defaults: {
         wrapper: $('body'),
         offset:50,
         loadingElement : '',
@@ -11,22 +11,22 @@
         label: false,
         topSectionLoaded: false
       },
-			initialize: function(opts) {
-				if (initialized) {
-					return this;
-				}
-				initialized = true;
-				this
-					.setOptions(opts)
-					.events();
+      initialize: function(opts) {
+        if (initialized) {
+          return this;
+        }
+        initialized = true;
+        this
+          .setOptions(opts)
+          .events();
           
-				return this;
-			},
+        return this;
+      },
 
-			setOptions: function(opts) {
-				this.options = $.extend(true, {}, this.defaults, opts);
-				return this;
-			},
+      setOptions: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts);
+        return this;
+      },
       getDerivativeCompanyStock: function(instName,symbol,expDate,optType,stkPrice,filter=true){
         var companyStockLive="#company-stock-live";
         $.ajax({
@@ -202,8 +202,8 @@
             }
         });
       },
-			events: function() {
-				var self    = this,
+      events: function() {
+        var self    = this,
           companyStockLive  = '#company-stock-live',
           _isScrolling = false;
           
@@ -421,8 +421,8 @@
               self.get_future_top_interest_stock_index_option_data(eleId,InstName,ExpDate,OptType,Opt);
           });
           // End
-				return this;
-			},
-		};
-	exports.TemplateFutures = TemplateFutures;
+        return this;
+      },
+    };
+  exports.TemplateFutures = TemplateFutures;
 }).apply(this, [jQuery]);

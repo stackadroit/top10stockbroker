@@ -44,7 +44,7 @@
 		                    <option value="1Y" class="">1 Year</option>
 		                </select>
 		            </div>    
-	                <div class="d-flex justify-content-center">
+	                <div class="pt-4 text-center">
 	                    <button type="submit" class="getGoldSilverCalculatedResult">Calculate</button>
 	                </div>
 	                <!-- <label for="">Period Ago</label> -->

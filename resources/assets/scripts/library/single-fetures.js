@@ -1,7 +1,7 @@
 (function($) {
-	var initialized = false;
-	var SingleFutures = {
-			defaults: {
+  var initialized = false;
+  var SingleFutures = {
+      defaults: {
         wrapper: $('body'),
         offset:50,
         loadingElement : '',
@@ -10,22 +10,22 @@
         label: false,
         topSectionLoaded: false
       },
-			initialize: function(opts) {
-				if (initialized) {
-					return this;
-				}
-				initialized = true;
-				this
-					.setOptions(opts)
-					.events();
+      initialize: function(opts) {
+        if (initialized) {
+          return this;
+        }
+        initialized = true;
+        this
+          .setOptions(opts)
+          .events();
           
-				return this;
-			},
+        return this;
+      },
 
-			setOptions: function(opts) {
-				this.options = $.extend(true, {}, this.defaults, opts);
-				return this;
-			},
+      setOptions: function(opts) {
+        this.options = $.extend(true, {}, this.defaults, opts);
+        return this;
+      },
       getDerivativeCompanyStock: function(instName,symbol,expDate,optType,stkPrice,filter=true){
         var companyStockLive="#company-stock-live";
         $.ajax({
@@ -202,9 +202,9 @@
             }
         });
       },
-			events: function() {
-				var self    = this,
-					companyStockLive  = '#company-stock-live',
+      events: function() {
+        var self    = this,
+          companyStockLive  = '#company-stock-live',
           _isScrolling = false;
           // Toad Top Section Data
           (function($) {
@@ -351,12 +351,12 @@
             var StkPrice = $('#ajax-load-api-data').data('stk-price');
             self.getDerivativeCompanyStock(instName,symbol,ExpDate,OptType,StkPrice);
           });
-					$(companyStockLive).on( 'change', '#ddlCompanySymble', function(event) {
-	            var filterUri = $(this).val();
+          $(companyStockLive).on( 'change', '#ddlCompanySymble', function(event) {
+              var filterUri = $(this).val();
               if (filterUri) {
                   window.location.href =filterUri;
               }
-	        });
+          });
           // Most Active Stock Futures
           $(document).on('click','.changeMASEDFilter',function(){
             var expdate =$(this).attr('data-expdate');
@@ -459,10 +459,10 @@
           // End
 
           
-				return this;
-			},
+        return this;
+      },
 
-		};
-	exports.SingleFutures = SingleFutures;
+    };
+  exports.SingleFutures = SingleFutures;
 
 }).apply(this, [jQuery]);

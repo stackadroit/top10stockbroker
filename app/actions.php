@@ -8,9 +8,9 @@ namespace App;
  */
 add_action('wp_head', function () {
     ?>
-    	<link rel="apple-touch-icon" sizes="180x180" href=" <?php asset_path('images/apple-touch-icon.png') ?> " >
-    	<link rel="icon" type="image/png" sizes="32x32" href=" <?php asset_path('images/favicon-32x32.png') ?> " >
-    	<link rel="icon" type="image/png" sizes="16x16" href=" <?php asset_path('images/favicon-16x16.png') ?> " >
+        <link rel="apple-touch-icon" sizes="180x180" href=" <?php asset_path('images/apple-touch-icon.png') ?> " >
+        <link rel="icon" type="image/png" sizes="32x32" href=" <?php asset_path('images/favicon-32x32.png') ?> " >
+        <link rel="icon" type="image/png" sizes="16x16" href=" <?php asset_path('images/favicon-16x16.png') ?> " >
     <?php
 });
 
@@ -20,9 +20,21 @@ add_action('wp_head', function () {
 add_action( 'wp_enqueue_scripts', function () {
         //styles
         // wp_dequeue_style( 'contact-form-7' );
-    	//scripts
-    	// wp_dequeue_script( 'contact-form-7');
+        //scripts
+        // wp_dequeue_script( 'contact-form-7');
  });
+
+/**
+ * Load Side Bar.
+ */
+add_action( 'wp_ajax_load_side_bar',  __NAMESPACE__ . '\\load_side_bar' );
+add_action( 'wp_ajax_nopriv_load_side_bar',  __NAMESPACE__ . '\\load_side_bar' );
+function load_side_bar() {
+    // @if (App\display_sidebar() && !$is_mobile)
+    // @endif
+    dynamic_sidebar('sidebar-primary');
+    exit; 
+}
 
 /**
  * Ajax
@@ -123,7 +135,7 @@ function goldsilver_investment_calculator() {
             $prcdate =date("Y-m-d", strtotime("-9 month"));
             break;
         case '1Y':
-            $prcdate =date("Y-m-d", strtotime("-365 month"));
+            $prcdate =date("Y-m-d", strtotime("-12 month"));
             break;
         default:
             $prcdate =date("Y-m-d", strtotime("-30 days"));
@@ -131,7 +143,6 @@ function goldsilver_investment_calculator() {
     }
 
     $cData = date('Y-m-d');
-    
     $c_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$p_id} and `type` = '{$type}' AND date='{$cData}' LIMIT 1");
     $gs_val =  $wpdb->get_row("SELECT * FROM gold_silver_rate  WHERE `page_id` = {$p_id} and `type` = '{$type}' AND date='{$prcdate}' LIMIT 1");
 
@@ -155,20 +166,22 @@ function goldsilver_investment_calculator() {
         $totalProLoss = @(number_format($goldUnits * ($currentRate - $timeLineRate),2));
         $totalProLossPre=@(number_format((($totalProLoss/$g_invest)*100),2));
 
-        $data['netWorth'] = @$netWorth;
-
+        $data['netWorth'] = (@$netWorth)?@$netWorth:'0.0';
+        $data['totalProLoss'] = (@$totalProLoss)?@$totalProLoss:'0.0';
+        $data['totalProLossPre'] = (@$totalProLossPre)?@$totalProLossPre:'0.0';
+        
         if($totalProLoss >= 0){
-            $data['plClass'] = 'green';
+            $data['plClass'] = 'text-success';
             $data['plText'] = 'Profit';
         }else{
-            $data['plClass'] = 'red';
+            $data['plClass'] = 'text-danger';
             $data['plText'] = 'Loss';
         }
         if($totalProLossPre >= 0){
-            $data['plpClass'] = 'green';
+            $data['plpClass'] = 'text-success';
             $data['plpText'] = 'Profit(%) ';
         }else{
-            $data['plpClass'] = 'red';
+            $data['plpClass'] = 'text-danger';
             $data['plpText'] = 'Loss(%)';
         }
 
@@ -223,7 +236,7 @@ function gold_rate_comparison_calculate() {
             $prcdate =date("Y-m-d", strtotime("-9 month"));
             break;
         case '1Y':
-            $prcdate =date("Y-m-d", strtotime("-365 month"));
+            $prcdate =date("Y-m-d", strtotime("-12 month"));
             break;
         default:
             $prcdate =date("Y-m-d", strtotime("-30 days"));
@@ -249,6 +262,7 @@ function gold_rate_comparison_calculate() {
 
         $goldUnits = ($g_invest/ $timeLineRate);
         $netWorth = @(number_format(($goldUnits * $currentRate),2));
+        
         $priceRes[$key] =array(
             'currentRate'=>$c_val,
             'timeLineRate'=>$gs_val,
@@ -264,7 +278,142 @@ function gold_rate_comparison_calculate() {
     echo \App\template($template, $data);
     die();
 }
+/*****************************************************************
+                    Gold Rate  Investment Comparison
+******************************************************************/
 
+
+add_action("wp_ajax_gold_silver_unit_compare_calculate_jfunc",   __NAMESPACE__ . '\\gold_silver_unit_compare_calculate_jfunc');
+add_action("wp_ajax_nopriv_gold_silver_unit_compare_calculate_jfunc",   __NAMESPACE__ . '\\gold_silver_unit_compare_calculate_jfunc');
+
+function gold_silver_unit_compare_calculate_jfunc(){
+    global $wpdb;
+    $p_id1 = @$_REQUEST['p_id1'];
+    $p_id2 = @$_REQUEST['p_id2'];
+    $p_id3 = @$_REQUEST['p_id3'];
+    $type = @$_REQUEST['type'];
+    $carat = @$_REQUEST['carat'];
+    $unit = @$_REQUEST['unit'];
+    $unit_type = @$_REQUEST['unit_type'];
+    $g_timeline = @$_REQUEST['g_timeline'];
+    $p_ids =array();
+    if($p_id1)
+        $p_ids[] =$p_id1;
+    if($p_id2)
+        $p_ids[] =$p_id2;
+    if($p_id2)
+        $p_ids[] =$p_id3;
+    if($type ==1){
+        $cities =get_GoldCityStateLists();
+    }else{
+        $cities =get_SilverCityStateLists();
+    }
+    foreach ($p_ids as $key => $p_id) {
+        if($g_timeline =='1D'){
+            $crdateQue= "SELECT * FROM gold_silver_rate  WHERE `page_id` = ".$p_id. " and `type` = '".$type."'  ORDER BY date DESC  LIMIT 1";
+        }else{
+            switch ($g_timeline) {
+                case '1W':
+                    $prcdate =date("Y-m-d", strtotime("-7 days"));
+                    break;
+                case '2W':
+                    $prcdate =date("Y-m-d", strtotime("-14 days"));
+                    break;
+                case '3W':
+                    $prcdate =date("Y-m-d", strtotime("-21 days"));
+                    break;
+                case '1M':
+                    $prcdate =date("Y-m-d", strtotime("-30 days"));
+                    break;
+                case '3M':
+                    $prcdate =date("Y-m-d", strtotime("-3 month"));
+                    break;
+                case '6M':
+                    $prcdate =date("Y-m-d", strtotime("-6 month"));
+                    break;
+                case '9M':
+                    $prcdate =date("Y-m-d", strtotime("-9 month"));
+                    break;
+                case '1Y':
+                    $prcdate =date("Y-m-d", strtotime("-12 month"));
+                    break;
+                default:
+                    $prcdate =date("Y-m-d");
+                    break;
+            }
+            $crdateQue="SELECT * FROM gold_silver_rate  WHERE `page_id` = ".$p_id. " and `type` = '".$type."' AND date='".$prcdate."' LIMIT 1";
+        }
+        $timeLinePriceobj =  $wpdb->get_row($crdateQue);
+        $onegrmPrice=0;
+        if($timeLinePriceobj){
+            if($type ==1){
+                if($carat == 22){
+                    $onegrmPrice=@$timeLinePriceobj->t22_1_rate;
+                }else{
+                    $onegrmPrice =@$timeLinePriceobj->t24_1_rate;
+                }
+            }else{
+                $onegrmPrice=@$timeLinePriceobj->t22_1_rate/10;
+            }
+            $totalAmount= getUnitConvertedAmount($unit,$unit_type,$onegrmPrice);
+        }else{
+            $totalAmount ="0.00";   
+        } 
+        $priceRes[$key] =array(
+            'timeLineobj'=>$timeLinePriceobj,
+            'timeLineRate'=>$totalAmount,
+        );
+    }
+     
+    $netw =0;
+    $maxidx =0;
+    foreach ($priceRes as $key => $value) {
+        if($netw < @$value['timeLineRate']){
+            $netw =@$value['timeLineRate'];
+            $maxidx =$key;
+        }
+    }
+    ?>
+
+    <p style="text-align: center;">Here is the Gold Rate Comparison of 3 cities</p>
+    <table>
+        <tr>
+            <th>&nbsp;</th>
+            <?php if($p_id1){ ?>
+                <th><?php echo  ucfirst(@$cities[$p_id1]); ?></th>
+            <?php }
+            if($p_id2){ ?>
+                <th><?php echo  ucfirst(@$cities[$p_id2]); ?></th>
+            <?php }
+            if($p_id3){ ?>
+            <th><?php echo  ucfirst(@$cities[$p_id3]); ?></th>
+        <?php } ?>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size:25px;"> 
+                    <?php 
+                    $untString= $unit.' '.ucfirst($unit_type).' '.(($type==1)?'Gold':'Silver').' Price (Rs.)';
+                echo $untString; ?>
+                </span>
+            </td>
+            <?php
+            foreach ($priceRes as $key => $value) {
+                if($maxidx ==$key){
+                    $plClass='style="color:green;"';
+                }else{
+                    $plClass='';
+                }
+                ?>
+                <td <?php echo @$plClass; ?>>
+                    <?php echo @$value['timeLineRate'];  ?>
+                </td>
+            <?php } ?>
+        </tr>
+    </table>
+    <?php
+    exit;
+}
 add_action( 'wp_ajax_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 add_action( 'wp_ajax_nopriv_modal_popup',  __NAMESPACE__ . '\\modal_popup' );
 function modal_popup() {
@@ -476,14 +625,7 @@ function get_gold_silver_price_graph_data() {
     die();
 }
  
-
-
-
-/**--------------------------------------------------------------
- * File include to create Taxonomy And Meta Box for cpts.
- /---------------------------------------------------------------*/
-include 'taxonomy-and-meta-boxes.php';
-
+ 
 
 /**--------------------------------------------------------------
  * File include Share Market Actions.
@@ -494,16 +636,7 @@ include 'cpts-action/share-market-actions.php';
  * File include Share Price Actions.
  /---------------------------------------------------------------*/
 include 'cpts-action/share-price-actions.php';
-
-/**--------------------------------------------------------------
- * File include Futures Actions.
- /---------------------------------------------------------------*/
-// include 'cpts-action/futures-actions.php';
-
-/**--------------------------------------------------------------
- * File include Option Chain Actions.
- /---------------------------------------------------------------*/
-//include 'cpts-action/option-chain-actions.php';
+  
 /**----------------------------------------------------------
  * File include broker-calculator Actions.
  /----------------------------------------------------------*/
@@ -513,11 +646,7 @@ include 'cpts-action/broker-calculator-actions.php';
  * Exteral Api Call On Different contact form submit.
  /---------------------------------------------------------*/
 include 'cpts-action/external-api-functions-actions.php';
-
-/**----------------------------------------------------------
- * This file include custom meta code for tab filter CPT.
- /---------------------------------------------------------*/
-include 'cpts-action/tab-filter-custom-meta.php';
+ 
 
 // Start Session 
 function register_my_session()
@@ -555,6 +684,8 @@ function action_comment_form_after_fields($fields) {
     }
     $_SESSION['comment_captcha']['act_ans']=$act_ans;
     $captch_strimg =$_SESSION['comment_captcha']['fv'].' '. $sign .' '.$_SESSION['comment_captcha']['lv'] .' = ';
+    $captch_strimg =' 24 + 9 = ';
+    $_SESSION['comment_captcha']['act_ans'] =33;
     ?>
     <label>Captcha</label>
     <div class="form-group row">
@@ -580,9 +711,15 @@ function custom_validate_comment_url() {
     // print_r($_SESSION['comment_captcha']);
     // print_r($_POST);
     $actualAns =$_SESSION['comment_captcha']['act_ans'];
+    if(empty($_POST['captcha_ans'])){
+         wp_die( __('Error: Please enter a valid captcha.'.'<br/><p><a href="javascript:history.back()">« Back</a></p>') );
+    }
     if(trim($_POST['captcha_ans']) != $actualAns){
         wp_die( __('Error: Please enter a valid captcha.'.'<br/><p><a href="javascript:history.back()">« Back</a></p>') );
         // echo '<p><a href="javascript:history.back()">« Back</a></p>'
     }
 }
 add_action( 'pre_comment_on_post',  __NAMESPACE__ . '\\custom_validate_comment_url' );
+ 
+
+ 
