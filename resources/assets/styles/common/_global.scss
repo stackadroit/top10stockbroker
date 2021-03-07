@@ -746,3 +746,11 @@ select#choose_broker {
       }
   }
 }
+
+.single-broker-comparison {
+  .entry-content {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+}
