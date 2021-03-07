@@ -50,7 +50,7 @@ label {
 		& textarea,
 		& input {
 			@extend .form-control;
-			background-color: #f8f8f8;
+			background-color: #ffffff!important;
 		}
 		& .submit {
 			@extend .btn;
