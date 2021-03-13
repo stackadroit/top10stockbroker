@@ -10,34 +10,26 @@
         <div class="row pt-3">
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
             {{-- dynamic_sidebar('sidebar-footer') --}}
-            <h5 class="text-3 mb-3">BLOG</h5>
-            {!! wp_nav_menu(['menu' =>'Blog Menu','menu_id' => 'priority-menu-closed','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
+            <h5 class="text-3 mb-3">BLOGS</h5>
+            {!! wp_nav_menu(['menu' =>'Blogs','menu_id' => 'priority-menu-closed','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
-            <h5 class="text-3 mb-3">PAGES</h5>
-           {!! wp_nav_menu(['menu' =>'Pages Menu','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
+            <h5 class="text-3 mb-3">SUB BROKERS</h5>
+           {!! wp_nav_menu(['menu' =>'Sub Brokers','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
-            <h5 class="text-3 mb-3">PORTFOLIO</h5>
-            {!! wp_nav_menu(['menu' =>'Portfolio Menu','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
+            <h5 class="text-3 mb-3">STOCK BROKERS</h5>
+            {!! wp_nav_menu(['menu' =>'Stock Brokers','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
           <div class="col-6 col-lg-3 mb-4 mb-lg-0">
-            <h5 class="text-3 mb-3">EXTRA</h5>
-            {!! wp_nav_menu(['menu' =>'Extra Menu','menu_id' => 'priority-menu-closed','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
+            <h5 class="text-3 mb-3">BRANCHES</h5>
+            {!! wp_nav_menu(['menu' =>'Branches','menu_id' => 'priority-menu-closed','menu_class' => 'list list-icons list-icons-sm mb-0"']) !!}
           </div>
         </div>
       </div>
       <div class="col-md-3 mb-4 mb-lg-0">
         <h5 class="text-3 mb-3 pb-1">CONTACT US</h5>
         <p class="text-2 text-color-light font-weight-bold"><a href="mailto:info@top10stockbroker.com" title="info@top10stockbroker.com">info@top10stockbroker.com</a></p>
-        <!-- <p class="mb-2">International: (333) 456-6670</p> -->
-        <!-- <p class="mb-2">Fax: (222) 531-8999</p> -->
-        <!-- <ul class="list list-icons list-icons-lg"> -->
-          <!-- <li class="mb-1"><i class="far fa-dot-circle text-color-primary"></i><p class="m-0">234 Street Name, City Name</p></li> -->
-         <!--  <li class="mb-1"><p class="m-0">
-            <a href="mailto:info@top10stockbroker.com" title="info@top10stockbroker.com">info@top10stockbroker.com</a></p>
-          </li> -->
-        <!-- </ul> -->
         <ul class="footer-social-icons social-icons mt-4">
           <li class="social-icons-facebook"><a href="https://www.facebook.com/top10stockbroker/" target="_blank" title="Facebook" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
           <li class="social-icons-twitter"><a href="https://twitter.com/topstockbrokerz" target="_blank" title="Twitter" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
@@ -51,14 +43,13 @@
     <div class="container py-2">
       <div class="row py-4">
         <div class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
-          <p>{!! sprintf(__('&copy; Copyright %d. All Rights Reserved | Check out our <a href="%s" >Disclaimer & Terms & Condition </a>', "stockadroit"), date("Y"), "#") !!}</p>
+          <p>{!! sprintf(__('&copy; Copyright %d. All Rights Reserved | Check out our <a style="color: #e35032;
+    text-decoration: underline;" href="%s" >Disclaimer & Terms & Condition </a>', "stockadroit"), date("Y"), "https://top10stockbroker.com/disclaimer-terms-conditions/") !!}</p>
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-center justify-content-lg-end">
           <nav id="sub-menu">
             <ul>
-              <li><i class="fas fa-angle-right"></i><a href="#"class="ml-1 text-decoration-none"> FAQ's</a></li>
-              <li><i class="fas fa-angle-right"></i><a href="#" class="ml-1 text-decoration-none"> Sitemap</a></li>
-              <li><i class="fas fa-angle-right"></i><a href="#" class="ml-1 text-decoration-none"> Contact Us</a></li>
+              <li><i class="fas fa-angle-right"></i><a href="https://top10stockbroker.com/contact-us/" class="ml-1 text-decoration-none"> Contact Us</a></li>
             </ul>
           </nav>
         </div>

@@ -360,6 +360,7 @@ function angelBroking_BtoB_Api_Call($postedArray =array()){
     print_r($response_value);
     $request_value = $apiUrl;
     // Add API Details in to DB
+    $request_value= "api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname=".$name."&lname=&LeadSource=WEB&Mobile=".$mobile."&Email=NA&ResidenceCity=".$city."&ResidenceAddress=&ResidenceArea=&ResidencePin=&ProductsInterested=&LeadChannel=Direct&Correspondence=&Category=&Refferal=&Remarks=";
     insert_request_response_ac_db($form_id,'ab_b2b_lead_request_url',$request_value,'ab_b2b_lead_status',$response_value);
 }
 
@@ -391,6 +392,7 @@ function angelBroking_BtoC_Api_Call($postedArray =array()){
     print_r($response_value );
     $request_value = $apiUrl;
     // Add API Details in to DB
+    $request_value= "api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname=".$name."&strLName=".$name."&mobile=".$mobile."&strLandLine=&city=".$city."&email=". $email."&strRefURL=&strLMSSource=chittorgarh&strDevice=Desktop&strAdType=Direct&strAd_Id=9665&iWebPlacementId=&strIPAddress=172.29.17.111&strOS=Windows&strBrowser=Chrome&UTM=http%3A%2F%2Fopenanaccount.angelbroking.com%2Forb.aspx%3Futm_source%3Dchittorgarh%26utm_medium%3Dweb%26utm_campaign%3Dorb%26utm_content%3Dtopsharebrokers&Keyword1=&Keyword2=&Keyword3=&Keyword_Final=&strReferrerKeyword=&strAdGroup=ad&PageUrl=http%3A%2F%2Fopenanaccount.angelbroking.com%2Forb.aspx";
     insert_request_response_ac_db($form_id,'ab_b2c_lead_request_url',$request_value,'ab_b2c_lead_status',$response_value);
 }
 
