@@ -7,7 +7,7 @@
           <div class="header-row">
             <div class="header-logo">
               <a href="{{ home_url('/') }}">
-                <img alt="{{ get_bloginfo('name', 'display') }}" width="226" height="54"
+                <img alt="Top10StockBroker.com Logo" width="226" height="54"
                      src="https://top10stockbroker.com/wp-content/uploads/logo.png">
               </a>
             </div>

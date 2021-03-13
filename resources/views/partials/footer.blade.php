@@ -31,9 +31,9 @@
         <h5 class="text-3 mb-3 pb-1">CONTACT US</h5>
         <p class="text-2 text-color-light font-weight-bold"><a href="mailto:info@top10stockbroker.com" title="info@top10stockbroker.com">info@top10stockbroker.com</a></p>
         <ul class="footer-social-icons social-icons mt-4">
-          <li class="social-icons-facebook"><a href="https://www.facebook.com/top10stockbroker/" target="_blank" title="Facebook" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-          <li class="social-icons-twitter"><a href="https://twitter.com/topstockbrokerz" target="_blank" title="Twitter" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
-          <li class="social-icons-youtube"><a href="https://www.youtube.com/channel/UCaIzPe052VbL27gbXurAmjg" target="_blank" title="Youtube" rel="noopener" aria-label="Youtube"><i class="fab fa-youtube"></i></a></li>
+          <li class="social-icons-facebook"><a href="https://www.facebook.com/top10stockbroker/" target="_blank" title="Facebook" rel="noopener nofollow" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li class="social-icons-twitter"><a href="https://twitter.com/topstockbrokerz" target="_blank" title="Twitter" rel="noopener nofollow" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+          <li class="social-icons-youtube"><a href="https://www.youtube.com/channel/UCaIzPe052VbL27gbXurAmjg" target="_blank" title="Youtube" rel="noopener nofollow" aria-label="Youtube"><i class="fab fa-youtube"></i></a></li>
         </ul>
       </div>
     </div>

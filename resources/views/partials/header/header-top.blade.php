@@ -30,17 +30,17 @@
         <div class="header-row">
           <ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
             <li class="social-icons-facebook">
-              <a href="https://www.facebook.com/top10stockbroker/" target="_blank" title="Facebook" aria-label="Facebook" rel="noopener">
+              <a href="https://www.facebook.com/top10stockbroker/" target="_blank" title="Facebook" aria-label="Facebook" rel="noopener nofollow">
                 <i class="fab fa-facebook-f"></i>
               </a>
             </li>
             <li class="social-icons-twitter">
-              <a href="https://twitter.com/topstockbrokerz" target="_blank" title="Twitter" aria-label="Twitter" rel="noopener">
+              <a href="https://twitter.com/topstockbrokerz" target="_blank" title="Twitter" aria-label="Twitter" rel="noopener nofollow">
                 <i class="fab fa-twitter"></i>
               </a>
             </li>
             <li class="social-icons-youtube">
-              <a href="https://www.youtube.com/channel/UCaIzPe052VbL27gbXurAmjg" target="_blank" title="Youtube" aria-label="Youtube" rel="noopener">
+              <a href="https://www.youtube.com/channel/UCaIzPe052VbL27gbXurAmjg" target="_blank" title="Youtube" aria-label="Youtube" rel="noopener nofollow">
                 <i class="fab fa-youtube"></i>
               </a>
             </li>

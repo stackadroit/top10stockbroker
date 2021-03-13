@@ -6,7 +6,7 @@
           <div class="header-mobile-style header-nav">
             <h2 class="logo-mobile hidden-lg hidden-md">
               <a href="{{ home_url('/') }}" rel="home" alt="Hame">
-                <img class="" width="132" height="44" src="https://top10.opendemataccounts.com/wp-content/uploads/logo.png" alt="top10stockbroker">
+                <img class="" width="132" height="44" src="https://top10stockbroker.com/wp-content/uploads/logo.png" alt="Top10StockBroker.com Logo">
                  </a>
             </h2>
             <div class="close-menu-mobile hidden-lg hidden-md">
