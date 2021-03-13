@@ -70,4 +70,33 @@
 	.modal-sm{
 		max-width:350px
 	}
+
+	ul {
+		&#priority-menu-closed, &#menu-stock-brokers, &#menu-sub-brokers {
+			float: left;
+			li {
+				line-height: 1;
+				float: left;
+
+				a {
+					line-height: 1;
+				    display: inline-block;
+				    padding: 10px 0;
+				}
+			}
+		}
+	}
+	.list {
+		&.list-icons {
+			&.list-icons-sm {
+				li {
+					a {
+						&:first-child>[class*=fa-]:first-child {
+							    top: 12px;
+						}
+					}
+				}
+			}
+		}
+	}
 }
