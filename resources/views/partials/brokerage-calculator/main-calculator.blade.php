@@ -21,13 +21,17 @@
       <table style="width:99%;font-weight: bold;background-color: rgba(230, 223, 223, 0.2);" >
         <tr>
           <td>
+           <label for="buy_price{{$i}}" style="padding: 0px;color: #000;"> 
           Buy Price (Rs.)
-          <span style="float:right;">
-           <input type="number" name="buy_price{{$i}}" id="buy_price{{$i}}" />
-          </span>
+            </label>
+            <span style="float:right;">
+             <input type="number" name="buy_price{{$i}}" id="buy_price{{$i}}" />
+            </span>
           </td>
           <td>
+            <label for="sell_price{{$i}}" style="padding: 0px;color: #000;"> 
           Sell Price(Rs.)
+        </label>
           <span style="float:right;">
             <input type="number" name="sell_price{{$i}}" id="sell_price{{$i}}" />
           </span>
@@ -40,13 +44,17 @@
     
         <tr>
           <td>
+            <label for="number_lot{{$i}}" style="padding: 0px;color: #000;"> 
             Number Of Lots
+          </label>
             <span style="float:right;">
               <input type="number" name="number_lot{{$i}}" id="number_lot{{$i}}" />
             </span>
           </td>
           <td>
+            <label for="lot_size{{$i}}" style="padding: 0px;color: #000;"> 
             Lots Size
+          </label>
             <span style="float:right;">
               <input type="number" name="lot_size{{$i}}" id="lot_size{{$i}}" />
             </span>
@@ -54,7 +62,9 @@
         </tr>
         <tr>
           <td>
+            <label for="state{{$i}}" style="padding: 0px;color: #000;"> 
             State
+          </label>
             <span style="float:right;">
               <select name="state{{$i}}" id="state{{$i}}">
               @php
@@ -74,13 +84,17 @@
       
         <tr>
           <td>
+            <label for="number_share{{$i}}" style="padding: 0px;color: #000;"> 
             Number Of Shares
+          </label>
             <span style="float:right;">
               <input type="number" name="number_share{{$i}}" id="number_share{{$i}}" />
             </span>
           </td>
           <td>
+            <label for="state{{$i}}" style="padding: 0px;color: #000;">
             State
+          </label>
             <span style="float:right;">
             <select name="state{{$i}}" id="state{{$i}}">
               @php
