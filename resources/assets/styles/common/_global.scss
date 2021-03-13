@@ -746,3 +746,15 @@ select#choose_broker {
       }
   }
 }
+.custom-hellobar {
+  a {
+      display: inline-block;
+      line-height: inherit;
+      margin-left: 10px;
+      background-color: green;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      padding: 5px 10px;
+  }
+}
