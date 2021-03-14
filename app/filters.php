@@ -121,3 +121,9 @@ add_filter('excerpt_more', function ($more) {
     echo \App\template($template,[]);
   return '';  
 });
+
+add_filter( 'show_admin_bar', '__return_false' );
+function hide_admin_bar_subscribers( $show ) {
+    return false;
+}
+add_filter( 'show_admin_bar', 'hide_admin_bar_subscribers' );
