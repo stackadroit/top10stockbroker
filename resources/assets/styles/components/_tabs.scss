@@ -43,15 +43,15 @@
   cursor: pointer;
   background-color: #eee;
   position: relative;
-  min-width: calc(50% - 3px);
+  // min-width: calc(50% - 3px);
 
-   @media (min-width: 1200px) {
-      min-width: 134px;
-    }
+  //  @media (min-width: 1200px) {
+  //     min-width: 134px;
+  //   }
 
-  @media (min-width: 1200px) {
-      min-width: 160px;
-    }
+  // @media (min-width: 1200px) {
+  //     min-width: 160px;
+  //   }
 
 }
 .tabs a.active,

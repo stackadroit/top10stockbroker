@@ -125,10 +125,10 @@ export default {
 
         
 
-  		// Show contact model on button click
-        $(document).on('click','.custom-hellobar', function (event, eventInfo) {
-        	$("#popup-main").modal('show');
-  		});
+  		// // Show contact model on button click
+    //     $(document).on('click','.custom-hellobar', function (event, eventInfo) {
+    //     	$("#popup-main").modal('show');
+  		// });
 
   		// Banner Class Image image class click Event Capture
         $(document)
