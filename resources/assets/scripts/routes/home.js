@@ -8,27 +8,32 @@ export default {
     
     // JavaScript to be fired on the home page
 
-    var process = true;
-    if ($( "body.mobile" ).length) {
-        $([window, document]).on('click', function(){
-          if (process) {
-            process = false;
-            ReactDOM.render(
-              <QuickerSlider />,
-              document.getElementById('list-slider')
-            );
-          }
-        });
-    }else{
-      ReactDOM.render(
-        <QuickerSlider />,
-        document.getElementById('list-slider')
-      );
-    }
 
     //
     if (typeof BrokerComparison !== 'undefined') {
       BrokerComparison.initialize();
+    }
+
+    var process = true;
+    if ($( "body.mobile" ).length) {
+        $([window, document]).on('click', function(){
+          if (process) {
+            setTimeout(function() {
+              process = false;
+              ReactDOM.render(
+                <QuickerSlider />,
+                document.getElementById('list-slider')
+              );
+            }, 3000);
+          }
+        });
+    }else{
+      setTimeout(function() {
+        ReactDOM.render(
+          <QuickerSlider />,
+          document.getElementById('list-slider')
+        );
+      }, 3000);
     }
 
   },
