@@ -77,11 +77,15 @@
 			li {
 				line-height: 1;
 				float: left;
+				margin-bottom: 0;
 
 				a {
 					line-height: 1;
 				    display: inline-block;
-				    padding: 10px 0;
+				    padding: 12px 0;
+				    @media only screen and (max-width: 767px) {
+					  padding: 18px 0;
+					}
 				}
 			}
 		}
@@ -93,6 +97,9 @@
 					a {
 						&:first-child>[class*=fa-]:first-child {
 							    top: 12px;
+							    @media only screen and (max-width: 767px) {
+								  top: 20px;
+								}
 						}
 					}
 				}
