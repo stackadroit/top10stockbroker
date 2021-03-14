@@ -123,7 +123,7 @@ add_filter('excerpt_more', function ($more) {
 });
 
 add_filter( 'show_admin_bar', '__return_false' );
-function hide_admin_bar_subscribers( $show ) {
+function hide_admin_bar_subscribers() {
     return false;
 }
 add_filter( 'show_admin_bar', 'hide_admin_bar_subscribers' );
