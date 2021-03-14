@@ -106,4 +106,23 @@
 			}
 		}
 	}
+
+	ul {
+		&.footer-social-icons {
+			&.social-icons {
+				li {
+					a {
+						@media only screen and (max-width: 767px) {
+							width: 48px;
+							height: 48px;
+    						line-height: 54px;
+    						display: flex;
+						    align-items: center;
+						    justify-content: center;
+						}
+					}
+				}
+			}
+		}
+	}
 }
