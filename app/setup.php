@@ -27,7 +27,7 @@ add_action('wp_enqueue_scripts', function () {
     if ( WP_DEBUG ) {
         $localize_script_vars['apiServerUrl'] = 'http://127.0.0.1:8000';
     }else{
-        $localize_script_vars['apiServerUrl'] = 'https://api.top10stockbroker.com';
+        $localize_script_vars['apiServerUrl'] = 'http://api1.top10stockbroker.com';
     }
 
     // if ( defined( 'WPCF7_LOAD_JS' ) ) {

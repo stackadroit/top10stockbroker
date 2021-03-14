@@ -126,7 +126,7 @@ export default {
         
 
   		// Show contact model on button click
-        $(document).on('click','.custom-hellobar', function (event, eventInfo) {
+        $(document).on('click','.custom-hellobar a', function (event, eventInfo) {
         	$("#popup-main").modal('show');
   		});
 
