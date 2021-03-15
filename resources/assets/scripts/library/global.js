@@ -1143,7 +1143,7 @@ exports.theme = window.theme;
 		                $(tab_wrap).html(response);
 						setTimeout(function(){
 							self.initializedEasyTab(tab_wrap);
-						},10); 
+						},500); 
 		          	},
 		          	error: function(response){
 		                console.log('Easy Tabs loading error.'); 
@@ -1157,7 +1157,7 @@ exports.theme = window.theme;
 				if($('.easy_tabs_container_wrap').length){
 					self.loadEasyTabHtml(self);
 				}
-			},10,this);
+			},4500,this);
 			return this;
 		},
 	 
