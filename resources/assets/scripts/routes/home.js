@@ -18,22 +18,22 @@ export default {
     if ($( "body.mobile" ).length) {
         $([window, document]).on('click', function(){
           if (process) {
-            // setTimeout(function() {
+            setTimeout(function() {
               process = false;
               ReactDOM.render(
                 <QuickerSlider />,
                 document.getElementById('list-slider')
               );
-            // }, 3000);
+            }, 5000);
           }
         });
     }else{
-      // setTimeout(function() {
+      setTimeout(function() {
         ReactDOM.render(
           <QuickerSlider />,
           document.getElementById('list-slider')
         );
-      // }, 3000);
+      }, 5000);
     }
 
   },
