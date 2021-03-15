@@ -1125,6 +1125,12 @@ exports.theme = window.theme;
 		        var tab_wrap ='#easy_tabs_container_wrap_'+id;
 		        $.ajax({
 		          	cache: false,
+		          	crossDomain: true,
+	                  	config: {
+	                      	headers: {
+	                         	'Access-Control-Allow-Origin': '*',
+	                  	}
+	                },
 		         	type:"POST",
 		            dataType: "html",
 		        	url: global_vars.ajax_url,
@@ -1137,7 +1143,7 @@ exports.theme = window.theme;
 		                $(tab_wrap).html(response);
 						setTimeout(function(){
 							self.initializedEasyTab(tab_wrap);
-						},500); 
+						},10); 
 		          	},
 		          	error: function(response){
 		                console.log('Easy Tabs loading error.'); 
@@ -1151,7 +1157,7 @@ exports.theme = window.theme;
 				if($('.easy_tabs_container_wrap').length){
 					self.loadEasyTabHtml(self);
 				}
-			},5000,this);
+			},10,this);
 			return this;
 		},
 	 

@@ -27,9 +27,6 @@ export default {
 	    	if (typeof LoadSideBar !== 'undefined') {
 				LoadSideBar.initialize();
 			}
-			setTimeout(function(){
-			
-			},5500); 
 	    }
 		// Easy tab
 		if($('.easy_tabs_container_wrap').length){
