@@ -19,20 +19,38 @@ export default {
         $([window, document]).on('click', function(){
           if (process) {
             setTimeout(function() {
-              process = false;
-              ReactDOM.render(
-                <QuickerSlider />,
-                document.getElementById('list-slider')
-              );
+              if($('#list-slider').length){
+                process = false;
+                ReactDOM.render(
+                  <QuickerSlider />,
+                  document.getElementById('list-slider')
+                );
+              }else{
+                setTimeout(function() {
+                   ReactDOM.render(
+                    <QuickerSlider />,
+                    document.getElementById('list-slider')
+                  );
+                }, 5000);
+              }
             }, 5000);
           }
         });
     }else{
       setTimeout(function() {
-        ReactDOM.render(
-          <QuickerSlider />,
-          document.getElementById('list-slider')
-        );
+        if($('#list-slider').length){
+          ReactDOM.render(
+            <QuickerSlider />,
+            document.getElementById('list-slider')
+          );
+        }else{
+          setTimeout(function() {
+             ReactDOM.render(
+              <QuickerSlider />,
+              document.getElementById('list-slider')
+            );
+          }, 5000);
+        }
       }, 5000);
     }
 
