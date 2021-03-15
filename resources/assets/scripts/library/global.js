@@ -1039,6 +1039,133 @@ exports.theme = window.theme;
 
 }).apply(this, [jQuery]);
 
+// Load Easy Tab
+(function($) {
+
+  var initialized = false;
+
+  var LoadEasyTab = {
+ 		defaults: {
+		},
+
+		initialize: function(opts) {
+			if (initialized) {
+				return this;
+			}
+
+			initialized = true;
+
+			this.setOptions(opts)
+				.events();
+ 			return this;
+		},
+
+		setOptions: function(opts) {
+			this.options = $.extend(true, {}, this.defaults, opts);
+ 			return this;
+		},
+		initializedEasyTab:function(tab_wrap){
+			var is_mobile=0;
+			if ($(window).width() < 700){
+		       is_mobile =1;
+		    }
+		    $(document).on('click','.see-all-btn',function(){
+				$(this).closest('.tab_content').find('.row').find('div').show();
+				$(this).hide();
+			});
+
+			$(document).on('click','.see-all-btn',function(){
+				$(this).closest('.tab_content').find('.row').find('div').show();
+				$(this).hide();
+			});
+			var els =tab_wrap+" .easy_tabs_container";
+			$(els+' .tab_content_wrapper div.tab_content:not(:first)').hide();
+			$(els+' .previous').hide();
+			$(els+' .tabs li > a').click(function (e) {
+	           	e.preventDefault();
+				if($(this).closest('li').is(':last-child')) {
+	              	$(this).closest('.easy_tabs_container').find('.next').hide();
+	         	} else {
+	               	$(this).closest('.easy_tabs_container').find('.next').show();
+	           	}
+ 				if ($(this).closest('li').is(':first-child')) {
+	               	$(this).closest('.easy_tabs_container').find('.previous').hide();
+	           	} else {
+	              	$(this).closest('.easy_tabs_container').find('.previous').show();
+	           	}
+ 				var position = $(this).closest('li').position();
+	            var corresponding = $(this).attr("href");
+	           	scroll = $(this).closest('.tabs').scrollLeft();
+		        $(this).closest('.tabs').animate({'scrollLeft': scroll + position.left - 30
+	           	}, 200);
+ 				// hide all content divs
+	           	$(this).closest('.easy_tabs_container').find('.tab_content_wrapper').find('div.tab_content').hide();
+	          	// show content of corresponding tab
+	           	$(this).closest('.easy_tabs_container').find('div' + corresponding).toggle();
+	         	// remove active class from currently not active tabs
+	           	$(this).closest('.easy_tabs_container').find(' .tabs li').removeClass('active');
+	           	// add active class to clicked tab
+	           	$(this).closest('li').addClass('active');
+	      	});
+  			$(els+' .next').click(function(e){
+	           	e.preventDefault();
+	           	$(this).closest('.easy_tabs_container').find('li.active').next('li').find('a').trigger('click');
+	       	});
+	       	$(els+' .previous').click(function(e){
+	          	e.preventDefault();
+	         	$(this).closest('.easy_tabs_container').find('li.active').prev('li').find('a').trigger('click');
+	      	});
+		},
+		loadEasyTabHtml:function(self){
+			// $('.easy_tabs_container_wrap').each(function(){
+				// console.log($(this).data('id'));
+		        // $rootnode  = $(document);
+
+		        var id =$('.easy_tabs_container_wrap').data('id');
+		        var tab_wrap ='#easy_tabs_container_wrap_'+id;
+		        $.ajax({
+		          	cache: false,
+		          	crossDomain: true,
+	                  	config: {
+	                      	headers: {
+	                         	'Access-Control-Allow-Origin': '*',
+	                  	}
+	                },
+		         	type:"POST",
+		            dataType: "html",
+		        	url: global_vars.ajax_url,
+		           	data: {
+		              	'action':'load_easy_tabs_html',
+		              	'id':id,
+		           	},
+		           	success: function(response){
+		                // sticky Widget
+		                $(tab_wrap).html(response);
+						setTimeout(function(){
+							self.initializedEasyTab(tab_wrap);
+						},10); 
+		          	},
+		          	error: function(response){
+		                console.log('Easy Tabs loading error.'); 
+		          	}
+		        });
+		        // return this;
+			// });
+		},
+		events: function() {
+			setTimeout(function(self){
+				if($('.easy_tabs_container_wrap').length){
+					self.loadEasyTabHtml(self);
+				}
+			},10,this);
+			return this;
+		},
+	 
+    };
+  exports.LoadEasyTab = LoadEasyTab;
+
+}).apply(this, [jQuery]);
+
 // share-market-education
 (function($) {
 

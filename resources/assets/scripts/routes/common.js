@@ -1,4 +1,4 @@
-import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation,LoadSideBar}  from '../library/global';
+import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,LoadEasyTab,EasyTab,ShareMarketEducation,LoadSideBar}  from '../library/global';
 // import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
@@ -27,14 +27,16 @@ export default {
 	    	if (typeof LoadSideBar !== 'undefined') {
 				LoadSideBar.initialize();
 			}
-			setTimeout(function(){
-			
-			},5500); 
 	    }
 		// Easy tab
-		if (typeof EasyTab !== 'undefined') {
-			EasyTab.initialize();
+		if($('.easy_tabs_container_wrap').length){
+			if (typeof LoadEasyTab !== 'undefined') {
+				LoadEasyTab.initialize();
+			}
 		}
+		// if (typeof EasyTab !== 'undefined') {
+		// 	EasyTab.initialize();
+		// }
 		// Easy tab
 		if (typeof ShareMarketEducation !== 'undefined') {
 			ShareMarketEducation.initialize();

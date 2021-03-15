@@ -19,8 +19,8 @@ class WidgetMarket extends React.Component {
 
     componentDidMount(){
         this.getData();
-    	// set Interval
         this.interval = setInterval(this.getData, 100000);
+    	// set Interval
     	// setTimeout(function(ele) {
     	// 	ele.getData();
     	// 	ele.interval = setInterval(ele.getData, 100000);

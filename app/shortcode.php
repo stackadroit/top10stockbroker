@@ -1598,8 +1598,8 @@ add_shortcode('socialPostShare', function ($atts){
     return \App\template($template, $data);
 
 });
-
-add_shortcode('EasyTabWidget_api', function ($atts){ 
+ 
+add_shortcode('EasyTabWidget', function ($atts){ 
     global $wpdb;
     $post_id =$atts['id'];
     // Extract the shortcode attributes
@@ -1611,13 +1611,12 @@ add_shortcode('EasyTabWidget_api', function ($atts){
      
     if($tabs_type == 'VT'){
         $shortcodeWrap= '<div id="v_tabs_wrapper_'.$post_id.'" class="v_tabs_wrapper_'.$post_id.' v_tabs_wrapper" data-id="'.$post_id.'" ></div>';
-     // print_r($data);
     }else{
         $shortcodeWrap ='<div id="easy_tabs_container_wrap_'.$post_id.'" class="easy_tabs_container_wrap" data-id="'.$post_id.'"></div>';
     }
     return $shortcodeWrap;
 });
-add_shortcode('EasyTabWidget', function ($atts){ 
+add_shortcode('EasyTabWidget_lar', function ($atts){ 
     global $wpdb;
     $post_id =$atts['id'];
     // Extract the shortcode attributes
