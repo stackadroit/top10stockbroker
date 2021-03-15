@@ -12,20 +12,20 @@ class WidgetMarketTop extends React.Component {
             isLoaded : false,
             lists : []          
         };
-        // this.getData = this.getData.bind(this);
-        setTimeout(function(ele) {
-        	ele.getData = ele.getData.bind(ele);
-        }, 3000,this);
+        this.getData = this.getData.bind(this);
+        // setTimeout(function(ele) {
+        // 	ele.getData = ele.getData.bind(ele);
+        // }, 3000,this);
     }
 
     componentDidMount(){
-        // this.getData();
-        // this.interval = setInterval(this.getData, 100000);
+        this.getData();
+        this.interval = setInterval(this.getData, 100000);
         // set Interval
-    	setTimeout(function(ele) {
-    		ele.getData();
-    		ele.interval = setInterval(ele.getData, 100000);
-    	}, 3000,this);
+    	// setTimeout(function(ele) {
+    	// 	ele.getData();
+    	// 	ele.interval = setInterval(ele.getData, 100000);
+    	// }, 3000,this);
     }
 
     componentWillUnmount() {
