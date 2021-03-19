@@ -1,3 +1,4 @@
+import { EasyTab}  from '../../library/global';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import GoldSilverChart from '../../components/graph/gold-silver-chart';
@@ -5,7 +6,9 @@ export default {
   init() {
       (function($) {
         'use strict';
-
+          if (typeof EasyTab !== 'undefined') {
+            EasyTab.initialize();
+          }
           setTimeout(function(){
             $('.gold-silver-graph a[href="#li_1y"').trigger('click');
           },4000);
