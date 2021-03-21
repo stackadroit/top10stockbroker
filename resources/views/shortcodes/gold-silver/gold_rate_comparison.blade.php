@@ -1,7 +1,7 @@
 <div data-id="{{@$id}}" id="{{@$div_id}}">
 	<div class="section_returnCal section-padding">
 		<div class="inner-wrap">
-			<div class="retcalc_form gold-calc">
+			<div class="retcalc_form gold-calc forms_container">
 			    <form action="">
                   	<input type="hidden" name="type" value="{{@$type}}" />
                   	<div class="__gold_rate_comparison">
@@ -91,7 +91,7 @@
 
                   		</div>
                   	</div>
-                  	
+
 			    	<div class="pt-4 text-center"> 
 			       		<button type="submit" class="getGoldSilverUnitCompareCalculatedResult">Compare {{ ($type ==1)?'Gold':'Silver'}} Rate</button>
 			     	</div>
