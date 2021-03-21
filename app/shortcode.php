@@ -1612,7 +1612,7 @@ add_shortcode('EasyTabWidget', function ($atts){
     if($tabs_type == 'VT'){
         $shortcodeWrap= '<div id="v_tabs_wrapper_'.$post_id.'" class="v_tabs_wrapper_'.$post_id.' v_tabs_wrapper" data-id="'.$post_id.'" ></div>';
     }else{
-        $shortcodeWrap ='<div id="easy_tabs_container_wrap_'.$post_id.'" class="easy_tabs_container_wrap" data-id="'.$post_id.'"></div>';
+        $shortcodeWrap ='<div id="content"><div id="easy_tabs_container_wrap_'.$post_id.'" class="easy_tabs_container_wrap" data-id="'.$post_id.'"></div></div>';
     }
     return $shortcodeWrap;
 });

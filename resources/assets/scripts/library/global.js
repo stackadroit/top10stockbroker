@@ -1133,10 +1133,13 @@ exports.theme = window.theme;
 	                },
 		         	type:"POST",
 		            dataType: "html",
-		        	url: global_vars.ajax_url,
+		        	url: global_vars.apiServerUrl + '/api/load-easy-tabs',
+            
+		        	// url: global_vars.ajax_url,
 		           	data: {
 		              	'action':'load_easy_tabs_html',
-		              	'id':id,
+		              	'post_id':id,
+		              	'tab_type':'HT',
 		           	},
 		           	success: function(response){
 		                // sticky Widget
