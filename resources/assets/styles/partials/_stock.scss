@@ -875,17 +875,32 @@ table.dataTable thead td {
     border-bottom-left-radius: 0;
   }
 }
+.__forms_outer {
+    padding: 0;
+    border: 0;
+    background: white;
+
+    .shortcode-bg {
+      padding: 0;
+      border: 0;
+      background: white;
+    }
+}
 .forms_container {
     width: 100%!important;
     padding: 30px!important;
 
-    .__gold_silver_rate_comparision, .__gold_investment_comparison {
+    .__gold_silver_rate_comparision, .__gold_investment_comparison, .__gold_rate_comparison {
       .col-sm-12 {
         margin-right: 0;
         margin-bottom: 10px;
       }
       label {
         margin-bottom: 0px;
+      }
+
+      input, select {
+        width: 100%;
       }
     }
 }
