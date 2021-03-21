@@ -6,7 +6,7 @@
 	        <div class="retcalc_form forms_container">
 	            <form action="">
 	            	<input type="hidden" name="type" value="{{ @$type }}" />
-	            	<div class="__gold-investment-calculator">
+	            	<div class="__gold_investment_calculator">
 	            		<div class="row">
 	            			<div class="col-sm-12 col-md-6 col-lg-6">
 	            				<label for="" class="col-form-label">Select City / States </label>
