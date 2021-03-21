@@ -1269,7 +1269,8 @@ add_shortcode('GoldRateComparison', function ($atts){
                 'id'      => '',
                 'title'   =>'Gold Rate Comparison',
                 'city' => '',
-                'caret' => ''
+                'caret' => '',
+                'type' => ''
                 ), $atts);
 
     // Set the template we're going to use for the Shortcode
