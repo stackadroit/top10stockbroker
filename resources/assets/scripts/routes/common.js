@@ -34,13 +34,6 @@ export default {
 				LoadEasyTab.initialize();
 			}
 		}
-		// if (typeof EasyTab !== 'undefined') {
-		// 	EasyTab.initialize();
-		// }
-		// Easy tab
-		if (typeof ShareMarketEducation !== 'undefined') {
-			ShareMarketEducation.initialize();
-		}
 
 		// Navigation.
 		if (typeof Nav !== 'undefined') {

@@ -149,6 +149,7 @@ import goldRate from './routes/gold-silver/gold-short-codes';
 import parentPageid52274 from './routes/gold-silver/gold-short-codes';
 import silverRate from './routes/gold-silver/gold-short-codes';
 import parentPageid52779 from './routes/gold-silver/gold-short-codes';
+import shareMarketEducation from './routes/share-market-education';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -201,7 +202,7 @@ const routes = new Router({
    Include Margin calculator js function
   */
   singleMarginCalculator,
-  // shareMarketEducation,
+  shareMarketEducation,
   // Shotcodes Calculator
   assetsToSalesRatioCalculator,
   assetsTurnoverRatioCalculator,

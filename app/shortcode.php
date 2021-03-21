@@ -1610,13 +1610,13 @@ add_shortcode('EasyTabWidget', function ($atts){
     $tabs_type = get_post_meta($post_id,'pa1_wp_easy_tabs_type',true);
      
     if($tabs_type == 'VT'){
-        $shortcodeWrap= '<div id="v_tabs_wrapper_'.$post_id.'" class="v_tabs_wrapper_'.$post_id.' v_tabs_wrapper" data-id="'.$post_id.'" ></div>';
+         
     }else{
         $shortcodeWrap ='<div id="content"><div id="easy_tabs_container_wrap_'.$post_id.'" class="easy_tabs_container_wrap" data-id="'.$post_id.'"></div></div>';
     }
     return $shortcodeWrap;
 });
-add_shortcode('EasyTabWidget_lar', function ($atts){ 
+add_shortcode('EasyTabWidgetVT', function ($atts){ 
     global $wpdb;
     $post_id =$atts['id'];
     // Extract the shortcode attributes
@@ -1635,10 +1635,6 @@ add_shortcode('EasyTabWidget_lar', function ($atts){
         $data['totalCount'] =@count($data['tabs_data']);
         $data['tabs_type'] = get_post_meta($post_id,'pa1_wp_easy_tabs_type',true);
     }
-    
-    // print_r(count(trim($data['tabs_data'])));
-    // print_r($data);
-    // exit;
     $totalTopic =0;
     if(@count($data['tabs_data'])){
         foreach ($data['tabs_data'] as $idx => $tabs) {
@@ -1670,9 +1666,7 @@ add_shortcode('EasyTabWidget_lar', function ($atts){
              }
         }
     }
-             // echo '<pre>';
-             // print_r($data);
-             // exit; 
+     
     $totalTopic =0;
     if($totalCount){ 
         foreach($tabs_data as $tabs_single_data){
@@ -1687,7 +1681,7 @@ add_shortcode('EasyTabWidget_lar', function ($atts){
     }else{
         $template = 'shortcodes.easy_tab_widget';
     }
-        return \App\template($template, $data);
+    return \App\template($template, $data);
 });
 add_shortcode('ShareMarketEducation', function ($atts){ 
 
