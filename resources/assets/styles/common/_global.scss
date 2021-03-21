@@ -821,3 +821,17 @@ article {
     }
   }
 }
+
+.forms_container {
+    width: 100%;
+    padding: 30px;
+
+    .__gold_silver_rate_comparision, .__gold_investment_comparison {
+      .col-sm-12 {
+        margin-bottom: 10px;
+      }
+      label {
+        margin-bottom: 0px;
+      }
+    }
+}
