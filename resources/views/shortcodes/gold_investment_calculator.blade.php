@@ -1,6 +1,6 @@
 @php $jsondatafiltered =  str_replace('"', "'", json_encode($josndata)) @endphp
 <div class="gold-investment-calculator" id="{{ $div_id }}"  data-plugin-options="{{ $jsondatafiltered }}">
-	<div class="section_returnCal shotcodwraper">
+	<div class="section_returnCal shotcodwraper __forms_outer">
 	    <div class="inner-wrap shortcode-bg">
 	        <!-- /.section-head -->
 	        <div class="retcalc_form forms_container">

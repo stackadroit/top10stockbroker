@@ -875,6 +875,17 @@ table.dataTable thead td {
     border-bottom-left-radius: 0;
   }
 }
+.__forms_outer {
+    padding: 0;
+    border: 0;
+    background: white;
+
+    .shortcode-bg {
+      padding: 0;
+      border: 0;
+      background: white;
+    }
+}
 .forms_container {
     width: 100%!important;
     padding: 30px!important;
@@ -886,6 +897,10 @@ table.dataTable thead td {
       }
       label {
         margin-bottom: 0px;
+      }
+
+      select {
+        width: 100%;
       }
     }
 }
