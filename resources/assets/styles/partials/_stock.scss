@@ -876,13 +876,13 @@ table.dataTable thead td {
   }
 }
 .__forms_outer {
-    padding: 0;
-    border: 0;
+    padding: 0!important;
+    border: 0!important;
     background: white;
 
     .shortcode-bg {
-      padding: 0;
-      border: 0;
+      padding: 0!important;
+      border: 0!important;
       background: white;
     }
 }
@@ -890,7 +890,7 @@ table.dataTable thead td {
     width: 100%!important;
     padding: 30px!important;
 
-    .__gold_silver_rate_comparision, .__gold_investment_comparison, .__gold_rate_comparison {
+    .__gold_silver_rate_comparision, .__gold_investment_comparison, .__gold_rate_comparison, .__gold_investment_calculator {
       .col-sm-12 {
         margin-right: 0;
         margin-bottom: 10px;
