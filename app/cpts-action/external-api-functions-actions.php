@@ -667,7 +667,10 @@ function IIFL_B2C_GrowthAPI( $postedArray =array() ){
     $apiResponse ='';
     $apiRequest = array(
         'name' => $name,
-        'mobile' => $mobile
+        'mobile' => $mobile,
+        "utmsource"=>"CPL Partners",
+        "utmcampaign"=>"partner 1",
+
     );
     $payload = json_encode($apiRequest);
     // Prepare new cURL resource
