@@ -6,7 +6,7 @@
                   	<input type="hidden" name="type" value="{{@$type}}" />
                   	<div class="__gold_rate_comparison">
                   		<div class="row">
-                  			<div class="col-sm-12 col-md-6 col-lg-6">
+                  			<div class="col-sm-12 col-md-6 col-lg-4">
                   				<label for="">Select your City / State </label>
                   				<select name="p_id1" class="select-style1d">
 						            @foreach ($cities as $p_id => $cityState)
@@ -17,7 +17,7 @@
 					         	</select>
                   			</div>
 
-                  			<div class="col-sm-12 col-md-6 col-lg-6">
+                  			<div class="col-sm-12 col-md-6 col-lg-4">
                   				<label for="">Compare with City / State </label>
                   				<select name="p_id2" class="select-style1d">
 				                    @foreach ($cities as $p_id => $cityState)
@@ -28,7 +28,7 @@
 				          		</select>
                   			</div>
 
-                  			<div class="col-sm-12 col-md-6 col-lg-6">
+                  			<div class="col-sm-12 col-md-6 col-lg-4">
                   				<label for="">Compare with City / State </label>
                   				<select name="p_id3" class="select-style1d">
 				                    @foreach ($cities as $p_id => $cityState)
@@ -40,7 +40,7 @@
                   			</div>
 
                   			@if(@$type ==1)
-                  			<div class="col-sm-12 col-md-6 col-lg-6">
+                  			<div class="col-sm-12 col-md-6 col-lg-4">
                   				<label for="">Select Gold Carat </label>
                   				<select name="carat" class="select-style1d">
 		                          	<option value="22">22 Ct</option> 
@@ -49,12 +49,12 @@
                   			</div>
                   			@endif
 
-                  			<div class="col-sm-12 col-md-6 col-lg-6">
+                  			<div class="col-sm-12 col-md-6 col-lg-4">
                   				<label for="">Unit</label>
                   				<input autocomplete="off" value="1" min="0" name="unit" type="number" step="any">
                   			</div>
 
-                  			<div class="col-sm-12 col-md-6 col-lg-6">
+                  			<div class="col-sm-12 col-md-6 col-lg-4">
                   				<label for="">Select Unit Type</label>
                   				<select name="unit_type" class="select-style1d"> 
 		                        	<option value="ounce">Ounce (28.3494 Grams)</option>
@@ -73,7 +73,7 @@
 		                    	</select>
                   			</div>
 
-                  			<div class="col-sm-12 col-md-6 col-lg-6">
+                  			<div class="col-sm-12 col-md-6 col-lg-4">
                   				<label for="">Select a Timeline</label>
                   				<select name="g_timeline" class="select-style1d"> 
 				               		<option value="1D" class=""> Today</option>
