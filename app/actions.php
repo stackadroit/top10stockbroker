@@ -48,9 +48,9 @@ function icon_slider_data_ajax_request() {
         $id =  @$_REQUEST['ID'];
         $nonce =  @$_REQUEST['nonce'];
 
-        if ( ! wp_verify_nonce( $nonce, 'gloabltop10stockbroker' ) ) {
-            die( __( 'Security check', 'top10stockbroker' ) ); 
-        }
+        // if ( ! wp_verify_nonce( $nonce, 'gloabltop10stockbroker' ) ) {
+        //     die( __( 'Security check', 'top10stockbroker' ) ); 
+        // }
 
         $loopid = 0;
         if( have_rows('quiker_data', $id ) ):
