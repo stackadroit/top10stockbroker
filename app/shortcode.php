@@ -1808,3 +1808,34 @@ add_shortcode('SUBBROKERSLINKS', function ($atts){
     $template = 'shortcodes.sub-brokers-links';
     return \App\template($template, $data);
 });
+
+/**
+*   Shortcode form ForeCost Calculators.
+*/
+add_shortcode('PivotPointCalculator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'finCode' => '217389',
+        'is_single' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.pivot-point-calculator';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form ForeCost Calculators.
+[PivotPointsCalculator finCode="217389" stock_filter="1" indexCode="123" index_filter="1"]
+*/  
+add_shortcode('PivotPointsCalculator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'finCode' => '217389',
+        'stock_filter' => '1',
+        'indexCode' => '123',
+        'index_filter' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.pivot-points-calculator';
+    return \App\template($template, $data);
+});

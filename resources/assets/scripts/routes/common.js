@@ -8,6 +8,9 @@ import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
 import WidgetMarketTop from '../components/widgetmarketTop';
+import {ForeCastPivotPoint}  from '../library/fore-cast/fore-cast-pivot-point';
+
+// import ForeCastPivotPoint from '../components/foreCastPivotPoint';
 
 export default {
   init() {
@@ -38,6 +41,11 @@ export default {
 		// Navigation.
 		if (typeof Nav !== 'undefined') {
 			Nav.initialize();
+		}
+		if($('#pivot-point-calculator').length){
+			if (typeof ForeCastPivotPoint !== 'undefined') {
+		        ForeCastPivotPoint.initialize();
+		    }
 		}
 
 		// contact Form 7
@@ -87,6 +95,13 @@ export default {
 			  	  document.getElementById('list-slider-modal')
 			  	);
 	  		});
+	     //    if($('#pivot-point-calculator').length){
+	     //    	ReactDOM.render(
+			  	//   <ForeCastPivotPoint />,
+			  	//   document.getElementById('pivot-point-calculator')
+			  	// );
+	     //    }
+	  		
 	    }
 
 	    //only for mobile render
