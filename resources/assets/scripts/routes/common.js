@@ -11,6 +11,7 @@ import WidgetMarketTop from '../components/widgetmarketTop';
 import {ForeCastPivotPoint}  from '../library/fore-cast/fore-cast-pivot-point';
 import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
 import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calculator';
+import {EMAForeCastCalculator}  from '../library/fore-cast/ema-fore-cast-calculator';
 
 export default {
   init() {
@@ -55,6 +56,11 @@ export default {
 		if($('#sma-stock-forecast-calculator').length){
 			if (typeof SMAForeCastCalculator !== 'undefined') {
 		        SMAForeCastCalculator.initialize();
+		    }
+		}
+		if($('#ema-stock-forecast-calculator').length){
+			if (typeof EMAForeCastCalculator !== 'undefined') {
+		        EMAForeCastCalculator.initialize();
 		    }
 		}
 
