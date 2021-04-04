@@ -335,6 +335,20 @@ add_filter('top10stockbroker_cpt', function ($array) {
                            
                         )
             );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Stock Prediction', 'top10stockbroker' ),
+                            __( 'Stock Predictions', 'top10stockbroker' ),
+                            'stock-prediction'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+            );
     
     return $array;
 

@@ -3,7 +3,7 @@
 
   var initialized = false;
 
-  var ForeCastPivotPoint = {
+  var MainPPCalculator = {
  		defaults: {
 		},
 
@@ -26,8 +26,41 @@
 
 				return this;
 		},
-		 
-		getPPCalculatorHtml:function($pivotPointCalculator,finCode,post_id,filter,calculateButton){
+		getPPCalculator:function($pivotPointCalculator,finCode,post_id,is_single){
+			if(finCode){
+				$.ajax({
+			     	cache: false,
+			      	crossDomain: true,
+		         	config: {
+		              	headers: {
+		                 	'Access-Control-Allow-Origin': '*',
+		              	}
+		         	},
+		         	beforeSend: function() {
+		              $pivotPointCalculator.find('.fb-loader').remove();
+		              $pivotPointCalculator.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		            },
+			      	type:"post",
+			     	dataType: "html",
+			      	url: global_vars.apiServerUrl + '/apiblock/react-fore-cast/get-pivot-points',
+	             	data: {
+			          	'finCode':finCode,
+			         	'post_id':post_id,
+			         	'is_single':is_single,
+			      	},
+			      	success: function(response){
+			            $pivotPointCalculator.html(response);    
+			      	},
+			     	error: function(response){
+			        	console.log('Error in loading...'); 
+			      	}
+				});
+			}else{
+				console.log('finCode Not valid:'+finCode);
+			}
+			
+		},
+		getPPCalculatorHtml:function($pivotPointCalculator,finCode,post_id,filter){
 			if(finCode){
 				$.ajax({
 			     	cache: false,
@@ -50,7 +83,6 @@
 			          	'finCode':finCode,
 			         	'post_id':post_id,
 			         	'filter':filter,
-			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
 			            $pivotPointCalculator.find('#pivotPointStock').html(response);    
@@ -64,7 +96,7 @@
 			}
 		},
 
-		calculatePivotPoints:function($pivotPointCalculator,finCode,post_id,filter,LTP,calculateButton){
+		calculatePivotPoints:function($pivotPointCalculator,finCode,post_id,filter,LTP){
 			if(finCode){
 				$.ajax({
 			     	cache: false,
@@ -86,7 +118,6 @@
 			         	'post_id':post_id,
 			         	'filter':filter,
 			         	'LTP':LTP,
-			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
 			            $pivotPointCalculator.find('#pivot-points-results').html(response);    
@@ -103,7 +134,7 @@
 				$pivotPointCalculator.find('.fb-loader').remove();
 			}
 		},
-		getPPIndiceCalculatorHtml:function($pivotPointCalculator,indexCode,post_id,filter,calculateButton){
+		getPPIndiceCalculatorHtml:function($pivotPointCalculator,indexCode,post_id,filter){
 			if(indexCode){
 				$.ajax({
 			     	cache: false,
@@ -126,7 +157,6 @@
 			          	'indexCode':indexCode,
 			         	'post_id':post_id,
 			         	'filter':filter,
-			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
 			            $pivotPointCalculator.find('#pivotPointIndices').html(response);    
@@ -141,9 +171,9 @@
 				console.log('indexCode Not valid:'+finCode);
 			}
 		},
-		calculateIndicePivotPoints:function($pivotPointCalculator,indexCode,post_id,filter,LTP,calculateButton){
-			if(indexCode){
-				$.ajax({
+		getPPLists:function($pivotPointCalculator){
+			 
+			$.ajax({
 			     	cache: false,
 			      	crossDomain: true,
 		         	config: {
@@ -151,51 +181,37 @@
 		                 	'Access-Control-Allow-Origin': '*',
 		              	}
 		         	},
-		         	// beforeSend: function() {
-		          //     $pivotPointCalculator.find('.fb-loader').remove();
-		          //     $pivotPointCalculator.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
-		          //   },
+		         	beforeSend: function() {
+		              $pivotPointCalculator.find('.fb-loader').remove();
+		              $pivotPointCalculator.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		            },
 			      	type:"post",
 			     	dataType: "html",
-			      	url: global_vars.apiServerUrl + '/apiblock/react-fore-cast/calculate-indices-pivot-points',
+			      	url: global_vars.apiServerUrl + '/apiblock/react-fore-cast/main-pp-lists',
 	             	data: {
-			          	'indexCode':indexCode,
-			         	'post_id':post_id,
-			         	'filter':filter,
-			         	'LTP':LTP,
-			         	'calculateButton':calculateButton,
+			          // 	'indexCode':indexCode,
+			         	// 'post_id':post_id,
+			         	// 'filter':filter,
+			         	// 'LTP':LTP,
 			      	},
 			      	success: function(response){
-			            $pivotPointCalculator.find('#indices-pivot-points-results').html(response);    
+			            $pivotPointCalculator.find('#main-pp-lists tbody').html(response);    
 			            $pivotPointCalculator.find('.fb-loader').remove();
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
 			        	$pivotPointCalculator.find('.fb-loader').remove();
 			      	}
-				});
-			}else{
-				console.log('indexCode Not valid:'+indexCode);
-				$pivotPointCalculator.find('.fb-loader').remove();
-			}
+			});
+			 
 		},
 		events: function() {
 			var self    = this,
-				$pivotPointCalculator  = $('#pivot-point-calculator');
+				$pivotPointCalculator  = $('#main-pp-calculator');
 			setTimeout(function(ele) {
-				var finCode=$pivotPointCalculator.find('#pivotPointStock').data('fincode');
-				var post_id=$pivotPointCalculator.data('id');
-				var calculateButton=$pivotPointCalculator.data('calculate-button');
-				var filter=$pivotPointCalculator.find('#pivotPointStock').data('filter');
-	        	self.getPPCalculatorHtml($pivotPointCalculator,finCode,post_id,filter,calculateButton);
-	        }, 1,this);
-			setTimeout(function(ele) {
-				var indexCode=$pivotPointCalculator.find('#pivotPointIndices').data('index-code');
-				var post_id=$pivotPointCalculator.data('id');
-				var calculateButton=$pivotPointCalculator.data('calculate-button');
-				var filter=$pivotPointCalculator.find('#pivotPointIndices').data('filter');
-	        	self.getPPIndiceCalculatorHtml($pivotPointCalculator,indexCode,post_id,filter,calculateButton);
-	        }, 1,this);
+				self.getPPLists($pivotPointCalculator);
+	        }, 3000,this);
+			 
 			// calculate-pivot-points
 			$(document).on('click','#calculate-pivot-points',function(e){
 				e.preventDefault();
@@ -203,9 +219,8 @@
 				$(this).after('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
 				var finCode=$pivotPointCalculator.find('#pivotPointStock').data('fincode');
 				var post_id=$pivotPointCalculator.data('id');
-				var calculateButton=$pivotPointCalculator.data('calculate-button');
 				var filter=$pivotPointCalculator.find('#pivotPointStock').data('filter');
-				self.calculatePivotPoints($pivotPointCalculator,finCode,post_id,filter,LTP,calculateButton);
+				self.calculatePivotPoints($pivotPointCalculator,finCode,post_id,filter,LTP);
 			});
 
 			$(document).on('click','#pivot-point-refresh',function(e){
@@ -214,9 +229,8 @@
 				var LTP=$(this).data('ltp');
 				var finCode=$pivotPointCalculator.find('#pivotPointStock').data('fincode');
 				var post_id=$pivotPointCalculator.data('id');
-				var calculateButton=$pivotPointCalculator.data('calculate-button');
 				var filter=$pivotPointCalculator.find('#pivotPointStock').data('filter');
-				self.calculatePivotPoints($pivotPointCalculator,finCode,post_id,filter,LTP,calculateButton);
+				self.calculatePivotPoints($pivotPointCalculator,finCode,post_id,filter,LTP);
 			});
 
 			$(document).on('change','#pivot-point-stocks',function(e){
@@ -225,18 +239,16 @@
 				var finCode=$(this).val();
 				$pivotPointCalculator.find('#pivotPointStock').data('fincode',finCode);
 				var post_id=$pivotPointCalculator.data('id');
-				var calculateButton=$pivotPointCalculator.data('calculate-button');
 				var filter=$pivotPointCalculator.find('#pivotPointStock').data('filter');
-				self.getPPCalculatorHtml($pivotPointCalculator,finCode,post_id,filter,calculateButton);
+				self.getPPCalculatorHtml($pivotPointCalculator,finCode,post_id,filter);
 			});
 			$(document).on('change','#pivot-point-indices',function(e){
 				$pivotPointCalculator.find('#indices-pivot-points-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
 				var indexCode=$(this).val();
 				$pivotPointCalculator.find('#pivotPointIndices').data('index-code',indexCode);
 				var post_id=$pivotPointCalculator.data('id');
-				var calculateButton=$pivotPointCalculator.data('calculate-button');
 				var filter=$pivotPointCalculator.find('#pivotPointIndices').data('filter');
-				self.getPPIndiceCalculatorHtml($pivotPointCalculator,indexCode,post_id,filter,calculateButton);
+				self.getPPIndiceCalculatorHtml($pivotPointCalculator,indexCode,post_id,filter);
 			});
 
 			$(document).on('click','#calculate-indices-pivot-points,#pivot-point-indices-refresh',function(e){
@@ -245,9 +257,8 @@
 				$pivotPointCalculator.find('#indices-pivot-points-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
 				var indexCode=$pivotPointCalculator.find('#pivotPointIndices').data('index-code');
 				var post_id=$pivotPointCalculator.data('id');
-				var calculateButton=$pivotPointCalculator.data('calculate-button');
 				var filter=$pivotPointCalculator.find('#pivotPointIndices').data('filter');
-				self.calculateIndicePivotPoints($pivotPointCalculator,indexCode,post_id,filter,LTP,calculateButton);
+				self.calculateIndicePivotPoints($pivotPointCalculator,indexCode,post_id,filter,LTP);
 			});
 			
 
@@ -255,6 +266,6 @@
 		},
 	 
     };
-  exports.ForeCastPivotPoint = ForeCastPivotPoint;
+  exports.MainPPCalculator = MainPPCalculator;
 
 }).apply(this, [jQuery]);

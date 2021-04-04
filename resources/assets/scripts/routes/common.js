@@ -9,8 +9,7 @@ import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
 import WidgetMarketTop from '../components/widgetmarketTop';
 import {ForeCastPivotPoint}  from '../library/fore-cast/fore-cast-pivot-point';
-
-// import ForeCastPivotPoint from '../components/foreCastPivotPoint';
+import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
 
 export default {
   init() {
@@ -45,6 +44,11 @@ export default {
 		if($('#pivot-point-calculator').length){
 			if (typeof ForeCastPivotPoint !== 'undefined') {
 		        ForeCastPivotPoint.initialize();
+		    }
+		}
+		if($('#main-pp-calculator').length){
+			if (typeof MainPPCalculator !== 'undefined') {
+		        MainPPCalculator.initialize();
 		    }
 		}
 

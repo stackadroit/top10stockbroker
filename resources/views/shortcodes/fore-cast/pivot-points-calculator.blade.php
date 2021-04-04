@@ -1,4 +1,4 @@
-<div data-id="{{@$id}}" id="pivot-point-calculator">
+<div data-id="{{@$id}}" data-calculate-button="{{ @$calculate_button }}" id="pivot-point-calculator">
 	<div class="row tab-holder">
             <div class="col-md-6"> 
                 <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
