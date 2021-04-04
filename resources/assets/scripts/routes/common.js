@@ -10,6 +10,7 @@ import WidgetMarket from '../components/widgetmarket';
 import WidgetMarketTop from '../components/widgetmarketTop';
 import {ForeCastPivotPoint}  from '../library/fore-cast/fore-cast-pivot-point';
 import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
+import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calculator';
 
 export default {
   init() {
@@ -49,6 +50,11 @@ export default {
 		if($('#main-pp-calculator').length){
 			if (typeof MainPPCalculator !== 'undefined') {
 		        MainPPCalculator.initialize();
+		    }
+		}
+		if($('#sma-stock-forecast-calculator').length){
+			if (typeof SMAForeCastCalculator !== 'undefined') {
+		        SMAForeCastCalculator.initialize();
 		    }
 		}
 

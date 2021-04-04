@@ -3,10 +3,10 @@
             <div class="col-md-6"> 
                 <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
                     <li class="nav-item">
-                    	<a href="#pivotPointStock" role="tab" data-toggle="tab" aria-controls="pivotPointStock" class="active changeMAIEDFilter" data-expdate="{{@$ExpDate}}">Stocks</a>
+                    	<a href="#pivotPointStock" role="tab" data-toggle="tab" aria-controls="pivotPointStock" class="active">Stocks</a>
                     </li>
                     <li class="nav-item">
-                    	<a href="#pivotPointIndices" role="tab" data-toggle="tab" aria-controls="pivotPointIndices" class="changeMAIEDFilter" data-expdate="{{@$ExpDate}}">Indices</a>
+                    	<a href="#pivotPointIndices" role="tab" data-toggle="tab" aria-controls="pivotPointIndices">Indices</a>
                     </li>
                      
                 </ul>
