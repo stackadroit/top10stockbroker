@@ -136,7 +136,7 @@
 			      	}
 				});
 			}else{
-				console.log('indexCode Not valid:'+finCode);
+				console.log('indexCode Not valid:'+indexCode);
 			}
 		},
 		getIndiceCalculator:function($stockForeCastEle,indexTabEle,indexCode,post_id,filter,calculateButton){
