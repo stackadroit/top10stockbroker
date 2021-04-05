@@ -113,41 +113,50 @@
       ajax: function(){
         var self    = this;
         $rootnode  = $(document);
-        var id ='';
-        var title ='';
-        var city ='';
-        var type ='';
-        var carret ='';
-        var responseDiv ='';
-        id= $rootnode.find('.goldsilverpricetoday').data('id');
-        title= $rootnode.find('.goldsilverpricetoday').data('title');
-        city= $rootnode.find('.goldsilverpricetoday').data('city');
-        type= $rootnode.find('.goldsilverpricetoday').data('type');
-        carret= $rootnode.find('.goldsilverpricetoday').data('carret');
-        responseDiv ='#goldsilverpricetoday_'+id+'_'+type+'_'+carret;
-        $.ajax({
-                cache: false,
-                type:"POST",
-                dataType: "html",
-                // url: global_vars.ajax_url,
-                url: global_vars.apiServerUrl + '/apiblock/react-gold-silver/get-gold-silver-today-price',
+        $rootnode.find('.goldsilverpricetoday').each(function(){
+
+          var id ='';
+          var title ='';
+          var city ='';
+          var type ='';
+          var carret ='';
+          var responseDiv ='';
+          // id= $rootnode.find('.goldsilverpricetoday').data('id');
+          // title= $rootnode.find('.goldsilverpricetoday').data('title');
+          // city= $rootnode.find('.goldsilverpricetoday').data('city');
+          // type= $rootnode.find('.goldsilverpricetoday').data('type');
+          // carret= $rootnode.find('.goldsilverpricetoday').data('carret');
+          id= $(this).data('id');
+          title= $(this).data('title');
+          city= $(this).data('city');
+          type= $(this).data('type');
+          carret= $(this).data('carret');
+          
+          responseDiv ='#goldsilverpricetoday_'+id+'_'+type+'_'+carret;
+          $.ajax({
+                  cache: false,
+                  type:"POST",
+                  dataType: "html",
+                  // url: global_vars.ajax_url,
+                  url: global_vars.apiServerUrl + '/apiblock/react-gold-silver/get-gold-silver-today-price',
                   async:true,
-                  data: {
-                    'action':'get_gold_silver_today_price',
-                    'id':id,
-                    'title':title,
-                    'city':city,
-                    'type':type,
-                    'carret':carret,      
+                    data: {
+                      'action':'get_gold_silver_today_price',
+                      'id':id,
+                      'title':title,
+                      'city':city,
+                      'type':type,
+                      'carret':carret,      
+                  },
+                success: function(response){
+                  responseDiv ='#goldsilverpricetoday_'+id+'_'+type+'_'+carret;
+                   $rootnode.find(responseDiv).html(response);
                 },
-              success: function(response){
-                responseDiv ='#goldsilverpricetoday_'+id+'_'+type+'_'+carret;
-                 $rootnode.find(responseDiv).html(response);
-              },
-              error: function(response){
-                console.log('Gold Silver Price Today Error.'); 
-              }
-          });
+                error: function(response){
+                  console.log('Gold Silver Price Today Error.'); 
+                }
+            });
+        });
         return this;
       },
 
