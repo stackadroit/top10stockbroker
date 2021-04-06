@@ -1910,7 +1910,7 @@ add_shortcode('EMAStockForecast', function ($atts){
 });
 
 /**
-*   Shortcode form EMA ForeCost Calculators.
+*   Shortcode form MACD ForeCost Calculators.
 [MACDStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
 */  
 add_shortcode('MACDStockForecast', function ($atts){ 
@@ -1924,5 +1924,23 @@ add_shortcode('MACDStockForecast', function ($atts){
         'calculate_button' => '0',
     ), $atts);
     $template = 'shortcodes.fore-cast.macd-stock-forecast';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form RSI ForeCost Calculators.
+[RSIStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('RSIStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'finCode' => '217389',
+        'stock_filter' => '1',
+        'indexCode' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.rsi-stock-forecast';
     return \App\template($template, $data);
 });
