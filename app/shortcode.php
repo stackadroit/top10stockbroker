@@ -1908,3 +1908,21 @@ add_shortcode('EMAStockForecast', function ($atts){
     $template = 'shortcodes.fore-cast.ema-stock-forecast';
     return \App\template($template, $data);
 });
+
+/**
+*   Shortcode form EMA ForeCost Calculators.
+[MACDStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('MACDStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'finCode' => '217389',
+        'stock_filter' => '1',
+        'indexCode' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.macd-stock-forecast';
+    return \App\template($template, $data);
+});

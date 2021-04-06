@@ -12,6 +12,7 @@ import {ForeCastPivotPoint}  from '../library/fore-cast/fore-cast-pivot-point';
 import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
 import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calculator';
 import {EMAForeCastCalculator}  from '../library/fore-cast/ema-fore-cast-calculator';
+import {MACDForeCastCalculator}  from '../library/fore-cast/macd-fore-cast-calculator';
 
 export default {
   init() {
@@ -61,6 +62,11 @@ export default {
 		if($('#ema-stock-forecast-calculator').length){
 			if (typeof EMAForeCastCalculator !== 'undefined') {
 		        EMAForeCastCalculator.initialize();
+		    }
+		}
+		if($('#macd-stock-forecast-calculator').length){
+			if (typeof MACDForeCastCalculator !== 'undefined') {
+		        MACDForeCastCalculator.initialize();
 		    }
 		}
 
