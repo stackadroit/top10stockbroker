@@ -1962,3 +1962,19 @@ add_shortcode('SOStockForecast', function ($atts){
     $template = 'shortcodes.fore-cast.so-stock-forecast';
     return \App\template($template, $data);
 });
+
+/**
+*   Shortcode form Graham Intrinsic Value ForeCost Calculators.
+[SOStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('GIVStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'finCode' => '217389',
+        'stock_filter' => '1',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.giv-stock-forecast';
+    return \App\template($template, $data);
+});
