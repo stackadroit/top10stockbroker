@@ -14,6 +14,7 @@ import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calcula
 import {EMAForeCastCalculator}  from '../library/fore-cast/ema-fore-cast-calculator';
 import {MACDForeCastCalculator}  from '../library/fore-cast/macd-fore-cast-calculator';
 import {RSIForeCastCalculator}  from '../library/fore-cast/rsi-fore-cast-calculator';
+import {SOForeCastCalculator}  from '../library/fore-cast/so-fore-cast-calculator';
 
 export default {
   init() {
@@ -73,6 +74,11 @@ export default {
 		if($('#rsi-stock-forecast-calculator').length){
 			if (typeof RSIForeCastCalculator !== 'undefined') {
 		        RSIForeCastCalculator.initialize();
+		    }
+		}
+		if($('#so-stock-forecast-calculator').length){
+			if (typeof SOForeCastCalculator !== 'undefined') {
+		        SOForeCastCalculator.initialize();
 		    }
 		}
 

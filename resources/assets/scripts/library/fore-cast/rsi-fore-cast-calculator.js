@@ -164,7 +164,7 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $rsiStockForeCastEle.find(rsiIndexTabEle).find('#macd-indices-calculator-results').html(response);    
+			            $rsiStockForeCastEle.find(rsiIndexTabEle).find('#rsi-indices-calculator-results').html(response);    
 			            $rsiStockForeCastEle.find(rsiIndexTabEle).find('.fb-loader').remove();    
 			      	},
 			     	error: function(response){
