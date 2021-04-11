@@ -150,7 +150,9 @@ import parentPageid52274 from './routes/gold-silver/gold-short-codes';
 import silverRate from './routes/gold-silver/gold-short-codes';
 import parentPageid52779 from './routes/gold-silver/gold-short-codes';
 import shareMarketEducation from './routes/share-market-education';
-
+// ForeCast Index 
+import singleIndexPrediction from './routes/single/single-index-prediction';
+import singleStockPrediction from './routes/single/single-index-prediction';
 /** Populate Router instance with DOM routes */
 const routes = new Router({
   // All pages
@@ -278,6 +280,9 @@ const routes = new Router({
   goldRate,
   silverRate,
   parentPageid52779,
+  // ForeCast Index 
+  singleIndexPrediction,
+  singleStockPrediction,
 });
 
 // Load Events

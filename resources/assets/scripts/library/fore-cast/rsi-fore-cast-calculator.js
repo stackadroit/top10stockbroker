@@ -54,6 +54,24 @@
 			      	success: function(response){
 			            $rsiStockForeCastEle.find(rsiStockTabEle).html(response);    
 			            $rsiStockForeCastEle.find(rsiStockTabEle).find('.fb-loader').remove();    
+			            var $rsiForecastWrap=$('#rsi-forecast-wrap');
+			            if($(document).find('#rsi-more-detail').length){
+			            	var resultJson =$rsiForecastWrap.find(rsiStockTabEle).find('#rsi-stock-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$rsiForecastWrap.find('#rsi-trade-value').html(resultJson.Trade);
+			            	$rsiForecastWrap.find('#rsi-sentiment-value').html(resultJson.Sentiment);
+			            	$rsiForecastWrap.find('#rsi-current').html(resultJson.RSI);
+			            	var rsibetween= '';
+
+			            	if(resultJson.RSI < 30){
+			            		rsibetween= 'below 30/above 70';
+			            	}else if(resultJson.RSI > 30 && resultJson.RSI <= 70){
+			            		rsibetween= 'between 30-70 threshold';
+			            	}else{
+			            		rsibetween= 'above 70';
+			            	}
+			            	$rsiForecastWrap.find('#rsi-between').html(rsibetween);
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -92,6 +110,24 @@
 			      	success: function(response){
 			            $rsiStockForeCastEle.find(rsiStockTabEle).find('#rsi-stock-calculator-results').html(response);    
 			            $rsiStockForeCastEle.find(rsiStockTabEle).find('.fb-loader').remove();    
+			            var $rsiForecastWrap=$('#rsi-forecast-wrap');
+			            if($(document).find('#rsi-more-detail').length){
+			            	var resultJson =$rsiForecastWrap.find(rsiStockTabEle).find('#rsi-stock-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$rsiForecastWrap.find('#rsi-trade-value').html(resultJson.Trade);
+			            	$rsiForecastWrap.find('#rsi-sentiment-value').html(resultJson.Sentiment);
+			            	$rsiForecastWrap.find('#rsi-current').html(resultJson.RSI);
+			            	var rsibetween= '';
+
+			            	if(resultJson.RSI < 30){
+			            		rsibetween= 'below 30/above 70';
+			            	}else if(resultJson.RSI > 30 && resultJson.RSI <= 70){
+			            		rsibetween= 'between 30-70 threshold';
+			            	}else{
+			            		rsibetween= 'above 70';
+			            	}
+			            	$rsiForecastWrap.find('#rsi-between').html(rsibetween);
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -114,7 +150,7 @@
 		         	},
 		         	beforeSend: function() {
 		              if(!$rsiStockForeCastEle.find('.fb-loader').length){
-		              		$rsiStockForeCastEle.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              		$rsiStockForeCastEle.find(rsiIndexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -129,6 +165,24 @@
 			      	success: function(response){
 			            $rsiStockForeCastEle.find(rsiIndexTabEle).html(response);    
 			            $rsiStockForeCastEle.find(rsiIndexTabEle).find('.fb-loader').remove();   
+			      		var $rsiForecastWrap=$('#rsi-forecast-wrap');
+			            if($(document).find('#rsi-more-detail').length){
+			            	var resultJson =$rsiForecastWrap.find(rsiIndexTabEle).find('#rsi-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$rsiForecastWrap.find('#rsi-trade-value').html(resultJson.Trade);
+			            	$rsiForecastWrap.find('#rsi-sentiment-value').html(resultJson.Sentiment);
+			            	$rsiForecastWrap.find('#rsi-current').html(resultJson.RSI);
+			            	var rsibetween= '';
+
+			            	if(resultJson.RSI < 30){
+			            		rsibetween= 'below 30/above 70';
+			            	}else if(resultJson.RSI > 30 && resultJson.RSI <= 70){
+			            		rsibetween= 'between 30-70 threshold';
+			            	}else{
+			            		rsibetween= 'above 70';
+			            	}
+			            	$rsiForecastWrap.find('#rsi-between').html(rsibetween);
+			            }
 			      	},
 			     	error: function(response){
 			            $rsiStockForeCastEle.find(rsiIndexTabEle).find('.fb-loader').remove();   
@@ -166,6 +220,25 @@
 			      	success: function(response){
 			            $rsiStockForeCastEle.find(rsiIndexTabEle).find('#rsi-indices-calculator-results').html(response);    
 			            $rsiStockForeCastEle.find(rsiIndexTabEle).find('.fb-loader').remove();    
+			            var $rsiForecastWrap=$('#rsi-forecast-wrap');
+			            if($(document).find('#rsi-more-detail').length){
+			            	var resultJson =$rsiForecastWrap.find(rsiIndexTabEle).find('#rsi-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$rsiForecastWrap.find('#rsi-trade-value').html(resultJson.Trade);
+			            	$rsiForecastWrap.find('#rsi-sentiment-value').html(resultJson.Sentiment);
+			            	$rsiForecastWrap.find('#rsi-current').html(resultJson.RSI);
+			            	var rsibetween= '';
+
+			            	if(resultJson.RSI < 30){
+			            		rsibetween= 'below 30/above 70';
+			            	}else if(resultJson.RSI > 30 && resultJson.RSI <= 70){
+			            		rsibetween= 'between 30-70 threshold';
+			            	}else{
+			            		rsibetween= 'above 70';
+			            	}
+			            	
+			            	$rsiForecastWrap.find('#rsi-between').html(rsibetween);
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -183,15 +256,20 @@
 				rsiIndexTabEle  = '#rsiForeCastIndices';
 			setTimeout(function(ele) {
 				var post_id=$rsiStockForeCastEle.data('id');
+
 				var calculateButton=$rsiStockForeCastEle.data('calculate-button');
 				// For Stock Calculator Load
-				var finCode=$rsiStockForeCastEle.find(rsiStockTabEle).data('fincode');
-				var filter=$rsiStockForeCastEle.find(rsiStockTabEle).data('filter');
-	        	self.getRSIStockCalculatorHtml($rsiStockForeCastEle,rsiStockTabEle,finCode,post_id,filter,calculateButton);
+				if($rsiStockForeCastEle.find(rsiStockTabEle).length){
+					var finCode=$rsiStockForeCastEle.find(rsiStockTabEle).data('fincode');
+					var filter=$rsiStockForeCastEle.find(rsiStockTabEle).data('filter');
+		        	self.getRSIStockCalculatorHtml($rsiStockForeCastEle,rsiStockTabEle,finCode,post_id,filter,calculateButton);
+				}
 				// For Index Calculator Load
-				var indexCode=$rsiStockForeCastEle.find(rsiIndexTabEle).data('index-code');
-				var filter=$rsiStockForeCastEle.find(rsiIndexTabEle).data('filter');
-	        	self.getRSIIndiceCalculatorHtml($rsiStockForeCastEle,rsiIndexTabEle,indexCode,post_id,filter,calculateButton);
+				if($rsiStockForeCastEle.find(rsiIndexTabEle).length){
+					var indexCode=$rsiStockForeCastEle.find(rsiIndexTabEle).data('index-code');
+					var filter=$rsiStockForeCastEle.find(rsiIndexTabEle).data('filter');
+	        		self.getRSIIndiceCalculatorHtml($rsiStockForeCastEle,rsiIndexTabEle,indexCode,post_id,filter,calculateButton);
+	        	}
 	        }, 1,this);
 			 
 			// rsi-stock-refresh and Calculate

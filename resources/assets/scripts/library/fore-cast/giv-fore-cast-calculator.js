@@ -54,6 +54,13 @@
 			      	success: function(response){
 			            $givStockForeCastEle.find(givStockTabEle).html(response);    
 			            $givStockForeCastEle.find(givStockTabEle).find('.fb-loader').remove();    
+			            var $givForecastWrap=$('#giv-forecast-wrap');
+			            if($(document).find('#giv-more-detail').length){
+			            	var resultJson =$givForecastWrap.find(givStockTabEle).find('#giv-stock-json-results').data('result-json');
+			            	$givForecastWrap.find('#giv-current-intrinsic-value').html(resultJson.Intrinsic_Value);
+			            	$givForecastWrap.find('#giv-trade-value').html(resultJson.Invest);
+			            	 
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -92,6 +99,13 @@
 			      	success: function(response){
 			            $givStockForeCastEle.find(givStockTabEle).find('#giv-stock-calculator-results').html(response);    
 			            $givStockForeCastEle.find(givStockTabEle).find('.fb-loader').remove();    
+			            var $givForecastWrap=$('#giv-forecast-wrap');
+			            if($(document).find('#giv-more-detail').length){
+			            	var resultJson =$givForecastWrap.find(givStockTabEle).find('#giv-stock-json-results').data('result-json');
+			            	$givForecastWrap.find('#giv-current-intrinsic-value').html(resultJson.Intrinsic_Value);
+			            	$givForecastWrap.find('#giv-trade-value').html(resultJson.Invest);
+			            	 
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -111,9 +125,11 @@
 				var post_id=$givStockForeCastEle.data('id');
 				var calculateButton=$givStockForeCastEle.data('calculate-button');
 				// For Stock Calculator Load
-				var finCode=$givStockForeCastEle.find(givStockTabEle).data('fincode');
-				var filter=$givStockForeCastEle.find(givStockTabEle).data('filter');
-	        	self.getGIVStockCalculatorHtml($givStockForeCastEle,givStockTabEle,finCode,post_id,filter,calculateButton);
+				if($givStockForeCastEle.find(givStockTabEle).length){
+					var finCode=$givStockForeCastEle.find(givStockTabEle).data('fincode');
+					var filter=$givStockForeCastEle.find(givStockTabEle).data('filter');
+		        	self.getGIVStockCalculatorHtml($givStockForeCastEle,givStockTabEle,finCode,post_id,filter,calculateButton);
+		        }
 	        }, 1,this);
 			 
 			// rsi-stock-refresh and Calculate

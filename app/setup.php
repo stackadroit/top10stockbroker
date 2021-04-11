@@ -348,6 +348,22 @@ add_filter('top10stockbroker_cpt', function ($array) {
                             'menu_icon' => 'dashicons-tagcloud',
                            
                         )
+
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Index Prediction', 'top10stockbroker' ),
+                            __( 'Index Predictions', 'top10stockbroker' ),
+                            'index-prediction'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+                
             );
     
     return $array;

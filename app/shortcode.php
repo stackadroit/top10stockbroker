@@ -1809,6 +1809,7 @@ add_shortcode('SUBBROKERSLINKS', function ($atts){
     return \App\template($template, $data);
 });
 
+
 /**
 *   Shortcode form Main Pivot Points Calculator.
 Need To work on this
@@ -1857,15 +1858,17 @@ add_shortcode('MainPivotPointsCalculator', function ($atts){
 
 /**
 *   Shortcode form ForeCost Calculators.
-[StockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+[PPStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
 */  
-add_shortcode('StockForecast', function ($atts){ 
+add_shortcode('PPStockForecast', function ($atts){ 
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-        'finCode' => '217389',
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
         'stock_filter' => '1',
-        'indexCode' => '123',
+        'index_code' => '123',
         'index_filter' => '0',
         'calculate_button' => '0',
     ), $atts);
@@ -1881,9 +1884,11 @@ add_shortcode('SMAStockForecast', function ($atts){
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-        'finCode' => '217389',
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
         'stock_filter' => '1',
-        'indexCode' => '123',
+        'index_code' => '123',
         'index_filter' => '0',
         'calculate_button' => '0',
     ), $atts);
@@ -1899,9 +1904,11 @@ add_shortcode('EMAStockForecast', function ($atts){
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-        'finCode' => '217389',
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
         'stock_filter' => '1',
-        'indexCode' => '123',
+        'index_code' => '123',
         'index_filter' => '0',
         'calculate_button' => '0',
     ), $atts);
@@ -1917,9 +1924,11 @@ add_shortcode('MACDStockForecast', function ($atts){
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-        'finCode' => '217389',
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
         'stock_filter' => '1',
-        'indexCode' => '123',
+        'index_code' => '123',
         'index_filter' => '0',
         'calculate_button' => '0',
     ), $atts);
@@ -1935,9 +1944,11 @@ add_shortcode('RSIStockForecast', function ($atts){
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-        'finCode' => '217389',
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
         'stock_filter' => '1',
-        'indexCode' => '123',
+        'index_code' => '123',
         'index_filter' => '0',
         'calculate_button' => '0',
     ), $atts);
@@ -1953,9 +1964,11 @@ add_shortcode('SOStockForecast', function ($atts){
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-        'finCode' => '217389',
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
         'stock_filter' => '1',
-        'indexCode' => '123',
+        'index_code' => '123',
         'index_filter' => '0',
         'calculate_button' => '0',
     ), $atts);
@@ -1971,10 +1984,36 @@ add_shortcode('GIVStockForecast', function ($atts){
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-        'finCode' => '217389',
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
         'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
         'calculate_button' => '0',
     ), $atts);
     $template = 'shortcodes.fore-cast.giv-stock-forecast';
+    return \App\template($template, $data);
+});
+
+
+/**
+*   Shortcode form Camarilla Levels ForeCost Calculators.
+[CLStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('CLStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    // print_r($data);
+    $template = 'shortcodes.fore-cast.cl-stock-forecast';
     return \App\template($template, $data);
 });

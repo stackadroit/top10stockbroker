@@ -27,7 +27,7 @@
 				return this;
 		},
 		 
-		getEMAStockCalculatorHtml:function($emastockForeCastEle,emastockTabEle,finCode,post_id,filter,calculateButton){
+		getEMAStockCalculatorHtml:function($emastockForeCastEle,emaStockTabEle,finCode,post_id,filter,calculateButton){
 			if(finCode){
 				$.ajax({
 			     	cache: false,
@@ -39,7 +39,7 @@
 		         	},
 		         	beforeSend: function() {
 		              if(!$emastockForeCastEle.find('.fb-loader').length){
-		              	$emastockForeCastEle.find(emastockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              	$emastockForeCastEle.find(emaStockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -52,12 +52,25 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $emastockForeCastEle.find(emastockTabEle).html(response);    
-			            $emastockForeCastEle.find(emastockTabEle).find('.fb-loader').remove();    
+			            $emastockForeCastEle.find(emaStockTabEle).html(response);    
+			            $emastockForeCastEle.find(emaStockTabEle).find('.fb-loader').remove();    
+			            var $emaForecastWrap=$('#ema-forecast-wrap');
+			            if($(document).find('#ema-more-detail').length){
+			            	var resultJson =$emaForecastWrap.find(emaStockTabEle).find('#ema-stock-json-results').data('result-json');
+			            	if(resultJson){
+				            	$emaForecastWrap.find('#ema-trade-value').html(resultJson.Trade);
+				            	$emaForecastWrap.find('#ema-sentiment-value').html(resultJson.Sentiment);
+				            	$emaForecastWrap.find('#ema-9day').html(resultJson.ema_9day);
+				            	$emaForecastWrap.find('#ema-12day').html(resultJson.ema_12day);
+				            	$emaForecastWrap.find('#ema-26day').html(resultJson.ema_26day);
+				            	$emaForecastWrap.find('#ema-50day').html(resultJson.ema_50day);
+				            	$emaForecastWrap.find('#ema-100day').html(resultJson.ema_100day);
+				            }
+			            } 
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
-			            $emastockForeCastEle.find(emastockTabEle).find('.fb-loader').remove();    
+			            $emastockForeCastEle.find(emaStockTabEle).find('.fb-loader').remove();    
 			      	}
 				});
 			}else{
@@ -65,7 +78,7 @@
 			}
 		},
 
-		getEMAStockCalculator:function($emastockForeCastEle,emastockTabEle,finCode,post_id,filter,calculateButton){
+		getEMAStockCalculator:function($emastockForeCastEle,emaStockTabEle,finCode,post_id,filter,calculateButton){
 			if(finCode){
 				$.ajax({
 			     	cache: false,
@@ -77,7 +90,7 @@
 		         	},
 		         	beforeSend: function() {
 		              if(!$emastockForeCastEle.find('.fb-loader').length){
-		              	$emastockForeCastEle.find(emastockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              	$emastockForeCastEle.find(emaStockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -90,19 +103,32 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $emastockForeCastEle.find(emastockTabEle).find('#stock-calculator-results').html(response);    
-			            $emastockForeCastEle.find(emastockTabEle).find('.fb-loader').remove();    
+			            $emastockForeCastEle.find(emaStockTabEle).find('#stock-calculator-results').html(response);    
+			            $emastockForeCastEle.find(emaStockTabEle).find('.fb-loader').remove();    
+			            var $emaForecastWrap=$('#ema-forecast-wrap');
+			            if($(document).find('#ema-more-detail').length){
+			            	var resultJson =$emaForecastWrap.find(emaStockTabEle).find('#ema-stock-json-results').data('result-json');
+			            	if(resultJson){
+				            	$emaForecastWrap.find('#ema-trade-value').html(resultJson.Trade);
+				            	$emaForecastWrap.find('#ema-sentiment-value').html(resultJson.Sentiment);
+				            	$emaForecastWrap.find('#ema-9day').html(resultJson.ema_9day);
+				            	$emaForecastWrap.find('#ema-12day').html(resultJson.ema_12day);
+				            	$emaForecastWrap.find('#ema-26day').html(resultJson.ema_26day);
+				            	$emaForecastWrap.find('#ema-50day').html(resultJson.ema_50day);
+				            	$emaForecastWrap.find('#ema-100day').html(resultJson.ema_100day);
+				            }
+			            } 
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
-			            $emastockForeCastEle.find(emastockTabEle).find('.fb-loader').remove();    
+			            $emastockForeCastEle.find(emaStockTabEle).find('.fb-loader').remove();    
 			      	}
 				});
 			}else{
 				console.log('finCode Not valid:'+finCode);
 			}
 		},
-		getEMAIndiceCalculatorHtml:function($emastockForeCastEle,emaindexTabEle,indexCode,post_id,filter,calculateButton){
+		getEMAIndiceCalculatorHtml:function($emastockForeCastEle,emaIndexTabEle,indexCode,post_id,filter,calculateButton){
 			if(indexCode){
 				$.ajax({
 			     	cache: false,
@@ -114,7 +140,7 @@
 		         	},
 		         	beforeSend: function() {
 		              if(!$emastockForeCastEle.find('.fb-loader').length){
-		              		$emastockForeCastEle.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              		$emastockForeCastEle.find(emaIndexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -127,11 +153,24 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $emastockForeCastEle.find(emaindexTabEle).html(response);    
-			            $emastockForeCastEle.find(emaindexTabEle).find('.fb-loader').remove();   
+			            $emastockForeCastEle.find(emaIndexTabEle).html(response);    
+			            $emastockForeCastEle.find(emaIndexTabEle).find('.fb-loader').remove();
+			            var $emaForecastWrap=$('#ema-forecast-wrap');
+			            if($(document).find('#ema-more-detail').length){
+			            	var resultJson =$emaForecastWrap.find(emaIndexTabEle).find('#ema-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$emaForecastWrap.find('#ema-trade-value').html(resultJson.Trade);
+			            	$emaForecastWrap.find('#ema-sentiment-value').html(resultJson.Sentiment);
+			            	$emaForecastWrap.find('#ema-9day').html(resultJson.ema_9day);
+			            	$emaForecastWrap.find('#ema-12day').html(resultJson.ema_12day);
+			            	$emaForecastWrap.find('#ema-26day').html(resultJson.ema_26day);
+			            	$emaForecastWrap.find('#ema-50day').html(resultJson.ema_50day);
+			            	$emaForecastWrap.find('#ema-100day').html(resultJson.ema_100day);
+			            	 
+			            }   
 			      	},
 			     	error: function(response){
-			            $emastockForeCastEle.find(emaindexTabEle).find('.fb-loader').remove();   
+			            $emastockForeCastEle.find(emaIndexTabEle).find('.fb-loader').remove();   
 			        	console.log('Error in loading...'); 
 			      	}
 				});
@@ -139,7 +178,7 @@
 				console.log('indexCode Not valid:'+finCode);
 			}
 		},
-		getEMAIndiceCalculator:function($emastockForeCastEle,emaindexTabEle,indexCode,post_id,filter,calculateButton){
+		getEMAIndiceCalculator:function($emastockForeCastEle,emaIndexTabEle,indexCode,post_id,filter,calculateButton){
 			if(indexCode){
 				$.ajax({
 			     	cache: false,
@@ -151,7 +190,7 @@
 		         	},
 		         	beforeSend: function() {
 		              if(!$emastockForeCastEle.find('.fb-loader').length){
-		              	$emastockForeCastEle.find(emaindexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              	$emastockForeCastEle.find(emaIndexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -164,12 +203,25 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $emastockForeCastEle.find(emaindexTabEle).find('#indices-calculator-results').html(response);    
-			            $emastockForeCastEle.find(emaindexTabEle).find('.fb-loader').remove();    
+			            $emastockForeCastEle.find(emaIndexTabEle).find('#indices-calculator-results').html(response);    
+			            $emastockForeCastEle.find(emaIndexTabEle).find('.fb-loader').remove();    
+			            var $emaForecastWrap=$('#ema-forecast-wrap');
+			            if($(document).find('#ema-more-detail').length){
+			            	var resultJson =$emaForecastWrap.find(emaIndexTabEle).find('#ema-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$emaForecastWrap.find('#ema-trade-value').html(resultJson.Trade);
+			            	$emaForecastWrap.find('#ema-sentiment-value').html(resultJson.Sentiment);
+			            	$emaForecastWrap.find('#ema-9day').html(resultJson.ema_9day);
+			            	$emaForecastWrap.find('#ema-12day').html(resultJson.ema_12day);
+			            	$emaForecastWrap.find('#ema-26day').html(resultJson.ema_26day);
+			            	$emaForecastWrap.find('#ema-50day').html(resultJson.ema_50day);
+			            	$emaForecastWrap.find('#ema-100day').html(resultJson.ema_100day);
+			            	 
+			            } 
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
-			            $emastockForeCastEle.find(emaindexTabEle).find('.fb-loader').remove();    
+			            $emastockForeCastEle.find(emaIndexTabEle).find('.fb-loader').remove();    
 			      	}
 				});
 			}else{
@@ -179,61 +231,65 @@
 		events: function() {
 			var self    = this,
 				$emastockForeCastEle  = $('#ema-stock-forecast-calculator');
-				emastockTabEle  = '#emaForeCastStock';
-				emaindexTabEle  = '#emaForeCastIndices';
+				emaStockTabEle  = '#emaForeCastStock';
+				emaIndexTabEle  = '#emaForeCastIndices';
 			setTimeout(function(ele) {
 				var post_id=$emastockForeCastEle.data('id');
 				var calculateButton=$emastockForeCastEle.data('calculate-button');
 				// For Stock Calculator Load
-				var finCode=$emastockForeCastEle.find(emastockTabEle).data('fincode');
-				var filter=$emastockForeCastEle.find(emastockTabEle).data('filter');
-	        	self.getEMAStockCalculatorHtml($emastockForeCastEle,emastockTabEle,finCode,post_id,filter,calculateButton);
+				if($emastockForeCastEle.find(emaStockTabEle).length){
+					var finCode=$emastockForeCastEle.find(emaStockTabEle).data('fincode');
+					var filter=$emastockForeCastEle.find(emaStockTabEle).data('filter');
+		        	self.getEMAStockCalculatorHtml($emastockForeCastEle,emaStockTabEle,finCode,post_id,filter,calculateButton);
+				}
 				// For Index Calculator Load
-				var indexCode=$emastockForeCastEle.find(emaindexTabEle).data('index-code');
-				var filter=$emastockForeCastEle.find(emaindexTabEle).data('filter');
-	        	self.getEMAIndiceCalculatorHtml($emastockForeCastEle,emaindexTabEle,indexCode,post_id,filter,calculateButton);
+				if($emastockForeCastEle.find(emaIndexTabEle).length){
+					var indexCode=$emastockForeCastEle.find(emaIndexTabEle).data('index-code');
+					var filter=$emastockForeCastEle.find(emaIndexTabEle).data('filter');
+	        		self.getEMAIndiceCalculatorHtml($emastockForeCastEle,emaIndexTabEle,indexCode,post_id,filter,calculateButton);
+	        	}
 	        }, 1,this);
 			 
 			// sma-stock-refresh and Calculate
 			$(document).on('click','#ema-stock-calculator,#ema-stock-refresh',function(e){
 				e.preventDefault();
 				var LTP=$(this).data('ltp');
-				$emastockForeCastEle.find('#stock-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
+				$emastockForeCastEle.find('#ema-stock-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
 				var post_id=$emastockForeCastEle.data('id');
 				var calculateButton=$emastockForeCastEle.data('calculate-button');
-				var finCode=$emastockForeCastEle.find(emastockTabEle).data('fincode');
-				var filter=$emastockForeCastEle.find(emastockTabEle).data('filter');
-				self.getEMAStockCalculator($emastockForeCastEle,emastockTabEle,finCode,post_id,filter,calculateButton);
+				var finCode=$emastockForeCastEle.find(emaStockTabEle).data('fincode');
+				var filter=$emastockForeCastEle.find(emaStockTabEle).data('filter');
+				self.getEMAStockCalculator($emastockForeCastEle,emaStockTabEle,finCode,post_id,filter,calculateButton);
 			});
 			$(document).on('change','#ema-stocks',function(e){
 				$('#calculate-pivot-points').hide();
-				$emastockForeCastEle.find('#stock-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
+				$emastockForeCastEle.find('#ema-stock-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
 				var finCode=$(this).val();
 				var post_id=$emastockForeCastEle.data('id');
 				var calculateButton=$emastockForeCastEle.data('calculate-button');
-				$emastockForeCastEle.find(emastockTabEle).data('fincode',finCode);
-				var filter=$emastockForeCastEle.find(emastockTabEle).data('filter');
-				self.getEMAStockCalculatorHtml($emastockForeCastEle,emastockTabEle,finCode,post_id,filter,calculateButton);
+				$emastockForeCastEle.find(emaStockTabEle).data('fincode',finCode);
+				var filter=$emastockForeCastEle.find(emaStockTabEle).data('filter');
+				self.getEMAStockCalculatorHtml($emastockForeCastEle,emaStockTabEle,finCode,post_id,filter,calculateButton);
 			});
 
 			$(document).on('click','#ema-indices-calculator,#ema-indices-refresh',function(e){
 				e.preventDefault();
 				var LTP=$(this).data('ltp');
-				$emastockForeCastEle.find('#indices-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
+				$emastockForeCastEle.find('#ema-indices-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
 				var post_id=$emastockForeCastEle.data('id');
 				var calculateButton=$emastockForeCastEle.data('calculate-button');
-				var indexCode=$emastockForeCastEle.find(emaindexTabEle).data('index-code');
-				var filter=$emastockForeCastEle.find(emaindexTabEle).data('filter');
-				self.getEMAIndiceCalculator($emastockForeCastEle,emaindexTabEle,indexCode,post_id,filter,calculateButton);
+				var indexCode=$emastockForeCastEle.find(emaIndexTabEle).data('index-code');
+				var filter=$emastockForeCastEle.find(emaIndexTabEle).data('filter');
+				self.getEMAIndiceCalculator($emastockForeCastEle,emaIndexTabEle,indexCode,post_id,filter,calculateButton);
 			});
  			$(document).on('change','#ema-indices',function(e){
-				$emastockForeCastEle.find('#indices-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
+				$emastockForeCastEle.find('#ema-indices-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
 				var indexCode=$(this).val();
-				$emastockForeCastEle.find(emaindexTabEle).data('index-code',indexCode);
+				$emastockForeCastEle.find(emaIndexTabEle).data('index-code',indexCode);
 				var post_id=$emastockForeCastEle.data('id');
 				var calculateButton=$emastockForeCastEle.data('calculate-button');
-				var filter=$emastockForeCastEle.find(emaindexTabEle).data('filter');
-				self.getEMAIndiceCalculatorHtml($emastockForeCastEle,emaindexTabEle,indexCode,post_id,filter,calculateButton);
+				var filter=$emastockForeCastEle.find(emaIndexTabEle).data('filter');
+				self.getEMAIndiceCalculatorHtml($emastockForeCastEle,emaIndexTabEle,indexCode,post_id,filter,calculateButton);
 			});
 			return this;
 		},

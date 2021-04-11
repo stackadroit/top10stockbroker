@@ -54,6 +54,22 @@
 			      	success: function(response){
 			            $macdStockForeCastEle.find(macdStockTabEle).html(response);    
 			            $macdStockForeCastEle.find(macdStockTabEle).find('.fb-loader').remove();    
+			            var $macdForecastWwrap=$('#macd-forecast-wrap');
+			            if($(document).find('#macd-more-detail').length){
+			            	var resultJson =$macdStockForeCastEle.find(macdStockTabEle).find('#macd-stock-json-results').data('result-json');
+			            	$macdForecastWwrap.find('#macd-trade-value').html(resultJson.Trade);
+			            	$macdForecastWwrap.find('#macd-sentiment-value').html(resultJson.Sentiment);
+			            	if(parseFloat(resultJson.Signal_Line) > 0 && parseFloat(resultJson.MACD) > 0){
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('above');
+			            	}	else{
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('below');
+			            	}
+			            	if(parseFloat(resultJson.Signal_Line) > parseFloat(resultJson.MACD)){
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('higher');
+			            	}else{
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('lower');
+			            	}
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -91,7 +107,23 @@
 			      	},
 			      	success: function(response){
 			            $macdStockForeCastEle.find(macdStockTabEle).find('#macd-stock-calculator-results').html(response);    
-			            $macdStockForeCastEle.find(macdStockTabEle).find('.fb-loader').remove();    
+			            $macdStockForeCastEle.find(macdStockTabEle).find('.fb-loader').remove(); 
+			            var $macdForecastWwrap=$('#macd-forecast-wrap');
+			            if($(document).find('#macd-more-detail').length){
+			            	var resultJson =$macdStockForeCastEle.find(macdStockTabEle).find('#macd-stock-json-results').data('result-json');
+			            	$macdForecastWwrap.find('#macd-trade-value').html(resultJson.Trade);
+			            	$macdForecastWwrap.find('#macd-sentiment-value').html(resultJson.Sentiment);
+			            	if(parseFloat(resultJson.Signal_Line) > 0 && parseFloat(resultJson.MACD) > 0){
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('above');
+			            	}	else{
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('below');
+			            	}
+			            	if(parseFloat(resultJson.Signal_Line) > parseFloat(resultJson.MACD)){
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('higher');
+			            	}else{
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('lower');
+			            	}
+			            }  
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -114,7 +146,7 @@
 		         	},
 		         	beforeSend: function() {
 		              if(!$macdStockForeCastEle.find('.fb-loader').length){
-		              		$macdStockForeCastEle.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              		$macdStockForeCastEle.find(macdIndexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -129,6 +161,23 @@
 			      	success: function(response){
 			            $macdStockForeCastEle.find(macdIndexTabEle).html(response);    
 			            $macdStockForeCastEle.find(macdIndexTabEle).find('.fb-loader').remove();   
+			            var $macdForecastWwrap=$('#macd-forecast-wrap');
+			            if($(document).find('#macd-more-detail').length){
+			            	var resultJson =$macdStockForeCastEle.find(macdIndexTabEle).find('#macd-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$macdForecastWwrap.find('#macd-trade-value').html(resultJson.Trade);
+			            	$macdForecastWwrap.find('#macd-sentiment-value').html(resultJson.Sentiment);
+			            	if(parseFloat(resultJson.Signal_Line) > 0 && parseFloat(resultJson.MACD) > 0){
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('above');
+			            	}	else{
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('below');
+			            	}
+			            	if(parseFloat(resultJson.Signal_Line) > parseFloat(resultJson.MACD)){
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('higher');
+			            	}else{
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('lower');
+			            	}
+			            }
 			      	},
 			     	error: function(response){
 			            $macdStockForeCastEle.find(macdIndexTabEle).find('.fb-loader').remove();   
@@ -136,7 +185,7 @@
 			      	}
 				});
 			}else{
-				console.log('indexCode Not valid:'+finCode);
+				console.log('indexCode Not valid:'+indexCode);
 			}
 		},
 		getMACDIndiceCalculator:function($macdStockForeCastEle,macdIndexTabEle,indexCode,post_id,filter,calculateButton){
@@ -165,7 +214,24 @@
 			      	},
 			      	success: function(response){
 			            $macdStockForeCastEle.find(macdIndexTabEle).find('#macd-indices-calculator-results').html(response);    
-			            $macdStockForeCastEle.find(macdIndexTabEle).find('.fb-loader').remove();    
+			            $macdStockForeCastEle.find(macdIndexTabEle).find('.fb-loader').remove();
+			            var $macdForecastWwrap=$('#macd-forecast-wrap');
+			            if($(document).find('#macd-more-detail').length){
+			            	var resultJson =$macdStockForeCastEle.find(macdIndexTabEle).find('#macd-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$macdForecastWwrap.find('#macd-trade-value').html(resultJson.Trade);
+			            	$macdForecastWwrap.find('#macd-sentiment-value').html(resultJson.Sentiment);
+			            	if(parseFloat(resultJson.Signal_Line) > 0 && parseFloat(resultJson.MACD) > 0){
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('above');
+			            	}	else{
+			            		$macdForecastWwrap.find('#sl-macd-above-below').html('below');
+			            	}
+			            	if(parseFloat(resultJson.Signal_Line) > parseFloat(resultJson.MACD)){
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('higher');
+			            	}else{
+			            		$macdForecastWwrap.find('#sl-macd-compare').html('lower');
+			            	}
+			            }    
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -185,13 +251,17 @@
 				var post_id=$macdStockForeCastEle.data('id');
 				var calculateButton=$macdStockForeCastEle.data('calculate-button');
 				// For Stock Calculator Load
-				var finCode=$macdStockForeCastEle.find(macdStockTabEle).data('fincode');
-				var filter=$macdStockForeCastEle.find(macdStockTabEle).data('filter');
-	        	self.getMACDStockCalculatorHtml($macdStockForeCastEle,macdStockTabEle,finCode,post_id,filter,calculateButton);
+				if($macdStockForeCastEle.find(macdStockTabEle).length){
+					var finCode=$macdStockForeCastEle.find(macdStockTabEle).data('fincode');
+					var filter=$macdStockForeCastEle.find(macdStockTabEle).data('filter');
+		        	self.getMACDStockCalculatorHtml($macdStockForeCastEle,macdStockTabEle,finCode,post_id,filter,calculateButton);
+				}
 				// For Index Calculator Load
-				var indexCode=$macdStockForeCastEle.find(macdIndexTabEle).data('index-code');
-				var filter=$macdStockForeCastEle.find(macdIndexTabEle).data('filter');
-	        	self.getMACDIndiceCalculatorHtml($macdStockForeCastEle,macdIndexTabEle,indexCode,post_id,filter,calculateButton);
+				if($macdStockForeCastEle.find(macdIndexTabEle).length){
+					var indexCode=$macdStockForeCastEle.find(macdIndexTabEle).data('index-code');
+					var filter=$macdStockForeCastEle.find(macdIndexTabEle).data('filter');
+		        	self.getMACDIndiceCalculatorHtml($macdStockForeCastEle,macdIndexTabEle,indexCode,post_id,filter,calculateButton);
+				}
 	        }, 1,this);
 			 
 			// sma-stock-refresh and Calculate

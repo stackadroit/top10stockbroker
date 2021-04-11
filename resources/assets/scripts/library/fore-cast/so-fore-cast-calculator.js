@@ -53,7 +53,15 @@
 			      	},
 			      	success: function(response){
 			            $soStockForeCastEle.find(soStockTabEle).html(response);    
-			            $soStockForeCastEle.find(soStockTabEle).find('.fb-loader').remove();    
+			            $soStockForeCastEle.find(soStockTabEle).find('.fb-loader').remove();
+			            var $soForecastWrap=$('#so-forecast-wrap');
+			            if($(document).find('#so-more-detail').length){
+			            	var resultJson =$soForecastWrap.find(soStockTabEle).find('#so-stock-json-results').data('result-json');
+			            	$soForecastWrap.find('#so-trade-value').html(resultJson.Trade);
+			            	$soForecastWrap.find('#so-sentiment-value').html(resultJson.Sentiment);
+			            	$soForecastWrap.find('#so-pre-k').html(resultJson.pre_K);
+			            	$soForecastWrap.find('#so-pre-d').html(resultJson.pre_D);
+			            }   
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -91,7 +99,15 @@
 			      	},
 			      	success: function(response){
 			            $soStockForeCastEle.find(soStockTabEle).find('#so-stock-calculator-results').html(response);    
-			            $soStockForeCastEle.find(soStockTabEle).find('.fb-loader').remove();    
+			            $soStockForeCastEle.find(soStockTabEle).find('.fb-loader').remove(); 
+			            var $soForecastWrap=$('#so-forecast-wrap');
+			            if($(document).find('#so-more-detail').length){
+			            	var resultJson =$soForecastWrap.find(soStockTabEle).find('#so-stock-json-results').data('result-json');
+			            	$soForecastWrap.find('#so-trade-value').html(resultJson.Trade);
+			            	$soForecastWrap.find('#so-sentiment-value').html(resultJson.Sentiment);
+			            	$soForecastWrap.find('#so-pre-k').html(resultJson.pre_K);
+			            	$soForecastWrap.find('#so-pre-d').html(resultJson.pre_D);
+			            }   
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -114,7 +130,7 @@
 		         	},
 		         	beforeSend: function() {
 		              if(!$soStockForeCastEle.find('.fb-loader').length){
-		              		$soStockForeCastEle.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              		$soStockForeCastEle.find(soIndexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -129,6 +145,14 @@
 			      	success: function(response){
 			            $soStockForeCastEle.find(soIndexTabEle).html(response);    
 			            $soStockForeCastEle.find(soIndexTabEle).find('.fb-loader').remove();   
+			            var $soForecastWrap=$('#so-forecast-wrap');
+			            if($(document).find('#so-more-detail').length){
+			            	var resultJson =$soForecastWrap.find(soIndexTabEle).find('#so-indices-json-results').data('result-json');
+			            	$soForecastWrap.find('#so-trade-value').html(resultJson.Trade);
+			            	$soForecastWrap.find('#so-sentiment-value').html(resultJson.Sentiment);
+			            	$soForecastWrap.find('#so-pre-k').html(resultJson.pre_K);
+			            	$soForecastWrap.find('#so-pre-d').html(resultJson.pre_D);
+			            }
 			      	},
 			     	error: function(response){
 			            $soStockForeCastEle.find(soIndexTabEle).find('.fb-loader').remove();   
@@ -166,6 +190,14 @@
 			      	success: function(response){
 			            $soStockForeCastEle.find(soIndexTabEle).find('#so-indices-calculator-results').html(response);    
 			            $soStockForeCastEle.find(soIndexTabEle).find('.fb-loader').remove();    
+			            var $soForecastWrap=$('#so-forecast-wrap');
+			            if($(document).find('#so-more-detail').length){
+			            	var resultJson =$soForecastWrap.find(soIndexTabEle).find('#so-indices-json-results').data('result-json');
+			            	$soForecastWrap.find('#so-trade-value').html(resultJson.Trade);
+			            	$soForecastWrap.find('#so-sentiment-value').html(resultJson.Sentiment);
+			            	$soForecastWrap.find('#so-pre-k').html(resultJson.pre_K);
+			            	$soForecastWrap.find('#so-pre-d').html(resultJson.pre_D);
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
@@ -185,13 +217,17 @@
 				var post_id=$soStockForeCastEle.data('id');
 				var calculateButton=$soStockForeCastEle.data('calculate-button');
 				// For Stock Calculator Load
-				var finCode=$soStockForeCastEle.find(soStockTabEle).data('fincode');
-				var filter=$soStockForeCastEle.find(soStockTabEle).data('filter');
-	        	self.getSOStockCalculatorHtml($soStockForeCastEle,soStockTabEle,finCode,post_id,filter,calculateButton);
+				if($soStockForeCastEle.find(soStockTabEle).length){
+					var finCode=$soStockForeCastEle.find(soStockTabEle).data('fincode');
+					var filter=$soStockForeCastEle.find(soStockTabEle).data('filter');
+		        	self.getSOStockCalculatorHtml($soStockForeCastEle,soStockTabEle,finCode,post_id,filter,calculateButton);
+				}
 				// For Index Calculator Load
-				var indexCode=$soStockForeCastEle.find(soIndexTabEle).data('index-code');
-				var filter=$soStockForeCastEle.find(soIndexTabEle).data('filter');
-	        	self.getSOIndiceCalculatorHtml($soStockForeCastEle,soIndexTabEle,indexCode,post_id,filter,calculateButton);
+				if($soStockForeCastEle.find(soIndexTabEle).length){
+					var indexCode=$soStockForeCastEle.find(soIndexTabEle).data('index-code');
+					var filter=$soStockForeCastEle.find(soIndexTabEle).data('filter');
+		        	self.getSOIndiceCalculatorHtml($soStockForeCastEle,soIndexTabEle,indexCode,post_id,filter,calculateButton);
+				}
 	        }, 1,this);
 			 
 			// rsi-stock-refresh and Calculate

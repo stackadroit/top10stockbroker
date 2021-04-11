@@ -27,7 +27,7 @@
 				return this;
 		},
 		 
-		getStockCalculatorHtml:function($stockForeCastEle,stockTabEle,finCode,post_id,filter,calculateButton){
+		getStockCalculatorHtml:function($smaStockForeCastEle,smaStockTabEle,finCode,post_id,filter,calculateButton){
 			if(finCode){
 				$.ajax({
 			     	cache: false,
@@ -38,8 +38,8 @@
 		              	}
 		         	},
 		         	beforeSend: function() {
-		              if(!$stockForeCastEle.find('.fb-loader').length){
-		              	$stockForeCastEle.find(stockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              if(!$smaStockForeCastEle.find('.fb-loader').length){
+		              	$smaStockForeCastEle.find(smaStockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -52,12 +52,24 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $stockForeCastEle.find(stockTabEle).html(response);    
-			            $stockForeCastEle.find(stockTabEle).find('.fb-loader').remove();    
+			            $smaStockForeCastEle.find(smaStockTabEle).html(response);    
+			            $smaStockForeCastEle.find(smaStockTabEle).find('.fb-loader').remove();    
+						var $smaForecastWrap=$('#sma-forecast-wrap');
+			            if($(document).find('#sma-more-detail').length){
+			            	var resultJson =$smaForecastWrap.find(smaStockTabEle).find('#sma-stock-json-results').data('result-json');
+			            	$smaForecastWrap.find('#sma-trade-value').html(resultJson.Trade);
+			            	$smaForecastWrap.find('#sma-sentiment-value').html(resultJson.Sentiment);
+			            	$smaForecastWrap.find('#sma-7day').html(resultJson.sma_7day);
+			            	$smaForecastWrap.find('#sma-15day').html(resultJson.sma_15day);
+			            	$smaForecastWrap.find('#sma-30day').html(resultJson.sma_30day);
+			            	$smaForecastWrap.find('#sma-50day').html(resultJson.sma_50day);
+			            	$smaForecastWrap.find('#sma-100day').html(resultJson.sma_100day);
+			            	$smaForecastWrap.find('#sma-200day').html(resultJson.sma_200day);
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
-			            $stockForeCastEle.find(stockTabEle).find('.fb-loader').remove();    
+			            $smaStockForeCastEle.find(smaStockTabEle).find('.fb-loader').remove();    
 			      	}
 				});
 			}else{
@@ -65,7 +77,7 @@
 			}
 		},
 
-		getStockCalculator:function($stockForeCastEle,stockTabEle,finCode,post_id,filter,calculateButton){
+		getStockCalculator:function($smaStockForeCastEle,smaStockTabEle,finCode,post_id,filter,calculateButton){
 			if(finCode){
 				$.ajax({
 			     	cache: false,
@@ -76,8 +88,8 @@
 		              	}
 		         	},
 		         	beforeSend: function() {
-		              if(!$stockForeCastEle.find('.fb-loader').length){
-		              	$stockForeCastEle.find(stockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              if(!$smaStockForeCastEle.find('.fb-loader').length){
+		              	$smaStockForeCastEle.find(smaStockTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -90,19 +102,31 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $stockForeCastEle.find(stockTabEle).find('#stock-calculator-results').html(response);    
-			            $stockForeCastEle.find(stockTabEle).find('.fb-loader').remove();    
+			            $smaStockForeCastEle.find(smaStockTabEle).find('#stock-calculator-results').html(response);    
+			            $smaStockForeCastEle.find(smaStockTabEle).find('.fb-loader').remove();    
+			            var $smaForecastWrap=$('#sma-forecast-wrap');
+			            if($(document).find('#sma-more-detail').length){
+			            	var resultJson =$smaForecastWrap.find(smaStockTabEle).find('#sma-stock-json-results').data('result-json');
+			            	$smaForecastWrap.find('#sma-trade-value').html(resultJson.Trade);
+			            	$smaForecastWrap.find('#sma-sentiment-value').html(resultJson.Sentiment);
+			            	$smaForecastWrap.find('#sma-7day').html(resultJson.sma_7day);
+			            	$smaForecastWrap.find('#sma-15day').html(resultJson.sma_15day);
+			            	$smaForecastWrap.find('#sma-30day').html(resultJson.sma_30day);
+			            	$smaForecastWrap.find('#sma-50day').html(resultJson.sma_50day);
+			            	$smaForecastWrap.find('#sma-100day').html(resultJson.sma_100day);
+			            	$smaForecastWrap.find('#sma-200day').html(resultJson.sma_200day);
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
-			            $stockForeCastEle.find(stockTabEle).find('.fb-loader').remove();    
+			            $smaStockForeCastEle.find(smaStockTabEle).find('.fb-loader').remove();    
 			      	}
 				});
 			}else{
 				console.log('finCode Not valid:'+finCode);
 			}
 		},
-		getIndiceCalculatorHtml:function($stockForeCastEle,indexTabEle,indexCode,post_id,filter,calculateButton){
+		getIndiceCalculatorHtml:function($smaStockForeCastEle,smaIndexTabEle,indexCode,post_id,filter,calculateButton){
 			if(indexCode){
 				$.ajax({
 			     	cache: false,
@@ -113,8 +137,8 @@
 		              	}
 		         	},
 		         	beforeSend: function() {
-		              if(!$stockForeCastEle.find('.fb-loader').length){
-		              		$stockForeCastEle.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              if(!$smaStockForeCastEle.find('.fb-loader').length){
+		              		$smaStockForeCastEle.find(smaIndexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -127,11 +151,25 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $stockForeCastEle.find(indexTabEle).html(response);    
-			            $stockForeCastEle.find(indexTabEle).find('.fb-loader').remove();   
+			            $smaStockForeCastEle.find(smaIndexTabEle).html(response);    
+			            $smaStockForeCastEle.find(smaIndexTabEle).find('.fb-loader').remove();   
+			            var $smaForecastWrap=$('#sma-forecast-wrap');
+			            if($(document).find('#sma-more-detail').length){
+			            	var resultJson =$smaForecastWrap.find(smaIndexTabEle).find('#sma-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$smaForecastWrap.find('#sma-trade-value').html(resultJson.Trade);
+			            	$smaForecastWrap.find('#sma-sentiment-value').html(resultJson.Sentiment);
+			            	$smaForecastWrap.find('#sma-7day').html(resultJson.sma_7day);
+			            	$smaForecastWrap.find('#sma-15day').html(resultJson.sma_15day);
+			            	$smaForecastWrap.find('#sma-30day').html(resultJson.sma_30day);
+			            	$smaForecastWrap.find('#sma-50day').html(resultJson.sma_50day);
+			            	$smaForecastWrap.find('#sma-100day').html(resultJson.sma_100day);
+			            	$smaForecastWrap.find('#sma-200day').html(resultJson.sma_200day);
+			            	 
+			            }
 			      	},
 			     	error: function(response){
-			            $stockForeCastEle.find(indexTabEle).find('.fb-loader').remove();   
+			            $smaStockForeCastEle.find(smaIndexTabEle).find('.fb-loader').remove();   
 			        	console.log('Error in loading...'); 
 			      	}
 				});
@@ -139,7 +177,7 @@
 				console.log('indexCode Not valid:'+indexCode);
 			}
 		},
-		getIndiceCalculator:function($stockForeCastEle,indexTabEle,indexCode,post_id,filter,calculateButton){
+		getIndiceCalculator:function($smaStockForeCastEle,smaIndexTabEle,indexCode,post_id,filter,calculateButton){
 			if(indexCode){
 				$.ajax({
 			     	cache: false,
@@ -150,8 +188,8 @@
 		              	}
 		         	},
 		         	beforeSend: function() {
-		              if(!$stockForeCastEle.find('.fb-loader').length){
-		              	$stockForeCastEle.find(indexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		              if(!$smaStockForeCastEle.find('.fb-loader').length){
+		              	$smaStockForeCastEle.find(smaIndexTabEle).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
 		              }
 		            },
 			      	type:"post",
@@ -164,12 +202,26 @@
 			         	'calculateButton':calculateButton,
 			      	},
 			      	success: function(response){
-			            $stockForeCastEle.find(indexTabEle).find('#indices-calculator-results').html(response);    
-			            $stockForeCastEle.find(indexTabEle).find('.fb-loader').remove();    
+			            $smaStockForeCastEle.find(smaIndexTabEle).find('#indices-calculator-results').html(response);    
+			            $smaStockForeCastEle.find(smaIndexTabEle).find('.fb-loader').remove();    
+			            var $smaForecastWrap=$('#sma-forecast-wrap');
+			            if($(document).find('#sma-more-detail').length){
+			            	var resultJson =$smaForecastWrap.find(smaIndexTabEle).find('#sma-indices-json-results').data('result-json');
+			            	// console.log(resultJson)
+			            	$smaForecastWrap.find('#sma-trade-value').html(resultJson.Trade);
+			            	$smaForecastWrap.find('#sma-sentiment-value').html(resultJson.Sentiment);
+			            	$smaForecastWrap.find('#sma-7day').html(resultJson.sma_7day);
+			            	$smaForecastWrap.find('#sma-15day').html(resultJson.sma_15day);
+			            	$smaForecastWrap.find('#sma-30day').html(resultJson.sma_30day);
+			            	$smaForecastWrap.find('#sma-50day').html(resultJson.sma_50day);
+			            	$smaForecastWrap.find('#sma-100day').html(resultJson.sma_100day);
+			            	$smaForecastWrap.find('#sma-200day').html(resultJson.sma_200day);
+			            	 
+			            }
 			      	},
 			     	error: function(response){
 			        	console.log('Error in loading...'); 
-			            $stockForeCastEle.find(indexTabEle).find('.fb-loader').remove();    
+			            $smaStockForeCastEle.find(smaIndexTabEle).find('.fb-loader').remove();    
 			      	}
 				});
 			}else{
@@ -178,62 +230,66 @@
 		},
 		events: function() {
 			var self    = this,
-				$stockForeCastEle  = $('#sma-stock-forecast-calculator');
-				stockTabEle  = '#smaForeCastStock';
-				indexTabEle  = '#smaForeCastIndices';
+				$smaStockForeCastEle  = $('#sma-stock-forecast-calculator');
+				smaStockTabEle  = '#smaForeCastStock';
+				smaIndexTabEle  = '#smaForeCastIndices';
 			setTimeout(function(ele) {
-				var post_id=$stockForeCastEle.data('id');
-				var calculateButton=$stockForeCastEle.data('calculate-button');
+				var post_id=$smaStockForeCastEle.data('id');
+				var calculateButton=$smaStockForeCastEle.data('calculate-button');
 				// For Stock Calculator Load
-				var finCode=$stockForeCastEle.find(stockTabEle).data('fincode');
-				var filter=$stockForeCastEle.find(stockTabEle).data('filter');
-	        	self.getStockCalculatorHtml($stockForeCastEle,stockTabEle,finCode,post_id,filter,calculateButton);
+				if($smaStockForeCastEle.find(smaStockTabEle).length){
+					var finCode=$smaStockForeCastEle.find(smaStockTabEle).data('fincode');
+					var filter=$smaStockForeCastEle.find(smaStockTabEle).data('filter');
+		        	self.getStockCalculatorHtml($smaStockForeCastEle,smaStockTabEle,finCode,post_id,filter,calculateButton);
+				}
 				// For Index Calculator Load
-				var indexCode=$stockForeCastEle.find(indexTabEle).data('index-code');
-				var filter=$stockForeCastEle.find(indexTabEle).data('filter');
-	        	self.getIndiceCalculatorHtml($stockForeCastEle,indexTabEle,indexCode,post_id,filter,calculateButton);
+				if($smaStockForeCastEle.find(smaIndexTabEle).length){
+					var indexCode=$smaStockForeCastEle.find(smaIndexTabEle).data('index-code');
+					var filter=$smaStockForeCastEle.find(smaIndexTabEle).data('filter');
+		        	self.getIndiceCalculatorHtml($smaStockForeCastEle,smaIndexTabEle,indexCode,post_id,filter,calculateButton);
+		        }
 	        }, 1,this);
 			 
 			// sma-stock-refresh and Calculate
 			$(document).on('click','#sma-stock-calculator,#sma-stock-refresh',function(e){
 				e.preventDefault();
 				var LTP=$(this).data('ltp');
-				$stockForeCastEle.find('#stock-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
-				var post_id=$stockForeCastEle.data('id');
-				var calculateButton=$stockForeCastEle.data('calculate-button');
-				var finCode=$stockForeCastEle.find(stockTabEle).data('fincode');
-				var filter=$stockForeCastEle.find(stockTabEle).data('filter');
-				self.getStockCalculator($stockForeCastEle,stockTabEle,finCode,post_id,filter,calculateButton);
+				$smaStockForeCastEle.find('#sma-stock-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
+				var post_id=$smaStockForeCastEle.data('id');
+				var calculateButton=$smaStockForeCastEle.data('calculate-button');
+				var finCode=$smaStockForeCastEle.find(smaStockTabEle).data('fincode');
+				var filter=$smaStockForeCastEle.find(smaStockTabEle).data('filter');
+				self.getStockCalculator($smaStockForeCastEle,smaStockTabEle,finCode,post_id,filter,calculateButton);
 			});
 			$(document).on('change','#sma-stocks',function(e){
 				$('#calculate-pivot-points').hide();
-				$stockForeCastEle.find('#stock-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
+				$smaStockForeCastEle.find('#sma-stock-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
 				var finCode=$(this).val();
-				var post_id=$stockForeCastEle.data('id');
-				var calculateButton=$stockForeCastEle.data('calculate-button');
-				$stockForeCastEle.find(stockTabEle).data('fincode',finCode);
-				var filter=$stockForeCastEle.find(stockTabEle).data('filter');
-				self.getStockCalculatorHtml($stockForeCastEle,stockTabEle,finCode,post_id,filter,calculateButton);
+				var post_id=$smaStockForeCastEle.data('id');
+				var calculateButton=$smaStockForeCastEle.data('calculate-button');
+				$smaStockForeCastEle.find(smaStockTabEle).data('fincode',finCode);
+				var filter=$smaStockForeCastEle.find(smaStockTabEle).data('filter');
+				self.getStockCalculatorHtml($smaStockForeCastEle,smaStockTabEle,finCode,post_id,filter,calculateButton);
 			});
 
 			$(document).on('click','#sma-indices-calculator,#sma-indices-refresh',function(e){
 				e.preventDefault();
 				var LTP=$(this).data('ltp');
-				$stockForeCastEle.find('#indices-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
-				var post_id=$stockForeCastEle.data('id');
-				var calculateButton=$stockForeCastEle.data('calculate-button');
-				var indexCode=$stockForeCastEle.find(indexTabEle).data('index-code');
-				var filter=$stockForeCastEle.find(indexTabEle).data('filter');
-				self.getIndiceCalculator($stockForeCastEle,indexTabEle,indexCode,post_id,filter,calculateButton);
+				$smaStockForeCastEle.find('#sma-indices-calculator-results').prepend('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
+				var post_id=$smaStockForeCastEle.data('id');
+				var calculateButton=$smaStockForeCastEle.data('calculate-button');
+				var indexCode=$smaStockForeCastEle.find(smaIndexTabEle).data('index-code');
+				var filter=$smaStockForeCastEle.find(smaIndexTabEle).data('filter');
+				self.getIndiceCalculator($smaStockForeCastEle,smaIndexTabEle,indexCode,post_id,filter,calculateButton);
 			});
  			$(document).on('change','#sma-indices',function(e){
-				$stockForeCastEle.find('#indices-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
+				$smaStockForeCastEle.find('#sma-indices-calculator-results').html('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>');
 				var indexCode=$(this).val();
-				$stockForeCastEle.find(indexTabEle).data('index-code',indexCode);
-				var post_id=$stockForeCastEle.data('id');
-				var calculateButton=$stockForeCastEle.data('calculate-button');
-				var filter=$stockForeCastEle.find(indexTabEle).data('filter');
-				self.getIndiceCalculatorHtml($stockForeCastEle,indexTabEle,indexCode,post_id,filter,calculateButton);
+				$smaStockForeCastEle.find(smaIndexTabEle).data('index-code',indexCode);
+				var post_id=$smaStockForeCastEle.data('id');
+				var calculateButton=$smaStockForeCastEle.data('calculate-button');
+				var filter=$smaStockForeCastEle.find(smaIndexTabEle).data('filter');
+				self.getIndiceCalculatorHtml($smaStockForeCastEle,smaIndexTabEle,indexCode,post_id,filter,calculateButton);
 			});
 			return this;
 		},

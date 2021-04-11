@@ -8,7 +8,7 @@ import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
 import WidgetMarketTop from '../components/widgetmarketTop';
-import {ForeCastPivotPoint}  from '../library/fore-cast/fore-cast-pivot-point';
+import {PPForeCastCalculator}  from '../library/fore-cast/pp-fore-cast-calculator';
 import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
 import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calculator';
 import {EMAForeCastCalculator}  from '../library/fore-cast/ema-fore-cast-calculator';
@@ -16,6 +16,7 @@ import {MACDForeCastCalculator}  from '../library/fore-cast/macd-fore-cast-calcu
 import {RSIForeCastCalculator}  from '../library/fore-cast/rsi-fore-cast-calculator';
 import {SOForeCastCalculator}  from '../library/fore-cast/so-fore-cast-calculator';
 import {GIVForeCastCalculator}  from '../library/fore-cast/giv-fore-cast-calculator';
+import {CLForeCastCalculator}  from '../library/fore-cast/cl-fore-cast-calculator';
 
 export default {
   init() {
@@ -47,9 +48,9 @@ export default {
 		if (typeof Nav !== 'undefined') {
 			Nav.initialize();
 		}
-		if($('#pivot-point-calculator').length){
-			if (typeof ForeCastPivotPoint !== 'undefined') {
-		        ForeCastPivotPoint.initialize();
+		if($('#pp-stock-forecast-calculator').length){
+			if (typeof PPForeCastCalculator !== 'undefined') {
+		        PPForeCastCalculator.initialize();
 		    }
 		}
 		if($('#main-pp-calculator').length){
@@ -85,6 +86,11 @@ export default {
 		if($('#giv-stock-forecast-calculator').length){
 			if (typeof GIVForeCastCalculator !== 'undefined') {
 		        GIVForeCastCalculator.initialize();
+		    }
+		}
+		if($('#cl-stock-forecast-calculator').length){
+			if (typeof CLForeCastCalculator !== 'undefined') {
+		        CLForeCastCalculator.initialize();
 		    }
 		}
 
