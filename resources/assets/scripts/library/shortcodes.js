@@ -426,7 +426,7 @@
 
             $rootnode.on('click','.custom-hellobar a',  function(e){
               e.preventDefault();
-              $('.modal').show();
+              $('#popup-main').show();
             });
 
 

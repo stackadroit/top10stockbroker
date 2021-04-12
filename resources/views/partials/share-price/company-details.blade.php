@@ -133,7 +133,7 @@
                             <p class="para2">Is the price-earnings ratio for valuing a company that measures its current share price relative to its earnings per share.</p>
                         </div>
                     <div class="name">P/E RATIO</div>
-                    <div class="value" id="peRatio">
+                    <div class="value" id="peRATIO">
                     </div>
                 </div>
                 <!-- item -->

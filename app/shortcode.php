@@ -1269,7 +1269,8 @@ add_shortcode('GoldRateComparison', function ($atts){
                 'id'      => '',
                 'title'   =>'Gold Rate Comparison',
                 'city' => '',
-                'caret' => ''
+                'caret' => '',
+                'type' => ''
                 ), $atts);
 
     // Set the template we're going to use for the Shortcode
@@ -1598,8 +1599,8 @@ add_shortcode('socialPostShare', function ($atts){
     return \App\template($template, $data);
 
 });
-
-add_shortcode('EasyTabWidget_api', function ($atts){ 
+ 
+add_shortcode('EasyTabWidget', function ($atts){ 
     global $wpdb;
     $post_id =$atts['id'];
     // Extract the shortcode attributes
@@ -1610,14 +1611,13 @@ add_shortcode('EasyTabWidget_api', function ($atts){
     $tabs_type = get_post_meta($post_id,'pa1_wp_easy_tabs_type',true);
      
     if($tabs_type == 'VT'){
-        $shortcodeWrap= '<div id="v_tabs_wrapper_'.$post_id.'" class="v_tabs_wrapper_'.$post_id.' v_tabs_wrapper" data-id="'.$post_id.'" ></div>';
-     // print_r($data);
+         
     }else{
-        $shortcodeWrap ='<div id="easy_tabs_container_wrap_'.$post_id.'" class="easy_tabs_container_wrap" data-id="'.$post_id.'"></div>';
+        $shortcodeWrap ='<div id="content"><div id="easy_tabs_container_wrap_'.$post_id.'" class="easy_tabs_container_wrap" data-id="'.$post_id.'"></div></div>';
     }
     return $shortcodeWrap;
 });
-add_shortcode('EasyTabWidget', function ($atts){ 
+add_shortcode('EasyTabWidgetVT', function ($atts){ 
     global $wpdb;
     $post_id =$atts['id'];
     // Extract the shortcode attributes
@@ -1636,10 +1636,6 @@ add_shortcode('EasyTabWidget', function ($atts){
         $data['totalCount'] =@count($data['tabs_data']);
         $data['tabs_type'] = get_post_meta($post_id,'pa1_wp_easy_tabs_type',true);
     }
-    
-    // print_r(count(trim($data['tabs_data'])));
-    // print_r($data);
-    // exit;
     $totalTopic =0;
     if(@count($data['tabs_data'])){
         foreach ($data['tabs_data'] as $idx => $tabs) {
@@ -1671,9 +1667,7 @@ add_shortcode('EasyTabWidget', function ($atts){
              }
         }
     }
-             // echo '<pre>';
-             // print_r($data);
-             // exit; 
+     
     $totalTopic =0;
     if($totalCount){ 
         foreach($tabs_data as $tabs_single_data){
@@ -1688,7 +1682,7 @@ add_shortcode('EasyTabWidget', function ($atts){
     }else{
         $template = 'shortcodes.easy_tab_widget';
     }
-        return \App\template($template, $data);
+    return \App\template($template, $data);
 });
 add_shortcode('ShareMarketEducation', function ($atts){ 
 
@@ -1812,5 +1806,216 @@ add_shortcode('SUBBROKERSLINKS', function ($atts){
      
     // Echo the shortcode blade template
     $template = 'shortcodes.sub-brokers-links';
+    return \App\template($template, $data);
+});
+
+
+
+
+/**
+*   Shortcode form ForeCost Calculators.
+[PPStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('PPStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.pivot-points-calculator';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form SMA ForeCost Calculators.
+[SMAStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('SMAStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.sma-stock-forecast';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form EMA ForeCost Calculators.
+[EMAStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('EMAStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.ema-stock-forecast';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form MACD ForeCost Calculators.
+[MACDStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('MACDStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.macd-stock-forecast';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form RSI ForeCost Calculators.
+[RSIStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('RSIStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.rsi-stock-forecast';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form RSI ForeCost Calculators.
+[SOStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('SOStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.so-stock-forecast';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form Graham Intrinsic Value ForeCost Calculators.
+[SOStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('GIVStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    $template = 'shortcodes.fore-cast.giv-stock-forecast';
+    return \App\template($template, $data);
+});
+
+
+/**
+*   Shortcode form Camarilla Levels ForeCost Calculators.
+[CLStockForecast finCode="217389" stock_filter="1" indexCode="123" index_filter="1" calculate_button="0"]
+*/  
+add_shortcode('CLStockForecast', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1',
+        'type' => '',
+        'fin_code' => '217389',
+        'stock_filter' => '1',
+        'index_code' => '123',
+        'index_filter' => '0',
+        'calculate_button' => '0',
+    ), $atts);
+    // print_r($data);
+    $template = 'shortcodes.fore-cast.cl-stock-forecast';
+    return \App\template($template, $data);
+});
+
+/**
+*   Shortcode form Main Pivot Points Calculator.
+Need To work on this
+[MainPivotPointsCalculator]
+*/
+add_shortcode('MainPivotPointsCalculator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+         
+    ), $atts);
+    $posts_array = get_posts(
+        array(
+            'posts_per_page' =>2,
+            'post_type' => 'stock-prediction',
+            'order' => 'ASC',
+            'orderby' => 'title',
+            // 'tax_query' => array(
+            //     array(
+            //         'taxonomy' => 'sub-broker-zones',
+            //         'field' => 'slug',
+            //         'terms' => $data['zone'],
+            //     )
+            // )
+        )
+    ); 
+    $stockData =[];
+    foreach ($posts_array as $key => $post) {
+        $stock_fin_index_code =get_post_meta($post->ID,'stock_fin_index_code',true);
+        $yHigh =get_post_meta($post->ID,'y_high',true);
+        $yLow =get_post_meta($post->ID,'y_low',true);
+        $yClose =get_post_meta($post->ID,'y_close',true);
+        $ppValue =get_post_meta($post->ID,'y_pivot_point',true);
+        $stockData[]=array(
+            'stock_name'=>get_post_meta($post->ID,'stock_name',true),
+            'stock_link'=>get_the_permalink($post->ID),
+            'pivot_point'=>$ppValue,
+       );
+    }
+    // echo '<pre>';
+    // print_r($stockData);
+    $data['stocks']= $stockData;
+    $template = 'shortcodes.fore-cast.main-pivot-points-calculator';
     return \App\template($template, $data);
 });

@@ -11,8 +11,8 @@ use Roots\Sage\Template\BladeProvider;
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('top10stockbroker/main.css', asset_path('styles/main.css'), '2.5.5', true);
-    wp_enqueue_script('top10stockbroker/main.js', asset_path('scripts/main.js'), ['jquery'], '2.5.5', true);
+    wp_enqueue_style('top10stockbroker/main.css', asset_path('styles/main.css'), '2.5.9', true);
+    wp_enqueue_script('top10stockbroker/main.js', asset_path('scripts/main.js'), ['jquery'], '2.5.9', true);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -27,6 +27,7 @@ add_action('wp_enqueue_scripts', function () {
     if ( WP_DEBUG ) {
         $localize_script_vars['apiServerUrl'] = 'http://127.0.0.1:8000';
     }else{
+        // $localize_script_vars['apiServerUrl'] = 'https://api.top10stockbroker.com';
         $localize_script_vars['apiServerUrl'] = 'https://api.top10stockbroker.com';
     }
 
@@ -333,6 +334,36 @@ add_filter('top10stockbroker_cpt', function ($array) {
                             'menu_icon' => 'dashicons-tagcloud',
                            
                         )
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Stock Prediction', 'top10stockbroker' ),
+                            __( 'Stock Predictions', 'top10stockbroker' ),
+                            'stock-prediction'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+
+            );
+    $array[] = array( 
+                'cpt' => array( 
+                            __( 'Index Prediction', 'top10stockbroker' ),
+                            __( 'Index Predictions', 'top10stockbroker' ),
+                            'index-prediction'
+                        ),
+                'arg_overrides' => array( 
+                            'has_archive' => false,
+                            'menu_position' => 5,
+                           'supports' => array('title','thumbnail', 'editor' ,'page-attributes'),
+                            'menu_icon' => 'dashicons-tagcloud',
+                           
+                        )
+                
             );
     
     return $array;
