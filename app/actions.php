@@ -53,8 +53,8 @@ function icon_slider_data_ajax_request() {
         // }
 
         $loopid = 0;
-        if( have_rows('quiker_data', $id ) ):
-            while( have_rows('quiker_data',$id) ): the_row(); 
+        if( @have_rows('quiker_data', $id ) ):
+            while( @have_rows('quiker_data',$id) ): the_row(); 
 
                 $title = get_sub_field('title');
                 $image_upload = get_sub_field('icon');

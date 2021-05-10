@@ -33,14 +33,14 @@ function get_broker_profit_loss_calculator() {
  //      	die( __( 'Security check', 'top10stockbroker' ) ); 
  //   	}		
 	$data=array();
-		$post_id =  @$_REQUEST['post_id'];
-		$idx =  @$_REQUEST['idx'];
-		$buy_price =  @$_REQUEST['buy_price'];
-		$sell_price =  @$_REQUEST['sell_price'];
-		$number_lot =  @$_REQUEST['number_lot'];
-		$lot_size =  @$_REQUEST['lot_size'];
-		$number_share =  @$_REQUEST['number_share'];
-		$stamp_duty =  @$_REQUEST['stamp_duty'];
+		$post_id = (int) @$_REQUEST['post_id'];
+		$idx = (int) @$_REQUEST['idx'];
+		$buy_price = (float) @$_REQUEST['buy_price'];
+		$sell_price = (float) @$_REQUEST['sell_price'];
+		$number_lot = (float) @$_REQUEST['number_lot'];
+		$lot_size = (float) @$_REQUEST['lot_size'];
+		$number_share = (float)  @$_REQUEST['number_share'];
+		$stamp_duty = (float) @$_REQUEST['stamp_duty'];
 		$stt=get_option('stt');
         $gst=get_option('gst');
         $sebi=get_option('sebi');
