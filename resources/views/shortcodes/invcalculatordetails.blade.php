@@ -3,11 +3,11 @@
 <form action="">
   <div class="form-row">
     <div class="form-group col-md-6 my-1">
-        <label>Investment Amount</label>
+        <label for="price">Investment Amount</label>
         <input type="text" name="price" id="price" value="500000" class="form-control input-hi4">
     </div>
     <div class="form-group col-md-4 my-1">
-      <label>Select Year</label>
+      <label for="invyear">Select Year</label>
       <select id="invyear">
         <option value="3M">3 Months</option>
         <option value="6M">6 Months</option>
@@ -19,7 +19,7 @@
       </select>
     </div>
     <div class="form-group col-md-2 my-1">
-        <label>Calculate</label>
+        <label for="update">Calculate</label>
         <button id="update">Calculate</button>
     </div>
   </div>

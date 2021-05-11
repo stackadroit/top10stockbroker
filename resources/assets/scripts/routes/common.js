@@ -1,4 +1,4 @@
-import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,EasyTab,ShareMarketEducation,LoadSideBar}  from '../library/global';
+import {ContactFormValidation,PluginScrollToTop, Header, Nav, PluginStickyWidget, ModalPopup, SuperTreadmill,LoadEasyTab,EasyTab,ShareMarketEducation,LoadSideBar}  from '../library/global';
 // import {contactForm} from '../plugins/contactform';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
@@ -8,6 +8,15 @@ import MdfSearchWrap from '../components/mbfsearchwrap';
 import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
 import WidgetMarketTop from '../components/widgetmarketTop';
+import {PPForeCastCalculator}  from '../library/fore-cast/pp-fore-cast-calculator';
+import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
+import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calculator';
+import {EMAForeCastCalculator}  from '../library/fore-cast/ema-fore-cast-calculator';
+import {MACDForeCastCalculator}  from '../library/fore-cast/macd-fore-cast-calculator';
+import {RSIForeCastCalculator}  from '../library/fore-cast/rsi-fore-cast-calculator';
+import {SOForeCastCalculator}  from '../library/fore-cast/so-fore-cast-calculator';
+import {GIVForeCastCalculator}  from '../library/fore-cast/giv-fore-cast-calculator';
+import {CLForeCastCalculator}  from '../library/fore-cast/cl-fore-cast-calculator';
 
 export default {
   init() {
@@ -27,22 +36,62 @@ export default {
 	    	if (typeof LoadSideBar !== 'undefined') {
 				LoadSideBar.initialize();
 			}
-			setTimeout(function(){
-			
-			},5500); 
 	    }
 		// Easy tab
-		if (typeof EasyTab !== 'undefined') {
-			EasyTab.initialize();
-		}
-		// Easy tab
-		if (typeof ShareMarketEducation !== 'undefined') {
-			ShareMarketEducation.initialize();
+		if($('.easy_tabs_container_wrap').length){
+			if (typeof LoadEasyTab !== 'undefined') {
+				LoadEasyTab.initialize();
+			}
 		}
 
 		// Navigation.
 		if (typeof Nav !== 'undefined') {
 			Nav.initialize();
+		}
+		if($('#pp-stock-forecast-calculator').length){
+			if (typeof PPForeCastCalculator !== 'undefined') {
+		        PPForeCastCalculator.initialize();
+		    }
+		}
+		if($('#main-pp-calculator').length){
+			if (typeof MainPPCalculator !== 'undefined') {
+		        MainPPCalculator.initialize();
+		    }
+		}
+		if($('#sma-stock-forecast-calculator').length){
+			if (typeof SMAForeCastCalculator !== 'undefined') {
+		        SMAForeCastCalculator.initialize();
+		    }
+		}
+		if($('#ema-stock-forecast-calculator').length){
+			if (typeof EMAForeCastCalculator !== 'undefined') {
+		        EMAForeCastCalculator.initialize();
+		    }
+		}
+		if($('#macd-stock-forecast-calculator').length){
+			if (typeof MACDForeCastCalculator !== 'undefined') {
+		        MACDForeCastCalculator.initialize();
+		    }
+		}
+		if($('#rsi-stock-forecast-calculator').length){
+			if (typeof RSIForeCastCalculator !== 'undefined') {
+		        RSIForeCastCalculator.initialize();
+		    }
+		}
+		if($('#so-stock-forecast-calculator').length){
+			if (typeof SOForeCastCalculator !== 'undefined') {
+		        SOForeCastCalculator.initialize();
+		    }
+		}
+		if($('#giv-stock-forecast-calculator').length){
+			if (typeof GIVForeCastCalculator !== 'undefined') {
+		        GIVForeCastCalculator.initialize();
+		    }
+		}
+		if($('#cl-stock-forecast-calculator').length){
+			if (typeof CLForeCastCalculator !== 'undefined') {
+		        CLForeCastCalculator.initialize();
+		    }
 		}
 
 		// contact Form 7
@@ -92,6 +141,13 @@ export default {
 			  	  document.getElementById('list-slider-modal')
 			  	);
 	  		});
+	     //    if($('#pivot-point-calculator').length){
+	     //    	ReactDOM.render(
+			  	//   <ForeCastPivotPoint />,
+			  	//   document.getElementById('pivot-point-calculator')
+			  	// );
+	     //    }
+	  		
 	    }
 
 	    //only for mobile render
@@ -125,10 +181,10 @@ export default {
 
         
 
-  		// // Show contact model on button click
-    //     $(document).on('click','.custom-hellobar', function (event, eventInfo) {
-    //     	$("#popup-main").modal('show');
-  		// });
+  		// Show contact model on button click
+        $(document).on('click','.custom-hellobar a', function (event, eventInfo) {
+        	$("#popup-main").modal('show');
+  		});
 
   		// Banner Class Image image class click Event Capture
         $(document)

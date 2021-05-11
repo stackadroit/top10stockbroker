@@ -1,3 +1,4 @@
+import {EasyTab}  from '../library/global';
 import {ShareMarketEducation} from '../library/share-market-education';
 export default {
   init() {
@@ -6,6 +7,9 @@ export default {
 		//for mobile version for lazy loading
 		if (typeof ShareMarketEducation !== 'undefined') {
 			ShareMarketEducation.initialize();
+		}
+		if (typeof EasyTab !== 'undefined') {
+			EasyTab.initialize();
 		}
 	}).apply(this, [jQuery]);
 

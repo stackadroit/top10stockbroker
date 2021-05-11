@@ -667,7 +667,10 @@ function IIFL_B2C_GrowthAPI( $postedArray =array() ){
     $apiResponse ='';
     $apiRequest = array(
         'name' => $name,
-        'mobile' => $mobile
+        'mobile' => $mobile,
+        "utmsource"=>"CPL Partners",
+        "utmcampaign"=>"partner 1",
+
     );
     $payload = json_encode($apiRequest);
     // Prepare new cURL resource
@@ -982,8 +985,8 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
                         "LeadProduct"=>"Equity",
                         "Mobile"=>$mobile,
                         "Email"=>$email,
-                        "LeadSource"=>"Partner Program",
-                        "lead_source"=>"Partner Program",
+                        "LeadSource"=>"Partner program new",
+                        "lead_source"=>"Partner program new",
                         'partner_client_code' => '58398898',
                         'Campaign'=> 'Top10StockBroker',
                         "subsource"=>"Top10stockbroker",

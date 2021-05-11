@@ -11,13 +11,20 @@ class WidgetMarket extends React.Component {
             isLoaded : false,
             lists : []          
         };
-        this.getData = this.getData.bind(this);
+        // this.getData = this.getData.bind(this);
+        setTimeout(function(ele) {
+        	ele.getData = ele.getData.bind(ele);
+        }, 3000,this);
     }
 
     componentDidMount(){
-    	this.getData();
+        // this.getData();
+        // this.interval = setInterval(this.getData, 100000);
     	// set Interval
-    	this.interval = setInterval(this.getData, 100000);
+    	setTimeout(function(ele) {
+    		ele.getData();
+    		ele.interval = setInterval(ele.getData, 100000);
+    	}, 3000,this);
     }
 
     componentWillUnmount() {

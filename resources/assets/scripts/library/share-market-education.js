@@ -1,6 +1,8 @@
 // share-market-education
 (function($) {
+
   var initialized = false;
+
   var ShareMarketEducation = {
  		defaults: {
 		},
@@ -24,57 +26,15 @@
 
 				return this;
 		},
-		loadTabContent(self) {
-			if($(document).find('.v_tabs_wrapper').length){
-				var ele ='';
-				$(document).find('.v_tabs_wrapper').each(function( index ) {
-				  	var post_id =$(this).data('id');
-				  	ele =this;
-				  	self.ajax(ele, post_id);
-				});	
-				 
-			}
-		},
-		ajax:function(ele,post_id){
-			var is_mobile=0;
-			if (jQuery(window).width() < 700){
-		       is_mobile =1;
-		    }
-		    $.ajax({
-				cache:false,
-				crossDomain: true,
-                  	config: {
-                      	headers: {
-                         	'Access-Control-Allow-Origin': '*',
-                  	}
-                },
-				data:{ 
-					post_id:post_id,
-					is_mobile:is_mobile,
-					tab_type:'VT',
-				},
-			  	url: global_vars.apiServerUrl +'/api/load-easy-tabs',
-			  	type:'post',
-			  	'dataType':'html',
-			  	success:function(res){
-			  		$(ele).html(res);
-
-			  },
-			  error:function(er){
-			  	console.log(er);
-			  }
-			  
-			});
+		changeTab() {
+			
+		    
 		},
 		events: function() {
-			var self =this;
-			var loaded=false;
 			var is_mobile=0;
 			if (jQuery(window).width() < 700){
 		       is_mobile =1;
 		    }
-		    self.loadTabContent(self);
-			 
 		    jQuery(document).on('click','.see-all-btn',function(){
 				jQuery(this).closest('.tab_content').find('.row').find('div').show();
 				jQuery(this).hide();
@@ -116,7 +76,6 @@
                   	}
             	});
 			});
-			
 			return this;
 		},
 	 
