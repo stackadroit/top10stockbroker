@@ -1061,7 +1061,7 @@ function PA1_PayTM_API_B2C( $postedArray =array() ){
     );
     $headerVars = $tokenHeaderVars= array(
             'Content-Type: application/json',
-            'Authorization: Basic YXBpS2V5OnNlY3JldEtleQ=='           
+            'Authorization: Basic VG9wMTBCcm9rZXI6QWZmaWlsaWF0ZVJlZmVycmFs'           
         );
     $apiRequest=$fields=json_encode($fields);
     
