@@ -922,6 +922,11 @@ table.dataTable thead td {
         .table-filter-wrap {
           padding-top: 10px;
           margin-bottom: 20px;
+
+          .row {
+            width: 100%;
+            margin: 0;
+          }
         }
   }
 
@@ -946,7 +951,16 @@ table.dataTable thead td {
       }
 
       &:nth-child(3n) {
-         border-right:0;
+        @media (min-width: 992px) {
+          border-right:0;
+        }
+      }
+
+      &:nth-child(2n) {
+        border-right:0;
+        @media (min-width: 992px) {
+           border-right: 1px solid #dcdcdc;
+        }
       }
           b {
             text-transform: uppercase;
