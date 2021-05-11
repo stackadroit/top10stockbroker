@@ -905,3 +905,43 @@ table.dataTable thead td {
     }
 }
 
+.container-custom-table {
+  padding: 0!important;
+    border-radius: 0;
+    border: 1px solid #dcdcdc;
+  .result-row {
+    margin: 0!important;
+    .result-cal-box {
+      background: #f7fdfa;
+      text-align: center;
+      border-right: 1px solid #dcdcdc;
+      border-bottom: 1px solid #dcdcdc;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      &:nth-child(3n) {
+         border-right:0;
+      }
+          b {
+            text-transform: uppercase;
+            color: #e35132;
+        }
+        p{
+          text-align: center;
+          margin: 0;
+        }
+    }
+  }
+}
+
+.table-filter-wrap {
+  margin-bottom: 20px;
+}
+
+.refresh-btn-wrap {
+  margin-top: 15px;
+
+  span {
+    float: left!important;
+  }
+}
