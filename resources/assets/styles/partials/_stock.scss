@@ -941,6 +941,10 @@ table.dataTable thead td {
       padding-top: 10px;
       padding-bottom: 10px;
 
+      &.highlight {
+        background: #dfece5;
+      }
+
       &:nth-child(3n) {
          border-right:0;
       }
