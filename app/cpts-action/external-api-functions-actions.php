@@ -65,7 +65,7 @@ function api_master_calls(){
         }elseif($brand){
             $serviceQuery .= " AND FIND_IN_SET('".$brand."',brands) ";
         }
-        echo $serviceQuery .'<br/>';
+        // echo $serviceQuery .'<br/>';
         $serviceResults = $wpdb->get_results($serviceQuery);
         
         if($serviceResults){
@@ -88,16 +88,16 @@ function api_master_calls(){
                         motilal_BtoC_Api_Call($postData);
                         break;
                     case '5': 
-                        echo 'mastertrust_API';
-                        mastertrust_API($postData);
+                        // echo 'mastertrust_API';
+                        // mastertrust_API($postData);
                         break;
                     case '6':
-                        echo 'religare_B2C_API';
-                        religare_B2C_API($postData);
+                        // echo 'religare_B2C_API';
+                        // religare_B2C_API($postData);
                         break;
                     case '7':
-                        echo 'Nirmal Bang B2C';
-                        nirmal_Bang_B2C_API($postData);
+                        // echo 'Nirmal Bang B2C';
+                        // nirmal_Bang_B2C_API($postData);
                         break;
                     case '8':
                         echo 'IIFL_B2B fan api';
@@ -112,8 +112,8 @@ function api_master_calls(){
                         
                         break;
                     case '10':
-                        echo 'BAJAJ';
-                        bajajfinservsecurities($postData);
+                        // echo 'BAJAJ';
+                        // bajajfinservsecurities($postData);
                         break;
                    case '11':
                         echo $value->api_name .$value->google_sheet_id;
@@ -124,12 +124,16 @@ function api_master_calls(){
                         pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
                         break;
                     case '14':
-                        echo $value->api_name;
-                        PA1_GEOJITCRM_API_B2C($postData);
+                        // echo $value->api_name;
+                        // PA1_GEOJITCRM_API_B2C($postData);
                         break;
                     case '15':
                         echo $value->api_name;
                         PA1_5Paisa_API_B2C($postData);
+                        break;
+                    case '16':
+                        echo $value->api_name;
+                        PA1_PayTM_API_B2C($postData);
                         break;
                   default:
                     
@@ -227,16 +231,16 @@ function api_master_calls_for_city_data(){
                         motilal_BtoC_Api_Call($postData);
                         break;
                     case '5': 
-                        echo 'mastertrust_API';
-                        mastertrust_API($postData);
+                        // echo 'mastertrust_API';
+                        // mastertrust_API($postData);
                         break;
                     case '6':
-                        echo 'religare_B2C_API';
-                        religare_B2C_API($postData);
+                        // echo 'religare_B2C_API';
+                        // religare_B2C_API($postData);
                         break;
                     case '7':
-                        echo 'Nirmal Bang B2C';
-                        nirmal_Bang_B2C_API($postData);
+                        // echo 'Nirmal Bang B2C';
+                        // nirmal_Bang_B2C_API($postData);
                         break;
                     case '8':
                         echo 'IIFL_B2B_NEW api';
@@ -248,8 +252,8 @@ function api_master_calls_for_city_data(){
                         IIFL_B2C_GrowthAPI($postData);
                         break;
                     case '10':
-                        echo 'BAJAJ';
-                        bajajfinservsecurities($postData);
+                        // echo 'BAJAJ';
+                        // bajajfinservsecurities($postData);
                         break;
                     case '11':
                         echo $value->api_name .$value->google_sheet_id;
@@ -264,12 +268,16 @@ function api_master_calls_for_city_data(){
                         IIFLGrowthPartners($postData);
                         break;
                     case '14':
-                        echo $value->api_name;
-                        PA1_GEOJITCRM_API_B2C($postData);
+                        // echo $value->api_name;
+                        // PA1_GEOJITCRM_API_B2C($postData);
                         break;
                     case '15':
                         echo $value->api_name;
                         PA1_5Paisa_API_B2C($postData);
+                        break;
+                    case '16':
+                        echo $value->api_name;
+                        PA1_PayTM_API_B2C($postData);
                         break;
                     default:
                         break;
@@ -1025,4 +1033,61 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
     }
     print_r($apiRequest);
     insert_request_response_ac_db($form_id,'5paisa_b2c_req_url',json_encode($apiRequest),'5paisa_b2c_api_status',$apiResponse);
+}
+
+/**
+ *  Send Contact Data to PA1 PayTM_API_B2C.
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
+function PA1_PayTM_API_B2C( $postedArray =array() ){
+
+    $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
+    
+    $form_id= $postedArray['_wpcf7'];
+    $name = $postedArray['cf7s-name'];
+    $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
+    $email="";  
+    // $email=$mobile."@gmail.com" ;  
+    $city=$postedArray['cf7s-City'];
+    //Get Token Request
+    $apiRequest =array();
+    $apiResponse =array();
+     
+    $fields = array('name' => $name,
+        'mobileNumber' => $mobile,
+        'emailId' => $email,
+        'state' => '',
+        'city' => $city
+    );
+    $headerVars = $tokenHeaderVars= array(
+            'Content-Type: application/json',
+            'Authorization: Basic VG9wMTBCcm9rZXI6QWZmaWlsaWF0ZVJlZmVycmFs'           
+        );
+    $apiRequest=$fields=json_encode($fields);
+    
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://api-pf.paytmmoney.com/userprofile/v1/referral/AFFILIATE/refer',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS =>$fields ,
+      CURLOPT_HTTPHEADER =>$headerVars,
+    ));
+    $api_response = curl_exec($curl);
+    $response =json_decode($api_response);
+     
+    $apiResponse ='';
+    if(is_array($response->meta) || is_object($response->meta)){
+       foreach ($response->meta as $key => $value) {
+            $apiResponse .=($apiResponse)? ' :: '.$key.':'.$value:$key.':'.$value;
+        }  
+    }else{
+        $apiResponse =$api_response;
+    }
+    insert_request_response_ac_db($form_id,'paytm_b2c_req_url',json_encode($apiRequest),'paytm_b2c_api_status',$apiResponse);
 }
