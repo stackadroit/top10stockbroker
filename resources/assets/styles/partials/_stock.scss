@@ -905,10 +905,32 @@ table.dataTable thead td {
     }
 }
 
-.container-custom-table {
-  padding: 0!important;
-    border-radius: 0;
+.bothtab-st-id-wrap {
+
+  .nav-tabs {
+    .nav-item {
+      list-style-type: none;
+
+      a {
+        padding: 6 25px;
+      }
+    }
+  }
+
+  .section_returnCal {
     border: 1px solid #dcdcdc;
+        .table-filter-wrap {
+          padding-top: 10px;
+          margin-bottom: 20px;
+        }
+  }
+
+  .container-custom-table {
+    padding: 0!important;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #dcdcdc;
+    border-top: 1px solid #dcdcdc;
   .result-row {
     margin: 0!important;
     .result-cal-box {
@@ -934,22 +956,14 @@ table.dataTable thead td {
   }
 }
 
-.table-filter-wrap {
-  margin-bottom: 20px;
-  border-left: 1px solid #dcdcdc;
-  border-right: 1px solid #dcdcdc;
-  border-top: 1px solid #dcdcdc;
-}
-
 .refresh-btn-wrap {
-  border-left: 1px solid #dcdcdc;
-    padding-top: 15px;
-    margin: 0px;
-    border-right: 1px solid #dcdcdc;
-    border-bottom: 1px solid #dcdcdc;
+      padding-top: 15px;
+      margin: 0px;
 
-  span {
-    font-size:12px;
-    text-align:center;
+    span {
+      font-size:12px;
+      text-align:center;
+    }
   }
+
 }
