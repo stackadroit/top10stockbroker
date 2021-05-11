@@ -61,14 +61,14 @@ class TemplateContactDataApi extends Controller
 			  $fields[] =['title'=>'serkhan  B2B Status','key'=>'mastertrust_lead_status'];
 			  $fields[] =['title'=>'serkhan B2B Request','key'=>'mastertrust_lead_request_url'];
 			  
-			 $fields[] =['title'=>'Mastertrust Status','key'=>'mastertrust_lead_status'];
-			  $fields[] =['title'=>'Mastertrust Request','key'=>'mastertrust_lead_request_url'];
+			 // $fields[] =['title'=>'Mastertrust Status','key'=>'mastertrust_lead_status'];
+			 //  $fields[] =['title'=>'Mastertrust Request','key'=>'mastertrust_lead_request_url'];
 			  
-			  $fields[] =['title'=>'Religare B2C Status','key'=>'religare_b2c_api_status'];
-			  $fields[] =['title'=>'Religare B2C Request','key'=>'religare_b2c_api_request_url'];
+			  // $fields[] =['title'=>'Religare B2C Status','key'=>'religare_b2c_api_status'];
+			  // $fields[] =['title'=>'Religare B2C Request','key'=>'religare_b2c_api_request_url'];
 			  
-			  $fields[] =['title'=>'Nirmal Bang B2C Status','key'=>'nirmal_bang_b2c_api_status'];
-			  $fields[] =['title'=>'Nirmal Bang B2C Request','key'=>'nirmal_bang_b2c_api_request_url'];
+			  // $fields[] =['title'=>'Nirmal Bang B2C Status','key'=>'nirmal_bang_b2c_api_status'];
+			  // $fields[] =['title'=>'Nirmal Bang B2C Request','key'=>'nirmal_bang_b2c_api_request_url'];
 			  
 			  $fields[] =['title'=>'IIFL B2B Status','key'=>'iifl_b2b_api_status'];
 			  $fields[] =['title'=>'IIFL B2B Request','key'=>'iifl_b2b_api_request_url']; 
@@ -76,15 +76,17 @@ class TemplateContactDataApi extends Controller
 			  $fields[] =['title'=>'IIFL B2C Request','key'=>'iifl_b2c_api_request_url']; 
 			  
 			  		  
-			  $fields[] =['title'=>'Bajaj Finanace Status','key'=>'bajajfinanace_status'];
-			  $fields[] =['title'=>'Bajaj Finanace Request','key'=>'bajaj_url'];
+			  // $fields[] =['title'=>'Bajaj Finanace Status','key'=>'bajajfinanace_status'];
+			  // $fields[] =['title'=>'Bajaj Finanace Request','key'=>'bajaj_url'];
 			  $fields[] =['title'=>'IIFL Growth Status','key'=>'iifl_growth_response'];
 			  $fields[] =['title'=>'IIFL Growth Request','key'=>'iifl_growth_request'];
-			  $fields[] =['title'=>'Geogit B2C Status','key'=>'geogit_b2c_api_status'];
-			  $fields[] =['title'=>'Geogit B2C Request','key'=>'geogit_b2c_api_request_url'];
+			  // $fields[] =['title'=>'Geogit B2C Status','key'=>'geogit_b2c_api_status'];
+			  // $fields[] =['title'=>'Geogit B2C Request','key'=>'geogit_b2c_api_request_url'];
 			  
 			  $fields[] =['title'=>'5Paisa B2C Status','key'=>'5paisa_b2c_api_status'];
 			  $fields[] =['title'=>'5Paisa B2C Request','key'=>'5paisa_b2c_req_url'];
+			  $fields[] =['title'=>'PayTM B2C Status','key'=>'paytm_b2c_api_status'];
+			  $fields[] =['title'=>'PayTM B2C Request','key'=>'paytm_b2c_req_url'];
 			 $responseData['headers']=$fields;
 			 $responseData['body'] =array();
 			 $response =array();
