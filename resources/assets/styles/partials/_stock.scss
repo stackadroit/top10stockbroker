@@ -936,12 +936,20 @@ table.dataTable thead td {
 
 .table-filter-wrap {
   margin-bottom: 20px;
+  border-left: 1px solid #dcdcdc;
+  border-right: 1px solid #dcdcdc;
+  border-top: 1px solid #dcdcdc;
 }
 
 .refresh-btn-wrap {
-  margin-top: 15px;
+  border-left: 1px solid #dcdcdc;
+    padding-top: 15px;
+    margin: 0px;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
 
   span {
-    float: left!important;
+    font-size:12px;
+    text-align:center;
   }
 }
