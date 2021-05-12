@@ -1975,6 +1975,20 @@ add_shortcode('CLStockForecast', function ($atts){
 });
 
 /**
+*   Shortcode form Camarilla Levels ForeCost Table.
+[Camarilla_Clevels_Stock_Table]
+*/  
+add_shortcode('Camarilla_Clevels_Stock_Table', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+    ), $atts);
+    // print_r($data);
+    $template = 'shortcodes.fore-cast.cl-stock-table';
+    return \App\template($template, $data);
+});
+
+/**
 *   Shortcode form Main Pivot Points Calculator.
 Need To work on this
 [MainPivotPointsCalculator]
