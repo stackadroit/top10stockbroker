@@ -101,8 +101,20 @@
                   'jsonData':true,
               },
               success: function(response){
-                 
                 var cEle = $clstockForeCastEle.find(clStackTabEle);
+                var change_val =response.Change+'('+response.Change_pre+'%)';
+                  cEle.find('#cl-company-name').html(response.Stock_name);
+                  cEle.find('#cl-ltp-val').html(response.LTP);
+                  if(response.Change >0){
+                    cEle.find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
+                    cEle.find('#cl-change-val').removeClass('text-red').addClass('text-green'); 
+                    cEle.find('#cl-change-val').html(parseFloat(response.Change).toFixed(2)+ ' ('+parseFloat(response.Change_pre).toFixed(2)+'%)');
+                  }else{
+                    cEle.find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
+                    cEle.find('#cl-change-val').removeClass('text-green').addClass('text-red'); 
+                    cEle.find('#cl-change-val').html(parseFloat(response.Change).toFixed(2)+ ' ('+parseFloat(response.Change_pre).toFixed(2)+'%)');
+                  }
+                  cEle.find('#cl-change-val').html(change_val);
                   cEle.find('#entry-bt').html(response.Support_3);
                   cEle.find('#cl-date').html(response.date);
                   cEle.find('#target1-bt').html(response.Resistance_1);

@@ -985,3 +985,56 @@ table.dataTable thead td {
   }
 
 }
+
+.prdict-table .row {
+  border: 1px solid #6d7c93;
+  margin-bottom: 2px;
+}
+.prdict-table .row-green [class*="col-"]:not(:first-child) .prdict-box {
+  background: #00af50;
+}
+.prdict-table .row-red [class*="col-"]:not(:first-child) .prdict-box {
+  background: #c55b11;
+}
+.prdict-table .prdict-box {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 1px;
+  border: 1px solid #6d7c93;
+}
+.prdict-table .prdict-box .label, .prdict-table .prdict-box .price {
+  color: #fff;
+}
+.prdict-table i {
+  font-size: 50px;
+}
+.prdict-table .label {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.prdict-table .price {
+  font-size: 20px;
+}
+.prdict-table .green {
+  color: #08af61;
+}
+.no-gutter [class*="col-"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width:576px){
+  .prdict-table .price {
+  font-size: 30px;
+}
+  .prdict-table .label {
+  font-size: 18px;
+}
+}
+@media (min-width:992px){
+  .prdict-table .price {
+  font-size: 36px;
+  }
+}
+p:empty{
+  display:none;
+}
