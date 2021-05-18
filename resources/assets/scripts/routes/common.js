@@ -9,7 +9,6 @@ import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
 import WidgetMarketTop from '../components/widgetmarketTop';
 import {PPForeCastCalculator}  from '../library/fore-cast/pp-fore-cast-calculator';
-import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
 import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calculator';
 import {EMAForeCastCalculator}  from '../library/fore-cast/ema-fore-cast-calculator';
 import {MACDForeCastCalculator}  from '../library/fore-cast/macd-fore-cast-calculator';
@@ -53,11 +52,7 @@ export default {
 		        PPForeCastCalculator.initialize();
 		    }
 		}
-		if($('#main-pp-calculator').length){
-			if (typeof MainPPCalculator !== 'undefined') {
-		        MainPPCalculator.initialize();
-		    }
-		}
+		
 		if($('#sma-stock-forecast-calculator').length){
 			if (typeof SMAForeCastCalculator !== 'undefined') {
 		        SMAForeCastCalculator.initialize();

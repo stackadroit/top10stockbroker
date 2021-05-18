@@ -153,6 +153,7 @@ import shareMarketEducation from './routes/share-market-education';
 // ForeCast Index 
 import singleIndexPrediction from './routes/single/single-index-prediction';
 import singleStockPrediction from './routes/single/single-index-prediction';
+import pivotPointIndicator from './routes/shortcodes/indicators/pivot-point-indicator';
 /** Populate Router instance with DOM routes */
 const routes = new Router({
   // All pages
@@ -283,6 +284,7 @@ const routes = new Router({
   // ForeCast Index 
   singleIndexPrediction,
   singleStockPrediction,
+  pivotPointIndicator,
 });
 
 // Load Events

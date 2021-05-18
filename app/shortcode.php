@@ -1991,45 +1991,45 @@ add_shortcode('Camarilla_Clevels_Stock_Table', function ($atts){
 /**
 *   Shortcode form Main Pivot Points Calculator.
 Need To work on this
-[MainPivotPointsCalculator]
+[MainPivotPointsIndicator]
 */
-add_shortcode('MainPivotPointsCalculator', function ($atts){ 
+add_shortcode('MainPivotPointsIndicator', function ($atts){ 
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
          
     ), $atts);
-    $posts_array = get_posts(
-        array(
-            'posts_per_page' =>2,
-            'post_type' => 'stock-prediction',
-            'order' => 'ASC',
-            'orderby' => 'title',
-            // 'tax_query' => array(
-            //     array(
-            //         'taxonomy' => 'sub-broker-zones',
-            //         'field' => 'slug',
-            //         'terms' => $data['zone'],
-            //     )
-            // )
-        )
-    ); 
-    $stockData =[];
-    foreach ($posts_array as $key => $post) {
-        $stock_fin_index_code =get_post_meta($post->ID,'stock_fin_index_code',true);
-        $yHigh =get_post_meta($post->ID,'y_high',true);
-        $yLow =get_post_meta($post->ID,'y_low',true);
-        $yClose =get_post_meta($post->ID,'y_close',true);
-        $ppValue =get_post_meta($post->ID,'y_pivot_point',true);
-        $stockData[]=array(
-            'stock_name'=>get_post_meta($post->ID,'stock_name',true),
-            'stock_link'=>get_the_permalink($post->ID),
-            'pivot_point'=>$ppValue,
-       );
-    }
+    // $posts_array = get_posts(
+    //     array(
+    //         'posts_per_page' =>2,
+    //         'post_type' => 'stock-prediction',
+    //         'order' => 'ASC',
+    //         'orderby' => 'title',
+    //         // 'tax_query' => array(
+    //         //     array(
+    //         //         'taxonomy' => 'sub-broker-zones',
+    //         //         'field' => 'slug',
+    //         //         'terms' => $data['zone'],
+    //         //     )
+    //         // )
+    //     )
+    // ); 
+    // $stockData =[];
+    // foreach ($posts_array as $key => $post) {
+    //     $stock_fin_index_code =get_post_meta($post->ID,'stock_fin_index_code',true);
+    //     $yHigh =get_post_meta($post->ID,'y_high',true);
+    //     $yLow =get_post_meta($post->ID,'y_low',true);
+    //     $yClose =get_post_meta($post->ID,'y_close',true);
+    //     $ppValue =get_post_meta($post->ID,'y_pivot_point',true);
+    //     $stockData[]=array(
+    //         'stock_name'=>get_post_meta($post->ID,'stock_name',true),
+    //         'stock_link'=>get_the_permalink($post->ID),
+    //         'pivot_point'=>$ppValue,
+    //    );
+    // }
     // echo '<pre>';
     // print_r($stockData);
-    $data['stocks']= $stockData;
-    $template = 'shortcodes.fore-cast.main-pivot-points-calculator';
+    // $data['stocks']= $stockData;
+    $template = 'shortcodes.fore-cast.indicators.pivot-points-indicator';
     return \App\template($template, $data);
 });

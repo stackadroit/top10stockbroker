@@ -3,28 +3,24 @@
 
   var initialized = false;
 
-  var MainPPCalculator = {
+  var MainPivotPointsIndicator = {
  		defaults: {
 		},
 
 		initialize: function(opts) {
-				if (initialized) {
-					return this;
-				}
-
-				initialized = true;
-
-				this
-					.setOptions(opts)
+			if (initialized) {
+				return this;
+			}
+			initialized = true;
+			this.setOptions(opts)
 					.events();
 
-				return this;
+			return this;
 		},
 
 		setOptions: function(opts) {
-				this.options = $.extend(true, {}, this.defaults, opts);
-
-				return this;
+			this.options = $.extend(true, {}, this.defaults, opts);
+			return this;
 		},
 		getPPCalculator:function($pivotPointCalculator,finCode,post_id,is_single){
 			if(finCode){
@@ -171,56 +167,55 @@
 				console.log('indexCode Not valid:'+finCode);
 			}
 		},
-		getPPLists:function($pivotPointCalculator){
-			 
+		getPPIndicatorLists:function($pivotPointsIndicator,$paged=1){
 			$.ajax({
-			     	cache: false,
-			      	crossDomain: true,
-		         	config: {
-		              	headers: {
-		                 	'Access-Control-Allow-Origin': '*',
-		              	}
-		         	},
-		         	beforeSend: function() {
-		              $pivotPointCalculator.find('.fb-loader').remove();
-		              $pivotPointCalculator.prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
-		            },
-			      	type:"post",
-			     	dataType: "html",
-			      	url: global_vars.apiServerUrl + '/apiblock/react-fore-cast/main-pp-lists',
-	             	data: {
-			          // 	'indexCode':indexCode,
+			 	cache: false,
+			  	crossDomain: true,
+		      	config: {
+		        	headers: {
+		              	'Access-Control-Allow-Origin': '*',
+		       		}
+		      	},
+		      	beforeSend: function() {
+		        	$pivotPointsIndicator.find('.fb-loader').remove();
+		          	$pivotPointsIndicator.append('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		       	},
+			  	type:"post",
+			 	dataType: "html",
+				url: global_vars.apiServerUrl + '/apiblock/main-pivot-points-indicator-list',
+	         	data: {
+			      	'paged':$paged,
 			         	// 'post_id':post_id,
 			         	// 'filter':filter,
 			         	// 'LTP':LTP,
-			      	},
-			      	success: function(response){
-			            $pivotPointCalculator.find('#main-pp-lists tbody').html(response);    
-			            $pivotPointCalculator.find('.fb-loader').remove();
-			      	},
-			     	error: function(response){
-			        	console.log('Error in loading...'); 
-			        	$pivotPointCalculator.find('.fb-loader').remove();
-			      	}
+			 	},
+				success: function(response){
+			      	$pivotPointsIndicator.find('#main-pp-indicator-lists tbody').html(response);    
+			     	$pivotPointsIndicator.find('.fb-loader').remove();
+			 	},
+				error: function(response){
+			    	console.log('Error in loading...'); 
+			    	$pivotPointsIndicator.find('.fb-loader').remove();
+			 	}
 			});
-			 
 		},
 		events: function() {
 			var self    = this,
-				$pivotPointCalculator  = $('#main-pp-calculator');
+				$pivotPointsIndicator  = $('#main-pivot-points-indicator');
 			setTimeout(function(ele) {
-				self.getPPLists($pivotPointCalculator);
-	        }, 3000,this);
+				self.getPPIndicatorLists($pivotPointsIndicator);
+	        }, 1,this);
 			 
 			// calculate-pivot-points
-			$(document).on('click','#calculate-pivot-points',function(e){
+			$(document).on('click','.pagination li,.pagination li a',function(e){
 				e.preventDefault();
-				var LTP=$(this).data('ltp');
-				$(this).after('<div class="fb-loader loader mx-auto" style="margin-top: 15px;margin-bottom:20px;"></div>')
-				var finCode=$pivotPointCalculator.find('#pivotPointStock').data('fincode');
-				var post_id=$pivotPointCalculator.data('id');
-				var filter=$pivotPointCalculator.find('#pivotPointStock').data('filter');
-				self.calculatePivotPoints($pivotPointCalculator,finCode,post_id,filter,LTP);
+				var paged=$(this).data('paged');
+				if(paged){
+					self.getPPIndicatorLists($pivotPointsIndicator,paged);
+				}else{
+					return false;
+				}
+				 
 			});
 
 			$(document).on('click','#pivot-point-refresh',function(e){
@@ -266,6 +261,6 @@
 		},
 	 
     };
-  exports.MainPPCalculator = MainPPCalculator;
+  exports.MainPivotPointsIndicator = MainPivotPointsIndicator;
 
 }).apply(this, [jQuery]);
