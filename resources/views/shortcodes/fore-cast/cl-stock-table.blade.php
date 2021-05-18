@@ -7,12 +7,12 @@
             <i id="currentStockRateArrow" class="fa fa-arrow-up fa-w-14 sm-icon-box color-green"></i>
             <div>
             <div class="label">LTP</div>
-            <div class="price green" id="cl-ltp-val"></div>
+            <div class="price text-green" id="cl-ltp-val"></div>
              </div>
         </div>
         <div class="col-6 col-md-4">
             <div class="label">Change</div>
-            <div class="price green" id="cl-change-val"></div>
+            <div class="price text-green" id="cl-change-val"></div>
         </div>
     </div>
     <div class="row row-green text-center no-gutter">

@@ -47,17 +47,30 @@
                 // cData=response.calData;
                 // console.log(clIndexTabEle);
                 var cEle = $clstockForeCastEle.find(clIndexTabEle);
+                  cEle.find('#cl-company-name').html(response.Index);
+                  cEle.find('#cl-ltp-val').html(response.LTP);
+                  if(response.Change >0){
+                    cEle.find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
+                    cEle.find('#cl-change-val').removeClass('text-red').addClass('text-green'); 
+                    cEle.find('#cl-ltp-val').removeClass('text-red').addClass('text-green'); 
+                    cEle.find('#cl-change-val').html(parseFloat(response.Change).toFixed(2)+ ' ('+parseFloat(response.Change_pre).toFixed(2)+'%)');
+                  }else{
+                    cEle.find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
+                    cEle.find('#cl-change-val').removeClass('text-green').addClass('text-red'); 
+                    cEle.find('#cl-ltp-val').removeClass('text-green').addClass('text-red'); 
+                    cEle.find('#cl-change-val').html(parseFloat(response.Change).toFixed(2)+ ' ('+parseFloat(response.Change_pre).toFixed(2)+'%)');
+                  }
                   cEle.find('#entry-bt').html(response.Support_3);
                   cEle.find('#cl-date').html(response.date);
                   cEle.find('#target1-bt').html(response.Resistance_1);
                   cEle.find('#target2-bt').html(response.Resistance_2);
-                  cEle.find('#target3-bt').html(response.Resistance_3);
+                  // cEle.find('#target3-bt').html(response.Resistance_3);
                   cEle.find('#stop-loss-bt').html(response.Support_4);
 
                   cEle.find('#entry-st').html(response.Resistance_3);
                   cEle.find('#target1-st').html(response.Support_1);
                   cEle.find('#target2-st').html(response.Support_2);
-                  cEle.find('#target3-st').html(response.Support_3);
+                  // cEle.find('#target3-st').html(response.Support_3);
                   cEle.find('#stop-loss-st').html(response.Resistance_4);
                   cEle.find('#camarilla-levels-sentiment').html(response.Sentiment);
 
@@ -108,13 +121,14 @@
                   if(response.Change >0){
                     cEle.find('#currentStockRateArrow').removeClass('fa-arrow-down color-red').addClass('fa-arrow-up color-green');
                     cEle.find('#cl-change-val').removeClass('text-red').addClass('text-green'); 
+                    cEle.find('#cl-ltp-val').removeClass('text-red').addClass('text-green'); 
                     cEle.find('#cl-change-val').html(parseFloat(response.Change).toFixed(2)+ ' ('+parseFloat(response.Change_pre).toFixed(2)+'%)');
                   }else{
                     cEle.find('#currentStockRateArrow').removeClass('fa-arrow-up color-green').addClass('fa-arrow-down color-red');
                     cEle.find('#cl-change-val').removeClass('text-green').addClass('text-red'); 
+                    cEle.find('#cl-ltp-val').removeClass('text-green').addClass('text-red'); 
                     cEle.find('#cl-change-val').html(parseFloat(response.Change).toFixed(2)+ ' ('+parseFloat(response.Change_pre).toFixed(2)+'%)');
                   }
-                  cEle.find('#cl-change-val').html(change_val);
                   cEle.find('#entry-bt').html(response.Support_3);
                   cEle.find('#cl-date').html(response.date);
                   cEle.find('#target1-bt').html(response.Resistance_1);
