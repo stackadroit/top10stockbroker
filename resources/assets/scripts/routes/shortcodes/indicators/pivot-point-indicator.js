@@ -1,12 +1,16 @@
-import {MainPivotPointsIndicator}  from '../../../library/fore-cast/indicators/pivot-point-indicator.js';
+import React, { Component } from "react";
+import ReactDOM from 'react-dom';
+import MainPivotPointsIndicator from '../../../components/indicators/main-pivot-points-indicator';
 export default {
   init() {
-    (function($) {
-      'use strict';
-      if (typeof MainPivotPointsIndicator !== 'undefined') {
-         MainPivotPointsIndicator.initialize();
-      }
-    }).apply(this, [jQuery]);
+      (function($) {
+        'use strict';
+         var resp_div ='#main-pivot-points-indicator';
+          ReactDOM.render(
+              <MainPivotPointsIndicator />,
+              document.getElementById('main-pivot-points-indicator')
+            );
+      }).apply(this, [jQuery]);
   },
   finalize() {
     // JavaScript to be fired on all pages, after page specific JS is fired

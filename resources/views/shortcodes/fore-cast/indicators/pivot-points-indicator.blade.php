@@ -1,4 +1,4 @@
-<div data-id="{{@$id}}" id="main-pivot-points-indicator">
+<!-- <div data-id="{{@$id}}" id="main-pivot-points-indicator">
 	<div class="table-responsive tb-fixed-head" data-simplebar data-simplebar-auto-hide="false">
 		<table class="table-style1 table-bordered mb-0" id="main-pp-indicator-lists">
           	 <thead>
@@ -44,4 +44,7 @@
 	</div>
 </div>
 <br/>
-<br/>
+<br/> -->
+<div data-id="{{@$id}}" id="main-pivot-points-indicator">
+    <div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>
+</div>

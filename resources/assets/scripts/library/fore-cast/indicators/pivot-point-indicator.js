@@ -178,7 +178,9 @@
 		      	},
 		      	beforeSend: function() {
 		        	$pivotPointsIndicator.find('.fb-loader').remove();
-		          	$pivotPointsIndicator.append('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		        	if($paged ==1){
+		          		$pivotPointsIndicator.append('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+		        	}
 		       	},
 			  	type:"post",
 			 	dataType: "html",
@@ -190,7 +192,7 @@
 			         	// 'LTP':LTP,
 			 	},
 				success: function(response){
-			      	$pivotPointsIndicator.find('#main-pp-indicator-lists tbody').html(response);    
+			      	$pivotPointsIndicator.find('#main-pp-indicator-lists tbody').append(response);    
 			     	$pivotPointsIndicator.find('.fb-loader').remove();
 			 	},
 				error: function(response){
@@ -202,9 +204,20 @@
 		events: function() {
 			var self    = this,
 				$pivotPointsIndicator  = $('#main-pivot-points-indicator');
+			var funCall=false;
 			setTimeout(function(ele) {
 				self.getPPIndicatorLists($pivotPointsIndicator);
+
 	        }, 1,this);
+	        var funCallIdx=1;
+	        var myVar = setInterval(function(){
+	        	funCallIdx++;
+	        	if(funCallIdx >25){
+		        	clearInterval(myVar);
+		        }
+	        	self.getPPIndicatorLists($pivotPointsIndicator,funCallIdx);
+	        }, 1000,funCallIdx,self,$pivotPointsIndicator);
+	        
 			 
 			// calculate-pivot-points
 			$(document).on('click','.pagination li,.pagination li a',function(e){
