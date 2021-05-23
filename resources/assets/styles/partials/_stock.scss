@@ -1039,3 +1039,13 @@ p:empty{
   display:none;
 }
 button.MUIDataTableSearch-clearIcon-31{display:none}
+
+.MuiCircularProgress-root {
+  width: 35px !important;
+    height: 35px !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 380px !important;
+    z-index: 9999 !important;
+    color: #e35032 !important;
+}
