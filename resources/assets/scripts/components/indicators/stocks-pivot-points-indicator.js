@@ -18,7 +18,7 @@ class StocksPivotPointsIndicator extends React.Component {
             columns:[],
             lists : [],
             selectedFilter:'All',       
-            filter_list:[
+            tableFilterOptions:[
                 { name: "Resistance 1" },
                 { name: "Support 1" },
                 { name: "Resistance 2" },
@@ -458,7 +458,7 @@ class StocksPivotPointsIndicator extends React.Component {
      
      
     render() {
-        const {isRefreshing,error,columns,selectedFilter, isLoaded, lists,filter_list} = this.state;
+        const {isRefreshing,error,columns,selectedFilter, isLoaded, lists,tableFilterOptions} = this.state;
         const options = {
             selectableRows: 'none', 
             hasIndex: true, 
@@ -478,7 +478,7 @@ class StocksPivotPointsIndicator extends React.Component {
             filter:false,
             customToolbar: () => {
               return (
-                <CustomToolbar selectedFilter={selectedFilter} onFilterSelect={this.onFilterSelected.bind(this)} onRefreshClick={this.onRefreshed.bind(this)}/>
+                <CustomToolbar tableFilterOptions={tableFilterOptions} selectedFilter={selectedFilter} onFilterSelect={this.onFilterSelected.bind(this)} onRefreshClick={this.onRefreshed.bind(this)}/>
               );
             },
             

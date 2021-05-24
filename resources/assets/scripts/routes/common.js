@@ -17,6 +17,10 @@ import {SOForeCastCalculator}  from '../library/fore-cast/so-fore-cast-calculato
 import {GIVForeCastCalculator}  from '../library/fore-cast/giv-fore-cast-calculator';
 import {CLForeCastCalculator}  from '../library/fore-cast/cl-fore-cast-calculator';
 
+// Sma Indicator
+import StocksSmaIndicator from '../components/indicators/stocks-sma-indicator';
+import IndicesSmaIndicator from '../components/indicators/indices-sma-indicator';
+
 export default {
   init() {
     // Commom Plugins
@@ -142,6 +146,21 @@ export default {
 			  	//   document.getElementById('pivot-point-calculator')
 			  	// );
 	     //    }
+	     	//Sma Stocks Indicator
+	     	if($('#main-sma-indicator').length){
+	     		if($('#stocksSmaIndicator').length){
+		        	ReactDOM.render(
+				  	  <StocksSmaIndicator />,
+				  	  document.getElementById('stocksSmaIndicator')
+				  	);
+		        }
+		        if($('#indicesSmaIndicator').length){
+		        	ReactDOM.render(
+				  	  <IndicesSmaIndicator />,
+				  	  document.getElementById('indicesSmaIndicator')
+				  	);
+		        }
+	        }
 	  		
 	    }
 

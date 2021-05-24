@@ -8,7 +8,7 @@ import { Select, MenuItem, Button,InputLabel,FormControl,CircularProgress} from 
 import { useState,setState } from "react";
 import CustomToolbar from "./custom-toolbar";
 
-class IndicesPivotPointsIndicator extends React.Component {
+class IndicesSmaIndicator extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -19,12 +19,6 @@ class IndicesPivotPointsIndicator extends React.Component {
             lists : [],
             selectedFilter:'All',       
             tableFilterOptions:[
-                { name: "Resistance 1" },
-                { name: "Support 1" },
-                { name: "Resistance 2" },
-                { name: "Support 2" },
-                { name: "Resistance 3" },
-                { name: "Support 3" },
                 { name: "Sentiment - Bullish" },
                 { name: "Sentiment - Bearish" },
                 { name: "Sentiment - Neutral" },
@@ -41,7 +35,6 @@ class IndicesPivotPointsIndicator extends React.Component {
       this.getData();
     }
     getColumns(){
-      // parseFloat(response.OPEN).toFixed(2)
       const columns = [
         {
             name: "Index",
@@ -51,17 +44,9 @@ class IndicesPivotPointsIndicator extends React.Component {
               sort: true,
               customBodyRender: (value, tableMeta, updateValue) => {
                 return (
-                  <a href={tableMeta.rowData[12]} title={value}>{value}</a>
+                  <a href={tableMeta.rowData[11]} title={value}>{value}</a>
                 );
               }
-            }
-        },
-        {
-            name: "Pivot_Point",
-            label: "Pivot Point",
-            options: {
-              filter: false,
-              sort: true,
             }
         },
         {
@@ -81,108 +66,51 @@ class IndicesPivotPointsIndicator extends React.Component {
             }
         },
         {
-            name: "Resistance_1",
-            label: "Resistance 1",
+            name: "sma_7day",
+            label: "7 Day SMA",
             options: {
               filter: false,
               sort: true,
-              filterOptions:{
-                logic: (Resistance_1, filters, row) => {
-                  if (filters.length){
-                    return (row[2] < row[4]);
-                  }
-                  return false;
-                },
-              }
             }
         },
         {
-            name: "Resistance_2",
-            label: "Resistance 2",
+            name: "sma_15day",
+            label: "15 Day SMA",
             options: {
               filter: false,
               sort: false,
-              filterOptions:{
-                logic: (Resistance_2, filters, row) => {
-                  if (filters.length){
-                    return (row[2] < row[5]);
-                  }
-                  return false;
-                },
-              }
             }
         },
         {
-            name: "Resistance_3",
-            label: "Resistance 3",
+            name: "sma_30day",
+            label: "30 Day SMA",
             options: {
               filter: false,
               sort: false,
-              filterOptions:{
-                logic: (Resistance_3, filters, row) => {
-                  if (filters.length){
-                    return (row[2] < row[6]);
-                  }
-                  return false;
-                },
-              }
             }
         },
         {
-            name: "Support_1",
-            label: "Support 1",
+            name: "sma_50day",
+            label: "50 Day SMA",
             options: {
               filter: false,
               sort: false,
-              filterOptions:{
-                logic: (Support_1, filters, row) => {
-                  if (filters.length){
-                    // console.log(row[2] +'----------'+ row[7]);
-                    return (row[2] > row[7]);
-                    // var cLtp =row[2].replace(/[^\d]/g, '');
-                    // var Support_1 =row[5].replace(/[^\d]/g, '');
-                    // // console.log(cLtp+':: < '+Support_1);
-                    // if(row[2] < row[5]){
-                    //   // console.log('________'+row[2]+':: < '+row[5]);
-                    //   return true;
-                    // }
-                  }
-                  return false;
-                },
-              }
             }
         },
         {
-            name: "Support_2",
-            label: "Support 2",
+            name: "sma_100day",
+            label: "100 Day SMA",
             options: {
               filter: false,
               sort: false,
-              filterOptions:{
-                logic: (Support_2, filters, row) => {
-                  // console.log(row);
-                  if (filters.length){
-                    return (row[2] > row[8]);
-                  }
-                  return false;
-                },
-              }
             }
         },
         {
-            name: "Support_3",
-            label: "Support 3",
+            name: "sma_200day",
+            label: "200 Day SMA",
             options: {
               filter: false,
               sort: false,
-              filterOptions:{
-                logic: (Support_3, filters, row) => {
-                  if (filters.length){
-                    return (row[2] > row[9]);
-                  }
-                  return false;
-                },
-              }
             }
         },
         {
@@ -221,7 +149,7 @@ class IndicesPivotPointsIndicator extends React.Component {
       const data = new FormData();
         data.append('nonce', global_vars.ajax_nonce);
         data.append('paged',1);
-        axios.post(global_vars.apiServerUrl + '/apiblock/main-ppi-indices-list', data)
+        axios.post(global_vars.apiServerUrl + '/apiblock/main-sma-indices-list', data)
           .then(res => {
               const result = res.data;
               this.setState({
@@ -245,7 +173,7 @@ class IndicesPivotPointsIndicator extends React.Component {
       const data = new FormData();
         data.append('nonce', global_vars.ajax_nonce);
         data.append('paged',paged);
-        axios.post(global_vars.apiServerUrl + '/apiblock/main-ppi-indices-list', data)
+        axios.post(global_vars.apiServerUrl + '/apiblock/main-sma-indices-list', data)
           .then(res => {
               var result =this.state.lists;
               var per_page =res.data.length;
@@ -266,50 +194,14 @@ class IndicesPivotPointsIndicator extends React.Component {
         });
     }
     onFilterSelected(event) {
-      console.log(event.target.value);
         var value =event.target.value;
         const filteredCols = this.state.columns;
         let filterList = [];
-        filteredCols[4].options.filterList =[];
-        filteredCols[5].options.filterList =[];
-        filteredCols[6].options.filterList =[];
-        filteredCols[7].options.filterList =[];
-        filteredCols[8].options.filterList =[];
         filteredCols[9].options.filterList =[];
         filteredCols[10].options.filterList =[];
-        filteredCols[11].options.filterList =[];
+         
         if (value !== "All") {
-          // Resistance 1
-          if((value =='Resistance 1' || value =='Resistance 2' || value =='Resistance 3')){
-            filterList[0] =value;
-            switch(value){
-              case 'Resistance 1':
-                filteredCols[4].options.filterList = filterList;
-                break;
-              case 'Resistance 2':
-                filteredCols[5].options.filterList = filterList;
-                break;
-              case 'Resistance 3':
-                filteredCols[6].options.filterList = filterList;
-                break;
-            }
-             
-          }
-          // Support 1
-          if((value =='Support 1' || value =='Support 2' || value =='Support 3')){
-            filterList[0] =value;
-            switch(value){
-              case 'Support 1':
-                filteredCols[7].options.filterList = filterList;
-                break;
-              case 'Support 2':
-                filteredCols[8].options.filterList = filterList;
-                break;
-              case 'Support 3':
-                filteredCols[9].options.filterList = filterList;
-                break;
-            }
-          }
+           
           // Sentiment Filter
           if((value =='Sentiment - Bullish' || value =='Sentiment - Bearish' || value =='Sentiment - Neutral')){
             if(value =='Sentiment - Bullish'){
@@ -321,7 +213,7 @@ class IndicesPivotPointsIndicator extends React.Component {
             if(value =='Sentiment - Neutral'){
                     filterList[0] ='Neutral';
             }
-            filteredCols[10].options.filterList = filterList; 
+            filteredCols[9].options.filterList = filterList; 
           }
            // Trade Filter
            if((value =='Trade - Sell' || value =='Trade - Buy' || value =='No Trade')){
@@ -334,7 +226,7 @@ class IndicesPivotPointsIndicator extends React.Component {
                   if(value =='No Trade'){
                     filterList[0] ='Hold';
                   }
-                  filteredCols[11].options.filterList = filterList;
+                  filteredCols[10].options.filterList = filterList;
           }
               
            
@@ -344,6 +236,10 @@ class IndicesPivotPointsIndicator extends React.Component {
         });
     }
     onRefreshed(){
+      const filteredCols = this.state.columns;
+      let filterList = [];
+        filteredCols[9].options.filterList =[];
+        filteredCols[10].options.filterList =[];
       this.setState({
         isRefreshing : true,
       });
@@ -417,4 +313,4 @@ class IndicesPivotPointsIndicator extends React.Component {
     }
 }
 
-export default IndicesPivotPointsIndicator;
+export default IndicesSmaIndicator;
