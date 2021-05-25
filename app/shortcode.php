@@ -2002,8 +2002,9 @@ add_shortcode('MainPivotPointsIndicator', function ($atts){
     $template = 'shortcodes.fore-cast.indicators.pivot-points-indicator';
     return \App\template($template, $data);
 });
+
 /**
-*   Shortcode form Main Pivot Points Calculator.
+*  Shortcode form Main SMA Indicator.
 Need To work on this
 [MainSMAIndicator]
 */
@@ -2014,5 +2015,20 @@ add_shortcode('MainSMAIndicator', function ($atts){
         'tabs' => '1', 
     ), $atts);
     $template = 'shortcodes.fore-cast.indicators.sma-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main EMA Indicator.
+Need To work on this
+[MainSMAIndicator]
+*/
+add_shortcode('MainEMAIndicator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+    ), $atts);
+    $template = 'shortcodes.fore-cast.indicators.ema-indicator';
     return \App\template($template, $data);
 });

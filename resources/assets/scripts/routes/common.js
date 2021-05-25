@@ -20,6 +20,9 @@ import {CLForeCastCalculator}  from '../library/fore-cast/cl-fore-cast-calculato
 // Sma Indicator
 import StocksSmaIndicator from '../components/indicators/stocks-sma-indicator';
 import IndicesSmaIndicator from '../components/indicators/indices-sma-indicator';
+// Ema Indicator
+import StocksEmaIndicator from '../components/indicators/stocks-ema-indicator';
+import IndicesEmaIndicator from '../components/indicators/indices-ema-indicator';
 
 export default {
   init() {
@@ -158,6 +161,21 @@ export default {
 		        	ReactDOM.render(
 				  	  <IndicesSmaIndicator />,
 				  	  document.getElementById('indicesSmaIndicator')
+				  	);
+		        }
+	        }
+	        //Ema Stocks Indicator
+	     	if($('#main-ema-indicator').length){
+	     		if($('#stocksEmaIndicator').length){
+		        	ReactDOM.render(
+				  	  <StocksEmaIndicator />,
+				  	  document.getElementById('stocksEmaIndicator')
+				  	);
+		        }
+		        if($('#indicesEmaIndicator').length){
+		        	ReactDOM.render(
+				  	  <IndicesEmaIndicator />,
+				  	  document.getElementById('indicesEmaIndicator')
 				  	);
 		        }
 	        }
