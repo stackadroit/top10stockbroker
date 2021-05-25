@@ -1990,7 +1990,7 @@ add_shortcode('Camarilla_Clevels_Stock_Table', function ($atts){
 
 /**
 *   Shortcode form Main Pivot Points Calculator.
-Need To work on this
+ 
 [MainPivotPointsIndicator]
 */
 add_shortcode('MainPivotPointsIndicator', function ($atts){ 
@@ -2005,7 +2005,7 @@ add_shortcode('MainPivotPointsIndicator', function ($atts){
 
 /**
 *  Shortcode form Main SMA Indicator.
-Need To work on this
+ 
 [MainSMAIndicator]
 */
 add_shortcode('MainSMAIndicator', function ($atts){ 
@@ -2020,7 +2020,7 @@ add_shortcode('MainSMAIndicator', function ($atts){
 
 /**
 *  Shortcode form Main EMA Indicator.
-Need To work on this
+ 
 [MainSMAIndicator]
 */
 add_shortcode('MainEMAIndicator', function ($atts){ 
@@ -2030,5 +2030,62 @@ add_shortcode('MainEMAIndicator', function ($atts){
         'tabs' => '1', 
     ), $atts);
     $template = 'shortcodes.fore-cast.indicators.ema-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main MACD Indicator.
+[MainMACDIndicator]
+*/
+add_shortcode('MainMACDIndicator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+    ), $atts);
+    $template = 'shortcodes.fore-cast.indicators.macd-indicator';
+    return \App\template($template, $data);
+});
+
+function get_chield_pages($post_parent){
+    global $wpdb; 
+    if($post_parent){
+        $chieldPages =[];
+        $all_wp_pages = get_posts(
+            array(
+                'posts_per_page' =>-1,
+                'post_type' => 'page',
+                'post_parent' => $post_parent,
+                'order' => 'ASC',
+                'orderby' => 'title',
+                 
+            )
+        );
+        foreach ($all_wp_pages as $key => $value) {
+            $chieldPages[get_the_permalink($value->ID)] =$value->post_title;
+        }
+        return $chieldPages;
+    }else{
+        return [];
+    }
+    return [];
+}
+/**
+*  Shortcode form Main MACD Indicator.
+[MainRSIIndicator]
+*/
+add_shortcode('MainRSIIndicator', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+    ), $atts);
+    $parent_page ='57204';
+    $chieldPages =get_chield_pages($parent_page);
+    
+    $data['chieldPages'] =$chieldPages;
+     
+    $template = 'shortcodes.fore-cast.indicators.rsi-indicator';
     return \App\template($template, $data);
 });

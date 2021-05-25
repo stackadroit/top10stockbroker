@@ -20,14 +20,24 @@ import {CLForeCastCalculator}  from '../library/fore-cast/cl-fore-cast-calculato
 // Sma Indicator
 import StocksSmaIndicator from '../components/indicators/stocks-sma-indicator';
 import IndicesSmaIndicator from '../components/indicators/indices-sma-indicator';
+
 // Ema Indicator
 import StocksEmaIndicator from '../components/indicators/stocks-ema-indicator';
 import IndicesEmaIndicator from '../components/indicators/indices-ema-indicator';
+
+// Macd Indicator
+import StocksMacdIndicator from '../components/indicators/stocks-macd-indicator';
+import IndicesMacdIndicator from '../components/indicators/indices-macd-indicator';
+
+// RSI Indicator
+import StocksRsiIndicator from '../components/indicators/stocks-rsi-indicator';
+import IndicesRsiIndicator from '../components/indicators/indices-rsi-indicator';
 
 export default {
   init() {
     // Commom Plugins
 	(function($) {
+
 		//for mobile version for lazy loading
 		var process = true;
 		
@@ -179,7 +189,36 @@ export default {
 				  	);
 		        }
 	        }
-	  		
+	  		//Macd Stocks Indicator
+	     	if($('#main-macd-indicator').length){
+	     		if($('#stocksMacdIndicator').length){
+		        	ReactDOM.render(
+				  	  <StocksMacdIndicator />,
+				  	  document.getElementById('stocksMacdIndicator')
+				  	);
+		        }
+		        if($('#indicesMacdIndicator').length){
+		        	ReactDOM.render(
+				  	  <IndicesMacdIndicator />,
+				  	  document.getElementById('indicesMacdIndicator')
+				  	);
+		        }
+	        }
+	        //RSI Stocks Indicator
+	     	if($('#main-rsi-indicator').length){
+	     		if($('#stocksRsiIndicator').length){
+		        	ReactDOM.render(
+				  	  <StocksRsiIndicator />,
+				  	  document.getElementById('stocksRsiIndicator')
+				  	);
+		        }
+		        if($('#indicesRsiIndicator').length){
+		        	ReactDOM.render(
+				  	  <IndicesRsiIndicator />,
+				  	  document.getElementById('indicesRsiIndicator')
+				  	);
+		        }
+	        }
 	    }
 
 	    //only for mobile render
@@ -252,8 +291,9 @@ export default {
         	new SimpleBar(this , { autoHide: true });
         });
 
+        
 	}).apply(this, [jQuery]);
-
+ 
   },
   finalize() {
     // JavaScript to be fired on all pages, after page specific JS is fired
