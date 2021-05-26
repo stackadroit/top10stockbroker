@@ -33,6 +33,17 @@ import IndicesMacdIndicator from '../components/indicators/indices-macd-indicato
 import StocksRsiIndicator from '../components/indicators/stocks-rsi-indicator';
 import IndicesRsiIndicator from '../components/indicators/indices-rsi-indicator';
 
+// Stochastic Oscillator Indicator
+import StocksSoIndicator from '../components/indicators/stocks-so-indicator';
+import IndicesSoIndicator from '../components/indicators/indices-so-indicator';
+
+// Graham Intrinsic Value Indicator
+import StocksGivIndicator from '../components/indicators/stocks-giv-indicator';
+ 
+ // Camarilla Levels Indicator
+import StocksClIndicator from '../components/indicators/stocks-cl-indicator';
+import IndicesClIndicator from '../components/indicators/indices-cl-indicator';
+ 
 export default {
   init() {
     // Commom Plugins
@@ -216,6 +227,47 @@ export default {
 		        	ReactDOM.render(
 				  	  <IndicesRsiIndicator />,
 				  	  document.getElementById('indicesRsiIndicator')
+				  	);
+		        }
+	        }
+
+	        //Stochastic Oscillator Indicator
+	     	if($('#main-so-indicator').length){
+	     		if($('#stocksSoIndicator').length){
+		        	ReactDOM.render(
+				  	  <StocksSoIndicator />,
+				  	  document.getElementById('stocksSoIndicator')
+				  	);
+		        }
+		        if($('#indicesSoIndicator').length){
+		        	ReactDOM.render(
+				  	  <IndicesSoIndicator />,
+				  	  document.getElementById('indicesSoIndicator')
+				  	);
+		        }
+	        }
+	        //Graham Intrinsic Value Indicator
+	     	if($('#main-giv-indicator').length){
+	     		if($('#stocksGivIndicator').length){
+		        	ReactDOM.render(
+				  	  <StocksGivIndicator />,
+				  	  document.getElementById('stocksGivIndicator')
+				  	);
+		        }
+		       
+	        }
+	        //Camarilla Levels Indicator
+	     	if($('#main-cl-indicator').length){
+	     		if($('#stocksClIndicator').length){
+		        	ReactDOM.render(
+				  	  <StocksClIndicator />,
+				  	  document.getElementById('stocksClIndicator')
+				  	);
+		        }
+		        if($('#indicesClIndicator').length){
+		        	ReactDOM.render(
+				  	  <IndicesClIndicator />,
+				  	  document.getElementById('indicesClIndicator')
 				  	);
 		        }
 	        }

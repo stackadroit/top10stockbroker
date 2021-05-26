@@ -1,4 +1,4 @@
-<div data-id="{{@$id}}" id="main-rsi-indicator" class="bothtab-st-id-wrap indicator-data-wrap">
+<div data-id="{{@$id}}" id="main-cl-indicator" class="bothtab-st-id-wrap indicator-data-wrap">
         <div class="row"> 
             <div class="col-md-4"> </div>
             <div class="col-md-4"> 
@@ -19,10 +19,10 @@
             <div class="col-md-6"> 
                 <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a href="#stocksRsiIndicator" role="tab" data-toggle="tab" aria-controls="stocksRsiIndicator" class="active">Stocks</a>
+                        <a href="#stocksClIndicator" role="tab" data-toggle="tab" aria-controls="stocksClIndicator" class="active">Stocks</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#indicesRsiIndicator" role="tab" data-toggle="tab" aria-controls="indicesRsiIndicator">Indices</a>
+                        <a href="#indicesClIndicator" role="tab" data-toggle="tab" aria-controls="indicesClIndicator">Indices</a>
                     </li>
                      
                 </ul>
@@ -30,17 +30,17 @@
              
     </div>
     <div class="tab-content" id="myTabContent">
-        <div id="stocksRsiIndicator" class="sintab-stock-cal-wrap tab-pane fade show active">
+        <div id="stocksClIndicator" class="sintab-stock-cal-wrap tab-pane fade show active">
         </div>
-        <div id="indicesRsiIndicator" class="sintab-stock-cal-wrap tab-pane fade">
+        <div id="indicesClIndicator" class="sintab-stock-cal-wrap tab-pane fade">
         </div>
     </div>
     @else
         @if($type =='Stock')
-        <div id="stocksRsiIndicator" class="sintab-stock-cal-wrap tab-pane fade show active">
+        <div id="stocksClIndicator" class="sintab-stock-cal-wrap tab-pane fade show active">
             </div>
         @else
-        <div id="indicesRsiIndicator" class="sintab-stock-cal-wrap tab-pane fade show active">
+        <div id="indicesClIndicator" class="sintab-stock-cal-wrap tab-pane fade show active">
             </div>
         @endif
     @endif
