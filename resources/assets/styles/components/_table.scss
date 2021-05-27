@@ -54,3 +54,27 @@
 // .table-responsive{
 //   border: 1px solid #dee2e6;
 // }
+.tab-content {
+  .template-indicator {
+    .MuiInput-root {
+      border: 0!important
+    }
+  }
+  .template-indicator {
+    .MuiInput-root {
+      margin-right: 40px!important;
+    }
+  }
+  .MUIDataTableFilterList-root-33 {
+    margin-bottom: 20px!important;
+  }
+  .MUIDataTable-responsiveBase-5 {
+      max-height: 500px;
+  }
+
+  @media (max-width: 599.95px) {
+    .MUIDataTableToolbar-actions-17 {
+      text-align: left!important;
+    }
+  }
+}
