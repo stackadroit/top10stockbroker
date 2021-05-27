@@ -56,12 +56,12 @@
 // }
 .tab-content {
   .template-indicator {
-    &.MuiInput-root {
-      border: 0!important
+    .MuiInput-root {
+      border: 0!important;
     }
   }
   .template-indicator {
-    &.MuiInput-root {
+    .MuiInput-root {
       margin-right: 40px!important;
     }
   }
