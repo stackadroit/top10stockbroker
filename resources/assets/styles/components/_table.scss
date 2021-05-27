@@ -51,55 +51,125 @@
       background: #eee;
   }
 }
-// .table-responsive{
-//   border: 1px solid #dee2e6;
-// }
-.tab-content {
-  .template-indicator {
-    .MuiInput-root {
-      border: 0!important;
+
+#main-pivot-points-indicator {
+  .more-indicator-filter {
+    margin-bottom: 20px;
+  }
+}
+
+.template-indicator {
+
+  .MUIDataTableHead-responsiveStacked-36 {
+    display: table-header-group!important
+  }
+
+  .MuiToolbar-root {
+    @media(max-width: 767px) {
+      flex-flow: row wrap;
     }
-  }
-  .template-indicator {
-    .MuiInput-root {
-      margin-right: 40px!important;
-    }
-  }
-  .MUIDataTableFilterList-root-33 {
-    margin-bottom: 20px!important;
-  }
-  .MUIDataTable-responsiveBase-5 {
-      max-height: 500px;
-
-      table {
-        th {
-            background: #f7fdfa;
-            font-weight: bold!important;
-            color: #e35133;
-            text-transform: uppercase;
-
-            .MUIDataTableHeadCell-data-55, span {
-              font-weight: bold!important;
-              color: #e35133;
-              text-transform: uppercase;
-            }
-        }
-
-        tr {
-          td {
-            display: table-cell!important;
-
-            .MUIDataTableBodyCell-cellHide-73 {
-              display: none!important;
+    .MUIDataTableToolbar-left-15 {
+      @media(max-width: 767px) {
+        flex: 100%!important;
+      }
+      .MUIDataTableSearch-main-28 {
+          position: relative;
+        .MUIDataTableSearch-searchIcon-29 {
+          position: absolute;
+          margin: 0!important;
+          left: 10px;
+          top:10px;
+          .MUIDataTableSearch-searchText-30 {
+            flex:1!important;
+            .MuiInputBase-input {
+              padding: 10px 10px 10px 40px!important;
             }
           }
         }
       }
-  }
-
-  @media (max-width: 599.95px) {
+    }
     .MUIDataTableToolbar-actions-17 {
-      text-align: left!important;
+      @media(max-width: 767px) {
+        flex: 100%!important;
+        text-align: left!important;
+      }
+
+      span {
+         @media(max-width: 767px) {
+          width: 100%;
+          float: left;
+        }
+      }
+      button {
+        &.MuiButton-root {
+          @media(max-width: 767px) {
+            float: right;
+          }
+        }
+      }
     }
   }
+
+  table {
+    &.MuiTable-root {
+      &.MUIDataTable-tableRoot-4 {
+        table-layout: auto !important;
+      }
+    }
+
+    tr {
+      position: relative !important;
+
+      th {
+        background: #f7fdfa;
+        font-weight: bold !important;
+        color: #e35133;
+        text-transform: uppercase;
+        width: 122px;
+
+        .MUIDataTableHeadCell-data-55, span {
+          font-weight: bold !important;
+          color: #e35133;
+          text-transform: uppercase;
+        }
+      }
+
+      th,
+      td {
+        &:first-child {
+          position: static !important;
+          left: 0 !important;
+
+          &:before, &:after {
+            content: "";
+            position:absolute;
+            width: 1px;
+            height: 100%;
+          }
+          &:before {
+            left: 0;
+          }
+          &:after {
+            right: 0;
+          }
+        }
+      }
+
+      td {
+        display: table-cell !important;
+
+        .MUIDataTableBodyCell-cellHide-73 {
+          display: none !important;
+        }
+      }
+    }
+  }
+
+  .MuiInput-root {
+    border: 0 !important;
+  }
+}
+
+.MUIDataTableFilterList-root-33 {
+  margin-bottom: 20px !important;
 }
