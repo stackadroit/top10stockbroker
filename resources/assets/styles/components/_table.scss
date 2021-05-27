@@ -88,6 +88,10 @@
         tr {
           td {
             display: table-cell!important;
+
+            .MUIDataTableBodyCell-cellHide-73 {
+              display: none!important;
+            }
           }
         }
       }
