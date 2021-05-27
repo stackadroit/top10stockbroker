@@ -70,6 +70,22 @@
   }
   .MUIDataTable-responsiveBase-5 {
       max-height: 500px;
+
+      table {
+        th, .MUIDataTableHeadCell-data-55 {
+            font-weight: bold;
+            background: #f7fdfa;
+            color: #e35133;
+            text-transform: uppercase;
+            span {
+              font-weight: bold!important;
+              font-weight: bold;
+              background: #f7fdfa;
+              color: #e35133;
+              text-transform: uppercase;
+            }
+        }
+      }
   }
 
   @media (max-width: 599.95px) {
