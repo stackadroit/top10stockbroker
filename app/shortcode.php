@@ -2097,8 +2097,9 @@ add_shortcode('MainRSIIndicator', function ($atts){
         'title' => '',
         'id' => get_the_ID(),
         'tabs' => '1', 
+        'parent_page' => '57204',
     ), $atts);
-    $parent_page ='57204';
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
     $chieldPages =get_chield_pages($parent_page);
     
     $data['chieldPages'] =$chieldPages;
@@ -2163,6 +2164,29 @@ add_shortcode('MainCLIndicator', function ($atts){
     $chieldPages =get_chield_pages($parent_page);
     
     $data['chieldPages'] =$chieldPages;
+     
+    $template = 'shortcodes.fore-cast.indicators.cl-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main  Camarilla Levels Indicator.
+[MainIndicatorFilters]
+*/
+add_shortcode('MainIndicatorFilters', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+    ), $atts);
+    // $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    // $chieldPages =get_chield_pages($parent_page);
+    // $chieldPages =array(
+    //     ''=>'',
+    // );
+    
+    // $data['chieldPages'] =$chieldPages;
      
     $template = 'shortcodes.fore-cast.indicators.cl-indicator';
     return \App\template($template, $data);
