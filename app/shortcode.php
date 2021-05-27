@@ -2186,8 +2186,8 @@ add_shortcode('MainIndicatorFilters', function ($atts){
     //     ''=>'',
     // );
     
-    // $data['chieldPages'] =$chieldPages;
+    $data['chieldPages'] =$chieldPages;
      
-    $template = 'shortcodes.fore-cast.indicators.cl-indicator';
+    $template = 'shortcodes.fore-cast.indicators.main-indicators-filters';
     return \App\template($template, $data);
 });
