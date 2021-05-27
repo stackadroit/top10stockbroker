@@ -68,4 +68,13 @@
   .MUIDataTableFilterList-root-33 {
     margin-bottom: 20px!important;
   }
+  .MUIDataTable-responsiveBase-5 {
+      max-height: 500px;
+  }
+
+  @media (max-width: 599.95px) {
+    .MUIDataTableToolbar-actions-17 {
+      text-align: left!important;
+    }
+  }
 }
