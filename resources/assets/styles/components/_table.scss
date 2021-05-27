@@ -72,18 +72,27 @@
       max-height: 500px;
 
       table {
-        th, .MUIDataTableHeadCell-data-55 {
-            font-weight: bold;
+        th {
             background: #f7fdfa;
+            font-weight: bold!important;
             color: #e35133;
             text-transform: uppercase;
-            span {
+
+            .MUIDataTableHeadCell-data-55, span {
               font-weight: bold!important;
-              font-weight: bold;
-              background: #f7fdfa;
               color: #e35133;
               text-transform: uppercase;
             }
+        }
+
+        tr {
+          td {
+            display: table-cell!important;
+
+            .MUIDataTableBodyCell-cellHide-73 {
+              display: none!important;
+            }
+          }
         }
       }
   }
