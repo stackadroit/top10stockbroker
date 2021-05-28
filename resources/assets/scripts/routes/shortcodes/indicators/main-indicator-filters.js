@@ -36,8 +36,63 @@ export default {
           if (typeof EasyTab !== 'undefined') {
             EasyTab.initialize();
           }
+          function loadIndicatorsComponent(defaultCal){
+            console.log(defaultCal);
+            var resp_div="#main-indicator-filters-content";
+            var actDiv ='';
+            switch(defaultCal){
+              case 'Cl':
+                actDiv='stocksClIndicator';
+                if($(resp_div).find('#stocksClIndicator').length) {
+                  ReactDOM.render( 
+                    <StocksClIndicator />,
+                    document.getElementById(actDiv)
+                  );
+                }
+            }
+            // if(!$(resp_div).find('.highcharts-container ').length){
+          //       ReactDOM.render( 
+          //         <GoldSilverChart />,
+          //         document.getElementById(resp_div)
+          //       );
+          //     }
+          }
           setTimeout(function(){
-            console.log('s');
+            // console.log('s');
+            if($('#main-indicator-filters').length){
+              var defaultCal= $('#main-indicator-filters').data('indicator');
+              defaultCal =(defaultCal)?defaultCal:'cl';
+              if(defaultCal){
+                console.log(defaultCal);
+                var eleId ='#main-indicator-filters-content';
+                jQuery.ajax(
+                   {
+                      type: "post",
+                      dataType: "html",
+                      url:global_vars.ajax_url,
+                      data: {
+                        'action':'load-main-indicator-filters',
+                        'defaultCal':defaultCal,
+                        'security': global_vars.ajax_nonce,
+                      },
+                      cache:false,
+                      beforeSend: function() {
+                        $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+                      },
+                      success: function(response){
+                        if(response){
+                            $(eleId).html(response);
+                            loadIndicatorsComponent(defaultCal);
+                        }else{
+                          $(eleId).html();
+                        }
+                      },
+                      error:function(error){
+                        $(eleId).html();
+                      }
+                  });
+              }
+            }
             $(document).find('#main-indicator-filter').on('change',function(){
               console.log('sss');
             });
