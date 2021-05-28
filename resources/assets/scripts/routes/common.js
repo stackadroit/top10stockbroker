@@ -16,33 +16,7 @@ import {RSIForeCastCalculator}  from '../library/fore-cast/rsi-fore-cast-calcula
 import {SOForeCastCalculator}  from '../library/fore-cast/so-fore-cast-calculator';
 import {GIVForeCastCalculator}  from '../library/fore-cast/giv-fore-cast-calculator';
 import {CLForeCastCalculator}  from '../library/fore-cast/cl-fore-cast-calculator';
-
-// Sma Indicator
-import StocksSmaIndicator from '../components/indicators/stocks-sma-indicator';
-import IndicesSmaIndicator from '../components/indicators/indices-sma-indicator';
-
-// Ema Indicator
-import StocksEmaIndicator from '../components/indicators/stocks-ema-indicator';
-import IndicesEmaIndicator from '../components/indicators/indices-ema-indicator';
-
-// Macd Indicator
-import StocksMacdIndicator from '../components/indicators/stocks-macd-indicator';
-import IndicesMacdIndicator from '../components/indicators/indices-macd-indicator';
-
-// RSI Indicator
-import StocksRsiIndicator from '../components/indicators/stocks-rsi-indicator';
-import IndicesRsiIndicator from '../components/indicators/indices-rsi-indicator';
-
-// Stochastic Oscillator Indicator
-import StocksSoIndicator from '../components/indicators/stocks-so-indicator';
-import IndicesSoIndicator from '../components/indicators/indices-so-indicator';
-
-// Graham Intrinsic Value Indicator
-import StocksGivIndicator from '../components/indicators/stocks-giv-indicator';
  
- // Camarilla Levels Indicator
-import StocksClIndicator from '../components/indicators/stocks-cl-indicator';
-import IndicesClIndicator from '../components/indicators/indices-cl-indicator';
 import MainIndicatorFilters from '../routes/shortcodes/indicators/main-indicator-filters';
  
 export default {
@@ -138,6 +112,7 @@ export default {
 		if (typeof ModalPopup !== 'undefined') {
 			ModalPopup.initialize();
 		}
+
 		if (typeof MainIndicatorFilters !== 'undefined') {
 			if($('#main-indicator-filters').length){
 				MainIndicatorFilters.init();
@@ -170,113 +145,6 @@ export default {
 			  	  document.getElementById('list-slider-modal')
 			  	);
 	  		});
-	     //    if($('#pivot-point-calculator').length){
-	     //    	ReactDOM.render(
-			  	//   <ForeCastPivotPoint />,
-			  	//   document.getElementById('pivot-point-calculator')
-			  	// );
-	     //    }
-	     	//Sma Stocks Indicator
-	     	if($('#main-sma-indicator').length){
-	     		if($('#stocksSmaIndicator').length){
-		        	ReactDOM.render(
-				  	  <StocksSmaIndicator />,
-				  	  document.getElementById('stocksSmaIndicator')
-				  	);
-		        }
-		        if($('#indicesSmaIndicator').length){
-		        	ReactDOM.render(
-				  	  <IndicesSmaIndicator />,
-				  	  document.getElementById('indicesSmaIndicator')
-				  	);
-		        }
-	        }
-	        //Ema Stocks Indicator
-	     	if($('#main-ema-indicator').length){
-	     		if($('#stocksEmaIndicator').length){
-		        	ReactDOM.render(
-				  	  <StocksEmaIndicator />,
-				  	  document.getElementById('stocksEmaIndicator')
-				  	);
-		        }
-		        if($('#indicesEmaIndicator').length){
-		        	ReactDOM.render(
-				  	  <IndicesEmaIndicator />,
-				  	  document.getElementById('indicesEmaIndicator')
-				  	);
-		        }
-	        }
-	  		//Macd Stocks Indicator
-	     	if($('#main-macd-indicator').length){
-	     		if($('#stocksMacdIndicator').length){
-		        	ReactDOM.render(
-				  	  <StocksMacdIndicator />,
-				  	  document.getElementById('stocksMacdIndicator')
-				  	);
-		        }
-		        if($('#indicesMacdIndicator').length){
-		        	ReactDOM.render(
-				  	  <IndicesMacdIndicator />,
-				  	  document.getElementById('indicesMacdIndicator')
-				  	);
-		        }
-	        }
-	        //RSI Stocks Indicator
-	     	if($('#main-rsi-indicator').length){
-	     		if($('#stocksRsiIndicator').length){
-		        	ReactDOM.render(
-				  	  <StocksRsiIndicator />,
-				  	  document.getElementById('stocksRsiIndicator')
-				  	);
-		        }
-		        if($('#indicesRsiIndicator').length){
-		        	ReactDOM.render(
-				  	  <IndicesRsiIndicator />,
-				  	  document.getElementById('indicesRsiIndicator')
-				  	);
-		        }
-	        }
-
-	        //Stochastic Oscillator Indicator
-	     	if($('#main-so-indicator').length){
-	     		if($('#stocksSoIndicator').length){
-		        	ReactDOM.render(
-				  	  <StocksSoIndicator />,
-				  	  document.getElementById('stocksSoIndicator')
-				  	);
-		        }
-		        if($('#indicesSoIndicator').length){
-		        	ReactDOM.render(
-				  	  <IndicesSoIndicator />,
-				  	  document.getElementById('indicesSoIndicator')
-				  	);
-		        }
-	        }
-	        //Graham Intrinsic Value Indicator
-	     	if($('#main-giv-indicator').length){
-	     		if($('#stocksGivIndicator').length){
-		        	ReactDOM.render(
-				  	  <StocksGivIndicator />,
-				  	  document.getElementById('stocksGivIndicator')
-				  	);
-		        }
-		       
-	        }
-	        //Camarilla Levels Indicator
-	     	if($('#main-cl-indicator').length){
-	     		if($('#stocksClIndicator').length){
-		        	ReactDOM.render(
-				  	  <StocksClIndicator />,
-				  	  document.getElementById('stocksClIndicator')
-				  	);
-		        }
-		        if($('#indicesClIndicator').length){
-		        	ReactDOM.render(
-				  	  <IndicesClIndicator />,
-				  	  document.getElementById('indicesClIndicator')
-				  	);
-		        }
-	        }
 	    }
 
 	    //only for mobile render
