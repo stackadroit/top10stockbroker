@@ -83,6 +83,7 @@
 }
 .template-indicator .MuiInputBase-input{
   border: 1px solid #808080;
+  border-radius: 5px;
 }
 .template-indicator .MuiInput-root{
   border: 1px solid #4a4a4a;
@@ -185,13 +186,21 @@
       th {
         background: #f7fdfa;
         font-weight: bold !important;
-        color: #e35133;
+        color: #000000;
         text-transform: uppercase;
         width: 122px;
 
+        &:nth-child(2) {
+            width: 90px;
+        }
+
+        &:nth-child(3) {
+          width: 110px;
+        }
+
         .MUIDataTableHeadCell-data-55, span {
           font-weight: bold !important;
-          color: #e35133;
+          color: #000000;
           text-transform: uppercase;
         }
 
@@ -202,6 +211,7 @@
             background: transparent!important;
           }
           &:focus {
+            background: transparent!important;
             box-shadow: none!important;
           }
 
@@ -214,7 +224,7 @@
                 right: -15px;
                 border: 5px solid transparent;
                 top: 7px;
-                border-top-color: #e35133;
+                border-top-color: #000000;
               }
             }
           }
@@ -267,6 +277,9 @@
 
   .MuiInput-root {
     border: 0 !important;
+    &:before, &:after {
+      display: none!important;
+    }
   }
 }
 
