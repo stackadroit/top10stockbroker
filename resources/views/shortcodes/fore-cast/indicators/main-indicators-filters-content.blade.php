@@ -2,10 +2,10 @@
             <div class="col-md-6"> 
                 <ul class="nav nav-tabs tab-hori-1" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a href="#stocks{{$defaultCal}}Indicator" role="tab" data-toggle="tab" aria-controls="stocksGivIndicator" class="active">Stocks</a>
+                        <a href="#stocks{{$defaultCal}}Indicator" role="tab" data-toggle="tab" aria-controls="stocks{{$defaultCal}}Indicator" class="active">Stocks</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#indices{{$defaultCal}}Indicator" role="tab" data-toggle="tab" aria-controls="indicesGivIndicator">Indices</a>
+                        <a href="#indices{{$defaultCal}}Indicator" role="tab" data-toggle="tab" aria-controls="indices{{$defaultCal}}Indicator">Indices</a>
                     </li>
                      
                 </ul>

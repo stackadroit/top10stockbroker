@@ -3,27 +3,27 @@ import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 // import GoldSilverChart from '../../components/graph/gold-silver-chart';
 // Sma Indicator
-import StocksSmaIndicator from '../../../components/indicators/stocks-sma-indicator';
-import IndicesSmaIndicator from '../../../components/indicators/indices-sma-indicator';
+// import StocksSmaIndicator from '../../../components/indicators/stocks-sma-indicator';
+// import IndicesSmaIndicator from '../../../components/indicators/indices-sma-indicator';
 
 // Ema Indicator
-import StocksEmaIndicator from '../../../components/indicators/stocks-ema-indicator';
-import IndicesEmaIndicator from '../../../components/indicators/indices-ema-indicator';
+// import StocksEmaIndicator from '../../../components/indicators/stocks-ema-indicator';
+// import IndicesEmaIndicator from '../../../components/indicators/indices-ema-indicator';
 
 // Macd Indicator
-import StocksMacdIndicator from '../../../components/indicators/stocks-macd-indicator';
-import IndicesMacdIndicator from '../../../components/indicators/indices-macd-indicator';
+// import StocksMacdIndicator from '../../../components/indicators/stocks-macd-indicator';
+// import IndicesMacdIndicator from '../../../components/indicators/indices-macd-indicator';
 
 // RSI Indicator
-import StocksRsiIndicator from '../../../components/indicators/stocks-rsi-indicator';
-import IndicesRsiIndicator from '../../../components/indicators/indices-rsi-indicator';
+// import StocksRsiIndicator from '../../../components/indicators/stocks-rsi-indicator';
+// import IndicesRsiIndicator from '../../../components/indicators/indices-rsi-indicator';
 
 // Stochastic Oscillator Indicator
-import StocksSoIndicator from '../../../components/indicators/stocks-so-indicator';
-import IndicesSoIndicator from '../../../components/indicators/indices-so-indicator';
+// import StocksSoIndicator from '../../../components/indicators/stocks-so-indicator';
+// import IndicesSoIndicator from '../../../components/indicators/indices-so-indicator';
 
 // Graham Intrinsic Value Indicator
-import StocksGivIndicator from '../../../components/indicators/stocks-giv-indicator';
+// import StocksGivIndicator from '../../../components/indicators/stocks-giv-indicator';
  
  // Camarilla Levels Indicator
 import StocksClIndicator from '../../../components/indicators/stocks-cl-indicator';
@@ -37,16 +37,23 @@ export default {
             EasyTab.initialize();
           }
           function loadIndicatorsComponent(defaultCal){
-            console.log(defaultCal);
+            // console.log(defaultCal);
             var resp_div="#main-indicator-filters-content";
-            var actDiv ='';
+            var stockActDiv ='stocks'+defaultCal+'Indicator';
+            var indicesActDiv ='indices'+defaultCal+'Indicator';
             switch(defaultCal){
               case 'Cl':
-                actDiv='stocksClIndicator';
-                if($(resp_div).find('#stocksClIndicator').length) {
+                // actDiv='stocksClIndicator';
+                if($(resp_div).find('#'+stockActDiv).length) {
                   ReactDOM.render( 
                     <StocksClIndicator />,
-                    document.getElementById(actDiv)
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesClIndicator />,
+                    document.getElementById(indicesActDiv)
                   );
                 }
             }
