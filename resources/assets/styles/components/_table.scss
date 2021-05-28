@@ -115,6 +115,10 @@
     @media(max-width: 767px) {
       flex-flow: row wrap;
     }
+
+    .MuiInputBase-input {
+      border: 1px solid #808080!important; 
+    }
     .MUIDataTableToolbar-left-15 {
       @media(max-width: 767px) {
         flex: 100%!important;
@@ -215,8 +219,8 @@
             }
           }
         }
-
-        div[aria-sort="ascending"], div[aria-sort="decending"] {
+      }
+      th[aria-sort="ascending"], th[aria-sort="decending"] {
           span {
              &.MuiButton-label {
               &:after {
@@ -225,7 +229,6 @@
              }
           }
         }
-      }
 
       th,
       td {
