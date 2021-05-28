@@ -2,28 +2,31 @@ import { EasyTab}  from '../../../library/global';
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 // import GoldSilverChart from '../../components/graph/gold-silver-chart';
+// PivotPoints Indicator  
+import StocksPivotPointsIndicator from '../../../components/indicators/stocks-pivot-points-indicator';
+import IndicesPivotPointsIndicator from '../../../components/indicators/indices-pivot-points-indicator';
 // Sma Indicator
-// import StocksSmaIndicator from '../../../components/indicators/stocks-sma-indicator';
-// import IndicesSmaIndicator from '../../../components/indicators/indices-sma-indicator';
+import StocksSmaIndicator from '../../../components/indicators/stocks-sma-indicator';
+import IndicesSmaIndicator from '../../../components/indicators/indices-sma-indicator';
 
 // Ema Indicator
-// import StocksEmaIndicator from '../../../components/indicators/stocks-ema-indicator';
-// import IndicesEmaIndicator from '../../../components/indicators/indices-ema-indicator';
+import StocksEmaIndicator from '../../../components/indicators/stocks-ema-indicator';
+import IndicesEmaIndicator from '../../../components/indicators/indices-ema-indicator';
 
 // Macd Indicator
-// import StocksMacdIndicator from '../../../components/indicators/stocks-macd-indicator';
-// import IndicesMacdIndicator from '../../../components/indicators/indices-macd-indicator';
+import StocksMacdIndicator from '../../../components/indicators/stocks-macd-indicator';
+import IndicesMacdIndicator from '../../../components/indicators/indices-macd-indicator';
 
 // RSI Indicator
-// import StocksRsiIndicator from '../../../components/indicators/stocks-rsi-indicator';
-// import IndicesRsiIndicator from '../../../components/indicators/indices-rsi-indicator';
+import StocksRsiIndicator from '../../../components/indicators/stocks-rsi-indicator';
+import IndicesRsiIndicator from '../../../components/indicators/indices-rsi-indicator';
 
 // Stochastic Oscillator Indicator
-// import StocksSoIndicator from '../../../components/indicators/stocks-so-indicator';
-// import IndicesSoIndicator from '../../../components/indicators/indices-so-indicator';
+import StocksSoIndicator from '../../../components/indicators/stocks-so-indicator';
+import IndicesSoIndicator from '../../../components/indicators/indices-so-indicator';
 
 // Graham Intrinsic Value Indicator
-// import StocksGivIndicator from '../../../components/indicators/stocks-giv-indicator';
+import StocksGivIndicator from '../../../components/indicators/stocks-giv-indicator';
  
  // Camarilla Levels Indicator
 import StocksClIndicator from '../../../components/indicators/stocks-cl-indicator';
@@ -37,13 +40,11 @@ export default {
             EasyTab.initialize();
           }
           function loadIndicatorsComponent(defaultCal){
-            // console.log(defaultCal);
             var resp_div="#main-indicator-filters-content";
             var stockActDiv ='stocks'+defaultCal+'Indicator';
             var indicesActDiv ='indices'+defaultCal+'Indicator';
             switch(defaultCal){
               case 'Cl':
-                // actDiv='stocksClIndicator';
                 if($(resp_div).find('#'+stockActDiv).length) {
                   ReactDOM.render( 
                     <StocksClIndicator />,
@@ -56,22 +57,105 @@ export default {
                     document.getElementById(indicesActDiv)
                   );
                 }
+                break;
+              case 'Ema':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksEmaIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesEmaIndicator />,
+                    document.getElementById(indicesActDiv)
+                  );
+                }
+                break;
+              case 'Giv':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksGivIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                break;
+              case 'Macd':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksMacdIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesMacdIndicator />,
+                    document.getElementById(indicesActDiv)
+                  );
+                }
+                break;
+              case 'PivotPoints':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksPivotPointsIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesPivotPointsIndicator />,
+                    document.getElementById(indicesActDiv)
+                  );
+                }
+                break;
+              case 'Rsi':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksRsiIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesRsiIndicator />,
+                    document.getElementById(indicesActDiv)
+                  );
+                }
+                break;
+              case 'Sma':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksSmaIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesSmaIndicator />,
+                    document.getElementById(indicesActDiv)
+                  );
+                }
+                break;
+              case 'So':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksSoIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesSoIndicator />,
+                    document.getElementById(indicesActDiv)
+                  );
+                }
+                break;
             }
-            // if(!$(resp_div).find('.highcharts-container ').length){
-          //       ReactDOM.render( 
-          //         <GoldSilverChart />,
-          //         document.getElementById(resp_div)
-          //       );
-          //     }
+           
           }
-          setTimeout(function(){
-            // console.log('s');
-            if($('#main-indicator-filters').length){
-              var defaultCal= $('#main-indicator-filters').data('indicator');
-              defaultCal =(defaultCal)?defaultCal:'cl';
-              if(defaultCal){
-                console.log(defaultCal);
-                var eleId ='#main-indicator-filters-content';
+          function loadIndicatorFilterHtml(defaultCal){
+             // console.log(defaultCal);
+              var eleId ='#main-indicator-filters-content';
                 jQuery.ajax(
                    {
                       type: "post",
@@ -84,7 +168,7 @@ export default {
                       },
                       cache:false,
                       beforeSend: function() {
-                        $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
+                        // $(eleId).prepend('<div class="fb-loader loader mx-auto" style="margin-bottom:20px;"></div>');
                       },
                       success: function(response){
                         if(response){
@@ -97,27 +181,25 @@ export default {
                       error:function(error){
                         $(eleId).html();
                       }
-                  });
+                  }); 
+          }
+          setTimeout(function(){
+            if($('#main-indicator-filters').length){
+              var defaultCal= $('#main-indicator-filters').data('indicator');
+              defaultCal =(defaultCal)?defaultCal:'cl';
+              if(defaultCal){
+                loadIndicatorFilterHtml(defaultCal)
               }
             }
             $(document).find('#main-indicator-filter').on('change',function(){
-              console.log('sss');
+              var defaultCal =$(this).val();
+              if(defaultCal){
+                loadIndicatorFilterHtml(defaultCal)
+              }
             });
-            // .trigger('click');
-            // $('.more-indicator-filter').trigger('click');
+            
           },500);
-          // $(document).on('click','.gold_silver_chart',function(e){
-          //     var dur=$(this).data("filter");
-          //     var selli=$(this).data("element");
-          //     var resp_div=$(this).data("chart-element");
-          //     var post_id=$(this).data("post-id");
-          //    if(!$('#'+resp_div).find('.highcharts-container ').length){
-          //       ReactDOM.render( 
-          //         <GoldSilverChart />,
-          //         document.getElementById(resp_div)
-          //       );
-          //     }
-          // });
+           
       }).apply(this, [jQuery]);
   },
   finalize() {

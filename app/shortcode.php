@@ -2181,7 +2181,7 @@ add_shortcode('MainIndicatorFilters', function ($atts){
         'tabs' => '1', 
         'default' => 'Cl', 
     ), $atts);
-    $defaultCal =($data['default'])?$data['default']:'cl';
+    $defaultCal =($data['default'])?$data['default']:'Cl';
     // $chieldPages =get_chield_pages($parent_page);
     $chieldPages =array(
         'Cl'=>'Camarilla Levels Indicator',
