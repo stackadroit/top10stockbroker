@@ -104,16 +104,21 @@
   .more-indicator-filter {
     margin-bottom: 20px;
   }
+  .col-md-5 {
+    &.text-right {
+      text-align: center!important;
+    }
+  }
 }
 
 .template-indicator, .main-indicator-filters-content {
 
   .MuiToolbar-gutters {
-    #mui-36447 {
-         @media(max-width: 767px) {
+    .MuiTablePagination-spacer + p {
+      @media(max-width: 767px) {
             width: 100%;
           }
-      }
+    }
   }
 
   .MUIDataTableHead-responsiveStacked-36 {
