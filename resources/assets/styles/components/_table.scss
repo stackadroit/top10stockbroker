@@ -124,7 +124,7 @@
   table {
     &.MuiTable-root {
       &.MUIDataTable-tableRoot-4 {
-        table-layout: auto !important;
+        // table-layout: auto !important;
       }
     }
 
@@ -156,6 +156,8 @@
         &:first-child {
           position: sticky !important;
           left: 0 !important;
+          background: #ffffff!important;
+          z-index: 999;
 
           &:before, &:after {
             content: "";
