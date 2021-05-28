@@ -2193,10 +2193,8 @@ add_shortcode('MainIndicatorFilters', function ($atts){
         'Sma'=>'Sma Indicator',
         'So'=>'Stochastic Oscillator Indicator',
     );
-    
     $data['chieldPages'] =$chieldPages;
     $data['defaultCal'] =$defaultCal;
-     
     $template = 'shortcodes.fore-cast.indicators.main-indicators-filters';
     return \App\template($template, $data);
 });

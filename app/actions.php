@@ -819,16 +819,6 @@ function load_main_indicator_filters_html(){
     // echo 'sssss';
     // print_r($_REQUEST);
     $defaultCal =(@$_REQUEST['defaultCal'])?@$_REQUEST['defaultCal']:'Cl';
-    switch ($defaultCal) {
-        case 'Cl':
-            # code...
-            break;
-        
-        default:
-            # code...
-            break;
-    }
-    // exit; 
     $data['defaultCal']  =$defaultCal;
     $template = 'shortcodes.fore-cast.indicators.main-indicators-filters-content';
     echo \App\template($template, $data); 
