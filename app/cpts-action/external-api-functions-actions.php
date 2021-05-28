@@ -358,10 +358,9 @@ function encryptPass($password) {
     $sSalt = 'EDCAC9EF13E742218EF91B132667A143';
     // $sSalt = substr(hash('sha256', $sSalt, true), 0, 32);
     $method = 'aes-256-cbc';
-    $method = 'AesEncoding.UTF8';
 
-    // $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
-    $iv = '[0x40, 0x40, 0x6e, 0x67, 0x65, 0x6c, 0x62, 0x72, 0x30, 0x6b, 0x69, 0x6e, 0x67]';
+    $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+    // $iv = '[0x40, 0x40, 0x6e, 0x67, 0x65, 0x6c, 0x62, 0x72, 0x30, 0x6b, 0x69, 0x6e, 0x67]';
 
     $encrypted = base64_encode(openssl_encrypt($password, $method, $sSalt, OPENSSL_RAW_DATA, $iv));
     return $encrypted;
@@ -377,9 +376,26 @@ function decryptPass($password) {
     $decrypted = openssl_decrypt(base64_decode($password), $method, $sSalt, OPENSSL_RAW_DATA, $iv);
     return $decrypted;
 }
+function encrypt_decrypt($action, $string) {
+    $output = false;
+    $encrypt_method = "AES-256-CBC";
+    $secret_key = 'EDCAC9EF13E742218EF91B132667A143';
+    $secret_iv = '[0x40, 0x40, 0x6e, 0x67, 0x65, 0x6c, 0x62, 0x72, 0x30, 0x6b, 0x69, 0x6e, 0x67]';
+    // hash
+    $key = hash('sha256', $secret_key);
+    $key =$secret_key;
+    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+    if ( $action == 'encrypt' ) {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+        $output = base64_encode($output);
+    } else if( $action == 'decrypt' ) {
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+    return $output;
+}
 
-
-PA1_Angel_DRA_B2C();
+// PA1_Angel_DRA_B2C();
 function PA1_Angel_DRA_B2C($postedArray =array()){
     $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
     
@@ -395,7 +411,8 @@ function PA1_Angel_DRA_B2C($postedArray =array()){
         'City'=>'Test Lucknow',
         'DRACode'=>'DRACode',
     );
-    $encVal= encryptPass(json_encode($datap));
+    // $encVal= encryptPass(json_encode($datap));
+    echo $encVal= encrypt_decrypt('encrypt',json_encode($datap));
     // $encVal= encryptPass(json_encode($datap));
 
    
@@ -409,7 +426,7 @@ function PA1_Angel_DRA_B2C($postedArray =array()){
     curl_setopt_array($curl, array(
       CURLOPT_URL => $url2,
       CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => 'AesEncoding.UTF8',
+      CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
       CURLOPT_TIMEOUT => 0,
       CURLOPT_FOLLOWLOCATION => true,
@@ -419,7 +436,7 @@ function PA1_Angel_DRA_B2C($postedArray =array()){
       CURLOPT_HTTPHEADER => array(
         'apikey: 347EA0C286E14C03B1EA3BC3B0D81BC9',
         'ContentType: application/json',
-        'Content-Type: text/plain'
+        'Content-Type: application/json'
       ),
     ));
 

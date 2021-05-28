@@ -2003,7 +2003,12 @@ function get_chield_pages($post_parent){
             )
         );
         foreach ($all_wp_pages as $key => $value) {
-            $chieldPages[get_the_permalink($value->ID)] =$value->post_title;
+            $chieldPages[] =array(
+                'url'=>get_the_permalink($value->ID),
+                'name'=>$value->post_title,
+                'page_id'=>$value->ID,
+            );
+             
         }
         return $chieldPages;
     }else{
