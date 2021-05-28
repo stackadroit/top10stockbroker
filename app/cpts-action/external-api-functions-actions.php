@@ -135,6 +135,10 @@ function api_master_calls(){
                         echo $value->api_name;
                         PA1_PayTM_API_B2C($postData);
                         break;
+                    case '17':
+                        echo $value->api_name;
+                        PA1_Angel_DRA_B2C($postData);
+                        break;
                   default:
                     
                         break;
@@ -279,6 +283,10 @@ function api_master_calls_for_city_data(){
                         echo $value->api_name;
                         PA1_PayTM_API_B2C($postData);
                         break;
+                    case '17':
+                        echo $value->api_name;
+                        PA1_Angel_DRA_B2C($postData);
+                        break;
                     default:
                         break;
                 }
@@ -342,6 +350,110 @@ function insert_request_response_ac_db($form_id,$request_key,$request_value='',$
     } 
 }
 /**
+ *  Send Contact Data to PA1_Angel_DRA_B2C.
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
+
+function encryptPass($password) {
+    $sSalt = 'EDCAC9EF13E742218EF91B132667A143';
+    // $sSalt = substr(hash('sha256', $sSalt, true), 0, 32);
+    $method = 'aes-256-cbc';
+    $method = 'AesEncoding.UTF8';
+
+    // $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+    $iv = '[0x40, 0x40, 0x6e, 0x67, 0x65, 0x6c, 0x62, 0x72, 0x30, 0x6b, 0x69, 0x6e, 0x67]';
+
+    $encrypted = base64_encode(openssl_encrypt($password, $method, $sSalt, OPENSSL_RAW_DATA, $iv));
+    return $encrypted;
+}
+
+function decryptPass($password) {
+    $sSalt = 'EDCAC9EF13E742218EF91B132667A143';
+    // $sSalt = substr(hash('sha256', $sSalt, true), 0, 32);
+    $method = 'aes-256-cbc';
+
+    $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+
+    $decrypted = openssl_decrypt(base64_decode($password), $method, $sSalt, OPENSSL_RAW_DATA, $iv);
+    return $decrypted;
+}
+
+
+PA1_Angel_DRA_B2C();
+function PA1_Angel_DRA_B2C($postedArray =array()){
+    $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
+    
+    $form_id= $postedArray['_wpcf7'];
+    $name = urlencode( $postedArray['cf7s-name'] );
+    $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
+    $email="NA" ;    
+    $city=urlencode($postedArray['cf7s-City']);
+     
+    $datap =array(
+        'Name'=>'Test P',
+        'Mobile'=>'8888888245',
+        'City'=>'Test Lucknow',
+        'DRACode'=>'DRACode',
+    );
+    $encVal= encryptPass(json_encode($datap));
+    // $encVal= encryptPass(json_encode($datap));
+
+   
+     $tokenHeaderVars= array(
+            'Content-Type: application/json',
+            'apikey:347EA0C286E14C03B1EA3BC3B0D81BC9',
+        );
+    $url2 ='https://diykyc.angelbroking.com//dracorporate/leadcapture';
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $url2,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => 'AesEncoding.UTF8',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS =>$encVal,
+      CURLOPT_HTTPHEADER => array(
+        'apikey: 347EA0C286E14C03B1EA3BC3B0D81BC9',
+        'ContentType: application/json',
+        'Content-Type: text/plain'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    var_dump($response) ;
+    exit;
+    $response_value = curl_exec ($curl);
+    curl_close ($curl);
+    echo '<pre>';
+    var_dump($response_value);
+     echo '<br/>';
+    // echo decryptPass($encVal);
+    echo '<br/>';
+    echo 'ddd';
+    exit;    
+    exit; 
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"https://www.angelbroking.com/api/b2b-3rd-party.php");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS,
+                "api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname=".$name."&lname=&LeadSource=WEB&Mobile=".$mobile."&Email=NA&ResidenceCity=".$city."&ResidenceAddress=&ResidenceArea=&ResidencePin=&ProductsInterested=&LeadChannel=Direct&Correspondence=&Category=&Refferal=&Remarks=");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+    // receive server response ...
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response_value = curl_exec ($ch);
+    curl_close ($ch);
+    print_r($response_value);
+    $request_value = $apiUrl;
+    // Add API Details in to DB
+    $request_value= "api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname=".$name."&lname=&LeadSource=WEB&Mobile=".$mobile."&Email=NA&ResidenceCity=".$city."&ResidenceAddress=&ResidenceArea=&ResidencePin=&ProductsInterested=&LeadChannel=Direct&Correspondence=&Category=&Refferal=&Remarks=";
+    insert_request_response_ac_db($form_id,'ab_b2b_lead_request_url',$request_value,'ab_b2b_lead_status',$response_value);
+}/**
  *  Send Contact Data to Angle Broking B2B.
  *  @author Pavan JI <dropmail2pavan@gmail.com> 
  */
