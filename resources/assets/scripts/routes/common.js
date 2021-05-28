@@ -43,6 +43,7 @@ import StocksGivIndicator from '../components/indicators/stocks-giv-indicator';
  // Camarilla Levels Indicator
 import StocksClIndicator from '../components/indicators/stocks-cl-indicator';
 import IndicesClIndicator from '../components/indicators/indices-cl-indicator';
+import MainIndicatorFilters from '../routes/shortcodes/indicators/main-indicator-filters';
  
 export default {
   init() {
@@ -137,7 +138,12 @@ export default {
 		if (typeof ModalPopup !== 'undefined') {
 			ModalPopup.initialize();
 		}
-
+		if (typeof MainIndicatorFilters !== 'undefined') {
+			if($('#main-indicator-filters').length){
+				MainIndicatorFilters.init();
+			}
+		}
+		
 		function loadReactComp(){
 			//bell icon popup
 			ReactDOM.render(

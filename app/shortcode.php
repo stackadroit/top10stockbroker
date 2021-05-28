@@ -2179,14 +2179,23 @@ add_shortcode('MainIndicatorFilters', function ($atts){
         'title' => '',
         'id' => get_the_ID(),
         'tabs' => '1', 
+        'default' => 'cl', 
     ), $atts);
-    // $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $defaultCal =($data['default'])?$data['default']:'cl';
     // $chieldPages =get_chield_pages($parent_page);
-    // $chieldPages =array(
-    //     ''=>'',
-    // );
+    $chieldPages =array(
+        'cl'=>'Camarilla Levels Indicator',
+        'ema'=>'Ema Indicator',
+        'giv'=>'Graham Intrinsic Value Indicator',
+        'macd'=>'Macd Indicator',
+        'pp'=>'Pivot Point Indicator',
+        'rsi'=>'Rsi Indicator',
+        'sma'=>'Sma Indicator',
+        'so'=>'Stochastic Oscillator Indicator',
+    );
     
     $data['chieldPages'] =$chieldPages;
+    $data['defaultCal'] =$defaultCal;
      
     $template = 'shortcodes.fore-cast.indicators.main-indicators-filters';
     return \App\template($template, $data);
