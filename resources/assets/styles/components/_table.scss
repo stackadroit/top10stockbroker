@@ -59,7 +59,7 @@
 .template-indicator thead button {
     background: transparent;
     border: none;
-    color: #000;
+    color: #000;  
     margin: 0 auto;
     padding: 0;
     font-size: 13px;
@@ -105,7 +105,7 @@
   }
 }
 
-.template-indicator {
+.template-indicator, .main-indicator-filters-content {
 
   .MUIDataTableHead-responsiveStacked-36 {
     display: table-header-group!important
@@ -192,8 +192,37 @@
         }
 
         button {
+          background: transparent!important;
+          color: #000000!important;
           &:hover {
             background: transparent!important;
+          }
+          &:focus {
+            box-shadow: none!important;
+          }
+
+          span {
+            &.MuiButton-label {
+              position: relative;
+              &:after {
+                content: '';
+                position: absolute;
+                right: -15px;
+                border: 5px solid transparent;
+                top: 7px;
+                border-top-color: #e35133;
+              }
+            }
+          }
+        }
+
+        div[aria-sort="ascending"], div[aria-sort="decending"] {
+          span {
+             &.MuiButton-label {
+              &:after {
+               display: none;
+              }
+             }
           }
         }
       }
