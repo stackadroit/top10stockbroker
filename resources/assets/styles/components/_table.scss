@@ -108,6 +108,14 @@
 
 .template-indicator, .main-indicator-filters-content {
 
+  .MuiToolbar-gutters {
+    .MuiTablePagination-spacer {
+      & ~ p {
+        width: 100%;
+      }
+    }
+  }
+
   .MUIDataTableHead-responsiveStacked-36 {
     display: table-header-group!important
   }
