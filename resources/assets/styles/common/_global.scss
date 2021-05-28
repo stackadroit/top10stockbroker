@@ -601,6 +601,7 @@ select#choose_broker {
   color: $color-light;
   z-index: 9;
   background-color: $color-green;
+  z-index: 9999;
   @media (min-width: 768px) {
     padding: 0.2em 0.3em;
     background-color: $color-primary;

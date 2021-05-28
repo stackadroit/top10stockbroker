@@ -52,6 +52,53 @@
   }
 }
 
+.template-indicator table{
+  table-layout: fixed;
+} 
+
+.template-indicator thead button {
+    background: transparent;
+    border: none;
+    color: #000;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+.template-indicator thead th {
+    padding: 12px 5px;
+    font-size: 13px;
+    text-align: center;
+
+}
+.template-indicator .MuiSelect-select.MuiSelect-select{
+  text-align:left;
+  padding-left: 9px 15px 10px;
+}
+.template-indicator .MuiPaper-elevation4{
+  padding: 15px;
+}
+.template-indicator .MuiToolbar-gutters{
+  padding: 0;
+}
+.template-indicator .MuiInputBase-input{
+  border: 1px solid #808080;
+}
+.template-indicator .MuiInput-root{
+  border: 1px solid #4a4a4a;
+  margin-bottom: 0 !important;
+}
+.template-indicator .MuiInput-root .MuiInputBase-input{
+    padding: 9px 15px 10px;
+}
+.fixed{
+  top:0;
+  position:fixed;
+  width:auto;
+  display:none;
+  border:none;
+}
+
 #main-pivot-points-indicator {
   .more-indicator-filter {
     margin-bottom: 20px;
@@ -124,7 +171,7 @@
   table {
     &.MuiTable-root {
       &.MUIDataTable-tableRoot-4 {
-        table-layout: auto !important;
+        // table-layout: auto !important;
       }
     }
 
@@ -156,6 +203,8 @@
         &:first-child {
           position: sticky !important;
           left: 0 !important;
+          background: #ffffff!important;
+          z-index: 999;
 
           &:before, &:after {
             content: "";
