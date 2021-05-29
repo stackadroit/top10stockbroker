@@ -59,6 +59,7 @@ class StocksPivotPointsIndicator extends React.Component {
             options: {
               filter: false,
               sort: true,
+              setCellHeaderProps: () => ({className: "mui-table-header-cell"}),
               customBodyRender: (value, tableMeta, updateValue) => {
                 return (
                   <a href={tableMeta.rowData[12]} title={value}>{value}</a>

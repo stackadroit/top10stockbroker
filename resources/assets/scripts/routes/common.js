@@ -113,11 +113,7 @@ export default {
 			ModalPopup.initialize();
 		}
 
-		if (typeof MainIndicatorFilters !== 'undefined') {
-			if($('#main-indicator-filters').length){
-				MainIndicatorFilters.init();
-			}
-		}
+		
 		
 		function loadReactComp(){
 			//bell icon popup
@@ -176,7 +172,11 @@ export default {
 	  		});
 	    },500,wpcf7);
 
-        
+        if (typeof MainIndicatorFilters !== 'undefined') {
+			if($('#main-indicator-filters').length){
+				MainIndicatorFilters.init();
+			}
+		}
 
   		// Show contact model on button click
         $(document).on('click','.custom-hellobar a', function (event, eventInfo) {
