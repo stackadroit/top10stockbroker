@@ -104,14 +104,26 @@
   .more-indicator-filter {
     margin-bottom: 20px;
   }
-  .col-md-5 {
+  .col-md-2 {
     &.text-right {
       text-align: center!important;
+
+      span{
+        &.select-label {
+          @media(max-width: 767px) {
+            float: none;
+          }
+        }
+      }
     }
   }
 }
 
 .template-indicator, .main-indicator-filters-content {
+
+  .MuiPaper-root {
+    margin-bottom: 20px!important;
+  }
 
   .MuiToolbar-gutters {
     .MuiTablePagination-spacer + p {
@@ -119,9 +131,16 @@
             width: 100%;
           }
     }
+    .MuiTablePagination-actions {
+       button {
+          &.MuiButtonBase-root {
+            margin: 0 5px!important;
+          }
+        }
+    }
   }
 
-  .MUIDataTableHead-responsiveStacked-36 {
+  .MUIDataTableHead-responsiveStacked-36, .MUIDataTableHead-responsiveStacked-35 {
     display: table-header-group!important
   }
 
@@ -207,6 +226,7 @@
         &.MuiButton-root {
           @media(max-width: 767px) {
             float: right;
+            margin: 0!important;
           }
         }
       }
@@ -220,7 +240,7 @@
   table {
     &.MuiTable-root {
       &.MUIDataTable-tableRoot-4 {
-        // table-layout: auto !important;
+        table-layout: auto !important;
       }
     }
 
@@ -323,11 +343,11 @@
       td {
         display: table-cell !important;
 
-        .MUIDataTableBodyCell-stackedCommon-77 {
+        .MUIDataTableBodyCell-stackedCommon-77, .MUIDataTableBodyCell-stackedCommon-76 {
           width: 100%!important;
         }
 
-        .MUIDataTableBodyCell-cellHide-73 {
+        .MUIDataTableBodyCell-cellHide-73, .MUIDataTableBodyCell-cellHide-72 {
           display: none !important;
         }
       }
@@ -342,6 +362,6 @@
   }
 }
 
-.MUIDataTableFilterList-root-33 {
+.MUIDataTableFilterList-root-33, .MUIDataTableFilterList-root-32 {
   margin-bottom: 20px !important;
 }
