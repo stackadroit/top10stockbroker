@@ -7,6 +7,7 @@ import ContentLoader from "react-content-loader";
 import { Select, MenuItem, Button,InputLabel,FormControl,CircularProgress} from "@material-ui/core"; 
 import { useState,setState } from "react";
 import CustomToolbar from "./custom-toolbar";
+import CustomSearchRender from "./customSearchRender";
 
 class IndicesSmaIndicator extends React.Component {
     constructor(props){
@@ -24,7 +25,7 @@ class IndicesSmaIndicator extends React.Component {
                 { name: "Sentiment - Neutral" },
                 { name: "Trade - Buy" },
                 { name: "Trade - Sell" },
-                { name: "No Trade" },
+                { name: "Trade - Hold" },
               ]    
         };
        // this.onFilterChange = this.onFilterChange.bind(this);
@@ -54,7 +55,7 @@ class IndicesSmaIndicator extends React.Component {
             label: "LTP",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -78,7 +79,7 @@ class IndicesSmaIndicator extends React.Component {
             label: "15 Day SMA",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -86,7 +87,7 @@ class IndicesSmaIndicator extends React.Component {
             label: "30 Day SMA",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -94,7 +95,7 @@ class IndicesSmaIndicator extends React.Component {
             label: "50 Day SMA",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -102,7 +103,7 @@ class IndicesSmaIndicator extends React.Component {
             label: "100 Day SMA",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -110,7 +111,7 @@ class IndicesSmaIndicator extends React.Component {
             label: "200 Day SMA",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -216,14 +217,14 @@ class IndicesSmaIndicator extends React.Component {
             filteredCols[9].options.filterList = filterList; 
           }
            // Trade Filter
-           if((value =='Trade - Sell' || value =='Trade - Buy' || value =='No Trade')){
+           if((value =='Trade - Sell' || value =='Trade - Buy' || value =='Trade - Hold')){
                   if(value =='Trade - Sell'){
                     filterList[0] ='Sell';
                   }
                   if(value =='Trade - Buy'){
                     filterList[0] ='Buy';
                   }
-                  if(value =='No Trade'){
+                  if(value =='Trade - Hold'){
                     filterList[0] ='Hold';
                   }
                   filteredCols[10].options.filterList = filterList;
@@ -259,11 +260,21 @@ class IndicesSmaIndicator extends React.Component {
             indexColumn: "fname",  
             rowsPerPage:15,
             fixedSelectColumn:false,
-            searchPlaceholder:"Search Stocks",
+            searchPlaceholder:"Search Index",
             selectableRowsHeader:false,
             sortFilterList:false,
             viewColumns:false,
             filter:false,
+            customSearchRender: (searchText, handleSearch, hideSearch, options) => {
+              return (
+                <CustomSearchRender
+                  searchText={searchText}
+                  onSearch={handleSearch}
+                  onHide={hideSearch}
+                  options={options}
+                />
+              );
+            },
             customToolbar: () => {
               return (
                 <CustomToolbar tableFilterOptions={tableFilterOptions} selectedFilter={selectedFilter} onFilterSelect={this.onFilterSelected.bind(this)} onRefreshClick={this.onRefreshed.bind(this)}/>

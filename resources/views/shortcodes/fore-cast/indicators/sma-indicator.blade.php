@@ -1,6 +1,7 @@
 <div data-id="{{@$id}}" id="main-sma-indicator" class="bothtab-st-id-wrap indicator-data-wrap">
     <div class="row"> 
-            <div class="col-md-5 text-right"><span class="select-label">Select Indicator</span></div>
+            <div class="col-md-3 text-right"></div>
+            <div class="col-md-2 text-right"><span class="select-label">Select Indicator</span></div>
             <div class="col-md-4"> 
                 <div class="more-indicator-wrap"> 
                     <!-- more-indicator-filter Id is requied -->

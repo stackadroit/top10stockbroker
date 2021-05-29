@@ -7,6 +7,7 @@ import ContentLoader from "react-content-loader";
 import { Select, MenuItem, Button,InputLabel,FormControl, CircularProgress} from "@material-ui/core"; 
 import { useState,setState } from "react";
 import CustomToolbar from "./custom-toolbar";
+import CustomSearchRender from "./customSearchRender";
 
 class StocksMacdIndicator extends React.Component {
     constructor(props){
@@ -24,7 +25,7 @@ class StocksMacdIndicator extends React.Component {
                 { name: "Sentiment - Neutral" },
                 { name: "Trade - Buy" },
                 { name: "Trade - Sell" },
-                { name: "No Trade" },
+                { name: "Trade - Hold" },
               ]    
         };
        // this.onFilterChange = this.onFilterChange.bind(this);
@@ -64,7 +65,7 @@ class StocksMacdIndicator extends React.Component {
             label: "Open",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -72,7 +73,7 @@ class StocksMacdIndicator extends React.Component {
             label: "High",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -80,7 +81,7 @@ class StocksMacdIndicator extends React.Component {
             label: "Low",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -88,7 +89,7 @@ class StocksMacdIndicator extends React.Component {
             label: "LTP",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -112,7 +113,7 @@ class StocksMacdIndicator extends React.Component {
             label: "MACD Signal Line",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -222,14 +223,14 @@ class StocksMacdIndicator extends React.Component {
             filteredCols[8].options.filterList = filterList; 
           }
            // Trade Filter
-          if((value =='Trade - Sell' || value =='Trade - Buy' || value =='No Trade')){
+          if((value =='Trade - Sell' || value =='Trade - Buy' || value =='Trade - Hold')){
                   if(value =='Trade - Sell'){
                     filterList[0] ='Sell';
                   }
                   if(value =='Trade - Buy'){
                     filterList[0] ='Buy';
                   }
-                  if(value =='No Trade'){
+                  if(value =='Trade - Hold'){
                     filterList[0] ='Hold';
                   }
                   filteredCols[9].options.filterList = filterList;
@@ -275,6 +276,16 @@ class StocksMacdIndicator extends React.Component {
             sortFilterList:false,
             viewColumns:false,
             filter:false,
+            customSearchRender: (searchText, handleSearch, hideSearch, options) => {
+              return (
+                <CustomSearchRender
+                  searchText={searchText}
+                  onSearch={handleSearch}
+                  onHide={hideSearch}
+                  options={options}
+                />
+              );
+            },
             customToolbar: () => {
               return (
                 <CustomToolbar tableFilterOptions={tableFilterOptions} selectedFilter={selectedFilter} onFilterSelect={this.onFilterSelected.bind(this)} onRefreshClick={this.onRefreshed.bind(this)}/>

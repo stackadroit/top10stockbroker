@@ -7,6 +7,7 @@ import ContentLoader from "react-content-loader";
 import { Select, MenuItem, Button,InputLabel,FormControl, CircularProgress} from "@material-ui/core"; 
 import { useState,setState } from "react";
 import CustomToolbar from "./custom-toolbar";
+import CustomSearchRender from "./customSearchRender";
 
 class StocksPivotPointsIndicator extends React.Component {
     constructor(props){
@@ -30,7 +31,7 @@ class StocksPivotPointsIndicator extends React.Component {
                 { name: "Sentiment - Neutral" },
                 { name: "Trade - Buy" },
                 { name: "Trade - Sell" },
-                { name: "No Trade" },
+                { name: "Trade - Hold" },
               ]    
         };
        // this.onFilterChange = this.onFilterChange.bind(this);
@@ -102,7 +103,7 @@ class StocksPivotPointsIndicator extends React.Component {
             label: "LTP",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -134,7 +135,7 @@ class StocksPivotPointsIndicator extends React.Component {
             label: "Resistance 2",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
               filterOptions:{
                 logic: (Resistance_2, filters, row) => {
                   if (filters.length){
@@ -150,7 +151,7 @@ class StocksPivotPointsIndicator extends React.Component {
             label: "Resistance 3",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
               filterOptions:{
                 logic: (Resistance_3, filters, row) => {
                   if (filters.length){
@@ -166,7 +167,7 @@ class StocksPivotPointsIndicator extends React.Component {
             label: "Support 1",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
               filterOptions:{
                 logic: (Support_1, filters, row) => {
                   if (filters.length){
@@ -182,7 +183,7 @@ class StocksPivotPointsIndicator extends React.Component {
             label: "Support 2",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
               filterOptions:{
                 logic: (Support_2, filters, row) => {
                   if (filters.length){
@@ -198,7 +199,7 @@ class StocksPivotPointsIndicator extends React.Component {
             label: "Support 3",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
               filterOptions:{
                 logic: (Support_3, filters, row) => {
                   if (filters.length){
@@ -357,14 +358,14 @@ class StocksPivotPointsIndicator extends React.Component {
             filteredCols[10].options.filterList = filterList; 
           }
            // Trade Filter
-           if((value =='Trade - Sell' || value =='Trade - Buy' || value =='No Trade')){
+           if((value =='Trade - Sell' || value =='Trade - Buy' || value =='Trade - Hold')){
                   if(value =='Trade - Sell'){
                     filterList[0] ='Sell';
                   }
                   if(value =='Trade - Buy'){
                     filterList[0] ='Buy';
                   }
-                  if(value =='No Trade'){
+                  if(value =='Trade - Hold'){
                     filterList[0] ='Hold';
                   }
                   filteredCols[11].options.filterList = filterList;
@@ -396,67 +397,7 @@ class StocksPivotPointsIndicator extends React.Component {
             funCallIdx++;
       },100,funCallIdx,self);
     }
-    // Not IN Use
-    // <FormControl>
-    //        <InputLabel id="demo-simple-select-label">
-    //                 Filters
-    //         </InputLabel>
-    //             <span>Filters &nbsp;</span>
-    //         <Select labelId="demo-simple-select-label"
-    //           id="demo-simple-select"
-    //           style={{width:'200px', marginBottom:'10px', marginRight:10}}
-    //           onChange={this.onFilterChange}
-    //            value={selectedFilter}>
-    //           <MenuItem value="All">All</MenuItem>
-    //           {filter_list.map((x) => (
-    //             <MenuItem key={x.name} value={x.name}>
-    //               {x.name}
-    //             </MenuItem>
-    //           ))}
-    //         </Select>
-    //         </FormControl>
-               
-    // onFilterChange(event){
-    //     console.log(event.target.value);
-    //     var value =event.target.value;
-    //     const filteredCols = this.state.columns;
-    //     let filterList = [];
-    //     filteredCols[11].options.filterList =[];
-    //     filteredCols[10].options.filterList =[];
-    //     if (value !== "All") {
-    //        if((value =='Trade - Sell' || value =='Trade - Buy' || value =='No Trade')){
-    //               if(value =='Trade - Sell'){
-    //                 filterList[0] ='Sell';
-    //               }
-    //               if(value =='Trade - Buy'){
-    //                 filterList[0] ='Buy';
-    //               }
-    //               if(value =='No Trade'){
-    //                 filterList[0] ='Hold';
-    //               }
-    //               filteredCols[11].options.filterList = filterList;
-    //       }
-    //       // Sentiment Filter
-    //             if(value  && (value =='Sentiment - Bullish' || value =='Sentiment - Bearish' || value =='Sentiment - Neutral')){
-    //               if(value =='Sentiment - Bullish'){
-    //                 filterList[0] ='Bullish';
-    //               }
-    //               if(value =='Sentiment - Bearish'){
-    //                 filterList[0] ='Bearish';
-    //               }
-    //               if(value =='Sentiment - Neutral'){
-    //                 filterList[0] ='Neutral';
-    //               }
-    //               filteredCols[10].options.filterList = filterList; 
-    //             }    
-           
-    //     }
-    //     this.setState({
-    //         selectedFilter: value,
-    //     });
-    // }
-     
-     
+    
     render() {
         const {isRefreshing,error,columns,selectedFilter, isLoaded, lists,tableFilterOptions} = this.state;
         const options = {
@@ -464,7 +405,7 @@ class StocksPivotPointsIndicator extends React.Component {
             hasIndex: true, 
             search:false,
             searchOpen:true,
-            searchBox: true, 
+            searchBox: false, 
             csv: false,  
             download:false,
             print:false,
@@ -476,6 +417,16 @@ class StocksPivotPointsIndicator extends React.Component {
             sortFilterList:false,
             viewColumns:false,
             filter:false,
+            customSearchRender: (searchText, handleSearch, hideSearch, options) => {
+              return (
+                <CustomSearchRender
+                  searchText={searchText}
+                  onSearch={handleSearch}
+                  onHide={hideSearch}
+                  options={options}
+                />
+              );
+            },
             customToolbar: () => {
               return (
                 <CustomToolbar tableFilterOptions={tableFilterOptions} selectedFilter={selectedFilter} onFilterSelect={this.onFilterSelected.bind(this)} onRefreshClick={this.onRefreshed.bind(this)}/>

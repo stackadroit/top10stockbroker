@@ -9,7 +9,7 @@ import { useState,setState } from "react";
 import CustomToolbar from "./custom-toolbar";
 import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
-
+import CustomSearchRender from "./customSearchRender";
  
 class StocksGivIndicator extends React.Component {
     constructor(props){
@@ -72,7 +72,7 @@ class StocksGivIndicator extends React.Component {
             label: "Open",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -80,7 +80,7 @@ class StocksGivIndicator extends React.Component {
             label: "High",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -88,7 +88,7 @@ class StocksGivIndicator extends React.Component {
             label: "Low",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -96,7 +96,7 @@ class StocksGivIndicator extends React.Component {
             label: "LTP",
             options: {
              filter: false,
-             sort: false,
+             sort: true,
             }
         },
         {
@@ -120,7 +120,7 @@ class StocksGivIndicator extends React.Component {
             label: "Expected Growth %",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -128,7 +128,7 @@ class StocksGivIndicator extends React.Component {
             label: "Intrinsic Value",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -136,7 +136,7 @@ class StocksGivIndicator extends React.Component {
             label: "Overvalued / Undervalued",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -144,7 +144,7 @@ class StocksGivIndicator extends React.Component {
             label: "Overvalued / Undervalued %",
             options: {
               filter: false,
-              sort: false,
+              sort: true,
             }
         },
         {
@@ -307,6 +307,16 @@ class StocksGivIndicator extends React.Component {
             sortFilterList:false,
             viewColumns:false,
             filter:false,
+            customSearchRender: (searchText, handleSearch, hideSearch, options) => {
+              return (
+                <CustomSearchRender
+                  searchText={searchText}
+                  onSearch={handleSearch}
+                  onHide={hideSearch}
+                  options={options}
+                />
+              );
+            },
             customToolbar: () => {
               return (
                 <CustomToolbar tableFilterOptions={tableFilterOptions} selectedFilter={selectedFilter} onFilterSelect={this.onFilterSelected.bind(this)} onRefreshClick={this.onRefreshed.bind(this)}/>

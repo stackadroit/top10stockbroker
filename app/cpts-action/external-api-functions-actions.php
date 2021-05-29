@@ -357,6 +357,51 @@ function insert_request_response_ac_db($form_id,$request_key,$request_value='',$
  
 // PA1_Angel_DRA_B2C();
 function PA1_Angel_DRA_B2C($postedArray =array()){
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL=>'https://diykyc.angelbroking.com/dracorporate/leadcapture',
+      CURLOPT_RETURNTRANSFER=>true,
+      CURLOPT_ENCODING=>'',
+      CURLOPT_MAXREDIRS=>10,
+      CURLOPT_TIMEOUT=>0,
+      CURLOPT_FOLLOWLOCATION=>true,
+      CURLOPT_HTTP_VERSION=>CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST=>'POST',
+      CURLOPT_POSTFIELDS=>'{"Request":"kzQ7D/GsXk81uP9KkDuXS5hM+xfLhGXHPILvwbhJPMMhya3BbgLttl4wrQBnupvXwLUp3hEqjIZ7wP2QPkHAtp5L/vCLux/HmGmiTHbAatc="}',
+      CURLOPT_HTTPHEADER=>array(
+        'apikey: 347EA0C286E14C03B1EA3BC3B0D81BC9',
+        'Content-Type: application/json; charset=utf-8'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    var_dump($response);
+    $headers = array(
+        'apikey: 347EA0C286E14C03B1EA3BC3B0D81BC9',
+        'Accept: application/json',
+        'Content-Type: application/json',
+    );
+    $body ='{"Request":"kzQ7D/GsXk81uP9KkDuXS5hM+xfLhGXHPILvwbhJPMMhya3BbgLttl4wrQBnupvXwLUp3hEqjIZ7wP2QPkHAtp5L/vCLux/HmGmiTHbAatc="}';
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://diykyc.angelbroking.com/dracorporate/leadcapture");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POSTFIELDS,$body);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $output = curl_exec($ch);
+    curl_close($ch);
+    var_dump($output);
+
+exit;
+
+
+
+
+
     $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
     
     $form_id= $postedArray['_wpcf7'];
