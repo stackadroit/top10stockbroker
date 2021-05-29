@@ -144,7 +144,7 @@ export default {
 	    }
 
 	    //only for mobile render
-	    function checkReactLoad(){
+	    function checkReactLoad(process){
 	    	if ($( "body.mobile" ).length && process) {
 	    		loadReactComp();
 	    		process = false;
@@ -162,7 +162,7 @@ export default {
 	      	loadReactComp();
 	    }
 
-	    setTimeout(checkReactLoad, 3000); 
+	    setTimeout(checkReactLoad,3000,process); 
 
 	    setTimeout(function(){
 	    	$(document).on('reinitContactform', function (event, eventInfo) {
