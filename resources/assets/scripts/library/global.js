@@ -3,7 +3,7 @@ window.theme = {};
 
 // Theme Common Functions
 window.theme.fn = {
-
+	
 	getOptions: function(opts) {
 
 		if (typeof(opts) == 'object') {
@@ -267,6 +267,17 @@ exports.theme = window.theme;
 			events: function() {
 					var self = this,
 					$header = $('#header');
+
+					// Indicator Page Chield page list change redirect to chield
+					// page links
+					if($('#more-indicator-filter').length){
+						$('#more-indicator-filter').on('change',function(){
+							var indicatorUrl = $(this).find(":selected").val();
+							if(indicatorUrl){
+								window.location.href =indicatorUrl;
+							}
+						});
+					}
 
 					$header.find('a[href="#"]').on('click', function(e) {
 							e.preventDefault();

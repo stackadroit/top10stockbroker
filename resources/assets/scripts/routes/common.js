@@ -9,7 +9,6 @@ import QuickerSlider from '../components/quickerslider';
 import WidgetMarket from '../components/widgetmarket';
 import WidgetMarketTop from '../components/widgetmarketTop';
 import {PPForeCastCalculator}  from '../library/fore-cast/pp-fore-cast-calculator';
-import {MainPPCalculator}  from '../library/fore-cast/main-pp-calculator';
 import {SMAForeCastCalculator}  from '../library/fore-cast/sma-fore-cast-calculator';
 import {EMAForeCastCalculator}  from '../library/fore-cast/ema-fore-cast-calculator';
 import {MACDForeCastCalculator}  from '../library/fore-cast/macd-fore-cast-calculator';
@@ -17,11 +16,14 @@ import {RSIForeCastCalculator}  from '../library/fore-cast/rsi-fore-cast-calcula
 import {SOForeCastCalculator}  from '../library/fore-cast/so-fore-cast-calculator';
 import {GIVForeCastCalculator}  from '../library/fore-cast/giv-fore-cast-calculator';
 import {CLForeCastCalculator}  from '../library/fore-cast/cl-fore-cast-calculator';
-
+ 
+import MainIndicatorFilters from '../routes/shortcodes/indicators/main-indicator-filters';
+ 
 export default {
   init() {
     // Commom Plugins
 	(function($) {
+
 		//for mobile version for lazy loading
 		var process = true;
 		
@@ -53,11 +55,7 @@ export default {
 		        PPForeCastCalculator.initialize();
 		    }
 		}
-		if($('#main-pp-calculator').length){
-			if (typeof MainPPCalculator !== 'undefined') {
-		        MainPPCalculator.initialize();
-		    }
-		}
+		
 		if($('#sma-stock-forecast-calculator').length){
 			if (typeof SMAForeCastCalculator !== 'undefined') {
 		        SMAForeCastCalculator.initialize();
@@ -115,6 +113,12 @@ export default {
 			ModalPopup.initialize();
 		}
 
+		if (typeof MainIndicatorFilters !== 'undefined') {
+			if($('#main-indicator-filters').length){
+				MainIndicatorFilters.init();
+			}
+		}
+		
 		function loadReactComp(){
 			//bell icon popup
 			ReactDOM.render(
@@ -141,13 +145,6 @@ export default {
 			  	  document.getElementById('list-slider-modal')
 			  	);
 	  		});
-	     //    if($('#pivot-point-calculator').length){
-	     //    	ReactDOM.render(
-			  	//   <ForeCastPivotPoint />,
-			  	//   document.getElementById('pivot-point-calculator')
-			  	// );
-	     //    }
-	  		
 	    }
 
 	    //only for mobile render
@@ -220,8 +217,9 @@ export default {
         	new SimpleBar(this , { autoHide: true });
         });
 
+        
 	}).apply(this, [jQuery]);
-
+ 
   },
   finalize() {
     // JavaScript to be fired on all pages, after page specific JS is fired

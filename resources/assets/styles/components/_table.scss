@@ -137,6 +137,37 @@
       @media(max-width: 767px) {
         flex: 100%!important;
       }
+      .CustomSearchRender-main-90 {
+          position: relative;
+        .MuiSvgIcon-root {
+          position: absolute;
+          margin: 0!important;
+          left: 10px;
+          top:10px;
+        }
+        .CustomSearchRender-searchText-91 {
+            flex:1!important;
+            .MuiInputBase-input {
+              padding: 10px 10px 10px 40px!important;
+            }
+          }
+      }
+      .CustomSearchRender-main-28 {
+          position: relative;
+        .MuiSvgIcon-root {
+          position: absolute;
+          margin: 0!important;
+          left: 10px;
+          top:10px;
+        }
+        .CustomSearchRender-searchText-29 {
+            flex:1!important;
+            .MuiInputBase-input {
+              padding: 10px 10px 10px 40px!important;
+            }
+          }
+      }
+     
       .MUIDataTableSearch-main-28 {
           position: relative;
         .MUIDataTableSearch-searchIcon-29 {

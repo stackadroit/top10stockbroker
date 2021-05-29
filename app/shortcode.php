@@ -1988,48 +1988,218 @@ add_shortcode('Camarilla_Clevels_Stock_Table', function ($atts){
     return \App\template($template, $data);
 });
 
+function get_chield_pages($post_parent){
+    global $wpdb; 
+    if($post_parent){
+        $chieldPages =[];
+        $all_wp_pages = get_posts(
+            array(
+                'posts_per_page' =>-1,
+                'post_type' => 'page',
+                'post_parent' => $post_parent,
+                'order' => 'ASC',
+                'orderby' => 'title',
+                 
+            )
+        );
+        foreach ($all_wp_pages as $key => $value) {
+            $chieldPages[] =array(
+                'url'=>get_the_permalink($value->ID),
+                'name'=>$value->post_title,
+                'page_id'=>$value->ID,
+            );
+             
+        }
+        return $chieldPages;
+    }else{
+        return [];
+    }
+    return [];
+}
 /**
 *   Shortcode form Main Pivot Points Calculator.
-Need To work on this
-[MainPivotPointsCalculator]
+ 
+[MainPivotPointsIndicator]
 */
-add_shortcode('MainPivotPointsCalculator', function ($atts){ 
+add_shortcode('MainPivotPointsIndicator', function ($atts){ 
     $data = shortcode_atts( array(
         'title' => '',
         'id' => get_the_ID(),
-         
+        'tabs' => '1', 
+        'parent_page' => '57204', 
     ), $atts);
-    $posts_array = get_posts(
-        array(
-            'posts_per_page' =>2,
-            'post_type' => 'stock-prediction',
-            'order' => 'ASC',
-            'orderby' => 'title',
-            // 'tax_query' => array(
-            //     array(
-            //         'taxonomy' => 'sub-broker-zones',
-            //         'field' => 'slug',
-            //         'terms' => $data['zone'],
-            //     )
-            // )
-        )
-    ); 
-    $stockData =[];
-    foreach ($posts_array as $key => $post) {
-        $stock_fin_index_code =get_post_meta($post->ID,'stock_fin_index_code',true);
-        $yHigh =get_post_meta($post->ID,'y_high',true);
-        $yLow =get_post_meta($post->ID,'y_low',true);
-        $yClose =get_post_meta($post->ID,'y_close',true);
-        $ppValue =get_post_meta($post->ID,'y_pivot_point',true);
-        $stockData[]=array(
-            'stock_name'=>get_post_meta($post->ID,'stock_name',true),
-            'stock_link'=>get_the_permalink($post->ID),
-            'pivot_point'=>$ppValue,
-       );
-    }
-    // echo '<pre>';
-    // print_r($stockData);
-    $data['stocks']= $stockData;
-    $template = 'shortcodes.fore-cast.main-pivot-points-calculator';
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    $data['chieldPages']=$chieldPages;
+    $template = 'shortcodes.fore-cast.indicators.pivot-points-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main SMA Indicator.
+ 
+[MainSMAIndicator]
+*/
+add_shortcode('MainSMAIndicator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204', 
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    $data['chieldPages']=$chieldPages;
+    $template = 'shortcodes.fore-cast.indicators.sma-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main EMA Indicator.
+ 
+[MainSMAIndicator]
+*/
+add_shortcode('MainEMAIndicator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204', 
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    $data['chieldPages']=$chieldPages;
+    $template = 'shortcodes.fore-cast.indicators.ema-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main MACD Indicator.
+[MainMACDIndicator]
+*/
+add_shortcode('MainMACDIndicator', function ($atts){ 
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204', 
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    $data['chieldPages']=$chieldPages;
+    $template = 'shortcodes.fore-cast.indicators.macd-indicator';
+    return \App\template($template, $data);
+});
+
+
+/**
+*  Shortcode form Main RSI Indicator.
+[MainRSIIndicator]
+*/
+add_shortcode('MainRSIIndicator', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204',
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    
+    $data['chieldPages'] =$chieldPages;
+     
+    $template = 'shortcodes.fore-cast.indicators.rsi-indicator';
+    return \App\template($template, $data);
+});
+/**
+*  Shortcode form Main Stochastic Oscillator - Stochastic Indicator.
+[MainSOIndicator]
+*/
+add_shortcode('MainSOIndicator', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204', 
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    
+    $data['chieldPages'] =$chieldPages;
+     
+    $template = 'shortcodes.fore-cast.indicators.so-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main Graham Intrinsic Indicator.
+[MainGLIndicator]
+*/
+add_shortcode('MainGIVIndicator', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204', 
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    
+    $data['chieldPages'] =$chieldPages;
+     
+    $template = 'shortcodes.fore-cast.indicators.giv-indicator';
+    return \App\template($template, $data);
+});
+/**
+*  Shortcode form Main  Camarilla Levels Indicator.
+[MainCLIndicator]
+*/
+add_shortcode('MainCLIndicator', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204', 
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    
+    $data['chieldPages'] =$chieldPages;
+     
+    $template = 'shortcodes.fore-cast.indicators.cl-indicator';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main  Camarilla Levels Indicator.
+[MainIndicatorFilters]
+*/
+add_shortcode('MainIndicatorFilters', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'default' => 'Cl', 
+    ), $atts);
+    $defaultCal =($data['default'])?$data['default']:'Cl';
+    // $chieldPages =get_chield_pages($parent_page);
+    $chieldPages =array(
+        'Cl'=>'Camarilla Levels Indicator',
+        'Ema'=>'Ema Indicator',
+        'Giv'=>'Graham Intrinsic Value Indicator',
+        'Macd'=>'Macd Indicator',
+        'PivotPoints'=>'Pivot Point Indicator',
+        'Rsi'=>'Rsi Indicator',
+        'Sma'=>'Sma Indicator',
+        'So'=>'Stochastic Oscillator Indicator',
+    );
+    $data['chieldPages'] =$chieldPages;
+    $data['defaultCal'] =$defaultCal;
+    $template = 'shortcodes.fore-cast.indicators.main-indicators-filters';
     return \App\template($template, $data);
 });

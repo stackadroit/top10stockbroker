@@ -822,3 +822,19 @@ article {
     }
   }
 }
+.select-label{font-weight:700;display: block;
+    margin-top: 6px;}
+@media(max-width: 767px) {
+  .select-label{
+   text-align:left;
+   float:left;
+  }
+   
+}
+.more-indicator-wrap .main-indicator-filter {
+    margin-bottom: 20px;
+}
+button.MuiButtonBase-root{
+  margin: 0px 10px;
+}
+ul.MuiMenu-list{height:300px}

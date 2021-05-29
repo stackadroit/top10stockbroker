@@ -153,6 +153,17 @@ import shareMarketEducation from './routes/share-market-education';
 // ForeCast Index 
 import singleIndexPrediction from './routes/single/single-index-prediction';
 import singleStockPrediction from './routes/single/single-index-prediction';
+
+// Indicator Chield Page Calculators
+import pivotPointIndicator from './routes/shortcodes/indicators/pivot-point-indicator';
+import camarillaEquationIndicator from './routes/shortcodes/indicators/camarilla-equation-indicator';
+import emaIndicator from './routes/shortcodes/indicators/ema-indicator';
+import grahamIntrinsicValue from './routes/shortcodes/indicators/graham-intrinsic-value';
+import macdIndicator from './routes/shortcodes/indicators/macd-indicator';
+import rsiIndicator from './routes/shortcodes/indicators/rsi-indicator';
+import smaIndicator from './routes/shortcodes/indicators/sma-indicator';
+import stochasticOscillator from './routes/shortcodes/indicators/stochastic-oscillator-indicator';
+
 /** Populate Router instance with DOM routes */
 const routes = new Router({
   // All pages
@@ -283,6 +294,14 @@ const routes = new Router({
   // ForeCast Index 
   singleIndexPrediction,
   singleStockPrediction,
+  pivotPointIndicator,
+  camarillaEquationIndicator,
+  emaIndicator,
+  grahamIntrinsicValue,
+  macdIndicator,
+  rsiIndicator,
+  smaIndicator,
+  stochasticOscillator,
 });
 
 // Load Events
