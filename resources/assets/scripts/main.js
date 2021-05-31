@@ -156,7 +156,7 @@ import singleStockPrediction from './routes/single/single-index-prediction';
 
 // Indicator Chield Page Calculators
 import pivotPointIndicator from './routes/shortcodes/indicators/pivot-point-indicator';
-import camarillaEquationIndicator from './routes/shortcodes/indicators/camarilla-equation-indicator';
+import camarillaIndicator from './routes/shortcodes/indicators/camarilla-equation-indicator';
 import emaIndicator from './routes/shortcodes/indicators/ema-indicator';
 import grahamIntrinsicValue from './routes/shortcodes/indicators/graham-intrinsic-value';
 import macdIndicator from './routes/shortcodes/indicators/macd-indicator';
@@ -295,7 +295,7 @@ const routes = new Router({
   singleIndexPrediction,
   singleStockPrediction,
   pivotPointIndicator,
-  camarillaEquationIndicator,
+  camarillaIndicator,
   emaIndicator,
   grahamIntrinsicValue,
   macdIndicator,

@@ -2176,7 +2176,7 @@ add_shortcode('MainCLIndicator', function ($atts){
 
 /**
 *  Shortcode form Main  Camarilla Levels Indicator.
-[MainIndicatorFilters]
+[MainIndicatorFilters default="Cl"]
 */
 add_shortcode('MainIndicatorFilters', function ($atts){
     
