@@ -31,7 +31,9 @@ import StocksGivIndicator from '../../../components/indicators/stocks-giv-indica
  // Camarilla Levels Indicator
 import StocksClIndicator from '../../../components/indicators/stocks-cl-indicator';
 import IndicesClIndicator from '../../../components/indicators/indices-cl-indicator';
-
+// Target Indicator
+import StocksTiIndicator from '../../../components/indicators/stocks-ti-indicator';
+import IndicesTiIndicator from '../../../components/indicators/indices-ti-indicator';
 export default {
   init() {
       (function($) {
@@ -44,6 +46,20 @@ export default {
             var stockActDiv ='stocks'+defaultCal+'Indicator';
             var indicesActDiv ='indices'+defaultCal+'Indicator';
             switch(defaultCal){
+              case 'Ti':
+                if($(resp_div).find('#'+stockActDiv).length) {
+                  ReactDOM.render( 
+                    <StocksTiIndicator />,
+                    document.getElementById(stockActDiv)
+                  );
+                }
+                if($(resp_div).find('#'+indicesActDiv).length) {
+                  ReactDOM.render( 
+                    <IndicesTiIndicator />,
+                    document.getElementById(indicesActDiv)
+                  );
+                }
+                break;
               case 'Cl':
                 if($(resp_div).find('#'+stockActDiv).length) {
                   ReactDOM.render( 

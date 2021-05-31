@@ -2189,6 +2189,7 @@ add_shortcode('MainIndicatorFilters', function ($atts){
     $defaultCal =($data['default'])?$data['default']:'Cl';
     // $chieldPages =get_chield_pages($parent_page);
     $chieldPages =array(
+        'Ti'=>'Target Indicator',
         'Cl'=>'Camarilla Levels Indicator',
         'Ema'=>'Ema Indicator',
         'Giv'=>'Graham Intrinsic Value Indicator',
@@ -2201,5 +2202,26 @@ add_shortcode('MainIndicatorFilters', function ($atts){
     $data['chieldPages'] =$chieldPages;
     $data['defaultCal'] =$defaultCal;
     $template = 'shortcodes.fore-cast.indicators.main-indicators-filters';
+    return \App\template($template, $data);
+});
+
+/**
+*  Shortcode form Main  Camarilla Levels Indicator.
+[MainTargetIndicator]
+*/
+add_shortcode('MainTargetIndicator', function ($atts){
+    
+    $data = shortcode_atts( array(
+        'title' => '',
+        'id' => get_the_ID(),
+        'tabs' => '1', 
+        'parent_page' => '57204', 
+    ), $atts);
+    $parent_page =($data['parent_page'])?$data['parent_page']:'57204';
+    $chieldPages =get_chield_pages($parent_page);
+    
+    $data['chieldPages'] =$chieldPages;
+     
+    $template = 'shortcodes.fore-cast.indicators.ti-indicator';
     return \App\template($template, $data);
 });

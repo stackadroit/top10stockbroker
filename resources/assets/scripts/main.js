@@ -163,6 +163,7 @@ import macdIndicator from './routes/shortcodes/indicators/macd-indicator';
 import rsiIndicator from './routes/shortcodes/indicators/rsi-indicator';
 import smaIndicator from './routes/shortcodes/indicators/sma-indicator';
 import stochasticOscillator from './routes/shortcodes/indicators/stochastic-oscillator-indicator';
+import targetIndicator from './routes/shortcodes/indicators/target-indicator';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -302,6 +303,7 @@ const routes = new Router({
   rsiIndicator,
   smaIndicator,
   stochasticOscillator,
+  targetIndicator,
 });
 
 // Load Events
