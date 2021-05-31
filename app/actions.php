@@ -808,7 +808,7 @@ function load_easy_tabs_html(){
 }
  
 /**
- * Load Share Market Page Template and Single Page Content
+ * Load Indicator Template 
  * Through Ajax
  * @return array
  */
@@ -816,12 +816,10 @@ add_action( 'wp_ajax_load-main-indicator-filters',  __NAMESPACE__ . '\\load_main
 add_action( 'wp_ajax_nopriv_load-main-indicator-filters',  __NAMESPACE__ . '\\load_main_indicator_filters_html' );
 function load_main_indicator_filters_html(){
     global $wpdb;
-    // echo 'sssss';
-    // print_r($_REQUEST);
+    
     $defaultCal =(@$_REQUEST['defaultCal'])?@$_REQUEST['defaultCal']:'Cl';
     $data['defaultCal']  =$defaultCal;
     $template = 'shortcodes.fore-cast.indicators.main-indicators-filters-content';
     echo \App\template($template, $data); 
-     
     exit;
 }
