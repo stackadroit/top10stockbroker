@@ -65,7 +65,7 @@ function api_master_calls(){
         }elseif($brand){
             $serviceQuery .= " AND FIND_IN_SET('".$brand."',brands) ";
         }
-        // echo $serviceQuery .'<br/>';
+        echo $serviceQuery .'<br/>';
         $serviceResults = $wpdb->get_results($serviceQuery);
         
         if($serviceResults){
@@ -138,7 +138,23 @@ function api_master_calls(){
                     case '17':
                         echo $value->api_name;
                         PA1_Angel_DRA_B2C($postData);
+                        break;   
+                    case '18':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
                         break;
+                    case '19':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break;
+                    case '20':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break;
+                    case '21':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break; 
                   default:
                     
                         break;
@@ -151,7 +167,7 @@ function api_master_calls(){
     }
     exit;
 }
-
+ 
 /**
  *  Get API list for sending Data City Wise api setting from backend.
  *  @author Pavan JI <dropmail2pavan@gmail.com> 
@@ -173,7 +189,7 @@ function api_master_calls_for_city_data(){
     $form_id = @$postData['_wpcf7'];
     $urls = $url;
     $service ='Open Demat Account';
-    // $service =$SelectServices;
+    $service =$SelectServices;
     $zoneTable ="{$wpdb->prefix}zones";
     $stateTable ="{$wpdb->prefix}states";
     $cityTable ="{$wpdb->prefix}zone_state_cities";
@@ -287,6 +303,22 @@ function api_master_calls_for_city_data(){
                         echo $value->api_name;
                         PA1_Angel_DRA_B2C($postData);
                         break;
+                    case '18':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break;
+                    case '19':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break;
+                    case '20':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break;
+                    case '21':
+                        echo $value->api_name .$value->google_sheet_id;
+                        pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break; 
                     default:
                         break;
                 }
@@ -349,59 +381,15 @@ function insert_request_response_ac_db($form_id,$request_key,$request_value='',$
        ));
     } 
 }
+
+
 /**   
  *  Send Contact Data to PA1_Angel_DRA_B2C.
  *  @author Pavan JI <dropmail2pavan@gmail.com> 
  */
  
  
-// PA1_Angel_DRA_B2C();
 function PA1_Angel_DRA_B2C($postedArray =array()){
-
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-      CURLOPT_URL=>'https://diykyc.angelbroking.com/dracorporate/leadcapture',
-      CURLOPT_RETURNTRANSFER=>true,
-      CURLOPT_ENCODING=>'',
-      CURLOPT_MAXREDIRS=>10,
-      CURLOPT_TIMEOUT=>0,
-      CURLOPT_FOLLOWLOCATION=>true,
-      CURLOPT_HTTP_VERSION=>CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST=>'POST',
-      CURLOPT_POSTFIELDS=>'{"Request":"kzQ7D/GsXk81uP9KkDuXS5hM+xfLhGXHPILvwbhJPMMhya3BbgLttl4wrQBnupvXwLUp3hEqjIZ7wP2QPkHAtp5L/vCLux/HmGmiTHbAatc="}',
-      CURLOPT_HTTPHEADER=>array(
-        'apikey: 347EA0C286E14C03B1EA3BC3B0D81BC9',
-        'Content-Type: application/json; charset=utf-8'
-      ),
-    ));
-
-    $response = curl_exec($curl);
-
-    curl_close($curl);
-    var_dump($response);
-    $headers = array(
-        'apikey: 347EA0C286E14C03B1EA3BC3B0D81BC9',
-        'Accept: application/json',
-        'Content-Type: application/json',
-    );
-    $body ='{"Request":"kzQ7D/GsXk81uP9KkDuXS5hM+xfLhGXHPILvwbhJPMMhya3BbgLttl4wrQBnupvXwLUp3hEqjIZ7wP2QPkHAtp5L/vCLux/HmGmiTHbAatc="}';
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://diykyc.angelbroking.com/dracorporate/leadcapture");
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POSTFIELDS,$body);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $output = curl_exec($ch);
-    curl_close($ch);
-    var_dump($output);
-
-exit;
-
-
-
-
-
     $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
     
     $form_id= $postedArray['_wpcf7'];
@@ -409,69 +397,24 @@ exit;
     $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
     $email="NA" ;    
     $city=urlencode($postedArray['cf7s-City']);
-     
-    $datap =array(
-        'Name'=>'Test P',
-        'Mobile'=>'8888888245',
-        'City'=>'Test Lucknow',
-        'DRACode'=>'AKZKK'
-    );
-     
-    echo  $postJson =json_encode($datap);
-    $curl = curl_init();
 
-    curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://diykyc.angelbroking.com/dracorporate/encryptresult',
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => '',
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 0,
-      CURLOPT_FOLLOWLOCATION => true,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS =>'{
-        "Name":"Test P",
-        "Mobile":"8888888245",
-        "City":"Test Lucknow",
-        "DRACode":"AKZKK"
-        }',
-      CURLOPT_HTTPHEADER => array(
-        'apikey: 347EA0C286E14C03B1EA3BC3B0D81BC9',
-        'Content-Type: application/json'
-      ),
-    ));
+    $postData ='api_key=dra-top10stockbroker&api_secret=8b2ccd53-4d27-4d94-beb8-996e7e649d75&fname='.$name.'&strLName=&mobile='.$mobile.'&strLandLine=&city='.$city.'&email=&strRefURL=&strLMSSource=Very%2520High%2520Priority&sharedLead=yes&strDevice=Desktop&strAdType=Direct&strAd_Id=&iWebPlacementId=&strIPAddress=&strOS=Windows&strBrowser=Chrome&UTM=dra-top10stockbroker&Keyword1=&Keyword2=&Keyword3=&Keyword_Final=&strReferrerKeyword=&strAdGroup=ad&PageUrl=&api_version=1.2&get-redirect-url=1';
 
-    $response = curl_exec($curl);
-
-    curl_close($curl);
-    echo $response; 
-    exit;
-    $response_value = curl_exec ($curl);
-    curl_close ($curl);
-    echo '<pre>';
-    var_dump($response_value);
-     echo '<br/>';
-    // echo decryptPass($encVal);
-    echo '<br/>';
-    echo 'ddd';
-    exit;    
-    exit; 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,"https://www.angelbroking.com/api/b2b-3rd-party.php");
+    curl_setopt($ch, CURLOPT_URL,"https://www.angelbroking.com/api/b2c-3rd-party.php");
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS,
-                "api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname=".$name."&lname=&LeadSource=WEB&Mobile=".$mobile."&Email=NA&ResidenceCity=".$city."&ResidenceAddress=&ResidenceArea=&ResidencePin=&ProductsInterested=&LeadChannel=Direct&Correspondence=&Category=&Refferal=&Remarks=");
+    curl_setopt($ch, CURLOPT_POSTFIELDS,$postData);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-    // receive server response ...
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response_value = curl_exec ($ch);
     curl_close ($ch);
-    print_r($response_value);
-    $request_value = $apiUrl;
-    // Add API Details in to DB
-    $request_value= "api_key=top10stockbroker&api_secret=230c233f-b70a-44fd-8bc8-331671e8b036&fname=".$name."&lname=&LeadSource=WEB&Mobile=".$mobile."&Email=NA&ResidenceCity=".$city."&ResidenceAddress=&ResidenceArea=&ResidencePin=&ProductsInterested=&LeadChannel=Direct&Correspondence=&Category=&Refferal=&Remarks=";
-    insert_request_response_ac_db($form_id,'ab_b2b_lead_request_url',$request_value,'ab_b2b_lead_status',$response_value);
-}/**
+    $response =(json_decode($response_value));
+    // $response->status;
+    insert_request_response_ac_db($form_id,'dra_b2c_lead_request_url',$postData,'dra_b2c_lead_status',$response->status);
+}
+
+
+/**
  *  Send Contact Data to Angle Broking B2B.
  *  @author Pavan JI <dropmail2pavan@gmail.com> 
  */
@@ -758,6 +701,7 @@ function IIFL_B2B_FAN_API( $postedArray =array() ){
         "description"=>"",
         "leadsource"=>"Website",
         "leadproduct"=>"FAN",
+        "LeadType"=>"Online",
         "utmsource"=>"",
         "utmmedium"=>"",
         "utmcampaign"=>"",
@@ -1123,8 +1067,8 @@ function PA1_5Paisa_API_B2C( $postedArray =array() ){
                         "LeadProduct"=>"Equity",
                         "Mobile"=>$mobile,
                         "Email"=>$email,
-                        "LeadSource"=>"Partner program new",
-                        "lead_source"=>"Partner program new",
+                        "LeadSource"=>"partner program new",
+                        "lead_source"=>"partner program new",
                         'partner_client_code' => '58398898',
                         'Campaign'=> 'Top10StockBroker',
                         "subsource"=>"Top10stockbroker",
