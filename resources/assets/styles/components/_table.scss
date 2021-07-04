@@ -380,3 +380,22 @@
 .MUIDataTableFilterList-root-33, .MUIDataTableFilterList-root-32 {
   margin-bottom: 20px !important;
 }
+#camarilla-levels-table-data {
+  #camarilla-levels-stock {
+    .prdict-table {
+      border: 1px solid #ccc;
+      margin-bottom: 30px;
+
+      .prdict-box {
+        border: 0!important;
+        font-weight: 100!important;
+        text-transform: uppercase;
+      }
+
+      .row {
+        border: 0 !important;
+        margin-bottom: 0!important
+      }
+    }
+  }
+}
