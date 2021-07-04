@@ -1418,7 +1418,7 @@ exports.theme = window.theme;
 			            $(this).after('<div class="fb-loader  mx-auto"></div>');
 			            sumbmit_form_data =$(form).serialize();
 			         	var submit = $(form).submit();
-			            $(this).siblings('.ajax-loader').removeClass('is-active')
+			            $(this).siblings('.ajax-loader').removeClass('is-active');
 			         	e.preventDefault();
 						return false;
 			      	}
@@ -1430,9 +1430,25 @@ exports.theme = window.theme;
 		    		$('.wpcf7-form').find('.fb-loader').remove();
 		    		self.leadPostApi(sumbmit_form_data) ;
 		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
+		    		console.log(event.target);
+		    		var modelActive =$(event.target).closest('.modal').attr('data-mini-popup');
+			        if(modelActive){
+			        	var linkval= $('.'+modelActive).closest('#header-right-sidebar').siblings('a.lb_banner_redirect_linkid')[0].attr('href');
+			        	if(linkval !='' || linkval !='#'){
+			         		$('.'+modelActive).closest('#header-right-sidebar').siblings('a.lb_banner_redirect_linkid')[0].click();
+			        	}
+			     	}
 		        }, false );
 		        document.addEventListener('wpcf7mailfailed', function( event ) {
 		    		console.log(event);
+		    		console.log(event.target);
+		    		var modelActive =$(event.target).closest('.modal').attr('data-mini-popup');
+			        if(modelActive){
+			        	var linkval= $('.'+modelActive).closest('#header-right-sidebar').siblings('a.lb_banner_redirect_linkid')[0].attr('href');
+			        	if(linkval !='' || linkval !='#'){
+			         		$('.'+modelActive).closest('#header-right-sidebar').siblings('a.lb_banner_redirect_linkid')[0].click();
+			        	}
+			     	}
 		    		$('.wpcf7-form').find('.fb-loader').remove();
 		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
 		        }, false );
@@ -1451,7 +1467,7 @@ exports.theme = window.theme;
 		    		$('.wpcf7-form').find('.wpcf7-submit').prop("disabled",false).removeAttr('disabled');
 		    		$('.wpcf7-form').find('.fb-loader').remove();
 		        }, false );
-
+		        
 			  	return this;
 			}
 		};

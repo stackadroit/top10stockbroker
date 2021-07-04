@@ -154,6 +154,10 @@ function api_master_calls(){
                     case '21':
                         echo $value->api_name .$value->google_sheet_id;
                         pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break;
+                    case '22':
+                        echo $value->api_name .$value->google_sheet_id;
+                        PA1_Espresso_SK_Api($postData);
                         break; 
                   default:
                     
@@ -318,6 +322,10 @@ function api_master_calls_for_city_data(){
                     case '21':
                         echo $value->api_name .$value->google_sheet_id;
                         pa1_cf7_save_to_google_sheets_ajaxs($postData,$value->google_sheet_id,$url);
+                        break; 
+                    case '22':
+                        echo $value->api_name .$value->google_sheet_id;
+                        PA1_Espresso_SK_Api($postData);
                         break; 
                     default:
                         break;
@@ -1164,4 +1172,92 @@ function PA1_PayTM_API_B2C( $postedArray =array() ){
         $apiResponse =$api_response;
     }
     insert_request_response_ac_db($form_id,'paytm_b2c_req_url',json_encode($apiRequest),'paytm_b2c_api_status',$apiResponse);
+}
+
+/**
+ *  Send Contact Data to  PA1_Espresso_SK_Api.
+ *  @author Pavan JI <dropmail2pavan@gmail.com> 
+ */
+
+function PA1_Espresso_SK_Api( $postedArray =array() ){
+
+    $SelectServices =(isset($postedArray['cf7s-SelectServices'])) ? $postedArray['cf7s-SelectServices'] : (isset($postedArray['cf7s-SelectService'])?$postedArray['cf7s-SelectService']:'');
+    
+    $form_id= $postedArray['_wpcf7'];
+    $name = $postedArray['cf7s-name'];
+    $mobile= ($postedArray['cf7s-phone'])?$postedArray['cf7s-phone']:'' ; 
+    $email="";  
+    $email=$mobile."top@gmail.com" ;  
+    $city=$postedArray['cf7s-City'];
+    //Get Token Request
+    $apiRequest =array();
+    $apiResponse =array();
+    // Get Token
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://diy.myespresso.com/id/connect/token',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => array('client_id' => 'Sharekhan.Onboard.Talisma','client_secret' => 'secret','scope' => 'gravithy.onboard.odata gravithy.onboard.services gravithy.onboard.api','grant_type' => 'client_credentials'),
+    ));
+    $api_response = curl_exec($curl);
+    $response =json_decode($api_response);
+
+    curl_close($curl);
+    // print_r($response->access_token);
+    $access_token=@$response->access_token;
+    $apiResponse ='';
+    if($access_token){
+         
+        $fields = array(
+            'Name' => $name,
+            'Email' => $email,
+            'Mobile' => $mobile,
+            'City' => $city,
+            'LeadSource' => "ES_MONEYCONTROL",
+            "SourceID"=>  "663",
+            "Flag"=>  1,
+            "SourceIP"=>  "",
+            "Environment"=> "Espresso",
+            "MobileVerifiedFlag"=>  1,
+            "EmailVerifiedFlag"=>  1,
+            "ReferralCode"=>  "",
+            "CampaignId"=>  "",
+            "CampaignCode"=>  "",
+            "CouponCode"=> "",
+            "EmployeeId"=> "",
+            "BranchCode"=> "",
+            "BranchId"=> "",
+            "SchemeCode"=> "",
+            "UTMParameters"=> "",
+            "URL"=> "",
+            "OtherDetails"=> ""
+        );
+        $curl1 = curl_init();
+
+        curl_setopt_array($curl1, array(
+            CURLOPT_URL => 'https://diy.myespresso.com/api/Lead/Create',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>json_encode($fields),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$access_token,
+                'Content-Type: application/json',
+            ),
+        ));
+
+        $apiResponse = curl_exec($curl1);
+        $apiRequest= json_encode($fields);
+    } 
+    insert_request_response_ac_db($form_id,'espresso_b2c_req_url',json_encode($apiRequest),'espresso_b2c_api_status',$apiResponse);
 }

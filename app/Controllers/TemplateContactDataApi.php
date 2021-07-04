@@ -89,6 +89,8 @@ class TemplateContactDataApi extends Controller
 			  $fields[] =['title'=>'PayTM B2C Request','key'=>'paytm_b2c_req_url'];
 			  $fields[] =['title'=>'DRA B2C Status','key'=>'dra_b2c_lead_status'];
 			  $fields[] =['title'=>'DRA B2C Request','key'=>'dra_b2c_lead_request_url'];
+			  $fields[] =['title'=>'Espresso B2C Status','key'=>'espresso_b2c_api_status'];
+			  $fields[] =['title'=>'Espresso B2C Request','key'=>'espresso_b2c_req_url'];
 			 $responseData['headers']=$fields;
 			 $responseData['body'] =array();
 			 $response =array();
