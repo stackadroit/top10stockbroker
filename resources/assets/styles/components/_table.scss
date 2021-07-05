@@ -391,10 +391,6 @@
         font-weight: 100!important;
         text-transform: uppercase;
 
-        .label {
-          font-weight: 100!important
-        }
-
         .price {
             font-size: 20px;
             @media (min-width:576px){
@@ -404,18 +400,22 @@
               font-size: 36px;
             }
         }
+    }
 
-      .row {
+    .row {
         border: 0 !important;
         margin-bottom: 0!important;
         margin-left: -17px;
         margin-right: -17px;
 
         &:first-child {
-          border: 1px solid #ccc!important;
+          border-bottom: 1px solid #ccc!important;
         }
       }
-    }
+
+     .label {
+        font-weight: 100!important
+      }
 
     .currentStockRateArrow {
           padding: 0;
