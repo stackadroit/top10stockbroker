@@ -390,12 +390,41 @@
         border: 0!important;
         font-weight: 100!important;
         text-transform: uppercase;
-      }
+
+        .label {
+          font-weight: 100!important
+        }
+
+        .price {
+            font-size: 20px;
+            @media (min-width:576px){
+                font-size: 30px;
+            }
+            @media (min-width:992px){
+              font-size: 36px;
+            }
+        }
 
       .row {
         border: 0 !important;
-        margin-bottom: 0!important
+        margin-bottom: 0!important;
+        margin-left: -17px;
+        margin-right: -17px;
+
+        &:first-child {
+          border: 1px solid #ccc!important;
+        }
       }
+    }
+
+    .currentStockRateArrow {
+          padding: 0;
+          border: 0;
+          width: 30px!important;
+          height: 30px;
+          display: flex;
+          align-self: flex-end;
+          margin-right: 5px;
     }
   }
 }
