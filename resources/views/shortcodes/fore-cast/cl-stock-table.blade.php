@@ -72,7 +72,7 @@
             <div class="price font-weight-bold" id="stop-loss-st"></div>
            </div>
         </div>
-<div class="col-12"><div class="label font-weight-bolder pt-3 pb-1" style="color:#000;">Sentiment - <span id="camarilla-levels-sentiment"></span></div></div>
+<div class="col-12"><div class="label font-weight-bolder pt-3 pb-1">Sentiment - <span id="camarilla-levels-sentiment"></span></div></div>
     </div>
     <br/>
 </div>
