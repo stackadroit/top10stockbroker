@@ -408,16 +408,16 @@
         margin-left: -17px;
         margin-right: -17px;
 
-        &:first-child {
-          border-bottom: 1px solid #ccc!important;
-        }
+      &:first-child {
+        border-bottom: 1px solid #ccc!important;
       }
+    }
 
      .label {
         font-weight: 100!important
       }
 
-    .currentStockRateArrow {
+    #currentStockRateArrow {
           padding: 0;
           border: 0;
           width: 30px!important;
